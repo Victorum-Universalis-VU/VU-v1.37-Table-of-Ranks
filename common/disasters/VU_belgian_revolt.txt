@@ -1,0 +1,224 @@
+#VU Belgian revolt by San Felipe
+belgian_revolt_disaster = {
+
+	potential = {
+		normal_or_historical_nations = yes
+		current_age = age_of_revolutions
+		NOT = { has_country_flag = dutch_belgian_integration }
+		NOT = { has_global_flag = belgian_revolt }
+		OR = {
+			tag = HOL
+			tag = NED
+		}
+		num_of_owned_provinces_with = {
+			value = 6
+			region = low_countries_region
+			OR = {
+				culture = brabantian
+				culture = flemish
+				culture = wallonian
+			}
+		}
+		#NOT = {
+		#	OR = {
+		#		primary_culture = dutch
+		#		primary_culture = frisian
+		#	}
+		#}
+		NOT = { exists = BEL }
+		NOT = { capital_scope = { region = low_countries_region } }
+		is_free_or_tributary_trigger = yes
+		num_of_cities = 7
+	}
+	
+	can_start = {
+		OR = {
+			AND = {
+				low_countries_region = {
+					owned_by = ROOT
+					NOT = { province_religion = ROOT }
+				}
+				NOT = { full_idea_group = humanist_ideas }
+			}
+			custom_trigger_tooltip = {
+				tooltip = belgian_revolt_disaster_tt
+				AND = {
+					any_owned_province = {
+						culture = brabantian
+					}
+					NOT = { accepted_culture = brabantian }
+				}
+				AND = {
+					any_owned_province = {
+						culture = flemish
+					}
+					NOT = { accepted_culture = flemish }
+				}
+				AND = {
+					any_owned_province = {
+						culture = wallonian
+					}
+					NOT = { accepted_culture = wallonian }
+				}
+			}
+		}
+	}
+	
+	can_stop = {
+		OR = {
+			has_any_disaster = yes
+			exists = BEL
+			is_year = 1831
+		}
+	}
+	
+	progress = {	
+		# progress happens as a result of tensions that actually exist in your country
+		modifier = {
+			factor = 1
+			any_owned_province = {
+				region = low_countries_region
+				NOT = { province_religion = ROOT }
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 3
+					region = low_countries_region
+					NOT = { province_religion = ROOT }
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			num_of_owned_provinces_with = {
+				value = 3
+				region = low_countries_region
+				NOT = { province_religion = ROOT }
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+					region = low_countries_region
+					NOT = { province_religion = ROOT }
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			num_of_owned_provinces_with = {
+				value = 5
+				region = low_countries_region
+				NOT = { province_religion = ROOT }
+			}
+		}
+		modifier = {
+			factor = 1
+			any_owned_province = {
+				region = low_countries_region
+				unrest = 3
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 3
+					region = low_countries_region
+					unrest = 3
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			num_of_owned_provinces_with = {
+				value = 3
+				region = low_countries_region
+				unrest = 3
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+					region = low_countries_region
+					unrest = 3
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			num_of_owned_provinces_with = {
+				value = 5
+				region = low_countries_region
+				unrest = 3
+			}
+		}
+		modifier = {
+			factor = 2
+			any_owned_province = {
+				culture = brabantian
+			}
+			NOT = { accepted_culture = brabantian }
+		}
+		modifier = {
+			factor = 2
+			any_owned_province = {
+				culture = flemish
+			}
+			NOT = { accepted_culture = flemish }
+		}
+		modifier = {
+			factor = 2
+			any_owned_province = {
+				culture = wallonian
+			}
+			NOT = { accepted_culture = wallonian }
+		}
+		modifier = {
+			factor = 1
+			NOT = { stability = 1 }
+		}
+	}
+	
+	can_end = {
+		OR = {
+			exists = BEL
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = had_disaster_for_x_years_belgian
+					had_global_flag = {
+						flag = belgian_revolt
+						days = 7300 # 20 years
+					}
+				}
+				NOT = { num_of_rebel_armies = 1 }
+				NOT = { num_of_rebel_controlled_provinces = 1 }
+				stability = 1
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+					region = low_countries_region
+					OR = {
+						culture = brabantian
+						culture = flemish
+						culture = wallonian
+					}
+				}
+			}
+		}
+	}
+	
+	modifier = {
+		stability_cost_modifier = 0.50
+	}
+	
+	on_start = dutch_republic.34
+	on_end = belgian_revolt.1
+	
+	on_monthly = {
+		events = {
+			dutch_republic.36 # belgium declares independence
+		}
+		random_events = {
+			100 = 0
+			5 = dutch_republic.35 # random rebels spawn
+		}	
+	}
+
+}

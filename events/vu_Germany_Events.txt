@@ -1,0 +1,70 @@
+namespace = vu_Germany_Events
+
+country_event = { #
+	id = vu_Germany_Events.1
+	title = vu_Germany_Events.EVTNAME1
+	desc = vu_Germany_Events.EVTDESC1
+	picture = GERMAN_KAISERREICH_eventPicture
+	
+	trigger = {
+		is_vassal = yes
+		overlord = { has_country_flag = mitteleuropa }
+	}
+	
+	option = {
+		name = vu_Germany_Events1.EVTOPT1
+		
+		trigger = {
+ 			overlord = { government = monarchy }
+		}
+		
+		change_government = monarchy
+		add_country_modifier = {
+			name = "vu_ger_kaiserreich_pupets_puppet"
+			duration = -1
+		}
+	}
+	option = {
+		name = vu_Germany_Events1.EVTOPT2
+		
+		trigger = {
+ 			overlord = { government = republic }
+		}
+		
+		change_government = republic
+		add_country_modifier = {
+			name = "vu_ger_kaiserreich_pupets_puppet"
+			duration = -1
+		}
+	}
+	option = {
+		name = vu_Germany_Events1.EVTOPT3
+		
+		trigger = {
+ 			overlord = { NOT = { OR = { government = republic government = monarchy } } }
+		}
+		
+		add_country_modifier = {
+			name = "vu_ger_kaiserreich_pupets_puppet"
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = vu_Germany_Events.2
+	title = vu_Germany_Events.EVTNAME2
+	desc = vu_Germany_Events.EVTDESC2
+	picture = GERMAN_KAISERREICH_eventPicture
+	
+	trigger = {
+		is_vassal = no
+		has_country_modifier = vu_ger_kaiserreich_pupets_puppet
+	}
+	
+	option = {
+		name = vu_Germany_Events2.EVTOPT1
+		
+		remove_country_modifier = vu_ger_kaiserreich_pupets_puppet
+	}
+}

@@ -1,0 +1,148 @@
+vu_civilwar_full_annex = {
+	ae_base = 0.0
+	power_projection = no
+	prestige_base = 0.5
+	warscore_cost = {
+		no_provinces = 100
+	}
+	is_visible = { 
+		OR = {
+			AND = {
+				ROOT = { tag = USA }
+				FROM = { tag = CSA }
+			}
+			AND = {
+				ROOT = { tag = CSA }
+				FROM = { tag = USA }
+			}
+		}
+	}
+	is_allowed = { always = yes }
+	effect = {
+		FROM = { every_owned_province = { cede_province = ROOT add_core = ROOT remove_core = from } }
+	}
+	category = 6
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = 100
+		}
+	}
+}
+
+#Canton_peace_treaties
+make_canton = {
+	category = 6 
+	power_projection = vassalized_rival 
+	power_cost_base = 1.0 
+	prestige_base = 0.1 
+	ae_base = 0.25 
+	warscore_cost = {
+		all_provinces = 0.0 
+		no_provinces = 20.0 
+		owner_keeps = 0.0 
+		conquered = 1.0 
+		returned_core = 0.0 
+		released_nation = 0.0 
+		cancelled_subject = 0.0 
+		concede_colonial_region = 0.0 
+	}
+	warscore_cap = -1 
+	requires_demand_independence = yes 
+	is_make_subject = yes 
+	requires_is_allowed = no 
+	
+	is_visible = { 
+		can_be_overlord = canton
+		NOT = { 
+			calc_true_if = {
+				all_subject_country = {
+					is_subject_of_type = canton
+				}
+				amount = 6
+			}
+		}
+	}
+	is_allowed = { 
+		FROM = {
+			NOT = {
+				total_development = 50
+			}
+		}
+	}
+	effect = { 
+		create_subject = {
+			subject = FROM
+			subject_type = canton
+		}
+	}
+	ai_weight = { 
+		export_to_variable = {
+			variable_name = ai_value 
+			value = 1
+		}
+		limit = { 
+			is_neighbor_of = FROM
+			total_development = FROM
+		}
+	}
+}
+
+#Autonomous Canton
+make_autonomous_canton = {
+	category = 6 
+	power_projection = vassalized_rival 
+	power_cost_base = 1.0 
+	prestige_base = 0.1 
+	ae_base = 0.25 
+	warscore_cost = {
+		all_provinces = 0.0 
+		no_provinces = 20.0 
+		owner_keeps = 0.0 
+		conquered = 1.0 
+		returned_core = 0.0 
+		released_nation = 0.0 
+		cancelled_subject = 0.0 
+		concede_colonial_region = 0.0 
+	}
+	warscore_cap = -1 
+	requires_demand_independence = yes 
+	is_make_subject = yes 
+	requires_is_allowed = no 
+	
+	is_visible = { 
+		can_be_overlord = autonomous_canton
+		NOT = { 
+			calc_true_if = {
+				all_subject_country = {
+					is_subject_of_type = autonomous_canton
+				}
+				amount = 6
+			}
+		}
+	}
+	is_allowed = { 
+		FROM = {
+			NOT = {
+				total_development = 50
+			}
+		}
+	}
+	effect = { 
+		create_subject = {
+			subject = FROM
+			subject_type = autonomous_canton
+		}
+	}
+	ai_weight = { 
+		export_to_variable = {
+			variable_name = ai_value 
+			value = 1
+		}
+		limit = { 
+			is_neighbor_of = FROM
+			total_development = FROM
+		}
+	}
+}
+

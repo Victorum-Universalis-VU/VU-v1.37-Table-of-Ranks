@@ -1,0 +1,253 @@
+republican_vs_monarchist_mechanic = {
+	alert_icon_gfx = GFX_republican_vs_monarchist_mechanic_alert_icon
+	alert_icon_index = 1
+	available = {
+		always = yes
+	}
+
+	powers = {
+		republican_vs_monarchist_power = {
+			gui = republican_vs_monarchist_mechanic_power
+			show_before_interactions = yes
+			min = -100
+			max = 100
+			default = 0
+			reverse_scaled_modifier = {
+				start_value = -100
+				end_value = 0
+				extend_beyond_value = no
+				modifier = {
+					core_creation = -0.1
+					manpower_in_own_culture_provinces = 0.15
+				}
+			}
+			scaled_modifier = {
+				start_value = 0
+				end_value = 100
+				#extend_beyond_value = no #Hashed out since I didn't see the point in this even being here if it is already inside the reverse scaled modifier - by San Felipe
+				modifier = {
+					all_power_cost = -0.05
+					global_unrest = -2
+				}
+			}
+		}
+	}
+
+	interactions = {
+		republican_vs_monarchist_mare_nostrum_focus = {
+			gui = republican_vs_monarchist_mechanic_interaction
+			cooldown_years = 20
+			cooldown_desc = republican_vs_monarchist_mechanic_cooldown_desc
+			cooldown_token = republican_vs_monarchist_mechanic
+			icon = GFX_republican_vs_monarchist_mare_nostrum_focus
+			trigger = {
+				NOT = { has_country_modifier = republican_vs_monarchist_mare_nostrum_focus_modifier }
+			}
+			effect = {
+				hidden_effect = {
+					remove_country_modifier = republican_vs_monarchist_mare_nostrum_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_culla_rinascimento_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_ambizione_imperiale_focus_modifier
+				}
+				add_country_modifier = {
+					name = republican_vs_monarchist_mare_nostrum_focus_modifier
+					duration = 5475
+					desc = republican_vs_monarchist_mechanic_interaction_duration
+				}
+				random_owned_province = {
+					limit = {
+						NOT = { has_province_flag = mare_nostrum_focus_province }
+						OR = {
+							province_id = 101
+							province_id = 112
+							province_id = 121
+							province_id = 115
+						}
+					}
+					add_base_production = 1
+					set_province_flag = mare_nostrum_focus_province
+					add_province_modifier = {
+						name = republican_vs_monarchist_mare_nostrum_focus_modifier_province
+						duration = 5475
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							calc_true_if = {
+								amount = 3
+								OR = {
+									NOT = { owns = 101 }
+									101 = { has_province_flag = mare_nostrum_focus_province }
+								}
+								OR = {
+									NOT = { owns = 112 }
+									112 = { has_province_flag = mare_nostrum_focus_province }
+								}
+								OR = {
+									NOT = { owns = 121 }
+									121 = { has_province_flag = mare_nostrum_focus_province }
+								}
+								OR = {
+									NOT = { owns = 125 }
+									125 = { has_province_flag = mare_nostrum_focus_province }
+								}
+							}
+						}
+						every_owned_province = {
+							limit = {
+								has_province_flag = mare_nostrum_focus_province
+							}
+							clr_province_flag = mare_nostrum_focus_province
+						}
+					}
+				}
+			}
+			ai_chance = {
+				factor = 1
+			}
+		}
+		republican_vs_monarchist_culla_rinascimento_focus = {
+			gui = republican_vs_monarchist_mechanic_interaction
+			cooldown_years = 20
+			cooldown_desc = republican_vs_monarchist_mechanic_cooldown_desc
+			cooldown_token = republican_vs_monarchist_mechanic
+			icon = GFX_republican_vs_monarchist_culla_rinascimento_focus
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = republican_vs_monarchist_culla_rinascimento_focus_north_TT
+					num_of_owned_provinces_with = {
+						value = 12
+						OR = {
+							area = piedmont_area
+							area = lombardy_area
+							area = po_valley_area
+							area = venetia_area
+							area = emilia_romagna_area
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = republican_vs_monarchist_culla_rinascimento_focus_center_TT
+					num_of_owned_provinces_with = {
+						value = 12
+						OR = {
+							area = liguria_area
+							area = corsica_sardinia_area
+							area = tuscany_area
+							area = central_italy_area
+							area = san_marino_area
+							area = lazio_area
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = republican_vs_monarchist_culla_rinascimento_focus_south_TT
+					num_of_owned_provinces_with = {
+						value = 12
+						OR = {
+							area = naples_area
+							area = apulia_area
+							area = calabria_area
+							area = sicily_area
+							area = sicily_area
+						}
+					}
+				}
+				NOT = { has_country_modifier = republican_vs_monarchist_culla_rinascimento_focus_modifier }
+			}
+			effect = {
+				hidden_effect = {
+					remove_country_modifier = republican_vs_monarchist_mare_nostrum_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_culla_rinascimento_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_ambizione_imperiale_focus_modifier
+				}
+				add_country_modifier = {
+					name = republican_vs_monarchist_culla_rinascimento_focus_modifier
+					duration = 5475
+					desc = republican_vs_monarchist_mechanic_interaction_duration
+				}
+				country_event = {
+					id = republican_vs_monarchist_mechanic_events.1
+					tooltip = republican_vs_monarchist_culla_rinascimento_focus_TT
+				}
+			}
+			ai_chance = {
+				factor = 1
+			}
+		}
+		republican_vs_monarchist_ambizione_imperiale_focus = {
+			gui = republican_vs_monarchist_mechanic_interaction
+			cooldown_years = 20
+			cooldown_desc = republican_vs_monarchist_mechanic_cooldown_desc
+			cooldown_token = republican_vs_monarchist_mechanic
+			icon = GFX_republican_vs_monarchist_ambizione_imperiale_focus
+			trigger = {
+				NOT = { has_country_modifier = republican_vs_monarchist_ambizione_imperiale_focus_modifier }
+			}
+			effect = {
+				hidden_effect = {
+					remove_country_modifier = republican_vs_monarchist_mare_nostrum_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_culla_rinascimento_focus_modifier
+					remove_country_modifier = republican_vs_monarchist_ambizione_imperiale_focus_modifier
+				}
+				add_country_modifier = {
+					name = republican_vs_monarchist_ambizione_imperiale_focus_modifier
+					duration = 5475
+					desc = republican_vs_monarchist_mechanic_interaction_duration
+				}
+				random_owned_province = {
+					limit = {
+						NOT = { has_province_flag = ambizione_imperiale_focus_province }
+						OR = {
+							province_id = 104
+							province_id = 118
+							province_id = 108
+							province_id = 103
+						}
+					}
+					add_base_manpower = 1
+					set_province_flag = ambizione_imperiale_focus_province
+					add_province_modifier = {
+						name = republican_vs_monarchist_ambizione_imperiale_focus_modifier_province
+						duration = 5475
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							calc_true_if = {
+								amount = 3
+								OR = {
+									NOT = { owns = 104 }
+									104 = { has_province_flag = ambizione_imperiale_focus_province }
+								}
+								OR = {
+									NOT = { owns = 118 }
+									118 = { has_province_flag = ambizione_imperiale_focus_province }
+								}
+								OR = {
+									NOT = { owns = 108 }
+									108 = { has_province_flag = ambizione_imperiale_focus_province }
+								}
+								OR = {
+									NOT = { owns = 103 }
+									103 = { has_province_flag = ambizione_imperiale_focus_province }
+								}
+							}
+						}
+						every_owned_province = {
+							limit = {
+								has_province_flag = ambizione_imperiale_focus_province
+							}
+							clr_province_flag = ambizione_imperiale_focus_province
+						}
+					}
+				}
+			}
+			ai_chance = {
+				factor = 1
+			}
+		}
+	}
+}

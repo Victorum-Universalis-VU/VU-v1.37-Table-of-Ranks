@@ -1,0 +1,20 @@
+change_government_to_monarchy = {
+	if = {
+		limit = {
+			NOT = { government = monarchy }
+			NOT = { is_subject_of_type = revolution_subject }
+			NOT = { is_subject_of_type = sister_republic }
+		}
+		if = {
+			limit = {
+				government = republic
+			}
+			change_government = monarchy
+			change_government_reform_progress = -400
+		}
+		else = {
+			change_government = monarchy
+			change_government_reform_progress = -200
+		}
+	}
+}

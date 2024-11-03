@@ -1,0 +1,316 @@
+country_decisions = {
+    habsburg_nation = {
+		major = yes
+		potential = {
+			#normal_or_historical_nations = yes
+			#was_never_end_game_tag_trigger = yes
+			#was_never_german_regional_tag_trigger = yes
+			tag = AUT
+			NOT = { tag = HAB }
+			NOT = { has_country_flag = formed_austria_flag }
+			primary_culture = austrian
+			ai = no
+		}
+		provinces_to_highlight = {
+			province_id = 134      #Vienna - Capital of Austria
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			#adm_tech = 27 #VU - Hashed out by SF
+			tag = AUT
+			NOT = { exists = HAB }
+			has_regency = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			AND = {
+				AND = {
+					owns_core_province = 134      #Vienna - Capital of Austria
+					134 = {						  #Vienna
+						is_state = yes
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = CNL }}
+					AND = {
+						OR = {
+							CNL = {	junior_union_with = ROOT }
+							CNL = {	is_subject_of = ROOT }
+							owns_core_province = 129      
+						}
+						CNL = { NOT = { num_of_cities = 8 } }
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = CR1 }}
+					AND = {
+						OR = {
+							CR1 = {	junior_union_with = ROOT }
+							CR1 = {	is_subject_of = ROOT }
+							owns_core_province = 7673
+						}
+						CR1 = { NOT = { num_of_cities = 8 } }
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = BSN }}
+					AND = {
+						OR = {
+							BSN = {	junior_union_with = ROOT }
+							BSN = {	is_subject_of = ROOT }
+							owns_core_province = 7674
+						}
+						BSN = { NOT = { num_of_cities = 8 } }
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = SH1 }}
+					AND = {
+						OR = {
+							SH1 = {	junior_union_with = ROOT }
+							SH1 = {	is_subject_of = ROOT }
+							owns_core_province = 7670
+						}
+						SH1 = { NOT = { num_of_cities = 8 } }
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = STY }}
+					AND = {
+						OR = {
+							STY = {	junior_union_with = ROOT }
+							STY = {	is_subject_of = ROOT }
+							owns_core_province = 1863
+						}
+						STY = { NOT = { num_of_cities = 8 } }
+					}
+				}
+				if = { 
+					limit = { NOT = { tag = TIR }}
+					AND = {
+						OR = {
+							TIR = {	junior_union_with = ROOT }
+							TIR = {	is_subject_of = ROOT }
+							owns_core_province = 73
+						}
+						TIR = { NOT = { num_of_cities = 8 } }
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_custom_ideas = no
+					NOT = { has_idea_group = HAB_ideas }
+					OR = {
+						CNL = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+						CR1 = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+						BSN = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+						SH1 = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+						STY = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+						TIR = {
+					    	exists = yes
+					    	ai = yes
+					    	is_subject_of = ROOT
+							NOT = { num_of_cities = 8 }
+					    }
+					}
+				}
+				inherit = CNL
+				inherit = CR1
+				inherit = BSN
+				inherit = SH1
+				inherit = STY
+				inherit = TIR
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			change_tag = HAB
+			add_prestige = 25
+			austria_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = HAB
+			}
+			72 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			1880 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7554 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7557 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7559 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7565 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7567 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7574 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7579 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7580 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7582 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7584 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7587 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7605 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			7606 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			8524 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			8539 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			8540 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = HAB
+				}
+			}
+			swap_non_generic_missions = yes
+			set_country_flag = formed_austria_flag
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		ai_importance = 400
+	}
+}

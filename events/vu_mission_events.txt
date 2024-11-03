@@ -1,0 +1,588 @@
+namespace = vu_ayyubid_mission_events
+namespace = vu_angevin_mission_events
+namespace = vu_mission_events
+
+country_event = { #1 The Jewish of Jerusalem
+	id = vu_ayyubid_mission_events.1
+	title = "vu_ayyubid_mission_events.1.t"
+	desc = "vu_ayyubid_mission_events.1.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	#major = yes
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = HSN
+		owns = 379 #Jerusalem
+	}
+
+	option = { #Let the Jews return to Jerusalem.
+		name = "vu_ayyubid_mission_events.1.a"
+		379 = {
+			change_religion = jewish
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 4
+		}
+		add_piety = -0.25
+		add_estate_loyalty = {
+			estate = estate_dhimmi
+			loyalty = 10
+		}
+		add_estate_loyalty_modifier = {
+			estate = estate_dhimmi
+			desc = EST_VAL_JERUSALEM_JEWISH
+			loyalty = 10
+			duration = 7300
+		}
+	}
+
+	option = { #Do not
+		name = "vu_ayyubid_mission_events.1.b"
+		add_piety = 0.25
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = 10
+		}
+		add_estate_loyalty_modifier = {
+			estate = estate_church
+			desc = EST_VAL_JERUSALEM_NOT_JEWISH
+			loyalty = 10
+			duration = 7300
+		}
+	}
+}
+country_event = { #2 The Eagle's Perch
+	id = vu_ayyubid_mission_events.2
+	title = "vu_ayyubid_mission_events.2.t"
+	desc = "vu_ayyubid_mission_events.2.d"
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	#major = yes
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = HSN
+		owns = 377 #Aleppo
+		owns = 382 #Damascus
+		owns = 361 #Cairo
+	}
+
+	option = { #Cairo, the Fatimid Capital
+		name = "vu_ayyubid_mission_events.2.a"
+		capital_scope = {
+			if = {
+				limit = { base_tax = 2 }
+				add_base_tax = -1
+			}
+			if = {
+				limit = { base_production = 2 }
+				add_base_production = -1
+			}
+			if = {
+				limit = { base_manpower = 2 }
+				add_base_manpower = -1
+			}
+		}
+		361 = {
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_tax = 2 } }
+				}
+				add_base_tax = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_production = 2 } }
+				}
+				add_base_production = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_manpower = 2 } }
+				}
+				add_base_manpower = 2
+			}
+			move_capital_effect = yes
+		}
+	}
+
+	option = { #Damascus, the home of Saladin's tomb
+		name = "vu_ayyubid_mission_events.2.b"
+		capital_scope = {
+			if = {
+				limit = { base_tax = 2 }
+				add_base_tax = -1
+			}
+			if = {
+				limit = { base_production = 2 }
+				add_base_production = -1
+			}
+			if = {
+				limit = { base_manpower = 2 }
+				add_base_manpower = -1
+			}
+		}
+		382 = {
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_tax = 2 } }
+				}
+				add_base_tax = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_production = 2 } }
+				}
+				add_base_production = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_manpower = 2 } }
+				}
+				add_base_manpower = 2
+			}
+			move_capital_effect = yes
+		}
+	}
+
+	option = { #Aleppo, the last Ayyubid capital
+		name = "vu_ayyubid_mission_events.2.c"
+		capital_scope = {
+			if = {
+				limit = { base_tax = 2 }
+				add_base_tax = -1
+			}
+			if = {
+				limit = { base_production = 2 }
+				add_base_production = -1
+			}
+			if = {
+				limit = { base_manpower = 2 }
+				add_base_manpower = -1
+			}
+		}
+		377 = {
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_tax = 2 } }
+				}
+				add_base_tax = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_production = 2 } }
+				}
+				add_base_production = 2
+			}
+			if = {
+				limit = {
+					ROOT = { capital_scope = { base_manpower = 2 } }
+				}
+				add_base_manpower = 2
+			}
+			move_capital_effect = yes
+		}
+	}
+}
+
+country_event = { #3 Government of Avaria
+	id = vu_mission_events.1
+	title = vu_mission_events.1.t
+	desc = vu_mission_events.1.d
+	picture = DIPLOMACY_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #Remain normal government
+		name = vu_mission_events.1.a
+		change_government_reform_progress = 200
+		set_government_rank = 8
+		add_army_professionalism = 0.05
+		change_adm = 1
+		change_dip = 1
+		change_mil = 1
+		change_innovativeness = 5
+	}
+
+	option = { #Become steppe nomads
+		name = vu_mission_events.1.b
+		highlight = yes
+		change_mil = 1
+		change_government = tribal
+		add_government_reform = steppe_horde
+		add_government_reform = herders_of_the_steppe
+		add_horde_unity = 100
+		add_army_tradition = 30
+		add_stability = -1
+	}
+}
+
+country_event = { #4 Religion of Avaria
+	id = vu_mission_events.2
+	title = vu_mission_events.2.t
+	desc = vu_mission_events.2.d
+	picture = DIPLOMACY_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #Remain current religion
+		name = vu_mission_events.2.a
+		change_government_reform_progress = 50
+		change_adm = 1
+		add_stability = 1
+		add_adm_power = 100
+		add_dip_power = 100
+		add_corruption = -2
+		add_inflation = -2
+	}
+
+	option = { #Convert orthodox
+		name = vu_mission_events.2.b
+		change_religion = orthodox
+		capital_scope = {
+			change_religion = orthodox
+		}
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		hidden_effect = { add_prestige = 50 } #Counters -100 from conversion command
+	}
+
+	option = { #Convert miaphysite
+		name = vu_mission_events.2.c
+		change_religion = miaphysite
+		capital_scope = {
+			change_religion = miaphysite
+		}
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		hidden_effect = { add_prestige = 50 } #Counters -100 from conversion command
+	}
+
+	option = { #Convert nestorian
+		name = vu_mission_events.2.e
+		change_religion = nestorian
+		capital_scope = {
+			change_religion = nestorian
+		}
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		hidden_effect = { add_prestige = 50 } #Counters -100 from conversion command
+	}
+
+	option = { #Convert tengri
+		name = vu_mission_events.2.f
+		highlight = yes
+		change_religion = tengri_pagan_reformed
+		capital_scope = {
+			change_religion = tengri_pagan_reformed
+		}
+		add_mil_power = 100
+		add_stability = 1
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		hidden_effect = { add_prestige = 50 } #Counters -100 from conversion command
+	}
+
+	option = { #Convert jewish
+		name = vu_mission_events.2.g
+		highlight = yes
+		change_religion = jewish
+		capital_scope = {
+			change_religion = jewish
+		}
+		add_adm_power = 50
+		add_inflation = -2
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		hidden_effect = { add_prestige = 50 } #Counters -100 from conversion command
+	}
+}
+
+country_event = { #5 Avarian Khaganate is reborn
+	id = vu_mission_events.3
+	title = vu_mission_events.3.t
+	desc = vu_mission_events.3.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = { #And so we conquer
+		name = vu_mission_events.3.a
+		set_government_rank = 9
+		override_country_name = VU_NAME_AVAR_KHAGANATE
+		add_manpower = 10
+		add_army_tradition = 25
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			cavalry = ROOT
+		}
+		capital_scope = {
+			artillery = ROOT
+		}
+		capital_scope = {
+			artillery = ROOT
+		}
+	}
+}
+
+country_event = { #6 Liquidation of Cossack Host
+	id = vu_mission_events.4
+	title = vu_mission_events.4.t
+	desc = vu_mission_events.4.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = { #Raze the land to the ground
+		name = vu_mission_events.4.a
+		custom_tooltip = vu_mission_events.4.tooltip
+		add_horde_unity = 10
+		hidden_effect = {
+			every_owned_province = {
+				limit = { culture = cossack }
+				set_base_tax = 1
+				set_base_production = 1
+				set_base_manpower = 1
+				add_devastation = 80
+			}
+		}
+		add_manpower = 2
+		add_years_of_income = 1
+		add_adm_power = 75
+		add_dip_power = 75
+		add_mil_power = 75
+		2406 = { change_culture = ROOT }
+		3243 = { change_culture = ROOT }
+		2411 = { change_culture = ROOT }
+		hidden_effect = {
+			every_owned_province = {
+				limit = { culture = cossack }
+				add_province_modifier = {
+					name = vu_ravaged_cossacks
+					duration = 5000
+				}
+			}
+		}
+	}
+
+	option = { #Force cossacks to join the army and liquidate host
+		name = vu_mission_events.4.b
+		add_horde_unity = 10
+		hidden_effect = {
+			every_owned_province = {
+				limit = { culture = cossack }
+				set_base_tax = 1
+				set_base_production = 1
+				set_base_manpower = 1
+			}
+		}
+		add_manpower = 10
+		add_army_tradition = 15
+		add_army_professionalism = 0.05
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+		2406 = { change_culture = ROOT }
+		3243 = { change_culture = ROOT }
+		hidden_effect = {
+			every_owned_province = {
+				limit = { culture = cossack }
+				add_province_modifier = {
+					name = vu_ravaged_cossacks
+					duration = 3650
+				}
+			}
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+	}
+
+	option = { #Keep the Cossack host
+		name = vu_mission_events.4.c
+		custom_tooltip = vu_mission_events.4.tooltip2
+		add_manpower = 2
+		add_army_tradition = 5
+		hidden_effect = {
+			every_owned_province = {
+				limit = { culture = cossack }
+				add_province_modifier = {
+					name = vu_cossack_host
+					duration = 7300
+				}
+				add_local_autonomy = 75
+			}
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+		2411 = {
+			cavalry = ROOT
+		}
+		add_country_modifier = {
+			name = vu_cossack_help
+			duration = 7300
+			hidden = yes
+		}
+	}
+}
+
+country_event = { #7 Avar intentions towards Europe
+	id = vu_mission_events.5
+	title = vu_mission_events.5.t
+	desc = vu_mission_events.5.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = { #Declare full invasion
+		name = vu_mission_events.5.a
+		highlight = yes
+		custom_tooltip = vu_mission_events.5.tooltip
+		add_horde_unity = 10
+		add_manpower = 5
+		add_mil_power = 25
+		add_country_modifier = {
+			name = vu_avar_invasion_1
+			duration = 3650
+			hidden = yes
+		}
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					capital_scope = { continent = europe }
+					NOT = { alliance_with = ROOT }
+					is_neighbor_of = ROOT
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = avar_direct_invasion
+				}
+			}
+			every_known_country = {
+				limit = {
+					capital_scope = { continent = europe }
+					NOT = { alliance_with = ROOT }
+					NOT = { is_neighbor_of = ROOT }
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = avar_invasion_worry
+				}
+			}
+		}
+	}
+
+	option = { #Take only the Carpathia
+		name = vu_mission_events.5.b
+		custom_tooltip = vu_mission_events.5.tooltip2
+		add_horde_unity = 5
+		add_manpower = 5
+		add_mil_power = 15
+		add_country_modifier = {
+			name = vu_avar_invasion_2
+			duration = 3650
+			hidden = yes
+		}
+		hidden_effect = {
+			153 = {
+				owner = {
+					add_opinion = {
+						who = ROOT
+						modifier = avar_direct_invasion
+					}
+				}
+			}
+			every_known_country = {
+				limit = {
+					capital_scope = { continent = europe }
+					NOT = { alliance_with = ROOT }
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = avar_invasion_worry
+				}
+			}
+		}
+	}
+
+	option = { #We are civilized
+		name = vu_mission_events.5.c
+		add_horde_unity = -10
+		add_country_modifier = {
+			name = vu_avar_invasion_3
+			duration = 3650
+			hidden = yes
+		}
+		153 = {
+			owner = {
+				add_opinion = {
+					who = ROOT
+					modifier = avar_invasion_worry
+				}
+			}
+		}
+	}
+}

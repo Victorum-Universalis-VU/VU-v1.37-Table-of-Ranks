@@ -1,0 +1,527 @@
+corsica_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = COR
+	}
+	has_country_shield = yes
+
+	cor_genoese_piracy = {
+		icon = expand_the_confederacy
+		position = 2
+		required_missions = { cor_seek_support_from_abroad }
+		trigger = {
+			if = {
+				limit = {
+					OR = {
+						has_dlc = "Wealth of Nations"
+						has_dlc = "El Dorado"
+						has_dlc = "Mare Nostrum"
+						has_dlc = "Golden Century"
+					}
+				}
+				1298 = {
+					privateer_power = {
+						country = ROOT
+						share = 15
+					}
+				}
+			}
+			else = {
+				1298 = {
+					trade_share = {
+						country = ROOT
+						share = 15
+					}
+				}
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			add_country_modifier = {
+				name = cor_control_over_genoa
+				duration = 3650
+			}
+		}
+	}
+
+	cor_bolster_the_confederacy = {
+		icon = overshadow_venice
+		position = 4
+		required_missions = {
+			cor_genoese_piracy
+			cor_corsican_infrastructure
+	 	}
+		trigger = {
+			legitimacy_equivalent = 90
+			num_of_galley = 20
+		}
+		effect = {
+			capital_scope = {
+				create_or_add_center_of_trade_level = { level = 1 }
+			}
+			add_country_modifier = {
+				name = cor_corsican_corsairs
+				duration = -1
+			}
+		}
+	}
+}
+
+corsica_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = COR
+	}
+	has_country_shield = yes
+
+	cor_seek_support_from_abroad = {
+		icon = me_mission_get_pu
+		position = 1
+		required_missions = { }
+		trigger = {
+			if = {
+				limit = {
+					OR = {
+						has_dlc = "El Dorado"
+						has_dlc = "Conquest of Paradise"
+					}
+				}
+				if = {
+					limit = {
+						is_subject = yes
+					}
+					calc_true_if = {
+						amount = 2
+						all_country = {
+							is_supporting_independence_of = ROOT
+						}
+					}
+				}
+				else = {
+					stability = 1
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						is_subject = yes
+					}
+					calc_true_if = {
+						amount = 2
+						all_country = {
+							OR = {
+								has_opinion = {
+									who = ROOT
+									value = 80
+								}
+								alliance_with = ROOT
+							}
+						}
+					}
+				}
+				else = {
+					stability = 1
+				}
+			}
+		}
+		effect = {
+			add_yearly_manpower = 2
+			add_country_modifier = {
+				name = cor_freedom_for_corsica
+				duration = 7300
+			}
+		}
+	}
+
+	cor_corsican_infrastructure = {
+		icon = end_genoese_competition
+		position = 3
+		required_missions = { cor_war_for_independence }
+		trigger = {
+			OR = {
+				temple = 1
+				cathedral = 1
+			}
+			OR = {
+				marketplace = 1
+				trade_depot = 1
+				stock_exchange = 1
+			}
+			OR = {
+				dock = 1
+				drydock = 1
+			}
+		}
+		effect = {
+			add_years_of_income = 2
+			capital_scope = {
+				create_or_add_center_of_trade_level = { level = 1 }
+			}
+		}
+	}
+
+	cor_attack_on_majorca = {
+		icon = a_question_of_spain
+		position = 5
+		required_missions = { cor_seize_sardinia }
+		provinces_to_highlight = {
+			area = baleares_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			baleares_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			baleares_area = {
+				add_province_modifier = {
+					name = cor_forward_ports
+					duration = 10950
+				}
+			}
+			catalonia_area = {
+				limit = {
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			valencia_area = {
+				limit = {
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+corsica_missions_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = COR
+	}
+	has_country_shield = yes
+
+	cor_war_for_independence = {
+		icon = reclaim_the_aegean
+		position = 2
+		required_missions = {
+			cor_seek_support_from_abroad
+			cor_develop_the_island
+		}
+		trigger = {
+			OR = {
+				is_subject = no
+				is_in_war = {
+					attacker_leader = ROOT
+					casus_belli = cb_independence_war
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_dlc = "Golden Century"
+					has_flagship = no
+					any_owned_province = {
+						has_port = yes
+					}
+				}
+				random_owned_province = {
+					limit = {
+						has_port = yes
+					}
+					create_flagship = {
+						name = "Vittoria"
+						type = galley
+					}
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = cor_naval_strategies
+					duration = 1825
+				}
+			}
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				galley = ROOT
+				galley = ROOT
+				galley = ROOT
+				galley = ROOT
+			}
+		}
+	}
+
+	cor_independent_corsica = {
+		icon = rule_corsica
+		position = 3
+		required_missions = { cor_war_for_independence }
+		trigger = {
+			is_at_war = no
+			is_subject = no
+			navy_size_percentage = 0.80
+		}
+		effect = {
+			if = {
+				limit = {
+					has_dlc = "Golden Century"
+				}
+				country_event = { id = ME_Corsica_Events.1 }
+			}
+			else = {
+				add_prestige = 10
+				add_power_projection = {
+					type = mission_rewards_power_projection
+					amount = 10
+				}
+			}
+			corsica_sardinia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			sardinia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	cor_seize_sardinia = {
+		icon = seize_sardinia
+		position = 4
+		required_missions = { cor_independent_corsica }
+		provinces_to_highlight = {
+			OR = {
+				area = corsica_sardinia_area
+				area = sardinia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			corsica_sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			baleares_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			sicily_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	cor_a_sea_of_pirates = {
+		icon = mission_sponsor_piracy
+		position = 6
+		required_missions = {
+			cor_attack_on_majorca
+			cor_capture_of_sicily
+		}
+		provinces_to_highlight = {
+			OR = {
+				trade_company_region = trade_company_safi
+				trade_company_region = trade_company_sevilla
+				trade_company_region = trade_company_valencia
+				trade_company_region = trade_company_genua
+				trade_company_region = trade_company_tunis
+				trade_company_region = trade_company_venice
+				trade_company_region = trade_company_ragusa
+				trade_company_region = trade_company_alexandria
+				trade_company_region = trade_company_aleppo
+				trade_company_region = trade_company_constantinople
+				trade_company_region = trade_company_crimea
+			}
+			has_port = yes
+			province_has_center_of_trade_of_level = 1
+			NOT = { area = southern_morocco_area }
+			NOT = { area = alentejo_area }
+			NOT = { area = beieras_area }
+			NOT = { area = asturias_area }
+			NOT = { area = mecca_area }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			ROOT = {
+				NOT = {
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 6
+						OR = {
+							trade_company_region = trade_company_safi
+							trade_company_region = trade_company_sevilla
+							trade_company_region = trade_company_valencia
+							trade_company_region = trade_company_genua
+							trade_company_region = trade_company_tunis
+							trade_company_region = trade_company_venice
+							trade_company_region = trade_company_ragusa
+							trade_company_region = trade_company_alexandria
+							trade_company_region = trade_company_aleppo
+							trade_company_region = trade_company_constantinople
+							trade_company_region = trade_company_crimea
+						}
+						has_port = yes
+						province_has_center_of_trade_of_level = 1
+						NOT = { area = southern_morocco_area }
+						NOT = { area = alentejo_area }
+						NOT = { area = beieras_area }
+						NOT = { area = asturias_area }
+						NOT = { area = mecca_area }
+					}
+				}
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				OR = {
+					trade_company_region = trade_company_safi
+					trade_company_region = trade_company_sevilla
+					trade_company_region = trade_company_valencia
+					trade_company_region = trade_company_genua
+					trade_company_region = trade_company_tunis
+					trade_company_region = trade_company_venice
+					trade_company_region = trade_company_ragusa
+					trade_company_region = trade_company_alexandria
+					trade_company_region = trade_company_aleppo
+					trade_company_region = trade_company_constantinople
+					trade_company_region = trade_company_crimea
+				}
+				has_port = yes
+				province_has_center_of_trade_of_level = 1
+				NOT = { area = southern_morocco_area }
+				NOT = { area = alentejo_area }
+				NOT = { area = beieras_area }
+				NOT = { area = asturias_area }
+				NOT = { area = mecca_area }
+			}
+		}
+		effect = {
+			add_prestige = 25
+			if = {
+				limit = {
+					OR = {
+						has_dlc = "Wealth of Nations"
+						has_dlc = "El Dorado"
+						has_dlc = "Mare Nostrum"
+						has_dlc = "Golden Century"
+					}
+				}
+				add_country_modifier = {
+					name = cor_mare_piratae
+					duration = 10950
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = cor_mare_piratae_nodlc
+					duration = 10950
+				}
+			}
+		}
+	}
+}
+
+corsica_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = COR
+	}
+	has_country_shield = yes
+
+	cor_develop_the_island = {
+		icon = renaissance_city
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+			NOT = { num_of_times_improved = 4 }
+		}
+		trigger = {
+			capital_scope = {
+				num_of_times_improved = 4
+			}
+		}
+		effect = {
+			add_yearly_manpower = 2
+			add_years_of_income = 2
+			capital_scope = {
+				add_province_modifier = {
+					name = cor_urban_development
+					duration = -1
+				}
+			}
+		}
+	}
+
+	cor_promote_the_renaissance = {
+		icon = florentine_renaissance
+		position = 3
+		required_missions = { cor_war_for_independence }
+		trigger = {
+			has_institution = renaissance
+		}
+		effect = {
+			add_prestige = 10
+			add_country_modifier = {
+				name = cor_school_of_florence
+				duration = 5475
+			}
+		}
+	}
+
+	cor_capture_of_sicily = {
+		icon = unite_the_two_sicilies
+		position = 5
+		required_missions = { cor_seize_sardinia }
+		provinces_to_highlight = {
+			area = sicily_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_navy_tradition = 20
+			add_country_modifier = {
+				name = cor_sicily_wrested
+				duration = 5475
+			}
+		}
+	}
+}

@@ -1,0 +1,332 @@
+namespace = subjects_expanded_administrative_region_events
+
+country_event = {
+	id = subjects_expanded_administrative_region_events.1
+	title = subjects_expanded_administrative_region_events.EVTNAME1
+	desc = subjects_expanded_administrative_region_events.EVTDESC1
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject_of_type = administrative_region
+		NOT = { has_ruler_flag = administrative_region_ruler_monarch_power_given }
+		has_regency = no
+		OR = {
+			government = monarchy
+			government = theocracy
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_ruler_flag = administrative_region_ruler_monarch_power_given
+			if = {
+				limit = {
+					OR = {
+						ADM = 1
+						DIP = 1
+						MIL = 1
+					}
+				}
+				overlord = {
+					country_event = { id = subjects_expanded_administrative_region_events.2 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_administrative_region_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_administrative_region_events.2
+	title = subjects_expanded_administrative_region_events.EVTNAME2
+	desc = subjects_expanded_administrative_region_events.EVTDESC2
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+	trigger = {
+		overlord_of = FROM
+		FROM = {
+			is_subject_of_type = administrative_region
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				export_to_variable = {
+					which = adm_power_to_gain_from_administrative_region
+					value = ADM
+				}
+				multiply_variable = { which = adm_power_to_gain_from_administrative_region value = 10 }
+				export_to_variable = {
+					which = dip_power_to_gain_from_administrative_region
+					value = DIP
+				}
+				multiply_variable = { which = dip_power_to_gain_from_administrative_region value = 10 }
+				export_to_variable = {
+					which = mil_power_to_gain_from_administrative_region
+					value = MIL
+				}
+				multiply_variable = { which = mil_power_to_gain_from_administrative_region value = 10 }
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_administrative_region_events2.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		custom_tooltip = ADMINISTRATIVE_REGION_GAIN_MONARCH_POWER_FROM_RULER_TT
+		hidden_effect = {
+			while = {
+				limit = {
+					FROM = {
+						check_variable = { which = adm_power_to_gain_from_administrative_region value = 10 }
+					}
+				}
+				FROM = {
+					change_variable = { which = adm_power_to_gain_from_administrative_region value = -10 }
+				}
+				add_adm_power = 10
+			}
+			while = {
+				limit = {
+					FROM = {
+						check_variable = { which = dip_power_to_gain_from_administrative_region value = 10 }
+					}
+				}
+				FROM = {
+					change_variable = { which = dip_power_to_gain_from_administrative_region value = -10 }
+				}
+				add_dip_power = 10
+			}
+			while = {
+				limit = {
+					FROM = {
+						check_variable = { which = mil_power_to_gain_from_administrative_region value = 10 }
+					}
+				}
+				FROM = {
+					change_variable = { which = mil_power_to_gain_from_administrative_region value = -10 }
+				}
+				add_mil_power = 10
+			}
+		}
+
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = administrative_region_enable_administrative_help
+					NOT = { liberty_desire = 50 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						variable_arithmetic_trigger = {
+							export_to_variable = {
+								which = adm_var
+								value = ADM
+							}
+							export_to_variable = {
+								which = dip_var
+								value = DIP
+							}
+							export_to_variable = {
+								which = mil_var
+								value = MIL
+							}
+							check_variable = { which = adm_var which = dip_var }
+							check_variable = { which = adm_var which = mil_var }
+						}
+					}
+				}
+				custom_tooltip = ADMINISTRATIVE_REGION_GIVES_US_MONTHLY_ADM_TT
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						variable_arithmetic_trigger = {
+							export_to_variable = {
+								which = adm_var
+								value = ADM
+							}
+							export_to_variable = {
+								which = dip_var
+								value = DIP
+							}
+							export_to_variable = {
+								which = mil_var
+								value = MIL
+							}
+							NOT = { check_variable = { which = adm_var which = dip_var } }
+							check_variable = { which = dip_var which = mil_var }
+						}
+					}
+				}
+				custom_tooltip = ADMINISTRATIVE_REGION_GIVES_US_MONTHLY_DIP_TT
+			}
+			else = {
+				custom_tooltip = ADMINISTRATIVE_REGION_GIVES_US_MONTHLY_MIL_TT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_administrative_region_events.3
+	title = subjects_expanded_administrative_region_events.EVTNAME3
+	desc = subjects_expanded_administrative_region_events.EVTDESC3
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_administrative_region_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		remove_heir = {}
+		add_liberty_desire = 25
+		add_opinion = {
+			who = FROM
+			modifier = administrative_region_removed_heir_opinion
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_administrative_region_events.4
+	title = subjects_expanded_administrative_region_events.EVTNAME4
+	desc = subjects_expanded_administrative_region_events.EVTDESC4
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	trigger = {
+		any_subject_country = {
+			is_subject_of_type = administrative_region
+			NOT = { government = monarchy }
+			NOT = { government = theocracy }
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = subjects_expanded_administrative_region_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = administrative_region
+				NOT = { government = monarchy }
+				NOT = { government = theocracy }
+			}
+			ROOT = { vassalize = PREV }
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_administrative_region_events.5
+	title = subjects_expanded_administrative_region_events.EVTNAME5
+	desc = subjects_expanded_administrative_region_events.EVTDESC5
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		calc_true_if = {
+			all_subject_country = {
+				is_subject_of_type = administrative_region
+			}
+			amount = 2
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						is_subject_of_type = administrative_region
+						truce_with = ROOT
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_subject_of_type = administrative_region
+						truce_with = ROOT
+					}
+					ROOT = { vassalize = PREV }
+				}
+			}
+			if = {
+				limit = {
+					any_subject_country = {
+						is_subject_of_type = administrative_region
+						NOT = { is_neighbor_of = ROOT }
+					}
+				}
+				every_subject_country = {
+					limit = {
+						is_subject_of_type = administrative_region
+						NOT = { is_neighbor_of = ROOT }
+					}
+					ROOT = { vassalize = PREV }
+				}
+			}
+			if = {
+				limit = {
+					calc_true_if = {
+						all_subject_country = {
+							is_subject_of_type = administrative_region
+						}
+						amount = 2
+					}
+				}
+				while = {
+					limit = {
+						calc_true_if = {
+							all_subject_country = {
+								is_subject_of_type = administrative_region
+							}
+							amount = 2
+						}
+					}
+					random_subject_country = {
+						limit = {
+							is_subject_of_type = administrative_region
+						}
+						ROOT = { vassalize = PREV }
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_administrative_region_events5.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}

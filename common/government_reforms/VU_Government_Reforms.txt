@@ -1,0 +1,584 @@
+tur_organized_pashas_reform = {
+	icon = tribal_centralize_power	
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			#mission_completed = tur_organize_pashas
+			has_reform = tur_organized_pashas_reform
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = tur_organize_pashas
+			has_reform = tur_organized_pashas_reform
+		}
+	}
+	modifiers = {
+		global_autonomy = -0.05
+		development_cost = -0.05
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+tur_custodian_holy_city_reform = {
+	icon = monastic_elections_reform
+	allow_normal_conversion = yes
+	potential = {
+		has_reform = tur_custodian_holy_city_reform
+	}
+	trigger = { has_reform = tur_custodian_holy_city_reform }
+	modifiers = {
+		tolerance_of_heathens_capacity = 1
+		num_accepted_cultures = 2 		
+		dhimmi_loyalty_modifier = 0.05
+		maratha_muslim_influence_modifier = 0.1
+		rajput_muslim_influence_modifier = 0.1
+		dhimmi_influence_modifier = 0.1
+		vaisyas_non_muslim_influence_modifier = 0.1
+	}
+	ai = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			estate_influence = {
+				estate = estate_dhimmi
+				influence = 90
+			}
+		
+		}
+	}
+}
+
+#tur_absolute_sultanic_power = { # tur_unlock_absolute_sultanic_law_flag isn't set anywhere commenting the reform for now
+#	icon = mamluk_government
+#	allow_normal_conversion = yes
+#	potential = {
+#		has_country_flag = tur_unlock_absolute_sultanic_law_flag
+#	}
+#	trigger = { has_country_flag = tur_unlock_absolute_sultanic_law_flag }
+#	modifiers = {
+#		governing_capacity_modifier = 0.15
+#		free_policy = 1
+#	}
+#	ai = {
+#		factor = 10
+#	}
+#}
+
+#vu_janissary_autocracy = { # tur_janissary_autocracy_flag isn't set anywhere, commenting out for now
+#	lock_level_when_selected = yes
+#	allow_normal_conversion = yes
+#	icon = rioting_burning_2
+#	potential = {
+#		has_country_flag = tur_janissary_autocracy_flag 
+#	}
+#	trigger = { has_country_flag = tur_janissary_autocracy_flag } 
+#	valid_for_nation_designer = no
+#	heir = no 
+#	queen = no 
+#	modifiers = {
+#		monarch_military_power = 1 
+#		max_absolutism = -70
+#		#janissaries_influence_modifier = 0.05 #implement that one day Stiopa, plez
+#		administrative_efficiency = -0.1
+#	}
+#	custom_attributes = {
+#		locked_government_type = yes
+#		generals_become_rulers = yes
+#	}
+#	
+#	conditional = {
+#		allow = { has_dlc = "Rights of Man" }
+#		government_abilities = {
+#			militarization_mechanic
+#		}
+#	}
+#}
+
+#vu_ottoman_government = { # Again the country_flag isn't set anywhere, disabling for now
+#	lock_level_when_selected = yes
+#	allow_normal_conversion = yes
+#	icon = crown_highlighted
+#	potential = {
+#		custom_trigger_tooltip = {
+#			tooltip = tur_repealed_janissaries_tt
+#			has_country_flag = tur_abolished_janissaries 
+#		}
+#	}
+#	valid_for_nation_designer = no
+#	maintain_dynasty = yes
+#	modifiers = {
+#		drill_gain_modifier = 0.5
+#		legitimacy = 1
+#		max_absolutism = 10
+#		governing_capacity = 250
+#	}
+#
+#	custom_attributes = {
+#		locked_government_type = yes
+#	}
+#	conditional = {
+#		allow = { has_dlc = "Rights of Man" }
+#		has_harem = yes
+#	}
+#	
+#	conditional = {
+#		allow = { has_dlc = "Rights of Man" }
+#		has_harem = yes
+#	}
+#}
+
+vu_order_of_saint_joan_reform = { 
+	allow_normal_conversion = yes
+	legacy_equivalent = holy_state_legacy
+	icon = "queen"
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					tag = KOJ
+					#has_country_modifier = orl_sisters_takeover_modifier
+				}
+				NOT = { map_setup = map_setup_random }
+			}
+			AND = {
+				is_playing_custom_nation = yes
+				have_had_reform = holy_state_reform
+			}
+		}
+	}
+	trigger = {
+		religion_group = christian
+	}
+	modifiers = {
+		cb_on_religious_enemies = yes
+		fire_damage = 0.1
+		tolerance_own = 1
+	}
+	conditional = {
+		allow = { has_dlc = "Rights of Man" }
+		government_abilities = {
+			militarization_mechanic
+		}
+	}
+	rulers_can_be_generals = yes
+	heirs_can_be_generals = yes
+	ai = {
+		factor = 10
+	}
+}
+
+vu_sultanate_of_rum_and_cairo = {
+	lock_level_when_selected = yes
+	allow_normal_conversion = yes
+	icon = mamluk_government
+	potential = {
+		have_had_reform = vu_sultanate_of_rum_and_cairo
+	}
+	legacy_equivalent = ottoman_government_legacy
+	maintain_dynasty = yes
+	modifiers = {
+		monarch_admin_power = 2
+		same_culture_advisor_cost = -0.25
+		max_absolutism = 10
+		governing_capacity = 150
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		has_pashas = yes
+	}
+	conditional = {
+		allow = { has_dlc = "Rights of Man" }
+		has_harem = yes
+	}
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+vu_indian_sultanate_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			capital_scope = {
+				superregion = india_superregion
+			}
+			has_reform = vu_indian_sultanate_reform
+		}
+		OR = { 
+			religion_group = muslim
+			religion_group = zoroastrian_group
+		}
+	}
+	valid_for_nation_designer = no
+	legacy_equivalent = indian_sultanate_legacy
+
+	modifiers = {
+		tolerance_heathen = 3
+		max_absolutism = 5
+		monthly_reform_progress = 0.25
+	}
+
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			iqta_mechanic
+		}
+	}
+}
+
+vu_declare_pirate_empire_reform = {
+	icon = "government_reform_become_rev_empire_reform"
+	allow_normal_conversion = no
+	potential = {
+		OR = { 
+			have_had_reform = vu_declare_pirate_empire_reform 
+			#mission_completed = nss_contact_far_east_pirates
+		}
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		max_absolutism = 25
+		free_policy = 1 
+		state_governing_cost = -0.25
+	}
+}
+
+vu_fleet_with_a_state_reform = {
+	icon = "government_reform_commander_king_reform"
+	allow_normal_conversion = no
+	potential = {
+		OR = { 
+			have_had_reform = vu_fleet_with_a_state_reform 
+			#mission_completed = nss_strong_republican_foundations
+		}
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		free_navy_leader_pool = 2
+		allowed_marine_fraction = 0.1 
+		republican_tradition = 0.5
+		pr_captains_influence = 0.1
+	}
+}
+
+vu_canton_administration = {
+	icon = legislative_assembly_reform
+	allow_normal_conversion = yes
+	potential = {
+		has_reform = united_cantons_reform
+	}
+	modifiers = {
+		vassal_forcelimit_bonus = 0.5
+		republican_tradition = 0.15
+	}
+	
+	effect = { 
+		custom_tooltip = swi_every_subject_gains_tt
+		hidden_effect = { 
+			every_subject_country = { 
+				limit = { is_subject_of_type = canton } 
+				add_country_modifier = {
+					name = swi_canton_administration_modifier
+					duration = -1 
+					hidden = yes 
+				}
+			}
+		}
+	}
+	removed_effect = {	
+		hidden_effect = { 
+			every_country = { 
+				limit = { has_country_modifier = swi_canton_administration_modifier }
+				remove_country_modifier = swi_canton_administration_modifier
+			}
+		}
+	}
+	ai = {
+		factor = 15
+	}
+}
+
+ara_consulate_of_the_sea = {
+	icon = ara_consulate_sea	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = ara_maritime_law
+			has_reform = ara_consulate_of_the_sea
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = ara_maritime_law
+			has_reform = ara_consulate_of_the_sea
+		}
+	}
+	modifiers = {
+		monarch_diplomatic_power = 1 
+		global_prov_trade_power_modifier = 0.2
+		burghers_influence_modifier = 0.1
+		burghers_loyalty_modifier = 0.05
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+ara_consell_de_cent = {
+	icon = ara_consell_cent	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = ara_tradicions_catalanes
+			has_reform = ara_consell_de_cent
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = ara_tradicions_catalanes
+			has_reform = ara_consell_de_cent
+		}
+	}
+	modifiers = {
+		advisor_cost = -0.15
+		num_accepted_cultures = 1
+		promote_culture_cost = -0.25 
+	}
+	effect = { 
+		custom_tooltip = ara_gain_administrator_trait_tt
+		#hidden_effect = { 
+			#country_event = { id = FU_Aragon_Events.12 }
+		#}
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+mil_secret_council = {
+	icon = mil_secret_chancellery	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = mlo_control_the_estates
+			has_reform = mil_secret_council
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = mlo_control_the_estates
+			has_reform = mil_secret_council
+		}
+	}
+	modifiers = {
+		all_estate_loyalty_equilibrium = 0.1
+		yearly_corruption = -0.05
+		development_cost = -0.05
+		
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+mil_sforza_administration = {
+	icon = mil_sforza_reforms	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = mlo_modern_tax_system
+			has_reform = mil_sforza_administration
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = mlo_modern_tax_system
+			has_reform = mil_sforza_administration
+		}
+	}
+	modifiers = {
+		global_tax_modifier = 0.15
+		interest = -1 
+		governing_capacity = 150
+		global_prosperity_growth = 0.25
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+nov_commercial_law = {
+	icon = nov_trade_law	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = nov_deal_with_hansa
+			has_reform = nov_commercial_law
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = nov_deal_with_hansa
+			has_reform = nov_commercial_law
+		}
+	}
+	modifiers = {
+		mr_traders_influence = 0.05
+		trade_efficiency = 0.1
+		placed_merchant_power = 5
+		republican_tradition = 0.1
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Leviathan"
+		}
+		allow_draft_transport_ships = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+nov_republican_guard_reform = {
+	icon = nov_office_of_republican_guard	
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			#mission_completed = nov_republican_guard
+			has_reform = nov_republican_guard_reform
+		}
+	}
+	trigger = {
+		OR = {
+			#mission_completed = nov_republican_guard
+			has_reform = nov_republican_guard_reform
+		}
+	}
+	modifiers = {
+		infantry_power = 0.1
+		drill_gain_modifier = 0.5
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+vu_republican_tsardom_reform = {
+	icon = vu_russian_republic
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			was_tag = NOV
+			tag = NOV
+			has_reform = vu_republican_tsardom_reform
+		}
+	}
+	trigger = {
+		OR = {
+			was_tag = NOV
+			tag = NOV
+			has_reform = vu_republican_tsardom_reform
+		}
+	}
+	fixed_rank = 9
+	legacy_equivalent = tsardom_legacy
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+
+	nation_designer_trigger = {
+		culture_group = east_slavic
+	}
+
+	modifiers = {
+		global_manpower_modifier = 0.20
+		merchants = 1
+		mercantilism_cost = -0.15
+		governing_capacity_modifier = 0.2
+	}
+
+	conditional = {
+		allow = { has_dlc = "Third Rome" }
+		government_abilities = {
+			russian_mechanic
+		}
+		claim_states = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+aju_hydraulic_empire = {
+	icon = aju_hydro_empire_reform
+	allow_normal_conversion = yes
+	potential = {
+		OR = { 
+			has_reform = aju_hydraulic_empire
+			#mission_completed = aju_jubba_and_shebelle
+		}
+	}
+	trigger = {
+		OR = { 
+			has_reform = aju_hydraulic_empire
+			#mission_completed = aju_jubba_and_shebelle
+		}
+	}
+	fixed_rank = 9
+	royal_marriage = yes
+	government_abilities = { feudal_theocracy_mechanic }
+	modifiers = {
+		development_cost = -0.1
+		great_project_upgrade_cost = -0.25
+	}
+}
+
+ada_adalan_empire = {
+	icon = ada_gunpowder_empire
+	allow_normal_conversion = no
+	potential = {
+		OR = { 
+			has_reform = ada_adalan_empire
+			#mission_completed = adal_end_abyssinian_hegemony
+		}
+	}
+	trigger = {
+		OR = { 
+			has_reform = ada_adalan_empire
+			#mission_completed = adal_end_abyssinian_hegemony
+		}
+	}
+	fixed_rank = 9
+	government_abilities = { iqta_mechanic }
+	modifiers = {
+		drill_decay_modifier = -0.3
+		yearly_army_professionalism = 0.01
+		discipline = 0.05
+	}
+}

@@ -1,0 +1,44 @@
+##################################
+# VU - SUSSY NATION by Mellstrom #
+##################################
+country_decisions = {
+
+    sussy_pirate_nation = {
+	    major = yes
+        potential = {
+	        tag = SOS
+	        owns_core_province = 487 # Port royal
+            NOT = { exists = RED }
+		    NOT = { exists = PRY }
+	        NOT = { has_country_flag = formed_sussy_nation_flag }
+		}
+		
+		provinces_to_highlight = {
+			province_id = 487
+		}
+		
+		allow = {
+		    is_free_or_tributary_trigger = yes
+		    is_at_war = no
+		    owns_core_province = 487 # Port royal
+		    is_year = 1522
+		}
+		
+		effect = {
+			country_event = { id = red.35 } #Sussy event
+			carribeans_region = {
+			    limit = {
+				    NOT = { is_core = ROOT }
+				    NOT = { is_permanent_claim = ROOT }
+			    }
+			    add_permanent_claim = RED
+			}
+			set_country_flag = formed_sussy_nation_flag
+			add_prestige = -5
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}	 
+}

@@ -1,0 +1,252 @@
+#VU updated by San Felipe for 1.36
+##################################################
+# VU - SUSSY PIRATES by Mellstrom (To spawn RED) #
+##################################################
+
+namespace = red
+
+# Sussy Pirates
+country_event = {
+	id = red.35
+	title = red.1.t
+	desc = red.1.d
+	picture = CARIBBEAN_PIRATE_FORT_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_dlc = "Golden Century"
+		tag = SOS
+		is_year = 1522
+		NOT = { exists = RED }
+		NOT = { has_reform = pirate_republic_reform }
+		OR = {
+			AND = {
+				owns_core_province = 487
+				is_subject = no
+				num_of_cities = 2
+			}
+			any_subject_country = {
+				owns_core_province = 487
+				num_of_cities = 2
+			}
+		}
+		487 = {
+			privateer_power = { 
+				country = ROOT
+				share = 5 
+			}
+		}
+		OR = {
+			487 = {
+				recent_treasure_ship_passage = yes
+			}
+			487 = {
+				trade_share = {
+					country = ROOT
+					share = 10
+				}
+			}
+			any_country = {
+				capital_scope = {
+					region = carribeans_region
+				}
+				war_exhaustion = 5
+			}
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			487 = {
+				discover_country = RED
+				add_core = RED
+			}
+			
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+		# modifiers
+	}
+	
+	option = { # play as the pirates
+		name = "red.1.a"
+		trigger = {
+			ai = no
+		}
+		487 = {
+			owner = {
+				release = RED
+			}
+		}
+		487 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 3
+			add_building = shipyard
+			add_building = dock
+			add_building = naval_base
+			add_building = courthouse
+			add_building = road_system
+			add_building = temple
+			add_center_of_trade_level = 2
+		}
+		create_guarantee = RED
+		RED = {
+			change_government = republic
+			add_government_reform = pirate_republic_reform
+			adopt_reform_progress = ROOT
+			change_religion = ROOT
+			change_primary_culture = ROOT
+			add_republican_tradition = 50
+			add_sailors = 7000
+			add_manpower = 5
+			add_prestige = 20
+			add_stability = 1
+			add_treasury = 650
+			add_army_tradition = 15
+			add_navy_tradition = 45
+			add_army_professionalism = 0.1
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 150
+			capital_scope = {
+				build_to_forcelimit = {
+					infantry = 0.8
+					artillery = 0.2
+					heavy_ship = 0.2
+					light_ship = 0.6
+					transport = 0.1
+				}
+			}
+			
+			define_ruler = {
+				name = "Red"
+				dynasty = "Impostor"
+				culture = shilha
+				adm = 3
+				dip = 4
+				mil = 6
+			}
+			
+			define_ruler_to_general = {
+                fire = 5
+                shock = 4
+                manuever = 5
+                siege = 2
+            }
+			
+			if = {
+				limit = {
+					NOT = { has_idea_group = pirate_ideas }
+				}
+				swap_free_idea_group = yes
+			}
+			swap_non_generic_missions = yes
+			set_ruler_flag = historical_pirate
+		}
+		switch_tag = RED
+	}
+	option = { # pirates get released
+		name = "red.1.b"
+		487 = {
+			owner = {
+				release = RED
+			}
+		}
+		487 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 3
+			add_building = shipyard
+			add_building = dock
+			add_building = naval_base
+			add_building = courthouse
+			add_building = road_system
+			add_building = temple
+			add_center_of_trade_level = 2
+		}
+		RED = {
+			change_government = republic
+			add_government_reform = pirate_republic_reform
+			adopt_reform_progress = ROOT
+			change_religion = ROOT
+			change_primary_culture = ROOT
+			add_republican_tradition = 50
+			add_sailors = 7000
+			add_manpower = 5
+			add_prestige = 20
+			add_treasury = 650
+			add_army_tradition = 15
+			add_navy_tradition = 45
+			add_army_professionalism = 0.1
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 150
+			capital_scope = {
+				build_to_forcelimit = {
+					infantry = 0.8
+					artillery = 0.2
+					heavy_ship = 0.2
+					light_ship = 0.6
+					transport = 0.1
+				}
+			}
+			define_ruler = {
+				name = "Red"
+				dynasty = "Impostor"
+				culture = shilha
+				adm = 3
+				dip = 4
+				mil = 6
+			}
+			
+			define_ruler_to_general = {
+                fire = 5
+                shock = 4
+               manuever = 5
+               siege = 2
+            }
+
+			if = {
+				limit = {
+					NOT = { has_idea_group = pirate_ideas }
+				}
+				swap_free_idea_group = yes
+			}
+			swap_non_generic_missions = yes
+			set_ruler_flag = historical_pirate
+		}
+	}
+
+	after = { # Trigger an event, which will swap the national ideas of pirate tag with correct ideas
+		hidden_effect = {
+			RED = {
+				country_event = {
+					id = pirates.26
+				}
+			}
+		}
+	}
+}
+
+# Give the Pirate nations their righful ideas
+country_event = {
+	id = pirates.26
+	title = "pirates.26.t"
+	desc = "pirates.26.d"
+	picture = SMUGGLERS_eventPicture
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {
+		name = "pirates.26.a"
+		ai_chance = {
+			factor = 1
+		}
+		swap_free_idea_group = yes
+	}
+}

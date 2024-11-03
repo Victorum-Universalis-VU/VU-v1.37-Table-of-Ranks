@@ -1,0 +1,168 @@
+catholics_vs_ultraquists_mechanic = {
+	alert_icon_gfx = GFX_catholics_vs_ultraquists_mechanic_alert_icon
+	alert_icon_index = 1
+
+	available = {
+		always = yes
+	}
+
+	powers = {
+		catholics_vs_ultraquists_mechanic_power = {
+			gui = catholics_vs_ultraquists_mechanic_power
+			min = -100
+			max = 100
+			default = 0
+			range_modifier = {
+				start_value = -100
+				end_value = 0 #Was-0.001
+				modifier = {
+					improve_relation_modifier = 0.1
+					land_morale = 0.05
+				}
+			}
+			range_modifier = {
+				start_value = 0 #Was 0.001
+				end_value = 100
+				modifier = {
+					global_unrest = -1
+					tolerance_heretic = 1
+				}
+			}
+			on_min_reached = {
+				change_religion = catholic
+			}
+			on_max_reached = {
+				change_religion = hussite
+			}
+		}
+	}
+
+	interactions = {
+		catholics_vs_ultraquists_mechanic_grant_privileges_to_catholics_interaction = {
+			gui = catholics_vs_ultraquists_mechanic_interaction
+			icon = GFX_catholics_vs_ultraquists_mechanic_interaction_button_catholics
+			cooldown_years = 5
+			trigger = {
+				adm_power_cost = 50
+			}
+			effect = {
+				adm_power_cost = 50
+				add_government_power = {
+					mechanic_type = catholics_vs_ultraquists_mechanic
+					power_type = catholics_vs_ultraquists_mechanic_power
+					value = -10
+				}
+				random = {
+					chance = 25
+					random_owned_province = {
+						spawn_rebels = {
+							type = hussite_rebels
+							size = 2
+						}
+					}
+				}
+			}
+			ai_chance = {
+				factor = 1
+				modifier = {
+					factor = 0
+					NOT = { adm_power = 500 }
+					OR = {
+						has_government_power = {
+							mechanic_type = catholics_vs_ultraquists_mechanic
+							power_type = catholics_vs_ultraquists_mechanic_power
+							value = 10
+						}
+						NOT = {
+							has_government_power = {
+								mechanic_type = catholics_vs_ultraquists_mechanic
+								power_type = catholics_vs_ultraquists_mechanic_power
+								value = -10
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					OR = {
+						has_government_power = {
+							mechanic_type = catholics_vs_ultraquists_mechanic
+							power_type = catholics_vs_ultraquists_mechanic_power
+							value = 25
+						}
+						NOT = {
+							has_government_power = {
+								mechanic_type = catholics_vs_ultraquists_mechanic
+								power_type = catholics_vs_ultraquists_mechanic_power
+								value = -25
+							}
+						}
+					}
+				}
+			}
+		}
+		catholics_vs_ultraquists_mechanic_grant_privileges_to_ultraquists_interaction = {
+			gui = catholics_vs_ultraquists_mechanic_interaction
+			icon = GFX_catholics_vs_ultraquists_mechanic_interaction_button_ultraquists
+			cooldown_years = 5
+			trigger = {
+				adm_power_cost = 50
+			}
+			effect = {
+				adm_power_cost = 50
+				add_government_power = {
+					mechanic_type = catholics_vs_ultraquists_mechanic
+					power_type = catholics_vs_ultraquists_mechanic_power
+					value = 10
+				}
+				random = {
+					chance = 25
+					random_owned_province = {
+						spawn_rebels = {
+							type = catholic_rebels
+							size = 2
+						}
+					}
+				}
+			}
+			ai_chance = {
+				factor = 1
+				modifier = {
+					factor = 0
+					NOT = { adm_power = 500 }
+					OR = {
+						has_government_power = {
+							mechanic_type = catholics_vs_ultraquists_mechanic
+							power_type = catholics_vs_ultraquists_mechanic_power
+							value = 10
+						}
+						NOT = {
+							has_government_power = {
+								mechanic_type = catholics_vs_ultraquists_mechanic
+								power_type = catholics_vs_ultraquists_mechanic_power
+								value = -10
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					OR = {
+						has_government_power = {
+							mechanic_type = catholics_vs_ultraquists_mechanic
+							power_type = catholics_vs_ultraquists_mechanic_power
+							value = 25
+						}
+						NOT = {
+							has_government_power = {
+								mechanic_type = catholics_vs_ultraquists_mechanic
+								power_type = catholics_vs_ultraquists_mechanic_power
+								value = -25
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

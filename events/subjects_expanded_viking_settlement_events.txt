@@ -1,0 +1,240 @@
+namespace = subjects_expanded_viking_settlement_events
+
+country_event = {
+	id = subjects_expanded_viking_settlement_events.1
+	title = subjects_expanded_viking_settlement_events.EVTNAME1
+	desc = subjects_expanded_viking_settlement_events.EVTDESC1
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject = yes
+		is_colonial_subject_type = yes
+		NOT = { is_subject_of_type = annexable_colony }
+		NOT = { is_subject_of_type = viking_settlement }
+		overlord = {
+			can_create_subject_type = {
+				subject = ROOT
+				subject_type = viking_settlement
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { religion = norse_pagan_reformed }
+				}
+				change_religion = norse_pagan_reformed
+			}
+			overlord = {
+				create_subject = {
+					subject = ROOT
+					subject_type = viking_settlement
+				}
+			}
+			swap_free_idea_group = yes
+		}
+	}
+
+	option = {
+		name = subjects_expanded_viking_settlement_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_viking_settlement_events.2
+	title = subjects_expanded_viking_settlement_events.EVTNAME2
+	desc = subjects_expanded_viking_settlement_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	trigger = {
+		is_subject = yes
+		is_subject_of_type = viking_settlement
+		NOT = { religion = norse_pagan_reformed }
+		overlord = {
+			can_be_overlord = viking_settlement
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = subjects_expanded_viking_settlement_events2.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		change_religion = norse_pagan_reformed
+	}
+}
+
+country_event = {
+	id = subjects_expanded_viking_settlement_events.3
+	title = subjects_expanded_viking_settlement_events.EVTNAME3
+	desc = subjects_expanded_viking_settlement_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject = yes
+		is_subject_of_type = viking_settlement
+		overlord = {
+			NOT = { can_be_overlord = viking_settlement }
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			overlord = {
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					create_subject = {
+						subject = FROM
+						subject_type = crown_colony
+					}
+				}
+				else = {
+					create_subject = {
+						subject = FROM
+						subject_type = colony
+					}
+				}
+				ROOT = {
+					if = {
+						limit = {
+							religion = norse_pagan_reformed
+						}
+						change_religion = PREV
+					}
+				}
+			}
+			swap_free_idea_group = yes
+		}
+	}
+
+	option = {
+		name = subjects_expanded_viking_settlement_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_viking_settlement_events.4
+	title = subjects_expanded_viking_settlement_events.EVTNAME4
+	desc = subjects_expanded_viking_settlement_events.EVTDESC4
+	picture = TRADEGOODS_eventPicture
+
+	major = yes
+	major_trigger = {
+		overlord_of = FROM
+	}
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = viking_settlement_demanding_raid_loot
+			add_liberty_desire = 15
+			add_opinion = {
+				who = FROM
+				modifier = viking_settlement_demanded_raid_loot_opinion
+			}
+			# Give 10% of sailors
+			export_to_variable = {
+				which = sailors_to_give_to_overlord
+				value = trigger_value:max_sailors
+			}
+			#change_variable = { which = sailors_to_give_to_overlord value = -1 }
+			multiply_variable = { which = sailors_to_give_to_overlord value = 0.1 }
+			divide_variable = { which = sailors_to_give_to_overlord value = 1000 }
+			multiply_variable = { which = sailors_to_give_to_overlord value = 1000 }
+			if = {
+				limit = {
+					OR = {
+						NOT = { check_variable = { which = sailors_to_give_to_overlord value = 0 } }
+						check_variable = { which = sailors_to_give_to_overlord value = 50000 }
+					}
+				}
+				set_variable = { which = sailors_to_give_to_overlord value = 50000 }
+			}
+			set_variable = { which = sailors_to_give_to_overlord_display which = sailors_to_give_to_overlord }
+			while = {
+				limit = {
+					check_variable = { which = sailors_to_give_to_overlord value = 1 }
+				}
+				change_variable = { which = sailors_to_give_to_overlord value = -1 }
+				add_sailors = -1
+				FROM = {
+					add_sailors = 1
+				}
+			}
+			# Give 0.5 years of income
+			export_to_variable = {
+				which = income_to_give_to_overlord
+				value = years_of_income
+			}
+			multiply_variable = { which = income_to_give_to_overlord value = 0.5 }
+			divide_variable = { which = income_to_give_to_overlord value = 1000 }
+			multiply_variable = { which = income_to_give_to_overlord value = 1000 }
+			if = {
+				limit = {
+					OR = {
+						NOT = { check_variable = { which = income_to_give_to_overlord value = 0 } }
+						check_variable = { which = income_to_give_to_overlord value = 50000 }
+					}
+				}
+				set_variable = { which = income_to_give_to_overlord value = 50000 }
+			}
+			set_variable = { which = income_to_give_to_overlord_display which = income_to_give_to_overlord }
+			while = {
+				limit = {
+					check_variable = { which = income_to_give_to_overlord value = 1 }
+				}
+				change_variable = { which = income_to_give_to_overlord value = -1 }
+				add_treasury = -1
+				FROM = {
+					add_treasury = 1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_viking_settlement_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		custom_tooltip = SE_VIKING_SETTLEMENT_MONEY_PAYMENT_TT
+		custom_tooltip = SE_VIKING_SETTLEMENT_SAILORS_PAYMENT_TT
+		tooltip = {
+			add_liberty_desire = 15
+			add_opinion = {
+				who = FROM
+				modifier = viking_settlement_demanded_raid_loot_opinion
+			}
+		}
+		hidden_effect = {
+			set_variable = { which = income_to_give_to_overlord_display value = 0 }
+			set_variable = { which = sailors_to_give_to_overlord_display value = 0 }
+			clr_country_flag = viking_settlement_demanding_raid_loot
+		}
+	}
+}

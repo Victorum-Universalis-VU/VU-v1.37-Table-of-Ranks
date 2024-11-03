@@ -1,0 +1,889 @@
+country_decisions = {
+
+	make_st_petersburg_capital = {
+		potential = {
+		    OR = {
+			    tag = RUS
+				tag = TZR
+			}
+			normal_or_historical_nations = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			owns = 33
+			NOT = { capital = 33 }
+			NOT = { has_country_flag = relocated_capital_st_petersburg }
+		}
+		allow = {
+			is_core = 33
+			is_at_war = no
+			33 = {
+				is_state = yes
+			}
+		}
+		effect = {
+			33 = {
+				change_province_name = "St. Petersburg"
+				rename_capital = "St. Petersburg"
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
+				change_culture = ROOT
+				if = {
+					limit = { NOT = { province_has_center_of_trade_of_level = 3 } }
+					add_center_of_trade_level = 1
+				}
+				move_capital_effect = yes
+			}
+			set_country_flag = relocated_capital_st_petersburg
+			add_years_of_income = -1
+			add_prestige_or_monarch_power = {
+				amount = 100
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { years_of_income = 1.25 }
+			}
+		}
+	}
+	
+	establish_russian_patriarchate = {
+		potential = {
+			NOT = { has_mission = rus_patriarchate_mission }
+			NOT = { has_mission = mos_rus_russian_patriarchate }
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+			normal_or_historical_nations = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = { has_country_modifier = russian_patriarchate }
+			religion = orthodox
+		}
+		allow = {
+			is_at_war = no
+			NOT = { 151 = { owned_by = BYZ } }
+			prestige = 2
+			NOT = { innovativeness_ideas = 3 }
+		}
+		effect = {
+			add_country_modifier = {
+				name = "russian_patriarchate"
+				duration = -1
+			}		
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#distribute_vodka_to_masses = {
+	#	potential = {
+	#		OR = {
+	#			culture_group = east_slavic
+	#			culture_group = west_slavic
+	#			culture_group = south_slavic
+	#		}
+	#		any_owned_province = {
+	#			trade_goods = vodka
+	#		}
+	#		NOT = { has_country_modifier = gave_vodka_timer }
+	#	}
+	#	allow = {
+	#		num_of_owned_provinces_with = {
+	#			trade_goods = vodka
+	#			base_production = 3
+	#			value = 3
+	#		}
+	#	}
+	#	effect = {
+	#		add_adm_power = -20
+	#		add_country_modifier = {
+	#			name = vodka_distributed
+	#			duration = 3650
+	#		}
+	#		every_owned_province = {
+	#			limit = {
+	#				trade_goods = vodka
+	#				base_production = 2
+	#			}
+	#			add_base_production = -1
+	#		}
+	#		hidden_effect = {
+	#			add_country_modifier = {
+	#				name = gave_vodka_timer
+	#				duration = 7300
+	#				hidden = yes
+	#			}
+	#		}
+	#	}
+	#	ai_will_do = {		#AI won't do it for now, please add conditions here later
+	#		factor = 0
+	#	}
+	#}
+	
+	rus_sell_vodka_to_the_people = {
+		potential = {
+			has_country_flag = rus_enable_vodka_sales_decision
+		}
+		allow = {
+			vodka = 1
+			custom_trigger_tooltip = {
+				tooltip = decision_once_every_ten_years
+				OR = {
+					NOT = { has_country_flag = rus_sold_vodka_to_the_people }
+					had_country_flag = {
+						flag = rus_sold_vodka_to_the_people
+						days = 3650
+					}
+				}
+			}
+		}
+		effect = {
+			clr_country_flag = rus_sold_vodka_to_the_people
+			set_country_flag = rus_sold_vodka_to_the_people
+			add_rebel_progress = {
+				value = -20
+			}
+			add_years_of_owned_provinces_production_income = {
+				custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+				trigger = {
+					trade_goods = vodka
+				}
+				years = 8
+			}
+			custom_tooltip = rus_sell_vodka_to_the_people_bt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = vodka
+					}
+					add_prosperity = -10
+				}
+			}
+			if = {
+				limit = { has_country_modifier = rus_vodka_sales }
+				extend_country_modifier = {
+					name = rus_vodka_sales
+					duration = 3650
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = rus_vodka_sales
+					duration = 7300
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	rus_abolish_the_serfdom = {
+		potential = {
+			has_country_flag = final_serfdom_privileges
+		}
+		allow = {
+			stability = 1
+			adm_power_cost = 100
+			dip_power_cost = 100
+			mil_power_cost = 100
+		}
+		effect = {
+			clr_country_flag = final_serfdom_privileges
+			add_stability = -1
+			adm_power_cost = 100
+			dip_power_cost = 100
+			mil_power_cost = 100
+			remove_estate_privilege = estate_nobles_total_serfdom
+			remove_estate_privilege = estate_nobles_restricted_serfdom
+			remove_estate_privilege = estate_nobles_devastating_serfdom
+			random_owned_province = {
+				spawn_rebels = {
+					type = noble_rebels
+					size = 3
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	rus_claim_emperor_title = {
+		major = yes
+		color = { 139 21 190 }
+		potential = {
+			has_dlc = "Domination"
+			tag = RUS
+			NOT = { has_country_flag = rus_proclaimed_empire_title }
+		}
+		provinces_to_highlight = {
+			is_capital = yes
+			NOT = { owned_by = ROOT }
+			has_discovered = ROOT
+			owner = {
+				if = {
+					limit = {
+						OR = {
+							has_dlc = "Rights of Man"
+							has_dlc = "Emperor"
+						}
+					}
+					is_great_power = yes
+				}
+				else = {
+					total_development = ROOT
+				}
+			}
+		}
+		allow = {
+			if = {
+				limit = {
+					OR = {
+						has_dlc = "Rights of Man"
+						has_dlc = "Emperor"
+					}
+				}
+				is_great_power = yes
+			}
+			total_development = 2500
+			is_at_war = no
+			has_government_power = {
+				mechanic_type = russian_modernization_mechanic
+				power_type = russian_modernization
+				value = 90
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = rus_claim_emperor_title_at
+					any_known_country = {
+						OR = {
+							is_rival = ROOT
+							is_enemy = ROOT
+						}
+						humiliated_by = ROOT
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = rus_claim_emperor_title_bt
+					NOT = {
+						calc_true_if = {
+							all_known_country = {
+								OR = {
+									is_rival = ROOT
+									is_enemy = ROOT
+								}
+							}
+							amount = 1
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			change_tag = TZR
+			swap_ideas = yes
+			add_prestige = 50
+			add_legitimacy = 50
+			set_country_flag = rus_proclaimed_empire_title
+			country_event = {
+				id = flavor_rus.200
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	rus_release_SLP = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_danzig_or_war
+			NOT = {
+				SLP = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = west_prussia_area
+		}
+		allow = {
+			NOT = { exists = SLP }
+			west_prussia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			west_prussia_area = {
+				add_core = SLP
+				cede_province = SLP
+			}
+			hidden_effect = {
+				SLP = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = kashubian_culture
+					}
+					else = {
+						change_primary_culture = kashubian_culture_new
+					}
+					add_accepted_culture = prussian
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 43
+				}
+			}
+			create_subject = {
+				who = SLP
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_POL = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_partition_poland
+			NOT = {
+				POL = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = mazovia_area
+		}
+		allow = {
+			NOT = { exists = POL }
+			mazovia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			mazovia_area = {
+				add_core = POL
+				cede_province = POL
+			}
+			hidden_effect = {
+				POL = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = polish
+						add_accepted_culture = schlesian
+					}
+					else = {
+						change_primary_culture = polish_new
+						add_accepted_culture = schlesian_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 257
+				}
+			}
+			create_subject = {
+				who = POL
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_BOH = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_carpathian_conquest
+			NOT = {
+				BOH = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = prague_area
+		}
+		allow = {
+			NOT = { exists = BOH }
+			prague_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			prague_area = {
+				add_core = BOH
+				cede_province = BOH
+			}
+			hidden_effect = {
+				BOH = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = czech
+						add_accepted_culture = moravian
+					}
+					else = {
+						change_primary_culture = czech_new
+						add_accepted_culture = moravian_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 266
+				}
+			}
+			create_subject = {
+				who = BOH
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_SLO = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_carpathian_conquest
+			NOT = {
+				SLO = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = slovakia_area
+		}
+		allow = {
+			NOT = { exists = SLO }
+			slovakia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			slovakia_area = {
+				add_core = SLO
+				cede_province = SLO
+			}
+			hidden_effect = {
+				SLO = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = slovak
+					}
+					else = {
+						change_primary_culture = slovak_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 8174
+				}
+			}
+			create_subject = {
+				who = SLO
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_BUL = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_protect_south_slavs
+			NOT = {
+				BUL = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = bulgaria_area
+		}
+		allow = {
+			NOT = { exists = BUL }
+			bulgaria_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			bulgaria_area = {
+				add_core = BUL
+				cede_province = BUL
+			}
+			hidden_effect = {
+				BUL = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = bulgarian
+					}
+					else = {
+						change_primary_culture = bulgarian_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 1765
+				}
+			}
+			create_subject = {
+				who = BUL
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_SER = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_protect_south_slavs
+			NOT = {
+				SER = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = syrmia_area
+		}
+		allow = {
+			NOT = { exists = SER }
+			syrmia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			syrmia_area = {
+				add_core = SER
+				cede_province = SER
+			}
+			hidden_effect = {
+				SER = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = serbian
+					}
+					else = {
+						change_primary_culture = serbian_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 4239
+				}
+			}
+			create_subject = {
+				who = SER
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_CRO = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_protect_south_slavs
+			NOT = {
+				CRO = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = croatia_area
+		}
+		allow = {
+			NOT = { exists = CRO }
+			croatia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			croatia_area = {
+				add_core = CRO
+				cede_province = CRO
+			}
+			hidden_effect = {
+				CRO = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					if = {
+						limit = {
+							NOT = { has_global_flag = united_slavs }
+						}
+						change_primary_culture = croatian
+					}
+					else = {
+						change_primary_culture = croatian_new
+					}
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 131
+				}
+			}
+			create_subject = {
+				who = CRO
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_GEO = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_conquer_the_caucasus
+			NOT = {
+				GEO = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = mtskheta_area
+		}
+		allow = {
+			NOT = { exists = GEO }
+			mtskheta_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			mtskheta_area = {
+				add_core = GEO
+				cede_province = GEO
+			}
+			hidden_effect = {
+				GEO = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					change_primary_culture = georgian
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 423
+				}
+			}
+			create_subject = {
+				who = GEO
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	rus_release_ARM = {
+		potential = {
+			has_dlc = "Domination"
+			OR = {
+				tag = MOS
+			    tag = RUS
+				tag = TZR
+			}
+			mission_completed = mos_rus_conquer_the_caucasus
+			NOT = {
+				ARM = {
+					vassal_of = ROOT
+				}
+			}
+		}
+		provinces_to_highlight = {
+			area = armenia_area
+		}
+		allow = {
+			NOT = { exists = ARM }
+			armenia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			OR = {
+			    tag = RUS
+				tag = TZR
+			}
+		}
+		effect = {
+			armenia_area = {
+				add_core = ARM
+				cede_province = ARM
+			}
+			hidden_effect = {
+				ARM = {
+					change_government = monarchy
+					add_government_reform = feudalism_reform
+					change_religion = ROOT
+					change_primary_culture = armenian
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+
+					set_capital = 419
+				}
+			}
+			create_subject = {
+				who = ARM
+				subject_type = vassal
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

@@ -1,0 +1,94 @@
+namespace = subjects_expanded_protectorate_events
+
+# subjects_expanded_protectorate_events.1 deleted
+
+country_event = {
+	id = subjects_expanded_protectorate_events.2
+	title = subjects_expanded_protectorate_events.EVTNAME2
+	desc = subjects_expanded_protectorate_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_protectorate_events2.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_protectorate_events.3
+	title = subjects_expanded_protectorate_events.EVTNAME3
+	desc = subjects_expanded_protectorate_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_subject_of_type = protectorate
+		war_with = FROM
+		overlord = {
+			NOT = {
+				is_in_war = {
+					participants = FROM
+					participants = THIS
+				}
+			}
+		}
+		liberty_desire = 50
+		overlord = {
+			reverse_has_opinion_modifier = {
+				modifier = refused_join_war
+				who = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_protectorate_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		overlord = {
+			ROOT = { grant_independence = yes }
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_protectorate_events.4
+	title = subjects_expanded_protectorate_events.EVTNAME4
+	desc = subjects_expanded_protectorate_events.EVTDESC4
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject_of_type = protectorate
+		overlord = {
+			capital_scope = {
+				NOT = { has_discovered = ROOT }
+			}
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	immediate = {
+		hidden_effect = {
+			overlord = {
+				capital_scope = {
+					discover_country = ROOT
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_protectorate_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}

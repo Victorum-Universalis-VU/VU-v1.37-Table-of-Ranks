@@ -1,0 +1,772 @@
+#VU 1.35 discovered and fixed by Quonton. 
+ARB_reward_west_arabia = {
+	add_country_modifier = {
+		name = ARB_holy_cities_routes_secured
+		duration = 9125
+	}
+	
+	add_estate_loyalty = {
+		estate = estate_church
+		loyalty = 10
+	}
+}
+
+ARB_reward_central_arabia = {
+	add_country_modifier = {
+		name = ARB_horses
+		duration = 9125
+	}
+	
+	custom_tooltip = ARB_in_random_province_of_central_arabia
+	tooltip = {
+		capital_scope = {
+			add_unit_construction = {
+				type = cavalry
+				amount = 3
+				speed = 0.25
+				cost = 0
+			}
+		}
+	}
+	hidden_effect = {
+		set_country_flag = ARB_did_we_get_cav
+		random_owned_province = {
+			limit = {
+				OR = {
+					area = yamamah_area #YO MAMA
+					area = qasim_area
+					area = nafud_area
+				}
+			}
+			add_unit_construction = {
+				type = cavalry
+				amount = 3
+				speed = 0.25
+				cost = 0
+			}
+			owner = { clr_country_flag = ARB_did_we_get_cav }
+		}
+		if = {
+			limit = {
+				has_country_flag = ARB_did_we_get_cav
+			}
+			clr_country_flag = ARB_did_we_get_cav
+			capital_scope = {
+				cavalry = ROOT
+				cavalry = ROOT
+				cavalry = ROOT
+			}
+		}
+	}
+	add_yearly_manpower = 0.5
+}
+
+ARB_reward_east_arabia = {
+	add_years_of_income = 1
+	add_mercantilism = 3
+}
+
+ARB_reward_yemen = {
+	add_country_modifier = {
+		name = ARB_yemeni_trade_routes
+		duration = 5475
+	}
+	add_mercantilism = 3
+}
+
+ARB_reward_levant = {
+	add_country_modifier = {
+		name = ARB_levant_conquered
+		duration = 7300
+	}
+	
+	add_power_projection = {
+		type = mission_rewards_power_projection
+		amount = 10
+	}
+}
+
+ARB_reward_iraq = {
+	add_country_modifier = {
+		name = ARB_house_of_wisdom_conquered
+		duration = 10950
+	}
+	
+	ME_technology_split_120_power = yes #will be done later ;)
+}
+
+ARB_reward_egypt = {
+	358 = {
+		add_trade_modifier = {
+			who = ROOT
+			duration = 19250
+			power = 25
+			key = ARB_important_asset
+		}
+	}
+	
+	add_stability_or_adm_power = yes
+}
+
+ARB_reward_arabia = {
+	set_country_flag = ARB_no_tech_requirement
+	custom_tooltip = ARB_no_tech_requirement_for_arabia
+	
+	custom_tooltip = " "
+	
+	add_country_modifier = {
+		name = ARB_new_caliphate_rising
+		duration = -1
+	}
+}
+
+ARB_claims_egypt = {
+	egypt_region = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_iraq = {
+	al_jazira_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	iraq_arabi_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	basra_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_levant = {
+	syria_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	syrian_desert_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	palestine_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	trans_jordan_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	aleppo_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_yemen = {
+	yemen_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	upper_yemen_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	hadramut_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	mahra_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	asir_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	tihama_al_yemen_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_east_arabia = {
+	bahrain_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	pirate_coast_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	oman_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	mascat_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	dhofar_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_central_arabia = {
+	yamamah_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	qasim_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	nafud_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_west_arabia = {
+	mecca_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	medina_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	tabuk_area = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+ARB_claims_arabia = {
+	egypt_region = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	arabia_region = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+	mashriq_region = {
+		limit = {
+			NOT = { is_core = ROOT }
+			NOT = { is_permanent_claim = ROOT }
+		}
+		add_permanent_claim = ROOT
+	}
+}
+
+OMA_give_claims_on_province = {
+	$id$ = {
+		if = {
+			limit = {
+				NOT = { is_core = ROOT }
+				NOT = { is_permanent_claim = ROOT }
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+OMA_give_claims_on_area = {
+	$area$ = {
+		if = {
+			limit = {
+				NOT = { is_core = ROOT }
+				NOT = { is_permanent_claim = ROOT }
+			}
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+ARB_claims_capital = {
+	if = {
+		limit = {
+			capital_scope = { ARB_is_in_central_arabia = yes }
+		}
+		ARB_claims_central_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_east_arabia = yes }
+		}
+		ARB_claims_east_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_west_arabia = yes }
+		}
+		ARB_claims_west_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_levant = yes }
+		}
+		ARB_claims_levant = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_iraq = yes }
+		}
+		ARB_claims_iraq = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_yemen = yes }
+		}
+		ARB_claims_yemen = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_egypt = yes }
+		}
+		ARB_claims_egypt = yes
+	}
+	else = {
+		capital_scope = {
+			area = {
+				every_neighbor_province = {
+					area = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+	}
+}
+
+ARB_claims_next = {
+	if = {
+		limit = {
+			capital_scope = { ARB_is_in_central_arabia = yes }
+		}
+		ARB_reward_central_arabia = yes
+		ARB_claims_east_arabia = yes
+		ARB_claims_west_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_east_arabia = yes }
+		}
+		ARB_reward_east_arabia = yes
+		ARB_claims_iraq = yes
+		ARB_claims_central_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_west_arabia = yes }
+		}
+		ARB_reward_west_arabia = yes
+		ARB_claims_central_arabia = yes
+		ARB_claims_yemen = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_levant = yes }
+		}
+		ARB_reward_levant = yes
+		ARB_claims_egypt = yes
+		ARB_claims_iraq = yes
+		ARB_claims_west_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_iraq = yes }
+		}
+		ARB_reward_iraq = yes
+		ARB_claims_east_arabia = yes
+		ARB_claims_levant = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_yemen = yes }
+		}
+		ARB_reward_yemen = yes
+		ARB_claims_west_arabia = yes
+		ARB_claims_central_arabia = yes
+	}
+	else_if = {
+		limit = {
+			capital_scope = { ARB_is_in_egypt = yes }
+		}
+		ARB_reward_egypt = yes 
+		ARB_claims_levant = yes
+		ARB_claims_west_arabia = yes
+	}
+	else = {
+		capital_scope = {
+			region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+YEM_madrasah_effect = {
+	add_country_modifier = {
+		name = YEM_united_in_faith
+		duration = 9125
+	}
+	
+	capital_scope = {
+		add_or_upgrade_tax_building = yes
+		add_base_tax = 3
+	}
+}
+
+YEM_eliminate_pretenders_effect = {
+	ME_give_claims = { area = ifat_area }
+	ME_give_claims = { area = aussa_area }
+	ME_give_claims = { area = mecca_area }
+	ME_give_claims = { area = medina_area }
+	ME_give_claims = { area = dhofar_area }
+	ME_give_claims = { area = oman_area }
+	ME_give_claims = { area = mascat_area }
+	ME_give_claims = { area = asir_area }
+	ME_give_claims = { area = hadramut_area }
+	ME_give_claims = { area = mahra_area }
+	
+	custom_tooltip = " "
+	
+	change_national_focus_effect = yes
+	
+	custom_tooltip = " "
+	
+	add_stability_or_adm_power = yes
+}
+
+YEM_event_20_potential = {
+	if = {
+		limit = {
+			NOT = { has_dlc = "Mandate of Heaven" }
+		}
+		YEM_20_find_provinces = { target = 1 goods = $goods$ }
+		if = {
+			limit = { has_country_flag = YEM_1_province }
+			YEM_20_find_provinces = { target = 2 goods = $goods$ }
+			if = {
+				limit = { has_country_flag = YEM_2_province }
+				YEM_20_find_provinces = { target = 3 goods = $goods$ }
+				if = {
+					limit = { has_country_flag = YEM_3_province }
+					YEM_20_find_provinces = { target = 4 goods = $goods$ }
+					if = {
+						limit = { has_country_flag = YEM_1_province }
+						YEM_20_find_provinces = { target = 5 goods = $goods$ }
+					}
+				}
+			}
+		}
+	}
+	else = {
+		YEM_20_find_provinces = { target = 1 goods = $goods$ }
+		if = {
+			limit = { has_country_flag = YEM_1_province }
+			YEM_20_find_provinces = { target = 2 goods = $goods$ }
+			if = {
+				limit = { has_country_flag = YEM_2_province }
+				YEM_20_find_provinces = { target = 3 goods = $goods$ }
+			}
+		}
+		if = {
+			limit = { has_country_flag = YEM_3_province }
+			YEM_20_find_provinces_state_edict = { target = 4 goods = $goods$ }
+			if = {
+				limit = { has_country_flag = YEM_1_province }
+				YEM_20_find_provinces_state_edict = { target = 5 goods = $goods$ }
+			}
+		}
+	}
+}
+
+YEM_20_find_provinces = {
+	random_owned_province = {
+		limit = {
+			NOT = { has_province_flag = YEM_flag_already_set }
+			NOT = { trade_goods = $goods$ }
+			NOT = { has_state_edict = edict_advancement_effort }
+		}
+		save_event_target_as = Yemen_target_$target$
+		set_province_flag = YEM_flag_already_set
+		ROOT = { set_country_flag =  YEM_$target$_province }
+	}
+}
+
+YEM_20_find_provinces_state_edict = {
+	random_owned_province = {
+		limit = {
+			NOT = { has_province_flag = YEM_flag_already_set }
+			NOT = { trade_goods = $goods$ }
+			has_state_edict = edict_advancement_effort
+		}
+		save_event_target_as = Yemen_target_$target$
+		set_province_flag = YEM_flag_already_set
+		ROOT = { set_country_flag =  YEM_$target$_province }
+	}
+}
+
+YEM_20_clr_flags = {
+	every_owned_province = {
+		clr_province_flag = YEM_flag_already_set
+	}
+	clr_country_flag = YEM_1_province
+	clr_country_flag = YEM_2_province
+	clr_country_flag = YEM_3_province
+	clr_country_flag = YEM_4_province
+	clr_country_flag = YEM_5_province
+	clr_country_flag = YEM_cocoa_flag
+}
+
+ME_overlord_effect = {
+	if = {
+		limit = {
+			is_subject = yes
+		}
+		custom_tooltip = HED_overlord_tt
+		tooltip = {
+			overlord = {
+				$effect$
+			}
+		}
+		hidden_effect = { 
+			overlord = {
+				$effect$
+			}
+		}
+	}
+}
+
+CRDB_enable_mission_tree = {
+	custom_tooltip = CRDB_this_gets_special_missions
+	override_country_name = CRDB
+	
+	clr_country_flag = use_paradox_missions
+	set_country_flag = CRDB_mission_enabled
+	set_country_flag = use_missions_expanded_missions_instead_of_paradox
+	swap_non_generic_missions = yes 
+	
+	ROOT = { 
+		vassalize = PREV 
+	}
+	
+	hidden_effect = {
+	}
+}
+
+ARB_give_casus_belli_on_nomads = {
+}
+
+GRA_add_war_modifier = {
+	add_country_modifier = {
+		name = $name$
+		duration = -1
+		desc = GRA_until_the_end_of_the_incident
+	}
+}
+
+TUN_leo_africanus_spawn = {
+	ME_TUN_$type$_advisor = { cost_multiplier = $discount$ }
+}
+
+ME_TUN_muslim_advisor = {
+	define_advisor = {
+		type = diplomat
+		name = "Al-Hasan ibn Muhammad al-Wazzan"
+		skill = 3
+		culture = andalucian 
+		religion = sunni
+		cost_multiplier = $cost_multiplier$
+	}
+}
+
+ME_TUN_christian_advisor = {
+	define_advisor = {
+		type = diplomat
+		name = "Leo Africanus"
+		skill = 3
+		culture = andalucian 
+		religion = catholic
+		cost_multiplier = $cost_multiplier$
+	}
+}
+
+RUM_event_112_potential = {
+	if = {
+		limit = {
+			NOT = { has_dlc = "Mandate of Heaven" }
+		}
+		RUM_112_find_provinces = { target = 1 }
+		if = {
+			limit = { has_country_flag = RUM_1_province }
+			RUM_112_find_provinces = { target = 2 }
+			if = {
+				limit = { has_country_flag = RUM_2_province }
+				RUM_112_find_provinces = { target = 3 }
+				if = {
+					limit = { has_country_flag = RUM_3_province }
+					RUM_112_find_provinces = { target = 4 }
+					if = {
+						limit = { has_country_flag = RUM_4_province }
+						RUM_112_find_provinces = { target = 5 }
+					}
+				}
+			}
+		}
+	}
+	else = {
+		RUM_112_find_provinces = { target = 1 }
+		if = {
+			limit = { has_country_flag = RUM_1_province }
+			RUM_112_find_provinces = { target = 2 }
+			if = {
+				limit = { has_country_flag = RUM_2_province }
+				RUM_112_find_provinces = { target = 3 }
+			}
+		}
+		#if = {
+			#limit = { has_country_flag = RUM_3_province }
+			RUM_112_find_provinces_state_edict = { target = 4 }
+			if = {
+				limit = { has_country_flag = RUM_4_province }
+				RUM_112_find_provinces_state_edict = { target = 5 }
+			}
+		#}
+	}
+}
+
+RUM_112_find_provinces = {
+	random_owned_province = {
+		limit = {
+			NOT = { has_province_flag = RUM_flag_already_set }
+			OR = {
+				trade_goods = cloth
+				trade_goods = wool
+			}
+			region = anatolia_region
+			NOT = { has_state_edict = edict_advancement_effort }
+		}
+		save_event_target_as = Rum_target_$target$
+		set_province_flag = RUM_flag_already_set
+		ROOT = { set_country_flag = RUM_$target$_province }
+	}
+}
+
+RUM_112_find_provinces_state_edict = {
+	random_owned_province = {
+		limit = {
+			NOT = { has_province_flag = RUM_flag_already_set }
+			OR = {
+				trade_goods = cloth
+				trade_goods = wool
+			}
+			region = anatolia_region
+			has_state_edict = edict_advancement_effort
+		}
+		save_event_target_as = Rum_target_$target$
+		set_province_flag = RUM_flag_already_set
+		ROOT = { set_country_flag = RUM_$target$_province }
+	}
+}
+
+RUM_112_clr_flags = {
+	every_owned_province = {
+		clr_province_flag = RUM_flag_already_set
+	}
+	clr_country_flag = RUM_1_province
+	clr_country_flag = RUM_2_province
+	clr_country_flag = RUM_3_province
+	clr_country_flag = RUM_4_province
+	clr_country_flag = RUM_5_province
+}

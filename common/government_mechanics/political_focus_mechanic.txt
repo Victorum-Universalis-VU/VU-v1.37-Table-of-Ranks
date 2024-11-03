@@ -1,0 +1,403 @@
+political_focus_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 17
+	available = {
+		always = yes
+	}
+
+	powers = {
+		political_focus_power = {
+			gui = political_focus_power
+			min = 0
+			max = 100
+			default = 0
+			base_monthly_growth = 1
+			development_scaled_monthly_growth = 1.8
+			show_before_interactions = yes
+			on_min_reached = {
+				custom_tooltip = political_focus_power_min_reached_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_administrative_focus_modifier
+					remove_country_modifier = political_focus_mechanic_diplomatic_focus_modifier
+					remove_country_modifier = political_focus_mechanic_military_focus_modifier
+					remove_country_modifier = political_focus_mechanic_religious_focus_modifier
+					remove_country_modifier = political_focus_mechanic_trade_focus_modifier
+				}
+			}
+		}
+	}
+
+	interactions = {
+		# Adm Focus
+		political_focus_mechanic_administrative_focus = {
+			center = no
+			gui = political_focus_mechanic_administrative_focus
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	NOT = { has_country_modifier = political_focus_mechanic_administrative_focus_modifier }
+			#}
+			trigger = {
+				NOT = { has_country_modifier = political_focus_mechanic_administrative_focus_modifier }
+				has_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = 6
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = -5
+				}
+				add_country_modifier = {
+					name = political_focus_mechanic_administrative_focus_modifier
+					duration = -1
+					desc = political_focus_mechanic_modifiers_duration
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 1
+			}
+		}
+		political_focus_mechanic_administrative_focus_selected = {
+			center = no
+			gui = political_focus_mechanic_administrative_focus_selected
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	has_country_modifier = political_focus_mechanic_administrative_focus_modifier
+			#}
+			trigger = {
+				has_country_modifier = political_focus_mechanic_administrative_focus_modifier
+			}
+			effect = {
+				custom_tooltip = political_focus_mechanic_disable_focus_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_administrative_focus_modifier
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = political_focus_mechanic_administrative_focus_modifier
+						duration = -1
+						desc = political_focus_mechanic_modifiers_duration
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		political_focus_mechanic_dummy_interaction_1 = {
+			center = no
+			gui = political_focus_mechanic_dummy_interaction
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	always = no
+			#}
+			trigger = {
+				always = no
+			}
+			effect = {
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		# Dip Focus
+		political_focus_mechanic_diplomatic_focus = {
+			center = no
+			gui = political_focus_mechanic_diplomatic_focus
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	NOT = { has_country_modifier = political_focus_mechanic_diplomatic_focus_modifier }
+			#}
+			trigger = {
+				NOT = { has_country_modifier = political_focus_mechanic_diplomatic_focus_modifier }
+				has_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = 6
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = -5
+				}
+				add_country_modifier = {
+					name = political_focus_mechanic_diplomatic_focus_modifier
+					duration = -1
+					desc = political_focus_mechanic_modifiers_duration
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 1
+			}
+		}
+		political_focus_mechanic_diplomatic_focus_selected = {
+			center = no
+			gui = political_focus_mechanic_diplomatic_focus_selected
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	has_country_modifier = political_focus_mechanic_diplomatic_focus_modifier
+			#}
+			trigger = {
+				has_country_modifier = political_focus_mechanic_diplomatic_focus_modifier
+			}
+			effect = {
+				custom_tooltip = political_focus_mechanic_disable_focus_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_diplomatic_focus_modifier
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = political_focus_mechanic_diplomatic_focus_modifier
+						duration = -1
+						desc = political_focus_mechanic_modifiers_duration
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		political_focus_mechanic_dummy_interaction_2 = {
+			center = no
+			gui = political_focus_mechanic_dummy_interaction
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	always = no
+			#}
+			trigger = {
+				always = no
+			}
+			effect = {
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		# Mil Focus
+		political_focus_mechanic_military_focus = {
+			center = no
+			gui = political_focus_mechanic_military_focus
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	NOT = { has_country_modifier = political_focus_mechanic_military_focus_modifier }
+			#}
+			trigger = {
+				NOT = { has_country_modifier = political_focus_mechanic_military_focus_modifier }
+				has_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = 6
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = -5
+				}
+				add_country_modifier = {
+					name = political_focus_mechanic_military_focus_modifier
+					duration = -1
+					desc = political_focus_mechanic_modifiers_duration
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 1
+			}
+		}
+		political_focus_mechanic_military_focus_selected = {
+			center = no
+			gui = political_focus_mechanic_military_focus_selected
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	has_country_modifier = political_focus_mechanic_military_focus_modifier
+			#}
+			trigger = {
+				has_country_modifier = political_focus_mechanic_military_focus_modifier
+			}
+			effect = {
+				custom_tooltip = political_focus_mechanic_disable_focus_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_military_focus_modifier
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = political_focus_mechanic_military_focus_modifier
+						duration = -1
+						desc = political_focus_mechanic_modifiers_duration
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		political_focus_mechanic_dummy_interaction_3 = {
+			center = no
+			gui = political_focus_mechanic_dummy_interaction
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	always = no
+			#}
+			trigger = {
+				always = no
+			}
+			effect = {
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		# Religious Focus
+		political_focus_mechanic_religious_focus = {
+			center = no
+			gui = political_focus_mechanic_religious_focus
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	NOT = { has_country_modifier = political_focus_mechanic_religious_focus_modifier }
+			#}
+			trigger = {
+				NOT = { has_country_modifier = political_focus_mechanic_religious_focus_modifier }
+				has_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = 6
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = -5
+				}
+				add_country_modifier = {
+					name = political_focus_mechanic_religious_focus_modifier
+					duration = -1
+					desc = political_focus_mechanic_modifiers_duration
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 1
+			}
+		}
+		political_focus_mechanic_religious_focus_selected = {
+			center = no
+			gui = political_focus_mechanic_religious_focus_selected
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	has_country_modifier = political_focus_mechanic_religious_focus_modifier
+			#}
+			trigger = {
+				has_country_modifier = political_focus_mechanic_religious_focus_modifier
+			}
+			effect = {
+				custom_tooltip = political_focus_mechanic_disable_focus_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_religious_focus_modifier
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = political_focus_mechanic_religious_focus_modifier
+						duration = -1
+						desc = political_focus_mechanic_modifiers_duration
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		political_focus_mechanic_dummy_interaction_4 = {
+			center = no
+			gui = political_focus_mechanic_dummy_interaction
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	always = no
+			#}
+			trigger = {
+				always = no
+			}
+			effect = {
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+		# Trade Focus
+		political_focus_mechanic_trade_focus = {
+			center = no
+			gui = political_focus_mechanic_trade_focus
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	NOT = { has_country_modifier = political_focus_mechanic_trade_focus_modifier }
+			#}
+			trigger = {
+				has_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = 6
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = political_focus_mechanic
+					power_type = political_focus_power
+					value = -5
+				}
+				add_country_modifier = {
+					name = political_focus_mechanic_trade_focus_modifier
+					duration = -1
+					desc = political_focus_mechanic_modifiers_duration
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 1
+			}
+		}
+		political_focus_mechanic_trade_focus_selected = {
+			center = no
+			gui = political_focus_mechanic_trade_focus_selected
+			#VU - Hashed this out in v1.36.2.* as this is classed as a trigger and you cannot have two triggers in a mechanic at once. By San Felipe
+			#potential = {
+			#	has_country_modifier = political_focus_mechanic_trade_focus_modifier
+			#}
+			trigger = {
+			}
+			effect = {
+				custom_tooltip = political_focus_mechanic_disable_focus_tt
+				hidden_effect = {
+					remove_country_modifier = political_focus_mechanic_trade_focus_modifier
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = political_focus_mechanic_trade_focus_modifier
+						duration = -1
+						desc = political_focus_mechanic_modifiers_duration
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}

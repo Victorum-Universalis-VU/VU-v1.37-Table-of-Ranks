@@ -1,0 +1,68 @@
+namespace = subjects_expanded_sister_republic_events
+
+country_event = {
+	id = subjects_expanded_sister_republic_events.1
+	title = subjects_expanded_sister_republic_events.EVTNAME1
+	desc = subjects_expanded_sister_republic_events.EVTDESC1
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	major = yes
+
+	trigger = {
+		any_subject_country = {
+			is_subject_of_type = sister_republic
+			OR = {
+				ROOT = {
+					NOT = { government = republic }
+					NOT = { government = theocracy }
+				}
+				AND = {
+					NOT = { government = republic }
+					ROOT = { government = republic }
+				}
+				AND = {
+					NOT = { government = theocracy }
+					ROOT = { government = theocracy }
+				}
+				AND = {
+					NOT = { government = republic }
+					NOT = { government = theocracy }
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = subjects_expanded_sister_republic_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = sister_republic
+				OR = {
+					ROOT = {
+						NOT = { government = republic }
+						NOT = { government = theocracy }
+					}
+					AND = {
+						NOT = { government = republic }
+						PREV = { government = republic }
+					}
+					AND = {
+						NOT = { government = theocracy }
+						PREV = { government = theocracy }
+					}
+					AND = {
+						NOT = { government = republic }
+						NOT = { government = theocracy }
+					}
+				}
+			}
+			grant_independence = yes
+			create_alliance = ROOT
+		}
+	}
+}

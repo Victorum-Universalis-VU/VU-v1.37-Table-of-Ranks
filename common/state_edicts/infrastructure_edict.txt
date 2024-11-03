@@ -1,0 +1,70 @@
+edict_infrastructure_edict = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		always = yes
+	}
+	modifier = {
+		local_build_cost = -0.1
+		local_build_time = -0.1
+	}
+	color = {
+		135
+		225
+		5
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 5
+			owner = {
+				OR = {
+					has_idea_group = economic_ideas
+					has_idea_group = infrastructure_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				years_of_income = 1
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				years_of_income = 2
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				years_of_income = 3
+			}
+		}
+		modifier = {
+			factor = 5
+			any_province_in_state = {
+				num_free_building_slots = 5
+			}
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				owner = {
+					is_at_war = yes
+				}
+				NOT = {
+					all_province_in_state = {
+						num_free_building_slots = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_infrastructure_edict
+		}
+	}
+}

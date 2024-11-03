@@ -1,0 +1,67 @@
+edict_advancement_effort = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		current_institution_growth = 0.01
+	}
+	modifier = {
+		institution_growth = 0.15
+		local_institution_spread = 0.25
+	}
+	notify_trigger = {
+		all_state_province = {
+			current_institution = 100
+		}
+	}
+	color = {
+		30
+		140
+		170
+	}
+	on_state_edict_enacted = {
+		random_area_province = {
+			spawn_rebels = {
+				size = 0.75
+				type = noble_rebels
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			any_province_in_state = {
+				NOT = {
+					current_institution_growth = 0.05
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			any_province_in_state = {
+				is_capital_of = FROM
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				is_lacking_institutions = yes
+			}
+		}
+		modifier = {
+			factor = 10
+			all_province_in_state = {
+				AND = {
+					current_institution_growth = 0.5
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_advancement_effort
+		}
+	}
+	# on_state_edict_enacted = {} triggers an effect when the state edict is added ROOT - Province FROM - Country that started
+	# on_state_edict_revoked = {} triggers an affect when the state edict is removed ROOT - Province FROM - Country that started
+}

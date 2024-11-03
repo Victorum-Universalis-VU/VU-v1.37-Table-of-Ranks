@@ -1,0 +1,226 @@
+# Jan Mayen bear nation meme event
+# Initially added by docRobert
+
+# ====================================
+namespace = vu_bear
+
+country_event = { # Player choice to spawn Bear Kingdom
+	id = vu_bear.1
+	title = vu_bear.1.t
+	desc = vu_bear.1.d
+	picture = LAND_MILITARY_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	goto = 5591
+	
+	trigger = {
+		ai = no
+		NOT = { exists = JMN }
+		owns_or_non_sovereign_subject_of = 5591
+	}
+	
+	mean_time_to_happen = { #About 10 years
+		months = 120
+	}
+	
+	option = { # THE BEAR HAS LANDED!
+		name = vu_bear.1.a
+		highlight = yes
+		goto = 5591
+		ai_chance = { factor = 0 }
+		custom_tooltip = vu_bear.1.tooltip
+		hidden_effect = {
+			5591 = {
+				add_core = JMN
+				set_base_tax = 8
+				set_base_production = 8
+				set_base_manpower = 8
+				add_prosperity = 100
+				change_culture = jan_mayenese
+				change_trade_goods = gems
+				center_of_trade = 1
+				if = {
+					limit = {
+						NOT = { fort_level = 2 }
+					}
+					add_building = fort_15th
+				}
+				if = {
+					limit = {
+						NOT = { has_building = workshop }
+					}
+					add_building = workshop
+				}
+				if = {
+					limit = {
+						NOT = { has_building = shipyard }
+						NOT = { has_building = grand_shipyard }
+					}
+					add_building = shipyard
+				}
+				cede_province = ROOT
+			}
+			release = JMN
+			5591 = {
+				remove_core = ROOT
+			}
+			JMN = {
+				capital_scope = {
+			    	build_to_forcelimit = {
+			    		heavy_ship = 0.3
+			    		light_ship = 0.3
+			    		galley = 0.2
+			    		transport = 0.2
+			    	}
+			    }
+				capital_scope = {
+			    	build_to_forcelimit = {
+			    		infantry = 0.6
+			    		cavalry = 0.1
+			    		artillery = 0.3
+			    	}
+			    }
+				add_adm_power = 150
+				add_dip_power = 150
+				add_mil_power = 150
+				add_sailors = 2000
+				add_manpower = 10 #Bearpower rather
+				add_army_tradition = 25
+				add_navy_tradition = 25
+				add_treasury = 1000
+				add_stability = 2
+				adopt_reform_progress = ROOT
+			}
+			set_global_flag = bear_nation_is_real
+			country_event = { 
+				id = vu_bear.2
+				days = 1
+			}
+		}
+	}
+	
+	option = { # Secret bear kingdom on Jan Mayen is not real and it's just false propaganda!
+		name = vu_bear.1.b
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = { # Player can choose to play as Jan Mayen
+	id = vu_bear.2
+	title = vu_bear.2.t
+	desc = vu_bear.2.d
+	picture = LAND_MILITARY_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 5591
+	
+	is_triggered_only = yes
+	
+	option = { # I will bear it with honor
+		name = vu_bear.2.a
+		highlight = yes
+		goto = 5591
+		switch_tag = JMN
+	}
+	
+	option = { # This is un-bear-able
+		name = vu_bear.2.b
+	}
+}
+
+country_event = { # Religion we shall bear
+	id = vu_bear.3
+	title = vu_bear.3.t
+	desc = vu_bear.3.d
+	picture = LAND_MILITARY_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 5591
+	
+	trigger = {
+		tag = JMN
+		ai = no
+		has_global_flag = bear_nation_is_real
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = { # Stay animist
+		name = vu_bear.3.a
+		highlight = yes
+		change_religion = animism
+		5591 = { change_religion = animism }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to catholicism
+		name = vu_bear.3.b
+		highlight = yes
+		change_religion = catholic
+		5591 = { change_religion = catholic }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to orthodox
+		name = vu_bear.3.c
+		highlight = yes
+		change_religion = orthodox
+		5591 = { change_religion = orthodox }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to coptic
+		name = vu_bear.3.e
+		highlight = yes
+		change_religion = coptic
+		5591 = { change_religion = coptic }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to finnish paganism
+		name = vu_bear.3.f
+		highlight = yes
+		change_religion = finnish_pagan_reformed
+		5591 = { change_religion = finnish_pagan_reformed }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to slavic paganism
+		name = vu_bear.3.g
+		highlight = yes
+		change_religion = slavic_pagan_reformed
+		5591 = { change_religion = slavic_pagan_reformed }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to miaphysite
+		name = vu_bear.3.h
+		highlight = yes
+		change_religion = miaphysite
+		5591 = { change_religion = miaphysite }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to muslim
+		name = vu_bear.3.i
+		highlight = yes
+		change_religion = sunni
+		5591 = { change_religion = sunni }
+		add_prestige = 100
+	}
+	
+	option = { # Convert to nestorian
+		name = vu_bear.3.j
+		highlight = yes
+		change_religion = nestorian
+		5591 = { change_religion = nestorian }
+		add_prestige = 100
+	}
+}

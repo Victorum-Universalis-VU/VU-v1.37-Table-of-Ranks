@@ -1,0 +1,137 @@
+sicilian_kingdom_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 6
+	available = { always = yes }
+	
+	powers = {
+		sicilian_kingdom_adm_power = {
+			max = 250
+			monarch_power = ADM
+			base_monthly_growth = 0.5
+		}
+		sicilian_kingdom_dip_power = {
+			max = 250
+			monarch_power = DIP
+			base_monthly_growth = 0.5
+		}
+		sicilian_kingdom_mil_power = {
+			max = 250
+			monarch_power = MIL
+			base_monthly_growth = 0.5
+		}
+	}
+	
+	interactions = {
+		sicilian_kingdom_encouraged_city_living = {
+			icon = GFX_sicilian_kingdom_encouraged_city_living
+			cost_type = sicilian_kingdom_adm_power
+			cost = 200
+			trigger = {
+				capital_scope = {
+					area_for_scope_province = {
+						type = all
+						owned_by = ROOT
+						controlled_by = ROOT
+					}
+				}
+			}
+			effect = {
+				add_years_of_income = 0.5
+				capital_scope = {
+					area = {
+						limit = { owned_by = ROOT }
+						add_province_modifier = {
+							name = sicilian_kingdom_encouraged_city_living_modifier
+							duration = 1825
+						}
+					}
+					random_area_province = {
+						limit = { owned_by = ROOT }
+						if = {
+							limit = {
+								owner = { ADM = 4 }
+							}
+							add_base_tax = 1
+						}
+						if = {
+							limit = {
+								owner = { DIP = 4 }
+							}
+							add_base_production = 1
+						}
+						if = {
+							limit = {
+								owner = { MIL = 4 }
+							}
+							add_base_manpower = 1
+						}
+					}
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 33
+			}
+		}
+		sicilian_kingdom_sicilian_defence = {
+			icon = GFX_sicilian_kingdom_sicilian_defence
+			cost_type = sicilian_kingdom_dip_power
+			cost = 200
+			trigger = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 10
+					OR = {
+						area = naples_area
+						area = apulia_area
+						area = calabria_area
+						area = sicily_area
+						area = sicily_area
+					}
+				}
+			}
+			effect = {
+				add_yearly_manpower = 0.5
+				custom_tooltip = sicilian_kingdom_sicilian_defence_tt
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							OR = {
+								area = naples_area
+								area = calabria_area
+								area = apulia_area
+								area = sicily_area
+								area = sicily_area
+							}
+						}
+						add_province_modifier = {
+							name = sicilian_kingdom_sicilian_defence_modifier
+							duration = 1825
+						}
+					}
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 33
+			}
+		}
+		sicilian_kingdom_centralization = {
+			icon = GFX_sicilian_kingdom_centralization
+			cost_type = sicilian_kingdom_mil_power
+			cost = 200
+			trigger = { }
+			effect = {
+				add_legitimacy_equivalent = { amount = 5 republican_tradition = 3 }
+				add_reform_progress_small_effect = yes
+				change_estate_land_share = {
+					estate = all
+					share = -2.0
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 33
+			}
+		}
+	}
+}

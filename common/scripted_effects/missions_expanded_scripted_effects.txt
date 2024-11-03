@@ -1,0 +1,2605 @@
+# province scope
+## add manufactory in scope
+### build_possible_manufactory_in_province = yes
+build_possible_manufactory_in_province = {
+	custom_tooltip = BUILD_MATCHING_MANUFACTORY_IN_THIS_PROVINCE
+	hidden_effect = {
+		if = {
+			limit = {
+				has_no_manufactory_trigger = yes
+			}
+			if = {
+				limit = {
+					OR = {
+						trade_goods = naval_supplies
+						trade_goods = fish
+						trade_goods = salt
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { dip_tech = 28 }
+					}
+					add_building = wharf
+				}
+				else = {
+					ROOT = { add_dip_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = copper
+						trade_goods = iron
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { mil_tech = 28 }
+					}
+					add_building = weapons
+				}
+				else = {
+					ROOT = { add_mil_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = wool
+						trade_goods = cloth
+						trade_goods = silk
+						trade_goods = dyes
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { adm_tech = 28 }
+					}
+					add_building = textile
+				}
+				else = {
+					ROOT = { add_adm_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = coffee
+						trade_goods = cotton
+						trade_goods = sugar
+						trade_goods = tobacco
+						trade_goods = tea
+						trade_goods = cocoa
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { adm_tech = 31 }
+					}
+					add_building = plantations
+				}
+				else = {
+					ROOT = { add_adm_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = ivory
+						trade_goods = slaves
+						trade_goods = spices
+						trade_goods = fur
+						trade_goods = incense
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { dip_tech = 31 }
+					}
+					add_building = tradecompany
+				}
+				else = {
+					ROOT = { add_dip_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = grain
+						trade_goods = livestock
+						trade_goods = wine
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { adm_tech = 23 }
+					}
+					add_building = farm_estate
+				}
+				else = {
+					ROOT = { add_adm_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						trade_goods = paper
+						trade_goods = gems
+						trade_goods = tropical_wood
+						trade_goods = glass
+						trade_goods = chinaware
+					}
+				}
+				if = {
+					limit = {
+						ROOT = { adm_tech = 33 }
+					}
+					add_building = mills
+				}
+				else = {
+					ROOT = { add_adm_power = 20 }
+				}
+			}
+			else_if = {
+				limit = {
+					has_dlc = "Rule Britannia"
+					trade_goods = coal
+				}
+				if = {
+					limit = {
+						ROOT = { adm_tech = 38 }
+					}
+					add_building = furnace
+				}
+				else = {
+					ROOT = { add_adm_power = 20 }
+				}
+			}
+			else = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+		}
+		else = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+## create or add a CoT
+### create_or_add_center_of_trade_level = { level = <number> }
+create_or_add_center_of_trade_level = {
+	if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = var
+					value = $level$
+				}
+				check_variable = { which = var value = 1 }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { province_has_center_of_trade_of_level = 1 }
+			}
+			center_of_trade = $level$
+		}
+		else_if = {
+			limit = {
+				NOT = { province_has_center_of_trade_of_level = 2 }
+			}
+			if = {
+				limit = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							which = var
+							value = $level$
+						}
+						check_variable = { which = var value = 2 }
+					}
+				}
+				add_center_of_trade_level = 2
+			}
+			else = {
+				add_center_of_trade_level = 1
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { province_has_center_of_trade_of_level = 3 }
+			}
+			add_center_of_trade_level = 1
+		}
+		else = {
+			add_base_production = 2
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = var
+					value = $level$
+				}
+				NOT = { check_variable = { which = var value = 0 } }
+			}
+		}
+		if = {
+			limit = {
+				province_has_center_of_trade_of_level = 3
+			}
+			if = {
+				limit = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							which = var
+							value = $level$
+						}
+						check_variable = { which = var value = -1 }
+					}
+				}
+				add_center_of_trade_level = -1
+			}
+			else = {
+				add_center_of_trade_level = -2
+			}
+		}
+		else_if = {
+			limit = {
+				province_has_center_of_trade_of_level = 2
+			}
+			add_center_of_trade_level = -1
+		}
+	}
+}
+
+## replace a province modifier with another
+### replace_province_modifier = { remove = test_modifier_1 add = test_modifier_2 time = -1 permanent = yes }
+replace_province_modifier = {
+	if = {
+		limit = {
+			has_province_modifier = $remove$
+		}
+		custom_tooltip = tt_replace_modifier_$remove$_with_$add$
+		hidden_effect = {
+			remove_province_modifier = $remove$
+			if = {
+				limit = {
+					always = $permanent$
+				}
+				add_permanent_province_modifier = {
+					name = $add$
+					duration = $time$
+				}
+			}
+			else = {
+				add_province_modifier = {
+					name = $add$
+					duration = $time$
+				}
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				always = $permanent$
+			}
+			add_permanent_province_modifier = {
+				name = $add$
+				duration = $time$
+			}
+		}
+		else = {
+			add_province_modifier = {
+				name = $add$
+				duration = $time$
+			}
+		}
+	}
+}
+
+#Add from 1 to 6 develop in province[s] based on the Monarch's Skill
+# add_development_scaled_on_monarch_skill = yes
+add_development_scaled_on_monarch_skill = {
+	custom_tooltip = ME_ADD_DEV_TT
+	if = {
+		limit = {
+			owner = { ADM = 6 }
+		}
+		add_base_tax = 6
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 5 }
+		}
+		add_base_tax = 5
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 4 }
+		}
+		add_base_tax = 4
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 3 }
+		}
+		add_base_tax = 3
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 2 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 1 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { DIP = 6 }
+		}
+		add_base_production = 6
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 5 }
+		}
+		add_base_production = 5
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 4 }
+		}
+		add_base_production = 4
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 3 }
+		}
+		add_base_production = 3
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 2 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 1 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { MIL = 6 }
+		}
+		add_base_manpower = 6
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 5 }
+		}
+		add_base_manpower = 5
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 4 }
+		}
+		add_base_manpower = 4
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 3 }
+		}
+		add_base_manpower = 3
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 2 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 1 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+#Add from 1 to 6 develop in province[s] based on the Monthly Monarch Power Gained
+# add_development_scaled_on_monthly_monarch_power = yes
+add_development_scaled_on_monthly_monarch_power = {
+	custom_tooltip = ME_ADD_DEV_MONTHLY_TT
+	if = {
+		limit = {
+			owner = { monthly_adm = 17 }
+		}
+		add_base_tax = 6
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 14 }
+		}
+		add_base_tax = 5
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 11 }
+		}
+		add_base_tax = 4
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 8 }
+		}
+		add_base_tax = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 5 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 2 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_dip = 17 }
+		}
+		add_base_production = 6
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 14 }
+		}
+		add_base_production = 5
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 11 }
+		}
+		add_base_production = 4
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 8 }
+		}
+		add_base_production = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 5 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 2 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_mil = 17 }
+		}
+		add_base_manpower = 6
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 14 }
+		}
+		add_base_manpower = 5
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 11 }
+		}
+		add_base_manpower = 4
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 8 }
+		}
+		add_base_manpower = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 5 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 2 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+#Add from 1 to 3 develop in province[s] based on the Monarch's Skill
+# add_development_half_monarch_skill = yes
+add_development_half_monarch_skill = {
+	custom_tooltip = ME_ADD_HALF_DEV_TT
+	if = {
+		limit = {
+			owner = { ADM = 6 }
+		}
+		add_base_tax = 3
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 4 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 2 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { DIP = 6 }
+		}
+		add_base_production = 3
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 4 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 2 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { MIL = 6 }
+		}
+		add_base_manpower = 3
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 4 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 2 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+#Add from 1 to 3 develop in province[s] based on the Monthly Monarch Power Gained
+# add_development_half_monthly_monarch_power = yes
+add_development_half_monthly_monarch_power = {
+	custom_tooltip = ME_ADD_HALF_DEV_MONTHLY_TT
+	if = {
+		limit = {
+			owner = { monthly_adm = 17 }
+		}
+		add_base_tax = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 11 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 5 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_dip = 17 }
+		}
+		add_base_production = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 11 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 5 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_mil = 17 }
+		}
+		add_base_manpower = 3
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 11 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 5 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+#Add from 1 to 2 develop in province[s] based on the Monarch's Skill
+# add_development_third_monarch_skill = yes
+add_development_third_monarch_skill = {
+	custom_tooltip = ME_ADD_THIRD_DEV_TT
+	if = {
+		limit = {
+			owner = { ADM = 6 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { ADM = 3 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { DIP = 6 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { DIP = 3 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { MIL = 6 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { MIL = 3 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+#Add from 1 to 2 develop in province[s] based on the Monthly Monarch Power Gained
+# add_development_third_monthly_monarch_power = yes
+add_development_third_monthly_monarch_power = {
+	custom_tooltip = ME_ADD_THIRD_DEV_MONTHLY_TT
+	if = {
+		limit = {
+			owner = { monthly_adm = 14 }
+		}
+		add_base_tax = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_adm = 8 }
+		}
+		add_base_tax = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_dip = 14 }
+		}
+		add_base_production = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_dip = 8 }
+		}
+		add_base_production = 1
+	}
+	if = {
+		limit = {
+			owner = { monthly_mil = 14 }
+		}
+		add_base_manpower = 2
+	}
+	else_if = {
+		limit = {
+			owner = { monthly_mil = 8 }
+		}
+		add_base_manpower = 1
+	}
+}
+
+## add/remove <value> papal influence, church power, etc.
+### change_religious_influence_equivalent = { add = <number> }
+### change_religious_influence_equivalent = { remove = <number> }
+### value MUST be positive
+change_religious_influence_equivalent = {
+	[[add]
+		add_papal_influence = $add$
+		add_church_power = $add$
+		add_fervor = $add$
+		add_patriarch_authority = 0.$add$
+		add_doom = $add$
+		add_karma = $add$
+		add_authority = $add$
+		add_piety = 0.$add$
+		if = {
+			limit = {
+				religion = confucianism
+			}
+			add_harmony = $add$
+		}
+		else = {
+			hidden_effect = {
+				add_harmony = $add$	# just in case any other religion might use harmony, it's added without a tooltip
+			}
+		}
+	]
+	[[remove]
+		add_papal_influence = -$remove$
+		add_church_power = -$remove$
+		add_fervor = -$remove$
+		add_patriarch_authority = -0.$remove$
+		add_doom = -$remove$
+		add_karma = -$remove$
+		add_authority = -$remove$
+		add_piety = -0.$remove$
+		if = {
+			limit = {
+				religion = confucianism
+			}
+			add_harmony = -$remove$
+		}
+		else = {
+			hidden_effect = {
+				add_harmony = -$remove$	# just in case any other religion might use harmony, it's removed without a tooltip
+			}
+		}
+	]
+}
+
+## replace a country modifier with another
+### replace_country_modifier = { remove = test_modifier_1 add = test_modifier_2 time = -1 }
+replace_country_modifier = {
+	if = {
+		limit = {
+			has_country_modifier = $remove$
+		}
+		custom_tooltip = tt_replace_modifier_$remove$_with_$add$
+		hidden_effect = {
+			remove_country_modifier = $remove$
+			add_country_modifier = {
+				name = $add$
+				duration = $time$
+			}
+		}
+	}
+	else = {
+		add_country_modifier = {
+			name = $add$
+			duration = $time$
+		}
+	}
+}
+
+## release subjects and collapse nation
+### release_subjects_and_cede_cores = { who = ROOT release_subjects = yes rebels = yes }
+### "release_subjects" and "rebels" are optional
+### must be used in the same scope as "who", "who" is used for some in-effect scopes, so only ROOT, FROM and direct tags/event targets work
+release_subjects_and_cede_cores = {
+	[[release_subjects]
+		if = {
+			limit = {
+				always = $release_subjects$
+			}
+			release_all_subjects = yes
+		}
+	]
+	custom_tooltip = RELEASE_SUBJECTS_AND_CEDE_CORES_CEDE_CORES_TT
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				is_capital = no
+				any_core_country = {
+					NOT = { tag = $who$ }
+				}
+			}
+			random_core_country = {
+				limit = {
+					NOT = { tag = $who$ }
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							exists = no
+						}
+						set_country_flag = core_country_not_exists
+					}
+				}
+				PREV = { cede_province = PREV }
+				hidden_effect = {
+					if = {
+						limit = {
+							has_country_flag = core_country_not_exists
+						}
+						clr_country_flag = core_country_not_exists
+						change_government = monarchy
+						add_government_reform = feudalism_reform
+					}
+				}
+			}
+		}
+	}
+	custom_tooltip = RELEASE_SUBJECTS_AND_CEDE_CORES_GAIN_UNREST_TT
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					is_capital = yes
+					NOT = {
+						any_core_country = {
+							NOT = { tag = $who$ }
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						NOT = { tag = $who$ }
+						primary_culture = PREV
+					}
+				}
+				random_country = {
+					limit = {
+						NOT = { tag = $who$ }
+						primary_culture = PREV
+					}
+					PREV = { add_core = PREV }
+				}
+			}
+			add_unrest = 25
+			add_nationalism = 10
+			[[rebels]
+				if = {
+					limit = {
+						always = $rebels$
+						is_capital = no
+					}
+					nationalist_rebels = 1
+				}
+			]
+		}
+	}
+	[[rebels]
+		if = {
+			limit = {
+				always = $rebels$
+			}
+			custom_tooltip = RELEASE_SUBJECTS_AND_CEDE_CORES_SPAWN_REBELS_TT
+		}
+	]
+}
+
+## adds army tradition until 100 is reached and then adds the rest as mil power
+### add_army_tradition_or_mil_power = { amount = <number> }
+add_army_tradition_or_mil_power = {
+	[[amount]
+		tooltip = {
+			add_army_tradition = $amount$
+		}
+		custom_tooltip = ME_ADD_ARMY_TRADITION_OR_MIL_POWER
+		hidden_effect = {
+			for = {
+				amount = $amount$
+				effect = "
+					if = {
+						limit = {
+							NOT = { army_tradition = 99.9 }
+						}
+						add_army_tradition = 1
+					}
+					else = {
+						add_mil_power = 3
+					}
+				"
+			}
+		}
+	]
+
+	[[value]
+		tooltip = {
+			add_army_tradition = $value$
+		}
+		custom_tooltip = ME_ADD_ARMY_TRADITION_OR_MIL_POWER
+		hidden_effect = {
+			for = {
+				amount = $value$
+				effect = "
+					if = {
+						limit = {
+							NOT = { army_tradition = 99.9 }
+						}
+						add_army_tradition = 1
+					}
+					else = {
+						add_mil_power = 3
+					}
+				"
+			}
+		}
+	]
+}
+
+## adds legitimacy equivalent until 100 is reached and then adds the rest as a reform progress
+### add_legitimacy_or_reform_progress = { amount = <number> }
+add_legitimacy_or_reform_progress = {
+	[[amount]
+		tooltip = {
+			add_legitimacy_equivalent = { amount = $amount$ }
+		}
+		custom_tooltip = ME_ADD_LEGITIMACY_OR_REFORM_PROGRESS
+		hidden_effect = {
+			for = {
+				amount = $amount$
+				effect = "
+					if = {
+						limit = {
+							NOT = { legitimacy_equivalent = 100 }
+						}
+						add_legitimacy_equivalent = { amount = 1 }
+					}
+					else = {
+						change_government_reform_progress = 2
+					}
+				"
+			}
+		}
+	]
+
+	[[value]
+		tooltip = {
+			add_legitimacy_equivalent = { amount = $value$ }
+		}
+		custom_tooltip = ME_ADD_LEGITIMACY_OR_REFORM_PROGRESS
+		hidden_effect = {
+			for = {
+				amount = $value$
+				effect = "
+					if = {
+						limit = {
+							NOT = { legitimacy_equivalent = 100 }
+						}
+						add_legitimacy_equivalent = { amount = 1 }
+					}
+					else = {
+						change_government_reform_progress = 2
+					}
+				"
+			}
+		}
+	]
+}
+
+## breaks the alliance between current scope and who
+### break_alliance_with = { who = <scope> }
+break_alliance_with = {
+	if = {
+		limit = {
+			alliance_with = $who$
+		}
+		$who$ = {
+			custom_tooltip = BREAK_ALLIANCE_WITH_TT
+		}
+		hidden_effect = {
+			add_rival = $who$
+			remove_rival = $who$
+		}
+	}
+}
+
+## adds the specified amount of crown land by reducing the land share of estates
+### change_crown_land = { add = <number> }
+### change_crown_land = { remove = <number> }
+### must use positive numbers!
+change_crown_land = {
+	[[add]
+		change_estate_land_share = {
+			estate = all
+			share = -$amount$
+		}
+	]
+	[[remove]
+		change_estate_land_share = {
+			estate = all
+			share = $amount$
+		}
+	]
+}
+
+## adds the culture as an accepted culture or 100 dip power
+### add_accepted_culture_or_dip_power = { culture = <culture> }
+### the custom effect is only able to check for up to 10 culture slots
+add_accepted_culture_or_dip_power = {
+	tooltip = {
+		add_accepted_culture = $culture$
+	}
+	custom_tooltip = ADD_ACCEPTED_CULTURE_TT
+	hidden_effect = {
+		if = {
+			limit = {
+				accepted_culture = $culture$
+			}
+			add_dip_power = 100
+		}
+		else_if = {
+			limit = {
+				primary_culture = $culture$
+			}
+			add_dip_power = 100
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 10
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 11
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 9
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 10
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 8
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 9
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 7
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 8
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 6
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 7
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 5
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 6
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 4
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 5
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 3
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 4
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 2
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 3
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				num_accepted_cultures = 1
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 2
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { num_accepted_cultures = 1 }
+			}
+			if = {
+				limit = {
+					has_global_modifier_value = {
+						which = num_accepted_cultures
+						value = 1
+					}
+				}
+				add_accepted_culture = $culture$
+			}
+			else = {
+				add_dip_power = 100
+			}
+		}
+		else = {
+			add_dip_power = 100
+		}
+	}
+}
+
+#####################
+# 	USAGE
+# 	pick_best_tags = {
+#		global_trigger = "your global triggers here" OPTIONAL
+#		<example>
+#		global_trigger = "
+#		OR = {
+#			continent = europe
+#			allied_with = ROOT
+#		}"
+#		scale = your trigger type here REQUIRED
+#		<example>
+#		scale = army_size
+#		<number of tags here> = yes (supported numbers: 1-3) REQUIRED
+#		event_target_name = "your name for event target here> REQUIRED
+#		scope = "your scope here> OPTIONAL
+#		<example>
+#		scope = "every_neighbor_country"
+#		default is every_country
+#	}
+#####################
+
+pick_best_tags = {
+	[[scope]
+		pick_best_tags_2 = {
+			scope = $scope$
+			scale = $scale$
+			event_target_name = $event_target_name$
+			global_trigger = "$global_trigger$"
+			1 = "$1$"
+			2 = "$2$"
+			3 = "$3$"
+			4 = "$4$"
+			5 = "$5$"
+			10 = "$10$"
+		}
+		set_global_flag = PICK_BEST_TAG_FLAG
+	] #curses for not having an [ELSE ] or something.
+	if = {
+		limit = {
+			NOT = { has_global_flag = PICK_BEST_TAG_FLAG } #This check is here to prevent the algorithm from being run again after the scoped version was executed
+		}
+		pick_best_tags_2 = {
+			scope = every_country
+			scale = $scale$
+			event_target_name = $event_target_name$
+			global_trigger = "$global_trigger$"
+			1 = "$1$"
+			2 = "$2$"
+			3 = "$3$"
+			4 = "$4$"
+			5 = "$5$"
+			10 = "$10$"
+		}
+	}
+	else = { clr_global_flag = PICK_BEST_TAG_FLAG }
+}
+
+pick_best_tags_2 = {
+	hidden_effect = {
+		[[1]
+			if = {
+				limit = { always = $1$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+			}
+		]
+		[[2]
+			if = {
+				limit = { always = $2$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+			}
+		]
+		[[3]
+			if = {
+				limit = { always = $3$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+			}
+		]
+		[[4]
+			if = {
+				limit = { always = $4$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+			}
+		]
+		[[5]
+			if = {
+				limit = { always = $5$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 5
+				}
+			}
+		]
+		[[10]
+			if = {
+				limit = { always = $10$ }
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 5
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 6
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 7
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 8
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 9
+				}
+				pick_best_tag = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 10
+				}
+			}
+		]
+		$scope$ = {
+			limit = {
+				has_country_flag = $event_target_name$_exclude
+			}
+			clr_country_flag = $event_target_name$_exclude
+		}
+	}
+}
+
+pick_best_tag = {
+	1 = { save_event_target_as = $event_target_name$_$number$ }
+	$scope$ = {
+		limit = {
+			[[global_trigger] $global_trigger$ ]
+			$scale$ = event_target:$event_target_name$_$number$
+			NOT = { has_country_flag = $event_target_name$_exclude }
+		}
+		save_event_target_as = $event_target_name$_$number$
+	}
+	event_target:$event_target_name$_$number$ = {
+		set_country_flag = $event_target_name$_exclude
+	}
+}
+
+#####################
+# 	USAGE
+# 	pick_best_provinces = {
+#		global_trigger = "your global triggers here" OPTIONAL
+#		<example>
+#		global_trigger = "
+#		OR = {
+#			continent = europe
+#			allied_with = ROOT
+#		}"
+#		scale = your trigger type here REQUIRED
+#		<example> scale = army_size
+#		<number of provinces here> = yes (supported numbers: 1-3) REQUIRED
+#		event_target_name = "your name for event target here> REQUIRED
+#		scope = <Your scope here> (default: every_province)
+#	}
+#####################
+
+pick_best_provinces = {
+	[[scope]
+		pick_best_provinces_2 = {
+			scope = "$scope$"
+			scale = "$scale$"
+			event_target_name = "$event_target_name$"
+			global_trigger = "$global_trigger$"
+			1 = "$1$"
+			2 = "$2$"
+			3 = "$3$"
+			4 = "$4$"
+			5 = "$5$"
+			10 = "$10$"
+		}
+		set_global_flag = PICK_BEST_PROVINCES_FLAG
+	] #curses for not having an [ELSE ] or something.
+	if = {
+		limit = {
+			NOT = { has_global_flag = PICK_BEST_PROVINCES_FLAG } #This check is here to prevent the algorithm from being run again after the scoped version was executed
+		}
+		pick_best_provinces_2 = {
+			scope = " every_province "
+			scale = "$scale$"
+			event_target_name = "$event_target_name$"
+			global_trigger = "$global_trigger$"
+			1 = "$1$"
+			2 = "$2$"
+			3 = "$3$"
+			4 = "$4$"
+			5 = "$5$"
+			10 = "$10$"
+		}
+	}
+	else = { clr_global_flag = PICK_BEST_PROVINCES_FLAG }
+}
+
+pick_best_provinces_2 = {
+	hidden_effect = {
+		[[1]
+			if = {
+				limit = { always = $1$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+			}
+		]
+		[[2]
+			if = {
+				limit = { always = $2$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+			}
+		]
+		[[3]
+			if = {
+				limit = { always = $3$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+			}
+		]
+		[[4]
+			if = {
+				limit = { always = $4$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+			}
+		]
+		[[5]
+			if = {
+				limit = { always = $5$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 5
+				}
+			}
+		]
+		[[10]
+			if = {
+				limit = { always = $10$ }
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 1
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 2
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 3
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 4
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 5
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 6
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 7
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 8
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 9
+				}
+				pick_best_province = {
+					scale = "$scale$"
+					scope = $scope$
+					global_trigger = "$global_trigger$"
+					event_target_name = "$event_target_name$"
+					number = 10
+				}
+			}
+		]
+		$scope$ = {
+			limit = {
+				has_province_flag = $event_target_name$_exclude
+			}
+			clr_province_flag = $event_target_name$_exclude
+		}
+	}
+}
+
+pick_best_province = {
+	$scope$ = {
+		limit = {
+			[[global_trigger] $global_trigger$ ]
+			NOT = { has_province_flag = $event_target_name$_exclude }
+		}
+		save_event_target_as = $event_target_name$_$number$
+	}
+	$scope$ = {
+		limit = {
+			[[global_trigger] $global_trigger$ ]
+			$scale$ = event_target:$event_target_name$_$number$
+			NOT = { has_province_flag = $event_target_name$_exclude }
+		}
+		save_event_target_as = $event_target_name$_$number$
+	}
+	event_target:$event_target_name$_$number$ = {
+		set_province_flag = $event_target_name$_exclude
+	}
+}
+#####
+# FOR LOOP
+# Executes the $effect$ $amount$ of times.
+# for = {
+#	amount = 5
+#	effect = "
+#	random_owned_province = {
+#		add_base_tax = 1
+#	}
+#	"
+# }
+#####
+
+
+for = {
+	set_variable = {
+		which = ForLoopCounter
+		value = $amount$
+	}
+
+	while = {
+		limit = {
+			check_variable = {
+				which = ForLoopCounter
+				value = 1
+			}
+		}
+		$effect$
+		subtract_variable = {
+			which = ForLoopCounter
+			value = 1
+		}
+	}
+}
+
+######
+# Define Foreign Advisor
+# Automates the process of defining an advisor's culture and religion based on a foreign province
+# Accepts the regular variables of define_advisor + uses province IDs for culture and religion variables
+# define_foreign_advisor = {
+#	type = recruit_master etc. optional
+#	skill = 3 etc. optional
+# 	name = "Giovanni Battista" optional
+#	cost_multiplier = 0.25 optional
+#	culture = province_id of origin
+#	religion = province_id of origin
+#	female = no optional
+# }
+#########
+
+define_foreign_advisor = {
+	hidden_effect = {
+		export_to_variable = {
+			which = cultureOrigin
+			value = culture
+			[[culture] who = $culture$ ]
+		}
+		export_to_variable = {
+			which = religionOrigin
+			value = religion
+			[[religion] who = $religion$ ]
+		}
+		define_advisor = {
+			[[type] type = $type$ ]
+			[[name] name = "$name$" ]
+			[[skill] skill = $skill$ ]
+			culture = variable:cultureOrigin
+			religion = variable:religionOrigin
+			[[cost_multiplier] cost_multiplier = $cost_multiplier$ ]
+			[[female] female = $female$ ]
+		}
+	}
+	tooltip = {
+		define_advisor = {
+			[[type] type = $type$ ]
+			[[name] name = "$name$" ]
+			[[skill] skill = $skill$ ]
+			[[cost_multiplier] cost_multiplier = $cost_multiplier$ ]
+			[[female] female = $female$ ]
+		}
+	}
+	$culture$ = {
+		$religion$ = {
+			custom_tooltip = ME_advisor_originates_from_PREV_THIS
+		}
+	}
+}
+
+#########
+# add_mana_scaled_on_monarch_skill = yes
+add_mana_scaled_on_monarch_skill = {
+	custom_tooltip = ME_ADD_MANA_TT
+	if = {
+		limit = { ADM = 6 }
+		add_adm_power = 120
+	}
+	else_if = {
+		limit = { ADM = 5 }
+		add_adm_power = 100
+	}
+	else_if = {
+		limit = { ADM = 4 }
+		add_adm_power = 80
+	}
+	else_if = {
+		limit = { ADM = 3 }
+		add_adm_power = 60
+	}
+	else_if = {
+		limit = { ADM = 2 }
+		add_adm_power = 40
+	}
+	else = {
+		add_adm_power = 20
+	}
+	if = {
+		limit = { DIP = 6 }
+		add_dip_power = 120
+	}
+	else_if = {
+		limit = { DIP = 5 }
+		add_dip_power = 100
+	}
+	else_if = {
+		limit = { DIP = 4 }
+		add_dip_power = 80
+	}
+	else_if = {
+		limit = { DIP = 3 }
+		add_dip_power = 60
+	}
+	else_if = {
+		limit = { DIP = 2 }
+		add_dip_power = 40
+	}
+	else = {
+		add_dip_power = 20
+	}
+	if = {
+		limit = { MIL = 6 }
+		add_mil_power = 120
+	}
+	else_if = {
+		limit = { MIL = 5 }
+		add_mil_power = 100
+	}
+	else_if = {
+		limit = { MIL = 4 }
+		add_mil_power = 80
+	}
+	else_if = {
+		limit = { MIL = 3 }
+		add_mil_power = 60
+	}
+	else_if = {
+		limit = { MIL = 2 }
+		add_mil_power = 40
+	}
+	else = {
+		add_mil_power = 20
+	}
+}
+
+#add_mana_scaled_on_monthly_monarch_power = yes
+add_mana_scaled_on_monthly_monarch_power = {
+	custom_tooltip = ME_ADD_MANA_MONTHLY_TT
+	if = {
+		limit = { monthly_adm = 17 }
+		add_adm_power = 120
+	}
+	else_if = {
+		limit = { monthly_adm = 14 }
+		add_adm_power = 100
+	}
+	else_if = {
+		limit = { monthly_adm = 11 }
+		add_adm_power = 80
+	}
+	else_if = {
+		limit = { monthly_adm = 8 }
+		add_adm_power = 60
+	}
+	else_if = {
+		limit = { monthly_adm = 5 }
+		add_adm_power = 40
+	}
+	else = {
+		add_adm_power = 20
+	}
+	if = {
+		limit = { monthly_dip = 17 }
+		add_dip_power = 120
+	}
+	else_if = {
+		limit = { monthly_dip = 14 }
+		add_dip_power = 100
+	}
+	else_if = {
+		limit = { monthly_dip = 11 }
+		add_dip_power = 80
+	}
+	else_if = {
+		limit = { monthly_dip = 8 }
+		add_dip_power = 60
+	}
+	else_if = {
+		limit = { monthly_dip = 5 }
+		add_dip_power = 40
+	}
+	else = {
+		add_dip_power = 20
+	}
+	if = {
+		limit = { monthly_mil = 17 }
+		add_mil_power = 120
+	}
+	else_if = {
+		limit = { monthly_mil = 14 }
+		add_mil_power = 100
+	}
+	else_if = {
+		limit = { monthly_mil = 11 }
+		add_mil_power = 80
+	}
+	else_if = {
+		limit = { monthly_mil = 8 }
+		add_mil_power = 60
+	}
+	else_if = {
+		limit = { monthly_mil = 5 }
+		add_mil_power = 40
+	}
+	else = {
+		add_mil_power = 20
+	}
+}
+
+change_national_focus_effect = {
+	if = {
+		limit = {
+			OR = {
+				has_dlc = "Res Publica"
+				has_dlc = "Common Sense"
+			}
+		}
+		custom_tooltip = ME_CHANGE_NATIONAL_FOCUS_TT
+		hidden_effect = {
+			country_event = { id = missions_expanded_events.2 }
+		}
+	}
+}
+
+set_defender_of_the_faith_effect = {
+	if = {
+		limit = {
+			OR = {
+				religion_group = christian
+				religion_group = muslim
+			}
+		}
+		custom_tooltip = ME_SET_DEFENDER_OF_FAITH_TT
+		hidden_effect = {
+			country_event = { id = missions_expanded_events.4 }
+		}
+	}
+}
+
+create_general_with_pips = {
+	create_general = {
+		tradition = $tradition$
+		[[add_fire] add_fire = $add_fire$ ]
+		[[add_shock] add_shock = $add_shock$ ]
+		[[add_manuever] add_manuever = $add_manuever$ ]
+		[[add_siege] add_siege = $add_siege$ ]
+		[[name] name = $name$ ]
+		[[culture] culture = $culture$ ]
+	}
+	custom_tooltip = ME_GENERAL_$add_fire$_$add_shock$_$add_manuever$_$add_siege$
+}
+
+ME_give_province_claims = {
+	$id$ = {
+		if = {
+			limit = {
+				NOT = { is_core = $tag$ }
+				NOT = { is_permanent_claim = $tag$ }
+			}
+			add_permanent_claim = $tag$
+		}
+	}
+}
+
+ME_give_area_claims = {
+	$group$ = {
+		limit = {
+			NOT = { is_core = $tag$ }
+			NOT = { is_permanent_claim = $tag$ }
+		}
+		add_permanent_claim = $tag$
+	}
+}
+
+ME_give_claims = {
+	[[province]
+		ME_give_province_claims = { id = $province$ tag = ROOT }
+	]
+	[[id]
+		ME_give_province_claims = { id = $id$ tag = ROOT }
+	]
+	[[area]
+		ME_give_area_claims = { group = $area$ tag = ROOT }
+	]
+	[[region]
+		ME_give_area_claims = { group = $region$ tag = ROOT }
+	]
+
+}
+
+ME_add_years_of_trade_income = {
+	[[years] add_years_of_trade_income = { years = $years$ custom_tooltip = ME_add_$years$_years_of_trade_income } ]
+	[[value] add_years_of_trade_income = { years = $value$ custom_tooltip = ME_add_$value$_years_of_trade_income } ]
+	[[amount] add_years_of_trade_income = { years = $amount$ custom_tooltip = ME_add_$amount$_years_of_trade_income } ]
+}
+
+add_positive_or_negative_piety = {
+	if = {
+		limit = {
+			piety = 0
+		}
+		add_piety = $amount$
+	}
+	else = {
+		add_piety = -$amount$
+	}
+}
+
+ME_technology_split_120_power = { #placeholder, I will put the implementation here later!
+	custom_tooltip = "ME_split_120_MP"
+	hidden_effect = {
+		export_to_variable = {
+			which = MSA_our_adm_tech
+			value = adm_tech
+		}
+		export_to_variable = {
+			which = MSA_our_dip_tech
+			value = dip_tech
+		}
+		export_to_variable = {
+			which = MSA_our_mil_tech
+			value = mil_tech
+		}
+		set_variable = {
+			which = MSA_our_lowest_tech
+			which = MSA_our_adm_tech
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = MSA_our_dip_tech
+						which = MSA_our_lowest_tech
+					}
+				}
+			}
+			set_variable = {
+				which = MSA_our_lowest_tech
+				which = MSA_our_dip_tech
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = MSA_our_mil_tech
+						which = MSA_our_lowest_tech
+					}
+				}
+			}
+			set_variable = {
+				which = MSA_our_lowest_tech
+				which = MSA_our_mil_tech
+			}
+		}
+
+		subtract_variable = {
+			which = MSA_our_adm_tech
+			which = MSA_our_lowest_tech
+		}
+		subtract_variable = {
+			which = MSA_our_dip_tech
+			which = MSA_our_lowest_tech
+		}
+		subtract_variable = {
+			which = MSA_our_mil_tech
+			which = MSA_our_lowest_tech
+		}
+
+		if = {
+			limit = {
+				is_variable_equal = {
+					which = MSA_our_adm_tech
+					value = 0
+				}
+			}
+			if = {
+				limit = {
+					is_variable_equal = {
+						which = MSA_our_dip_tech
+						value = 0
+					}
+				}
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = MSA_our_mil_tech
+							value = 0
+						}
+					}
+					add_adm_power = 40
+					add_dip_power = 40
+					add_mil_power = 40
+				}
+				else = {
+					add_adm_power = 60
+					add_dip_power = 60
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = MSA_our_mil_tech
+							value = 0
+						}
+					}
+					add_adm_power = 60
+					add_mil_power = 60
+				}
+				else = {
+					add_adm_power = 120
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					is_variable_equal = {
+						which = MSA_our_dip_tech
+						value = 0
+					}
+				}
+				if = {
+					limit = {
+						is_variable_equal = {
+							which = MSA_our_mil_tech
+							value = 0
+						}
+					}
+					add_dip_power = 60
+					add_mil_power = 60
+				}
+				else = {
+					add_dip_power = 120
+				}
+			}
+			else = {
+				add_mil_power = 120
+			}
+		}
+
+		#flush the vars
+		set_variable = {
+			which = MSA_our_adm_tech
+			value = 0
+		}
+		set_variable = {
+			which = MSA_our_dip_tech
+			value = 0
+		}
+		set_variable = {
+			which = MSA_our_mil_tech
+			value = 0
+		}
+		set_variable = {
+			which = MSA_our_lowest_tech
+			value = 0
+		}
+	}
+}
+
+#ME_pt_feedback_requested = { #a program will look for instances of those
+#	custom_tooltip = ME_playtester_feedback_requested
+#}
+
+#tag = { ME_add_to_empire = yes }
+ME_add_to_empire = {
+	custom_tooltip = ME_join_the_empire
+	if = {
+		limit = {
+			capital_scope = {
+				continent = europe #In case their capital is not in Europe
+			}
+		}
+		tooltip = {
+			set_in_empire = yes
+		}
+
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					continent = europe
+				}
+				set_in_empire = yes
+			}
+			set_country_flag = reined_in_for_shadow_kingdom #in case that happens
+		}
+	}
+}
+
+# ME_distribute_development = {
+#	type = x //The 3 development types. E.G. type = production
+#	amount = x //How many development to add. E.G amount = 10
+#	limit = " " OPTIONAL //takes actual triggers. E.G. limit = " NOT = { culture = ROOT } "
+#}
+ME_distribute_development = {
+	hidden_effect = {
+		set_variable = {
+			which = ME_$type$_loop
+			value = 0
+		}
+		while = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = ME_$type$_loop
+						value = $amount$
+					}
+				}
+			}
+			random_owned_province = {
+				[[limit]
+					limit = {
+						$limit$
+					}
+				]
+				add_base_$type$ = 1
+			}
+			change_variable = {
+				which = ME_$type$_loop
+				value = 1
+			}
+		}
+	}
+	custom_tooltip = $type$_$amount$
+}
+
+# ME_remove_development_distributed = {
+#	type = x //The 3 development types. E.G. type = production
+#	amount = x //How many development to add. E.G amount = 10
+#	limit = " " OPTIONAL //takes actual triggers. E.G. limit = " NOT = { culture = ROOT } "
+#}
+ME_remove_development_distributed = {
+	hidden_effect = {
+		set_variable = {
+			which = ME_$type$_loop
+			value = 0
+		}
+		while = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = ME_$type$_loop
+						value = $amount$
+					}
+				}
+			}
+			random_owned_province = {
+				limit = {
+					[[limit] $limit$ ]
+					base_$type$ = 2 #In case the province has 1 development of that type
+				}
+				add_base_$type$ = -1
+			}
+			change_variable = {
+				which = ME_$type$_loop
+				value = 1
+			}
+		}
+	}
+	custom_tooltip = remove_$type$_$amount$
+}
+
+#ME_country_event_delay = { id = x }
+#Done for some small flavor
+#Will let Stiopa make the final verdict
+#ME_country_event_delay = {
+#	hidden_effect = {
+#		country_event = { id = $id$ days = 1 }
+#	}
+#	tooltip = {
+#		country_event = { id = $id$ }
+#	}
+#}
+
+disable_annex_penalty = {
+	custom_tooltip = ME_disble_annex_penalty_for_annexing_root
+	set_country_flag = ME_causes_no_annexation_penalty
+}
+
+ME_override_country_name = {
+	[[country_name] override_country_name = $country_name$ ]
+	[[name] override_country_name = $name$ ]
+	[[country] override_country_name = $country$ ]
+	[[value] override_country_name = $value$ ]
+	[[string] override_country_name = $string$ ]
+	hidden_effect = {
+		set_country_flag = ME_overrid_country_name
+	}
+}
+
+#ME_add_scaling_adm_advisor_bonuses = yes
+ME_add_scaling_adm_advisor_bonuses = {
+	custom_tooltip = me_mug_adm_advisors_give_scaling_bonuses
+	set_country_flag = me_mug_scaling_advisors
+}
+
+#ME_add_scaling_dip_advisor_bonuses = yes
+ME_add_scaling_dip_advisor_bonuses = {
+	custom_tooltip = me_mug_dip_advisors_give_scaling_bonuses
+	set_country_flag = me_mug_scaling_advisors_dip
+}
+
+#ME_add_scaling_mil_advisor_bonuses = yes
+ME_add_scaling_mil_advisor_bonuses = {
+	custom_tooltip = me_mug_mil_advisors_give_scaling_bonuses
+	set_country_flag = me_mug_scaling_advisors_mil
+}
+
+ME_add_power_projection = {
+	[[amount]
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = $amount$
+		}
+	]
+	[[value]
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = $value$
+		}
+
+	]
+}
+
+ME_add_or_reset_golden_age = { # extremely powerful, use sparingly!
+	if = {					   # should be guarded by a check for golden age
+		limit = {
+			has_dlc = "Mandate of Heaven"
+		}
+
+		custom_tooltip = ME_golden_age_renewal_tt
+		hidden_effect = {
+			if = {
+				limit = { has_had_golden_age = yes }
+				reset_golden_age = yes
+			}
+			else_if = {
+				limit = { in_golden_age = yes }
+				extend_golden_age = 600
+			}
+		}
+	}
+	else = {
+		add_country_modifier = {
+			name = ME_mini_golden_age
+			duration = 18250
+		}
+	}
+}
+
+EE_change_variable = {
+	[[add]
+		change_variable = {
+			which = $which$
+			value = $add$
+		}
+	]
+
+	[[subtract]
+		subtract_variable = {
+			which = $which$
+			value = $subtract$
+		}
+	]
+
+	[[divide]
+		divide_variable = {
+			which = $which$
+			value = $divide$
+		}
+	]
+
+	[[multiply]
+		multiply_variable = {
+			which = $which$
+			value = $multiply$
+		}
+	]
+}
+
+ME_create_flagship = {
+	hidden_effect = {
+		owner = {
+			set_country_flag = ME_flagship_effect
+			set_country_flag = ME_flagship_$mod_1$_flag
+			set_country_flag = ME_flagship_$mod_2$_flag
+			set_country_flag = ME_flagship_$mod_3$_flag
+		}
+	}
+	create_flagship = {
+		[[name] name = "$name$" ]
+		type = $type$
+	}
+	custom_tooltip = ME_flagship_$mod_1$_tt
+	custom_tooltip = ME_flagship_$mod_2$_tt
+	custom_tooltip = ME_flagship_$mod_3$_tt
+	hidden_effect = {
+		owner = {
+			clr_country_flag = ME_flagship_effect
+		}
+	}
+}
+
+add_stat_or_monarch_power = {
+    tooltip = {
+        change_$stat$ = $amount$
+    }
+    custom_tooltip = ADD_STAT_OR_POWER_$stat$
+    hidden_effect = {
+		set_variable = {
+			which = ForLoopCounter
+			value = $amount$
+		}
+		while = {
+			limit = {
+				check_variable = {
+					which = ForLoopCounter
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = { $stat$ = 6 }
+				}
+				change_$stat$ = 1
+			}
+			else = {
+				add_$stat$_power = 100
+			}
+			subtract_variable = {
+				which = ForLoopCounter
+				value = 1
+			}
+		}
+    }
+}

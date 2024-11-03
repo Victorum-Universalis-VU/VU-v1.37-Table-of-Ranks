@@ -1,0 +1,103 @@
+country_decisions = {
+	
+	unite_latvian_tribes = {
+		major = yes
+		potential = {
+			OR = {
+				culture_group = baltic
+				culture_group = finno_ugric
+				culture_group = east_slavic
+				culture_group = west_slavic
+				culture_group = germanic
+			}
+			any_owned_province = {
+				OR = {
+					culture = curonian
+					culture = zemgalian
+					culture = selonian
+					culture = latgalian
+				}
+			}
+			NOT = { any_province = { culture = latvian } }
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 37
+				province_id = 273
+				province_id = 3293
+				province_id = 1935
+				province_id = 7838
+				province_id = 7839
+				province_id = 7843
+				province_id = 7848
+			}
+		}
+		
+		allow = {
+			any_owned_province = { culture = curonian }
+			any_owned_province = { culture = zemgalian }
+			any_owned_province = { culture = selonian }
+			any_owned_province = { culture = latgalian }
+			owns = 37
+			owns = 273
+			owns = 3293
+			owns = 1935
+			owns = 7838
+			owns = 7839
+			owns = 7843
+			owns = 7848
+			dip_power = 100
+			OR = {
+				accepted_culture = curonian
+				accepted_culture = zemgalian
+				accepted_culture = latgalian
+				accepted_culture = selonian
+			}
+			adm_tech = 25
+		}
+		effect = {
+			add_dip_power = -50
+			add_prestige = 5
+			every_province = {
+				limit = {
+					OR = {
+						culture = curonian
+						culture = zemgalian
+						culture = selonian
+						culture = latgalian
+					}
+				}
+				add_core = LAT
+				change_culture = latvian
+			}
+			if = {
+				limit = {
+					OR = {
+						primary_culture = curonian
+						primary_culture = zemgalian
+						primary_culture = selonian
+						primary_culture = latgalian
+					}
+				}
+				change_tag = LAT
+				on_change_tag_effect = yes
+			}
+			if = {
+				limit = {
+					culture_group = baltic
+				}
+				remove_accepted_culture = curonian
+				remove_accepted_culture = zemgalian
+				remove_accepted_culture = selonian
+				remove_accepted_culture = latgalian
+				add_accepted_culture = latvian
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 50
+	}
+}

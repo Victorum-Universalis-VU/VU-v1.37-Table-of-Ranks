@@ -1,0 +1,23 @@
+namespace = CotCreation
+
+#First an event template to create CoT from a set province
+province_event = {
+    id = CotCreation.1
+    title = CotCreation.EVTNAME1 #Needs localization!
+    desc = CotCreation.EVTDESC1 #Needs localization!
+    picture = CITY_DEVELOPMENT_eventPicture
+    fire_only_once = yes
+
+    trigger = {
+        province_id = 8057 #some random non-cot province owned by castile
+        development = 80 #Set to something or comment away with "#"
+        NOT = {
+            province_has_center_of_trade_of_level = 1 #To make sure event doesn't fire if the province has CoT
+        }
+    }
+
+    option = {
+        name = "good" #Needs localization!
+        center_of_trade = 1
+    }
+}

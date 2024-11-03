@@ -1,0 +1,16 @@
+add_or_upgrade_education_building = {
+	custom_tooltip = add_or_upgrade_education_building_tt
+	hidden_effect = {
+		if = {
+			limit = { has_building = library }
+			add_building = school
+		}
+		else_if = {
+			limit = { has_building = school }
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		else = { add_building = library }
+	}
+}

@@ -1,0 +1,335 @@
+timar = {
+	copy_from = tributary_state
+
+	sprite = GFX_icon_vassal
+	diplomacy_overlord_sprite = GFX_diplomacy_leadvassal # The one that the overlord sees
+	diplomacy_subject_sprite = GFX_diplomacy_amvassal
+
+	can_have_subjects_of_other_types = yes
+	joins_overlords_wars = yes
+	can_fight_independence_war = no
+	overlord_can_attack = no
+	takes_diplo_slot = no
+	relative_power_class = 0
+	uses_military_focus = yes
+	can_release_in_peace = no
+	overlord_protects_external = yes
+	counts_for_borders = no
+	can_use_claims = no
+	can_send_tribute = no
+	gets_help_with_rebels = yes
+	trust_on_start = 50
+	base_liberty_desire = -10.0
+	liberty_desire_development_ratio = 0.25
+	forcelimit_to_overlord = 1.0
+	military_focus = 2.0
+	share_rebel_popup = yes
+	can_set_mil_focus = yes
+	can_send_missionary_to_subject = yes
+
+	can_fight = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_ally = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = yes
+		other_overlord = all
+	}
+
+	subsidize_armies = yes
+	send_officers = yes
+
+	enforce_religion = yes
+	grant_core_claim = yes
+	bestow_gifts = no
+	send_additional_troops = no
+	demand_artifacts = no
+	demand_additional_tribute = no
+	placate_rulers = yes
+	knowledge_sharing = yes
+	# (continuous)
+	embargo_rivals = yes
+}
+
+permanent_union = {
+	copy_from = default
+
+	# Graphics:
+	sprite = GFX_court_union
+	diplomacy_overlord_sprite = GFX_diplomacy_leadunions
+	diplomacy_subject_sprite = GFX_diplomacy_inunion
+
+	# Properties:
+	has_overlords_ruler = yes
+	can_be_integrated = no
+	overlord_can_attack = no
+	has_power_projection = no
+	gets_help_with_rebels = yes
+	can_have_subjects_of_other_types = yes
+	can_union_break = yes
+	transfer_subjects_when_made = yes
+	takes_diplo_slot = no
+
+	liberty_desire_negative_prestige = 1.0
+	military_focus = 0.66
+
+	relative_power_class = 1
+
+	restoration_cb = cb_restore_personal_union
+
+	# Subject Interactions:
+	placate_rulers = no
+	enforce_culture = yes
+	siphon_income = yes
+	support_loyalists = yes
+
+	# Modifiers:
+	modifier_overlord = {
+		modifier = union_subject
+	}
+
+	overlord_opinion_modifier = in_union
+	subject_opinion_modifier = in_union
+}
+
+prussian_congress_vassal = {
+	copy_from = vassal
+	count = vassal
+
+	takes_diplo_slot = no
+}
+
+prussian_vassal = {
+	copy_from = vassal
+	count = vassal
+
+	modifier_subject = clear
+	modifier_subject = {
+		modifier = prussian_vassal_modifier
+	}
+	modifier_overlord = {
+		modifier = prussian_vassal_modifier_overlord
+	}
+
+	can_fight = {
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+	}
+	can_ally = {
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = yes
+		other_overlord = all
+	}
+
+	takes_diplo_slot = no
+}
+
+brotherly_order = {
+	copy_from = vassal
+	count = vassal
+
+	can_have_subjects_of_other_types = yes
+	joins_overlords_wars = yes
+	can_fight_independence_war = no
+	overlord_can_attack = no
+	can_use_claims = no
+	can_fight = {
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_ally = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = yes
+		other_overlord = all
+	}
+}
+
+french_hre_subject = {
+	copy_from = default
+
+	# Graphics:
+	sprite = GFX_icon_french_hre_subject
+	diplomacy_overlord_sprite = GFX_icon_lead_french_hre_subject
+	diplomacy_subject_sprite = GFX_icon_am_french_hre_subject
+
+	# Triggers:
+	is_potential_overlord = {
+		OR = {
+			tag = FRA
+			was_tag = FRA
+		}
+		has_country_flag = french_hre_subject_enabled
+		NOT = { hre_size = 1 }
+	}
+
+	# Properties:
+	can_fight_independence_war = no
+	is_voluntary = yes
+	joins_overlords_wars = no
+	overlord_can_attack = no
+	can_have_subjects_of_other_types = yes
+	takes_diplo_slot = no
+	uses_military_focus = no
+	overlord_protects_external = yes
+	counts_for_borders = no
+	can_use_claims = no
+	share_rebel_popup = no
+	allows_taking_land_without_independence = yes
+	can_transfer_in_peace = no
+	can_set_mil_focus = no
+	can_send_missionary_to_subject = no
+	overlord_can_fabricate_for = no
+	does_overlord_size_count_for_warscore_cost = no
+	can_concentrate_development = no
+
+	max_government_rank = 0
+	cities_required_for_bonuses = 0
+	trust_on_start = 35
+
+	base_liberty_desire = -5
+	liberty_desire_development_ratio = 0.175
+
+	should_quit_wars_on_activation = yes
+
+	relative_power_class = 1
+	diplomacy_view_class = 1
+
+	can_fight = {
+		independent_nations = yes
+		same_overlord = french_hre_subject
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+		same_overlord = french_hre_subject
+		other_overlord = all
+	}
+	can_ally = {
+		independent_nations = yes
+		same_overlord = french_hre_subject
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = yes
+		same_overlord = french_hre_subject
+		other_overlord = all
+	}
+
+	# Subject Interactions:
+	# (continuous)
+	embargo_rivals = no
+	# (immediate)
+	placate_rulers = no
+	enforce_religion = yes
+	grant_province = no
+	block_settlement_growth = no
+	allow_settlement_growth = no
+
+	# Modifiers:
+	modifier_subject = clear
+	modifier_overlord = clear
+
+	overlord_opinion_modifier = is_french_hre_subject
+	subject_opinion_modifier = is_french_hre_subject
+}
+
+ME_personal_union = {
+	copy_from = personal_union
+
+	# Graphics:
+	sprite = GFX_court_union
+	diplomacy_overlord_sprite = GFX_diplomacy_leadunions
+	diplomacy_subject_sprite = GFX_diplomacy_inunion
+
+	takes_diplo_slot = no
+
+	# Modifiers:
+	modifier_overlord = {
+		modifier = union_subject
+	}
+
+	overlord_opinion_modifier = in_union
+	subject_opinion_modifier = in_union
+}
+
+ME_Austrian_personal_union = {
+	copy_from = personal_union
+
+	# Graphics:
+	sprite = GFX_court_union
+	diplomacy_overlord_sprite = GFX_diplomacy_leadunions
+	diplomacy_subject_sprite = GFX_diplomacy_inunion
+	
+	joins_overlords_wars = no
+
+	# Modifiers:
+	modifier_overlord = {
+		modifier = union_subject
+	}
+
+	overlord_opinion_modifier = in_union
+	subject_opinion_modifier = in_union
+}
+
+ME_TIM_trib_state = {
+	copy_from = tributary_state
+
+	sprite = GFX_icon_vassal
+	diplomacy_overlord_sprite = GFX_diplomacy_leadvassal # The one that the overlord sees
+	diplomacy_subject_sprite = GFX_diplomacy_amvassal
+
+	can_have_subjects_of_other_types = yes
+	can_fight_independence_war = yes
+	overlord_can_attack = yes
+	takes_diplo_slot = no
+	relative_power_class = 0
+	can_release_in_peace = no
+	overlord_protects_external = yes
+	counts_for_borders = no
+	can_use_claims = no
+	can_send_tribute = no
+	gets_help_with_rebels = no
+	trust_on_start = 50
+	liberty_desire_development_ratio = 0.25
+
+	can_fight = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_ally = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = yes
+		other_overlord = all
+	}
+	
+	demand_additional_tribute = yes
+	demand_artifacts = no
+	placate_rulers = yes
+	knowledge_sharing = yes
+}
+

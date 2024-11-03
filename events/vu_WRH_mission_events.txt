@@ -1,0 +1,121 @@
+namespace = vu_WRH_missions
+country_event = {
+	id = vu_WRH_missions.1
+	title = "vu_WRH_destiny_ev_title"
+	desc = "vu_WRH_destiny_ev_desc"
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	option = {
+		trigger = {
+			NOT = {
+				exists = UKR
+			}
+		}
+		name = "vu_WRH_destiny_ukraine"
+		custom_tooltip = vu_WRH_now_can_form_ukr
+		hidden_effect = {
+			set_country_flag = vu_WRH_can_form_ruthenia
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		trigger = {
+			NOT = {
+				exists = RUS
+			}
+		}
+		name = "vu_WRH_destiny_russia"
+		custom_tooltip = vu_WRH_now_can_form_rus
+		hidden_effect = {
+			set_country_flag = vu_WRH_can_form_russia
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		name = "vu_WRH_destiny_our_own"
+		add_stability_or_adm_power = yes
+		add_prestige = 25
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {
+	id = vu_WRH_missions.2
+	title = "vu_WRH_duma_title"
+	desc = "vu_WRH_duma_desc"
+	picture = DIET_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = WRH
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = "vu_WRH_duma_institute"
+		IF = {
+			limit = {
+				NOT = {
+					government = republic
+				}
+			}
+			change_government_to_republic = yes
+		}
+		IF = {
+			limit = {
+				NOT = {
+					has_reform = improved_veche_republic
+				}
+			}
+			add_government_reform = improved_veche_republic
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = "vu_ukraine_tsardom_tsar"
+		if = {
+			limit = {
+				is_revolutionary = no
+				NOT = {
+					government = monarchy
+				}
+			}
+			change_government_to_monarchy = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_reform = ruthenian_tsardom
+				}
+			}
+			add_government_reform = ruthenian_tsardom
+		}
+		if = {
+			limit = {
+				has_custom_ideas = no
+				NOT = {
+					has_idea_group = ruthenian_ideas
+				}
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+	option = {
+		name = "vu_WRH_duma_leave"
+		add_prestige = 5
+		ai_chance = {
+			factor = 0
+		}
+	}
+}

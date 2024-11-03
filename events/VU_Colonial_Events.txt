@@ -1,0 +1,2297 @@
+namespace = VU_COL_Events
+
+#Colonial Land Transfer
+country_event = {
+	id = VU_COL_Events.01
+	title = VU_COL_Events.01.t
+	desc = VU_COL_Events.01.d
+	picture = COURT_eventPicture
+	
+	trigger = {
+		FROM = { is_colonial_nation = yes }
+		FROM = { ai = yes }
+		any_owned_province = {
+			NOT = { colonial_region = capital }
+	
+		}
+	}
+
+	mean_time_to_happen = { months = 6 }
+
+	#Transfer
+	option = {
+		name = VU_COL_Events.01.a
+		
+		hidden_effect = {
+			capital_scope = {
+				save_event_target_as = colonial_capital
+			}
+			overlord = {
+				save_event_target_as = overlord_country
+			}
+			every_owned_province = {
+				limit = {
+					NOT = { colonial_region = event_target:colonial_capital }
+				}
+				remove_core = ROOT
+				add_core = event_target:overlord_country
+				cede_province = event_target:overlord_country
+			}
+		}
+	}
+}
+
+# Cultural Divergence - Primary Culture
+country_event = {
+	id = VU_COL_Events.02
+	title = VU_COL_Events.02.t
+	desc = VU_COL_Events.02.d
+	picture = CULTURE_eventPicture
+	
+	trigger = {
+		FROM = {
+			# Capital needs to be where culture divergence would happen (nation wouldn't keep old culture)
+			capital_scope = {
+				OR = {
+					# South America
+					colonial_region = colonial_brazil
+					colonial_region = colonial_la_plata
+					colonial_region = colonial_chile
+					colonial_region = colonial_peru
+					colonial_region = colonial_bolivia
+					colonial_region = colonial_colombia
+					colonial_region = colonial_venezuela
+					colonial_region = colonial_ecuador
+					colonial_region = colonial_guyana
+					
+					# Central America
+					colonial_region = colonial_central_america
+					colonial_region = colonial_cuba
+					colonial_region = colonial_hispaniola
+					colonial_region = colonial_the_carribean
+					colonial_region = colonial_mexico
+					
+					# North America - USA
+					colonial_region = colonial_eastern_america
+					colonial_region = colonial_mississippi
+					colonial_region = colonial_great_lakes
+					colonial_region = colonial_louisiana
+					colonial_region = colonial_florida
+					colonial_region = colonial_texas
+					colonial_region = colonial_california
+					
+					# North America - Canada
+					colonial_region = colonial_acadia
+					colonial_region = colonial_canada
+					colonial_region = colonial_newfoundland
+					colonial_region = colonial_hudson_bay
+					colonial_region = colonial_northwest_territories
+					colonial_region = colonial_cascadia
+					colonial_region = colonial_alaska
+					colonial_region = colonial_greenland
+					
+					# Africa
+					colonial_region = colonial_cape
+					
+					# Oceania
+					colonial_region = colonial_australia
+					colonial_region = colonial_polynesia
+					colonial_region = colonial_papua
+				}
+			}
+			
+			# Nation culture group needs to be divergable (have a culture for different continents/regions)
+			OR = {
+				culture_group = iberian
+				culture_group = british
+				culture_group = french
+				culture_group = low_franconian #Dutch
+				culture_group = scandinavian #Nordic
+				culture_group = east_slavic
+				culture_group = germanic
+			}
+			
+			# Nation can't already have a colonial culture - prevents the event from triggering when not needed
+			NOT = {
+				OR = {
+					# Iberian
+					primary_culture = brazilian
+					primary_culture = platinean
+					primary_culture = peruvian
+					primary_culture = colombian
+					primary_culture = centroamerican
+					primary_culture = cuban
+					primary_culture = dominican
+					primary_culture = iberian_caribbean
+					primary_culture = mexican
+					primary_culture = floridan
+					primary_culture = tejano
+					primary_culture = californio
+					
+					# British
+					primary_culture = british_guyanese
+					primary_culture = british_belizeans
+					primary_culture = british_bahamian
+					primary_culture = american
+					primary_culture = dixie
+					primary_culture = canadian
+					primary_culture = british_south_african
+					primary_culture = aussie
+					primary_culture = kiwi
+					
+					# French
+					primary_culture = french_guyanese
+					primary_culture = haitian
+					primary_culture = martinique
+					primary_culture = louisianans
+					primary_culture = quebecois
+					
+					# Dutch
+					primary_culture = surinamer
+					primary_culture = antillianen
+					primary_culture = jersey_dutch
+					primary_culture = afrikaner_culture
+					
+					# Nordic
+					primary_culture = vinlandic
+					primary_culture = greenlandic
+					
+					# East Slavic
+					primary_culture = russo_alaskan
+					
+					# Germanic
+					primary_culture = hunsrik
+					primary_culture = argentiner
+					primary_culture = deutschkolumbian
+					primary_culture = peruanisch
+					primary_culture = guyanisch
+					primary_culture = texasdeutsch
+					primary_culture = haitianisch
+					primary_culture = kubaner
+					primary_culture = antillen
+					primary_culture = mexikaner
+					primary_culture = nordlander
+					primary_culture = kanadisch
+					primary_culture = kalifornier
+					primary_culture = neues_deutsch
+					primary_culture = alaskaner
+					primary_culture = afrikaner
+					primary_culture = australier
+					primary_culture = seelander
+					# Italian
+					
+					# Chinese
+					
+					# Japanese
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = { months = 120 }
+
+	option = {
+		name = VU_COL_Events.02.a
+		
+		hidden_effect = {
+
+			### IBERIAN
+
+			# Iberian Brazil
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = { colonial_region = colonial_brazil }
+						NOT = { primary_culture = brazilian }
+					}
+				}
+				FROM = { change_primary_culture = brazilian  }
+			}
+			
+			# Iberian La Plata, Chile
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_la_plata
+								colonial_region = colonial_chile
+							}
+						}
+						NOT = { primary_culture = platinean }
+					}
+				}
+				FROM = { change_primary_culture = platinean }
+			}
+			
+			# Iberian Peru, Bolivia
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_peru
+								colonial_region = colonial_bolivia
+							}
+						}
+						NOT = { primary_culture = peruvian }
+					}
+				}
+				FROM = { change_primary_culture = peruvian }
+			}
+			
+			# Iberian Colombia, Venezuela, Ecuador
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_colombia
+								colonial_region = colonial_venezuela
+								colonial_region = colonial_ecuador
+							}
+						}
+						NOT = { primary_culture = colombian }
+					}
+				}
+				FROM = { change_primary_culture = colombian }
+			}
+			
+			# Iberian Central Aamerica
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_central_america
+						}
+						NOT = { primary_culture = centroamerican }
+					}
+				}
+				FROM = { change_primary_culture = centroamerican }
+			}
+			
+			# Iberian Cuba
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_cuba
+						}
+						NOT = { primary_culture = cuban }
+					}
+				}
+				FROM = { change_primary_culture = cuban }
+			}
+			
+			# Iberian Hispaniola
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_hispaniola
+						}
+						NOT = { primary_culture = dominican }
+					}
+				}
+				FROM = { change_primary_culture = dominican }
+			}
+			
+			# Iberian Antilles
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_the_carribean
+						}
+						NOT = { primary_culture = iberian_caribbean }
+					}
+				}
+				FROM = { change_primary_culture = iberian_caribbean }
+			}
+			
+			# Iberian Mexico
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = { colonial_region = colonial_mexico }
+						NOT = { primary_culture = mexican }
+					}
+				}
+				FROM = { change_primary_culture = mexican }
+			}
+
+			# Iberian Florida
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_florida
+						}
+						NOT = { primary_culture = floridan }
+					}
+				}
+				FROM = { change_primary_culture = floridan }
+			}
+			
+			# Iberian Texas
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_texas
+						}
+						NOT = { primary_culture = tejano }
+					}
+				}
+				FROM = { change_primary_culture = tejano }
+			}
+			
+			# Iberian California
+			if = {
+				limit = {
+					FROM = {
+						culture_group = iberian
+						capital_scope = {
+							colonial_region = colonial_california
+						}
+						NOT = { primary_culture = californio }
+					}
+				}
+				FROM = { change_primary_culture = californio }
+			}
+
+			### BRITISH
+
+			# British Guyana
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_guyana
+						}
+						NOT = { primary_culture = british_guyanese }
+					}
+				}
+				FROM = { change_primary_culture = british_guyanese }
+			}
+
+			# British Central America
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_central_america
+						}
+						NOT = { primary_culture = british_belizeans }
+					}
+				}
+				FROM = { change_primary_culture = british_belizeans }
+			}
+
+			# British Antilles
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_the_carribean
+						}
+						NOT = { primary_culture = british_bahamian }
+					}
+				}
+				FROM = { change_primary_culture = british_bahamian }
+			}
+
+			# British Eastern America - American
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_eastern_america
+							NOT = {
+								OR = {
+									area = great_valley_area #Virginia
+									area = carolinas_area #North Carolina
+									area = south_carolina_area #South Carolina
+									area = american_georgia_area #Georgia
+								}
+							}
+						}
+						NOT = { primary_culture = american }
+					}
+				}
+				FROM = { change_primary_culture = american add_accepted_culture = dixie }
+			}
+			
+			# British Eastern America - Dixie
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_eastern_america
+							OR = {
+								area = great_valley_area # Virginia
+								area = carolinas_area # North Carolina
+								area = south_carolina_area # South Carolina
+								area = american_georgia_area # Georgia
+							}
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie add_accepted_culture = american }
+			}
+
+			# British Mississippi - American
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_mississippi
+							NOT = {
+								OR = {
+									area = choctaw_area # Tennessee
+									area = mississippi_area # Mississippi
+									area = alabama_area # Alabama
+								}
+							}
+						}
+						NOT = { primary_culture = american }
+					}
+				}
+				FROM = { change_primary_culture = american add_accepted_culture = dixie }
+			}
+			
+			# British Mississippi - Dixie
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_mississippi
+							OR = {
+								area = choctaw_area # Tennessee
+								area = mississippi_area # Mississippi
+								area = alabama_area # Alabama
+							}
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie add_accepted_culture = american }
+			}
+			
+			# British Great Lakes
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_great_lakes
+						}
+						NOT = { primary_culture = american }
+					}
+				}
+				FROM = { change_primary_culture = american }
+			}
+
+			# British Louisiana - American
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_louisiana
+							NOT = {
+								OR = {
+									area = lower_plains_area #Oklahoma
+									area = ozarks_area #Arkansas
+									AND = {
+										area = lower_louisiana_area #Louisiana
+										NOT = { province_id = 893 }
+									}
+								}
+							}
+						}
+						NOT = { primary_culture = american }
+					}
+				}
+				FROM = { change_primary_culture = american add_accepted_culture = dixie }
+			}
+			
+			# British Louisiana - Dixie
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_louisiana
+							OR = {
+								area = lower_plains_area #Oklahoma
+								area = ozarks_area #Arkansas
+								AND = { 
+									area = lower_louisiana_area #Louisiana
+									NOT = { province_id = 893 }
+								}
+							}
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie add_accepted_culture = american }
+			}
+			
+			# British Florida
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_florida
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie }
+			}
+			
+			# British Texas
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_texas
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie }
+			}
+			
+			# British California
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_california
+						}
+						NOT = { primary_culture = american }
+					}
+				}
+				FROM = { change_primary_culture = american }
+			}
+			
+			# British Canada
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_acadia
+								colonial_region = colonial_canada
+								colonial_region = colonial_newfoundland
+							}
+						}
+						NOT = { primary_culture = canadian }
+					}
+				}
+				FROM = { change_primary_culture = canadian }
+			}
+			
+			# British Hudson Bay
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_hudson_bay
+								colonial_region = colonial_northwest_territories
+							}
+						}
+						NOT = { primary_culture = canadian }
+					}
+				}
+				FROM = { change_primary_culture = canadian }
+			}
+			
+			# British Cascadia
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_cascadia
+						}
+						NOT = { primary_culture = canadian }
+					}
+				}
+				FROM = { change_primary_culture = canadian }
+			}
+
+			# British Alaska
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_alaska
+						}
+						NOT = { primary_culture = american  }
+					}
+				}
+				FROM = { change_primary_culture = american  }
+			}
+
+			# British Mexico
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_mexico
+						}
+						NOT = { primary_culture = dixie }
+					}
+				}
+				FROM = { change_primary_culture = dixie }
+			}
+
+			# British South Africa
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_cape
+						}
+						NOT = { primary_culture = british_south_african }
+					}
+				}
+				FROM = { change_primary_culture = british_south_african }
+			}
+
+			# British Australia
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_australia
+						}
+						NOT = { primary_culture = aussie }
+					}
+				}
+				FROM = { change_primary_culture = aussie }
+			}
+
+			# British New Zealand
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_polynesia
+						}
+						NOT = { primary_culture = kiwi }
+					}
+				}
+				FROM = { change_primary_culture = kiwi }
+			}
+
+			# British Papua
+			if = {
+				limit = {
+					FROM = {
+						culture_group = british
+						capital_scope = {
+							colonial_region = colonial_papua
+						}
+						NOT = { primary_culture = aussie }
+					}
+				}
+				FROM = { change_primary_culture = aussie }
+			}
+
+			### FRENCH
+
+			# French Guyana
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							colonial_region = colonial_guyana
+						}
+						NOT = { primary_culture = french_guyanese }
+					}
+				}
+				FROM = { change_primary_culture = french_guyanese }
+			}
+			
+			# French Hispaniola
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							colonial_region = colonial_hispaniola
+						}
+						NOT = { primary_culture = haitian }
+					}
+				}
+				FROM = { change_primary_culture = haitian }
+			}
+			
+			# French Antilles
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = { colonial_region = colonial_the_carribean }
+						NOT = { primary_culture = martinique }
+					}
+				}
+				FROM = { change_primary_culture = martinique }
+			}
+
+			# French Mississippi
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							colonial_region = colonial_mississippi
+						}
+						NOT = { primary_culture = louisianans }
+					}
+				}
+				FROM = { change_primary_culture = louisianans }
+			}
+
+			# French Great Lakes
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							colonial_region = colonial_great_lakes
+						}
+						NOT = { primary_culture = louisianans }
+					}
+				}
+				FROM = { change_primary_culture = louisianans }
+			}
+
+			# French Louisiana
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							colonial_region = colonial_louisiana
+						}
+						NOT = { primary_culture = louisianans }
+					}
+				}
+				FROM = { change_primary_culture = louisianans }
+			}
+			
+			# French Canada
+			if = {
+				limit = {
+					FROM = {
+						culture_group = french
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_acadia
+								colonial_region = colonial_canada
+								colonial_region = colonial_newfoundland
+							}
+						}
+						NOT = { primary_culture = quebecois }
+					}
+				}
+				FROM = { change_primary_culture = quebecois }
+			}
+
+			### DUTCH
+
+			# Dutch Guyana
+			if = {
+				limit = {
+					FROM = {
+						culture_group = low_franconian
+						capital_scope = { colonial_region = colonial_guyana }
+						NOT = { primary_culture = surinamer }
+					}
+				}
+				FROM = { change_primary_culture = surinamer }
+			}
+
+			# Dutch Antilles
+			if = {
+				limit = {
+					FROM = {
+						culture_group = low_franconian
+						capital_scope = { colonial_region = colonial_the_carribean }
+						NOT = { primary_culture = antillianen }
+					}
+				}
+				FROM = { change_primary_culture = antillianen }
+			}
+
+			# Dutch Eastern America
+			if = {
+				limit = {
+					FROM = {
+						culture_group = low_franconian
+						capital_scope = { colonial_region = colonial_eastern_america }
+						NOT = { primary_culture = jersey_dutch }
+					}
+				}
+				FROM = { change_primary_culture = jersey_dutch }
+			}
+
+			# Dutch Cape
+			if = {
+				limit = {
+					FROM = {
+						culture_group = low_franconian
+						capital_scope = { colonial_region = colonial_cape }
+						NOT = { primary_culture = afrikaner_culture }
+					}
+				}
+				FROM = { change_primary_culture = afrikaner_culture }
+			}
+
+			### NORDIC
+
+			#Nordic Canada
+			if = {
+				limit = {
+					FROM = {
+						culture_group = scandinavian
+						capital_scope = { 
+							OR = {
+								colonial_region = colonial_acadia
+								colonial_region = colonial_canada
+								colonial_region = colonial_newfoundland
+							}
+						}
+						NOT = { primary_culture = vinlandic }
+					}
+				}
+				FROM = { change_primary_culture = vinlandic }
+			}
+
+			#Nordic Greenland
+			if = {
+				limit = {
+					FROM = {
+						culture_group = scandinavian
+						capital_scope = { colonial_region = colonial_greenland }
+						NOT = { primary_culture = greenlandic }
+					}
+				}
+				FROM = { change_primary_culture = greenlandic }
+			}
+
+			### EAST SLAVIC
+
+			#East Slavic Alaska
+			if = {
+				limit = {
+					FROM = {
+						culture_group = east_slavic
+						capital_scope = {
+							colonial_region = colonial_alaska
+						}
+						NOT = { primary_culture = russo_alaskan }
+					}
+				}
+				FROM = { change_primary_culture = russo_alaskan }
+			}
+
+			### GERMANIC
+
+			# Germanic Brazil
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = { colonial_region = colonial_brazil }
+						NOT = { primary_culture = hunsrik }
+					}
+				}
+				FROM = { change_primary_culture = hunsrik }
+			}
+			
+			# Germanic La Plata, Chile
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_la_plata
+								colonial_region = colonial_chile
+							}
+						}
+						NOT = { primary_culture = argentiner }
+					}
+				}
+				FROM = { change_primary_culture = argentiner }
+			}
+			
+			# Germanic Colombia, Venezuela, Ecuador
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_colombia
+								colonial_region = colonial_venezuela
+								colonial_region = colonial_ecuador
+							}
+						}
+						NOT = { primary_culture = deutschkolumbian }
+					}
+				}
+				FROM = { change_primary_culture = deutschkolumbian }
+			}
+			
+			# Germanic Guyana
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_guyana
+						}
+						NOT = { primary_culture = guyanisch }
+					}
+				}
+				FROM = { change_primary_culture = guyanisch }
+			}
+			
+			# Germanic Peru, Bolivia
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_peru
+								colonial_region = colonial_bolivia
+							}
+						}
+						NOT = { primary_culture = peruanisch }
+					}
+				}
+				FROM = { change_primary_culture = peruanisch }
+			}
+			
+			# Germanic Cuba
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_cuba
+						}
+						NOT = { primary_culture = kubaner }
+					}
+				}
+				FROM = { change_primary_culture = kubaner }
+			}
+			# Germanic Hati
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_hispaniola
+						}
+						NOT = { primary_culture = haitianisch }
+					}
+				}
+				FROM = { change_primary_culture = haitianisch }
+			}
+			# Germanic Antillies
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_the_carribean
+						}
+						NOT = { primary_culture = antillen }
+					}
+				}
+				FROM = { change_primary_culture = antillen }
+			}
+			
+			# Germanic Mexico
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {							
+							OR = {
+								colonial_region = colonial_mexico
+								colonial_region = colonial_central_america
+							}
+						}
+						NOT = { primary_culture = mexikaner }
+					}
+				}
+				FROM = { change_primary_culture = mexikaner }
+			}
+			
+			# Germanic America
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_louisiana
+								colonial_region = colonial_eastern_america
+								colonial_region = colonial_mississippi
+								colonial_region = colonial_great_lakes
+								colonial_region = colonial_florida
+							}
+						}
+						NOT = { primary_culture = neues_deutsch }
+					}
+				}
+				FROM = { change_primary_culture = neues_deutsch }
+			}
+
+			# Germanic Texas
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_texas
+						}
+						NOT = { primary_culture = texasdeutsch }
+					}
+				}
+				FROM = { change_primary_culture = texasdeutsch }
+			}
+			# Germanic California
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = { 
+							OR = {
+								colonial_region = colonial_california
+								colonial_region = colonial_cascadia
+							}
+						}
+						NOT = { primary_culture = kalifornier }
+					}
+				}
+				FROM = { change_primary_culture = kalifornier }
+			}
+			
+			# Germanic Canada
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_acadia
+								colonial_region = colonial_canada
+								colonial_region = colonial_newfoundland
+							}
+						}
+						NOT = { primary_culture = kanadisch }
+					}
+				}
+				FROM = { change_primary_culture = kanadisch }
+			}
+			
+			# Germanic Hudson Bay
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_hudson_bay
+								colonial_region = colonial_northwest_territories
+							}
+						}
+						NOT = { primary_culture = nordlander }
+					}
+				}
+				FROM = { change_primary_culture = nordlander }
+			}
+			
+			# Germanic Alaska
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = { colonial_region = colonial_alaska }
+						NOT = { primary_culture = alaskaner }
+					}
+				}
+				FROM = { change_primary_culture = alaskaner }
+			}
+			
+			# Germanic Cape
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = { colonial_region = colonial_cape }
+						NOT = { primary_culture = afrikaner }
+					}
+				}
+				FROM = { change_primary_culture = afrikaner }
+			}
+			
+			# Germanic Australia
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							OR = {
+								colonial_region = colonial_australia
+								colonial_region = colonial_papua
+							}
+						}
+						NOT = { primary_culture = australier }
+					}
+				}
+				FROM = { change_primary_culture = australier }
+			}
+			
+			# Germanic New Zealand
+			if = {
+				limit = {
+					FROM = {
+						culture_group = germanic
+						capital_scope = {
+							colonial_region = colonial_polynesia
+						}
+						NOT = { 
+							primary_culture = seelander
+						}
+					}
+				}
+				FROM = { change_primary_culture = seelander }
+			}
+
+			### ITALIAN
+
+			### CHINESE
+
+			### JAPANESE
+		}
+	}
+}
+
+# Cultural Divergence - Province Culture
+country_event = {
+	id = VU_COL_Events.03
+	title = VU_COL_Events.03.t
+	desc = VU_COL_Events.03.d
+	picture = CULTURE_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		# Nation needs to have a colonial culture
+		FROM = {
+			OR = {
+				# Iberian
+				primary_culture = brazilian
+				primary_culture = platinean
+				primary_culture = peruvian
+				primary_culture = colombian
+				primary_culture = centroamerican
+				primary_culture = cuban
+				primary_culture = dominican
+				primary_culture = iberian_caribbean
+				primary_culture = mexican
+				primary_culture = floridan
+				primary_culture = tejano
+				primary_culture = californio
+				
+				# British
+				primary_culture = british_guyanese
+				primary_culture = british_belizeans
+				primary_culture = british_bahamian
+				primary_culture = american
+				primary_culture = dixie
+				primary_culture = canadian
+				primary_culture = british_south_african
+				primary_culture = aussie
+				primary_culture = kiwi
+				
+				# French
+				primary_culture = french_guyanese
+				primary_culture = haitian
+				primary_culture = martinique
+				primary_culture = louisianans
+				primary_culture = quebecois
+
+				# Dutch
+				primary_culture = surinamer
+				primary_culture = antillianen
+				primary_culture = jersey_dutch
+				primary_culture = afrikaner_culture
+				
+				# Nordic
+				primary_culture = vinlandic
+				primary_culture = greenlandic
+				
+				# East Slavic
+				primary_culture = russo_alaskan
+				
+				# Germanic
+				primary_culture = hunsrik
+				primary_culture = argentiner
+				primary_culture = deutschkolumbian
+				primary_culture = peruanisch
+				primary_culture = guyanisch
+				primary_culture = texasdeutsch
+				primary_culture = haitianisch
+				primary_culture = kubaner
+				primary_culture = antillen
+				primary_culture = mexikaner
+				primary_culture = nordlander
+				primary_culture = kanadisch
+				primary_culture = kalifornier
+				primary_culture = neues_deutsch
+				primary_culture = alaskaner
+				primary_culture = afrikaner
+				primary_culture = australier
+				primary_culture = seelander
+
+				# Italian
+
+				# Chinese
+
+				# Japanese
+			}
+		}
+		
+		# Nation needs to own a province with culture that can diverge...
+		any_owned_province = {
+			OR = {
+				culture_group = iberian
+				culture_group = british
+				culture_group = french
+				culture_group = low_franconian # Dutch
+				culture_group = scandinavian # Nordic
+				culture_group = east_slavic
+				culture_group = germanic
+			}
+			# ...that hasn't already diverged
+			NOT = {
+				OR = {
+					# Iberian
+					culture = brazilian
+					culture = platinean
+					culture = peruvian
+					culture = colombian
+					culture = centroamerican
+					culture = cuban
+					culture = dominican
+					culture = iberian_caribbean
+					culture = mexican
+					culture = floridan
+					culture = tejano
+					culture = californio
+					
+					# British
+					culture = british_guyanese
+					culture = british_belizeans
+					culture = british_bahamian
+					culture = american
+					culture = dixie
+					culture = canadian
+					culture = british_south_african
+					culture = aussie
+					culture = kiwi
+					
+					# French
+					culture = french_guyanese
+					culture = haitian
+					culture = martinique
+					culture = louisianans
+					culture = quebecois
+
+					#Dutch
+					culture = surinamer
+					culture = antillianen
+					culture = jersey_dutch
+					culture = afrikaner_culture
+					
+					#Nordic
+					culture = vinlandic
+					culture = greenlandic
+					
+					#East Slavic
+					culture = russo_alaskan
+					
+					# Germanic
+					culture = hunsrik
+					culture = argentiner
+					culture = deutschkolumbian
+					culture = peruanisch
+					culture = guyanisch
+					culture = texasdeutsch
+					culture = haitianisch
+					culture = kubaner
+					culture = antillen
+					culture = mexikaner
+					culture = nordlander
+					culture = kanadisch
+					culture = kalifornier
+					culture = neues_deutsch
+					culture = alaskaner
+					culture = afrikaner
+					culture = australier
+					culture = seelander
+					# Italian
+
+					# Chinese
+
+					# Japanese
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = { months = 6 }
+
+	option = {
+		name = VU_COL_Events.03.a
+		
+		hidden_effect = {
+			### IBERIAN
+			
+			# Iberian Brazil
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_brazil
+					is_colony = no
+					NOT = { culture = brazilian }
+				}
+				change_culture = brazilian
+			}
+			
+			# Iberian La Plata, Chile
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					OR = {
+						colonial_region = colonial_la_plata
+						colonial_region = colonial_chile
+					}
+					is_colony = no
+					NOT = { culture = platinean }
+				}
+				change_culture = platinean
+			}
+			
+			# Iberian Peru, Bolivia
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					OR = {
+						colonial_region = colonial_peru
+						colonial_region = colonial_bolivia
+					}
+					is_colony = no
+					NOT = { culture = peruvian }
+				}
+				change_culture = peruvian
+			}
+			
+			# Iberian Colombia, Venezuela, Ecuador
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					OR = {
+						colonial_region = colonial_colombia
+						colonial_region = colonial_venezuela
+						colonial_region = colonial_ecuador
+					}
+					is_colony = no
+					NOT = { culture = colombian }
+				}
+				change_culture = colombian
+			}
+			
+			# Iberian Central America
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_central_america
+					is_colony = no
+					NOT = { culture = centroamerican }
+				}
+				change_culture = centroamerican
+			}
+			
+			# Iberian Cuba
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_cuba
+					is_colony = no
+					NOT = { culture = cuban }
+				}
+				change_culture = cuban
+			}
+			
+			# Iberian Hispaniola
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_hispaniola
+					is_colony = no
+					NOT = { culture = dominican }
+				}
+				change_culture = dominican
+			}
+			
+			# Iberian Antilles
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_the_carribean
+					is_colony = no
+					NOT = { culture = iberian_caribbean }
+				}
+				change_culture = iberian_caribbean
+			}
+			
+			# Iberian Mexico
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_mexico
+					is_colony = no
+					NOT = { culture = mexican }
+				}
+				change_culture = mexican
+			}
+			
+			# Iberian Florida
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_florida
+					is_colony = no
+					NOT = { culture = floridan }
+				}
+				change_culture = floridan
+			}
+			
+			# Iberian Texan
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_texas
+					is_colony = no
+					NOT = { culture = tejano }
+				}
+				change_culture = tejano
+			}
+
+			# Iberian California
+			every_owned_province = {
+				limit = {
+					culture_group = iberian
+					colonial_region = colonial_california
+					is_colony = no
+					NOT = { culture = californio }
+				}
+				change_culture = californio
+			}
+			
+			### BRITISH
+
+			# British Guyana
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_guyana
+					is_colony = no
+					NOT = { culture = british_guyanese }
+				}
+				change_culture = british_guyanese
+			}
+			
+			# British Central America
+			every_owned_province = {
+				limit = {
+					colonial_region = colonial_central_america
+					is_colony = no
+					culture_group = british
+					NOT = { culture = british_belizeans }
+				}
+				change_culture = british_belizeans
+			}
+			
+			# British Antilles
+			every_owned_province = {
+				limit = {
+					colonial_region = colonial_the_carribean
+					is_colony = no
+					culture_group = british
+					NOT = { culture = british_bahamian }
+				}
+				change_culture = british_bahamian
+			}
+
+			# British Eastern America - American
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_eastern_america
+					NOT = {
+						OR = {
+							area = great_valley_area # Virginia
+							area = carolinas_area # North Carolina
+							area = south_carolina_area # South Carolina
+							area = american_georgia_area # Georgia
+						}
+					}
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american 
+			}
+
+			# British Eastern America - Dixie
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_eastern_america
+					OR = {
+						area = great_valley_area # Virginia
+						area = carolinas_area # North Carolina
+						area = south_carolina_area # South Carolina
+						area = american_georgia_area # Georgia
+					}
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie
+			}
+
+			# British Mississippi - American
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_mississippi
+					NOT = {
+						OR = {
+							area = choctaw_area # Tennessee
+							area = mississippi_area # Mississippi
+							area = alabama_area # Alabama
+						}
+					}
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american
+			}
+
+			# British Mississippi - Dixie
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_mississippi
+					OR = {
+						area = choctaw_area # Tennessee
+						area = mississippi_area # Mississippi
+						area = alabama_area # Alabama
+					}
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie
+			}
+
+			# British Great Lakes
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_great_lakes
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american
+			}
+
+			# British Louisiana - American
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_louisiana
+					NOT = {
+						OR = {
+							area = lower_plains_area # Oklahoma
+							area = ozarks_area # Arkansas
+							area = lower_louisiana_area # Louisiana
+						}
+					}
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american
+			}
+
+			# British Louisiana - Dixie
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_louisiana
+					OR = {
+						area = lower_plains_area # Oklahoma
+						area = ozarks_area # Arkansas
+						area = lower_louisiana_area # Louisiana
+					}
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie
+			}
+
+			# British Florida
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_florida
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie
+			}
+
+			# British Texas
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_texas
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie
+			}
+
+			# British California
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_california
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american
+			}
+
+			# British Alaska
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_alaska
+					is_colony = no
+					NOT = { culture = american }
+				}
+				change_culture = american
+			}
+
+			# British Mexico
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_mexico
+					is_colony = no
+					NOT = { culture = dixie }
+				}
+				change_culture = dixie 
+			}
+
+			# British Canada
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					OR = {
+						colonial_region = colonial_acadia
+						colonial_region = colonial_canada
+						colonial_region = colonial_newfoundland
+					}
+					is_colony = no
+					NOT = { culture = canadian }
+				}
+				change_culture = canadian
+			}
+
+			# British Hudson Bay
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					OR = {
+						colonial_region = colonial_hudson_bay
+						colonial_region = colonial_northwest_territories
+					}
+					is_colony = no
+					NOT = { culture = canadian }
+				}
+				change_culture = canadian
+			}
+			
+			# British Cascadia
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_cascadia
+					is_colony = no
+					NOT = { culture = canadian }
+				}
+				change_culture = canadian
+			}
+			
+			# British Cape
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_cape
+					is_colony = no
+					NOT = { culture = british_south_african }
+				}
+				change_culture = british_south_african
+			}
+			
+			# British Australia
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_australia
+					is_colony = no
+					NOT = { culture = aussie }
+				}
+				change_culture = aussie
+			}
+			
+			# British New Zealand
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_polynesia
+					is_colony = no
+					NOT = { culture = kiwi }
+				}
+				change_culture = kiwi
+			}
+			
+			# British Papua
+			every_owned_province = {
+				limit = {
+					culture_group = british
+					colonial_region = colonial_papua
+					is_colony = no
+					NOT = { culture = aussie }
+				}
+				change_culture = aussie
+			}
+			
+			### FRENCH
+			
+			# French Guyana
+			every_owned_province = {
+				limit = {
+					colonial_region = colonial_guyana
+					is_colony = no
+					culture_group = french
+					NOT = { culture = french_guyanese }
+				}
+				change_culture = french_guyanese
+			}
+			
+			# French Hispaniola
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					colonial_region = colonial_hispaniola
+					is_colony = no
+					NOT = { culture = haitian }
+				}
+				change_culture = haitian
+			}
+			
+			# French Antilles
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					colonial_region = colonial_the_carribean
+					is_colony = no
+					NOT = { culture = martinique }
+				}
+				change_culture = martinique
+			}
+			
+			#French Mississippi
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					colonial_region = colonial_mississippi
+					is_colony = no
+					NOT = { culture = louisianans }
+				}
+				change_culture = louisianans
+			}
+			
+			#French Great Lakes
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					colonial_region = colonial_great_lakes
+					is_colony = no
+					NOT = { culture = louisianans }
+				}
+				change_culture = louisianans
+			}
+			
+			#French Louisiana
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					colonial_region = colonial_louisiana
+					is_colony = no
+					NOT = { culture = louisianans }
+				}
+				change_culture = louisianans
+			}
+			
+			#French Canada
+			every_owned_province = {
+				limit = {
+					culture_group = french
+					OR = {
+						colonial_region = colonial_acadia
+						colonial_region = colonial_canada
+						colonial_region = colonial_newfoundland
+					}
+					is_colony = no
+					NOT = { culture = quebecois }
+				}
+				change_culture = quebecois
+			}
+			
+			### DUTCH
+			
+			# Dutch Guyana
+			every_owned_province = {
+				limit = {
+					culture_group = low_franconian
+					colonial_region = colonial_guyana
+					is_colony = no
+					NOT = { culture = surinamer }
+				}
+				change_culture = surinamer
+			}
+
+			# Dutch Antilles
+			every_owned_province = {
+				limit = {
+					culture_group = low_franconian
+					colonial_region = colonial_the_carribean
+					is_colony = no
+					NOT = { culture = antillianen }
+				}
+				change_culture = antillianen
+			}
+			
+			# Dutch Eastern America
+			every_owned_province = {
+				limit = {
+					culture_group = low_franconian
+					colonial_region = colonial_eastern_america
+					is_colony = no
+					NOT = { culture = jersey_dutch }
+				}
+				change_culture = jersey_dutch
+			}
+			
+			# Dutch Cape
+			every_owned_province = {
+				limit = {
+					culture_group = low_franconian
+					colonial_region = colonial_cape
+					is_colony = no
+					NOT = { culture = afrikaner_culture }
+				}
+				change_culture = afrikaner_culture
+			}
+			
+			### NORDIC
+			
+			#Nordic Canada
+			every_owned_province = {
+				limit = {
+					OR = {
+						colonial_region = colonial_acadia
+						colonial_region = colonial_canada
+						colonial_region = colonial_newfoundland
+					}
+					is_colony = no
+					culture_group = scandinavian
+					NOT = { culture = vinlandic }
+				}
+				change_culture = vinlandic
+			}
+			
+			#Nordic to Greenlandic
+			every_owned_province = {
+				limit = {
+					culture_group = scandinavian
+					colonial_region = colonial_greenland
+					is_colony = no
+					NOT = { culture = greenlandic }
+				}
+				change_culture = greenlandic
+			}
+			
+			### EAST SLAVIC
+			
+			#East Slavic Alaska
+			every_owned_province = {
+				limit = {
+					culture_group = east_slavic
+					colonial_region = colonial_alaska
+					is_colony = no
+					NOT = { culture = russo_alaskan }
+				}
+				change_culture = russo_alaskan
+			}
+
+			### GERMANIC
+
+			# Germanic Brazil
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_brazil
+					is_colony = no
+					NOT = { culture = hunsrik }
+				}
+				change_culture = hunsrik
+			}
+			
+			# Germanic La Plata, Chile
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_la_plata
+						colonial_region = colonial_chile
+					}
+					is_colony = no
+					NOT = { culture = argentiner }
+				}
+				change_culture = argentiner
+			}
+			
+			# Germanic Colombia, Venezuela, Ecuador
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_colombia
+						colonial_region = colonial_venezuela
+						colonial_region = colonial_ecuador
+					}
+					is_colony = no
+					NOT = { culture = deutschkolumbian }
+				}
+				change_culture = deutschkolumbian
+			}
+			
+			# Germanic Peru, Bolivia
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_peru
+						colonial_region = colonial_bolivia
+					}
+					is_colony = no
+					NOT = { culture = peruanisch }
+				}
+				change_culture = peruanisch
+			}
+
+			# Germanic Guyana
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_guyana
+					is_colony = no
+					NOT = { culture = guyanisch }
+				}
+				change_culture = guyanisch
+			}
+			
+			# Germanic Cuba
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_cuba
+					is_colony = no
+					NOT = { culture = kubaner }
+				}
+				change_culture = kubaner
+			}
+
+			# Germanic Hati
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_hispaniola
+					is_colony = no
+					NOT = { culture = haitianisch }
+				}
+				change_culture = haitianisch
+			}
+
+			# Germanic Antillies
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_the_carribean
+					is_colony = no
+					NOT = { culture = antillen }
+				}
+				change_culture = antillen
+			}
+			
+			# Germanic Mexico
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_mexico
+						colonial_region = colonial_central_america
+					}
+					is_colony = no
+					NOT = { culture = mexikaner }
+				}
+				change_culture = mexikaner
+			}
+			
+			# Germanic Eastern America
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_eastern_america
+						colonial_region = colonial_mississippi
+						colonial_region = colonial_great_lakes
+						colonial_region = colonial_louisiana
+						colonial_region = colonial_florida
+					}
+					is_colony = no
+					NOT = { culture = neues_deutsch }
+				}
+				change_culture = neues_deutsch
+			}
+
+			# Germanic Texas
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_texas
+					is_colony = no
+					NOT = { culture = texasdeutsch }
+				}
+				change_culture = texasdeutsch
+			}
+
+			# Germanic California
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_california
+						colonial_region = colonial_cascadia
+					}
+					is_colony = no
+					NOT = { culture = kalifornier }
+				}
+				change_culture = kalifornier
+			}
+			
+			# Germanic Canada
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_acadia
+						colonial_region = colonial_canada
+						colonial_region = colonial_newfoundland
+					}
+					is_colony = no
+					NOT = { culture = kanadisch }
+				}
+				change_culture = kanadisch
+			}
+			
+			# Germanic Hudson Bay
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_hudson_bay
+						colonial_region = colonial_northwest_territories
+					}
+					is_colony = no
+					NOT = { culture = nordlander }
+				}
+				change_culture = nordlander
+			}
+			
+			# Germanic Alaska
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_alaska
+					is_colony = no
+					NOT = { culture = alaskaner }
+				}
+				change_culture = alaskaner
+			}
+			
+			# Germanic Cape
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_cape
+					is_colony = no
+					NOT = { culture = afrikaner }
+				}
+				change_culture = afrikaner
+			}
+			
+			# Germanic Australia
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					OR = {
+						colonial_region = colonial_australia
+						colonial_region = colonial_papua
+					}
+					is_colony = no
+					NOT = { culture = australier }
+				}
+				change_culture = australier
+			}
+			
+			# Germanic New Zealand
+			every_owned_province = {
+				limit = {
+					culture_group = germanic
+					colonial_region = colonial_polynesia
+					is_colony = no
+					NOT = { culture = seelander }
+				}
+				change_culture = seelander
+			}
+
+			### ITALIAN
+
+			### CHINESE
+
+			### JAPANESE
+		}
+	}
+}
+
+# No Hard to Colonise Claims
+country_event = {
+	id = VU_COL_Events.04
+	title = VU_COL_Events.04.t
+	desc = VU_COL_Events.04.d
+	picture = COURT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+	    # If player selected to disable 'Hard to Colonise' this event will NEVER fire.
+		NOT = { has_global_flag = malaria_turned_off }
+		
+		# Diplomatic Technology 47 (~1850s) will unlock malaria provinces, preventing this event.
+		FROM = { NOT = { dip_tech = 47 } }
+		
+		# If the province isn't from the same continent as the owner's capital, the event will trigger.
+		# Colonial nations should still be affected - at least before their independence.
+		any_province = {
+			has_province_modifier = vu_malaria_present
+			is_claim = ROOT
+			OR = {
+				NOT = { same_continent = ROOT }
+				AND = { 
+					FROM = { is_colonial_nation = yes }
+					FROM = { NOT = { is_subject_of_type = self_governing_dominion_vu } }
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = { months = 6 }
+
+	# Remove
+	option = {
+		name = VU_COL_Events.04.a
+		
+		hidden_effect = {
+			every_claimed_province = {
+				limit = {
+					has_province_modifier = vu_malaria_present
+					OR = {
+						NOT = { same_continent = ROOT }
+						FROM = { is_colonial_nation = yes }
+					}
+				}
+				remove_claim = ROOT
+			}
+		}
+	}
+}

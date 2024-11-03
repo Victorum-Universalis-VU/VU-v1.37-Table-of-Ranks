@@ -1,0 +1,681 @@
+#VU 1.36 added by Quonton
+RMN_missions_1 = {
+	slot = 1
+	ai = yes
+	generic = no
+	potential = {
+		tag = RMN
+	}
+	has_country_shield = yes
+	
+	rmn_vu_recover_balkans = {
+		icon = rmn_vu_recover_balkans
+		required_missions = { rmn_vu_romanian_unity }
+		position = 2
+		provinces_to_highlight = {
+			region = balkan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			balkan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			anatolia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			balkan_region = { add_nationalism = -10 }
+		}
+	}
+
+	rmn_vu_recover_anatolia = {
+		icon = rmn_vu_recover_anatolia
+		required_missions = { rmn_vu_recover_balkans }
+		position = 3
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			anatolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			mashriq_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			egypt_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			anatolia_region = { add_nationalism = -10 }
+		}
+	}
+}
+
+RMN_missions_2 = {
+	slot = 2
+	ai = yes
+	generic = no
+	potential = {
+		tag = RMN
+	}
+	has_country_shield = yes
+	
+	rmn_vu_romanian_unity = {
+		icon = rmn_vu_romanian_unity
+		required_missions = {  }
+		position = 1
+		trigger = {
+			always = yes
+		}
+		effect = {
+			carpathia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			balkan_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			341 = { add_permanent_claim = ROOT }
+		}
+	}
+
+	rmn_vu_scipio_legacy = {
+		icon = rmn_vu_scipio_legacy
+		required_missions = { rmn_vu_romanian_unity }
+		position = 3
+		trigger = {
+			owns = 341
+		}
+		effect = {
+			maghreb_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			libya_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			341 = {
+				change_culture = afro_roman
+				change_religion = ROOT
+				add_base_tax = 5
+				add_base_production = 5
+				add_base_manpower = 5
+			}
+			add_accepted_culture = afro_roman
+			custom_tooltip = rmn_conversion_of_africa
+			set_country_flag = rmn_conversion_of_africa_flag
+		}
+	}
+
+	rmn_vu_revover_hispania = {
+		icon = rmn_vu_revover_hispania
+		required_missions = { rmn_vu_scipio_legacy }
+		position = 4
+		provinces_to_highlight = {
+			region = iberia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			iberia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = { 
+			    name = rmn_hispania_tercio
+			    duration = -1  
+			}
+			iberia_region = { add_nationalism = -10 }
+		}
+	}
+}
+
+RMN_missions_3 = {
+	slot = 3
+	ai = yes
+	generic = no
+	potential = {
+		tag = RMN
+	}
+	has_country_shield = yes
+	
+	rmn_vu_petit_paris = {
+		icon = rmn_vu_petit_paris
+		required_missions = {  }
+		position = 1
+		trigger = {
+			capital_scope = { development = 30 }
+		}
+		effect = {
+			add_historical_friend = FRA
+			add_country_modifier = { 
+  				name = rmn_romanian_dev
+    			duration = -1  
+			}
+		}
+	}
+
+	rmn_vu_recover_panonia = {
+		icon = rmn_vu_recover_panonia
+		required_missions = { rmn_vu_romanian_unity }
+		position = 2
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			carpathia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			italy_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			carpathia_region = { add_nationalism = -10 }
+		}
+	}
+
+	rmn_vu_revover_italy = {
+		icon = rmn_vu_revover_italy
+		required_missions = { rmn_vu_recover_panonia }
+		position = 3
+		provinces_to_highlight = {
+			region = italy_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			#Would like to make the boarder better, but doing so would take so much fucking time so fuck it
+			austria_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			south_german_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = { area = franconia_area}
+				}
+				add_permanent_claim = ROOT
+			}
+			italy_region = { add_nationalism = -10 }
+		}
+	}
+
+	rmn_vu_eagle_rising = {
+		icon = rmn_vu_eagle_rising
+		required_missions = { rmn_vu_revover_hispania rmn_vu_revover_italy rmn_vu_beyond_channel }
+		position = 5
+		trigger = {
+			prestige = 75
+			legitimacy_equivalent = 70
+			stability = 1
+		}
+		effect = {
+			118 = {
+				move_capital_effect = yes
+			}
+			restore_country_name_effect = yes
+			change_tag = ROM
+			on_change_tag_effect = yes
+			custom_tooltip = roman_culture_provinces_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = latin
+					}
+					change_culture = roman
+				}
+			}
+			change_primary_culture = roman
+			swap_non_generic_missions = yes
+			custom_tooltip = restore_roman_empire_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_in_empire = no
+				}
+			}
+			set_government_rank = 9
+			add_prestige_or_monarch_power = { amount = 50 }
+			if = {
+				limit = {
+					has_dlc = "Domination"
+				}
+				if = {
+					limit = {
+						government = monarchy
+						is_revolutionary = no
+						NOT = { has_reform = celestial_empire }
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_empire_reform
+				}
+				else_if = {
+					limit = {
+						government = republic
+						is_revolutionary = no
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_republic_government
+				}
+				else = {
+					unlock_government_reform = {
+						government_reform = roman_empire_reform
+					}
+					unlock_government_reform = {
+						government_reform = roman_republic_government
+					}
+				}
+			}
+			add_core = 118 # Rome
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			country_event = { id = wal_events.11 }
+			set_country_flag = restored_rome_flag
+		}
+	}
+}
+
+RMN_missions_4 = {
+	slot = 4
+	ai = yes
+	generic = no
+	potential = {
+		tag = RMN
+	}
+	has_country_shield = yes
+	
+	rmn_vu_vive_la_france = {
+		icon = rmn_vu_vive_la_france
+		required_missions = { rmn_vu_petit_paris }
+		position = 2
+		trigger = {
+			alliance_with = FRA
+		}
+		effect = {
+		    custom_tooltip = rmn_french_cultural_union
+		    change_primary_culture = french_romanian
+		    hidden_effect = {
+		    	every_province = {
+		    		limit = { culture = romanian}
+		    		change_culture = french_romanian
+		    	}
+		    	every_province = {
+		    		limit = { culture = aromanian_culture}
+		    		change_culture = french_aromanian_culture
+		    	}
+		    	every_province = {
+		    		limit = { culture = transylvanian}
+		    		change_culture = french_transylvanian
+		    	}
+			}
+
+		}
+	}
+
+	rmn_vu_fraternity = {
+		icon = rmn_vu_fraternity
+		required_missions = { rmn_vu_vive_la_france }
+		position = 3
+		trigger = {
+			AND = {
+				FRA = {
+					trust = { who = ROOT value = 60 }
+					owes_favors = { 
+        				who = ROOT 
+        				value = 10 
+					}
+				}
+				total_development = FRA		
+				army_strength = {
+					who = FRA
+					value = 1.50
+				}
+				monthly_income = FRA
+			}
+		}
+		effect = {
+			custom_tooltip = rmn_roman_britain_conquest
+			hidden_effect = {
+				northern_england_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				cornwall_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				east_anglia_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				south_east_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				greater_london_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				yorkshire_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				east_midlands_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				west_midlands_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				south_wales_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				powys_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				deheubarth_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				wales_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+				lancashire_area = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			FRA = {
+				country_event = { 
+				    id = vu_romanian_events.3
+			    }
+			}
+		}
+	}
+
+	rmn_vu_beyond_channel = {
+		icon = rmn_vu_beyond_channel
+		required_missions = { rmn_vu_fraternity }
+		position = 4
+		provinces_to_highlight = {
+			OR = {
+				area = northern_england_area
+				area = cornwall_area
+				area = east_anglia_area
+				area = south_east_area
+				area = greater_london_area
+				area = yorkshire_area
+				area = east_midlands_area
+				area = west_midlands_area
+				area = south_wales_area
+				area = powys_area
+				area = deheubarth_area
+				area = wales_area
+				area = lancashire_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = rmn_roman_britain
+				northern_england_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				cornwall_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				east_anglia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				south_east_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				greater_london_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				yorkshire_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				east_midlands_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				west_midlands_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				south_wales_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				powys_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				deheubarth_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				wales_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				lancashire_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			british_isles_region = { add_nationalism = -10 }
+			custom_tooltip = rmn_conversion_of_england
+			set_country_flag = rmn_conversion_of_england_flag
+		}
+	}
+}
+
+RMN_missions_5 = {
+	slot = 5
+	ai = yes
+	generic = no
+	potential = {
+		tag = RMN
+	}
+	has_country_shield = yes
+	
+	rmn_vu_reconect_with_latin = {
+		icon = rmn_vu_reconect_with_latin
+		required_missions = {  }
+		position = 1
+		trigger = {
+			OR = {
+				FRA = { 
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				POR = { 
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				SPA = { 
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = { 
+  				name = rmn_latin_brothers
+    				duration = -1  
+			}
+		}
+	}
+
+	rmn_vu_loanwords = {
+		icon = rmn_vu_loanwords
+		required_missions = { rmn_vu_reconect_with_latin }
+		position = 2
+		trigger = {
+			any_ally = {
+				OR = {
+					culture_group = iberian
+					culture_group = latin
+					culture_group = french
+					culture_group = old_latin
+				}
+			}
+		}
+		effect = {
+		    custom_tooltip = rmn_dev_tax_in_latin_provinces
+		    set_country_flag = rmn_dev_tax_in_latin_provinces_flag
+		}
+	}
+
+	rmn_vu_sound_of_latin = {
+		icon = rmn_vu_sound_of_latin
+		required_missions = { rmn_vu_loanwords rmn_vu_fraternity }
+		position = 4
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = rmn_has_latin_accepted
+				AND = {
+					OR = { 	accepted_culture = ladin_culture accepted_culture = corsican_culture accepted_culture = friulian_culture accepted_culture = romanch_culture accepted_culture = lombard accepted_culture = tuscan accepted_culture = sardinian accepted_culture = romagnan accepted_culture = ligurian accepted_culture = venetian accepted_culture = dalmatian accepted_culture = neapolitan accepted_culture = piedmontese accepted_culture = sicilian accepted_culture = umbrian accepted_culture = maltese}
+					OR = { accepted_culture = mozarabic accepted_culture = sephardic accepted_culture = castillian accepted_culture = portugese accepted_culture = katsila accepted_culture = leonese accepted_culture = galician accepted_culture = aragonese accepted_culture = catalan accepted_culture = andalucian }
+					OR = { accepted_culture = anglois accepted_culture = lorraine_culture accepted_culture = auvergnat_culture accepted_culture = arpitan accepted_culture = angevin_culture accepted_culture = poitevin_culture accepted_culture = burgundian accepted_culture = wallonian accepted_culture = picard_culture accepted_culture = occitain accepted_culture = cosmopolitan_french accepted_culture = aquitaine accepted_culture = gascon accepted_culture = normand }
+					num_accepted_cultures = 3
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = { 
+  				name = rmn_sound_of_latin
+    				duration = -1  
+			}
+		}
+	}
+}

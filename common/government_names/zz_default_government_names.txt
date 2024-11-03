@@ -1,0 +1,302 @@
+# Fallback defaults
+# Will pick the first valid one it finds in list
+
+default_monarchy = {
+	rank = {
+		1 = LORDSHIP_VU
+		2 = BARONY_VU
+		3 = VISCOUNTY_VU
+		4 = COUNTY
+		5 = MARQUISATE_VU
+		6 = DUCHY_VU
+		7 = PRINCIPALITY_VU
+		8 = KINGDOM_VU
+		9 = EMPIRE_VU
+	}
+
+	ruler_male = {
+		1 = LORD
+		2 = BARON_VU
+		3 = VISCOUNT_VU
+		4 = COUNT_VU
+		5 = MARQUESS_VU
+		6 = DUKE_VU
+		7 = PRINCE_VU
+		8 = KING_VU
+		9 = EMPEROR_VU
+	}
+
+	ruler_female = {
+		1 = LADY_fem
+		2 = BARONESS_VU_fem
+		3 = VISCOUNTESS_VU_fem
+		4 = COUNTESS_VU_fem
+		5 = MARCHIONESS_VU_fem
+		6 = DUCHESS_fem
+		7 = PRINCESS_fem
+		8 = QUEEN_VU_fem
+		9 = EMPRESS_VU_fem
+	}
+
+	consort_male = {
+		1 = LORD
+		2 = BARON_CONSORT_VU
+		3 = VISCOUNT_CONSORT_VU
+		4 = COUNT_CONSORT_VU
+		5 = MARQUESS_CONSORT_VU
+		6 = DUKE_CONSORT_VU
+		7 = PRINCESS_CONSORT_VU_fem
+		8 = KING_CONSORT_VU
+		9 = PRINCE_CONSORT_VU
+	}
+
+	consort_female = {
+		1 = LADY_fem
+		2 = BARONESS_CONSORT_VU_fem
+		3 = VISCOUNTESS_CONSORT_VU_fem
+		4 = COUNTESS_CONSORT_VU_fem
+		5 = MARCHIONESS_CONSORT_VU_fem
+		6 = DUCHESS_CONSORT_VU_fem
+		7 = PRINCESS_CONSORT_VU_fem
+		8 = QUEEN_CONSORT_VU_fem
+		9 = EMPRESS_CONSORT_VU_fem
+	}
+
+	heir_male = {
+		1 = HONOURABLE_VU
+		2 = LORD
+		3 = LORD
+		4 = LORD
+		5 = LORD
+		6 = PRINCE_CONSORT_VU
+		7 = PRINCE_CONSORT_VU
+		8 = PRINCE_CONSORT_VU
+		9 = PRINCE_CONSORT_VU
+	}
+
+	heir_female = {
+		1 = DAME_VU_fem
+		2 = LADY_fem
+		3 = LADY_fem
+		4 = LADY_fem
+		5 = LADY_fem
+		6 = PRINCESS_CONSORT_VU_fem
+		7 = PRINCESS_CONSORT_VU_fem
+		8 = PRINCESS_CONSORT_VU_fem
+		9 = PRINCESS_CONSORT_VU_fem
+	}
+
+	#government_reform = monarchy_mechanic
+
+	trigger = {
+		has_reform = monarchy_mechanic
+		NOT = { 
+			has_reform = eue_lordship_reform
+			has_reform = eue_barony_reform
+			has_reform = eue_viscounty_reform
+			has_reform = eue_county_reform
+			has_reform = eng_earldom_reform
+			has_reform = eue_marquisate_reform
+			has_reform = eue_duchy_reform
+			has_reform = eue_principality_reform
+			has_reform = eue_kingdom_reform
+			has_reform = tanistry_reform
+			has_reform = irish_clann_reform
+			has_reform = irish_highkingdom_reform
+	    }
+		NOT = { 
+			tag = AGV
+			tag = ARA
+			tag = ARR
+			tag = ASU
+			tag = BAR
+			tag = BOH
+			tag = CAS
+			tag = CAT
+			tag = GAL
+			tag = LGD
+			tag = LON
+			tag = LUX
+			tag = MJO
+			tag = MNO
+			tag = NAV
+			tag = NAP
+			tag = NEV
+			tag = PIC
+			tag = PRO
+			tag = SAR
+			tag = SAV
+			tag = SIC
+			tag = SZO
+			tag = POR
+			tag = VAL
+		}
+	}
+}
+
+default_republic = {
+	rank = {
+		6 = REPUBLIC
+		7 = HIGH_REPUBLIC
+		8 = GREAT_REPUBLIC
+		9 = GRAND_REPUBLIC
+	}
+
+	ruler_male = {
+		6 = CONSUL
+		7 = HIGH_CONSUL
+		8 = GREAT_CONSUL
+		9 = GRAND_CONSUL
+	}
+
+	trigger = {
+		NOT = { tag = SNM }
+		NOT = { 
+			culture_group = latin
+			culture_group = germanic
+		}
+		government = republic
+	}
+}
+
+default_theocracy = {
+	rank = {
+		1 = BISHOPRIC
+		2 = BISHOPRIC
+		3 = BISHOPRIC
+		4 = BISHOPRIC
+		5 = BISHOPRIC
+		6 = BISHOPRIC
+		7 = BISHOPRIC
+		8 = ARCHBISHOPRIC
+		9 = PATRIARCHATE
+	}
+
+	ruler_male = {
+		1 = BISHOP
+		2 = BISHOP
+		3 = BISHOP
+		4 = BISHOP
+		5 = BISHOP
+		6 = BISHOP
+		7 = BISHOP
+		8 = ARCHBISHOP
+		9 = PATRIARCH
+	}
+
+	trigger = {
+		NOT = { 
+			tag = DUR
+			tag = ARC
+			tag = RHM
+	    }
+		NOT = {
+			#Church of the Balkans
+			has_reform = church_of_balkans_abbacy_reform
+            has_reform = church_of_balkans_bishopric_reform
+            has_reform = church_of_balkans_archbishopric_reform
+			#Church of the Baltics
+            has_reform = church_of_baltics_abbacy_reform
+            has_reform = church_of_baltics_bishopric_reform
+            has_reform = church_of_baltics_archbishopric_reform
+			#Church of the Bohemia
+            has_reform = church_of_bohemia_abbacy_reform
+            has_reform = church_of_bohemia_bishopric_reform
+            has_reform = church_of_bohemia_archbishopric_reform
+			#Church of the England
+            has_reform = church_of_england_abbacy_reform
+            has_reform = church_of_england_bishopric_reform
+            has_reform = church_of_england_archbishopric_reform
+			#Church of the France
+            has_reform = church_of_france_abbacy_reform
+            has_reform = church_of_france_bishopric_reform
+            has_reform = church_of_france_archbishopric_reform
+			#Church of the Germany
+            has_reform = church_of_germany_abbacy_reform
+            has_reform = church_of_germany_bishopric_reform
+            has_reform = church_of_germany_archbishopric_reform
+			#Church of the Italy
+            has_reform = church_of_italy_abbacy_reform
+            has_reform = church_of_italy_bishopric_reform
+            has_reform = church_of_italy_archbishopric_reform
+			#Church of the Lotharingia
+            has_reform = church_of_lotharingia_abbacy_reform
+            has_reform = church_of_lotharingia_bishopric_reform
+            has_reform = church_of_lotharingia_archbishopric_reform
+			#Church of the Poland
+            has_reform = church_of_poland_abbacy_reform
+            has_reform = church_of_poland_bishopric_reform
+            has_reform = church_of_poland_archbishopric_reform
+			#Church of the Portugal
+            has_reform = church_of_portugal_abbacy_reform
+            has_reform = church_of_portugal_bishopric_reform
+            has_reform = church_of_portugal_archbishopric_reform
+			#Church of the Switzerland
+            has_reform = church_of_switzerland_abbacy_reform
+            has_reform = church_of_switzerland_bishopric_reform
+            has_reform = church_of_switzerland_archbishopric_reform
+			#Church Subjects
+			is_subject_of_type = european_abbacy
+			is_subject_of_type = european_bishopric 
+			is_subject_of_type = european_archbishopric 
+		}
+		government = theocracy
+	}
+}
+
+default_tribal = {
+	rank = {
+		1 = CHIEFDOM
+		2 = CHIEFDOM
+		3 = CHIEFDOM
+		4 = CHIEFDOM
+		5 = GREAT_CHIEFDOM
+		6 = GRAND_CHIEFDOM
+		7 = HIGH_CHIEFDOM
+		8 = TRIBAL_KINGDOM
+		9 = HIGH_KINGDOM
+	}
+	
+	ruler_male = {
+		1 = CHIEF
+		2 = CHIEF
+		3 = CHIEF
+		4 = CHIEF
+		5 = GREAT_CHIEF
+		6 = GRAND_CHIEF
+		7 = HIGH_CHIEF
+		8 = TRIBAL_KING
+		9 = HIGH_KING
+	}
+	
+	consort_female = {
+		1 = CONSORT_fem
+		2 = CONSORT_fem
+		3 = CONSORT_fem
+		4 = CONSORT_fem
+		5 = CONSORT_fem
+		6 = CONSORT_fem
+		7 = CONSORT_fem
+		8 = QUEEN_CONSORT_fem
+		9 = QUEEN_CONSORT_fem
+	}
+	
+	heir_male = {
+		1 = LORD
+		2 = LORD
+		3 = LORD
+		4 = LORD
+		5 = LORD
+		6 = LORD
+		7 = LORD
+		8 = LORD
+		9 = LORD
+	}
+
+	government_reform = tribe_mechanic
+
+	trigger = {
+		government = tribal
+		NOT = { tag = BAL }
+	}
+}

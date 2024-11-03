@@ -1,0 +1,1721 @@
+#VU Quontin 1.35
+wallachia_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+        NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	legacy_of_mircea_the_eldar = {
+		icon = legacy_of_mircea_the_eldar
+		position = 2
+		required_missions = { impaler_prince }
+		provinces_to_highlight = {
+			OR = {
+			    area = oltenia_area
+			    area = upper_muntenia_area
+			    area = wallachia_area
+			    province_id = 4706
+			    province_id = 7759
+			    province_id = 7765
+			    province_id = 3164
+			    province_id = 7154
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+		    custom_trigger_tooltip = {
+			tooltip = wal_silistria
+				oltenia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				upper_muntenia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				wallachia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				4706 = {owned_by = ROOT}
+	 			7759 = {owned_by = ROOT}
+				3164 = {owned_by = ROOT}
+				7765 = {owned_by = ROOT}
+				7154 = {owned_by = ROOT}
+			}
+		}
+		effect = {
+			vidin_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			bulgaria_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = { OR = {province_id = 3000 province_id = 7711}}
+				}
+				add_permanent_claim = ROOT
+			}
+			danubian_plain_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			silistria_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_thrace_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_thrace_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			thrace_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = {
+						OR = {
+							province_id = 7137 
+							province_id = 151 
+							province_id = 6932
+						}
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			eastern_macedonia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			macedonia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			thessaly_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_greece_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_epirus_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			aetolia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			aegean_archipelago_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			eastern_mediterrenean_islands_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			morea_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			western_aegean_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			thessaly_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	greek_claims = {
+		icon = greek_claims
+		position = 4
+		required_missions = { legacy_of_mircea_the_eldar }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 7128 
+			    province_id = 4702
+			    province_id = 7120
+			    province_id = 7127
+			    province_id = 7129
+			    province_id = 4705 
+			    province_id = 7130
+			    province_id = 149
+			    province_id = 7134
+			    province_id = 4779
+			    province_id = 7136 
+			    province_id = 3170
+			    province_id = 7138
+			    province_id = 6931
+			    area = macedonia_area 
+			    area = northern_greece_area 
+			    area = aetolia_area
+			    area = northern_epirus_area 
+			    area = thessaly_area 
+			    area = western_aegean_area 
+			    area = morea_area 
+			    area = eastern_mediterrenean_islands_area
+			    area = aegean_archipelago_area 
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = wal_greek
+				7128 = {owned_by = ROOT}
+				4702 = {owned_by = ROOT}
+				7120 = {owned_by = ROOT}
+				7127 = {owned_by = ROOT}
+				7129 = {owned_by = ROOT}
+				4705 = {owned_by = ROOT}
+				7130 = {owned_by = ROOT}
+				149 = {owned_by = ROOT}
+				7134 = {owned_by = ROOT}
+				4779 = {owned_by = ROOT}
+				7136 = {owned_by = ROOT}
+				3170 = {owned_by = ROOT}
+				7138 = {owned_by = ROOT}
+				6931 = {owned_by = ROOT}
+				macedonia_area  = {
+					type = all
+					owned_by = ROOT
+				}
+				northern_greece_area = {
+					type = all
+				    owned_by = ROOT
+				}
+				aetolia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				northern_epirus_area  = {
+					type = all
+					owned_by = ROOT
+				}
+				thessaly_area = {
+					type = all
+					owned_by = ROOT
+				}
+				western_aegean_area = {
+					type = all
+					owned_by = ROOT
+				}
+				morea_area   = {
+					type = all
+					owned_by = ROOT
+				}
+				eastern_mediterrenean_islands_area = {
+					type = all
+					owned_by = ROOT
+				}
+				aegean_archipelago_area   = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = { 
+    		    name = "vu_greek_trade"
+   			    duration = -1  
+			}
+			7137 = {
+			    if = {
+				    limit = {
+				    	NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+				    }
+					add_permanent_claim = ROOT
+				}
+			}
+			151 = {
+			    if = {
+				    limit = {
+				    	NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+				    }
+					add_permanent_claim = ROOT
+				}
+			}
+			6932 = {
+			    if = {
+				    limit = {
+				    	NOT = { is_permanent_claim = ROOT }
+						NOT = { is_core = ROOT }
+				    }
+					add_permanent_claim = ROOT
+				}
+			}
+			bukovina_area = {
+		    	limit = {
+		    		NOT = { is_permanent_claim = ROOT	}
+			   		NOT = { is_core = ROOT	}
+			   	}
+			   	add_permanent_claim = ROOT
+		    }
+		    western_moldovia = {
+		    	limit = {
+		    		NOT = { is_permanent_claim = ROOT	}
+		    		NOT = { is_core = ROOT	}
+		    	}
+			   	add_permanent_claim = ROOT
+		    }
+		    moldavia_area = {
+			   	limit = {
+			   		NOT = { is_permanent_claim = ROOT	}
+			   		NOT = { is_core = ROOT	}
+			   	}
+		    	add_permanent_claim = ROOT
+		    }
+		}
+	}
+	baba_novak = {
+	    position = 7
+		icon = baba_novak
+		required_missions = { to_buy_throne }
+		trigger = {
+		    custom_trigger_tooltip = {
+			    tooltip = wal_elite
+			    num_of_rajput = 1
+			}
+		}
+		effect = {
+		    custom_tooltip = estate_peasants_enabled
+		    set_country_flag = estate_peasants_enabled
+		    add_country_modifier = { 
+    	    	name = "vu_wal_merc"
+   		    	duration = -1  
+		    }
+		    country_event = { id = wal_events.7 }
+		}
+	}
+
+	great_hajduk_host = {
+	    position = 9
+		icon = great_hajduk_host
+		required_missions = { baba_novak }
+		trigger = {
+		    custom_trigger_tooltip = {
+			    tooltip = wal_hadjuk
+			    num_of_rajput = 10
+			}
+		}
+		effect = {
+		    custom_tooltip = wal_hadjuk_host
+		}
+	}
+}
+
+wallachia_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	impaler_prince = {
+		icon = impaler_prince
+		required_missions = { }
+		trigger = {
+			NOT = {
+			    estate_loyalty = {
+   				    estate = estate_nobles 
+  				    loyalty = 50
+				}
+			}						
+			estate_influence = {
+    			estate = estate_nobles 
+    			influence = 75
+			}			
+		}
+		effect = {
+		    country_event = { id = wal_events.1 }
+		}
+	}
+
+	bulgarian_claims = {
+		icon = bulgarian_claims
+		position = 3
+		required_missions = { legacy_of_mircea_the_eldar }
+		provinces_to_highlight = {
+			OR = {
+			    area = vidin_area 
+			    area = danubian_plain_area 
+			    area = upper_thrace_area 
+			    area = northern_thrace_area
+			    area = silistria_area 
+			    province_id = 4703 
+			    province_id = 1765
+			    province_id = 7705
+			    province_id = 7703
+			    province_id = 3167
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = wal_bulgaria
+				vidin_area = {
+					type = all
+					owned_by = ROOT
+				}
+				upper_thrace_area = {
+					type = all
+					owned_by = ROOT
+				}
+				northern_thrace_area = {
+					type = all
+					owned_by = ROOT
+				}
+				danubian_plain_area = {
+					type = all
+					owned_by = ROOT
+				}
+				silistria_area = {
+					type = all
+					owned_by = ROOT
+				}
+				3167 = {owned_by = ROOT}
+				1765 = {owned_by = ROOT}
+				7703 = {owned_by = ROOT}
+				4703 = {owned_by = ROOT}
+				7705 = {owned_by = ROOT}
+			}
+		}
+		effect = {
+		    add_treasury = 50
+			add_country_modifier = { 
+    		    name = "vu_bulgarian_discipline"
+   			    duration = -1  
+			}
+		}
+	}
+	story_of_cup = {
+		icon = story_of_cup
+		position = 4
+		required_missions = { high_morale }
+		trigger = {
+			crown_land_share = 50
+			average_autonomy = 10
+		}
+		effect = {
+		    add_country_modifier = { 
+		        name = "vu_da_cup"
+   			    duration = -1  
+			}
+		}
+	}
+	tsarigrad = {
+		icon = tsarigrad
+		position = 5
+		provinces_to_highlight = {
+			OR = {
+				province_id = 7137
+				province_id = 151
+				province_id = 6932
+			}
+			NOT = { owned_by = ROOT }
+		}
+		required_missions = { greek_claims }
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = wal_constantinople
+				7137 = { owned_by = ROOT }
+				151 = { owned_by = ROOT }
+				6932 = { owned_by = ROOT }
+			}
+		}
+		effect = {
+		add_country_modifier = { 
+		    name = "tsarigrad"
+   			duration = -1  
+			}
+			151 = {
+				change_culture = romanian
+				change_religion = orthodox
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		}
+	}
+
+	to_buy_throne = {
+		icon = to_buy_throne
+		position = 6
+		required_missions = { }
+		trigger = {
+			is_year = 1560
+			religion = orthodox	
+			primary_culture = romanian
+		}
+		effect = {
+		    custom_tooltip = to_buy_throne_tool_event
+		    custom_tooltip = to_buy_throne_tool
+		    custom_tooltip = to_buy_throne_tool2
+		    hidden_effect = {
+			    country_event = { id = wal_events.6 }
+			}
+		}
+	}
+}
+
+wallachia_missions_2_mold = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		has_country_flag = wal_independence 
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	crown_of_moldova = {
+		icon = crown_of_moldova
+		position = 8
+		required_missions = { wal_affirming_independence }
+		trigger = {
+			western_moldovia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bukovina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			moldavia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			western_moldovia = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			bukovina_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			moldavia_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = mol_crown_1
+			custom_tooltip = mol_crown_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		MOL = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+			    	}
+			    }
+			}
+		}
+	}
+
+	reconquest_dobrogea = {
+		icon = reconquest_dobrogea
+		position = 9
+		required_missions = { crown_of_moldova }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 4706
+			    province_id = 7759
+			    province_id = 7765
+			    province_id = 3164
+			    province_id = 7154
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			4706 = {owned_by = ROOT}
+ 			7759 = {owned_by = ROOT}
+			3164 = {owned_by = ROOT}
+			7765 = {owned_by = ROOT}
+			7154 = {owned_by = ROOT}
+		}
+		effect = {
+			silistria_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			3164 = {add_center_of_trade_level = 1 }
+		}
+	}
+}
+
+wallachia_missions_2_mold2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+		has_country_flag = wal_turk_cuck
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	crown_of_moldova2 = {
+		icon = crown_of_moldova
+		position = 8
+		required_missions = {war_of_independce }
+		trigger = {
+			western_moldovia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bukovina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			moldavia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			western_moldovia = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			bukovina_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			moldavia_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = mol_crown_1
+			custom_tooltip = mol_crown_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		MOL = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex  }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+			    	}
+			    }
+			}
+		}
+	}
+
+	reconquest_dobrogea2 = {
+		icon = reconquest_dobrogea
+		position = 9
+		required_missions = { crown_of_moldova2  }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 4706
+			    province_id = 7759
+			    province_id = 7765
+			    province_id = 3164
+			    province_id = 7154
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			4706 = {owned_by = ROOT}
+ 			7759 = {owned_by = ROOT}
+			3164 = {owned_by = ROOT}
+			7765 = {owned_by = ROOT}
+			7154 = {owned_by = ROOT}
+		}
+		effect = {
+			silistria_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			3164 = {add_center_of_trade_level = 1 }
+		}
+	}
+}
+
+wallachia_missions_2_mold1 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_country_flag = wal_independence } 
+		NOT = { has_country_flag = wal_turk_cuck }
+	}
+	has_country_shield = yes
+	
+	crown_of_moldova1 = {
+		icon = crown_of_moldova
+		position = 8
+		required_missions = {wal_branch_mission_3 }
+		trigger = {
+			western_moldovia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bukovina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			moldavia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			western_moldovia = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			bukovina_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			moldavia_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = mol_crown_1
+			custom_tooltip = mol_crown_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		MOL = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex  }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+			    	}
+			    }
+			}
+		}
+	}
+
+	reconquest_dobrogea1 = {
+		icon = reconquest_dobrogea
+		position = 9
+		required_missions = { crown_of_moldova1  }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 4706
+			    province_id = 7759
+			    province_id = 7765
+			    province_id = 3164
+			    province_id = 7154
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			4706 = {owned_by = ROOT}
+ 			7759 = {owned_by = ROOT}
+			3164 = {owned_by = ROOT}
+			7765 = {owned_by = ROOT}
+			7154 = {owned_by = ROOT}
+		}
+		effect = {
+			silistria_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			3164 = {add_center_of_trade_level = 1 }
+		}
+	}
+}
+
+wallachia_missions_3_before = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	standing_army = {
+		icon = standing_army
+		position = 2
+		required_missions = { son_of_the_devil impaler_prince }
+		trigger = {
+			army_size_percentage = 0.70
+		}
+		effect = {
+		    country_event = { id = wal_events.2 }
+		}
+	}
+
+	high_morale = {
+		icon = high_morale
+		position = 3
+		required_missions = { standing_army }
+		trigger = {
+			war_with = TUR
+		}
+		effect = {
+		    country_event = { id = wal_events.3 }
+		}
+	}
+	low_intrest_loans = {
+		icon = low_intrest_loans
+		position = 6
+		required_missions = { }
+		trigger = {
+			is_year = 1560
+			num_of_loans = 1
+		}
+		effect = {
+		    add_loan = {
+		    	interest_modifier = -0.5
+		    	#fixed_interest = 0.75
+		    	duration = 60
+		    }
+		    add_loan = {
+		    	interest_modifier = -0.5
+		    	#fixed_interest = 0.75
+		    	duration = 60
+		    }
+		    add_loan = {
+		    	interest_modifier = -0.5
+		    	#fixed_interest = 0.75
+		    	duration = 60
+		    }
+		    add_loan = {
+		    	interest_modifier = -0.5
+		    	#fixed_interest = 0.75
+		    	duration = 60
+		    }
+		    add_loan = {
+		    	interest_modifier = -0.5
+		    	#fixed_interest = 0.75
+		    	duration = 60
+		    }
+		}
+	}
+}
+
+wallachia_missions_3_branching = {
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_country_flag = wal_independence } 
+		NOT = { has_country_flag = wal_turk_cuck }
+	}
+	has_country_shield = yes
+	
+	wal_branch_mission_3 = { 
+		icon = mission_unknown_mission
+		required_missions = { to_buy_throne }
+		position = 7  
+		trigger = { 
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+		}
+		effect = { 
+			custom_tooltip = wal_independence
+			custom_tooltip = wal_cuck
+		}
+	}
+
+	claim_tranylvania3 = {
+		icon = claim_tranylvania
+		position = 8
+		required_missions = { wal_branch_mission_3 }
+		provinces_to_highlight = {
+			OR = {
+				area = transylvania_area 
+				area = southern_transylvania_area 
+				area = banat_area  
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			banat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			banat_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			southern_transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = tra_ban_1
+			custom_tooltip = tra_ban_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		TRA = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex  }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+   			    	}
+			    }
+			}
+		}
+	}
+
+	unite_romania1 = {
+		icon = unite_romania
+		position = 10
+		required_missions = { great_hajduk_host reconquest_dobrogea1 ottoman_rival  mercinary_host }
+		trigger = {
+			religion = orthodox	
+			primary_culture = romanian
+		}
+		effect = {
+			change_tag = RMN	
+			swap_non_generic_missions = yes
+			set_government_rank = 8
+			set_capital = 3160
+			3160 = {
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
+			}
+			3160 = {change_province_name = "Bucuresti"}
+			add_government_reform = romanian_united_principality
+			country_event = { id = wal_events.10 }
+		}
+	}
+}	
+
+wallachia_missions_3_turk_cuck = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+		has_country_flag = wal_turk_cuck
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	war_of_independce = {
+		icon = war_of_independce
+		position = 7
+		required_missions = { to_buy_throne }
+		trigger = {
+			is_in_war = {
+				attacker_leader = ROOT
+   		 		defender_leader = TUR 
+			}
+		}
+		effect = {
+			custom_tooltip = wal_independencer
+			country_event = { id = wal_events.8 }
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		exists = MOL
+			    	}
+			        add_casus_belli = {
+ 		        	    target = MOL
+ 		   	    	    type = cb_restore_personal_union 
+ 		        	    months = 60
+			    	}
+			    }
+			    else = {
+			        bukovina_area = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			        western_moldovia = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			        moldavia_area = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			    }
+			    if = {
+			    	limit = {
+			    		exists = TRA
+			    	}
+			        add_casus_belli = {
+ 		        	    target = TRA
+ 		   	    	    type = cb_restore_personal_union 
+ 		        	    months = 60
+			    	}
+			    }
+			    else = {
+			        southern_transylvania_area = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			        banat_area = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			        transylvania_area = {
+			        	limit = {
+			        		NOT = { is_permanent_claim = ROOT	}
+			        		NOT = { is_core = ROOT	}
+			        	}
+			        	add_permanent_claim = ROOT
+			        }
+			    }
+			    every_known_country = {
+			    	limit = {
+			    		religion_group = christian
+			    	}
+			    	add_opinion = {
+			    		who = ROOT
+			    		modifier = wal_vs_oto_independence
+			    	}
+			    }
+			}
+			custom_tooltip = mol_pu
+			custom_tooltip = mol_pu2
+			custom_tooltip = mol_pu3
+			custom_tooltip = tra_pu
+			custom_tooltip = tra_pu2
+			custom_tooltip = tra_pu3
+			add_country_modifier = { 
+		        name = "vu_wal_force_limit"
+   			    duration = -1  
+			}
+		}
+	}
+
+	claim_tranylvania2 = {
+		icon = claim_tranylvania
+		position = 8
+		required_missions = { war_of_independce }
+		provinces_to_highlight = {
+			OR = {
+				area = transylvania_area 
+				area = southern_transylvania_area 
+				area = banat_area  
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			banat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			banat_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			southern_transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = tra_ban_1
+			custom_tooltip = tra_ban_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		TRA = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex  }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+   			    	}
+			    }
+			}
+		}
+	}
+
+	unite_romania = {
+		icon = unite_romania
+			position = 10
+		required_missions = { great_hajduk_host reconquest_dobrogea2 ottoman_rival  mercinary_host }
+		trigger = {
+			religion = orthodox	
+			primary_culture = romanian
+		}
+		effect = {
+			change_tag = RMN	
+			swap_non_generic_missions = yes
+			set_government_rank = 8
+			set_capital = 3160
+			3160 = {
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
+			}
+			3160 = {change_province_name = "Bucuresti"}
+			add_government_reform = romanian_united_principality
+			country_event = { id = wal_events.10 }
+		}
+	}
+}
+
+wallachia_missions_3_independence = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		has_country_flag = wal_independence 
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	wal_affirming_independence = {
+		icon = wal_affirming_independence
+		position = 7
+		required_missions = { to_buy_throne }
+		trigger = {
+			is_at_war = no
+		}
+		effect = {
+			custom_tooltip = wal_independence2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		exists = MOL
+			    	}
+			        add_casus_belli = {
+ 		        	    target = MOL
+ 		   	    	    type = cb_restore_personal_union 
+ 		        	    months = 60
+			    	}
+			    }
+			    bukovina_area = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    western_moldovia = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    moldavia_area = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    if = {
+			    	limit = {
+			    		exists = TRA
+			    	}
+			        add_casus_belli = {
+ 		        	    target = TRA
+ 		   	    	    type = cb_restore_personal_union 
+ 		        	    months = 60
+			    	}
+			    }
+			    southern_transylvania_area = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    banat_area = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    transylvania_area = {
+			    	limit = {
+			    		NOT = { is_permanent_claim = ROOT	}
+			    		NOT = { is_core = ROOT	}
+			    	}
+			    	add_permanent_claim = ROOT
+			    }
+			    every_known_country = {
+			    	limit = {
+			    		religion_group = christian
+			    	}
+			    	add_opinion = {
+			    		who = ROOT
+			    		modifier = wal_vs_oto_pushback
+			    	}
+			    }
+			}
+			add_country_modifier = { 
+		        name = "vu_wal_force_limit"
+   			    duration = -1  
+			}
+			add_country_modifier = { 
+		        name = "wal_chad_limit"
+   			    duration = -1  
+			}
+			custom_tooltip = 2mol_pu3
+			custom_tooltip = 2mol_pu
+			custom_tooltip = 2mol_pu2
+			custom_tooltip = 2tra_pu3
+			custom_tooltip = 2tra_pu
+			custom_tooltip = 2tra_pu2
+		}
+	}
+
+	claim_tranylvania = {
+		icon = claim_tranylvania
+		position = 8
+		required_missions = { wal_affirming_independence }
+		provinces_to_highlight = {
+			OR = {
+				area = transylvania_area 
+				area = southern_transylvania_area 
+				area = banat_area  
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			banat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			banat_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			southern_transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			transylvania_area = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			custom_tooltip = tra_ban_1
+			custom_tooltip = tra_ban_2
+			hidden_effect = {
+			    if = {
+			    	limit = {
+			    		TRA = { is_subject_of = WAL }
+			    		NOT = { has_country_modifier = vu_wal_annex  }
+			    	}
+			    	add_country_modifier = { 
+		   	     		name = "vu_wal_annex"
+   			    		duration = -1  
+   			    	}
+			    }
+			}
+		}
+	}
+
+	unite_romania2 = {
+		icon = unite_romania
+			position = 10
+		required_missions = { great_hajduk_host reconquest_dobrogea ottoman_rival  mercinary_host }
+		trigger = {
+			religion = orthodox	
+			primary_culture = romanian
+		}
+		effect = {
+			change_tag = RMN	
+			swap_non_generic_missions = yes
+			set_government_rank = 8
+			set_capital = 3160
+			3160 = {
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
+			}
+			3160 = {change_province_name = "Bucuresti"}
+			add_government_reform = romanian_united_principality
+			country_event = { id = wal_events.10 }
+		}
+	}
+}
+
+wallachia_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	son_of_the_devil = {
+		icon = son_of_the_devil
+		required_missions = { }
+		trigger = {
+			NOT = { is_year = 1500 }
+			OR = { dynasty = "Draculesti" dynasty = "Basarab" }
+			prestige = 30
+		}
+		effect = {
+		    define_ruler = {
+    	    	name = "Vlad III Draculesti"
+    	    	dynasty = "Draculesti"
+    	    	adm = 4
+    	    	dip = 4
+    	    	mil = 6
+    	    	age = 20
+    	    	claim = 95
+		    }
+		    add_army_professionalism = 0.05
+		}
+	}
+
+	war_with_mehmet = {
+		icon = war_with_mehmet
+		position = 3
+		required_missions = { standing_army vu_order_of_the_dragon }
+		trigger = {
+			TUR = {
+				OR = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = insulted
+					}
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = scornfully_insulted
+					}
+				}
+			}
+		}
+		effect = {
+		    161 = {set_province_flag = wal_idkwhattoputhere}
+		    TUR = {
+			declare_war_with_cb = {
+    					who = WAL
+ 					casus_belli = cb_annex
+				}
+			}
+		}
+	}
+	
+	night_attack = {
+		icon = night_attack
+		position = 4
+		required_missions = { high_morale war_with_mehmet }
+		provinces_to_highlight = {
+			province_id = 161
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = night_attack_vu
+				has_country_flag = wal_night_attack
+			}
+		}
+		effect = {
+		    country_event = { id = wal_events.5 }
+		}
+	}
+
+	kill_infidels = {
+		icon = kill_infidels
+		position = 4
+		required_missions = { transylvanian_claims }
+		provinces_to_highlight = {
+			OR = {
+				area = transylvania_area 
+				area = southern_transylvania_area 
+				area = banat_area  
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			banat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    custom_tooltip = wal_infidels
+		    hidden_effect = {
+		    	every_owned_province = {
+		    		limit = { NOT = { religion = orthodox}}
+		    		change_culture = romanian
+		    		change_religion = orthodox
+		    	}
+		    }
+		}
+	}
+	
+	kill_credditors = {
+		icon = kill_credditors
+		position = 7
+		required_missions = { low_intrest_loans }
+		trigger = {
+			num_of_loans = 1
+		}
+		effect = {
+			add_years_of_income = 10
+			add_stability = -1
+			add_opinion = {
+ 				who = TUR
+    			modifier = wal_heritic
+			}
+		}
+	}
+	
+	rising_economy = {
+		icon = rising_economy
+		position = 8
+		required_missions = { kill_credditors }
+		trigger = {
+			monthly_income = 40
+			NOT = { average_autonomy = 30 }
+		}
+		effect = {
+			add_country_modifier = { 
+		   		name = "vu_wal_high_productivity"
+   				duration = -1  
+			}
+		}
+	}
+	
+	mercinary_host = {
+		icon = mercinary_host
+		position = 9
+		required_missions = { rising_economy }
+		trigger = {
+			num_of_mercenaries = 1
+		}
+		effect = {
+			add_country_modifier = { 
+		   		name = "vu_WAL_merc_cost"
+   				duration = -1  
+			}
+		}
+	}
+}
+
+wallachia_missions_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = WAL
+		NOT = { tag = RMN }
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	vu_order_of_the_dragon = {
+	    position = 2
+		icon = vu_order_of_the_dragon
+		required_missions = { }
+		trigger = {
+			estate_loyalty = {
+   				estate = estate_nobles 
+  				loyalty = 50
+			}
+		}
+		effect = {
+		    add_army_professionalism = 0.05
+		    custom_tooltip = wal_dragon	
+		}
+	}
+	
+	transylvanian_claims = {
+	    position = 4
+		icon = transylvanian_claims
+		required_missions = { vu_order_of_the_dragon }
+		provinces_to_highlight = {
+			area = southern_transylvania_area 
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			southern_transylvania_area = {
+				any_province_in_state = { owned_by = ROOT }
+			}
+		}
+		effect = {
+			southern_transylvania_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			transylvania_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			banat_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	austrian_marraige = {
+	    position = 6
+		icon = austrian_marraige
+		required_missions = { }
+		trigger = {
+			is_year = 1560
+			NOT = {	is_enemy = HAB}
+		}
+		effect = {
+			add_historical_friend = HAB
+			add_opinion = {
+ 			    who = HAB
+ 			    modifier = vu_walachian_opinion
+			}
+			HAB = {
+				add_historical_friend = WAL
+				add_opinion = {
+ 			        who = WAL
+ 			        modifier = vu_walachian_opinion
+				}
+			}
+			create_marriage = HAB
+		}
+	}
+	
+	powerful_allies = {
+	    position = 7
+		icon = powerful_allies
+		required_missions = { austrian_marraige }
+		trigger = {
+		    calc_true_if = {
+		    	all_ally = {
+		    		is_great_power = yes
+		    	}
+		    	amount = 2
+		    }
+		}
+		effect = {
+		    custom_tooltip = wal_powerful_allies
+		    custom_tooltip = wal_powerful_allie2
+		    hidden_effect = {
+		    	every_ally = {
+		    		limit = {
+		    			has_opinion = {
+		    			    who = ROOT 
+		    			    value = 50
+		    			}
+		    		}
+		    		ROOT = {
+		    		    add_trust = {
+		    		  	    who = PREV
+		    		  	    value = 25
+		    		  	    mutual = yes
+		    		    }
+		    		    add_favors = {
+		    		  	    who = PREV
+		    		  	    amount = 100
+		    		    }
+		    		}
+		    	}
+		    }
+		}
+	}
+	
+	ottoman_rival = {
+	    position = 9
+		icon = ottoman_rival
+		required_missions = { powerful_allies rising_economy }
+		trigger = {
+		    OR = {
+		        is_rival = TUR
+		        NOT = {exists = TUR}
+			}
+		}
+		effect = {
+			add_army_tradition = 100
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 100
+			}
+			custom_tooltip = wal_ottoman_rival
+			hidden_effect = {
+			    every_known_country = {
+			    	limit = {
+			    		religion_group = christian
+			    	}
+			    	add_opinion = {
+			    		who = ROOT
+			    		modifier = wal_vs_oto_rival
+			    	}
+			    }
+			}
+		}
+	}
+}

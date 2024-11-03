@@ -1,0 +1,100 @@
+#VU Quonton
+
+namespace = jewish_pops
+
+country_event = {
+	id = jewish_pops.1
+	title = "jewish_pops.1.t"
+	desc = "jewish_pops.1.d"
+	picture = CITY_VIEW_eventPicture
+	
+	trigger = {
+		has_estate_privilege = estate_jews_foster_jews 
+		any_owned_province = { AND = { OR = { development = 20 is_capital = yes } NOT = { has_province_modifier = jewish_population } } }
+	}
+
+	mean_time_to_happen = {
+		months = 184
+	}
+
+	immediate = {
+		random_core_province = {
+			limit = {
+				AND = {
+					OR = {
+		    	   		development = 20
+		    	   		is_capital = yes
+					}
+				NOT = { has_province_modifier = jewish_population }
+		   		}
+			}
+			save_event_target_as = pop_province
+		}
+	}
+
+	option = {
+		name = "jewish_pops.1.a"
+		event_target:pop_province = {
+			add_permanent_province_modifier = { 
+   				name = jewish_population
+    				duration = -1  
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jewish_pops.2
+	title = "jewish_pops.2.t"
+	desc = "jewish_pops.2.d"
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	
+	trigger = {
+		has_estate_privilege = estate_jews_suck_privileges 
+		any_owned_province = { has_province_modifier = jewish_population }
+	}
+
+	mean_time_to_happen = {
+		months = 224
+	}
+	immediate = {
+		random_core_province = {
+			limit = { has_province_modifier = jewish_population }
+			save_event_target_as = pop_province
+		}
+	}
+	option = {
+		name = "jewish_pops.2.a"
+		event_target:pop_province = {
+			remove_province_modifier = jewish_population
+			add_province_modifier = { 
+   				name = jewish_expulsions 
+    				duration = 2880 
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jewish_pops.3
+	title = "jewish_pops.3.t"
+	desc = "jewish_pops.3.d"
+	picture = BORDER_TENSION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "jewish_pops.3.a"
+		custom_tooltip = jewish_ww2
+		hidden_effect = {
+		every_core_province = {
+			limit = { has_province_modifier = jewish_population }
+			remove_province_modifier = jewish_population
+			add_province_modifier = { 
+   				name = jewish_expulsions 
+    				duration = 2880 
+				}
+			}
+		}
+	}
+}

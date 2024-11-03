@@ -1,0 +1,228 @@
+namespace = ME_Germany_Events
+
+country_event = {
+	id = ME_Germany_Events.1
+	title = ME_Germany_Events.EVTNAME1
+	desc = ME_Germany_Events.EVTDESC1
+	picture = GERMAN_KAISERREICH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ME_Germany_Events1.EVTOPT1
+		
+		ai_chance = {
+			factor = 0.95
+			
+			modifier = {
+				factor = 0.2
+				NOT = { government = monarchy }
+			}
+		}
+		
+		change_government = monarchy
+		add_government_reform = german_kaiserreich
+		clr_country_flag = enable_second_mil_level_flag
+		set_country_flag = enable_third_mil_level_flag
+		regenerate_government_mechanics = yes
+	}
+	
+	option = {
+		name = ME_Germany_Events1.EVTOPT2
+		
+		ai_chance = {
+			factor = 0.05
+			
+			modifier = {
+				factor = 5
+				government = republic
+			}
+		}
+		
+		add_prestige = 5
+		add_absolutism = 10
+		change_government = republic
+		add_government_reform = german_kaiserreich_republic
+		clr_country_flag = enable_second_mil_level_flag
+		set_country_flag = enable_third_mil_level_flag
+		regenerate_government_mechanics = yes
+		add_legitimacy_equivalent = { amount = 20 republican_tradition = 10 }
+	}
+
+	option = {
+		name = ME_Germany_Events1.EVTOPT3
+
+		trigger = {
+ 			has_reform = peasants_republic
+		}
+		
+		ai_chance = {
+			factor = 1
+			
+			modifier = {
+				factor = 5
+				government = republic
+			}
+		}
+		
+		add_prestige = 5
+		add_absolutism = 10
+		change_government = republic
+		add_government_reform = german_kaiserreich_peasant_republic
+		clr_country_flag = enable_second_mil_level_flag
+		set_country_flag = enable_third_mil_level_flag
+		regenerate_government_mechanics = yes
+		add_legitimacy_equivalent = { amount = 20 republican_tradition = 20 }
+		override_country_name = ddr_germany
+	}
+}
+
+country_event = {
+	id = ME_Germany_Events.2
+	title = ME_Germany_Events.EVTNAME2
+	desc = ME_Germany_Events.EVTDESC2
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ME_Germany_Events2.EVTOPT1
+		
+		ai_chance = { factor = 0.8 }
+		
+		every_owned_province = {
+			limit = {
+				culture = polish
+			}
+			add_nationalism = -10
+		}
+	}
+	
+	option = {
+		name = ME_Germany_Events2.EVTOPT2
+		
+		ai_chance = { factor = 0.2 }
+		
+		every_owned_province = {
+			limit = {
+				culture = polish
+			}
+			change_culture = polishBOH
+			add_province_modifier = {
+				name = germany_fate_of_the_polish_culture
+				duration = 7300
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = czech
+			}
+			change_culture = czechBOH
+			add_province_modifier = {
+				name = germany_fate_of_the_polish_culture
+				duration = 7300
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = moravian
+			}
+			change_culture = czechBOH
+			add_province_modifier = {
+				name = germany_fate_of_the_polish_culture
+				duration = 7300
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = schlesian
+			}
+			change_culture = silesian_german
+			add_province_modifier = {
+				name = germany_fate_of_the_polish_culture
+				duration = 7300
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = sorbian 
+			}
+			change_culture = sorbianBOH
+			add_province_modifier = {
+				name = germany_fate_of_the_polish_culture
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ME_Germany_Events.3
+	title = ME_Germany_Events.EVTNAME3
+	desc = ME_Germany_Events.EVTDESC3
+	picture = CAROLINGIAN_EMPIRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ME_Germany_Events3.EVTOPT1
+		
+		ai_chance = { factor = 0.75 }
+		
+		add_prestige = 50
+		add_country_modifier = {
+			name = germany_undoing_the_treaty_of_verdun_1
+			duration = -1
+		}
+		every_country = {
+			limit = {
+				NOT = { alliance_with = ROOT }
+				NOT = { is_subject_of = ROOT }
+				capital_scope = {
+					continent = europe
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = germany_undoing_the_treaty_of_verdun_opinion
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					alliance_with = ROOT
+					is_subject_of = ROOT
+				}
+				capital_scope = {
+					continent = europe
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = germany_undoing_the_treaty_of_verdun_opinion_light
+			}
+		}
+	}
+	
+	option = {
+		name = ME_Germany_Events3.EVTOPT2
+		
+		ai_chance = { factor = 0.25 }
+		
+		add_country_modifier = {
+			name = germany_undoing_the_treaty_of_verdun_2
+			duration = 9125
+		}
+		every_country = {
+			limit = {
+				capital_scope = {
+					continent = europe
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = germany_undoing_the_treaty_of_verdun_opinion_positive
+			}
+		}
+	}
+}

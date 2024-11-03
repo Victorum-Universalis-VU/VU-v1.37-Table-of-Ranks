@@ -1,0 +1,134 @@
+# New events and falvor related to Prussia and Brandenburg
+# Initially added by docRobert
+
+# ====================================
+namespace = vu_pru
+
+country_event = { # Prussia and Brandenburg will unite into bigger Prussia
+	id = vu_pru.1
+	title = vu_pru.1.t
+	desc = vu_pru.1.d
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = PRU
+			tag = BRA
+		}
+		is_year = 1550
+		prestige = 50
+		OR = {
+			PRU = { ai = yes }
+			BRA = { ai = yes }
+		}
+		total_development = 100
+		dip_tech = 25
+		adm_tech = 25
+		OR = {
+			PRU = { is_subject_of = BRA }
+			BRA = { is_subject_of = PRU }
+			PRU = { junior_union_with = BRA }
+			BRA = { junior_union_with = PRU }
+		}
+	}
+	
+	mean_time_to_happen = {	#10 years
+		months = 120
+	}
+	
+	option = { #Become one big Prussia
+		name = vu_pru.1.a
+		ai_chance = { factor = 100 }
+		if = {	#Player is playing Prussia
+			limit = { 
+				tag = PRU
+				ai = no
+			}
+			inherit = BRA
+			add_prestige = 20
+			add_legitimacy = 20
+			if = {
+				limit = { owns_core_province = 50 }
+				set_capital = 50
+				50 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else_if = {
+				limit = { owns_core_province = 41 }
+				set_capital = 41
+				41 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = { add_adm_power = 25 }
+		}
+		else_if = {	#Player is playing Brandenburg
+			limit = { 
+				tag = BRA
+				ai = no
+			}
+			switch_tag = PRU
+			inherit = BRA
+			add_prestige = 20
+			add_legitimacy = 20
+			if = {
+				limit = { owns_core_province = 50 }
+				set_capital = 50
+				50 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else_if = {
+				limit = { owns_core_province = 41 }
+				set_capital = 41
+				41 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = { add_adm_power = 25 }
+		}
+		else = {	#Neither BRA or PRU are player-controlled
+			PRU = { inherit = BRA }
+			add_prestige = 20
+			add_legitimacy = 20
+			if = {
+				limit = { owns_core_province = 50 }
+				set_capital = 50
+				50 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else_if = {
+				limit = { owns_core_province = 41 }
+				set_capital = 41
+				41 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = { add_adm_power = 25 }
+		}
+	}
+	
+	option = { #No thanks
+		name = vu_pru.1.b
+		ai_chance = { factor = 0 }
+		add_treasury = 1
+	}
+}

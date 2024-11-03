@@ -1,0 +1,69 @@
+edict_promote_military_recruitment = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		always = yes
+	}
+	modifier = {
+		local_manpower_modifier = 0.25
+		local_manpower = 0.15
+	}
+	color = {
+		110
+		10
+		40
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			owner = {
+				manpower_percentage = 0.9
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				NOT = {
+					manpower_percentage = 0.25
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				NOT = {
+					manpower_percentage = 0.5
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			owner = {
+				NOT = {
+					manpower_percentage = 0.75
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				is_at_war = yes
+			}
+		}
+		modifier = {
+			factor = 4
+			owner = {
+				OR = {
+					has_idea_group = conscription_ideas
+					has_idea_group = quantity_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_promote_military_recruitment
+		}
+	}
+}

@@ -1,0 +1,2006 @@
+
+#Victorum Universalis work done by all contributors other than Darth Modus
+#	Example:
+# 
+#	example_effect = {
+#		treasury = 100
+#		add_adm_power = 50
+#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+#		example_effect = yes
+#	}
+
+# Note by Altan : value = base_production (or any other dev type isn't a thing). Use value = trigger_value:base_production (or other dev type)
+#############################################################
+#############################################################
+#############################################################
+#Dub's work
+#############################################################
+#############################################################
+#############################################################
+
+add_or_spawn_center_of_trade = {
+    if = { #If has center of trade, add level.
+        limit = {
+            OR = {
+                province_has_center_of_trade_of_level = 1
+                province_has_center_of_trade_of_level = 2
+                province_has_center_of_trade_of_level = 3
+            }
+        }
+        add_center_of_trade_level = $level$
+    }
+    else = {
+        center_of_trade = $level$
+    }
+}
+
+swap_ideas = { #Should really be this easy, i.e "swap_ideas = yes"
+	if = {
+		limit = { has_custom_ideas = no }
+		country_event = { id = ideagroups.1 } #Swap Ideas
+	}
+}
+
+create_interregnum_effect = {
+    hidden_effect = {
+        every_country = {
+            limit = {
+                marriage_with = ROOT
+            }
+            break_marriage = ROOT
+        }
+        kill_heir = {}
+    }
+    define_ruler = {
+        name = "(Interregnum)"
+        adm = 0
+        dip = 0
+        mil = 0
+        regency = yes #Not sure that interregnum effect is going to work
+    }
+}
+
+#Changes every reference of one culture into another for the purposes of switching culture group, like Celtica's uniting Brythonic & Gaelic into Celtic, or Manchu's Jurchen Evenk into Manchu Chinese.
+#Usage: change_culture_group_effect = { old_culture=X new_culture=Y }
+#old_culture: The culture to replace
+#new_culture: The culture to replace the old culture with.
+#Note: Lacks a tooltip and is a hidden effect, therefore requiring a custom_tooltip
+change_culture_group_effect = {
+	#Primary Culture
+	every_country = {
+		limit = { primary_culture = $old_culture$ }
+		change_primary_culture = $new_culture$
+	}
+	#Accepted Culture
+	every_country = {
+		limit = { accepted_culture = $old_culture$ }
+		remove_accepted_culture = $old_culture$
+		add_accepted_culture = $new_culture$
+	}
+	#Provinces
+	every_province = {
+		limit = { culture = $old_culture$ }
+		change_culture = $new_culture$
+	}
+	#Rulers
+	every_country = {
+		limit = { ruler_culture = $old_culture$ }
+		set_ruler_culture = $new_culture$
+	}
+	#Heirs
+	every_country = {
+		limit = { heir_culture = $old_culture$ }
+		set_heir_culture = $new_culture$
+	}
+	#Consorts
+	every_country = {
+		limit = { consort_culture = $old_culture$ }
+		set_consort_culture = $new_culture$
+	}
+	#Advisors (Can't be done currently due to lack of EU4 effects)
+}
+
+# GE Additions
+
+remove_vassal_tax = {
+	remove_country_modifier = GE_vassal_tax_script_1
+	remove_country_modifier = GE_vassal_tax_script_2
+	remove_country_modifier = GE_vassal_tax_script_3
+	remove_country_modifier = GE_vassal_tax_script_4
+	remove_country_modifier = GE_vassal_tax_script_5
+	remove_country_modifier = GE_vassal_tax_script_6
+	remove_country_modifier = GE_vassal_tax_script_7
+	remove_country_modifier = GE_vassal_tax_script_8
+	remove_country_modifier = GE_vassal_tax_script_9
+	remove_country_modifier = GE_vassal_tax_script_10
+	remove_country_modifier = GE_vassal_tax_script_11
+	remove_country_modifier = GE_vassal_tax_script_12
+	remove_country_modifier = GE_vassal_tax_script_13
+	remove_country_modifier = GE_vassal_tax_script_14
+	remove_country_modifier = GE_vassal_tax_script_15
+	remove_country_modifier = GE_vassal_tax_script_16
+	remove_country_modifier = GE_vassal_tax_script_17
+	remove_country_modifier = GE_vassal_tax_script_18
+	remove_country_modifier = GE_vassal_tax_script_19
+	remove_country_modifier = GE_vassal_tax_script_20
+}
+
+remove_primary_development_cost = {
+	remove_province_modifier = GE_primary_development_cost_script_1
+	remove_province_modifier = GE_primary_development_cost_script_2
+	remove_province_modifier = GE_primary_development_cost_script_3
+	remove_province_modifier = GE_primary_development_cost_script_4
+	remove_province_modifier = GE_primary_development_cost_script_5
+	remove_province_modifier = GE_primary_development_cost_script_6
+	remove_province_modifier = GE_primary_development_cost_script_7
+	remove_province_modifier = GE_primary_development_cost_script_8
+	remove_province_modifier = GE_primary_development_cost_script_9
+	remove_province_modifier = GE_primary_development_cost_script_10
+	remove_province_modifier = GE_primary_development_cost_script_11
+	remove_province_modifier = GE_primary_development_cost_script_12
+	remove_province_modifier = GE_primary_development_cost_script_13
+	remove_province_modifier = GE_primary_development_cost_script_14
+	remove_province_modifier = GE_primary_development_cost_script_15
+	remove_province_modifier = GE_primary_development_cost_script_16
+	remove_province_modifier = GE_primary_development_cost_script_17
+	remove_province_modifier = GE_primary_development_cost_script_18
+	remove_province_modifier = GE_primary_development_cost_script_19
+	remove_province_modifier = GE_primary_development_cost_script_20
+}
+
+remove_rural_goods_produced = {
+	remove_province_modifier = rural_goods_produced_1
+	remove_province_modifier = rural_goods_produced_2
+	remove_province_modifier = rural_goods_produced_3
+	remove_province_modifier = rural_goods_produced_4
+	remove_province_modifier = rural_goods_produced_5
+	remove_province_modifier = rural_goods_produced_6
+	remove_province_modifier = rural_goods_produced_7
+	remove_province_modifier = rural_goods_produced_8
+	remove_province_modifier = rural_goods_produced_9
+	remove_province_modifier = rural_goods_produced_10
+	remove_province_modifier = rural_goods_produced_11
+	remove_province_modifier = rural_goods_produced_12
+	remove_province_modifier = rural_goods_produced_13
+	remove_province_modifier = rural_goods_produced_14
+	remove_province_modifier = rural_goods_produced_15
+	remove_province_modifier = rural_goods_produced_16
+	remove_province_modifier = rural_goods_produced_17
+	remove_province_modifier = rural_goods_produced_18
+	remove_province_modifier = rural_goods_produced_19
+	remove_province_modifier = rural_goods_produced_20
+}
+
+remove_urban_goods_produced = {
+	remove_province_modifier = urban_goods_produced_1
+	remove_province_modifier = urban_goods_produced_2
+	remove_province_modifier = urban_goods_produced_3
+	remove_province_modifier = urban_goods_produced_4
+	remove_province_modifier = urban_goods_produced_5
+	remove_province_modifier = urban_goods_produced_6
+	remove_province_modifier = urban_goods_produced_7
+	remove_province_modifier = urban_goods_produced_8
+	remove_province_modifier = urban_goods_produced_9
+	remove_province_modifier = urban_goods_produced_10
+	remove_province_modifier = urban_goods_produced_11
+	remove_province_modifier = urban_goods_produced_12
+	remove_province_modifier = urban_goods_produced_13
+	remove_province_modifier = urban_goods_produced_14
+	remove_province_modifier = urban_goods_produced_15
+	remove_province_modifier = urban_goods_produced_16
+	remove_province_modifier = urban_goods_produced_17
+	remove_province_modifier = urban_goods_produced_18
+	remove_province_modifier = urban_goods_produced_19
+	remove_province_modifier = urban_goods_produced_20
+}
+
+remove_mining_goods_produced = {
+	remove_province_modifier = mining_goods_produced_1
+	remove_province_modifier = mining_goods_produced_2
+	remove_province_modifier = mining_goods_produced_3
+	remove_province_modifier = mining_goods_produced_4
+	remove_province_modifier = mining_goods_produced_5
+	remove_province_modifier = mining_goods_produced_6
+	remove_province_modifier = mining_goods_produced_7
+	remove_province_modifier = mining_goods_produced_8
+	remove_province_modifier = mining_goods_produced_9
+	remove_province_modifier = mining_goods_produced_10
+	remove_province_modifier = mining_goods_produced_11
+	remove_province_modifier = mining_goods_produced_12
+	remove_province_modifier = mining_goods_produced_13
+	remove_province_modifier = mining_goods_produced_14
+	remove_province_modifier = mining_goods_produced_15
+	remove_province_modifier = mining_goods_produced_16
+	remove_province_modifier = mining_goods_produced_17
+	remove_province_modifier = mining_goods_produced_18
+	remove_province_modifier = mining_goods_produced_19
+	remove_province_modifier = mining_goods_produced_20
+}
+
+remove_plantage_goods_produced = {
+	remove_province_modifier = plantage_goods_produced_1
+	remove_province_modifier = plantage_goods_produced_2
+	remove_province_modifier = plantage_goods_produced_3
+	remove_province_modifier = plantage_goods_produced_4
+	remove_province_modifier = plantage_goods_produced_5
+	remove_province_modifier = plantage_goods_produced_6
+	remove_province_modifier = plantage_goods_produced_7
+	remove_province_modifier = plantage_goods_produced_8
+	remove_province_modifier = plantage_goods_produced_9
+	remove_province_modifier = plantage_goods_produced_10
+	remove_province_modifier = plantage_goods_produced_11
+	remove_province_modifier = plantage_goods_produced_12
+	remove_province_modifier = plantage_goods_produced_13
+	remove_province_modifier = plantage_goods_produced_14
+	remove_province_modifier = plantage_goods_produced_15
+	remove_province_modifier = plantage_goods_produced_16
+	remove_province_modifier = plantage_goods_produced_17
+	remove_province_modifier = plantage_goods_produced_18
+	remove_province_modifier = plantage_goods_produced_19
+	remove_province_modifier = plantage_goods_produced_20
+}
+
+add_export_effect = {
+	#Rural_Exports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_rural_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_rural_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_rural_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_2
+			add_country_modifier = {
+				name = GE_rural_trade_deal_exports_1
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_rural_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_rural_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_1
+			remove_country_modifier = GE_rural_trade_deal_exports_3
+			add_country_modifier = {
+				name = GE_rural_trade_deal_exports_2
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_rural_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_rural_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_2
+			remove_country_modifier = GE_rural_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_rural_trade_deal_exports_3
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_rural_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_rural_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_3
+			remove_country_modifier = GE_rural_trade_deal_exports_5
+			add_country_modifier = {
+				name = GE_rural_trade_deal_exports_4
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_rural_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_rural_trade_deal_exports_5
+				duration = -1
+			}
+		}
+	#}
+	#urban_Exports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_urban_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_urban_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_urban_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_2
+			add_country_modifier = {
+				name = GE_urban_trade_deal_exports_1
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_urban_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_urban_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_1
+			remove_country_modifier = GE_urban_trade_deal_exports_3
+			add_country_modifier = {
+				name = GE_urban_trade_deal_exports_2
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_urban_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_urban_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_2
+			remove_country_modifier = GE_urban_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_urban_trade_deal_exports_3
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_urban_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_urban_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_3
+			remove_country_modifier = GE_urban_trade_deal_exports_5
+			add_country_modifier = {
+				name = GE_urban_trade_deal_exports_4
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_urban_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_urban_trade_deal_exports_5
+				duration = -1
+			}
+		}
+	#}
+	#mining_Exports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_mining_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_mining_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_mining_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_2
+			add_country_modifier = {
+				name = GE_mining_trade_deal_exports_1
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_mining_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_mining_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_1
+			remove_country_modifier = GE_mining_trade_deal_exports_3
+			add_country_modifier = {
+				name = GE_mining_trade_deal_exports_2
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_mining_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_mining_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_2
+			remove_country_modifier = GE_mining_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_mining_trade_deal_exports_3
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_mining_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_mining_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_3
+			remove_country_modifier = GE_mining_trade_deal_exports_5
+			add_country_modifier = {
+				name = GE_mining_trade_deal_exports_4
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_mining_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_mining_trade_deal_exports_5
+				duration = -1
+			}
+		}
+	#}
+	#plantation_Exports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_plantation_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_plantation_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_plantation_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_2
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_exports_1
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_plantation_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_plantation_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_1
+			remove_country_modifier = GE_plantation_trade_deal_exports_3
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_exports_2
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_plantation_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_plantation_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_2
+			remove_country_modifier = GE_plantation_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_exports_3
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_plantation_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_outgoing_plantation_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_3
+			remove_country_modifier = GE_plantation_trade_deal_exports_5
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_exports_4
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_outgoing_plantation_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_exports_4
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_exports_5
+				duration = -1
+			}
+		}
+	#}
+}
+
+add_import_effect = {
+	#Rural_Imports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_rural_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_rural_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_rural_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_2
+			add_country_modifier = {
+				name = GE_rural_trade_deal_imports_1
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_rural_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_rural_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_1
+			remove_country_modifier = GE_rural_trade_deal_imports_3
+			add_country_modifier = {
+				name = GE_rural_trade_deal_imports_2
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_rural_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_rural_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_2
+			remove_country_modifier = GE_rural_trade_deal_imports_4
+			add_country_modifier = {
+				name = GE_rural_trade_deal_imports_3
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_rural_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_rural_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_3
+			remove_country_modifier = GE_rural_trade_deal_imports_5
+			add_country_modifier = {
+				name = GE_rural_trade_deal_imports_4
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_rural_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_rural_trade_deal_imports_4
+			remove_country_modifier = GE_rural_trade_deal_imports_6
+			add_country_modifier = {
+				name = GE_rural_trade_deal_imports_5
+				duration = -1
+			}
+		}
+	#}
+	#Urban_Imports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_urban_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_urban_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_urban_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_2
+			add_country_modifier = {
+				name = GE_urban_trade_deal_imports_1
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_urban_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_urban_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_1
+			remove_country_modifier = GE_urban_trade_deal_imports_3
+			add_country_modifier = {
+				name = GE_urban_trade_deal_imports_2
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_urban_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_urban_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_2
+			remove_country_modifier = GE_urban_trade_deal_imports_4
+			add_country_modifier = {
+				name = GE_urban_trade_deal_imports_3
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_urban_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_urban_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_3
+			remove_country_modifier = GE_urban_trade_deal_imports_5
+			add_country_modifier = {
+				name = GE_urban_trade_deal_imports_4
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_urban_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_urban_trade_deal_imports_4
+			remove_country_modifier = GE_urban_trade_deal_imports_6
+			add_country_modifier = {
+				name = GE_urban_trade_deal_imports_5
+				duration = -1
+			}
+		}
+	#}
+	#Mining_Imports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_mining_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_mining_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_mining_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_2
+			add_country_modifier = {
+				name = GE_mining_trade_deal_imports_1
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_mining_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_mining_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_1
+			remove_country_modifier = GE_mining_trade_deal_imports_3
+			add_country_modifier = {
+				name = GE_mining_trade_deal_imports_2
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_mining_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_mining_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_2
+			remove_country_modifier = GE_mining_trade_deal_imports_4
+			add_country_modifier = {
+				name = GE_mining_trade_deal_imports_3
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_mining_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_mining_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_3
+			remove_country_modifier = GE_mining_trade_deal_imports_5
+			add_country_modifier = {
+				name = GE_mining_trade_deal_imports_4
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_mining_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_mining_trade_deal_imports_4
+			remove_country_modifier = GE_mining_trade_deal_imports_6
+			add_country_modifier = {
+				name = GE_mining_trade_deal_imports_5
+				duration = -1
+			}
+		}
+	#}
+	#Plantation_Imports {
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_plantation_trade
+						value = 1
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_1
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_plantation_trade
+					value = 1
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_plantation_trade
+						value = 2
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_2
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_imports_1
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_plantation_trade
+					value = 2
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_plantation_trade
+						value = 3
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_1
+			remove_country_modifier = GE_plantation_trade_deal_imports_3
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_imports_2
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_plantation_trade
+					value = 3
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_plantation_trade
+						value = 4
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_2
+			remove_country_modifier = GE_plantation_trade_deal_imports_4
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_imports_3
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_plantation_trade
+					value = 4
+				}
+				NOT = {
+					check_variable = {
+						which = GE_num_of_incoming_plantation_trade
+						value = 5
+					}
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_3
+			remove_country_modifier = GE_plantation_trade_deal_imports_5
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_imports_4
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = GE_num_of_incoming_plantation_trade
+					value = 5
+				}
+			}
+			remove_country_modifier = GE_plantation_trade_deal_imports_4
+			remove_country_modifier = GE_plantation_trade_deal_imports_6
+			add_country_modifier = {
+				name = GE_plantation_trade_deal_imports_5
+				duration = -1
+			}
+		}
+	#}
+}
+
+GE_calculate_goods_produced_effect = {
+	hidden_effect = {
+		set_variable = {
+			which = GE_total_goods
+			value = 0
+		}
+		#Rural = {
+			every_owned_province = {
+				export_to_variable = {
+					variable_name = GE_total_goods_counter
+					value = trigger_value:base_production
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = GE_total_goods_counter
+							value = 1
+						}
+					}
+					change_variable = {
+						which = GE_total_goods_counter
+						value = -1
+					}
+					ROOT = {
+						change_variable = {
+							which = GE_total_goods
+							value = 1
+						}
+					}
+				}
+			}
+			set_variable = {
+				which = GE_percentage_of_rural_goods
+				value = 0
+			}
+			every_owned_province = {
+				limit = {
+					has_rural_goods = yes
+				}
+				export_to_variable = {
+					variable_name = GE_rural_goods_counter
+					value = trigger_value:base_production
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = GE_rural_goods_counter
+							value = 1
+						}
+					}
+					change_variable = {
+						which = GE_rural_goods_counter
+						value = -1
+					}
+					ROOT = {
+						change_variable = {
+							which = GE_percentage_of_rural_goods
+							value = 1
+						}
+					}
+				}
+			}
+			multiply_variable = {
+				which = GE_percentage_of_rural_goods
+				value = 100
+			}
+			divide_variable = {
+				which = GE_percentage_of_rural_goods
+				which = GE_total_goods
+			}
+		#}
+		#Urban = {
+			set_variable = {
+				which = GE_percentage_of_urban_goods
+				value = 0
+			}
+			every_owned_province = {
+				limit = {
+					has_urban_goods = yes
+				}
+				export_to_variable = {
+					variable_name = GE_urban_goods_counter
+					value = trigger_value:base_production
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = GE_urban_goods_counter
+							value = 1
+						}
+					}
+					change_variable = {
+						which = GE_urban_goods_counter
+						value = -1
+					}
+					ROOT = {
+						change_variable = {
+							which = GE_percentage_of_urban_goods
+							value = 1
+						}
+					}
+				}
+			}
+			multiply_variable = {
+				which = GE_percentage_of_urban_goods
+				value = 100
+			}
+			divide_variable = {
+				which = GE_percentage_of_urban_goods
+				which = GE_total_goods
+			}
+		#}
+		#Mining = {
+			set_variable = {
+				which = GE_percentage_of_mining_goods
+				value = 0
+			}
+			every_owned_province = {
+				limit = {
+					has_mining_goods = yes
+				}
+				export_to_variable = {
+					variable_name = GE_mining_goods_counter
+					value = trigger_value:base_production
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = GE_mining_goods_counter
+							value = 1
+						}
+					}
+					change_variable = {
+						which = GE_mining_goods_counter
+						value = -1
+					}
+					ROOT = {
+						change_variable = {
+							which = GE_percentage_of_mining_goods
+							value = 1
+						}
+					}
+				}
+			}
+			multiply_variable = {
+				which = GE_percentage_of_mining_goods
+				value = 100
+			}
+			divide_variable = {
+				which = GE_percentage_of_mining_goods
+				which = GE_total_goods
+			}
+		#}
+		#Plantation = {
+			set_variable = {
+				which = GE_percentage_of_plantation_goods
+				value = 0
+			}
+			every_owned_province = {
+				limit = {
+					has_plantage_goods = yes
+				}
+				export_to_variable = {
+					variable_name = GE_plantation_goods_counter
+					value = trigger_value:base_production
+				}
+				while = {
+					limit = {
+						check_variable = {
+							which = GE_plantation_goods_counter
+							value = 1
+						}
+					}
+					change_variable = {
+						which = GE_plantation_goods_counter
+						value = -1
+					}
+					ROOT = {
+						change_variable = {
+							which = GE_percentage_of_plantation_goods
+							value = 1
+						}
+					}
+				}
+			}
+			multiply_variable = {
+				which = GE_percentage_of_plantation_goods
+				value = 100
+			}
+			divide_variable = {
+				which = GE_percentage_of_plantation_goods
+				which = GE_total_goods
+			}
+		#}
+	}
+}
+
+##################################################################################################
+##################################################################################################
+##################################################################################################
+# Tanistry effects
+##################################################################################################
+##################################################################################################
+##################################################################################################
+
+#Tanistry script, high legitimacy. This effect creates an heir with an avg. age in the early 30s, but a decreasing chance for an older or younger heir, and a 4 percent chance of a remarkable (read very high stat) ruler who is either very young, or very old, elected despite their age because of merit.
+vu_tanistry_heir_high_legitimacy = {
+	random_list = {
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 20
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 21
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 22
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 23
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 24
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 25
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 26
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 27
+				claim = 90
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 28
+				claim = 90
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 29
+				claim = 90
+				female = no
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 30
+				claim = 90
+				female = no
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 31
+				claim = 90
+				female = no
+			}
+		}
+		9 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 32
+				claim = 90
+				female = no
+			}
+		}
+		9 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 33
+				claim = 90
+				female = no
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 34
+				claim = 90
+				female = no
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 35
+				claim = 90
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 36
+				claim = 90
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 37
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 38
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 39
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 40
+				claim = 90
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 41
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 42
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 43
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 44
+				claim = 90
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 45
+				claim = 90
+				female = no
+			}
+		}
+		1 = {	#Rare remarkable individual chosen despite youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 18
+				claim = 95
+				female = no
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 50
+				claim = 95
+				female = no
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 15
+				claim = 100
+				female = no
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 60
+				claim = 100
+				female = no
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+	}
+}
+
+#Tanistry script, low legitimacy. This effect creates an heir with an avg. age in the early 30s, but a decreasing chance for an older or younger heir, and a 4 percent chance of a remarkable (read very high stat) ruler who is either very young, or very old, elected despite their age because of merit.
+vu_tanistry_heir_low_legitimacy = {
+	random_list = {
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 20
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 21
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 22
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 23
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 24
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 25
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 26
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 27
+				claim = 50
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 28
+				claim = 50
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 29
+				claim = 50
+				female = no
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 30
+				claim = 50
+				female = no
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 31
+				claim = 50
+				female = no
+			}
+		}
+		9 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 32
+				claim = 50
+				female = no
+			}
+		}
+		9 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 33
+				claim = 50
+				female = no
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 34
+				claim = 50
+				female = no
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 35
+				claim = 50
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 36
+				claim = 50
+				female = no
+			}
+		}
+		4 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 37
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 38
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 39
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 40
+				claim = 50
+				female = no
+			}
+		}
+		3 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 41
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 42
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 43
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 44
+				claim = 50
+				female = no
+			}
+		}
+		2 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 45
+				claim = 50
+				female = no
+			}
+		}
+		1 = {	#Rare remarkable individual chosen despite youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 18
+				claim = 60
+				female = no
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 50
+				claim = 60
+				female = no
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 15
+				claim = 75
+				female = no
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 60
+				claim = 75
+				female = no
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+	}
+}
+
+#Tanistry script, female. Note - use with caution, this is for very rare events with prereqs etc., if exploited, it could be game breakingingly OPed, not to mention absurd. Mostly for the hardline feminists who don't understand history (or Irish kingship, for that matter =p), but it is somewhat more plausible here than some other places, as Ireland did have some strong women and comparative gender equality.
+vu_tanistry_heir_female = {
+	random_list = {
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 20
+				claim = 10
+				female = yes
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 21
+				claim = 10
+				female = yes
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 22
+				claim = 10
+				female = yes
+			}
+		}
+		7 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 23
+				claim = 10
+				female = yes
+			}
+		}
+		8 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 24
+				claim = 10
+				female = yes
+			}
+		}
+		10 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 25
+				claim = 10
+				female = yes
+			}
+		}
+		15 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 26
+				claim = 10
+				female = yes
+			}
+		}
+		10 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 27
+				claim = 10
+				female = yes
+			}
+		}
+		8 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 28
+				claim = 10
+				female = yes
+			}
+		}
+		7 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 29
+				claim = 10
+				female = yes
+			}
+		}
+		6 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 30
+				claim = 10
+				female = yes
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 31
+				claim = 10
+				female = yes
+			}
+		}
+		5 = {
+			define_heir = {
+				dynasty = original_dynasty
+				age = 32
+				claim = 10
+				female = yes
+			}
+		}
+		1 = {	#Rare remarkable individual chosen despite youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 18
+				claim = 20
+				female = yes
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 36
+				claim = 20
+				female = yes
+			}
+			change_heir_adm = 1
+			change_heir_dip = 1
+			change_heir_mil = 1
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme youth
+			define_heir = {
+				dynasty = original_dynasty
+				age = 15
+				claim = 25
+				female = yes
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+		1 = {	#Rare remarkable individual chosen despite extreme advanced age
+			define_heir = {
+				dynasty = original_dynasty
+				age = 40
+				claim = 25
+				female = yes
+			}
+			change_heir_adm = 2
+			change_heir_dip = 2
+			change_heir_mil = 2
+		}
+	}
+}
+
+#DON'T FORGET TO ADD NEW ENTRIES HERE WHEN ADDING NEW IDEA GROUPS
+reset_all_national_ideas_effect = {	#Removes all national idea groups from the nation. Used in on_effects to counter the forced idea picks from countries folder.
+	remove_idea_group = aristocracy_ideas
+	remove_idea_group = plutocracy_ideas
+	remove_idea_group = horde_gov_ideas
+	remove_idea_group = theocracy_gov_ideas
+	remove_idea_group = indigenous_ideas
+	remove_idea_group = innovativeness_ideas
+	remove_idea_group = religious_ideas
+	remove_idea_group = spy_ideas
+	remove_idea_group = diplomatic_ideas
+	remove_idea_group = offensive_ideas
+	remove_idea_group = defensive_ideas
+	remove_idea_group = trade_ideas
+	remove_idea_group = economic_ideas
+	remove_idea_group = exploration_ideas
+	remove_idea_group = maritime_ideas
+	remove_idea_group = quality_ideas
+	remove_idea_group = quantity_ideas
+	remove_idea_group = expansion_ideas
+	remove_idea_group = administrative_ideas
+	remove_idea_group = humanist_ideas
+	remove_idea_group = influence_ideas
+	remove_idea_group = naval_ideas
+	remove_idea_group = court_ideas
+	remove_idea_group = mercenary_ideas
+	remove_idea_group = infrastructure_ideas
+	remove_idea_group = industry_ideas
+	remove_idea_group = nationalism_ideas
+	remove_idea_group = gunpowder_ideas
+	#
+	#
+	#
+}

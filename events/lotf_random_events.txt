@@ -1,0 +1,249 @@
+namespace = lotf_random_events
+
+country_event = { #American Innovation
+	id = lotf_random_events.1
+	title = lotf_random_events.1.t
+	desc = lotf_random_events.1.d
+	picture = INVENTION_eventPicture
+	is_triggered_only = yes
+	trigger = { 
+		tag = USA
+		NOT = { has_country_modifier = american_innovation_modifier }
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 1.5
+			has_idea_group = innovativeness_ideas	
+		}
+		modifier = {
+			factor = 1.5
+			stability = 1	
+		}
+	}
+	option = {
+		name = lotf_random_events.1.a
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		change_innovativeness = 2
+		add_country_modifier = { name = american_innovation_modifier duration = 3650 }
+	}
+}
+
+country_event = { #Stab + Advisor
+	id = lotf_random_events.2
+	title = lotf_random_events.2.t
+	desc = lotf_random_events.2.d
+	picture = ADVISOR_eventPicture
+	is_triggered_only = yes
+	trigger = { 
+		tag = USA
+		stability = -1
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 1.5
+			has_idea_group = humanist_ideas	
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = religious_ideas	
+		}
+		modifier = {
+			factor = 2
+			NOT = { stability = 0 }
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			random_list = {
+				5 = { set_country_flag = advisor_theologian }
+				3 = { set_country_flag = advisor_inquisitor }
+				2 = { set_country_flag = advisor_artist }
+			}
+		}
+	}
+	option = {
+		name = lotf_random_events.2.a
+		add_stability_or_adm_power = yes
+		if = {
+			limit = { has_country_flag = advisor_theologian }
+			define_advisor = {
+				type = theologian 
+				skill = 2 
+				cost_multiplier = 0.50 
+			}
+		}
+		if = {
+			limit = { has_country_flag = advisor_inquisitor }
+			define_advisor = {
+				type = inquisitor 
+				skill = 2 
+				cost_multiplier = 0.50 
+			}
+		}
+		if = {
+			limit = { has_country_flag = advisor_artist }
+			define_advisor = {
+				type = artist 
+				skill = 2 
+				cost_multiplier = 0.50 
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = { has_country_flag = advisor_theologian }
+			clr_country_flag = advisor_theologian
+		}
+		if = {
+			limit = { has_country_flag = advisor_inquisitor }
+			clr_country_flag = advisor_inquisitor
+		}
+		if = {
+			limit = { has_country_flag = advisor_artist }
+			clr_country_flag = advisor_artist
+		}
+	}
+}
+
+country_event = { #Native Tech Bonuses
+	id = lotf_random_events.3
+	title = lotf_random_events.3.t
+	desc = lotf_random_events.3.d
+	picture = CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	trigger = { 
+		technology_group = north_american
+		is_neighbor_of = USA
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 2
+			tech_difference = 3
+		}
+	}
+	option = {
+		name = lotf_random_events.3.a
+		add_stability_or_adm_power = yes
+		add_country_modifier = { name = native_tech_reduction_modifier duration = 3650 }
+	}
+}
+
+
+country_event = { #Great Awakening
+	id = lotf_random_events.4
+	title = lotf_random_events.4.t
+	desc = lotf_random_events.4.d
+	picture = RELIGION_eventPicture
+	is_triggered_only = yes
+	trigger = { 
+		tag = USA
+		NOT = { religious_unity = 1 }
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 2
+			NOT = { religious_unity = 0.75 }
+		}
+	}
+	option = {
+		name = lotf_random_events.4.a
+		add_stability_or_adm_power = yes
+		add_country_modifier = { name = great_awakening_modifier duration = 3650 }
+	}
+}
+
+country_event = { #Borat Easter Egg
+	id = lotf_random_events.5
+	title = lotf_random_events.5.t
+	desc = lotf_random_events.5.d
+	picture = BORAT_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = { 
+		tag = USA
+		any_province = { 
+			culture = khazak
+			has_discovered = ROOT
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 2
+			has_idea_group = humanist_ideas
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = innovativeness_ideas
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = diplomatic_ideas
+		}
+		modifier = {
+			factor = 0.5
+			is_at_war = yes
+		}
+	}
+	option = {
+		name = lotf_random_events.5.a
+		add_prestige = 10
+		add_country_modifier = { name = borat_easter_egg_modifier duration = 3650 }
+		define_advisor = {
+			culture = khazak
+			religion = animism
+			name = "Borat Sagdiyev"
+			type = statesman 
+			skill = 3 
+			cost_multiplier = 0.50 
+		}
+	}
+}
+
+
+country_event = { #University Flavor Event
+	id = lotf_random_events.6
+	title = lotf_random_events.6.t
+	desc = lotf_random_events.6.d
+	picture = UNIVERSITY_eventPicture
+	is_triggered_only = yes
+	trigger = { 
+		tag = USA
+		stability = 1
+		any_province = { 
+			has_building = university
+			development = 20
+			NOT = { has_province_flag = university_buff }
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 5
+			has_idea_group = innovativeness_ideas
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = economic_ideas
+		}
+	}
+	option = {
+		name = lotf_random_events.6.a
+		random_owned_province = {
+			limit = { 
+				has_building = university 
+				NOT = { has_province_flag = university_buff }
+				development = 20
+			}
+			set_province_flag = university_buff
+			add_province_modifier = { name = university_buff_modifier duration = 3650 }
+		}
+	}
+}
+

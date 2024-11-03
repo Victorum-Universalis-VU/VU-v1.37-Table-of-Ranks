@@ -1,0 +1,36 @@
+country_decisions = {
+	vu_byzantine_admiralty_decision = {
+		#major = no 
+		potential = {
+			OR = {
+				tag = BYZ 
+				was_tag = BYZ
+			}
+			# OR = { 
+				# mission_completed = ppbyz_admiralty_purple
+				mission_completed = BYZ_restore_navy #was byz_admiralty_purple
+			# }
+			151 = { 
+				NOT = { has_province_modifier = byz_admiralty_purple_modifier }
+			}
+		}
+		allow = {
+			years_of_income = 1 
+			dip_power = 100 
+			is_at_war = no 
+			151 = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_years_of_income = -1 
+			add_dip_power = -100 
+			151 = {	
+				add_province_modifier = {
+					name = byz_admiralty_purple_modifier
+					duration = -1 
+				}
+			}
+		}
+	}
+}

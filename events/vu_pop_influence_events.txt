@@ -1,0 +1,1420 @@
+#Events changing the availability of slaves and the influence different demographics have over a country
+#Mostly set country flags which then have an effect on buildings
+#Made originally for Victorum Universalis by Lord_Bowser
+###################################################################################################################################################################################################
+#Current content:
+#	Events for slaves setting flags for plantations to make them more efficient (3 Stages)
+#	Event for abolition of slavery
+#	Events regarding serfdom (Establishment and gradual removal, and a revolt event)
+#
+#Planned:
+#	Artisans/Middle Class
+#	Nobles/Elite
+#	Soldiers and Sailors
+###################################################################################################################################################################################################
+#For future me (and other people working with this file:
+#The flags are used how the effects were chronologically:
+#Example: 	Slavery became stronger, so the effects on the buildings become stronger with increasing number
+#			Serfdom (generally) became weaker, so the effects on the buildings become weaker with increasing number
+###################################################################################################################################################################################################
+
+namespace = vu_pop_influence
+
+###################################################################################################################################################################################################
+#slaves
+###################################################################################################################################################################################################
+
+
+country_event = {
+	id = vu_pop_influence.1
+	title = "vu_pop_influence.1.t" #Meagre slavery
+	desc = "vu_pop_influence.1.d" #Slaves are arriving on our plantations
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+	
+	trigger = {
+		AND = {
+			trading_part = {
+				trade_goods = slaves
+				value = 0.05
+			}
+			OR = {
+				any_owned_province = {
+					has_building = plantations
+				}
+				AND = {
+					any_owned_province = {
+						has_building = tradecompany
+						OR = {
+							trade_goods = spices
+							trade_goods = cloves
+						}
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_country_flag = vu_slaves_size_1
+					has_country_flag = vu_slaves_size_2
+					has_country_flag = vu_slaves_size_3
+				}
+			}
+			NOT = {
+				has_country_modifier = the_abolish_slavery_act
+			}
+			has_global_flag = triangle_happened
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 240
+		
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.1
+			}
+		}
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.2
+			}
+		}
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.5
+			}
+		}
+		modifier = {
+			factor = 0.5
+			slaves = 1
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = vu_slaves_size_1
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.1.a" #This will make our plantations more efficient
+		ai_chance = {
+			factor = 90
+			modifier = {
+				years_of_income = 2.0
+				factor = 0.5
+			}
+			modifier = {
+				years_of_income = 5.0
+				factor = 0.5
+			}
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 0.5
+			trigger = {
+				OR = {
+					#vanilla trade goods
+					trade_goods = cocoa
+					trade_goods = coffee
+					trade_goods = cotton
+					trade_goods = sugar
+					trade_goods = tea
+					trade_goods = tobacco
+					#vu-added trade goods (originally from trade goods expanded [I think])
+					trade_goods = palm_oil
+					trade_goods = opium
+					trade_goods = dates
+					trade_goods = vanilla
+					trade_goods = nutmeg
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.1.b" #We shouldn't rely on slave labor
+		ai_chance = { factor = 10 }
+		add_prestige = 10
+		random_owned_province = {
+			limit = {
+				NOT = {
+					OR = {
+					#vanilla trade goods
+					trade_goods = cocoa
+					trade_goods = coffee
+					trade_goods = cotton
+					trade_goods = sugar
+					trade_goods = tea
+					trade_goods = tobacco
+					#vu-added trade goods (originally from trade goods expanded [I think])
+					trade_goods = palm_oil
+					trade_goods = opium
+					trade_goods = dates
+					trade_goods = vanilla
+					trade_goods = nutmeg
+					}
+				}
+			}
+			add_base_production = 2
+			if = {
+				limit = {
+					AND = {
+						has_building = workshop
+						can_build = counting_house
+					}
+				}	
+				add_building = counting_house
+			}
+			else_if = {
+				limit = {
+					AND = {
+						NOT = {
+							OR = {
+								has_building = workshop
+								has_building = counting_house
+							}
+						}
+						can_build = workshop
+					}
+				}
+				add_building = workshop
+			}
+		}
+	}
+}
+
+country_event = {
+	id = vu_pop_influence.2
+	title = "vu_pop_influence.2.t" #We must purchase more slaves
+	desc = "vu_pop_influence.2.d" #More slaves are arriving on our plantations
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+	
+	trigger = {
+		AND = {
+			trading_part = {
+				trade_goods = slaves
+				value = 0.2
+			}
+			OR = {
+				any_owned_province = {
+					has_building = plantations
+				}
+				AND = {
+					any_owned_province = {
+						has_building = tradecompany
+						OR = {
+							trade_goods = spices
+							trade_goods = cloves
+						}
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_country_flag = vu_slaves_size_2
+					has_country_flag = vu_slaves_size_3
+				}
+			}
+			NOT = {
+				has_country_modifier = the_abolish_slavery_act
+			}
+			has_country_flag = vu_slaves_size_1
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 240
+		
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.3
+			}
+		}
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.4
+			}
+		}
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.6
+			}
+		}
+		modifier = {
+			factor = 0.8
+			slaves = 1
+		}
+		modifier = {
+			factor = 0.5
+			slaves = 3
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = vu_slaves_size_2
+			clr_country_flag = vu_slaves_size_1	
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.2.a" #This will make our plantations more efficient
+		ai_chance = {
+			factor = 50
+			modifier = {
+				years_of_income = 2.0
+				factor = 0.5
+			}
+			modifier = {
+				years_of_income = 5.0
+				factor = 0.5
+			}
+			modifier = {
+				num_of_loans = 1
+				factor = 1.3
+			}
+			modifier = {
+				num_of_loans = 5
+				factor = 2
+			}
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 1
+			trigger = {
+				OR = {
+					#vanilla trade goods
+					trade_goods = cocoa
+					trade_goods = coffee
+					trade_goods = cotton
+					trade_goods = sugar
+					trade_goods = tea
+					trade_goods = tobacco
+					#vu-added trade goods (originally from trade goods expanded [I think])
+					trade_goods = palm_oil
+					trade_goods = opium
+					trade_goods = dates
+					trade_goods = vanilla
+					trade_goods = nutmeg
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.2.b" #We shouldn't rely on slave labor
+		ai_chance = { 
+			factor = 40 
+			modifier = {
+				is_year = 1700
+				factor = 2
+			}
+			modifier = {
+				is_year = 1800
+				factor = 2
+				any_owned_province = {
+                    has_province_modifier = enlightened_modifier
+                    enlightenment = 100
+                }
+			}
+		}
+		add_prestige = 15
+		#counter to make a for loop out of a while loop
+		set_variable = {
+			which = vu_pop_influence_industry_province_counter
+			value = 0
+		}
+		#increases base production in 3 random non-plantation provinces by 2
+		while = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = vu_pop_influence_industry_province_counter
+						value = 3
+					}
+				}
+			}
+			change_variable = {
+				which = vu_pop_influence_industry_province_counter
+				value = 1
+			}
+			random_owned_province = {
+				limit = {
+					NOT = {
+						OR = {
+						#vanilla trade goods
+						trade_goods = cocoa
+						trade_goods = coffee
+						trade_goods = cotton
+						trade_goods = sugar
+						trade_goods = tea
+						trade_goods = tobacco
+						#vu-added trade goods (originally from trade goods expanded [I think])
+						trade_goods = palm_oil
+						trade_goods = opium
+						trade_goods = dates
+						trade_goods = vanilla
+						trade_goods = nutmeg
+						}
+					}
+				}
+				add_base_production = 2
+				if = {
+					limit = {
+						AND = {
+							has_building = workshop
+							can_build = counting_house
+						}
+					}
+					add_building = counting_house
+				}
+				else_if = {
+					limit = {
+						AND = {
+							NOT = {
+								OR = {
+									has_building = workshop
+									has_building = counting_house
+								}
+							}
+						}
+						can_build = workshop
+					}
+					add_building = workshop
+				}
+			}
+		}
+	}
+	option = {
+		name = "vu_pop_influence.2.c" #Let's industrialize
+		highlight = yes
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				any_owned_province = {
+                    has_province_modifier = enlightened_modifier
+                    enlightenment = 100
+                }
+			}
+			modifier = {
+				factor = 2
+				is_great_power = yes
+			}
+			modifier = {
+				factor = 2
+				production_income_percentage = 0.4
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					production_income_percentage = 0.2
+				}
+			}
+		}
+		trigger = {
+			any_owned_province = {
+				OR = {
+					trade_goods = coal
+					trade_goods = oil
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					trade_goods = coal
+					trade_goods = oil
+				}
+			}
+			add_base_production = 5
+			if = {
+				limit = {
+					can_build = furnace
+				}
+				add_building = furnace
+			}
+			else = {
+				add_base_production = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = vu_pop_influence.3
+	title = "vu_pop_influence.3.t" #Buy all the slaves!
+	desc = "vu_pop_influence.3.d" #Even more slaves are arriving on our plantations
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+	
+	trigger = {
+		AND = {
+			trading_part = {
+				trade_goods = slaves
+				value = 0.4
+			}
+			OR = {
+				any_owned_province = {
+					has_building = plantations
+				}
+				AND = {
+					any_owned_province = {
+						has_building = tradecompany
+						OR = {
+							trade_goods = spices
+							trade_goods = cloves
+						}
+					}
+				}
+			}
+			NOT = {
+				has_country_flag = vu_slaves_size_3
+			}
+			NOT = {
+				has_country_modifier = the_abolish_slavery_act
+			}
+			has_country_flag = vu_slaves_size_2
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 240
+		
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.5
+			}
+		}
+		modifier = {
+			factor = 0.75
+			trading_part = {
+				trade_goods = slaves
+				value = 0.6
+			}
+		}
+		modifier = {
+			factor = 0.5
+			trading_part = {
+				trade_goods = slaves
+				value = 0.8
+			}
+		}
+		modifier = {
+			factor = 0.8
+			slaves = 1
+		}
+		modifier = {
+			factor = 0.5
+			slaves = 3
+		}
+		modifier = {
+			factor = 0.3
+			slaves = 10
+		}
+		modifier = {
+			factor = 0.5
+			has_global_flag = popularization_of_sugar_happened
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = vu_slaves_size_3
+			clr_country_flag = vu_slaves_size_2	
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.3.a" #This will make our plantations more efficient!
+		ai_chance = {
+			factor = 30
+			modifier = {
+				years_of_income = 2.0
+				factor = 0.5
+			}
+			modifier = {
+				years_of_income = 5.0
+				factor = 0.5
+			}
+			modifier = {
+				num_of_loans = 1
+				factor = 1.3
+			}
+			modifier = {
+				num_of_loans = 5
+				factor = 2
+			}
+			modifier = {
+				num_of_loans = 10
+				factor = 2
+			}
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 2
+			trigger = {
+				OR = {
+					#vanilla trade goods
+					trade_goods = cocoa
+					trade_goods = coffee
+					trade_goods = cotton
+					trade_goods = sugar
+					trade_goods = tea
+					trade_goods = tobacco
+					#vu-added trade goods (originally from trade goods expanded [I think])
+					trade_goods = palm_oil
+					trade_goods = opium
+					trade_goods = dates
+					trade_goods = vanilla
+					trade_goods = nutmeg
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "vu_pop_influence.3.b" #We shouldn't rely on slave labor
+		ai_chance = { 
+			factor = 40 
+			modifier = {
+				is_year = 1700
+				factor = 2
+			}
+			modifier = {
+				is_year = 1800
+				factor = 2
+				any_owned_province = {
+                    has_province_modifier = enlightened_modifier
+                    enlightenment = 100
+                }
+			}
+		}
+		add_prestige = 15
+		#counter to make a for loop out of a while loop
+		set_variable = {
+			which = vu_pop_influence_industry_province_counter
+			value = 0
+		}
+		#increases base production in 5 random non-plantation provinces by 3
+		while = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = vu_pop_influence_industry_province_counter
+						value = 5
+					}
+				}
+			}
+			change_variable = {
+				which = vu_pop_influence_industry_province_counter
+				value = 1
+			}
+			random_owned_province = {
+				limit = {
+					NOT = {
+						OR = {
+						#vanilla trade goods
+						trade_goods = cocoa
+						trade_goods = coffee
+						trade_goods = cotton
+						trade_goods = sugar
+						trade_goods = tea
+						trade_goods = tobacco
+						#vu-added trade goods (originally from trade goods expanded [I think])
+						trade_goods = palm_oil
+						trade_goods = opium
+						trade_goods = dates
+						trade_goods = vanilla
+						trade_goods = nutmeg
+						}
+					}
+				}
+				add_base_production = 3
+				if = {
+					limit = {
+						AND = {
+							has_building = workshop
+							can_build = counting_house
+						}
+					}
+					add_building = counting_house
+				}
+				else_if = {
+					limit = {
+						AND = {
+							NOT = {
+								OR = {
+									has_building = workshop
+									has_building = counting_house
+								}
+							}
+						}
+						can_build = workshop
+					}
+					add_building = workshop
+				}
+			}
+		}
+	}
+	option = {
+		name = "vu_pop_influence.3.c" #Let's industrialize instead!
+		highlight = yes
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 2
+				NOT = {
+					has_institution = manufactories
+				}
+			}
+			modifier = {
+				factor = 5
+				NOT = {
+					has_institution = industrialization
+				}
+			}
+			modifier = {
+				factor = 2
+				is_great_power = yes
+			}
+			modifier = {
+				factor = 2
+				production_income_percentage = 0.4
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					production_income_percentage = 0.2
+				}
+			}
+		}
+		trigger = {
+			any_owned_province = {
+				OR = {
+					trade_goods = coal
+					trade_goods = oil
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					trade_goods = coal
+					trade_goods = oil
+				}
+			}
+			add_base_production = 5
+			if = {
+				limit = {
+					can_build = furnace
+				}
+				add_building = furnace
+			}
+			else = {
+				add_base_production = 1
+			}
+		}
+	}
+	option = {
+		name = "vu_pop_influence.3.d" #We should stop all this at once!
+		highlight = yes
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 3
+				AND = {
+					OR = {
+		            	technology_group = western
+		            	technology_group = dutch_tech_group
+		            	technology_group = english_tech_group
+		            	technology_group = french_tech_group
+		            	technology_group = german_tech_group
+		            	technology_group = italian_tech_group
+		            	technology_group = portuguese_tech_group
+		            	technology_group = roman_tech_group
+		            	technology_group = scandinavian_tech_group
+		            	technology_group = spanish_tech_group
+		            	technology_group = swiss_tech_group
+		            }
+					is_year = 1830
+				}
+			}
+			modifier = {
+				factor = 10
+				is_year = 1850
+			}
+		}
+		trigger = {
+		    OR = {
+                any_owned_province = {
+                    has_province_modifier = enlightened_modifier
+                    enlightenment = 100
+                }
+                has_global_flag = abolitionism_happened
+            }
+		}
+		add_stability = 1
+		add_prestige = 20
+		change_government_reform_progress = 100
+		add_republican_tradition = 10
+	}
+}
+
+country_event = {
+	id = vu_pop_influence.4
+	title = "vu_pop_influence.4.t" #Abolition of Slavery
+	desc =  "vu_pop_influence.4.d" #Despite the name of this historical event, not all forms of slavery have truly been abolished since there still remains indentured servitude, a program our elites and industrialists hope will alleviate their losses and help provide an alternative means of labour. This programe however does in essence violate the spirit of the new laws introduced by the abolishment slavery due to the fact that abolishing one form of slavery, only to support another is hypocritical in nature.
+	picture = WESTERNISATION_eventPicture
+	
+	trigger = {
+		has_country_modifier = the_abolish_slavery_act
+		OR = {
+			has_country_flag = vu_slaves_size_1
+			has_country_flag = vu_slaves_size_2
+			has_country_flag = vu_slaves_size_3
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = vu_slaves_size_1
+			clr_country_flag = vu_slaves_size_2
+			clr_country_flag = vu_slaves_size_3
+		}
+	}
+	option = {
+		name = "vu_pop_influence.4.a" #Finally, this injustice is over
+		ai_chance = { factor = 100 }
+		add_stability = 1
+		change_government_reform_progress = 25
+	}
+	option = {
+		name = "vu_pop_influence.4.b" #There's no other alternative
+		ai_chance = { factor = 0 }
+		add_stability = -1
+		add_prestige = -15
+		hidden_effect = {
+			set_country_flag = vu_indentured_servants
+		}
+	}
+}
+
+###################################################################################################################################################################################################
+#serfs
+###################################################################################################################################################################################################
+
+#serfdom in western europe
+country_event = {
+	id = vu_pop_influence.5
+	title = "vu_pop_influence.5.t" #Serfdom in Europe
+	desc = "vu_pop_influence.5.d" #All across Europe, peasants were conscripted into a system called serfdom or indentured servitude to work on farms and fields
+	picture = FARMING_eventPicture
+	
+	trigger = {
+		AND = {
+			OR = {
+		    	technology_group = western
+		    	technology_group = dutch_tech_group
+		    	technology_group = english_tech_group
+		    	technology_group = french_tech_group
+		    	technology_group = german_tech_group
+		    	technology_group = italian_tech_group
+		    	technology_group = portuguese_tech_group
+		    	technology_group = roman_tech_group
+		    	technology_group = scandinavian_tech_group
+		    	technology_group = spanish_tech_group
+		    	technology_group = swiss_tech_group
+		    }
+			NOT = { 
+				has_institution = renaissance 
+			}
+			NOT = {
+				has_country_flag = vu_serfs_1
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+		
+		modifier = {
+			factor = 0.5
+			government = monarchy
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				legitimacy = 50
+			}
+		}
+		modifier = {
+			factor = 0.8
+			legitimacy = 90
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_country_flag = vu_serfs_1
+		}
+	}
+	option = {
+		name = "vu_pop_influence.5.a" #Great, let's use the peasantry!
+		ai_chance = {
+			factor = 40
+			modifier = {
+			    factor = 2
+				stability = 2
+			}
+		}
+		add_years_of_income = 1
+	}
+	option = {
+		name = "vu_pop_influence.5.b" #Pay them so they stay quiet
+		ai_chance = {
+			factor = 60
+			modifier = {
+			    factor = 2
+				NOT = {
+					stability = -1	
+				}
+			}
+		}
+		add_stability = 1
+	}
+}
+
+#serfdom in eastern europe
+country_event = {
+	id = vu_pop_influence.6
+	title = "vu_pop_influence.6.t" #Serfdom in Eastern Europe
+	desc = "vu_pop_influence.6.d" #Serfdom, originating with Charlemagne in Western Europe, slowly moved east and established itself in Eastern Europe
+	picture = FARMING_eventPicture
+	
+	trigger = {
+		AND = {
+			capital_scope = { superregion = eastern_europe_superregion }
+			is_year = 1500
+			NOT = {
+				has_country_flag = vu_serfs_1
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 480
+		modifier = {
+			factor = 2
+			religion = orthodox
+		}
+		modifier = {
+			factor = 0.5
+			government = monarchy
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				legitimacy = 50
+			}
+		}
+		modifier = {
+			factor = 0.8
+			legitimacy = 90
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_country_flag = vu_serfs_1
+		}
+	}
+	option = {
+		name = "vu_pop_influence.6.a" #Great, let's use the peasantry!
+		ai_chance = {
+			factor = 30
+			modifier = {
+				stability = 2
+				factor = 2
+			}
+		}
+		add_years_of_income = 1
+	}
+	option = {
+		name = "vu_pop_influence.6.b" #Pay them so they stay quiet
+		ai_chance = {
+			factor = 30
+			modifier = {
+				NOT = {
+					stability = -1	
+				}
+			factor = 2
+			}
+		}
+		add_stability = 1
+	}
+	#intended to get Russia to form (adm 10), as they often lag behind
+	option = {
+		name = "vu_pop_influence.6.c" #This should help us in the long-term right?
+		trigger = {
+			religion = orthodox
+		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 1
+				NOT = {
+					adm_tech = 29
+				}
+			}
+		}
+		add_years_of_income = 0.25
+		add_adm_power = 100
+	}
+}
+
+#decreased serfdom
+country_event = {
+	id = vu_pop_influence.7
+	title = "vu_pop_influence.7.t" #Decreased Serfdom
+	desc = "vu_pop_influence.7.d" #With more and more serfs beeing freed and moving to cities, the effects of serfdom get reduced
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		has_institution = renaissance
+		OR = {
+			capital_scope = { region = italy_region }
+			AND = {
+				capital_scope = { region = low_countries_region }
+				is_year = 1480
+			}
+			AND = {
+				capital_scope = { superregion = europe_superregion }
+				is_year = 1600
+			}
+			AND = {
+				capital_scope = { superregion = eastern_europe_superregion }
+				is_year = 1700
+				NOT = {
+					OR = {
+						tag = MOS
+						tag = RUS
+						tag = TZR
+					}
+				}
+			}
+			AND = {
+				OR = {
+					tag = MOS
+					tag = RUS
+					tag = TZR
+				}
+				is_year = 1800
+			}
+		}
+		has_country_flag = vu_serfs_1
+		NOT = {
+			has_country_flag = vu_serfs_revolt
+		}
+	}
+	mean_time_to_happen = {
+		months = 300
+		modifier = {
+			factor = 1.5
+			government = monarchy
+		}
+		modifier = {
+			factor = 2
+			legitimacy = 90
+		}
+		modifier = {
+			factor = 0.75
+			government = republic
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				has_idea_group = humanist_ideas
+				has_idea_group = innovativeness_ideas
+			}
+		}
+		modifier = {
+			factor = 0.75
+			has_idea_group = plutocracy_ideas
+		}
+	}
+	option = {
+		name = "vu_pop_influence.7.a" #We must stop them at all costs!
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0.5
+				AND = {
+					government = republic
+					republican_tradition = 40
+				}
+			}
+			modifier = {
+				factor = 1
+				OR = {
+					ruler_has_personality = strict_personality
+					ruler_has_personality = cruel_personality
+				}
+			}
+		}
+		hidden_effect = {
+			set_country_flag = vu_serfs_revolt
+		}
+		add_mil_power = -50
+		add_yearly_manpower = -0.1
+		add_stability = 1
+		add_legitimacy = 10
+	}
+	option = {
+		name = "vu_pop_influence.7.b" #Let them be for we cannot stop change
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {
+			clr_country_flag = vu_serfs_1
+			set_country_flag = vu_serfs_2
+		}
+		add_years_of_income = -0.5
+		add_prestige = 5
+	}
+	option = {
+		name = "vu_pop_influence.7.c" #Serfdom of any kind has no place in our Republic!
+		trigger = {
+			government = republic
+		}
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				factor = 5
+				AND = {
+					years_of_income = 1
+					NOT = {
+						republican_tradition = 95
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = vu_serfs_1
+		}
+		add_republican_tradition = 5
+		add_years_of_income = -0.5
+	}
+}
+
+##serfs revolt event
+country_event = {
+	id = vu_pop_influence.8
+	title = "vu_pop_influence.8.t" #The Serfs are revolting!
+	desc = "vu_pop_influence.8.d" #Anyone could have predicted this, despite our efforts to keep the serfs in line
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		has_country_flag = vu_serfs_revolt
+		OR = {
+			is_at_war = yes
+			average_unrest = -1
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+		modifier = {
+			factor = 0.5
+			has_disaster = peasant_war
+		}
+		modifier = {
+			factor = 1.5
+			stability = 2
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				stability = 0
+			}
+		}
+		modifier = {
+			factor = 0.8
+			NOT = {
+				manpower_percentage = 0.3
+			}
+		}
+		modifier = {
+			factor = 0.8
+			NOT = {
+				manpower_percentage = 0.1
+			}
+		}
+		modifier = {
+			factor = 0.8
+			num_of_loans = 5
+		}
+		modifier = {
+			factor = 0.5
+			is_bankrupt = yes
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = vu_serfs_revolt
+		}
+	}
+	option = {
+		name = "vu_pop_influence.8.a" #We have no option but to concede
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 2
+				NOT = {
+					manpower_percentage = 0.1
+				}
+			}
+			modifier = {
+				factor = 1
+				NOT = {
+					stability = 0
+				}
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = vu_serfs_1
+		}
+		add_prestige = -10
+		if = {
+			limit = {
+				NOT = {
+					stability = 0
+				}
+			}
+			add_stability = 1
+		}
+		
+	}
+	option = {
+		name = "vu_pop_influence.8.b" #Let us offer them a compromise
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0.5
+				
+			}
+		}
+		add_stability = -1
+		add_dip_power = 50
+		add_years_of_income = 0.5
+		hidden_effect = {
+			clr_country_flag = vu_serfs_1
+			set_country_flag = vu_serfs_2
+		}
+	}
+	option = {
+		name = "vu_pop_influence.8.c" #Crush them!
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0.5
+				NOT = {
+					manpower_percentage = 0.4
+				}
+			}
+			modifier = {
+				factor = 0.1
+				NOT = {
+					manpower_percentage = 0.05
+				}
+			}
+			modifier = {
+				factor = 2
+				ruler_has_personality = cruel_personality
+			}
+		}
+		add_mil_power = -50
+		add_legitimacy = -15
+		random_owned_province = {
+			limit = {
+				same_continent = CAPITAL
+			}
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 3
+			}
+		}
+		random_owned_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 2
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_building = farm_estate
+			}
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 3
+				win = yes
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_building = farm_estate
+			}
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 3
+				win = yes
+			}
+		}
+		random_owned_province = {
+			limit = {
+				AND = {
+					fort_level = 1
+					is_capital = no
+				}
+			}
+			spawn_rebels = {
+				type = leadered_peasant_rebels
+				size = 2
+				win = yes
+			}
+		}
+	}
+}
+
+##serfs totally abolished
+country_event = {
+	id = vu_pop_influence.9
+	title = "vu_pop_influence.9.t" #Serfdom abolished!
+	desc = "vu_pop_influence.9.d" #Since the time of the Renaissance, Serfdom in Europe has gradually been on the decline. Let us hasten its decline by finally ending it once and for all!
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		OR = {
+			AND = {
+				has_country_flag = vu_serfs_1
+				AND = {
+					OR = {
+						tag = MOS
+						tag = RUS
+						tag = TZR
+					}
+					is_year = 1800
+				}
+			}
+			AND = {
+				has_country_flag = vu_serfs_2
+				OR = {
+					AND = {
+						capital_scope = { region = italy_region }
+						is_year = 1500
+					}
+					AND = {
+						capital_scope = { region = low_countries_region }
+						is_year = 1550
+					}
+					AND = {
+						capital_scope = { superregion = europe_superregion }
+						is_year = 1650
+					}
+					AND = {
+						capital_scope = { superregion = eastern_europe_superregion }
+						is_year = 1750
+						NOT = {
+							OR = {
+								tag = MOS
+								tag = RUS
+								tag = TZR
+							}
+						}
+					}
+					AND = {
+						OR = {
+							tag = MOS
+							tag = RUS
+							tag = TZR
+						}
+						is_year = 1820
+					}
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+		modifier = {
+			factor = 2
+			has_government_mechanic = russian_mechanic
+		}
+		modifier = {
+			factor = 0.5
+			has_idea_group = innovativeness_ideas
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				government_rank = 8
+			}
+		}
+		modifier = {
+			factor = 1.5
+			religion = orthodox
+		}
+	}
+	immediate = {
+		clr_country_flag = vu_serfs_2
+		clr_country_flag = vu_serfs_1
+	}
+	option = {
+		name = "vu_pop_influence.9.a" #Release them!
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 1.5
+				has_idea_group = innovativeness_ideas
+			}
+			modifier = {
+				factor = 0.7
+				has_government_mechanic = russian_mechanic
+			}
+		}
+		add_stability = 1
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+	}
+	option = {
+		name = "vu_pop_influence.9.b" #Let us reform the state to adapt to this change
+		trigger = {
+			has_country_flag = vu_serfs_1
+		}
+		ai_chance = {
+			factor = 40
+		}
+		add_stability = 1
+		change_government_reform_progress = 50
+		add_adm_power = 25
+		add_dip_power = 25
+		random_owned_province = {
+			limit = {
+				is_capital = yes
+			}
+			add_base_tax = 3
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+	}
+}

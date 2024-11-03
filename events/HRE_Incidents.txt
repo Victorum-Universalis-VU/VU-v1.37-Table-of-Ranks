@@ -1,0 +1,109 @@
+#VU updated by San Felipe for 1.35
+namespace = imperial_hussite
+
+country_event = { #Hussite incident fire
+	id = imperial_hussite.1
+	title = imperial_hussite.1.t
+	desc = imperial_hussite.1.d
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+	hidden = yes
+
+	trigger = {
+		always = no
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_imperial_incident = incident_hussite_dominance
+		}
+	}
+	option = {
+		name = imperial_hussite.1.a
+	}
+}
+
+country_event = {
+	id = imperial_hussite.2
+	title = imperial_hussite.2.t
+	desc = imperial_hussite.2.d
+	picture = RELIGIOUS_CONVERSION_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = imperial_hussite.2.a
+
+		hidden_effect = {
+			set_hre_religion_treaty = yes
+			set_hre_heretic_religion = catholic
+			set_HRE_religion = hussite
+			set_hre_religion_locked = yes
+		}
+		
+		tooltip = {
+			set_HRE_religion = hussite
+		}
+
+		ai_chance = {
+			factor = 1
+			modifier = {
+				religion = hussite
+				factor = 500
+			}
+			modifier = {
+				any_ally = {
+					religion = hussite
+				}
+				factor = 2
+			}
+		}
+	}
+
+	option = {
+		name = imperial_hussite.2.b
+
+		set_hre_religion_treaty = yes
+
+		ai_chance = {
+			factor = 1
+			modifier = {
+				has_idea_group = humanist_ideas
+				factor = 2
+			}
+			modifier = {
+				any_ally = {
+					religion = hussite
+				}
+				factor = 2
+			}
+		}
+	}
+
+	Option = {
+		name = imperial_hussite.2.c
+
+		ai_chance = {
+			factor = 1
+			modifier = {
+				has_idea_group = religious_ideas
+				factor = 2
+			}
+			modifier = {
+				factor = 10
+				any_rival_country = {
+					religion = hussite 
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				is_part_of_hre = yes
+				religion = hussite
+			}
+		}
+		add_reform_desire = 0.05
+	}
+}

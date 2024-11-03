@@ -1,0 +1,560 @@
+namespace = ME_Sus_Events
+
+country_event = {
+	id = ME_Sus_Events.1 #An Imposter Among Us
+	title = ME_Sus_Events.1.t
+	desc = ME_Sus_Events.1.d
+	picture = ACCUSATION_eventPicture
+
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	trigger = {
+		tag = SOS
+	}
+	
+	option = {
+		name = ME_Sus_Events.1.a
+		
+		ai_chance = { factor = 0 } #no, better not
+		
+		custom_tooltip = SOS_get_special_mission_tree
+		set_country_flag = SOS_impostor_missions
+		swap_non_generic_missions = yes
+	}
+	
+	option = {
+		name = ME_Sus_Events.1.b
+		
+		ai_chance = { factor = 100 }
+		
+		add_legitimacy = 10
+		add_devotion = 10
+	}
+}
+
+country_event = {
+	id = ME_Sus_Events.2 #Emergency Meeting
+	title = ME_Sus_Events.2.t
+	desc = ME_Sus_Events.2.d
+	picture = ACCUSATION_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ME_Sus_Events.2.a
+		
+		ai_chance = { factor = 1 } 
+		
+		add_country_modifier = {
+			name = SOS_national_unity
+			duration = 10950
+		}
+		
+	}
+	
+	option = {
+		name = ME_Sus_Events.2.b
+		
+		ai_chance = { factor = 1 }
+		
+		
+		add_country_modifier = {
+			name = SOS_plan
+			duration = 10950
+		}
+		
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+	}
+	
+	option = {
+		name = ME_Sus_Events.2.c
+		
+		ai_chance = { factor = 1 }
+		
+		add_country_modifier = {
+			name = SOS_high_alert
+			duration = 10950
+		}
+		
+		add_stability_or_adm_power = yes 
+	}
+}
+
+country_event = {
+	id = ME_Sus_Events.3 #Shhhh! Do your Tasks!
+	title = ME_Sus_Events.3.t
+	desc = ME_Sus_Events.3.d
+	picture = ACCUSATION_eventPicture
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					any_owned_province = {
+						NOT = { has_tax_building_trigger = yes }
+					}
+				}
+				set_country_flag = SUS_has_a_building_for_church
+				pick_best_provinces = {
+					1 = yes
+					global_trigger = "
+						NOT = { has_tax_building_trigger = yes }
+					"
+					event_target_name = "Sus_target"
+					scope = every_owned_province
+					scale = higher_development_than
+				}
+			}
+		}
+	}
+				
+	
+	option = {
+		name = ME_Sus_Events.3.a #they went onto to build something
+		
+		ai_chance = { factor = 0 } #no, better not
+		
+		if = {
+			limit = {
+				has_country_flag = SUS_has_a_building_for_church
+			}
+			event_target:Sus_Target_1 = {
+				add_or_upgrade_tax_building = yes
+			}
+			
+			custom_tooltip = " "
+		}
+		add_country_modifier = {
+			name = SOS_building_stuff
+			duration = 10950
+		}
+	}
+	
+	option = {
+		name = ME_Sus_Events.3.b #or they went to make better defenses
+		
+		ai_chance = { factor = 100 }
+		
+		add_army_tradition_or_mil_power = { amount = 10 }
+		
+		custom_tooltip = " "
+		
+		add_country_modifier = {
+			name = SOS_preparing_defenses
+			duration = 9125
+		}
+	}
+	
+	option = {
+		name = ME_Sus_Events.3.c #or they went to train
+		
+		ai_chance = { factor = 100 }
+		
+		if = {
+			limit = {
+				has_dlc = "Cradle of Civilization"
+			}
+			add_army_professionalism = 0.05
+		}
+		else = {
+			add_mil_power = 100
+		}
+		
+		custom_tooltip = " "
+		
+		create_general_with_pips = {
+			tradition = 40
+			add_manuever = 1
+		}
+	}
+	
+	after = {
+		clr_country_flag = SUS_has_a_building_for_church
+	}
+}
+
+country_event = {
+	id = ME_Sus_Events.4 #Impostor iz found
+	title = ME_Sus_Events.4.t
+	desc = ME_Sus_Events.4.d
+	picture = ACCUSATION_eventPicture
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			define_exiled_ruler = {
+				exiled_as = sus_candidate
+				min_age = 25 
+				max_age = 50
+				change_adm = 4
+				change_dip = 4
+				change_mil = 4
+				option = 0
+			}
+		}
+	}
+	option = {
+		name = ME_Sus_Events.4.a 
+		
+		ai_chance = { factor = 1 } #execute impostor
+		
+		ME_add_power_projection = { amount = 40 }
+		
+		add_mil_power = 100
+	}
+	
+	option = {
+		name = ME_Sus_Events.4.b 
+		
+		ai_chance = { factor = 1 } #execute impostor
+		
+		set_ruler = sus_candidate
+	}
+	after = {
+		clear_exiled_ruler = sus_candidate
+	}
+}
+
+#one particularly nasty, expensive event, but it is well worth it for the meme.
+
+#another thing I don't like about the event is how one-sided it is. There is info about the event happening, but no counterplay. It may seem scummy, but as such I've limited it to only AI targets.
+country_event = { 
+	id = ME_Sus_Events.5 #Castle vent
+	title = ME_Sus_Events.5.t
+	desc = ME_Sus_Events.5.d
+	picture = ACCUSATION_eventPicture
+	
+	trigger = {
+		has_country_flag = SOS_siege_events
+		NOT = {
+			any_war_enemy_country = {
+				ai = no
+			}
+		}
+		any_war_enemy_country = {
+			any_owned_province = {
+				sieged_by = ROOT
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	major = yes
+	major_trigger = {
+		war_with = event_target:SOS_we_are_sus
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_war_enemy_country = {
+				limit = {
+					any_owned_province = {
+						sieged_by = ROOT
+					}
+				}
+				random_owned_province = {
+					limit = {
+						sieged_by = ROOT
+					}
+					save_event_target_as = Sos_province_chosen
+				}
+			}
+			event_target:Sos_province_chosen = {
+				change_siege = 2
+			}
+			save_event_target_as = SOS_we_are_sus
+		}
+	}
+	
+	option = {
+		name = ME_Sus_Events.5.a
+		
+		ai_chance = { factor = 0 } 
+		
+		custom_tooltip = SOS_siege_has_advanced
+	}
+}
+
+country_event = {
+	id = ME_Sus_Events.6
+	title = ME_Sus_Events.6.t
+	desc = ME_Sus_Events.6.d
+	picture = ACCUSATION_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ME_Sus_Events.6.a
+		
+		ai_chance = { factor = 1 }
+		
+		set_country_flag = SOS_can_fabricate_states
+		add_government_reform = SOS_advanced_tactics
+	}
+	
+	option = {
+		name = ME_Sus_Events.6.b
+		
+		ai_chance = { factor = 0 }
+		
+		add_prestige_or_monarch_power = { amount = 20 }
+	}
+}
+
+#country_event = {
+#	id = ME_Sus_Events.7
+#	title = ME_Sus_Events.7.t
+#	desc = ME_Sus_Events.7.d
+#	picture = ACCUSATION_eventPicture
+#
+#	is_triggered_only = yes
+#	
+#	immediate = {
+#		hidden_effect = {
+#			set_country_flag = SOS_window_is_open
+#			if = { #TODO: if this will be used by someone else than Sus, optimize this
+#				limit = {
+#					event_target:Sus_target_for_claims = {
+#						num_of_owned_provinces_with = {
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#							value = 5
+#						}
+#					}
+#				}
+#				set_country_flag = SOS_1_claim
+#				set_country_flag = SOS_2_claim
+#				set_country_flag = SOS_3_claim
+#				set_country_flag = SOS_4_claim
+#				set_country_flag = SOS_5_claim
+#				
+#				event_target:Sus_target_for_claims = {
+#					pick_best_provinces = {
+#						scope = every_owned_province
+#						scale = higher_development_than
+#						5 = yes
+#						global_trigger = "
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						"
+#						event_target_name = Sus_Target_1
+#					}
+#				}
+#			}
+#			else_if = {
+#				limit = {
+#					event_target:Sus_target_for_claims = {
+#						num_of_owned_provinces_with = {
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#							value = 4
+#						}
+#					}
+#				}
+#				set_country_flag = SOS_1_claim
+#				set_country_flag = SOS_2_claim
+#				set_country_flag = SOS_3_claim
+#				set_country_flag = SOS_4_claim
+#				
+#				event_target:Sus_target_for_claims = {
+#					pick_best_provinces = {
+#						scope = every_owned_province
+#						scale = higher_development_than
+#						4 = yes
+#						global_trigger = "
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						"
+#						event_target_name = Sus_Target_2
+#					}
+#				}
+#			}
+#			else_if = {
+#				limit = {
+#					event_target:Sus_target_for_claims = {
+#						num_of_owned_provinces_with = {
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#							value = 3
+#						}
+#					}
+#				}
+#				set_country_flag = SOS_1_claim
+#				set_country_flag = SOS_2_claim
+#				set_country_flag = SOS_3_claim
+#				
+#				event_target:Sus_target_for_claims = {
+#					pick_best_provinces = {
+#						scope = every_owned_province
+#						scale = higher_development_than
+#						3 = yes
+#						global_trigger = "
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						"
+#						event_target_name = Sus_Target_3
+#					}
+#				}
+#			}
+#			else_if = {
+#				limit = {
+#					event_target:Sus_target_for_claims = {
+#						num_of_owned_provinces_with = {
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#							value = 2
+#						}
+#					}
+#				}
+#				set_country_flag = SOS_1_claim
+#				set_country_flag = SOS_2_claim
+#				
+#				event_target:Sus_target_for_claims = {
+#					pick_best_provinces = {
+#						scope = every_owned_province
+#						scale = higher_development_than
+#						2 = yes
+#						global_trigger = "
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						"
+#						event_target_name = Sus_Target_4
+#					}
+#				}
+#			}
+#			else_if = {
+#				limit = {
+#					event_target:Sus_target_for_claims = {
+#						any_owned_province = {
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						}	
+#					}
+#				}
+#				set_country_flag = SOS_1_claim
+#				
+#				event_target:Sus_target_for_claims = {
+#					pick_best_provinces = {
+#						scope = every_owned_province
+#						scale = higher_development_than
+#						1 = yes
+#						global_trigger = "
+#							is_claim = ROOT
+#							NOT = { is_permanent_claim = ROOT }
+#						"
+#						event_target_name = Sus_Target_5
+#					}
+#				}
+#			}
+#			else = { } # what the...
+#		}
+#	}
+#	
+#	option = {
+#		name = ME_Sus_Events.7.a
+#		
+#		ai_chance = { factor = 1 }
+#		
+#		goto = Sus_Target_1
+#		
+#		trigger = {
+#			has_country_flag = SOS_1_claim
+#		}
+#		
+#		event_target:Sus_Target_1 = {
+#			remove_claim = ROOT
+#			add_permanent_claim = ROOT
+#		}
+#	}
+#	
+#	option = {
+#		name = ME_Sus_Events.7.b
+#		
+#		ai_chance = { factor = 0 }
+#		
+#		goto = Sus_Target_2
+#		
+#		trigger = {
+#			has_country_flag = SOS_2_claim
+#		}
+#		
+#		event_target:Sus_Target_2 = {
+#			remove_claim = ROOT
+#			add_permanent_claim = ROOT
+#		}
+#	}
+#	
+#	option = {
+#		name = ME_Sus_Events.7.c
+#		
+#		ai_chance = { factor = 0 }
+#		
+#		goto = Sus_Target_3
+#		
+#		trigger = {
+#			has_country_flag = SOS_3_claim
+#		}
+#		
+#		event_target:Sus_Target_3 = {
+#			remove_claim = ROOT
+#			add_permanent_claim = ROOT
+#		}
+#	}
+#	
+#	option = {
+#		name = ME_Sus_Events.7.e
+#		
+#		ai_chance = { factor = 0 }
+#		
+#		goto = Sus_Target_4
+#		
+#		trigger = {
+#			has_country_flag = SOS_4_claim
+#		}
+#		
+#		event_target:Sus_Target_4 = {
+#			remove_claim = ROOT
+#			add_permanent_claim = ROOT
+#		}
+#	}
+#	
+#	option = {
+#		name = ME_Sus_Events.7.f
+#		
+#		goto = Sus_Target_5
+#		
+#		ai_chance = { factor = 0 }
+#		
+#		trigger = {
+#			has_country_flag = SOS_5_claim
+#		}
+#		
+#		event_target:Sus_Target_5 = {
+#			remove_claim = ROOT
+#			add_permanent_claim = ROOT
+#		}
+#	}
+#	
+#	after = {
+#		hidden_effect = {
+#			clr_country_flag = SOS_window_is_open
+#			clr_country_flag = SOS_1_claim
+#			clr_country_flag = SOS_2_claim
+#			clr_country_flag = SOS_3_claim
+#			clr_country_flag = SOS_4_claim
+#			clr_country_flag = SOS_5_claim
+#		}
+#	}
+#}

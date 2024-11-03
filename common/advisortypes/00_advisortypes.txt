@@ -1,0 +1,6682 @@
+# If you add advisortypes, and use those tags, do not change them without changing everywhere they are used.
+# Additional arguments: allow_only_male/allow_only_female
+# Contains skill_scaled_modifier for which the effects get multiplied by the advisor's skill level
+# Uses all 'modifiers' possible that are exported as a Modifier.
+# Note that ai_will_do calculates a priority.
+# An advisor may be chosen over another if its random priority exceeds it. RandomPriority(advisor) := rand[1, 2[ * Priority(advisor).
+# Fixed the second modifier -Don on 4-6-24
+# Completely re-worked this entire file, added AI stuff and changed the spawn requirements for VU -Don on 16-7-24
+# 
+#
+##############################################################
+##############################################################
+###					Administrative Advisors				   ###
+##############################################################
+##############################################################
+#
+#========================================================#
+#					Administration						 #
+#========================================================#
+parliamentarian = {
+	monarch_power = ADM
+	# Primary Modifier
+	can_revoke_parliament_seats = yes
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			parliament_backing_chance = 0.1
+			parliament_effect_duration = 1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 2
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					has_parliament = yes
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				has_parliament = yes
+			}
+		}
+		modifier = {
+			factor = 1.25
+			current_size_of_parliament = 20
+		}
+		modifier = {
+			factor = 1.25
+			has_active_debate = yes
+		}
+	}
+}
+
+#========================================================#
+physician = {
+	monarch_power = ADM
+	# Primary Modifier
+	heir_chance = 0.5
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			monarch_lifespan = 0.05
+			promote_culture_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.5
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 4
+		#	owner = {
+		#		has_idea_group = health_ideas
+		#	}
+		#}
+		modifier = {
+			factor = 3
+			has_building = barber
+		}
+		modifier = {
+			factor = 5
+			has_building = hospital
+		}
+	}
+	ai_will_do = {
+		factor = 0.5
+		modifier = {
+			factor = 1.5
+			ruler_age = 50
+		}
+		modifier = {
+			factor = 1.5
+			ruler_age = 65
+		}
+		modifier = {
+			factor = 2
+			government = monarchy
+			has_heir = no
+		}
+		#un-hash after Idea group update
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = health_ideas
+		#}
+	}
+}
+
+#========================================================#
+propagandist = {
+	monarch_power = DIP
+	# Primary Modifier
+	war_exhaustion = -0.05
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			ae_impact = -0.05
+			unjustified_demands = -0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.75
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					dip_tech = 22
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = spy_ideas
+			}
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	owner ={
+		#		has_idea_group = propaganda_ideas
+		#	}
+		#}
+		modifier = {
+			factor = 1.15
+			is_part_of_hre = yes
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_part_of_hre = yes
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = spy_ideas
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	has_idea_group = propaganda_ideas
+		#}
+	}
+}
+
+#========================================================#
+assimilator = {
+	monarch_power = ADM
+	# Primary Modifier
+	core_creation = -0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			core_creation = -0.015
+			years_of_nationalism = -1
+			years_to_integrate_personal_union = -1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					overextension_percentage = 0.01
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					overextension_percentage = 0.2
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					overextension_percentage = 0.4
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					overextension_percentage = 0.6
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					overextension_percentage = 0.8
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					overextension_percentage = 1
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				overextension_percentage = 0.01
+			}
+		}
+		modifier = {
+			factor = 1.2
+			NOT = {
+				overextension_percentage = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				overextension_percentage = 0.4
+			}
+		}
+		modifier = {
+			factor = 1.3
+			NOT = {
+				overextension_percentage = 0.6
+			}
+		}
+		modifier = {
+			factor = 1.35
+			NOT = {
+				overextension_percentage = 0.8
+			}
+		}
+		modifier = {
+			factor = 1.4
+			NOT = {
+				overextension_percentage = 1
+			}
+		}
+	}
+}
+
+#========================================================#
+natural_scientist = {
+	monarch_power = ADM
+	# Primary Modifier
+	technology_cost = -0.05
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			yearly_innovativeness = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			owner = {
+				any_neighbor_country = {
+					tech_difference = -1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = innovativeness_ideas
+			}
+		}
+		modifier = {
+			factor = 2
+			has_building = university
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			has_idea_group = innovativeness_ideas
+		}
+		modifier = {
+			factor = 1.25
+			innovativeness = 15
+		}
+		modifier = {
+			factor = 1.5
+			any_neighbor_country = {
+				tech_difference = -1
+			}
+		}
+	}
+}
+
+#========================================================#
+absolutist = {
+	monarch_power = ADM
+	# Primary Modifier
+	yearly_absolutism = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			max_absolutism = 5
+			max_absolutism_effect = 0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.75
+		modifier = {
+			factor = 0
+			is_absolutism_active = no
+		}
+		modifier = {
+			factor = 1.35
+			current_age = age_of_absolutism
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				government = monarchy
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_global_modifier_value = {
+				which = administrative_efficiency
+				value = 0.15
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_global_modifier_value = {
+				which = max_absolutism
+				value = 50
+			}
+		}
+	}
+}
+
+#========================================================#
+administrator = {
+	monarch_power = ADM
+	# Primary Modifier
+	administrative_efficiency = 0.025
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			governing_capacity_modifier = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.85
+		modifier = {
+			factor = 0
+			OR = {
+				owner = {
+					NOT = {
+						num_of_states = 5
+					}
+				}
+				is_state = no
+				NOT = {
+					is_state_core = owner
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				government_rank = 8
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = administrative_ideas
+				#has_idea_group = state_affairs_ideas #un-hash after Idea groups update
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+#========================================================#
+loyalist = {
+	monarch_power = DIP
+	# Primary Modifier
+	stability_cost_modifier = -0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			allow_free_estate_privilege_revocation = yes
+			legitimacy = 0.2
+			horde_unity = 0.2
+			devotion = 0.2
+			republican_tradition = 0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.75
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					num_of_powerful_estates = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_powerful_estates = 2
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_powerful_estates = 3
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#========================================================#
+state_overseer = {
+	monarch_power = ADM
+	# Primary Modifier
+	state_governing_cost = -0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			state_maintenance_modifier = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				owner = {
+					NOT = {
+						num_of_states = 5
+					}
+				}
+				is_state = no
+				NOT = {
+					is_state_core = owner
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				num_of_states = 15
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = administrative_ideas
+				#has_idea_group = state_affairs_ideas #un-hash after Idea groups update
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_states = 5
+			}
+		}
+	}
+}
+
+#========================================================#
+philosopher = {
+	monarch_power = ADM
+	# Primary Modifier
+	prestige = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			idea_cost = -0.025
+			prestige_decay = -0.005
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				development = 3
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				development = 6
+			}
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				development = 12
+			}
+		}
+		modifier = {
+			factor = 1.25
+			development = 18
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.2
+			NOT = {
+				prestige = 50
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				prestige = 25
+			}
+		}
+		modifier = {
+			factor = 0
+			prestige = 80
+		}
+	}
+}
+
+#========================================================#
+researcher = {
+	monarch_power = ADM
+	# Primary Modifier
+	global_institution_spread = 0.25
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			adm_tech_cost_modifier = -0.025
+			embracement_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					is_lacking_institutions = no
+					primitives = yes
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			current_institution = 100
+		}
+		modifier = {
+			factor = 1.15
+			current_institution = 50
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				current_institution = 25
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_building = university
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				is_lacking_institutions = yes
+				any_known_country = {
+					institution_difference = {
+						who = PREV
+						value = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_tribal = yes
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				any_known_country = {
+					institution_difference = {
+						who = PREV
+						value = 2
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			any_neighbor_country = {
+				institution_difference = {
+					who = PREV
+					value = -1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.3
+			has_idea_group = innovativeness_ideas
+		}
+		modifier = {
+			factor = 1.25
+			any_neighbor_country = {
+				tech_difference = -2
+			}
+		}
+	}
+}
+
+#========================================================#
+reformist = {
+	monarch_power = ADM
+	# Primary Modifier
+	monthly_reform_progress = 0.5
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			monthly_reform_progress_modifier = 0.15
+			stability_cost_modifier = 0.1
+			max_absolutism = -5
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.65
+		modifier = {
+			factor = 0
+			has_completed_all_reforms_trigger = yes
+		}
+		modifier = {
+			factor = 2
+			has_building = university
+		}
+		modifier = {
+			factor = 1.15
+			owner = {
+				NOT = {
+					reform_level = 2
+				}
+			}
+		}
+		modifier = {
+			factor = 1.15
+			owner = {
+				NOT = {
+					reform_level = 4
+				}
+			}
+		}
+		modifier = {
+			factor = 1.15
+			owner = {
+				NOT = {
+					reform_level = 6
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			has_completed_all_reforms_trigger = yes
+		}
+		modifier = {
+			factor = 1.1
+			NOT = {
+				reform_level = 2
+			}
+		}
+		modifier = {
+			factor = 1.1
+			NOT = {
+				reform_level = 4
+			}
+		}
+		modifier = {
+			factor = 1.1
+			NOT = {
+				reform_level = 6
+			}
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				is_at_war = yes
+				current_age = age_of_absolutism
+			}
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				has_idea_group = innovativeness_ideas
+			}
+		}
+	}
+}
+
+#========================================================#
+artist = {
+	monarch_power = ADM
+	# Primary Modifier
+	stability_cost_modifier = -0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			monthly_splendor = 0.5
+			prestige = 0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				development = 3
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				development = 6
+			}
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				development = 12
+			}
+		}
+		modifier = {
+			factor = 1.25
+			development = 18
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			stability = 2
+		}
+		modifier = {
+			factor = 1.2
+			NOT = {
+				stability = 1
+			}
+		}
+		modifier = {
+			factor = 1.2
+			NOT = {
+				stability = 0
+			}
+		}
+	}
+}
+
+#========================================================#
+estate_mediator = {
+	monarch_power = DIP
+	# Primary Modifier
+	all_estate_loyalty_equilibrium = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			all_estate_influence_modifier = -0.05
+			loyalty_change_on_revoked = 0.1
+			estate_interaction_cooldown_modifier = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					num_of_powerful_estates = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_powerful_estates = 2
+			}
+		}
+		modifier = {
+			factor = 3
+			owner = {
+				num_of_powerful_estates = 3
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_powerful_estates = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			num_of_powerful_estates = 2
+		}
+		modifier = {
+			factor = 3
+			num_of_powerful_estates = 3
+		}
+	}
+}
+
+#========================================================#
+jester = {
+	monarch_power = DIP
+	# Primary Modifier
+	all_power_cost = -0.01
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			monthly_splendor = 1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0			#Charles II, cancelled the office of jester (they were already
+			is_year = 1668			#loosing popularity by the 1600s) 	
+		}
+		modifier = {
+			factor = 0.5			#After reneisance they declined big-time
+			is_institution_enabled = new_world_i
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				is_year = 1450
+			}
+		}
+		modifier = {
+			factor = 1.25
+			is_institution_enabled = renaissance
+			NOT = {
+				is_institution_enabled = new_world_i
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.15
+			has_institution = renaissance
+			NOT = {
+				has_institution = new_world_i
+			}
+		}
+		modifier = {
+			factor = 0			#AI will prefer other advisors past 1500s
+			is_year = 1500
+		}
+		modifier = {
+			factor = 1.15			#AI will prefer Jesters early game
+			NOT = {
+				is_year = 1500
+			}
+		}
+		modifier = {
+			factor = 1.15
+			OR = {
+				religion_group = christian
+				religion_group = muslim
+			}
+		}
+	}
+}
+
+#========================================================#
+#						Economy							 #
+#========================================================#
+treasurer = {
+	monarch_power = ADM
+	# Primary Modifier
+	global_tax_modifier = 0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			interest = -0.15
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			OR = {
+				has_building = counting_house
+				has_tax_building_trigger = yes
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			tax_income_percentage = 0.3
+		}
+		modifier = {
+			factor = 1.25
+			tax_income_percentage = 0.7
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				tax_income_percentage = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.25
+			num_of_loans = 1
+		}
+	}
+}
+
+#========================================================#
+master_of_mint = {
+	monarch_power = ADM
+	# Primary Modifier
+	inflation_reduction = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			gold_depletion_chance_modifier = -0.15
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 5
+			OR = {
+				trade_goods = gold
+				trade_goods = silver
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.15
+			OR = {
+				gold = 1
+				silver = 1
+			}
+		}
+		modifier = {
+			factor = 1.15
+			OR = {
+				gold = 2
+				silver = 3
+			}
+		}
+		modifier = {
+			factor = 1.15
+			OR = {
+				gold = 3
+				silver = 4
+			}
+		}
+		modifier = {
+			factor = 0
+			AND = {
+				NOT = {
+					gold = 1
+				}
+				NOT = {
+					silver = 1
+				}
+				NOT = {
+					inflation = 0
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				inflation = 5
+			}
+		}
+	}
+}
+
+#========================================================#
+civil_engineer = {
+	monarch_power = ADM
+	# Primary Modifier
+	build_cost = -0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			build_time = -0.1
+			build_cost = -0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.75
+		modifier = {
+			factor = 1.25
+			has_building = road_system
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				has_building = well
+				has_building = aqueduct
+				has_building = distillery
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				OR = {
+					has_idea_group = infrastructure_ideas
+					has_idea_group = economic_ideas
+					#has_idea_group = centralisation_ideas #un-hash after Idea group update
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			OR = {
+				has_idea_group = infrastructure_ideas
+				has_idea_group = economic_ideas
+				#has_idea_group = centralisation_ideas #un-hash after Idea group update
+			}
+		}
+	}
+}
+
+#========================================================#
+economist = {
+	monarch_power = ADM
+	# Primary Modifier
+	global_trade_goods_size = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_unrest = 0.25
+			global_trade_goods_size_modifier = 0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_colony = yes
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					num_of_colonists = 1
+					primitives = yes
+					is_tribal = yes
+					government = native
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			average_unrest = -2
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				average_unrest = -1
+			}
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				average_unrest = -1.5
+			}
+			OR = {
+				production_efficiency = 0.2
+				production_income_percentage = 0.5
+				has_idea_group = economic_ideas
+			}
+		}
+	}
+}
+
+#========================================================#
+#						Religion						 #
+#========================================================#
+theologian = {
+	monarch_power = ADM
+	# Primary Modifier
+	global_unrest = -2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			tolerance_own = 0.25
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			owner = {
+				OR = {
+					has_idea_group = religious_ideas
+					has_idea_group = humanist_ideas
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			average_unrest = -1
+		}
+		modifier = {
+			factor = 1.5
+			average_unrest = 1
+		}
+		modifier = {
+			factor = 1.5
+			average_unrest = 2
+		}
+	}
+}
+
+#========================================================#
+inquisitor = {
+	monarch_power = ADM
+	# Primary Modifier
+	missionaries = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_missionary_strength = 0.01
+			missionary_maintenance_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	allow_only_owner_religion = yes
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			has_owner_religion = no
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				has_building = temple
+				has_building = cathedral
+				has_building = grand_cathedral
+			}
+		}
+		modifier = {
+			factor = 0
+			has_building = university
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				religious_unity = 1
+				has_idea_group = humanist_ideas
+			}
+		}
+		modifier = {
+			factor = 0.25
+			NOT = {
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			estate_influence = {
+				estate = estate_church
+				influence = 50
+			}
+		}
+		modifier = {
+			factor = 0.75
+			religious_unity = 0.9
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = religious_ideas
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				religious_unity = 0.5
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				religious_unity = 0.7
+			}
+		}
+	}
+}
+
+#========================================================#
+religious_representative = {
+	monarch_power = ADM
+	# Primary Modifier
+	religious_unity = 0.2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_missionary_strength = -0.01
+			tolerance_heathen = 0.25
+			tolerance_heretic = 0.25
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			church_influence_modifier = 0.02
+			republican_tradition = 0.02
+			meritocracy = 0.15
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	allow_only_male = yes
+	allow_only_owner_religion = yes
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					religious_unity = 1
+					NOT = {
+						has_estate = estate_church
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				religious_unity = 0.75
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				religious_unity = 0.25
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				has_building = temple
+				has_building = cathedral
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_building = university
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				estate_influence = {
+					estate = estate_church
+					influence = 80
+				}
+				NOT = {
+					has_estate = estate_church
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				religious_unity = 0.75
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				religious_unity = 0.5
+			}
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				religious_unity = 0.25
+			}
+		}
+	}
+}
+
+#========================================================#
+culture_minister = {
+	monarch_power = DIP
+	# Primary Modifier
+	culture_conversion_cost = -0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			culture_conversion_time = -0.15
+			relation_with_same_culture = 5
+			relation_with_other_culture = -5
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			AND = {
+				OR = {
+					NOT = {
+						is_institution_enabled = nationalism_institution
+					}
+					NOT = {
+						owner = {
+							OR = {
+								has_idea_group = religious_ideas
+								#has_idea_group = nationalism_ideas #un-hash after Idea groups update
+							}
+						}
+					}
+					owner = {
+						OR = {
+							has_idea_group = humanist_ideas
+							#has_idea_group = society_ideas #un-hash after Idea groups update
+						}
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_institution = nationalism_institution
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = nationalism_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1.5
+		modifier = {
+			factor = 0
+			NOT = {
+				has_idea_group = nationalism_ideas
+			}
+		}
+	}
+}
+
+##############################################################
+##############################################################
+###					Diplomatic Advisors					   ###
+##############################################################
+##############################################################
+#
+#========================================================#
+#						Diplomacy						 #
+#========================================================#
+statesman = {
+	monarch_power = DIP
+	# Primary Modifier
+	diplomatic_reputation = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			accept_vassalization_reasons = 5
+			reasons_to_elect = 5
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = diplomatic_ideas
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = influence_ideas
+			}
+		}
+		modifier = {
+			factor = 1.25
+			is_part_of_hre = yes
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_part_of_hre = yes
+		}
+		modifier = {
+			factor = 1.5
+			is_elector = yes
+		}
+		modifier = {
+			factor = 2
+			is_emperor = yes
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = diplomatic_ideas
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = influence_ideas
+		}
+	}
+}
+
+#========================================================#
+spymaster = {
+	monarch_power = DIP
+	# Primary Modifier
+	spy_offence = 0.2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_spy_defence = 0.05
+			spy_action_cost_modifier = -0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 2
+			owner = {
+				has_idea_group = spy_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.75
+			has_idea_group = spy_ideas
+		}
+	}
+}
+
+#========================================================#
+diplomat = {
+	monarch_power = DIP
+	# Primary Modifier
+	improve_relation_modifier = 0.2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			monthly_favor_modifier = 0.1
+			rival_change_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = diplomatic_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			NOT = {
+				AND = {
+					num_of_allies = 1
+					government_rank = 9
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				AND = {
+					num_of_allies = 2
+					government_rank = 8
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					num_of_free_diplomatic_relations = 1
+					is_year = 1445
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			diplomatic_reputation = 4
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = diplomatic_ideas
+		}
+	}
+}
+
+#========================================================#
+negotiator = {
+	monarch_power = DIP
+	# Primary Modifier
+	diplomats = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			diplomatic_upkeep = 1
+			envoy_travel_time = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.15
+			owner = {
+				OR = {
+					has_idea_group = diplomatic_ideas
+					has_idea_group = influence_ideas
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 0.8
+		modifier = {
+			factor = 1.75
+			OR = {
+				has_idea_group = diplomatic_ideas
+			}
+		}
+		modifier = {
+			factor = 1.5
+			is_part_of_hre = yes
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				government_rank = 8
+			}
+		}
+	}
+}
+
+#========================================================#
+subject_mediator = {
+	monarch_power = DIP
+	# Primary Modifier
+	vassal_income = 0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			reduced_liberty_desire = 2.5
+			liberty_desire_from_subject_development = -0.05
+			annexation_relations_impact = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					num_of_subjects = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				num_of_subjects = 3
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				num_of_subjects = 6
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_subjects = 1
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				any_subject_country = {
+					liberty_desire = 5
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			any_subject_country = {
+				liberty_desire = 50
+			}
+		}
+		modifier = {
+			factor = 1.25
+			any_subject_country = {
+				liberty_desire = 25
+			}
+		}
+		modifier = {
+			factor = 1.25
+			num_of_subjects = 3
+		}
+		modifier = {
+			factor = 1.25
+			num_of_subjects = 4
+		}
+		modifier = {
+			factor = 1.25
+			num_of_subjects = 5
+		}
+	}
+}
+
+#========================================================#
+#			   			  Navy							 #	
+#========================================================#
+naval_reformer = {
+	monarch_power = DIP
+	# Primary Modifier
+	naval_morale = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			navy_tradition = 0.25
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				has_port = no
+				owner = {
+					primitives = yes
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				owner = {
+					navy_tradition = 0.15
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					navy_tradition = 0.5
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				owner = {
+					navy_tradition = 0.8
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			num_of_owned_provinces_with = {
+				value = 10
+				has_port = yes
+			}
+		}
+		modifier = {
+			factor = 1.4
+			NOT = {
+				navy_tradition = 0.15
+			}
+		}
+		modifier = {
+			factor = 1.2
+			NOT = {
+				navy_tradition = 0.5
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				navy_tradition = 0.8
+			}
+		}
+	}
+}
+
+#========================================================#
+marauder_captain = {
+	monarch_power = DIP
+	# Primary Modifier
+	capture_ship_chance = 0.25
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			privateer_efficiency = 0.1
+			embargo_efficiency = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			has_port = no
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					num_of_total_ports = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 0.15
+			owner = {
+				NOT = {
+					has_reform = pirate_republic_reform
+				}
+				has_privateers = no
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				has_reform = pirate_republic_reform
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_privateers = yes
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					navy_size = 10
+					num_of_total_ports = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			is_at_war = no
+			has_privateers = no
+		}
+	}
+}
+
+#========================================================#
+mariner = {
+	monarch_power = DIP
+	# Primary Modifier
+	ship_durability = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			naval_maintenance_modifier = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				owner = {
+					OR = {
+						num_of_ports = 1
+						dip_tech = 24
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				NOT = {
+					num_of_ports = 5
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = maritime_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					has_idea_group = maritime_ideas
+					has_idea_group = naval_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = maritime_ideas
+		}
+	}
+}
+
+#========================================================#
+navarch = {
+	monarch_power = DIP
+	# Primary Modifier
+	navy_tradition_decay = -0.01
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_ship_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				has_port = no
+				owner = {
+					NOT = {
+						num_of_total_ports = 1
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					num_of_total_ports = 1
+					navy_size = 10
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = naval_ideas
+		}
+	}
+}
+
+#========================================================#
+#						Trade							 #
+#========================================================#
+trader = {
+	monarch_power = DIP
+	# Primary Modifier
+	merchants = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			trade_efficiency = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = trade_ideas
+			}
+		}
+		modifier = {
+			factor = 2
+			province_has_center_of_trade_of_level = 1
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	owner = {
+		#		has_idea_group = industry_ideas
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				trade_income_percentage = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = trade_ideas
+		}
+		modifier = {
+			factor = 1.25
+			trade_income_percentage = 0.3
+		}
+		modifier = {
+			factor = 1.5
+			trade_income_percentage = 0.55
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	has_idea_group = industry_ideas
+		#}
+	}
+}
+
+#========================================================#
+marketeer = {
+	monarch_power = DIP
+	# Primary Modifier
+	global_trade_power = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			center_of_trade_upgrade_cost = -0.075
+			global_ship_trade_power = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.9
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					has_estate = estate_burghers
+				}
+			}
+		}
+		modifier = {
+			factor = 1.2
+			OR = {
+				has_building = marketplace
+				has_building = stock_exchange
+				has_building = trade_depot
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = {
+					has_estate = estate_burghers
+				}
+				estate_influence = {
+					estate = estate_burghers
+					influence = 80
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = trade_ideas
+		}
+		modifier = {
+			factor = 1.75
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 40
+			}
+		}
+	}
+}
+
+#========================================================#
+mercantile_influencer = {
+	monarch_power = DIP
+	# Primary Modifier
+	trade_steering = 0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			mercantilism_cost = -0.1
+			global_own_trade_power = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.85
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = trade_ideas
+				#has_idea_group = industry_ideas #un-hash after Idea groups update
+			}
+		}
+		modifier = {
+			factor = 1.25
+			province_has_center_of_trade_of_level = 1
+		}
+		modifier = {
+			factor = 1.25
+			province_has_center_of_trade_of_level = 3
+		}
+	}
+	ai_will_do = {
+		factor = 0.75
+		modifier = {
+			factor = 0
+			NOT = {
+				trade_income_percentage = 0.2
+			}
+		}
+		modifier = {
+			factor = 2
+			trade_income_percentage = 0.3
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = trade_ideas
+		}
+		#un-hash after Idea group update
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = industry_ideas
+		#}
+	}
+}
+
+#========================================================#
+#						Colonial						 #				
+#========================================================#
+colonial_governor = {
+	monarch_power = DIP
+	# Primary Modifier
+	global_tariffs = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			reduced_liberty_desire_on_other_continent = 5
+			global_tariffs = 0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					NOT = {
+						num_of_colonists = 1
+					}
+					is_colonial_nation = yes
+					is_primitive = yes
+					is_tribal = yes
+					government = tribal
+					NOT = {
+						num_of_colonies = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_colonies = 3
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			num_of_colonies = 3
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = expansion_ideas
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = colonial_empire
+		#}
+	}
+}
+
+#========================================================#
+pioneer = {
+	monarch_power = DIP
+	# Primary Modifier
+	colonist_placement_chance = 0.05
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			auto_explore_adjacent_to_colony = yes
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_colony = yes
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					NOT = {
+						num_of_colonists = 1
+					}
+					primitives = yes
+					is_tribal = yes
+					government = native
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = exploration_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 0.75
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_colonists = 1
+			}
+		}
+		modifier = {
+			factor = 0.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 2
+			num_of_owned_provinces_with = {
+				value = 3
+				is_colony = yes
+			}
+		}
+		modifier = {
+			factor = 2
+			has_idea_group = exploration_ideas
+		}
+	}
+}
+
+#========================================================#
+navigator = {
+	monarch_power = DIP
+	# Primary Modifier
+	range = 0.2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			naval_attrition = -0.1
+			range = 0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					NOT = {
+						num_of_colonists = 1
+					}
+					is_primitive = yes
+					is_native_tribe = yes
+					government = native
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = exploration_ideas
+			}
+		}
+		modifier = {
+			factor = 2
+			current_age = age_of_discovery
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			current_age = age_of_discovery
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = exploration_ideas
+		}
+	}
+}
+
+##############################################################
+##############################################################
+###					  Military Advisors					   ###
+##############################################################
+##############################################################
+#
+#========================================================#
+#						 Quality						 #
+#========================================================#
+army_reformer = {
+	monarch_power = MIL
+	# Primary Modifier
+	land_morale = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			mil_tech_cost_modifier = -0.015
+			army_tradition = 0.25
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 3
+			has_building = war_office
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				NOT = {
+					army_tradition = 20
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				NOT = {
+					army_tradition = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 0.75
+			owner = {
+				army_tradition = 70
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2.5
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 0
+			is_at_war = no
+		}
+		modifier = {
+			factor = 1.5
+			any_neighbor_country = {
+				tech_difference = -1
+			}
+		}
+	}
+}
+
+#========================================================#
+drill_instructor = {
+	monarch_power = MIL
+	# Primary Modifier
+	drill_gain_modifier = 0.33
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			drill_decay_modifier = -0.15
+			yearly_army_professionalism = 0.01
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				has_dlc = "Cradle of Civilization"
+			}
+		}
+		#un-hash after Idea group update
+		#modifier = {
+		#	factor = 1.5
+		#	owner = {
+		#		has_idea_group = standing_army
+		#	}
+		#}
+		#modifier = {
+		#	factor = 0.5
+		#	owner = {
+		#		OR = {
+		#			has_idea_group = mercenary_ideas
+		#			has_idea_group = conscription_ideas
+		#		}
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 1
+		#un-hash after Idea group update
+		#modifier = {
+		#	factor = 1.5
+		#	has_idea_group = standing_army
+		#}
+		#modifier = {
+		#	factor = 0.5
+		#	OR = {
+		#		has_idea_group = mercenary_ideas
+		#		has_idea_group = conscription_ideas
+		#	}
+		#}
+		modifier = {
+			factor = 1.25
+			OR = {
+				army_professionalism = 0.25
+				army_tradition = 50
+			}
+		}
+	}
+}
+
+#========================================================#
+commander = {
+	monarch_power = MIL
+	# Primary Modifier
+	army_tradition_decay = -0.01
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			morale_damage_received = -0.02
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				NOT = {
+					has_government_attribute = republican_tradition_from_advisors
+				}
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.65
+		modifier = {
+			factor = 1.5
+			has_building = barracks
+		}
+		modifier = {
+			factor = 1.75
+			has_building = training_fields
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			NOT = {
+				army_tradition = 25
+			}
+		}
+		modifier = {
+			factor = 1.5
+			army_tradition = 75
+		}
+	}
+}
+
+#========================================================#
+commandant = {
+	monarch_power = MIL
+	# Primary Modifier
+	discipline = 0.05
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			shock_damage_received = -0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0.15
+			NOT = {
+				owner = {
+					army_professionalism = 0.1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				army_professionalism = 0.5
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				army_professionalism = 0.1
+			}
+		}
+		modifier = {
+			factor = 1.25
+			army_professionalism = 0.35
+		}
+		modifier = {
+			factor = 1.6
+			has_idea_group = quality_ideas
+		}
+		modifier = {
+			factor = 1.25
+			infantry_fraction = 0.8
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	OR = {
+		#		has_idea_group = gunpowder_ideas
+		#		has_idea_group = infantry_focus_ideas
+		#		has_idea_group = cavalry_focus_ideas
+		#	}
+		#}
+	}
+}
+
+#========================================================#
+vu_noble_man = {
+	monarch_power = MIL
+	# Primary Modifier
+	leader_land_shock = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			free_leader_pool = 1
+			nobles_loyalty_modifier = 0.05
+			rajput_loyalty_modifier = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	allow_only_male = yes
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					has_estate = estate_nobles
+					has_estate = estate_rajput
+					#add any other noble estates here that I forgot
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 50
+				}
+			}
+			owner = {
+				estate_influence = {
+					estate = estate_rajput
+					influence = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 65
+				}
+			}
+			owner = {
+				estate_influence = {
+					estate = estate_rajput
+					influence = 65
+				}
+			}
+		}
+		modifier = {
+			factor = 2.5
+			owner = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 80
+				}
+			}
+			owner = {
+				estate_influence = {
+					estate = estate_rajput
+					influence = 80
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			estate_influence = {
+				estate = estate_nobles
+				influence = 50
+			}
+			estate_influence = {
+				estate = estate_rajput
+				influence = 50
+			}
+		}
+		modifier = {
+			factor = 1.5
+			has_global_modifier_value = {
+				which = cavalry_power
+				value = 2
+			}
+		}
+	}
+}
+
+#========================================================#
+cavalier = {
+	monarch_power = MIL
+	# Primary Modifier
+	cavalry_power = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			cavalry_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					mil_tech = 24
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				mil_tech = 30
+			}
+		}
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 1.25
+		#	owner = {
+		#		has_idea_group = cavalry_focus_ideas
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 1
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 0
+		#	OR = {
+		#		has_idea_group = infantry_focus_ideas
+		#		has_idea_group = gunpowder_ideas
+		#	}
+		#}
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = cavalry_focus_ideas
+		#}
+		modifier = {
+			factor = 1.5
+			has_global_modifier_value = {
+				which = cavalry_power
+				value = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.5
+			cavalry_fraction = 0.4
+		}
+	}
+}
+
+#========================================================#
+army_colonel = {
+	monarch_power = MIL
+	# Primary Modifier
+	infantry_power = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			infantry_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					mil_tech = 24
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				mil_tech = 30
+			}
+		}
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 1.25
+		#	owner = {
+		#		has_idea_group = infantry_focus_ideas
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 1
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 0
+		#	OR = {
+		#		has_idea_group = gunpowder_ideas
+		#		has_idea_group = cavalry_focus_ideas
+		#	}
+		#}
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = infantry_focus_ideas
+		#}
+		modifier = {
+			factor = 1.5
+			has_global_modifier_value = {
+				which = infantry_power
+				value = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.5
+			infantry_fraction = 0.7
+		}
+	}
+}
+
+#========================================================#
+bombardier = {
+	monarch_power = MIL
+	# Primary Modifier
+	artillery_power = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			artillery_cost = -0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					mil_tech = 24
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				mil_tech = 30
+			}
+		}
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 1.25
+		#	owner = {
+		#		has_idea_group = gunpowder_ideas
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 1
+		#un-hash after Idea-Group update
+		#modifier = {
+		#	factor = 0
+		#	OR = {
+		#		has_idea_group = infantry_focus_ideas
+		#		has_idea_group = cavalry_focus_ideas
+		#	}
+		#}
+		#modifier = {
+		#	factor = 2
+		#	has_idea_group = gunpowder_ideas
+		#}
+		modifier = {
+			factor = 1.5
+			has_global_modifier_value = {
+				which = artillery_power
+				value = 0.2
+			}
+		}
+		modifier = {
+			factor = 1.5
+			artillery_fraction = 0.3
+		}
+	}
+}
+
+#========================================================#
+drunkard = {
+	monarch_power = MIL
+	# Primary Modifier
+	movement_speed = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			morale_damage_received = -0.025
+			morale_damage = 0.015
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				religion_group = christian
+				owner = {
+					NOT = {
+						OR = {
+							government = native
+							government = tribal
+						}
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				OR = {
+					culture_group = slavic
+					culture_group = south_slavic
+					culture_group = west_slavic
+					culture_group = east_slavic
+					culture = finnish
+				}
+			}
+		}
+		modifier = {
+			factor = 2.5
+			owner = {
+				culture = czech
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 0.5
+		modifier = {
+			factor = 5
+			ROOT = {
+				culture = czech
+			}
+		}
+		modifier = {
+			factor = 5
+			ruler_has_personality = drunkard_personality
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				religion_group = christian
+				NOT = {
+					OR = {
+						beer = 1
+						vodka = 1
+						rum = 1
+						cider = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				beer = 1
+				vodka = 1
+				rum = 1
+				cider = 2
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				beer = 3
+				vodka = 3
+				rum = 3
+				cider = 4
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				beer = 5
+				vodka = 5
+				rum = 5
+				cider = 6
+			}
+		}
+	}
+}
+
+#========================================================#
+bard = {
+	monarch_power = MIL
+	# Primary Modifier
+	recover_army_morale_speed = 0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			land_morale = 0.025
+			reserves_organisation = 0.025
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			is_year = 1550
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				is_year = 1500
+			}
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				is_year = 1400
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				is_year = 1500
+				NOT = {
+					has_global_modifier_value = {
+						which = army_tradition
+						value = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 0			#AI will prefer other advisors past 1500s
+			is_year = 1500
+		}
+		modifier = {
+			factor = 2			#AI will prefer Jesters early game
+			NOT = {
+				is_year = 1500
+			}
+		}
+		modifier = {
+			factor = 2
+			ruler_has_personality = drunkard_personality
+		}
+	}
+}
+
+#========================================================#
+#						Quantity						 #
+#========================================================#
+army_organiser = {
+	monarch_power = MIL
+	# Primary Modifier
+	land_forcelimit_modifier = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			reserves_organisation = 0.025
+			global_supply_limit_modifier = 0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			owner = {
+				OR = {
+					has_idea_group = quantity_ideas
+					#has_idea_group = conscription_ideas #un-hash after Idea groups update
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			has_building = war_office
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_at_war = no
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				government_rank = 8
+			}
+		}
+		modifier = {
+			factor = 1.15
+			government_rank = 9
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = quality_ideas
+		}
+	}
+}
+
+#========================================================#
+quartermaster = {
+	monarch_power = MIL
+	# Primary Modifier
+	reinforce_speed = 0.3
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			land_maintenance_modifier = -0.075
+			manpower_recovery_speed = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.95
+		modifier = {
+			factor = 1.55
+			OR = {
+				has_building = barracks
+				has_building = training_fields
+			}
+		}
+		modifier = {
+			factor = 1.45
+			OR = {
+				has_building = regimental_camp
+				has_building = conscription_center
+				#un-hash after Idea groups update
+				#owner = {
+				#	has_idea_group = conscription_ideas
+				#}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				manpower_percentage = 0.5
+			}
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	OR = {
+		#		has_idea_group = conscription_ideas
+		#	}
+		#}
+	}
+}
+
+#========================================================#
+recruitmaster = {
+	monarch_power = MIL
+	# Primary Modifier
+	global_manpower_modifier = 0.1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			global_regiment_cost = -0.05
+			manpower_recovery_speed = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.95
+		modifier = {
+			factor = 1.45
+			OR = {
+				has_building = barracks
+				has_building = training_fields
+				owner = {
+					has_idea_group = quantity_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 1.55
+			OR = {
+				has_building = regimental_camp
+				has_building = conscription_center
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			is_at_war = no
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				army_size_percentage = 0.9
+			}
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				army_size_percentage = 0.62
+			}
+		}
+		modifier = {
+			factor = 2.5
+			NOT = {
+				army_size_percentage = 0.25
+			}
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				has_idea_group = quantity_ideas
+			}
+		}
+	}
+}
+
+#========================================================#
+mercenary_captain = {
+	monarch_power = MIL
+	# Primary Modifier
+	merc_maintenance_modifier = -0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			mercenary_manpower = 0.1
+			mercenary_discipline = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	allow_only_male = yes
+	chance = {
+		factor = 1
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_hired_mercenary_companies = 1
+			}
+		}
+		modifier = {
+			factor = 1.5
+			has_idea_group = mercenary_ideas
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 0.5
+		#	has_idea_group = standing_army
+		#	has_idea_group = conscription_ideas
+		#}
+		modifier = {
+			factor = 0.75
+			is_at_war = no
+		}
+	}
+}
+
+#========================================================#
+#					    Defence							 #
+#========================================================#
+fortification_expert = {
+	monarch_power = MIL
+	# Primary Modifier
+	defensiveness = 0.2
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			hostile_attrition = 0.3
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.75
+		modifier = {
+			factor = 1.25
+			fort_level = 1
+		}
+		modifier = {
+			factor = 1.5
+			fort_level = 1
+		}
+		modifier = {
+			factor = 2
+			has_building = ramparts
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.35
+			has_idea_group = defensive_ideas
+			#has_idea_group = fortress_ideas #un-hash after Idea groups update
+		}
+		modifier = {
+			factor = 1.25
+			num_of_owned_provinces_with = {
+				value = 5
+				fort_level = 1
+			}
+		}
+	}
+}
+
+#========================================================#
+defensive_planner = {
+	monarch_power = MIL
+	# Primary Modifier
+	garrison_size = 0.15
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			fort_maintenance_modifier = -0.1
+			garrison_damage = 0.1
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	allow_only_male = yes
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				fort_level = 1
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				fort_level = 2
+			}
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				fort_level = 3
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = defensive_ideas
+				#has_idea_group = fortress_ideas #un-hash after Idea groups update
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				has_idea_group = offensive_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0.25
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 2
+					fort_level = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.15
+			num_of_owned_provinces_with = {
+				value = 5
+				fort_level = 1
+			}
+		}
+		modifier = {
+			factor = 0.75
+			is_at_war = no
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				has_idea_group = defensive_ideas
+				#has_idea_group = fortress_ideas #un-hash after Idea groups update
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_idea_group = offensive_ideas
+		}
+	}
+}
+
+#========================================================#
+tactician = {
+	monarch_power = MIL
+	# Primary Modifier
+	own_territory_dice_roll_bonus = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			movement_speed = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 0.85
+		modifier = {
+			factor = 1.25
+			OR = {
+				has_building = university
+				development = 35
+			}
+		}
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 1.5
+		#	owner = {
+		#		has_idea_group = general_staff_ideas
+		#	}
+		#}
+	}
+	ai_will_do = {
+		factor = 0.5
+		#un-hash after Idea groups update
+		#modifier = {
+		#	factor = 3
+		#	has_idea_group = general_staff_ideas
+		#}
+		modifier = {
+			factor = 3
+			has_idea_group = defensive_ideas
+			#has_idea_group = fortress_ideas #un-hash after Idea groups update
+		}
+	}
+}
+
+#========================================================#
+#						Offence							 #		
+#========================================================#
+sapper = {
+	monarch_power = MIL
+	# Primary Modifier
+	assault_fort_ability = 0.25
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			assault_fort_cost_modifier = -0.15
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					is_institution_enabled = renaissance
+					owner = {
+						mil_tech = 24
+					}
+					owner = {
+						has_idea_group = offensive_ideas
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = offensive_ideas
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				mil_tech = 31
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				OR = {
+					has_idea_group = defensive_ideas
+					#has_idea_group = fortress_ideas #un-hash past idea group update
+				}
+				NOT = {
+					is_year = 1550
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			OR = {
+				has_idea_group = offensive_ideas
+				has_estate = estate_janissaries
+			}
+		}
+	}
+}
+
+#========================================================#
+combat_engineer = {
+	monarch_power = MIL
+	# Primary Modifier
+	artillery_levels_available_vs_fort = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			siege_ability = 0.1
+			artillery_barrage_cost = -0.15
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			owner = {
+				has_institution = gunpowder_warfare
+			}
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				has_idea_group = offensive_ideas
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				OR = {
+					has_idea_group = defensive_ideas
+					#has_idea_group = fortress_ideas #un-hash after Idea groups update
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			is_at_war = no
+		}
+		modifier = {
+			factor = 1.25
+			has_idea_group = offensive_ideas
+		}
+		modifier = {
+			factor = 1.5
+			is_at_war = yes
+			any_enemy_country = {
+				has_idea_group = defensive_ideas
+				#has_idea_group = fortress_ideas #un-hash after Idea groups update
+			}
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				has_idea_group = defensive_ideas
+				#has_idea_group = fortress_ideas #un-hash after Idea groups update
+			}
+		}
+	}
+}
+
+#========================================================#
+#						  Navy							 #		
+#========================================================#
+grand_captain = {
+	monarch_power = MIL
+	# Primary Modifier
+	max_flagships = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			naval_forcelimit_modifier = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				has_port = no
+				owner = {
+					NOT = {
+						num_of_ports = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				has_building = shipyard
+				has_building = drydock
+				has_building = grand_shipyard
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 1.15
+			is_at_war = no
+		}
+		modifier = {
+			factor = 1.15
+			has_flagship = no
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				num_of_ports = 10
+			}
+		}
+		modifier = {
+			factor = 0.75
+			NOT = {
+				OR = {
+					has_idea_group = maritime_ideas
+					has_idea_group = naval_ideas
+					#un-hash after Idea groups update
+					#has_idea_group = heavy_ideas
+					#has_idea_group = galley_ideas
+					#has_idea_group = transport_ideas
+					#has_idea_group = light_ship_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 1.15
+			naval_forcelimit = 20
+		}
+	}
+}
+
+#========================================================#
+smuggler = {
+	monarch_power = MIL
+	# Primary Modifier
+	siege_blockade_progress = 1
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			blockade_efficiency = 0.1
+			global_naval_engagement_modifier = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			has_port = no
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				NOT = {
+					num_of_total_ports = 1
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_port = yes
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				OR = {
+					has_idea_group = naval_ideas
+					has_idea_group = maritime_ideas
+					#un-hash after Idea groups update
+					#has_idea_group = heavy_ideas
+					#has_idea_group = galley_ideas
+					#has_idea_group = light_ship_ideas
+					#has_idea_group = transport_ideas
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					has_idea_group = naval_ideas
+					has_idea_group = maritime_ideas
+					#un-hash after Idea groups update
+					#has_idea_group = heavy_ideas
+					#has_idea_group = galley_ideas
+					#has_idea_group = light_ship_ideas
+					#has_idea_group = transport_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			OR = {
+				has_reform = pirate_republic_reform
+				has_reform = pirate_kingdom
+				has_reform = pirate_republic
+			}
+		}
+	}
+}
+
+#========================================================#
+commando = {
+	monarch_power = MIL
+	# Primary Modifier
+	has_marines = yes
+	# Secondary Modifier
+	skill_scaled_modifier = {
+		trigger = {
+			always = yes
+		}
+		modifier = {
+			allowed_marine_fraction = 0.075
+			global_sailors_modifier = 0.05
+			sailors_recovery_speed = 0.05
+		}
+	}
+	# Republican Tradition
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_attribute = republican_tradition_from_advisors
+			}
+		}
+		modifier = {
+			republican_tradition = 0.02
+		}
+	}
+	# Empire of China
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
+		modifier = {
+			meritocracy = 0.15
+		}
+	}
+	# Russian Modernization
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = russian_modernization_mechanic
+				NOT = {
+					culture_group = PREV
+				}
+			}
+		}
+		modifier = {
+			monthly_russian_modernization = 0.02
+		}
+	}
+	# Persian Influence
+	skill_scaled_modifier = {
+		trigger = {
+			owner = {
+				has_government_mechanic = persian_influence_mechanic
+			}
+		}
+		modifier = {
+			monthly_persian_influence = 0.03
+		}
+	}
+	chance = {
+		factor = 1
+		modifier = {
+			factor = 0
+			OR = {
+				has_port = no
+				owner = {
+					NOT = {
+						num_of_total_ports = 1
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			owner = {
+				has_idea_group = maritime_ideas
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 0.5
+		modifier = {
+			factor = 3
+			has_idea_group = maritime_ideas
+		}
+	}
+}

@@ -1,0 +1,1263 @@
+is_possible_subject_of_subject_type_vassal = {
+	NOT = { is_subject_of_type = vassal }
+}
+
+is_possible_subject_of_subject_type_march = {
+	NOT = { is_subject_of_type = march }
+}
+
+is_possible_subject_of_subject_type_daimyo_vassal = {
+	NOT = { is_subject_of_type = daimyo_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_barony_vassal = {
+	NOT = { is_subject_of_type = daimyo_barony_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_viscounty_vassal = {
+	NOT = { is_subject_of_type = daimyo_viscounty_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_county_vassal = {
+	NOT = { is_subject_of_type = daimyo_county_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_marquisate_vassal = {
+	NOT = { is_subject_of_type = daimyo_marquisate_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_duchy_vassal = {
+	NOT = { is_subject_of_type = daimyo_duchy_vassal }
+}
+
+is_possible_subject_of_subject_type_daimyo_principality_vassal = {
+	NOT = { is_subject_of_type = daimyo_principality_vassal }
+}
+
+is_possible_subject_of_subject_type_personal_union = {
+	NOT = { is_subject_of_type = personal_union }
+	is_subject = no
+}
+
+is_possible_subject_of_subject_type_client_vassal = {
+	NOT = { is_subject_of_type = client_vassal }
+}
+
+is_possible_subject_of_subject_type_client_march = {
+	NOT = { is_subject_of_type = client_march }
+	is_subject_of = PREV
+	is_subject_of_type = client_vassal
+	primitives = no
+}
+
+is_possible_subject_of_subject_type_colony = {
+	NOT = { is_subject_of_type = colony }
+	is_colonial_subject_type = yes
+}
+
+is_possible_subject_of_subject_type_crown_colony = {
+	NOT = { is_subject_of_type = crown_colony }
+	is_colonial_subject_type = yes
+}
+
+is_possible_subject_of_subject_type_private_enterprise = {
+	NOT = { is_subject_of_type = private_enterprise }
+	is_colonial_subject_type = yes
+}
+
+is_possible_subject_of_subject_type_self_governing_colony = {
+	NOT = { is_subject_of_type = self_governing_colony }
+	is_colonial_subject_type = yes
+}
+
+is_possible_subject_of_subject_type_tributary_state = {
+	has_dlc = "Mandate of Heaven"
+	NOT = { is_subject_of_type = tributary_state }
+}
+
+is_possible_subject_of_subject_type_protectorate = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = protectorate }
+	is_subject = no
+	NOT = { 
+		OR = {
+			technology_group = western
+			technology_group = dutch_tech_group
+			technology_group = english_tech_group
+			technology_group = french_tech_group
+			technology_group = german_tech_group
+			technology_group = italian_tech_group
+			technology_group = portuguese_tech_group
+			technology_group = roman_tech_group
+			technology_group = scandinavian_tech_group
+			technology_group = spanish_tech_group
+			technology_group = swiss_tech_group
+		}
+	}
+	NOT = { 
+		OR = {
+			technology_group = eastern
+			technology_group = bohemian_tech_group
+			technology_group = byzantine_tech_group
+			technology_group = hungarian_tech_group
+			technology_group = polish_tech_group
+			technology_group = russian_tech_group
+			technology_group = bulgarian_tech_group
+		}
+	}
+	NOT = { technology_group = muslim }
+	#VU - Hashed this out as it has nothing to do with our mod. By San Felipe
+	#OR = {
+	#	NOT = { has_global_flag = extended_timeline_mod }
+	#}
+	PREV = {
+		NOT = { same_continent = PREV }
+	}
+	is_nomad = no
+	OR = {
+		PREV = { institution_difference = { who = PREV value = 3 } }
+		# THIS is at least 4 or 9 techs behind PREV
+		variable_arithmetic_trigger = {
+			export_to_variable = {
+				which = our_adm_tech_level
+				value = adm_tech
+			}
+			export_to_variable = {
+				which = our_dip_tech_level
+				value = dip_tech
+			}
+			export_to_variable = {
+				which = our_mil_tech_level
+				value = mil_tech
+			}
+			export_to_variable = {
+				which = their_adm_tech_level
+				value = adm_tech
+				who = PREV
+			}
+			export_to_variable = {
+				which = their_dip_tech_level
+				value = dip_tech
+				who = PREV
+			}
+			export_to_variable = {
+				which = their_mil_tech_level
+				value = mil_tech
+				who = PREV
+			}
+			export_to_variable = {
+				which = our_total_tech_level
+				value = 0
+			}
+			export_to_variable = {
+				which = their_total_tech_level
+				value = 0
+			}
+			change_variable = { which = our_total_tech_level which = our_adm_tech_level }
+			change_variable = { which = our_total_tech_level which = our_dip_tech_level }
+			change_variable = { which = our_total_tech_level which = our_mil_tech_level }
+			change_variable = { which = their_total_tech_level which = their_adm_tech_level }
+			change_variable = { which = their_total_tech_level which = their_dip_tech_level }
+			change_variable = { which = their_total_tech_level which = their_mil_tech_level }
+			change_variable = { which = their_total_tech_level value = -4 }
+			check_variable = { which = their_total_tech_level which = our_total_tech_level }
+		}
+	}
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_puppet_state = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = puppet_state }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_subject_of_type = client_vassal
+		}
+	}
+	is_nomad = no
+	is_tribal = no
+	primitives = no
+	is_great_power = no
+	OR = {
+		war_with = PREV
+		is_subject_of = PREV
+		has_opinion_modifier = {
+			modifier = released_in_peace
+			who = PREV
+		}
+	}
+	OR = {
+		is_year = 1700
+		current_age = age_of_absolutism
+		PREV = {
+			has_casus_belli = { type = cb_imperial target = PREV }
+		}
+	}
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_roman_client_kingdom = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = roman_client_kingdom }
+	OR = {
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+				is_subject_of_type = daimyo_vassal
+				is_subject_of_type = daimyo_barony_vassal
+				is_subject_of_type = daimyo_viscounty_vassal
+				is_subject_of_type = daimyo_county_vassal
+				is_subject_of_type = daimyo_marquisate_vassal
+				is_subject_of_type = daimyo_duchy_vassal
+				is_subject_of_type = daimyo_principality_vassal
+			}
+			government = monarchy
+		}
+		war_with = PREV
+	}
+}
+
+is_possible_subject_of_subject_type_voivodeship = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = voivodeship }
+	is_subject_of = PREV
+	OR = {
+		AND = {
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+				is_subject_of_type = daimyo_vassal
+				is_subject_of_type = daimyo_barony_vassal
+				is_subject_of_type = daimyo_viscounty_vassal
+				is_subject_of_type = daimyo_county_vassal
+				is_subject_of_type = daimyo_marquisate_vassal
+				is_subject_of_type = daimyo_duchy_vassal
+				is_subject_of_type = daimyo_principality_vassal
+			}
+		}
+		is_subject_of_type = march
+	}
+	is_neighbor_of = PREV
+}
+
+is_possible_subject_of_subject_type_fief_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = fief_subject }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+				is_subject_of_type = daimyo_vassal
+				is_subject_of_type = daimyo_barony_vassal
+				is_subject_of_type = daimyo_viscounty_vassal
+				is_subject_of_type = daimyo_county_vassal
+				is_subject_of_type = daimyo_marquisate_vassal
+				is_subject_of_type = daimyo_duchy_vassal
+				is_subject_of_type = daimyo_principality_vassal
+			}
+		}
+	}
+	OR = {
+		primary_culture = PREV
+		AND = {
+			culture_group = PREV
+			PREV = {
+				OR = {
+					accepted_culture = PREV
+					has_cultural_union = yes
+				}
+			}
+		}
+		AND = {
+			is_subject_of = PREV
+			PREV = {
+				accepted_culture = PREV
+			}
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_crusader_state_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = crusader_state_vassal }
+	is_subject_of = PREV
+	is_vassal_or_similar_subject = yes
+	NOT = { 
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = daimyo_barony_vassal
+		is_subject_of_type = daimyo_viscounty_vassal
+		is_subject_of_type = daimyo_county_vassal
+		is_subject_of_type = daimyo_marquisate_vassal
+		is_subject_of_type = daimyo_duchy_vassal
+		is_subject_of_type = daimyo_principality_vassal
+	}
+	is_excommunicated = no
+	religion = catholic
+	capital_scope = {
+		OR = {
+			continent = europe
+			province_id = 379
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_nahuatl_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = nahuatl_vassal }
+	is_subject_of = PREV
+	is_vassal_or_similar_subject = yes
+	NOT = { 
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = daimyo_barony_vassal
+		is_subject_of_type = daimyo_viscounty_vassal
+		is_subject_of_type = daimyo_county_vassal
+		is_subject_of_type = daimyo_marquisate_vassal
+		is_subject_of_type = daimyo_duchy_vassal
+		is_subject_of_type = daimyo_principality_vassal
+	}
+	capital_scope = {
+		OR = {
+			region = california_region
+			region = mexico_region
+			region = rio_grande_region
+			region = central_america_region
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_peasant_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = peasant_vassal }
+	is_subject = no
+	primitives = no
+	government = republic
+	same_continent = PREV
+}
+
+is_possible_subject_of_subject_type_pirate_brotherhood_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	PREV = {
+		is_subject = no
+	}
+	NOT = { is_subject_of_type = pirate_brotherhood_vassal }
+	num_of_ports = 3
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+			OR = {
+				has_reform = pirate_republic_reform
+				has_reform = pirate_king_reform
+				has_reform = war_against_the_world_doctrine_reform
+			}
+		}
+	}
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_imperial_tributary_state = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = imperial_tributary_state }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+			government = monarchy
+		}
+	}
+	OR = {
+		government = tribal
+		capital_scope = {
+			superregion = india_superregion
+		}
+	}
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_sister_republic = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = sister_republic }
+	OR = {
+		AND = {
+			government = republic
+			PREV = { government = republic }
+		}
+		AND = {
+			government = theocracy
+			PREV = { government = theocracy }
+		}
+	}
+	OR = {
+		religion = PREV
+		AND = {
+			religion_group = PREV
+			PREV = {
+				has_global_modifier_value = {
+					which = tolerance_heretic
+					value = 2
+				}
+			}
+		}
+	}
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+		}
+	}
+	same_continent = PREV
+}
+
+is_possible_subject_of_subject_type_muslim_tributary_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = muslim_tributary_vassal }
+	is_subject = no
+	NOT = { religion_group = muslim }
+	is_neighbor_of = PREV
+	variable_arithmetic_trigger = {
+		export_to_variable = {
+			which = our_total_development
+			value = trigger_value:total_development
+		}
+		#subtract_variable = { which = our_total_development value = 1 }
+		export_to_variable = {
+			which = their_total_development
+			value = trigger_value:total_development
+			who = PREV
+		}
+		#subtract_variable = { which = their_total_development value = 1 }
+		divide_variable = { which = their_total_development value = 3 }
+		NOT = { check_variable = { which = our_total_development which = their_total_development } }
+	}
+}
+
+is_possible_subject_of_subject_type_mandala_trade_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	OR = {
+		is_subject = no
+		is_subject_of_type = tributary_state
+		is_subject_of_type = mandala_trade_vassal
+	}
+	OR = {
+		PREV = {
+			NOT = { is_subject_of_type = mandala_trade_vassal }
+		}
+		overlord_of = PREV
+	}
+	capital_scope = {
+		continent = asia
+	}
+	NOT = { is_subject_of = PREV }
+}
+
+is_possible_subject_of_subject_type_integrated_tribe_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = integrated_tribe_subject }
+	is_subject_of = PREV
+	is_vassal_or_similar_subject = yes
+	NOT = { 
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = daimyo_barony_vassal
+		is_subject_of_type = daimyo_viscounty_vassal
+		is_subject_of_type = daimyo_county_vassal
+		is_subject_of_type = daimyo_marquisate_vassal
+		is_subject_of_type = daimyo_duchy_vassal
+		is_subject_of_type = daimyo_principality_vassal
+	}
+	OR = {
+		government = tribal
+		AND = {
+			culture_group = caucasian
+			capital_scope = {
+				region = caucasia_region
+			}
+		}
+	}
+	same_continent = PREV
+}
+
+is_possible_subject_of_subject_type_dutch_province_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = dutch_province_subject }
+	NOT = { has_global_flag = dutch_province_subject_no_leader_election }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+		}
+	}
+	OR = {
+		primary_culture = dutch
+		primary_culture = flemish
+		primary_culture = frisian
+		primary_culture = wallonian
+	}
+	capital_scope = {
+		region = low_countries_region
+	}
+}
+
+is_possible_subject_of_subject_type_revolution_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = revolution_subject }
+	is_subject = no
+	same_continent = PREV
+	OR = {
+		government = monarchy
+		government = republic
+	}
+}
+
+is_possible_subject_of_subject_type_persian_satrapy = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = persian_satrapy }
+	is_neighbor_of = PREV
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_naval_march = {
+	# PREVs in THIS scope refer to possible overlord
+	PREV = {
+		is_subject = no
+	}
+	NOT = { is_subject_of_type = naval_march }
+	OR = {
+		vassal_of = PREV
+		march_of = PREV
+		AND = {
+			is_subject_of = PREV
+			is_different_march_subject = yes
+		}
+	}
+	num_of_ports = 1
+	primitives = no
+}
+
+is_possible_subject_of_subject_type_trade_outpost = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = trade_outpost }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+		}
+	}
+	NOT = { num_of_cities = 2 }
+	capital_scope = {
+		has_port = yes
+		development = 30
+		OR = {
+			region = south_china_region
+			region = north_china_region
+			region = korea_region
+			region = japan_region
+			area = liaoning_area
+		}
+	}
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_integrated_personal_union = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = integrated_personal_union }
+	is_subject_of = PREV
+	is_subject_of_type = personal_union
+	years_in_union_under = {
+		who = PREV
+		years = 50
+	}
+}
+
+is_possible_subject_of_subject_type_brother_kingdom = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = brother_kingdom }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+				is_subject_of_type = medieval_vassal
+			}
+		}
+	}
+	government = monarchy
+	dynasty = PREV
+	has_regency = no
+	religion_group = christian
+}
+
+is_possible_subject_of_subject_type_iqta_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = iqta_vassal }
+	religion_group = muslim
+	is_neighbor_of = PREV
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+			religion = PREV
+			PREV = {
+				is_defender_of_faith = yes
+			}
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_papal_sanctuary_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = papal_sanctuary_subject }
+	is_subject = no
+	religion = PREV
+	same_continent = PREV
+	NOT = { has_country_modifier = the_statue_in_restraint_of_appeals }
+	is_excommunicated = no
+}
+
+is_possible_subject_of_subject_type_imperial_feud_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = imperial_feud_subject }
+	is_subject = no
+	is_part_of_hre = no
+	capital_scope = {
+		continent = europe
+	}
+	OR = {
+		AND = {
+			OR = {
+				NOT = { has_dlc = "Art of War" }
+				hre_religion_locked = no
+			}
+			OR = {
+				religion = catholic
+				religion = protestant
+				religion = reformed
+				religion = PREV
+			}
+		}
+		AND = {
+			has_dlc = "Art of War"
+			hre_religion_locked = yes
+			religion = PREV
+		}
+	}
+	any_owned_province = {
+		OR = {
+			any_neighbor_province = {
+				is_part_of_hre = yes
+				owner = {
+					is_part_of_hre = yes
+				}
+			}
+			AND = {
+				has_port = yes
+				sea_zone = {
+					any_neighbor_province = {
+						has_port = yes
+						is_part_of_hre = yes
+						owner = {
+							is_part_of_hre = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_pagan_chiefdom = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = pagan_chiefdom }
+	vassal_of = PREV
+	OR = {
+		religion_group = pagan
+		religion_group = slavic_group
+		religion_group = balto_slavic_group
+		religion = shamanism
+		religion_group = asian_pagan_group
+	}
+}
+
+is_possible_subject_of_subject_type_native_reserve = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = native_reserve }
+	is_subject = no
+	is_former_colonial_nation = no
+	NOT = { 
+		OR = {
+			technology_group = western
+			technology_group = dutch_tech_group
+			technology_group = english_tech_group
+			technology_group = french_tech_group
+			technology_group = german_tech_group
+			technology_group = italian_tech_group
+			technology_group = portuguese_tech_group
+			technology_group = roman_tech_group
+			technology_group = scandinavian_tech_group
+			technology_group = spanish_tech_group
+			technology_group = swiss_tech_group
+		}
+	}
+	capital_scope = {
+		OR = {
+			continent = north_america
+			continent = south_america
+			continent = africa
+			continent = oceania
+		}
+	}
+	PREV = {
+		NOT = {
+			border_distance = {
+				who = PREV
+				distance = 10
+			}
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_administrative_region = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = administrative_region }
+	is_subject_of = PREV
+	is_vassal_or_similar_subject = yes
+	NOT = { 
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = daimyo_barony_vassal
+		is_subject_of_type = daimyo_viscounty_vassal
+		is_subject_of_type = daimyo_county_vassal
+		is_subject_of_type = daimyo_marquisate_vassal
+		is_subject_of_type = daimyo_duchy_vassal
+		is_subject_of_type = daimyo_principality_vassal
+	}
+	is_neighbor_of = PREV
+	OR = {
+		government = monarchy
+		government = theocracy
+	}
+	capital_scope = {
+		development = 25
+	}
+}
+
+is_possible_subject_of_subject_type_viking_settlement = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = viking_settlement }
+	is_subject_of = PREV
+	is_colonial_subject_type = yes
+	NOT = { is_subject_of_type = annexable_colony }
+	capital_scope = {
+		continent = north_america
+		NOT = { colonial_region = colonial_mexico }
+	}
+}
+
+is_possible_subject_of_subject_type_banking_family_subject = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = banking_family_subject }
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+		}
+	}
+	government = republic
+	capital_scope = {
+		base_tax = 10
+		development = 20
+	}
+	NOT = { num_of_cities = 5 }
+}
+
+is_possible_subject_of_subject_type_palatinate_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = palatinate_vassal }
+	is_part_of_hre = yes
+	is_elector = yes
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_subject_of_type = vassal
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_defensive_march = {
+	# PREVs in THIS scope refer to possible overlord
+	PREV = {
+		is_subject = no
+	}
+	NOT = { is_subject_of_type = defensive_march }
+	OR = {
+		vassal_of = PREV
+		march_of = PREV
+		AND = {
+			is_subject_of = PREV
+			is_different_march_subject = yes
+		}
+	}
+	primitives = no
+}
+
+is_possible_subject_of_subject_type_annexable_colony = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = annexable_colony }
+	is_subject_of = PREV
+	is_colonial_subject_type = yes
+	capital_scope = {
+		OR = {
+			colonial_region = colonial_alaska
+			colonial_region = colonial_canada
+			colonial_region = colonial_eastern_america
+			colonial_region = colonial_louisiana
+			colonial_region = colonial_california
+			colonial_region = colonial_mexico
+			colonial_region = colonial_the_carribean
+			colonial_region = colonial_colombia
+			colonial_region = colonial_peru
+			colonial_region = colonial_la_plata
+			colonial_region = colonial_brazil
+			colonial_region = colonial_australia
+			colonial_region = colonial_papua
+			colonial_region = colonial_solomons
+			colonial_region = colonial_vanuatu
+			colonial_region = colonial_new_caledonia
+			colonial_region = colonial_fiji
+			colonial_region = colonial_polynesia
+			colonial_region = colonial_cape
+			#VU - Hashed this out as it has nothing to do with our mod. By San Felipe
+			# Extended Timeline:
+			#AND = {
+			#	has_global_flag = extended_timeline_mod
+			#	OR = {
+			#		colonial_region = colonial_papua
+			#		colonial_region = colonial_solomons
+			#		colonial_region = colonial_vanuatu
+			#		colonial_region = colonial_new_caledonia
+			#		colonial_region = colonial_fiji
+			#		colonial_region = colonial_polynesia
+			#		colonial_region = colonial_cape
+			#	}
+			#}
+		}
+	}
+}
+
+is_possible_subject_of_subject_type_agricultural_march = {
+	# PREVs in THIS scope refer to possible overlord
+	PREV = {
+		is_subject = no
+	}
+	NOT = { is_subject_of_type = agricultural_march }
+	OR = {
+		vassal_of = PREV
+		march_of = PREV
+		AND = {
+			is_subject_of = PREV
+			is_different_march_subject = yes
+		}
+	}
+	primitives = no
+}
+
+is_possible_subject_of_subject_type_religious_march = {
+	# PREVs in THIS scope refer to possible overlord
+	PREV = {
+		is_subject = no
+	}
+	NOT = { is_subject_of_type = religious_march }
+	religion = PREV
+	has_border_with_religious_enemy = yes
+	OR = {
+		vassal_of = PREV
+		march_of = PREV
+		AND = {
+			is_subject_of = PREV
+			is_different_march_subject = yes
+		}
+	}
+	primitives = no
+}
+
+is_possible_subject_of_subject_type_stato_da_mar_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = stato_da_mar_vassal }
+	num_of_ports = 1
+	OR = {
+		is_subject = no
+		AND = {
+			is_subject_of = PREV
+			is_vassal_or_similar_subject = yes
+			NOT = { 
+	        	is_subject_of_type = daimyo_vassal
+	        	is_subject_of_type = daimyo_barony_vassal
+	        	is_subject_of_type = daimyo_viscounty_vassal
+	        	is_subject_of_type = daimyo_county_vassal
+	        	is_subject_of_type = daimyo_marquisate_vassal
+	        	is_subject_of_type = daimyo_duchy_vassal
+	        	is_subject_of_type = daimyo_principality_vassal
+	        }
+		}
+	}
+	capital_scope = {
+		is_node_in_trade_company_region = yes
+	}
+	# Capital not in same region has to be checked additionally
+	# No such subject in the same trade node has to be checked additionally
+	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+is_possible_subject_of_subject_type_medieval_vassal = {
+	# PREVs in THIS scope refer to possible overlord
+	NOT = { is_subject_of_type = medieval_vassal }
+	NOT = { government = native }
+	NOT = { government = tribal }
+	is_subject = no
+}
+
+can_create_subject_type = {
+	can_be_overlord = $subject_type$
+	$subject$ = {
+		custom_trigger_tooltip = {
+			tooltip = IS_POSSIBLE_SUBJECT_OF_SUBJECT_TYPE_$subject_type$
+			is_possible_subject_of_subject_type_$subject_type$ = yes
+		}
+	}
+}
+
+#03_subjects_expanded_scripted_triggers
+is_vassal_or_similar_subject = {
+	OR = {
+		is_subject_of_type = vassal
+		is_subject_of_type = client_vassal
+		is_subject_of_type = daimyo_vassal
+		is_similar_vassal_subject = yes
+	}
+}
+
+is_similar_vassal_subject = {
+	OR = {
+		is_subject_of_type = puppet_state
+		is_subject_of_type = roman_client_kingdom
+		is_subject_of_type = voivodeship
+		is_subject_of_type = fief_subject
+		is_subject_of_type = nahuatl_vassal
+		is_subject_of_type = peasant_vassal
+		is_subject_of_type = pirate_brotherhood_vassal
+		is_subject_of_type = muslim_tributary_vassal
+		is_subject_of_type = mandala_trade_vassal
+		is_subject_of_type = integrated_tribe_subject
+		is_subject_of_type = persian_satrapy
+		is_subject_of_type = iqta_vassal
+		is_subject_of_type = administrative_region
+		is_subject_of_type = palatinate_vassal
+		is_subject_of_type = stato_da_mar_vassal
+	}
+}
+
+is_march_or_similar_subject = {
+	OR = {
+		is_subject_of_type = march
+		is_subject_of_type = client_march
+		is_similar_march_subject = yes
+	}
+}
+
+is_similar_march_subject = {
+	OR = {
+		is_subject_of_type = crusader_state_vassal
+		is_subject_of_type = naval_march
+		is_subject_of_type = pagan_chiefdom
+		is_subject_of_type = defensive_march
+		is_subject_of_type = agricultural_march
+		is_subject_of_type = religious_march
+	}
+}
+
+is_different_march_subject = {
+	OR = {
+		is_subject_of_type = naval_march
+		is_subject_of_type = defensive_march
+		is_subject_of_type = agricultural_march
+		is_subject_of_type = religious_march
+	}
+}
+
+is_tributary_or_similar_subject = {
+	OR = {
+		is_subject_of_type = tributary_state
+		is_similar_tributary_subject = yes
+	}
+}
+
+is_similar_tributary_subject = {
+	OR = {
+		is_subject_of_type = protectorate
+		is_subject_of_type = peasant_vassal
+		is_subject_of_type = imperial_tributary_state
+		is_subject_of_type = sister_republic
+		is_subject_of_type = dutch_province_subject
+		is_subject_of_type = brother_kingdom
+		is_subject_of_type = papal_sanctuary_subject
+		is_subject_of_type = imperial_feud_subject
+		is_subject_of_type = trade_outpost
+		is_subject_of_type = banking_family_subject
+		is_subject_of_type = medieval_vassal
+	}
+}
+
+is_subject_type_that_pays_vassal_tax = {
+	OR = {
+		is_subject_of_type = vassal
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = client_vassal
+		is_subject_of_type = nahuatl_vassal
+		is_subject_of_type = roman_client_kingdom
+		is_subject_of_type = fief_subject
+		is_subject_of_type = crusader_state_vassal
+		is_subject_of_type = imperial_tributary_state
+		is_subject_of_type = dutch_province_subject
+		is_subject_of_type = revolution_subject
+		is_subject_of_type = trade_outpost
+		is_subject_of_type = iqta_vassal
+		is_subject_of_type = papal_sanctuary_subject
+	}
+}
+
+is_colonial_subject_type = {
+	OR = {
+		is_subject_of_type = colony
+		is_subject_of_type = crown_colony
+		is_subject_of_type = private_enterprise
+		is_subject_of_type = self_governing_colony
+		is_subject_of_type = viking_settlement
+		is_subject_of_type = annexable_colony
+	}
+}
+
+is_subject_type_that_can_have_subjects = {
+	OR = {
+		is_subject_of_type = personal_union
+		is_subject_of_type = tributary_state
+		#is_subject_of_type = salic_personal_union
+		is_subject_of_type = integrated_personal_union
+		is_subject_of_type = protectorate
+		is_subject_of_type = pirate_brotherhood_vassal
+		is_subject_of_type = imperial_tributary_state
+		is_subject_of_type = sister_republic
+		is_subject_of_type = mandala_trade_vassal
+		is_subject_of_type = dutch_province_subject
+		is_subject_of_type = brother_kingdom
+		is_subject_of_type = papal_sanctuary_subject
+		is_subject_of_type = imperial_feud_subject
+		is_subject_of_type = native_reserve
+		is_subject_of_type = banking_family_subject
+		is_subject_of_type = medieval_vassal
+	}
+}
+
+is_defensive_subject_only = {
+	OR = {
+		is_subject_of_type = persian_satrapy
+		AND = {
+			is_subject_of_type = defensive_march
+			NOT = { has_country_flag = call_defensive_march_to_offensive_war }
+		}
+	}
+}
+
+is_subject_type_that_can_be_annexed = {
+	OR = {
+		is_subject_of_type = vassal
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = client_vassal
+		is_subject_of_type = puppet_state
+		is_subject_of_type = roman_client_kingdom
+		is_subject_of_type = voivodeship
+		is_subject_of_type = fief_subject
+		#is_subject_of_type = salic_personal_union
+		is_subject_of_type = nahuatl_vassal
+		is_subject_of_type = pirate_brotherhood_vassal
+		is_subject_of_type = integrated_tribe_subject
+		is_subject_of_type = revolution_subject
+		is_subject_of_type = iqta_vassal
+		is_subject_of_type = palatinate_vassal
+		is_subject_of_type = annexable_colony
+		is_subject_of_type = stato_da_mar_vassal
+	}
+}
+
+is_subject_type_that_can_be_integrated = {
+	OR = {
+		is_subject_of_type = personal_union
+		is_subject_of_type = peasant_vassal
+		is_subject_of_type = sister_republic
+	}
+}
+
+#04_subjects_expanded_scripted_triggers
+is_in_selected_trade_outpost_region_or_area = {
+	OR = {
+		AND = {
+			region = south_china_region
+			ROOT = {
+				has_country_flag = selected_trade_outpost_region_south_china_region
+			}
+		}
+		AND = {
+			region = north_china_region
+			ROOT = {
+				has_country_flag = selected_trade_outpost_region_north_china_region
+			}
+		}
+		AND = {
+			region = korea_region
+			ROOT = {
+				has_country_flag = selected_trade_outpost_region_korea_region
+			}
+		}
+		AND = {
+			region = japan_region
+			ROOT = {
+				has_country_flag = selected_trade_outpost_region_japan_region
+			}
+		}
+		AND = {
+			area = liaoning_area
+			ROOT = {
+				has_country_flag = selected_trade_outpost_area_liaoning_area
+			}
+		}
+	}
+}
+
+has_any_trade_outpost_region_or_area_selected = {
+	OR = {
+		has_country_flag = selected_trade_outpost_region_south_china_region
+		has_country_flag = selected_trade_outpost_region_north_china_region
+		has_country_flag = selected_trade_outpost_region_korea_region
+		has_country_flag = selected_trade_outpost_region_japan_region
+		has_country_flag = selected_trade_outpost_area_liaoning_area
+	}
+}
+
+#06_subjects_expanded_scripted_triggers
+has_total_development_fraction_of = {
+	variable_arithmetic_trigger = {
+		export_to_variable = {
+			which = this_dev
+			value = trigger_value:total_development
+		}
+		export_to_variable = {
+			which = their_dev
+			value = trigger_value:total_development
+			who = $who$
+		}
+		divide_variable = { which = this_dev which = their_dev }
+		check_variable = { which = this_dev value = $value$ }
+	}
+}
+
+has_disabled_colonial_nation_spawning = {
+	[[is_province]
+		if = {
+			limit = {
+				always = $is_province$
+			}
+			colonial_region = $colonial_region$
+		}
+	]
+	$who$ = {
+		has_country_flag = no_colonial_nations_in_$colonial_region$
+		NOT = {
+			any_subject_country = {
+				is_colonial_nation = yes
+				capital_scope = {
+					colonial_region = $colonial_region$
+				}
+			}
+		}
+	}
+}

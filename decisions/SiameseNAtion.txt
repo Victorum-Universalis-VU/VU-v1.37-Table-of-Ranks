@@ -1,0 +1,133 @@
+#Updated to v1.37 - SF
+country_decisions = {
+	siamese_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_siam_flag }
+			NOT = { tag = SIA }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			OR = {
+				NOT = { exists = SIA }
+				ai = no
+			}
+			culture_group = thai_group
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 5
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+			OR = {
+				NOT = {
+					tag = AYU
+				}
+				NOT = { has_dlc = "Leviathan" }
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = indo_china_region
+				region = south_china_sea_islands_region
+				area = tenasserim_area
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+
+		allow = {
+			adm_tech = 37
+			NOT = { exists = SIA }
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			owns_core_province = 600 #Ayutthaya
+			owns_core_province = 589 #Jiang Mai
+			owns_core_province = 593 #Si Thammarat
+			owns_core_province = 614 #Viangchan
+			owns_core_province = 609 #Angkor
+			num_of_owned_provinces_with = {	
+				value = 20
+				is_core = ROOT
+				OR = {
+					region = indo_china_region
+					region = south_china_sea_islands_region
+					area = tenasserim_area
+				}
+			}
+			total_non_estate_disasters_completed = { value = 2 }
+		}
+
+		effect = {
+			8556 = { #These provinces starting with 4700s were moved to the 8500s. Hence this used to be 4756 
+				add_base_tax = 5
+				add_base_production = 5
+				add_base_manpower = 4
+				move_capital_effect = yes
+			}
+			change_tag = SIA
+			swap_non_generic_missions = yes
+			on_change_tag_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 8 } }
+				set_government_rank = 8
+			}
+			indo_china_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			south_china_sea_islands_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			tenasserim_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			add_prestige = 25
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			set_country_flag = formed_siam_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

@@ -1,0 +1,104 @@
+italian_condottieri_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+		always = yes
+	}
+
+	powers = {
+		italian_condottieri = {
+			max = 100
+			reset_on_new_ruler = no
+			base_monthly_growth = 0
+			development_scaled_monthly_growth = 0
+			scaled_modifier = {
+				modifier = {
+					loot_amount = 0.50
+					available_province_loot = 0.50
+					merc_leader_army_tradition = 0.33
+					monthly_italian_condottieri = -0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_government_power = {
+						mechanic_type = italian_condottieri_mechanic
+						power_type = italian_condottieri
+						value = 100
+					}
+				}
+				modifier = {
+					mercenary_discipline = 0.10
+					mercenary_manpower = 0.25
+				}
+			}
+			on_max_reached = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = GE_reached_max_italian_condottieri }
+					}
+					set_country_flag = GE_reached_max_italian_condottieri
+					add_army_professionalism = 0.05
+					add_army_tradition = 20
+				}
+			}
+			is_good = yes
+		}
+	}
+
+	interactions = {
+		promote_hessian_militarization = {
+			gui = hessian_militarization_gov_mech
+			cost_type = italian_condottieri
+			center = no
+			trigger = {
+				NOT = {
+					has_government_power = {
+						mechanic_type = italian_condottieri_mechanic
+						power_type = italian_condottieri
+						value = 100
+					}
+				}
+				years_of_income = 0.1
+			}
+			effect = {
+				add_years_of_income = -0.1
+				add_government_power = {
+					mechanic_type = italian_condottieri_mechanic
+					power_type = italian_condottieri
+					value = 5
+				}
+			}
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 0
+					is_at_war = no
+				}
+				modifier = {
+					factor = 0
+					NOT = { num_of_mercenaries = 1 }
+				}
+				modifier = {
+					factor = 0
+					is_in_deficit = yes
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = { years_of_income = 0.25 }
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						has_government_power = {
+							mechanic_type = italian_condottieri_mechanic
+							power_type = italian_condottieri
+							value = 90
+						}
+					}
+				}
+			}
+		}
+	}
+}

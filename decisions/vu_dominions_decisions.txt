@@ -1,0 +1,813 @@
+
+country_decisions = {
+	create_dominion_in_india = {
+		potential = {
+			ai = no
+			is_subject = no
+			can_be_overlord = self_governing_dominion_vu
+			num_of_ports = 40
+			capital_scope = {
+				NOT = { superregion = india_superregion }
+				NOT = { superregion = china_superregion }
+				NOT = { region = japan_region }
+				NOT = { continent = oceania }
+				NOT = { superregion = east_indies_superregion }
+				NOT = { continent = africa }
+			}
+			NOT = {
+				exists = DI1
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				superregion = india_superregion
+			}
+		}
+		provinces_to_highlight = {
+			superregion = india_superregion
+			has_discovered = ROOT
+		}
+		allow = {
+			treasury = 3000
+			is_at_war = no
+			OR = {
+				has_idea_group = expansion_ideas
+				has_idea_group = exploration_ideas
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				superregion = india_superregion
+			}
+		}
+		effect = {
+			add_treasury = -3000
+			custom_tooltip = ALL_PROVINCES_IN_INDIAN_TRADE_COMPANY_REGIONS_CEDED_TO_DOMINION
+			hidden_effect = {
+				india_superregion = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DI1
+					}
+					cede_province = DI1
+				}
+				create_subject = {
+					subject = DI1
+					subject_type = self_governing_dominion_vu
+				}
+				DI1 = {
+					add_treasury = 3000
+					add_truce_with = ROOT
+					change_primary_culture = ROOT
+					change_religion = ROOT
+					change_technology_group = ROOT
+					change_unit_type = ROOT
+					define_ruler = {
+						culture = ROOT
+						religion = ROOT
+					}
+					adopt_reform_progress = ROOT
+					every_province = {
+						limit = {
+							has_discovered = ROOT
+						}
+						discover_country = PREV
+					}
+				}
+			}
+		}
+	}
+
+	create_dominion_in_east_indies = {
+		potential = {
+			ai = no
+			is_subject = no
+			can_be_overlord = self_governing_dominion_vu
+			num_of_ports = 40
+			capital_scope = {
+				NOT = { superregion = india_superregion }
+				NOT = { superregion = china_superregion }
+				NOT = { region = japan_region }
+				NOT = { continent = oceania }
+				NOT = { superregion = east_indies_superregion }
+				NOT = { continent = africa }
+			}
+			NOT = {
+				exists = DC1
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					trade_company_region = trade_company_indonesia
+					trade_company_region = trade_company_moluccas
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				trade_company_region = trade_company_indonesia
+				trade_company_region = trade_company_moluccas
+			}
+			has_discovered = ROOT
+		}
+		allow = {
+			treasury = 3000
+			is_at_war = no
+			OR = {
+				has_idea_group = expansion_ideas
+				has_idea_group = exploration_ideas
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					trade_company_region = trade_company_indonesia
+					trade_company_region = trade_company_moluccas
+				}
+			}
+		}
+		effect = {
+			add_treasury = -3000
+			custom_tooltip = ALL_PROVINCES_IN_INDOCHINA_TRADE_COMPANY_REGIONS_CEDED_TO_DOMINION
+			hidden_effect = {
+				trade_company_indonesia = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DC1
+					}
+					cede_province = DC1
+				}
+				trade_company_moluccas = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DC1
+					}
+					cede_province = DC1
+				}
+				create_subject = {
+					subject = DC1
+					subject_type = self_governing_dominion_vu
+				}
+				DC1 = {
+					add_treasury = 3000
+					add_truce_with = ROOT
+					change_primary_culture = ROOT
+					change_religion = ROOT
+					change_technology_group = ROOT
+					change_unit_type = ROOT
+					define_ruler = {
+						culture = ROOT
+						religion = ROOT
+					}
+					adopt_reform_progress = ROOT
+					every_province = {
+						limit = {
+							has_discovered = ROOT
+						}
+						discover_country = PREV
+					}
+				}
+			}
+		}
+	}
+
+	create_dominion_in_west_africa = {
+		potential = {
+			ai = no
+			is_subject = no
+			can_be_overlord = self_governing_dominion_vu
+			num_of_ports = 40
+			capital_scope = {
+				NOT = { superregion = india_superregion }
+				NOT = { superregion = china_superregion }
+				NOT = { region = japan_region }
+				NOT = { continent = oceania }
+				NOT = { superregion = east_indies_superregion }
+				NOT = { continent = africa }
+			}
+			NOT = {
+				exists = DW1
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+				    trade_company_region = trade_company_senegal
+				    trade_company_region = trade_company_gambia
+				    trade_company_region = trade_company_bissau
+				    trade_company_region = trade_company_guinea
+				    trade_company_region = trade_company_sierra_leone
+				    trade_company_region = trade_company_liberia
+				    trade_company_region = trade_company_ivory_coast
+				    trade_company_region = trade_company_ghana
+				    trade_company_region = trade_company_togo
+				    trade_company_region = trade_company_benin
+				    trade_company_region = trade_company_nigeria
+				    trade_company_region = trade_company_mali
+				    trade_company_region = trade_company_mauritania
+				    trade_company_region = trade_company_burkina
+				    trade_company_region = trade_company_niger
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+			    trade_company_region = trade_company_senegal
+			    trade_company_region = trade_company_gambia
+			    trade_company_region = trade_company_bissau
+			    trade_company_region = trade_company_guinea
+			    trade_company_region = trade_company_sierra_leone
+			    trade_company_region = trade_company_liberia
+			    trade_company_region = trade_company_ivory_coast
+			    trade_company_region = trade_company_ghana
+			    trade_company_region = trade_company_togo
+			    trade_company_region = trade_company_benin
+			    trade_company_region = trade_company_nigeria
+			    trade_company_region = trade_company_mali
+			    trade_company_region = trade_company_mauritania
+			    trade_company_region = trade_company_burkina
+			    trade_company_region = trade_company_niger
+			}
+			has_discovered = ROOT
+		}
+		allow = {
+			treasury = 3000
+			is_at_war = no
+			OR = {
+				has_idea_group = expansion_ideas
+				has_idea_group = exploration_ideas
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+				    trade_company_region = trade_company_senegal
+				    trade_company_region = trade_company_gambia
+				    trade_company_region = trade_company_bissau
+				    trade_company_region = trade_company_guinea
+				    trade_company_region = trade_company_sierra_leone
+				    trade_company_region = trade_company_liberia
+				    trade_company_region = trade_company_ivory_coast
+				    trade_company_region = trade_company_ghana
+				    trade_company_region = trade_company_togo
+				    trade_company_region = trade_company_benin
+				    trade_company_region = trade_company_nigeria
+				    trade_company_region = trade_company_mali
+				    trade_company_region = trade_company_mauritania
+				    trade_company_region = trade_company_burkina
+				    trade_company_region = trade_company_niger
+				}
+			}
+		}
+		effect = {
+			add_treasury = -3000
+			custom_tooltip = ALL_PROVINCES_IN_WEST_AFRICA_TRADE_COMPANY_REGIONS_CEDED_TO_DOMINION
+			hidden_effect = {
+			    trade_company_senegal = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_gambia = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_bissau = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_guinea = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_sierra_leone = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_liberia = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_ivory_coast = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_ghana = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_togo = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_benin = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_nigeria = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_mali = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_mauritania = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_burkina = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+			    trade_company_niger = {
+			    	limit = {
+			    	    owned_by = ROOT
+			    	    is_city = yes
+			    	}
+			    	if = {
+			    	    limit = {
+			    	        is_core = ROOT
+			    	    }
+			    	    remove_core = ROOT
+			    	    add_core = DW1
+			    	}
+			    	cede_province = DW1
+			    }
+				create_subject = {
+					subject = DW1
+					subject_type = self_governing_dominion_vu
+				}
+				DW1 = {
+					add_treasury = 3000
+					add_truce_with = ROOT
+					change_primary_culture = ROOT
+					change_religion = ROOT
+					change_technology_group = ROOT
+					change_unit_type = ROOT
+					define_ruler = {
+						culture = ROOT
+						religion = ROOT
+					}
+					
+					adopt_reform_progress = ROOT
+					every_province = {
+						limit = {
+							has_discovered = ROOT
+						}
+						discover_country = PREV
+					}
+				}
+			}
+		}
+	}
+
+	create_dominion_in_east_africa = {
+		potential = {
+			ai = no
+			is_subject = no
+			can_be_overlord = self_governing_dominion_vu
+			num_of_ports = 40
+			capital_scope = {
+				NOT = { superregion = india_superregion }
+				NOT = { superregion = china_superregion }
+				NOT = { region = japan_region }
+				NOT = { continent = oceania }
+				NOT = { superregion = east_indies_superregion }
+				NOT = { continent = africa }
+			}
+			NOT = {
+				exists = DA1
+			}
+			num_of_owned_provinces_with = {
+				value = 10 
+				OR = {
+					trade_company_region = trade_company_angola
+					trade_company_region = trade_company_namibia
+					trade_company_region = trade_company_kongo
+					trade_company_region = trade_company_gabon
+					trade_company_region = trade_company_cameroon
+					trade_company_region = trade_company_central_africa
+					trade_company_region = trade_company_chad
+				    trade_company_region = trade_company_tanganyika
+				    trade_company_region = trade_company_kenya
+				    trade_company_region = trade_company_zambezi
+				    trade_company_region = trade_company_mozambique
+				    trade_company_region = trade_company_madagascar
+				    trade_company_region = trade_company_buganda
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				trade_company_region = trade_company_angola
+				trade_company_region = trade_company_namibia
+				trade_company_region = trade_company_kongo
+				trade_company_region = trade_company_gabon
+				trade_company_region = trade_company_cameroon
+				trade_company_region = trade_company_central_africa
+				trade_company_region = trade_company_chad
+			    trade_company_region = trade_company_tanganyika
+			    trade_company_region = trade_company_kenya
+			    trade_company_region = trade_company_zambezi
+			    trade_company_region = trade_company_mozambique
+			    trade_company_region = trade_company_madagascar
+			    trade_company_region = trade_company_buganda
+			}
+			has_discovered = ROOT
+		}
+		allow = {
+			treasury = 3000
+			is_at_war = no
+			OR = {
+				has_idea_group = expansion_ideas
+				has_idea_group = exploration_ideas
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					trade_company_region = trade_company_angola
+					trade_company_region = trade_company_namibia
+					trade_company_region = trade_company_kongo
+					trade_company_region = trade_company_gabon
+					trade_company_region = trade_company_cameroon
+					trade_company_region = trade_company_central_africa
+					trade_company_region = trade_company_chad
+				    trade_company_region = trade_company_tanganyika
+				    trade_company_region = trade_company_kenya
+				    trade_company_region = trade_company_zambezi
+				    trade_company_region = trade_company_mozambique
+				    trade_company_region = trade_company_madagascar
+				    trade_company_region = trade_company_buganda
+				}
+			}
+		}
+		effect = {
+			add_treasury = -3000
+			custom_tooltip = ALL_PROVINCES_IN_EAST_AFRICA_TRADE_COMPANY_REGIONS_CEDED_TO_DOMINION
+			hidden_effect = {
+				trade_company_angola = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_namibia = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_kongo = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_gabon = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_cameroon = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_central_africa = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_chad = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_tanganyika = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_kenya = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_zambezi = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_mozambique = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_madagascar = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				trade_company_buganda = {
+					limit = {
+						owned_by = ROOT
+						is_city = yes
+					}
+					if = {
+						limit = {
+							is_core = ROOT
+						}
+						remove_core = ROOT
+						add_core = DA1
+					}
+					cede_province = DA1
+				}
+				create_subject = {
+					subject = DA1
+					subject_type = self_governing_dominion_vu
+				}
+				DA1 = {
+					add_treasury = 3000
+					add_truce_with = ROOT
+					change_primary_culture = ROOT
+					change_religion = ROOT
+					change_technology_group = ROOT
+					change_unit_type = ROOT
+					define_ruler = {
+						culture = ROOT
+						religion = ROOT
+					}
+					
+					adopt_reform_progress = ROOT
+					every_province = {
+						limit = {
+							has_discovered = ROOT
+						}
+						discover_country = PREV
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,504 @@
+#VU Quontin 1.35
+moldovia_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		OR = {
+			tag = MOL
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	mitropoly_of_moldova = {
+	    position = 1
+		icon = mitropoly_of_moldova
+		required_missions = { }
+		trigger = {
+		    religion = orthodox
+			estate_loyalty = {
+		   		estate = estate_church
+		   		loyalty = 50
+			}
+			estate_influence = {
+    			estate = estate_church
+    			influence = 30
+			}
+		}
+		effect = {
+		    7273 = {
+		        add_permanent_claim = ROOT
+		    }
+		    add_patriarch_authority = 1
+		}
+	}
+
+	stefan_the_saint = {
+	    position = 2
+		icon = stefan_the_saint
+		required_missions = { mitropoly_of_moldova }
+		trigger = {
+			religion = orthodox
+			OR = {
+		        temple = 5
+		        cathedral = 5
+		        grand_cathedral = 5
+		    }
+			estate_loyalty = {
+		   		estate = estate_church
+		    	loyalty = 65
+			}
+		}
+		effect = {
+			add_country_modifier = { 
+    		    name = "vu_mol_piety"
+   			    duration = -1  
+			}
+		    define_advisor = {
+    	    	type = theologian 
+    	    	skill = 3
+    	    	culture = romanian
+    	    	religion = orthodox
+    	    	discount = yes
+		    }
+		}
+	}
+	athlete_christ = {
+	    position = 3
+		icon = athlete_christ
+		required_missions = { stefan_the_saint }
+		trigger = {
+			religion = orthodox
+			current_icon = icon_michael 
+		}
+		effect = {
+		    country_event = { id = mol_events.2 }
+		    add_casus_belli = {
+    	    	target = TUR
+    	    	type = cb_crusade
+    	    	months = 60
+			}
+		}
+	}
+}
+
+moldovia_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		OR = {
+			tag = MOL
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	voronet_monastery = {
+	    position = 2
+		icon = voronet_monastery
+		required_missions = { mitropoly_of_moldova rule_of_stefan_the_great }
+		trigger = {
+			religion = orthodox
+			estate_loyalty = {
+		   		estate = estate_church
+		    	loyalty = 65
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+				    NOT = {
+						any_owned_province = {
+							has_great_project = {
+								type = vu_voronet_monastery
+								tier = 0
+							}	
+						}
+					}
+				}
+				custom_tooltip = voronet_monastry
+			    set_country_flag = voronet_monastry
+			}
+		    else = {
+			    3156 = {
+				    add_great_project_tier = {
+    				    type = vu_voronet_monastery
+    				    tier = 1
+					}
+				}
+			}
+		}
+	}
+
+	golden_age_mol = {
+	    position = 3
+		icon = golden_age_mol
+		required_missions = { }
+		trigger = {
+			monthly_income = 10
+		}
+		effect = {
+		    add_country_modifier = { 
+    	    	name = "vu_mol_tax"
+   		    	duration = -1  
+			}
+		}
+	}
+	gros_moldovenesc = {
+	    position = 3
+		icon = gros_moldovenesc
+		required_missions = { golden_age_mol }
+		trigger = {
+		    power_projection = 20
+		    in_golden_age = yes
+			POL = {
+				OR = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = insulted
+					}
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = scornfully_insulted
+					}
+				}
+			}
+		}
+		effect = {
+		    add_treasury = 10000
+		    add_country_modifier = { 
+    	    	name = "vu_mol_prestige"
+   		    	duration = -1  
+			}
+		}
+	}
+}
+
+moldovia_missions_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		OR = {
+			tag = MOL
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	rule_of_stefan_the_great = {
+	    position = 1
+		icon = rule_of_stefan_the_great
+		required_missions = { }
+		trigger = {
+		    is_year = 1457
+		    NOT = { 
+				is_year = 1500 
+			}
+		    is_subject = no
+		    religion = orthodox
+		}
+		effect = {
+		    country_event = { id = mol_events.1 }
+		}
+	}
+	path_to_unification = {
+	    position = 4
+		icon = path_to_unification
+		required_missions = { 
+			golden_age_mol wallachian_cousins 
+		}
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 4531
+			    province_id = 7754
+			}
+		}
+		trigger = {
+			WAL = { is_subject_of = MOL }
+			4531 = { country_or_non_sovereign_subject_holds = ROOT }
+ 			7754 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		effect = {
+			if = {
+				limit ={
+					exists = TRA
+				}
+			    add_casus_belli = {
+ 		    	    target = TRA
+ 		   		    type = cb_restore_personal_union 
+ 		    	    months = 60
+				}
+			}
+			southern_transylvania_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			banat_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			transylvania_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+moldovia_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		OR = {
+			tag = MOL
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	oastea_domneasca = {
+	    position = 2
+		icon = oastea_domneasca
+		required_missions = { rule_of_stefan_the_great legitimate_dominus }
+		trigger = {
+			manpower_percentage = 0.7
+		}
+		effect = {
+			hidden_effect = {
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    	capital_scope = { infantry = MOL }
+		    }
+		    custom_tooltip = mol_infantry
+			add_army_professionalism = 0.3
+			add_country_modifier = { 
+    		    name = "vu_mol_discipline"
+   			    duration = -1  
+			}
+		}
+	}
+
+	wallachian_cousins = {
+	    position = 3
+		icon = wallachian_cousins
+		required_missions = { }
+		trigger = {
+			OR = {
+				AND = {
+				    has_opinion = {
+				    	who = WAL
+				    	value = 150
+				    }
+				    marriage_with = WAL
+				    WAL = { 
+				    	NOT = { 
+				    		mil = 4
+				    	}
+				    }
+				}
+				AND = {
+				    is_enemy = WAL
+				    army_size = WAL
+				    WAL = { 
+						NOT = { 
+							mil = 4 
+						}
+					}
+				}
+			}
+		}
+		effect = {
+		    custom_tooltip = mol_wallachia1
+		    custom_tooltip = mol_wallachia2
+		    custom_tooltip = mol_wallachia3
+		    custom_tooltip = mol_wallachia4
+		    hidden_effect = {
+		        if = {
+		        	limit = {
+		        		has_opinion = {
+		        			who = WAL
+		        			value = 150
+		        		}
+		        		marriage_with = WAL
+		        		WAL = { 
+		        			NOT = { 
+		        				mil = 4 
+		        			}
+		        		}
+		        	}
+		        	create_union = WAL
+		        }
+		        else = {
+			        add_casus_belli = {
+ 		            	target = WAL
+ 		   	        	type = cb_restore_personal_union 
+ 		            	months = 60
+			    	}
+				}
+			}
+		}
+	}
+	tartarian_sellswords = {
+	    position = 4
+		icon = tartarian_sellswords
+		required_missions = { oastea_cea_mare }
+		trigger = {
+			full_idea_group = mercenary_ideas 
+			OR = {
+			    accepted_culture = crimean 
+			    border_distance = {
+			    	who = CRI
+			    	distance = 5
+			    }
+			}
+		}
+		effect = {
+		    add_country_modifier = { 
+    	    	name = "vu_mol_mercccsss"
+   		    	duration = -1  
+		    }
+		}
+	}
+}
+
+moldovia_missions_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		OR = {
+			tag = MOL
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	legitimate_dominus = {
+	    position = 1
+		icon = legitimate_dominus
+		required_missions = { }
+		trigger = {
+			legitimacy = 100
+			dynasty = "Musat"
+			OR = {
+			    custom_trigger_tooltip = {
+			        tooltip = mol_pol_no_union
+			        POL = {
+			            has_opinion_modifier = {
+			            	who = MOL
+			            	modifier = resisted_polish_interference
+			            }
+			        }
+			    }
+			    AND = {
+				    is_year = 1524
+				    is_subject = no
+				}
+			}
+		}
+		effect = {
+		    add_country_modifier = { 
+    	    	name = "vu_mol_diplo_legit"
+   		    	duration = -1  
+		    }
+		    add_prestige = 20
+		}
+	}
+	oastea_boiereasca = {
+	    position = 2
+		icon = oastea_boiereasca
+		required_missions = { legitimate_dominus }
+		trigger = {
+			estate_loyalty = {
+		   		estate = estate_nobles
+		   		loyalty = 50
+			}
+			estate_influence = {
+    			estate = estate_nobles
+    			influence = 30
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+    	    	name = "vu_mol_calv_army"
+   		    	duration = -1  
+		    }
+		    add_prestige = 20
+		}
+	}
+	oastea_cea_mare = {
+	    position = 3
+		icon = oastea_cea_mare
+		required_missions = { oastea_domneasca }
+		trigger = {
+			army_size_percentage = 1
+			crown_land_share = 10
+		}
+		effect = {
+		    custom_tooltip = estate_peasants_enabled
+		    set_country_flag = estate_peasants_enabled
+		    add_country_modifier = { 
+    	    	name = "vu_mol_force_limit"
+   		    	duration = -1  
+		    }
+		}
+	}
+	fortress_system = {
+	    position = 4
+		icon = fortress_system
+		required_missions = { oastea_cea_mare }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 3156
+			    province_id = 1756
+			    province_id = 7275
+			    province_id = 7276
+			    province_id = 4529
+			}
+		}
+		trigger = {
+			3156 = {has_building = fort_16th }
+			1756 = {has_building = fort_16th }
+			7275 = {has_building = fort_16th }
+			7276 = {has_building = fort_16th }
+			4529 = {has_building = fort_16th }
+		}
+		effect = {
+			3156 = {add_building = fort_18th }
+			1756 = {add_building = fort_18th }
+			7275 = {add_building = fort_18th }
+			7276 = {add_building = fort_18th }
+			4529 = {add_building = fort_18th }
+		}
+	}
+}

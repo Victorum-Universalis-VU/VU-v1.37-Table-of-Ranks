@@ -1,0 +1,189 @@
+namespace = nav_up
+
+province_event = {
+	id = nav_up.1
+	title = nav_up.1.t
+	desc = nav_up.1.d
+	picture = SHIP_SAILING_eventPicture
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	trigger = {
+		has_province_modifier = navalbase_modifier
+		OR = {
+			has_building = dock
+			has_building = drydock
+		}
+		NOT = { has_province_modifier = navalbase_up_rejected }	
+		owner = { 
+			NOT = { has_country_flag = no_more_bases }
+		}
+	}
+
+	option = {
+		name = nav_up.1.a
+		goto = ROOT
+		remove_province_modifier = navalbase_modifier
+		add_permanent_province_modifier = {
+			name = navalbase_modifier_2
+			duration = -1
+		}
+		if = {
+			limit = { 
+				owner = { has_idea_group = naval_ideas }
+			}
+			owner = { add_treasury = -50 }
+		}
+		if = {
+			limit = { 
+				owner = { NOT = { has_idea_group = naval_ideas } }
+			}
+			owner = { add_treasury = -100 }
+		}
+	}
+
+	option = {
+		name = nav_up.1.b
+		goto = ROOT
+		add_province_modifier = {
+		name = navalbase_up_rejected
+		duration = 1825
+		hidden = yes
+		}
+	}
+
+	option = {
+		name = nav_up.1.c
+
+		custom_tooltip = no_more
+		owner = { set_country_flag = no_more_bases }
+	}
+}
+
+province_event = {
+	id = nav_up.2
+	title = nav_up.1.t
+	desc = nav_up.1.d
+	picture = SHIP_SAILING_eventPicture
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	trigger = {
+		has_province_modifier = navalbase_modifier_2
+		OR = {
+			has_building = dock
+			has_building = drydock
+		}
+		OR = {
+			has_building = shipyard
+			has_building = grand_shipyard
+		}
+		NOT = { has_province_modifier = navalbase_up_rejected }	
+		owner = { 
+			NOT = { has_country_flag = no_more_bases }
+		}
+	}
+
+	option = {
+		name = nav_up.2.a
+		goto = ROOT
+		remove_province_modifier = navalbase_modifier_2
+		add_permanent_province_modifier = {
+			name = navalbase_modifier_3
+			duration = -1
+		}
+		if = {
+			limit = { 
+				owner = { has_idea_group = naval_ideas }
+			}
+			owner = { add_treasury = -250 }
+		}
+		if = {
+			limit = { 
+				owner = { NOT = { has_idea_group = naval_ideas } }
+			}
+			owner = { add_treasury = -500 }
+		}
+	}
+
+	option = {
+		name = nav_up.2.b
+		goto = ROOT
+		add_province_modifier = {
+		name = navalbase_up_rejected
+		duration = 1825
+		hidden = yes
+		}
+	}
+
+	option = {
+		name = nav_up.2.c
+
+		custom_tooltip = no_more
+		owner = { set_country_flag = no_more_bases }
+	}
+}
+
+province_event = {
+	id = nav_up.3
+	title = nav_up.1.t
+	desc = nav_up.1.d
+	picture = SHIP_SAILING_eventPicture
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	trigger = {
+		has_province_modifier = navalbase_modifier_3
+		has_building = grand_shipyard
+		has_building = drydock
+		NOT = { has_province_modifier = navalbase_up_rejected }	
+		owner = { 
+			NOT = { has_country_flag = no_more_bases }
+		}
+	}
+
+	option = {
+		name = nav_up.3.a
+		goto = ROOT
+		remove_province_modifier = navalbase_modifier_3
+		add_permanent_province_modifier = {
+			name = navalbase_modifier_4
+			duration = -1
+		}
+		if = {
+			limit = { 
+				owner = { has_idea_group = naval_ideas }
+			}
+			owner = { add_treasury = -750 }
+		}
+		if = {
+			limit = { 
+				owner = { NOT = { has_idea_group = naval_ideas } }
+			}
+			owner = { add_treasury = -1500 }
+		}
+	}
+
+	option = {
+		name = nav_up.3.b
+		goto = ROOT
+		add_province_modifier = {
+		name = navalbase_up_rejected
+		duration = 1825
+		hidden = yes
+		}
+	}
+
+	option = {
+		name = nav_up.3.c
+
+		custom_tooltip = no_more
+		owner = { set_country_flag = no_more_bases }
+	}
+}

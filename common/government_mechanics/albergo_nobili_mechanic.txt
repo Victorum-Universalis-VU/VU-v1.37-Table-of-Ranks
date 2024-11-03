@@ -1,0 +1,67 @@
+albergo_nobili_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 8
+	available = {
+		always = yes
+	}
+
+	interactions = {
+		albergo_nobili_mechanic_uso_di_mare = {
+			gui = venetian_government_mechanic_interaction
+			icon = GFX_albergo_nobili_mechanic_uso_di_mare_button
+			trigger = {
+				NOT = { has_ruler_modifier = albergo_nobili_uso_di_mare_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_doria_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_fieschi_modifier }
+			}
+			effect = {
+				create_explorer = {
+					tradition = 50
+				}
+				add_ruler_modifier = {
+					name = albergo_nobili_uso_di_mare_modifier
+					duration = -1
+				}
+			}
+			ai_chance = {
+				factor = 33
+			}
+		}
+		albergo_nobili_mechanic_doria = {
+			gui = venetian_government_mechanic_interaction
+			icon = GFX_albergo_nobili_mechanic_doria_button
+			trigger = {
+				NOT = { has_ruler_modifier = albergo_nobili_uso_di_mare_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_doria_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_fieschi_modifier }
+			}
+			effect = {
+				add_ruler_modifier = {
+					name = albergo_nobili_doria_modifier
+					duration = -1
+				}
+			}
+			ai_chance = {
+				factor = 33
+			}
+		}
+		albergo_nobili_mechanic_fieschi = {
+			gui = venetian_government_mechanic_interaction
+			icon = GFX_albergo_nobili_mechanic_fieschi_button
+			trigger = {
+				NOT = { has_ruler_modifier = albergo_nobili_uso_di_mare_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_doria_modifier }
+				NOT = { has_ruler_modifier = albergo_nobili_fieschi_modifier }
+			}
+			effect = {
+				add_ruler_modifier = {
+					name = albergo_nobili_fieschi_modifier
+					duration = -1
+				}
+			}
+			ai_chance = {
+				factor = 33
+			}
+		}
+	}
+}

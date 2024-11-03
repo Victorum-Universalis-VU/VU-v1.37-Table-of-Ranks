@@ -1,0 +1,883 @@
+# New events based around fall of Constantinople
+# and end days of Byzantium.
+# Initially added by docRobert
+#
+# ====================================
+namespace = vu_fall_of_rome
+
+country_event = { # Losing grip on northern coast part 1
+	id = vu_fall_of_rome.1
+	title = vu_fall_of_rome.1.t
+	desc = vu_fall_of_rome.1.d
+	picture = CONQUEST_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 1764
+	
+	trigger = {
+		tag = TUR
+		is_year = 1448
+		exists = BYZ
+		is_great_power = yes
+		NOT = { offensive_war_with = BYZ }
+		is_at_war = no
+		OR = {
+			1764 = { owned_by = BYZ }
+			7139 = { owned_by = BYZ }
+			7138 = { owned_by = BYZ }
+		}
+		NOT = {
+			BYZ = {
+				has_won_war_against = {
+					who = PREV
+					max_years_since = 25
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = { # We will make demands
+		name = vu_fall_of_rome.1.a
+		highlight = yes
+		ai_chance = { factor = 100 } #AI will always make a demand
+		BYZ = {
+			country_event = { 
+				id = vu_fall_of_rome.2
+				days = 1
+			}
+		}
+	}
+	
+	option = { # Pass
+		name = vu_fall_of_rome.1.b
+		ai_chance = { factor = 0 }
+		add_prestige = -5
+		add_mil_power = 10
+	}
+}
+
+country_event = { # Losing grip on northern coast part 2
+	id = vu_fall_of_rome.2
+	title = vu_fall_of_rome.2.t
+	desc = vu_fall_of_rome.2.d
+	picture = BANKRUPTCY_eventPicture
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	goto = 1764
+	
+	option = { # We will agree
+		name = vu_fall_of_rome.2.a
+		highlight = yes
+		ai_chance = { factor = 50 }
+		if = {
+			limit = {
+				1764 = { owned_by = ROOT }
+			}
+			1764 = {
+				cede_province = TUR
+				add_territorial_core = TUR
+			}
+		}
+		if = {
+			limit = {
+				7139 = { owned_by = ROOT }
+			}
+			7139 = {
+				cede_province = TUR
+				add_territorial_core = TUR
+			}
+		}
+		if = {
+			limit = {
+				7138 = { owned_by = ROOT }
+			}
+			7138 = {
+				cede_province = TUR
+				add_territorial_core = TUR
+			}
+		}
+		add_dip_power = 25
+		add_prestige = -20
+		add_adm_power = 25
+		add_stability = 1
+	}
+	
+	option = { # No, we will fight
+		name = vu_fall_of_rome.2.b
+		highlight = yes
+		ai_chance = { factor = 50 }
+		1764 = { add_territorial_core = TUR }
+		7139 = { add_territorial_core = TUR }
+		7138 = { add_territorial_core = TUR }
+		6931 = { add_permanent_claim = TUR }
+		add_mil_power = 25
+		add_legitimacy = 10
+		add_dip_power = -20
+		TUR = {
+			add_casus_belli = {
+				target = ROOT
+				type = cb_insult
+				months = 12
+			}
+		}
+	}
+}
+
+country_event = { # Gathering storm
+	id = vu_fall_of_rome.3
+	title = vu_fall_of_rome.3.t
+	desc = vu_fall_of_rome.3.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 151
+	
+	trigger = {
+		tag = BYZ
+		is_year = 1445
+		OR = {
+			1764 = { owned_by = BYZ }
+			7139 = { owned_by = BYZ }
+			7138 = { owned_by = BYZ }
+			151 = { owned_by = BYZ }
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = { # We play offensively
+		name = vu_fall_of_rome.3.a
+		ai_chance = { factor = 50 }
+		custom_tooltip = vu_fall_of_rome.3.tooltip1
+		4779 = { add_permanent_claim = ROOT }
+		7136 = { add_permanent_claim = ROOT }
+		3170 = { add_permanent_claim = ROOT }
+		add_country_modifier = { 
+			name = BYZ_offensive_stand
+			duration = 3650
+			hidden = yes
+		}
+		add_treasury = 30
+	}
+	
+	option = { # We play defensively
+		name = vu_fall_of_rome.3.b
+		ai_chance = { factor = 50 }
+		custom_tooltip = vu_fall_of_rome.3.tooltip2
+		add_country_modifier = { 
+			name = BYZ_defensive_stand
+			duration = 3650
+			hidden = yes
+		}
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+		capital_scope = {
+			cavalry = BYZ
+		}
+		add_manpower = 1
+	}
+	
+	option = { # We don't need no help
+		name = vu_fall_of_rome.3.c
+		ai_chance = { factor = 0 }
+		add_prestige = 1
+	}
+}
+
+country_event = { # Orhan Celebi
+	id = vu_fall_of_rome.4
+	title = vu_fall_of_rome.4.t
+	desc = vu_fall_of_rome.4.d
+	picture = MERCHANTS_TALKING_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = BYZ
+		is_year = 1447
+		151 = { owned_by = ROOT }
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = { # He will be advisor
+		name = vu_fall_of_rome.4.a
+		define_advisor = {
+			type = quartermaster
+			name = "Orhan Çelebi"
+			skill = 2
+			culture = turkish
+			religion = sunni
+			cost_multiplier = 0.5
+		}
+		add_splendor = 20
+	}
+	
+	option = { # Let him command the army
+		name = vu_fall_of_rome.4.b
+		add_mil_power = 25
+		capital_scope = {
+			infantry = BYZ
+		}
+		add_manpower = 1
+		define_general = {
+			shock = 2
+			fire = 2
+			manuever = 2
+			siege = 1
+			name = "Orhan Çelebi"
+		}
+	}
+	
+	option = { # We don't need his help, keep him hostage
+		name = vu_fall_of_rome.4.c
+		add_treasury = 50
+	}
+}
+
+country_event = { # Turks capture Theodosian Walls
+	id = vu_fall_of_rome.5
+	title = vu_fall_of_rome.5.t
+	desc = vu_fall_of_rome.5.d
+	picture = SIEGE_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 7137
+	
+	major = yes
+	
+	trigger = {
+		tag = BYZ
+		exists = TUR
+		is_at_war = yes
+		151 = { owned_by = BYZ }
+		7137 = { owned_by = BYZ }
+		NOT = { is_year = 1490 }
+		at_war_with_religious_enemy = yes
+		NOT = { 7137 = { controlled_by = ROOT }	}
+		7137 = {
+			controller = {
+				religion_group = muslim
+			}
+		}
+	}
+	
+	option = { # rip
+		name = vu_fall_of_rome.5.a
+		BYZ = {
+			add_prestige = -20
+			add_mil_power = -10
+		}
+		7137 = {
+			add_devastation = 50
+			remove_building = fort_17th
+			remove_building = fort_16th
+			remove_building = fort_15th
+			controller = {
+				add_prestige = 10
+				add_mil_power = 20
+				add_army_tradition = 10
+				add_splendor = 25
+				add_treasury = 50
+			}
+		}
+		7137 = {
+			add_great_project_tier = {
+				type = walls_of_theodosius
+				tier = -2
+			}
+		}
+	}
+}
+
+country_event = { # Constantinople has fallen!
+	id = vu_fall_of_rome.6
+	title = vu_fall_of_rome.6.t
+	desc = vu_fall_of_rome.6.d
+	picture = SIEGE_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 151
+	
+	major = yes
+	
+	trigger = {
+		tag = TUR
+		exists = BYZ
+		is_at_war = yes
+		war_with = BYZ
+		151 = { controlled_by = TUR }
+		7137 = { controlled_by = TUR }
+	}
+	
+	option = { # We got what we needed
+		name = vu_fall_of_rome.6.a
+		ai_chance = { 
+			factor = 80 
+			modifier = {
+				factor = 0
+				BYZ = { ai = no } #AI will not force defeat instantly, if BYZ is a player
+			}
+		} #AI likes historical path
+		highlight = yes
+		white_peace = BYZ
+		add_prestige = 25
+		add_legitimacy = 20
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		add_treasury = 500
+		add_army_tradition = 20
+		if = {
+			limit = { 151 = { owned_by = BYZ } }
+			151 = { cede_province = ROOT }
+		}
+		if = {
+			limit = { 7137 = { owned_by = BYZ } }
+			7137 = { cede_province = ROOT }
+		}
+		if = { #If Galata somehow ends up under BYZ
+			limit = { 6932 = { owned_by = BYZ } }
+			6932 = { cede_province = ROOT }
+		}
+		if = {
+			limit = { 6931 = { owned_by = BYZ } }
+			6931 = { 
+				cede_province = ROOT 
+				add_core = ROOT
+			}
+		}
+		if = {
+			limit = { 7138 = { owned_by = BYZ } }
+			7138 = { 
+				cede_province = ROOT 
+				add_core = ROOT
+			}
+		}
+		if = {
+			limit = { 7139 = { owned_by = BYZ } }
+			7139 = { 
+				cede_province = ROOT 
+				add_core = ROOT
+			}
+		}
+		if = {
+			limit = { 1764 = { owned_by = BYZ } }
+			1764 = { 
+				cede_province = ROOT 
+				add_core = ROOT
+			}
+		}
+		BYZ = {
+			add_stability = -1
+			add_prestige = -50
+			add_legitimacy = -50
+			add_war_exhaustion = 10
+			add_patriarch_authority = -1
+		}
+		set_global_flag = TUR_captured_constantinople
+	}
+	option = { # The war goes on, loot the city
+		name = vu_fall_of_rome.6.b
+		ai_chance = { factor = 15 }
+		add_prestige = 20
+		add_legitimacy = 20
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		add_treasury = 800
+		add_manpower = 5
+		151 = { add_devastation = 50 }
+		BYZ = {
+			add_stability = -1
+			add_prestige = -50
+			add_legitimacy = -50
+			add_war_exhaustion = 10
+			add_patriarch_authority = -1
+		}
+	}
+	option = { # The war goes on, spare the city
+		name = vu_fall_of_rome.6.c
+		ai_chance = { factor = 5 }
+		add_prestige = 20
+		add_legitimacy = 20
+		add_adm_power = 25
+		add_dip_power = 50
+		add_mil_power = 25
+		add_army_tradition = 10
+		BYZ = {
+			add_stability = -1
+			add_prestige = -50
+			add_legitimacy = -50
+			add_war_exhaustion = 10
+			add_patriarch_authority = -1
+		}
+	}
+}
+
+country_event = { # Hexamilion wall
+	id = vu_fall_of_rome.7
+	title = vu_fall_of_rome.7.t
+	desc = vu_fall_of_rome.7.d
+	picture = FORT_eventPicture
+	
+	fire_only_once = yes
+	
+	goto = 4701
+	
+	trigger = {
+		tag = BYZ
+		4701 = { country_or_non_sovereign_subject_holds = ROOT }
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = { # Rebuild it
+		name = vu_fall_of_rome.7.a
+		ai_chance = { factor = 80 }
+		add_treasury = -50
+		4701 = {
+			add_permanent_province_modifier = { 
+				name = vu_hexamilion_wall
+				duration = -1  
+				hidden = yes
+			}
+		}
+	}
+	
+	option = { # Pass
+		name = vu_fall_of_rome.7.b
+		ai_chance = { factor = 20 }
+		add_prestige = -5
+	}
+}
+
+country_event = { # Ottomans own Constantinople
+	id = vu_fall_of_rome.8
+	title = vu_fall_of_rome.8.t
+	desc = vu_fall_of_rome.8.d
+	picture = RELIGIOUS_WARS_eventPicture
+	
+	fire_only_once = yes
+	
+	major = yes
+	
+	goto = 151
+	
+	trigger = {
+		tag = TUR
+		owns_core_province = 151
+		NOT = { offensive_war_with = BYZ }
+		is_at_war = no
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = { # Eastern Rome has fallen
+		name = vu_fall_of_rome.8.a
+		ai_chance = { factor = 95 }
+		custom_tooltip = vu_fall_of_rome.8.tooltip
+		151 = {
+			add_base_tax = -2
+			add_base_production = -5
+			add_base_manpower = -3
+			add_devastation = 25
+		}
+		add_years_of_income = 1
+		add_treasury = 1000
+		add_splendor = 200
+		add_prestige = 25
+		add_legitimacy = 50
+		add_manpower = 10
+		add_army_tradition = 15
+		hidden_effect = {
+			BYZ = { set_country_flag = byz_lost_constantinople }
+			every_known_country = { 
+				limit = { religion_group = christian }
+				reverse_add_opinion = {
+					who = PREV
+					modifier = vu_captured_east_rome
+				}
+			}
+			every_owned_province = { 
+				limit = {
+					OR = {
+						religion_group = christian
+						culture_group = byzantine
+						is_core = BYZ
+					}
+				}
+				add_province_modifier = {
+					name = vu_greek_unrest
+					duration = 3650
+				}
+			}
+		}
+	}
+	
+	option = { # Treat city kindly
+		name = vu_fall_of_rome.8.b
+		ai_chance = { factor = 5 }
+		add_treasury = 800
+		add_splendor = 200
+		add_prestige = 20
+		add_legitimacy = 25
+		add_manpower = 10
+		add_army_tradition = 10
+		hidden_effect = {
+			BYZ = { set_country_flag = byz_lost_constantinople }
+			every_known_country = { 
+				limit = { religion_group = christian }
+				add_opinion = {
+					who = PREV
+					modifier = vu_captured_east_rome
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Byzantium is no more - becomes Morea
+	id = vu_fall_of_rome.9
+	title = vu_fall_of_rome.9.t
+	desc = vu_fall_of_rome.9.d
+	picture = BANKRUPTCY_eventPicture
+	
+	fire_only_once = yes
+	
+	major = yes
+	
+	trigger = {
+		tag = BYZ
+		has_country_flag = byz_lost_constantinople
+		NOT = { owns_core_province = 151 }
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = { # Eastern Rome is no more (standard route)
+		name = vu_fall_of_rome.9.a
+		ai_chance = { factor = 50 }
+		custom_tooltip = vu_fall_of_rome.9.tooltip
+		add_splendor = -200
+		add_army_tradition = -10
+		change_tag = MOE
+		set_government_rank = 8
+		add_government_reform = autocracy_reform
+		define_ruler = {
+			name = "Demetrios"
+			dynasty = "Palaiologos"
+			adm = 5
+			dip = 4
+			mil = 4
+			age = 50
+			claim = 90
+		}
+		if = {
+			limit = {
+				ATH = { is_subject_of = ROOT }
+			}
+			ATH = { grant_independence = yes }
+		}
+		if = {
+			limit = {
+				LES = { is_subject_of = ROOT }
+			}
+			LES = { grant_independence = yes }
+		}
+		hidden_effect = {
+			clr_country_flag = byz_lost_constantinople
+		}
+	}
+	
+	option = { # Eastern Rome is no more (sell lands to others)
+		name = vu_fall_of_rome.9.b
+		ai_chance = { factor = 50 }
+		add_splendor = -200
+		add_army_tradition = -10
+		change_tag = MOE
+		set_government_rank = 8
+		add_government_reform = autocracy_reform
+		define_ruler = {
+			name = "Demetrios"
+			dynasty = "Palaiologos"
+			adm = 5
+			dip = 4
+			mil = 4
+			age = 50
+			claim = 90
+		}
+		if = {
+			limit = {
+				ATH = { is_subject_of = ROOT }
+			}
+			ATH = { grant_independence = yes }
+			VEN = { create_march = ATH }
+			add_treasury = 25
+		}
+		if = {
+			limit = {
+				LES = { is_subject_of = ROOT }
+				4700 = { owned_by = LES }
+			}
+			4700 = {
+				add_core = GEN
+				cede_province = GEN
+			}
+			add_treasury = 50
+		}
+		if = {
+			limit = {
+				LES = { is_subject_of = ROOT }
+			}
+			inherit = LES
+		}
+		if = {
+			limit = {
+				3195 = { owned_by = ROOT }
+			}
+			3195 = {
+				add_core = GEN
+				cede_province = GEN
+			}
+			add_treasury = 40
+		}
+		create_vassal = ACH
+		hidden_effect = {
+			clr_country_flag = byz_lost_constantinople
+		}
+	}
+}
+
+country_event = { # Murad II returns to power
+	id = vu_fall_of_rome.10
+	title = vu_fall_of_rome.10.t
+	desc = vu_fall_of_rome.10.d
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = TUR
+		is_year = 1446
+		has_ruler = "Mehmed II Fatih"
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = { # It's natural process
+		name = vu_fall_of_rome.10.a
+		highlight = yes
+		ai_chance = { factor = 100 }
+		define_ruler = {
+			name = "Murad II"
+			dynasty = "Osmanoglu"
+			adm = 3
+			dip = 2
+			mil = 1
+			age = 42
+			claim = 90
+		}
+		define_heir = {
+			name = "Mehmed II Fatih"
+			dynasty = "Osmanoglu"
+			adm = 6
+			dip = 4
+			mil = 6
+			birth_date = 1432.3.30
+			claim = 90
+		}
+		add_heir_personality = conqueror_personality
+	}
+	
+	option = { # Murad II should step back for once
+		name = vu_fall_of_rome.10.b
+		ai_chance = { factor = 0 }
+		add_stability = -1
+		add_legitimacy = -10
+	}
+}
+
+country_event = { # Death of Murad II
+	id = vu_fall_of_rome.11
+	title = vu_fall_of_rome.11.t
+	desc = vu_fall_of_rome.11.d
+	picture = KING_SICK_IN_BED_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = TUR
+		is_year = 1451
+		has_ruler = "Murad II"
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = { # Mehmed II will succeed
+		name = vu_fall_of_rome.11.a
+		highlight = yes
+		ai_chance = { factor = 100 }
+		add_stability = -1
+		define_ruler = {
+			name = "Mehmed II Fatih"
+			dynasty = "Osmanoglu"
+			adm = 6
+			dip = 4
+			mil = 6
+			age = 19
+			claim = 90
+		}
+		remove_heir = { allow_new_heir = no }
+		add_ruler_personality = conqueror_personality
+		set_ruler_flag = mehmed_tur_in_power
+	}
+	
+	option = { # Sorrow overtakes you
+		name = vu_fall_of_rome.11.b
+		ai_chance = { factor = 0 }
+		kill_ruler = yes
+	}
+}
+
+country_event = { # Constantine XI threat
+	id = vu_fall_of_rome.12
+	title = vu_fall_of_rome.12.t
+	desc = vu_fall_of_rome.12.d
+	picture = ACCUSATION_eventPicture
+	
+	fire_only_once = yes
+	
+	major = yes
+	
+	trigger = {
+		tag = TUR
+		is_year = 1451
+		has_ruler_flag = mehmed_tur_in_power
+		OR = {
+			BYZ = { is_subject_of = ROOT }
+			BYZ = { has_ruler = "Konstantinos XI" }
+			BYZ = { has_ruler = "Konstantinos" }
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = { # We should agree
+		name = vu_fall_of_rome.12.a
+		ai_chance = { factor = 33 }
+		add_prestige = -10
+		add_truce_with = BYZ
+		add_years_of_income = -1
+		BYZ = {
+			grant_independence = yes
+			add_years_of_income = 1
+			add_treasury = 250
+			add_adm_power = 25
+			add_dip_power = 25
+			add_mil_power = 25
+			change_dip = 1
+		}
+		hidden_effect = { clr_ruler_flag = mehmed_tur_in_power }
+	}
+	
+	option = { # We will not be threatened
+		name = vu_fall_of_rome.12.b
+		ai_chance = { factor = 67 }
+		highlight = yes
+		BYZ = { grant_independence = yes }
+		add_casus_belli = {
+			target = BYZ
+			type = cb_annex
+			months = 120
+		}
+		BYZ = {
+			country_event = { 
+				id = vu_fall_of_rome.13
+				days = 5
+			}
+		}
+		hidden_effect = { clr_ruler_flag = mehmed_tur_in_power }
+	}
+}
+
+country_event = { # Constantine XI reaction
+	id = vu_fall_of_rome.13
+	title = vu_fall_of_rome.13.t
+	desc = vu_fall_of_rome.13.d
+	picture = BORDER_TENSION_eventPicture
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { # Well... war it is
+		name = vu_fall_of_rome.13.a
+		ai_chance = { factor = 75 }
+		add_prestige = 10
+		add_legitimacy = 10
+		define_ruler_to_general = {
+			fire = 3
+			shock = 3
+			manuever = 4
+			siege = 0
+		}
+		TUR = {
+			declare_war_with_cb = {
+				who = ROOT
+				casus_belli = cb_annex
+			}
+			every_ally = {
+				join_all_offensive_wars_of = PREV
+			}
+		}
+	}
+	
+	option = { # Step back and pay more tribute
+		name = vu_fall_of_rome.13.b
+		ai_chance = { factor = 25 }
+		add_prestige = -20
+		add_legitimacy = -20
+		add_treasury = -250
+		TUR = {
+			add_treasury = 250
+			add_adm_power = 20
+			add_dip_power = 20
+			add_mil_power = 20
+		}
+		TUR = {
+			create_subject = {
+				subject_type = tributary_state
+				subject = BYZ
+			}
+		}
+	}
+}

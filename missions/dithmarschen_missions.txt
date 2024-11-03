@@ -1,0 +1,1115 @@
+#VU - Updated by San Felipe for 1.36.*
+vu_dithmarschen_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = DTT
+		has_country_flag = use_paradox_missions
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes	
+	
+	dtt_otterndorf_strife = {
+		icon = protect_against_austria 
+		required_missions = { } 
+		position = 1 
+		provinces_to_highlight = { province_id = 44 } 
+		trigger = {
+			44 = { country_or_non_sovereign_subject_holds = ROOT }
+			army_size = BRE 
+		}
+		effect = {
+			add_war_exhaustion = -2 
+			weser_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			lower_saxony_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			oldenburg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			custom_tooltip = dtt_if_44_owned_by_subject_tt
+			tooltip = { 
+				add_country_modifier = {
+					name = dtt_liberation_hamburg_modifier
+					duration = 7300 
+				}
+			}
+			tooltip = {
+				44 = {
+					owner = {
+						add_country_modifier = {
+							name = btt_abolition_feudalism_modifier
+							duration = -1 
+							desc = dtt_as_long_as_subject_desc
+						}
+						change_government_reform_progress = 50 
+						add_historical_friend = ROOT 
+						if = {
+							limit = {
+								government = republic
+							}
+							add_government_reform = peasants_republic #VU - Moved this here from the last bracket of the if. By San Felipe
+						}
+					}
+				}
+			}
+			custom_tooltip = dtt_else_tt
+			tooltip = {
+				add_power_projection = {
+					type = mission_rewards_power_projection
+					amount = 25
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						44 = { 
+							owner = { 
+								is_subject_of = ROOT 
+								government = republic
+							}
+						}
+					}
+					add_government_reform = peasants_republic
+				}
+				if = {
+					limit = { 
+						44 = {
+							owner = { is_subject_of = ROOT } 
+						}
+					}
+					add_country_modifier = {
+						name = dtt_liberation_hamburg_modifier
+						duration = 7300 
+					}
+					44 = {
+						owner = {
+							add_country_modifier = {
+								name = btt_abolition_feudalism_modifier
+								duration = -1 
+								desc = dtt_as_long_as_subject_desc
+							}
+							change_government_reform_progress = 50 
+							add_historical_friend = ROOT
+						}
+					}
+				}
+				else = {
+					add_power_projection = {
+						type = mission_rewards_power_projection
+						amount = 25
+					}
+				}
+			}
+		}
+	}
+	
+	dtt_bishop_needle = {
+		icon = vu_bishop_needle
+		required_missions = { dtt_otterndorf_strife }
+		position = 2 
+		provinces_to_highlight = {
+			area = weser_area 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			weser_area = {
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = { 
+			country_event = { id = VU_Dith_Events.1 } #City of Bremen
+		}
+	}
+	
+	dtt_trade_lubeck = {
+		icon = explore_caribbean 
+		required_missions = { dtt_eider_estuary }
+		position = 5
+		provinces_to_highlight = { province_id = 45 }
+		trigger = {
+			45 = {
+				trade_share = {
+					country = ROOT 
+					share = 30
+				}
+			}
+			num_of_light_ship = 12 
+			OR = {
+				has_idea = dtt_trade_missions
+				num_of_estate_privileges = {
+					estate = estate_burghers
+					value = 3 
+				}
+			}
+			navy_size_percentage = 0.95
+		}
+		effect = {	
+			if = {
+				limit = { has_dlc = "Golden Century" }
+				random_owned_province = {
+					limit = { has_port = yes }
+					create_flagship = {
+						name = "Frieda"
+						type = light_ship 
+					}
+				}
+			}
+			else = {
+				random_owned_province = {
+					limit = { has_port = yes }
+					galley = ROOT 
+					galley = ROOT 
+					galley = ROOT 
+					galley = ROOT 
+					galley = ROOT 
+				}
+			}
+			add_country_modifier = {
+				name = dtt_naval_affairs_of_the_republic_modifier
+				duration = 7300
+			}
+			add_mercantilism = 3
+		}
+	}
+	
+	dtt_enlist_likedeelers = {
+		icon = vu_likedeelers
+		required_missions = { dtt_trade_lubeck }
+		position = 6
+		provinces_to_highlight = { 
+			province_id = 1269 
+			province_id = 1 #Stockholm
+		}
+		trigger = {
+			OR = {
+				1269 = {
+					has_privateer_share_in_trade_node = {
+						who = ROOT
+						share = 0.25
+					}
+				}
+				1 = {	
+					has_privateer_share_in_trade_node = {
+						who = ROOT
+						share = 0.25
+					}
+				}
+			}
+			OR = { 
+				num_of_heavy_ship = 4 
+				num_of_galley = 20 
+			}
+			num_of_owned_provinces_with = {
+				OR = {
+					has_building = dock 
+					has_building = drydock 
+				}
+				value = 3
+			}
+			num_of_owned_provinces_with = {
+				OR = {
+					has_building = shipyard 
+					has_building = grand_shipyard
+				}
+				value = 5
+			}
+			num_of_admirals = 2 
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						naval_ideas = 1 
+						maritime_ideas = 3 
+					}
+					navy_tradition = 50 
+				}
+				add_country_modifier = {
+					name = dtt_likedeeler_crews_modifier
+					duration = -1 
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = dtt_likedeeler_crews_modifier
+					duration = 10950 
+				}
+				custom_tooltip = dtt_naval_mar_50_trad_tt
+			}
+		}
+	}
+}
+
+vu_dithmarschen_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = DTT
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+	
+	dtt_repel_black_guard = {
+		icon = vu_black_guard
+		required_missions = { dtt_otterndorf_strife }
+		position = 2 
+		provinces_to_highlight = {
+			area = lower_saxony_area 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			lower_saxony_area = {
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_unyielding_spirit_modifier
+				duration = 7300
+			}
+			lower_saxony_area = {
+				add_devastation = -5 
+				add_prosperity = 20 
+				add_nationalism = -5 
+			}
+		}
+	}
+	
+	dtt_great_peasant_war = {
+		icon = mission_impaled_soldies
+		required_missions = { dtt_bishop_needle dtt_repel_black_guard dtt_break_wends }
+		position = 3 
+		trigger = {
+			if = { 
+				limit = { hre_size = 1 } 
+				custom_trigger_tooltip = {
+					tooltip = dtt_won_incident_tt
+					OR = {	
+						NOT = { hre_size = 1 } 
+						has_global_flag = gpw_peasants_win_major
+						has_global_flag = gpw_peasants_win_minor 
+					}
+				}
+			}
+			else = { 
+				OR = { 
+					num_of_subjects = 4
+					grown_by_development = 300 
+				}
+				army_size = 50 
+			}
+		}
+		effect = {
+			if = { 
+				limit = {
+					OR = {
+						has_global_flag = gpw_peasants_win_major
+						has_global_flag = gpw_peasants_win_minor
+						has_dlc = "Emperor" 
+					}
+				}
+				custom_tooltip = dtt_rise_up_tt
+				hidden_effect = {
+					every_country = {
+						limit = {
+							capital_scope = { superregion = europe_superregion }
+							government = monarchy 
+							NOT = { is_subject_of = ROOT }
+							NOT = { alliance_with = ROOT } 
+						}
+						add_country_modifier = {
+							name = dtt_rise_of_the_peasants_modifier
+							duration = -1 
+							desc = dtt_until_dtt_dies_desc
+						}
+						capital_scope = {
+							spawn_rebels = {
+								size = 3
+								type = leadered_peasant_rebels
+								win = yes 	
+							}
+						}
+					}
+				}
+			}
+			add_country_modifier = {
+				name = dtt_crush_opressors_modifier
+				duration = -1 
+			}
+		}
+	}
+	
+	dtt_unite_masses = {
+		icon = all_bases_covered
+		required_missions = { dtt_great_peasant_war }
+		position = 4
+		provinces_to_highlight = {
+			#any_country = {
+				#capital_scope = {
+					#OR = {
+					#	region = north_german_region 
+					#	region = south_german_region
+					#}
+				#}
+			#	government = monarchy 
+			#	army_size = ROOT
+			#}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = dtt_stronger_than_monarchy
+				NOT = { 
+					any_country = {
+						capital_scope = {
+							OR = {
+								region = north_german_region 
+								region = south_german_region
+							}
+						}
+						government = monarchy 
+						army_size = ROOT 
+					}
+				}
+			}
+			stability = 3 
+			crown_land_share = 60 
+			OR = { 
+				is_great_power = yes 
+				total_development = 500 
+			}
+			government = republic 
+		}
+		effect = {
+			custom_tooltip = dtt_more_likely_to_spawn_rev_tt
+			set_country_flag = dtt_unite_masses_flag
+			add_country_modifier = {
+				name = dtt_spread_of_modern_ideas_modifier
+				duration = -1 
+			}
+			custom_tooltip = dtt_per_subject_mana_or_1_in_every_category_tt
+			if = {	
+				limit = { num_of_subjects = 10 }
+				add_adm_power = 500 
+				add_dip_power = 500 
+				add_mil_power = 500 
+			}
+			else_if = {
+				limit = { num_of_subjects = 9 }
+				add_adm_power = 450 
+				add_dip_power = 450 
+				add_mil_power = 450 
+			}
+			else_if = {
+				limit = { num_of_subjects = 8 }
+				add_adm_power = 400 
+				add_dip_power = 400 
+				add_mil_power = 400 
+			}
+			else_if = {
+				limit = { num_of_subjects = 7 }
+				add_adm_power = 350 
+				add_dip_power = 350 
+				add_mil_power = 350 
+			}
+			else_if = {
+				limit = { num_of_subjects = 6 }
+				add_adm_power = 300 
+				add_dip_power = 300 
+				add_mil_power = 300 
+			}
+			else_if = {
+				limit = { num_of_subjects = 5 }
+				add_adm_power = 250 
+				add_dip_power = 250 
+				add_mil_power = 250 
+			}
+			else_if = {
+				limit = { num_of_subjects = 4 }
+				add_adm_power = 200 
+				add_dip_power = 200 
+				add_mil_power = 200 
+			}
+			else_if = {
+				limit = { num_of_subjects = 3 }
+				add_adm_power = 150 
+				add_dip_power = 150 
+				add_mil_power = 150 
+			}
+			else_if = {
+				limit = { num_of_subjects = 2 }
+				add_adm_power = 100 
+				add_dip_power = 100 
+				add_mil_power = 100 
+			}
+			else_if = {
+				limit = { num_of_subjects = 1 }
+				add_adm_power = 50 
+				add_dip_power = 50 
+				add_mil_power = 50 
+			}
+			else = {
+				change_adm = 1 
+				change_dip = 1 
+				change_mil = 1 
+			}
+		}
+	}
+	
+	dtt_means_production = {
+		icon = prosperity_for_all 
+		required_missions = { dtt_land_reclamation dtt_trade_lubeck }
+		position = 6
+		trigger = {
+			crown_land_share = 75
+			government = republic  
+			stability = 3 
+			num_of_owned_provinces_with = {
+				has_manufactory_trigger = yes 
+				value = 15
+			}
+			num_of_owned_provinces_with = {
+				trade_goods = grain 
+				base_production = 12
+				value = 1 
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_centralized_ownership_infrastructure_modifier 
+				duration = -1 
+			}
+			custom_tooltip = dtt_every_manufactory_2_base_production_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_manufactory_trigger = yes }
+					add_base_production = 2 
+				}
+			}
+			custom_tooltip = dtt_if_murican_dream_tt
+			tooltip = { 
+				country_event = { id = usa_dlc.100 } 
+			}
+			hidden_effect = { 
+				if = { 
+					limit = { 
+						prestige = 100
+						OR = {
+							has_dlc = "American Dream"
+							has_dlc = "Star and Crescent"
+						}
+					}
+					country_event = { id = usa_dlc.100 }
+				}
+			}
+		}
+	}
+}
+
+vu_dithmarschen_missions_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = DTT
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+	
+	dtt_heart_hansa = {
+		icon = mission_rb_hanseatic_east
+		required_missions = { } 
+		position = 1 
+		provinces_to_highlight = { province_id = 45 } 
+		trigger = {
+			OR = {
+				HSA = {
+					owns = 45 
+					alliance_with = ROOT 
+					has_opinion = {
+						who = ROOT 
+						value = 150
+					}
+				}
+				45 = { country_or_non_sovereign_subject_holds = ROOT }
+			}
+		}
+		effect = {
+			custom_tooltip = dtt_lubeck_direct_ownership_tt
+			tooltip = {
+				45 = { add_center_of_trade_level = 1 }
+				custom_tooltip = vu_colossus_trait_if_possible_tt
+				hidden_effect = {
+					country_event = { id = FU_Monument_Events.2 }
+				}
+			}
+			custom_tooltip = dtt_lubeck_owned_by_subject_tt
+			tooltip = {
+				45 = {
+					add_trade_modifier = {
+						who = ROOT 
+						key = dtt_peasant_merchants_hansa_modifier
+						duration = 9125
+						power = 30
+					}
+				}
+				45 = {
+					owner = {
+						if = {
+							limit = {
+								government = republic
+							}
+							add_government_reform = peasants_republic
+							add_historical_friend = DTT 
+						}
+					}
+				}
+			}
+			custom_tooltip = dtt_alliance_option 
+			tooltip = {
+				add_mercantilism = 3 
+				add_trade_modifier = {
+					who = ROOT 
+					key = dtt_peasant_merchants_hansa_modifier
+					duration = 9125
+					power = 30
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { 
+						45 = { owned_by = ROOT }
+					}
+					45 = { add_center_of_trade_level = 1 }
+					country_event = { id = FU_Monument_Events.2 }
+				}
+				else_if = {
+					limit = { 
+						45 = {
+							owner = {
+								is_subject_of = ROOT 
+							}
+						} 
+					}
+					45 = {
+						add_trade_modifier = {
+							who = ROOT 
+							key = dtt_peasant_merchants_hansa_modifier
+							duration = 9125
+							power = 30
+						}
+					}
+					45 = {
+						owner = {
+							if = {
+								limit = {
+									NOT = { government = republic }
+								}
+								change_government_to_republic = yes
+							}
+							add_government_reform = peasants_republic
+							add_historical_friend = DTT
+						}
+					}
+				}
+				else = {
+					45 = { 
+						add_trade_modifier = {
+							who = ROOT 
+							key = dtt_peasant_merchants_hansa_modifier
+							duration = 9125
+							power = 30
+						}
+					}
+					add_mercantilism = 3 
+				}
+			}
+		}
+	}
+
+	dtt_break_wends = {
+		icon = mission_raid_on_genoa
+		required_missions = { dtt_heart_hansa dtt_protect_ppl }
+		position = 2 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2996
+				province_id = 46
+				province_id = 4749
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			2996 = { country_or_non_sovereign_subject_holds = ROOT }
+			46 = { country_or_non_sovereign_subject_holds = ROOT }
+			4749 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_maritime_endeavours_modifier
+				duration = 7300
+			}
+			add_sailors = 1000
+			2996 = { add_base_production = 1 }
+			46 = { add_base_production = 1 }
+			4749 = { add_base_production = 1 }
+		}
+	}
+	
+	dtt_eider_estuary = {
+		icon = vu_estuary 
+		required_missions = { } 
+		position = 4
+		trigger = {
+			capital_scope = { has_trade_building_trigger = yes } 
+		}
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = dtt_active_hub_modifier
+					duration = -1 
+				}
+			}
+		}
+	}
+	
+	dtt_land_reclamation = {
+		icon = develop_the_po_valley 
+		required_missions = { dtt_eider_estuary } 
+		position = 5 
+		trigger = {
+			capital_scope = { development = 26 } 
+		}
+		effect = {
+			add_stability_or_adm_power = yes 
+			capital_scope = {
+				add_province_modifier = {
+					name = dtt_expanded_urban_infrastructure_modifier
+					duration = 14600
+				}
+				add_prosperity = 50
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
+			}
+		}
+	}
+}
+
+vu_dithmarschen_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = DTT
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+	
+	dtt_protect_ppl = {
+		icon = vu_peasant_leader
+		required_missions = { }
+		position = 1
+		trigger = {
+			army_size_percentage = 1 
+			num_of_generals = 1 
+			
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_defending_ideals_modifier 
+				duration = 3650 
+			}
+			holstein_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				} 
+				add_permanent_claim = ROOT
+			}
+			hamburg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				} 
+				add_permanent_claim = ROOT
+			}
+			lauenburg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				} 
+				add_permanent_claim = ROOT
+			}
+			mecklenburg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			lubeck_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			schleswig_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			east_frisia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			frisia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			4749 = {
+				if = { 
+					limit = {
+						NOT = { is_core = ROOT }
+						NOT = { is_permanent_claim = ROOT }
+						NOT = { owned_by = ROOT }
+					}
+					add_permanent_claim = ROOT 
+				}
+			}
+		}
+	}
+	
+	dtt_break_chains = {
+		icon = end_the_habsburgs 
+		required_missions = { dtt_protect_ppl dtt_break_wends dtt_battle_hemmingstedt }
+		position = 3
+		trigger = {
+			crown_land_share = 50 
+			total_development = 250 
+			army_size = 40 
+		}
+		effect = {
+			north_german_region = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			low_countries_region = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			add_country_modifier = {
+				name = dtt_wars_liberation_modifier 
+				duration = -1 
+			}
+			if = {
+				limit = { has_dlc = "Emperor" }
+				custom_tooltip = dtt_new_cb_grant_tt
+				set_country_flag = dtt_break_chains_enabled_cb_flag
+			}
+			else = { add_mil_power = 200 }
+		}
+	}
+	
+	dtt_organize_parishes = {
+		icon = eastern_catholicization 
+		required_missions = { dtt_eider_estuary }
+		position = 5
+		trigger = {
+			estate_loyalty = {		
+				estate = estate_church 
+				loyalty = 60 
+			}
+			num_of_estate_privileges = {
+				estate = estate_church
+				value = 3
+			}
+		}
+		effect = {
+			change_government_reform_progress = 50
+			#You know I would add a modifier here for it, instead of flat, but PDX has broken the modifier so you get flat for now
+			add_country_modifier = {
+				name = dtt_kirchspiele_halls_modifier
+				duration = 7300
+			}
+		}
+	}
+}
+	
+vu_dithmarschen_missions_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = DTT
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes			
+	
+	dtt_battle_hemmingstedt = {
+		icon = mission_rb_unite_the_clans
+		required_missions = { dtt_protect_ppl }
+		position = 2 
+		provinces_to_highlight = {
+			OR = {
+				area = holstein_area
+				area = hamburg_area
+				area = lauenburg_area
+			} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			holstein_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			hamburg_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			lauenburg_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_turning_tables_modifier
+				duration = 7300
+			}
+			jutland_area = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			add_prestige = 20 
+		}
+	}
+	
+	dtt_last_feud = {
+		icon = vu_hemmingsteadt 
+		required_missions = { dtt_battle_hemmingstedt }
+		position = 3 
+		provinces_to_highlight = {
+			area = jutland_area 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			jutland_area = {
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_trampled_danish_monarchy_modifier
+				duration = 7300
+			}
+			jutland_area = { add_local_autonomy = -10 } 
+			denmark_area = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			sjaelland_area = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			skaneland_area = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			kobenhavn_area = {
+					limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT 
+			}
+			custom_tooltip = dtt_capture_of_the_danish_coat_of_arms_tt
+			hidden_effect = {
+				if = {
+					limit = { 
+						SWE = { is_subject_of = DAN }
+					}
+					SWE = { add_liberty_desire = 50 } 
+				}
+				if = {
+					limit = { 
+						NOR = { is_subject_of = DAN }
+					}
+					NOR = { add_liberty_desire = 50 } 
+				}
+			}
+		}
+	}
+	
+	dtt_control_sound_toll = {
+		icon = secure_the_republic 
+		required_missions = { dtt_last_feud }
+		position = 4 
+		provinces_to_highlight = {
+			area = denmark_area 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			denmark_area = {
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			45 = {
+				trade_share = {
+					country = ROOT 
+					share = 60
+				}
+			}
+			6 = { owned_by = ROOT }
+		}
+		effect = {
+			add_country_modifier = {
+				name = dtt_prosperity_oresund_modifier
+				duration = -1 
+			}
+			custom_tooltip = dtt_herring_wont_run_out
+			hidden_effect = {
+				6 = { remove_province_modifier = skanemarket }
+				6 = { 
+					add_province_modifier = {
+						name = dtt_skanemarket_modifier
+						duration = -1 
+					}
+				}
+			}
+			if = {
+				limit = { has_global_flag = advisors_expanded_mod_active }
+				define_advisor = {
+					type = mercantile_influencer
+					skill = 3 
+					cost_multiplier = 0.1
+				}
+			}
+			else = { custom_tooltip = dtt_ade_advisor_reward }
+		}
+	}
+	
+	dtt_times_achanging = {
+		icon = vu_old_times_changing 
+		required_missions = { dtt_organize_parishes }
+		position = 6
+		trigger = {
+			OR = {
+				AND = {
+					religion = protestant
+					church_power = 100 
+				}
+				AND = { 
+					religion = reformed 
+					fervor = 90
+				}
+				AND = {
+					religion = catholic 
+					reform_desire = 1
+					papal_influence = 50
+				}
+			}
+			religious_unity = 1 
+		}
+		effect = {
+			add_republican_tradition = 5 
+			custom_tooltip = dtt_if_catholic_reward_tt
+			tooltip = {
+				add_country_modifier = {
+					name = dtt_shield_catholicism_in_the_north_modifier
+					duration = -1
+				}
+			}
+			custom_tooltip = dtt_if_reformed_or_protestant_reward_tt
+			tooltip = {
+				add_country_modifier = {
+					name = dtt_teachings_henry_modifier
+					duration = -1 
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { religion = catholic }
+					add_country_modifier = {
+						name = dtt_shield_catholicism_in_the_north_modifier
+						duration = -1 
+					}
+				}
+				else = {
+					add_country_modifier = {
+				    	name = dtt_teachings_henry_modifier
+				    	duration = -1 
+				    }
+				}
+			}
+		}
+	}
+}

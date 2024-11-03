@@ -1,0 +1,521 @@
+# Greek League
+greek_league = {
+	icon = "politician"
+	allow_normal_conversion = no
+	legacy_government = yes
+	duration = 5
+	valid_for_new_country = no
+	valid_for_nation_designer = yes
+	nation_designer_cost = 30
+
+	republican_name = yes
+	royal_marriage = no
+
+	republic = yes
+
+	modifiers = {
+		global_tax_modifier = 0.05
+		shock_damage_received = -0.1
+		global_unrest = -0.5
+		liberty_desire = -5
+		max_absolutism = -50
+	}
+
+	conditional = {
+		allow = {
+			has_dlc = "Common Sense"
+		}
+		has_parliament = yes
+	}
+
+	#factions = {
+	#	gl_aristocrats
+	#	gl_democrats
+	#	gl_oligarchs
+	#}
+
+	ai = {
+		factor = 0
+	}
+}
+
+############
+#Made by claivin for Missions Expanded
+############
+# Crusader Kingdom
+crusader_kingdom = {
+	lock_level_when_selected = yes
+	icon = "king"
+	allow_normal_conversion = yes
+	potential = {
+		religion = catholic
+		has_reform = crusader_kingdom
+	}
+	nation_designer_trigger = {
+		religion = catholic
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 60
+	modifiers = {
+		global_missionary_strength = 0.03
+		tolerance_own = 2
+		papal_influence = 2
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+}
+
+# Sharia Reform
+sharia_reform = {
+	lock_level_when_selected = yes
+	icon = "muslim_highlighted"
+	allow_normal_conversion = yes
+	potential = {
+		religion_group = muslim
+		has_reform = sharia_reform
+	}
+	nation_designer_trigger = {
+		religion_group = muslim
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	modifiers = {
+		institution_spread_from_true_faith = 0.50
+		yearly_corruption = -0.15
+		global_unrest = -0.5
+	}
+}
+
+# Khagnate
+khaganate = {
+	lock_level_when_selected = yes
+	icon = "horde_riding"
+	allow_normal_conversion = yes
+	potential = {
+		has_reform = khaganate
+	}
+	nation_designer_trigger = {
+		culture_group = tartar
+	}
+	fixed_rank = 9
+	valid_for_nation_designer = yes
+	nation_designer_cost = 200
+	modifiers = {
+		max_absolutism = 10
+		yearly_absolutism = 0.10
+		culture_conversion_cost = -0.25
+		global_unrest = -1
+		vassal_income = 0.33
+		diplomats = 1
+		free_leader_pool = 2
+	}
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			iqta_mechanic
+		}
+	}
+	custom_attributes = {
+		locked_government_type = yes
+	}
+}
+
+trade_confederation = {
+	icon = "politician"
+	allow_normal_conversion = no
+	legacy_government = yes
+	valid_for_new_country = no
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+	duration = 4
+	republican_name = yes
+	royal_marriage = no
+	boost_income = yes
+	#factions = {
+	#	tc_cities
+	#	tc_federal
+	#	tc_merchants
+	#	tc_pirates
+	#}
+	republic = yes
+	modifiers = {
+		merchants = 1
+		caravan_power = 0.33
+		max_absolutism = -50
+	}
+
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city_legacy
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city_legacy
+	}
+
+	ai = {
+		factor = 0
+	}
+}
+
+#hansa gov
+trade_confederation_reform = {
+	icon = "politician"
+	allow_normal_conversion = yes
+	modifiers = {
+		max_absolutism = -50
+		merchants = 1
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+	legacy_equivalent = trade_confederation
+	potential = {
+		has_reform = trade_confederation_reform
+	}
+	boost_income = yes
+	duration = 4
+	#factions = {
+	#	tc_cities
+	#	tc_federal
+	#	tc_merchants
+	#}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		is_merchant_republic = yes
+		can_create_stato_da_mar_vassal_rule = yes
+	}
+}
+
+###############
+# LordVarangian's new Governments
+###############
+athenian_monarchy = {
+	icon = "crown"
+	allow_normal_conversion = no
+	potential = {
+		has_reform = athenian_monarchy
+	}
+	valid_for_new_country = no
+	allow_convert = no
+	valid_for_new_country = no
+	valid_for_nation_designer = yes
+	nation_designer_cost = 250
+
+	monarchy = yes
+	modifiers = {
+		drill_gain_modifier = 0.25
+		yearly_army_professionalism = 0.02
+		culture_conversion_cost = -0.25
+		global_unrest = -1
+		vassal_income = 0.33
+		diplomats = 1
+		free_leader_pool = 2
+	}
+}
+
+athenian_republic = {
+	icon = "crown"
+	allow_normal_conversion = no
+	potential = {
+		has_reform = athenian_republic
+	}
+	valid_for_new_country = no
+	allow_convert = no
+	valid_for_new_country = no
+	nation_designer_cost = 250
+
+	republic = yes
+	modifiers = {
+		max_absolutism = -50
+		diplomatic_upkeep = 2
+		vassal_income = 0.5
+		reduced_liberty_desire = -20
+		naval_morale = 0.1
+		galley_power = 0.15
+		development_cost = -0.05
+		republican_tradition = 0.5
+		trade_efficiency = 0.1
+	}
+}
+
+# German Kaiserreich
+german_kaiserreich = {
+	icon = "german_kaiserreich"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			has_reform = german_kaiserreich
+			tag = GER
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+
+	modifiers = {
+		global_unrest = -2
+		global_autonomy = -0.05
+		max_absolutism = 20
+		country_military_power = 1
+		monthly_militarized_society = 0.5
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+		has_unify_germany_cb = yes
+	}
+
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			prussian_militarization_mechanic_1
+		}
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			prussian_militarization_mechanic_2
+		}
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			prussian_militarization_mechanic_3
+		}
+	}
+	conditional = {
+		allow = { has_dlc = "Common Sense" }
+		has_parliament = yes
+	}
+}
+
+#West Slavic Monarchy
+west_slavic_monarchy = {
+	icon = "crown"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		tag = ZCV
+	}
+	valid_for_nation_designer = no
+	factions = {
+		west_slav_slovaks
+		west_slav_poles
+		west_slav_czechs
+	}
+	queen = no
+	heir = no
+
+	modifiers = {
+		num_accepted_cultures = 2
+		global_autonomy = -0.05
+		cavalry_cost = -0.15
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+}
+
+austria_hungary_reform = {
+	icon = "crown"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		has_country_flag = me_hab_austria_hungary
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		global_autonomy = 0.15
+		same_culture_advisor_cost = 0.2
+		min_autonomy = 15
+		global_unrest = -2
+		reform_progress_growth = -0.5
+	}
+
+	government_abilities = {
+		habsburg_glory
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+}
+
+enlightened_despotism_reform = {
+	icon = "crown"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		has_country_flag = me_allow_enlightened_despotism
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		administrative_efficiency = 0.05
+		max_absolutism = 10
+		yearly_absolutism = 0.5
+		reform_progress_growth = 0.3
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+		enables_enlightened_despot = yes
+	}
+}
+
+me_hofkammer_reform = {
+	icon = "crown"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		has_country_flag = me_hab_hofkammer
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		development_cost = -0.05
+		build_cost = -0.1
+		interest = -0.5
+	}
+
+	custom_attributes = {
+		me_devving_has_50_chance_of_doubling = yes
+	}
+}
+
+me_baroque_monarchy_reform = {
+	icon = "crown"
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	potential = {
+		has_reform = me_baroque_monarchy_reform
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		liberty_desire_from_subject_development = -0.33
+		nobles_influence_modifier = 0.15
+		monarch_diplomatic_power = 2
+		governing_capacity = 150
+	}
+
+	government_abilities = {
+		habsburg_glory
+	}
+}
+
+me_nordmark = {
+	icon = "prussian_monarchy"
+	allow_normal_conversion = no
+	potential = {
+		has_reform = me_nordmark
+		is_subject = yes
+	}
+	trigger = {
+		has_reform = me_nordmark
+		is_subject = yes
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		war_exhaustion = -0.02
+		global_unrest = -2
+		global_autonomy = -0.075
+		max_absolutism = 20
+		monarch_military_power = 2
+	}
+
+	conditional = {
+		allow = { has_dlc = "Rights of Man" }
+		government_abilities = {
+			militarization_mechanic
+		}
+	}
+}
+
+ME_synthetic_monarchy = {
+	icon = "prussian_monarchy"
+	allow_normal_conversion = no
+	potential = {
+		has_reform = ME_synthetic_monarchy
+	}
+	trigger = {
+		has_reform = ME_synthetic_monarchy
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		stability_cost_to_declare_war = -5
+		technology_cost = -0.15
+	}
+}
+
+ME_synthetic_monarchy_militarized = {
+	icon = "prussian_monarchy"
+	allow_normal_conversion = no
+	potential = {
+		has_reform = ME_synthetic_monarchy_militarized
+	}
+	trigger = {
+		has_reform = ME_synthetic_monarchy_militarized
+	}
+	valid_for_nation_designer = no
+
+	modifiers = {
+		stability_cost_to_declare_war = -5
+		technology_cost = -0.15
+		discipline = 0.05
+	}
+
+	conditional = {
+		allow = { has_dlc = "Rights of Man" }
+		government_abilities = {
+			militarization_mechanic
+		}
+	}
+}

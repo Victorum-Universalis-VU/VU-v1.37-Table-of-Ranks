@@ -1,0 +1,676 @@
+# New VU Triggered Modifiers
+#The idea for a triggered modifier giving more diplo slots to high vassal count tags was JP's idea, and a good one at that. Solves all sort of problems I was going to do funny NI stuff to fix. I Also then further expanded on it with other bonuses
+###########################################
+# Eventual fiefdom triggered mod
+###########################################
+#Bugfixes note: The country-unique ones should eventually be replaced by more generic versions, because situational trigmods disallow player freedom and is too railroaded for situations not fit for the game.
+#One idea is to expand the vassal upkeep bonuses up to 9 or 11 vassals, plus rebalance the bonuses to not become better the more subjects you have.
+#Also: Remove fiefs from the trigmods and remove all current fiefs from history temporarily, as they're unfinished.
+#The situation with Aragon is particularly difficult, as giving a major LD bonus to Aragonese ideas feel really weird. One option is to directly decrease Neapolitan LD through an effect in history files, which means Aragon will have to work harder to keep Naples.
+###########################################
+# Aragon Balancing
+###########################################
+vu_iberian_crowns = {
+	potential = {
+		tag = ARA
+		is_subject = no
+		NOT = {
+			total_development = 500
+		}
+		any_subject_country = {
+			is_subject_of_type = personal_union
+			OR = {
+				capital_scope = {
+					region = italy_region
+				}
+				capital_scope = {
+					region = iberia_region
+				}
+			}
+		}
+	}
+	trigger = {
+		tag = ARA
+		any_subject_country = {
+			is_subject_of_type = personal_union
+			total_development = 200
+		}
+		#NOT = { has_country_flag = vu_centralising_aragon }			#Currently a dead end, might add later.
+	}
+	diplomatic_upkeep = 2	#Added to account for lack of hegemoniacle for Aragon since PUs don't count.
+	reduced_liberty_desire = 45
+	diplomatic_annexation_cost = 0.25
+}
+
+###########################################
+# Hanseatic League Balancing
+###########################################
+vu_hanseatic_domination = {
+	potential = {
+		government = republic
+		is_in_trade_league = yes
+		any_core_province = {
+			has_port = yes
+		}
+	}
+	trigger = {
+		custom_trigger_tooltip = {
+			tooltip = vu_trade_capital_in_luebeck_node_tooltip
+			OR = {
+				tag = HSA
+				is_in_trade_league_with = HSA
+			}
+		}
+		has_government_attribute = is_merchant_republic
+	}
+	placed_merchant_power = 18
+	global_foreign_trade_power = 0.25
+}
+
+###########################################
+# Maritime Republic Bonuses
+###########################################
+vu_hanseatic_domination = {
+	potential = {
+		culture_group = latin
+		government = republic
+		any_core_province = {
+			has_port = yes
+		}
+	}
+	trigger = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = vu_trade_capital_in_venice_node_tooltip
+				OR = {
+					tag = VEN
+					AND = {
+						is_trade_league_leader = yes
+						is_in_trade_league_with = VEN
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = vu_trade_capital_in_genoa_node_tooltip
+				OR = {
+					tag = GEN
+					AND = {
+						is_trade_league_leader = yes
+						is_in_trade_league_with = GEN
+					}
+				}
+			}
+		}
+		has_government_attribute = is_merchant_republic
+		is_subject = no
+	}
+	trade_steering = 0.25
+	global_ship_trade_power = 0.1
+}
+
+###########################################
+# Burgundy Balancing
+###########################################
+vu_hegemony_of_burgundy = {
+	potential = {
+		tag = BUR
+		is_subject = no
+		NOT = {
+			government_rank = 8
+		}
+		personal_union = 4
+	}
+	trigger = {
+		tag = BUR
+		NOT = {
+			is_year = 1545
+		}
+		NOT = {
+			government_rank = 8
+		}
+		personal_union = 5
+	}
+	diplomatic_upkeep = 7
+	reduced_liberty_desire = 5
+}
+
+################################
+# GE Additions by Jay Double U #
+################################
+# Triggered modifiers are here.
+# these are checked for each countries once/month and then applied.
+#
+# Effects are fully scriptable here.
+orthodox_influence_1 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		religion = orthodox
+		faction_in_power = GE_orthodox
+	}
+	#GE_orthodox_influence = 0.10
+}
+
+orthodox_influence_2 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		num_of_religion = {
+			religion = orthodox
+			value = 0.75
+		}
+	}
+	#GE_orthodox_influence = 0.10
+}
+
+orthodox_influence_3 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		faction_in_power = GE_orthodox
+		religious_unity = 1
+	}
+	#GE_orthodox_influence = 0.10
+}
+
+orthodox_influence_4 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		faction_in_power = GE_orthodox
+		NOT = {
+			num_of_religion = {
+				religion = orthodox
+				value = 0.4
+			}
+		}
+	}
+	#GE_orthodox_influence = -0.25
+}
+
+orthodox_influence_5 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		num_of_religion = {
+			religion = orthodox
+			value = 0.25
+		}
+	}
+	#GE_orthodox_influence = 0.05
+}
+
+orthodox_influence_5 = {
+	potential = {
+		has_faction = GE_orthodox
+	}
+	trigger = {
+		num_of_religion = {
+			religion = orthodox
+			value = 0.25
+		}
+	}
+	#GE_orthodox_influence = 0.05
+}
+
+coptic_influence_1 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		religion = coptic
+		faction_in_power = GE_coptic
+	}
+	#GE_coptic_influence = 0.10
+}
+
+coptic_influence_2 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		num_of_religion = {
+			religion = coptic
+			value = 0.75
+		}
+	}
+	#GE_coptic_influence = 0.10
+}
+
+coptic_influence_3 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		faction_in_power = GE_coptic
+		religious_unity = 1
+	}
+	#GE_coptic_influence = 0.10
+}
+
+coptic_influence_4 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		faction_in_power = GE_coptic
+		NOT = {
+			num_of_religion = {
+				religion = coptic
+				value = 0.4
+			}
+		}
+	}
+	#GE_coptic_influence = -0.25
+}
+
+coptic_influence_5 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		num_of_religion = {
+			religion = coptic
+			value = 0.25
+		}
+	}
+	#GE_coptic_influence = 0.05
+}
+
+coptic_influence_6 = {
+	potential = {
+		has_faction = GE_coptic
+	}
+	trigger = {
+		num_of_religion = {
+			religion = coptic
+			value = 0.25
+		}
+	}
+	#GE_coptic_influence = 0.05
+}
+
+sunni_influence_1 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		religion = sunni
+		faction_in_power = GE_sunni
+	}
+	#GE_sunni_influence = 0.10
+}
+
+sunni_influence_2 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		num_of_religion = {
+			religion = sunni
+			value = 0.75
+		}
+	}
+	#GE_sunni_influence = 0.10
+}
+
+sunni_influence_3 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		faction_in_power = GE_sunni
+		religious_unity = 1
+	}
+	#GE_sunni_influence = 0.10
+}
+
+sunni_influence_4 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		faction_in_power = GE_sunni
+		NOT = {
+			num_of_religion = {
+				religion = sunni
+				value = 0.4
+			}
+		}
+	}
+	#GE_sunni_influence = -0.25
+}
+
+sunni_influence_5 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		num_of_religion = {
+			religion = sunni
+			value = 0.25
+		}
+	}
+	#GE_sunni_influence = 0.05
+}
+
+sunni_influence_6 = {
+	potential = {
+		has_faction = GE_sunni
+	}
+	trigger = {
+		num_of_religion = {
+			religion = sunni
+			value = 0.1
+		}
+	}
+	#GE_sunni_influence = 0.05
+}
+
+bangyesurok_1 = {
+	potential = {
+		has_government_attribute = enables_global_tax_modifier_buff
+	}
+	trigger = {
+		stability = 1
+		NOT = {
+			stability = 2
+		}
+	}
+	global_tax_modifier = 0.05
+}
+
+bangyesurok_2 = {
+	potential = {
+		has_government_attribute = enables_global_tax_modifier_buff
+	}
+	trigger = {
+		stability = 2
+		NOT = {
+			stability = 3
+		}
+	}
+	global_tax_modifier = 0.1
+}
+
+bangyesurok_3 = {
+	potential = {
+		has_government_attribute = enables_global_tax_modifier_buff
+	}
+	trigger = {
+		stability = 3
+	}
+	global_tax_modifier = 0.15
+}
+
+central_army_GE = {
+	potential = {
+		has_government_attribute = enables_central_army_conscription
+	}
+	trigger = {
+		is_at_war = yes
+	}
+	global_regiment_recruit_speed = -0.25
+	manpower_recovery_speed = 0.1
+}
+
+bureaucracy_autonomy = {
+	potential = {
+		has_government_attribute = enables_bureaucracy_autonomy
+	}
+	trigger = {
+		NOT = {
+			average_autonomy_above_min = 30
+		}
+	}
+	global_tax_modifier = 0.05
+	production_efficiency = 0.05
+}
+
+korean_bureaucracy_advisor_1 = {
+	potential = {
+		has_government_attribute = enables_korean_bureaucracy
+	}
+	trigger = {
+		has_adm_advisor_with_skill = {
+			skill = 1
+		}
+		NOT = {
+			has_adm_advisor_with_skill = {
+				skill = 2
+			}
+		}
+	}
+	stability_cost_modifier = -0.05
+}
+
+korean_bureaucracy_advisor_2 = {
+	potential = {
+		has_government_attribute = enables_korean_bureaucracy
+	}
+	trigger = {
+		has_adm_advisor_with_skill = {
+			skill = 2
+		}
+		NOT = {
+			has_adm_advisor_with_skill = {
+				skill = 3
+			}
+		}
+	}
+	stability_cost_modifier = -0.1
+}
+
+korean_bureaucracy_advisor_3 = {
+	potential = {
+		has_government_attribute = enables_korean_bureaucracy
+	}
+	trigger = {
+		has_adm_advisor_with_skill = {
+			skill = 3
+		}
+		NOT = {
+			has_adm_advisor_with_skill = {
+				skill = 4
+			}
+		}
+	}
+	stability_cost_modifier = -0.15
+}
+
+korean_bureaucracy_advisor_4 = {
+	potential = {
+		has_government_attribute = enables_korean_bureaucracy
+	}
+	trigger = {
+		has_adm_advisor_with_skill = {
+			skill = 4
+		}
+		NOT = {
+			has_adm_advisor_with_skill = {
+				skill = 5
+			}
+		}
+	}
+	stability_cost_modifier = -0.2
+}
+
+korean_bureaucracy_advisor_5 = {
+	potential = {
+		has_government_attribute = enables_korean_bureaucracy
+	}
+	trigger = {
+		has_adm_advisor_with_skill = {
+			skill = 5
+		}
+	}
+	stability_cost_modifier = -0.25
+}
+
+GE_monastic_militarism = {
+	potential = {
+		has_government_attribute = enables_militant_orders
+	}
+	trigger = {
+		at_war_with_religious_enemy = yes
+	}
+	manpower_recovery_speed = 0.25
+	army_tradition = 1
+}
+
+vu_emperor_dip_decrease = {
+	potential = {
+		ai = yes
+	}
+	trigger = {
+		is_emperor = yes
+	}
+	diplomatic_upkeep = -5
+}
+
+vu_elector_dip_decrease = {
+	potential = {
+		ai = yes
+	}
+	trigger = {
+		is_emperor = no
+		is_elector = yes
+	}
+	diplomatic_upkeep = -3
+}
+
+vu_prince_dip_decrease = {
+	potential = {
+		ai = yes
+	}
+	trigger = {
+		is_emperor = no
+		is_elector = no
+		is_part_of_hre = yes
+	}
+	diplomatic_upkeep = -2
+}
+
+#4 variants, at peace, at peace as general, at war, at war as general 
+#at peace...
+vu_ruler_studying = {
+	potential = {
+		has_ruler_flag = vu_ruler_studying
+	}
+	trigger = {
+		is_at_war = no
+		NOT = {
+			is_monarch_leader = yes
+		}
+	}
+	state_maintenance_modifier = 0.15
+	stability_cost_modifier = 0.15
+	administrative_efficiency = -0.1
+}
+
+vu_ruler_general_studying = {
+	potential = {
+		has_ruler_flag = vu_ruler_studying
+	}
+	trigger = {
+		is_at_war = no
+		is_monarch_leader = yes
+	}
+	state_maintenance_modifier = 0.25
+	stability_cost_modifier = 0.15
+	diplomatic_upkeep = -1
+	administrative_efficiency = -0.15
+}
+
+vu_war_ruler_studying = {
+	potential = {
+		has_ruler_flag = vu_ruler_studying
+	}
+	trigger = {
+		is_at_war = yes
+		NOT = {
+			is_monarch_leader = yes
+		}
+	}
+	state_maintenance_modifier = 0.15
+	stability_cost_modifier = 0.25
+	administrative_efficiency = -0.1
+	all_power_cost = 0.05
+}
+
+vu_war_ruler_general_studying = {
+	potential = {
+		has_ruler_flag = vu_ruler_studying
+	}
+	trigger = {
+		is_at_war = no
+		is_monarch_leader = yes
+	}
+	state_maintenance_modifier = 0.25
+	stability_cost_modifier = 0.25
+	diplomatic_upkeep = -1
+	administrative_efficiency = -0.15
+	all_power_cost = 0.10
+}
+
+#4 variants, at peace, at peace as general, at war, at war as general 
+#at peace...
+vu_heir_studying = {
+	potential = {
+		has_heir_flag = vu_heir_studying
+	}
+	trigger = {
+		is_at_war = no
+		NOT = {
+			is_heir_leader = yes
+		}
+	}
+	stability_cost_modifier = 0.15
+	administrative_efficiency = -0.1
+}
+
+vu_heir_general_studying = {
+	potential = {
+		has_heir_flag = vu_heir_studying
+	}
+	trigger = {
+		is_at_war = no
+		is_heir_leader = yes
+	}
+	state_maintenance_modifier = 0.10
+	stability_cost_modifier = 0.15
+	administrative_efficiency = -0.15
+}
+
+vu_war_ruler_studying = {
+	potential = {
+		has_heir_flag = vu_heir_studying
+	}
+	trigger = {
+		is_at_war = yes
+		NOT = {
+			is_heir_leader = yes
+		}
+	}
+	state_maintenance_modifier = 0.10
+	stability_cost_modifier = 0.15
+	administrative_efficiency = -0.1
+}
+
+vu_war_ruler_general_studying = {
+	potential = {
+		has_heir_flag = vu_heir_studying
+	}
+	trigger = {
+		is_at_war = no
+		is_heir_leader = yes
+	}
+	state_maintenance_modifier = 0.15
+	stability_cost_modifier = 0.15
+	administrative_efficiency = -0.15
+}

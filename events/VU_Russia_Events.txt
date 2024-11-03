@@ -1,0 +1,2699 @@
+namespace = VU_Russia_Events
+# The Grand Duchy of Slawno
+#country_event = {
+#	id = VU_Russia_Events.107
+#	title = VU_Russia_Events.107.t
+#	desc = VU_Russia_Events.107.desc
+#	picture = GOOD_WITH_MONARCH_eventPicture
+#	is_triggered_only = yes
+#
+#	# Establish the autonomous Grand Duchy of Slawno
+#	option = {
+#		name = VU_Russia_Events.107.a
+#		hidden_effect = {
+#			west_prussia_area = {
+#				add_core = SLP
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#			nadruvia_area = {
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#			east_prussia_area = {
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#		}
+#		if = {
+#			limit = { NOT = { exists = SLP } }
+#			release = SLP
+#			hidden_effect = {
+#				SLP = {
+#					change_government = monarchy
+#					add_government_reform = feudalism_reform
+#					change_religion = ROOT
+#					change_primary_culture = kashubian_culture
+#					set_prestige_to_zero = yes
+#					add_adm_power = 50
+#					add_dip_power = 50
+#					add_mil_power = 50
+#
+#					add_accepted_culture = prussian
+#					set_capital = 43
+#				}
+#			}
+#		}
+#		if = {
+#			limit = { SLP = { is_subject = no } }
+#			if = {
+#				limit = { valid_for_personal_unions_trigger = yes SLP = { valid_for_personal_unions_trigger = yes } }
+#				create_subject = {
+#					who = SLP
+#					subject_type = personal_union
+#				}
+#			}
+#			else = {
+#				create_subject = {
+#					who = SLP
+#					subject_type = vassal
+#				}
+#			}
+#		}
+#		add_country_modifier = {
+#			name = rus_grand_duke_of_slawno
+#			duration = -1
+#			desc = rus_grand_duke_of_slawno_at
+#		}
+#		ai_chance = {
+#			factor = 0
+#		}
+#	}
+#
+#	option = {
+#		name = VU_Russia_Events.107.b
+#		hidden_effect = {
+#			west_prussia_area = {
+#				add_core = SLP
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#			nadruvia_area = {
+#				add_core = SLP
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#			east_prussia_area = {
+#				add_core = SLP
+#				if = {
+#					limit = { NOT = { owned_by = ROOT } }
+#					cede_province = ROOT
+#				}
+#			}
+#		}
+#		if = {
+#			limit = { NOT = { exists = SLP } }
+#			release = SLP
+#			hidden_effect = {
+#				SLP = {
+#					change_government = monarchy
+#					add_government_reform = feudalism_reform
+#					if = {
+#						limit = { 43 = { religion = catholic } }
+#						change_religion = catholic
+#					}
+#					else_if = {
+#						limit = { 43 = { religion = protestant } }
+#						change_religion = protestant
+#					}
+#					else_if = {
+#						limit = { 43 = { religion = reformed } }
+#						change_religion = reformed
+#					}
+#					else = {
+#						change_religion = orthodox
+#					}
+#					change_primary_culture = kashubian_culture
+#					set_prestige_to_zero = yes
+#					add_adm_power = 50
+#					add_dip_power = 50
+#					add_mil_power = 50
+#
+#					add_accepted_culture = prussian
+#					set_capital = 43
+#				}
+#			}
+#		}
+#		if = {
+#			limit = { SLP = { is_subject = no } }
+#			if = {
+#				limit = { valid_for_personal_unions_trigger = yes SLP = { valid_for_personal_unions_trigger = yes } }
+#				create_subject = {
+#					who = SLP
+#					subject_type = personal_union
+#				}
+#			}
+#			else = {
+#				create_subject = {
+#					who = SLP
+#					subject_type = vassal
+#				}
+#			}
+#		}
+#		add_country_modifier = {
+#			name = rus_grand_duke_of_slawno
+#			duration = -1
+#			desc = rus_grand_duke_of_slawno_at
+#		}
+#		ai_chance = {
+#			factor = 0
+#		}
+#	}
+#
+#	# We will govern Slawno ourselves with all means necessary
+#	option = {
+#		name = VU_Russia_Events.107.с
+#		add_adm_power = 75
+#		ai_chance = {
+#			factor = 1
+#		}
+#	}
+#}
+# Artillery Fields of Smolensk
+country_event = {
+	id = VU_Russia_Events.10
+	title = VU_Russia_Events.10.t
+	desc = VU_Russia_Events.10.desc
+	picture = ENTERING_MOSCOW_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = VU_Russia_Events.10.a
+		293 = {
+			add_base_production = 3
+			add_base_manpower = 1
+		}
+		add_country_modifier = {
+			name = mos_rus_artillery_combat
+			duration = 7300			#20 years
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = VU_Russia_Events.10.b
+		293 = {
+			add_base_production = 3
+			add_base_manpower = 1
+		}
+		add_country_modifier = {
+			name = mos_rus_artillery_siege
+			duration = 7300			#20 years
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = VU_Russia_Events.10.c
+		293 = {
+			add_base_production = 3
+			add_base_manpower = 1
+		}
+		release = SMO
+		smolensk_area = {
+			limit = {
+				owned_by = ROOT
+			}
+			cede_province = SMO
+		}
+		create_march = SMO
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Tula Arsenal
+country_event = {
+	id = VU_Russia_Events.20
+	title = VU_Russia_Events.20.t
+	desc = VU_Russia_Events.20.desc
+	picture = URBANIZATION_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = RUS
+			tag = TZR
+		}
+		any_country = {
+			mil_tech = 32
+		}
+		owns = 300
+		controls = 300
+	}
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 0.75
+			is_at_war = yes
+			NOT = { war_score = -15 }
+		}
+		modifier = {
+			factor = 0.5
+			is_at_war = yes
+			NOT = { war_score = -30 }
+		}
+		modifier = {
+			factor = 0.25
+			is_at_war = yes
+			NOT = { war_score = -50 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { is_at_war = yes }
+		}
+		modifier = {
+			factor = 2
+			NOT = { mil_tech = 32 }
+		}
+	}
+	option = {
+		name = VU_Russia_Events.20.a
+		goto = 300
+		300 = {
+			add_center_of_trade_level = 1
+			add_base_production = 5
+			add_building = munition_factory #check Import trade
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+# War with Turkey
+country_event = {
+	id = VU_Russia_Events.30
+	title = VU_Russia_Events.30.t
+	desc = VU_Russia_Events.30.desc
+	picture = CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			random_province = {
+				limit = {
+					area = silistria_area
+				}
+				owner = {
+					save_global_event_target_as = silistria_area_owner
+				}
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.30.a
+		hidden_effect = {
+			add_casus_belli = {
+				target = event_target:silistria_area_owner
+				type = cb_annex
+				months = 1
+			}
+		}
+		declare_war_with_cb = {
+			who = event_target:silistria_area_owner
+			casus_belli = cb_annex
+		}
+		add_dip_power = -50
+		add_country_modifier = {
+			name = rush_to_bulgaria
+			duration = 365
+		}
+	}
+	option = {
+		name = VU_Russia_Events.30.b
+		add_mil_power = -10
+	}
+}
+
+# Both Romes
+country_event = {
+	id = VU_Russia_Events.40
+	title = "VU_Russia_Events.40.t"
+	desc = "VU_Russia_Events.40.desc"
+	picture = BYZANTINE_EAGLE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		has_dlc = "Third Rome"
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = "VU_Russia_Events.40.a"
+		trigger = {
+			151 = {
+				is_capital = no
+			}
+		}
+		151 = {
+			add_base_tax = 3
+			add_base_production = 3
+			add_base_manpower = 2
+			move_capital_effect = yes
+			change_religion = ROOT
+			change_culture = ROOT
+			rename_capital = Tsargrad
+			add_province_modifier = {
+				name = "second_rome_modifier"
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "VU_Russia_Events.40.b"
+		capital_scope = {
+			add_base_tax = 3
+			add_base_production = 3
+			add_base_manpower = 2
+			add_province_modifier = {
+				name = "third_rome_modifier"
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = "VU_Russia_Events.40.c"
+		capital_scope = {
+			add_base_tax = 3
+			add_base_production = 3
+			add_base_manpower = 2
+			add_province_modifier = {
+				name = "third_rome_modifier"
+				duration = -1
+			}
+		}
+		custom_tooltip = VU_Russia_Events.40.ttc
+		hidden_effect = {
+			151 = {
+				add_core = MOE
+				if = {
+					limit = {
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+					cede_province = ROOT
+				}
+			}
+			7137 = {
+				add_core = MOE
+				if = {
+					limit = {
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+					cede_province = ROOT
+				}
+			}
+			6932 = {
+				add_core = MOE
+				if = {
+					limit = {
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+					cede_province = ROOT
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = MOE
+					}
+				}
+				release = MOE
+				MOE = {
+					change_government = monarchy
+					change_religion = ROOT
+					set_prestige_to_zero = yes
+					add_adm_power = 50
+					add_dip_power = 50
+					add_mil_power = 50
+					set_capital = 151
+					change_tag = BYZ
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						is_subject = no
+					}
+				}
+				if = {
+					limit = {
+						valid_for_personal_unions_trigger = yes
+						BYZ = {
+							valid_for_personal_unions_trigger = yes
+						}
+					}
+					create_subject = {
+						who = BYZ
+						subject_type = personal_union
+					}
+				}
+				else = {
+					create_subject = {
+						who = BYZ
+						subject_type = vassal
+					}
+				}
+			}
+		}
+	}
+}
+
+#Desolation of the Mishary
+country_event = {
+	id = VU_Russia_Events.50
+	title = VU_Russia_Events.50.t
+	desc = VU_Russia_Events.50.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = GOL
+		}
+		any_country = {
+			NOT = {
+				primary_culture = mishary
+			}
+		}
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				culture = mishary
+			}
+		}
+		owns = 303
+		owns = 1971
+	}
+	option = {
+		name = VU_Russia_Events.50.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				culture = mishary
+				development = 4
+				NOT = {
+					province_id = 303
+				}
+				NOT = {
+					province_id = 1971
+				}
+			}
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		303 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1971 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_mishary
+	}
+}
+
+#Desolation of the Kazani
+country_event = {
+	id = VU_Russia_Events.60
+	title = VU_Russia_Events.60.t
+	desc = VU_Russia_Events.60.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = KAZ
+		}
+		any_country = {
+			NOT = {
+				primary_culture = kazani
+			}
+		}
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				culture = kazani
+			}
+		}
+		owns = 1082
+		owns = 1081
+		owns = 473
+	}
+	option = {
+		name = VU_Russia_Events.60.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				culture = kazani
+				development = 4
+				NOT = {
+					province_id = 1778
+				}
+				NOT = {
+					province_id = 1082
+				}
+				NOT = {
+					province_id = 4267
+				}
+				NOT = {
+					province_id = 1081
+				}
+				NOT = {
+					province_id = 473
+				}
+			}
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1082 = {
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 3
+		}
+		4267 = {
+			set_base_tax = 2
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1081 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		473 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_kazani
+	}
+}
+
+#Desolation of the Astrakhani
+country_event = {
+	id = VU_Russia_Events.70
+	title = VU_Russia_Events.70.t
+	desc = VU_Russia_Events.70.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = AST
+		}
+		any_country = {
+			NOT = {
+				primary_culture = astrakhani
+			}
+		}
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					region = caucasia_region
+				}
+				culture = astrakhani
+			}
+		}
+		owns = 464
+	}
+	option = {
+		name = VU_Russia_Events.70.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				culture = astrakhani
+				NOT = {
+					region = caucasia_region
+				}
+				development = 4
+				NOT = {
+					province_id = 464
+				}
+			}
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		464 = {
+			set_base_tax = 2
+			set_base_production = 3
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_astrakhani
+	}
+}
+
+#Desolation of the Crimean
+country_event = {
+	id = VU_Russia_Events.80
+	title = VU_Russia_Events.80.t
+	desc = VU_Russia_Events.80.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = CRI
+		}
+		any_country = {
+			NOT = {
+				primary_culture = crimean
+			}
+		}
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				culture = crimean
+			}
+		}
+		owns = 286
+		owns = 2413
+		owns = 7203
+		owns = 1974
+	}
+	option = {
+		name = VU_Russia_Events.80.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				culture = crimean
+				development = 5
+				NOT = {
+					province_id = 284
+				}
+			}
+			set_base_tax = 2
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		284 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_crimean
+	}
+}
+
+#Desolation of the Nogai
+country_event = {
+	id = VU_Russia_Events.90
+	title = VU_Russia_Events.90.t
+	desc = VU_Russia_Events.90.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = NOG
+		}
+		any_country = {
+			NOT = {
+				primary_culture = nogaybak
+			}
+		}
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					area = khiva_area
+				}
+				NOT = {
+					area = transcaspia_area
+				}
+				culture = nogaybak
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.90.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				NOT = {
+					area = khiva_area
+				}
+				NOT = {
+					area = transcaspia_area
+				}
+				culture = nogaybak
+				development = 4
+			}
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_nogai
+	}
+}
+
+#Desolation of the Siberian
+country_event = {
+	id = VU_Russia_Events.100
+	title = VU_Russia_Events.100.t
+	desc = VU_Russia_Events.100.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		NOT = {
+			exists = SIB
+		}
+		any_country = {
+			NOT = {
+				primary_culture = siberian
+			}
+		}
+		owns = 1074
+		owns = 1075
+		NOT = {
+			any_province = {
+				NOT = {
+					owned_by = ROOT
+				}
+				culture = siberian
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.100.a
+		every_owned_province = {
+			limit = {
+				owned_by = ROOT
+				culture = siberian
+				development = 4
+				NOT = {
+					province_id = 1074
+				}
+				NOT = {
+					province_id = 1075
+				}
+				NOT = {
+					province_id = 1071
+				}
+			}
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1074 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1075 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		1071 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 2
+		}
+		set_country_flag = desolation_siberian
+	}
+}
+
+#Colonization of the Don
+province_event = {
+	id = VU_Russia_Events.110
+	title = VU_Russia_Events.110.t
+	desc = VU_Russia_Events.110.desc
+	picture = PEASANTS_ON_STEPPES_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = colonization_don
+			OR = {
+				NOT = {
+					has_country_flag = colonization_don_cooldown
+				}
+				had_country_flag = {
+					flag = colonization_don_cooldown
+					days = 1460					#4 years
+				}
+			}
+		}
+		culture = mishary
+		NOT = {
+			province_id = 303
+		}
+		NOT = {
+			province_id = 1971
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = VU_Russia_Events.110.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = united_slavs
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						province_id = 467
+						province_id = 2409
+						province_id = 3265
+						province_id = 288
+					}
+				}
+				change_culture = cossack
+			}
+			else = {
+				change_culture = russian
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					OR = {
+						province_id = 467
+						province_id = 2409
+						province_id = 3265
+						province_id = 288
+					}
+				}
+				change_culture = cossack_new
+			}
+			else = {
+				change_culture = russian_new
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = slavic_pagan_reformed
+				}
+			}
+			change_religion = slavic_pagan_reformed
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = orthodox
+				}
+			}
+			change_religion = orthodox
+		}
+		set_base_tax = 2
+		set_base_production = 2
+		set_base_manpower = 2
+		owner = {
+			set_country_flag = colonization_don_cooldown
+		}
+	}
+}
+
+#New towns on the Volga
+country_event = {
+	id = VU_Russia_Events.120
+	title = VU_Russia_Events.120.t
+	desc = VU_Russia_Events.120.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = VU_Russia_Events.120.a
+		1082 = {
+			set_base_tax = 3
+			set_base_production = 3
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		1081 = {
+			change_province_name = "Simbirsk"
+			rename_capital = "Simbirsk"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+		}
+		473 = {
+			change_province_name = "Samara"
+			rename_capital = "Samara"
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		303 = {
+			change_province_name = "Saratov"
+			rename_capital = "Saratov"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		1971 = {
+			change_province_name = "Tsaritsyn"
+			rename_capital = "Tsaritsyn"
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+		}
+		302 = {
+			change_province_name = "Tambov"
+			rename_capital = "Tambov"
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		304 = {
+			change_province_name = "Penza"
+			rename_capital = "Penza"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		464 = {
+			change_province_name = "Astrakhan"
+			rename_capital = "Astrakhan"
+		}
+		set_country_flag = colonization_volga
+		custom_tooltip = VU_Russia_Events_120_at
+	}
+}
+
+#Colonization of the Volga
+province_event = {
+	id = VU_Russia_Events.121
+	title = VU_Russia_Events.121.t
+	desc = VU_Russia_Events.121.desc
+	picture = PEASANTS_ON_STEPPES_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = colonization_volga
+			OR = {
+				NOT = {
+					has_country_flag = colonization_volga_cooldown
+				}
+				had_country_flag = {
+					flag = colonization_volga_cooldown
+					days = 2555					#7 years
+				}
+			}
+		}
+		OR = {
+			culture = kazani
+			culture = astrakhani
+		}
+		NOT = {
+			province_id = 1972
+		}
+		NOT = {
+			province_id = 2421
+		}
+		NOT = {
+			province_id = 3338
+		}
+		NOT = {
+			province_id = 2417
+		}
+		NOT = {
+			province_id = 464
+		}
+		NOT = {
+			region = caucasia_region
+		}
+	}
+	mean_time_to_happen = {
+		months = 96
+	}
+	option = {
+		name = VU_Russia_Events.121.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = united_slavs
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						province_id = 8661
+						province_id = 8660
+						province_id = 3264
+					}
+				}
+				change_culture = cossack
+			}
+			else = {
+				change_culture = russian
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					OR = {
+						province_id = 8661
+						province_id = 8660
+						province_id = 3264
+					}
+				}
+				change_culture = cossack_new
+			}
+			else = {
+				change_culture = russian_new
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = slavic_pagan_reformed
+				}
+			}
+			change_religion = slavic_pagan_reformed
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = orthodox
+				}
+			}
+			change_religion = orthodox
+		}
+		set_base_tax = 2
+		set_base_production = 2
+		set_base_manpower = 2
+		owner = {
+			set_country_flag = colonization_volga_cooldown
+		}
+	}
+}
+
+#Growth of towns on the Volga
+country_event = {
+	id = VU_Russia_Events.122
+	title = VU_Russia_Events.122.t
+	desc = VU_Russia_Events.122.desc
+	picture = CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 1082
+		owns = 1081
+		owns = 473
+		owns = 303
+		owns = 1971
+		owns = 302
+		owns = 304
+		owns = 464
+		had_country_flag = {
+			flag = colonization_volga
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.122.a
+		1082 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		1081 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		473 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		303 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+			add_center_of_trade_level = 1
+		}
+		1971 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		302 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		304 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		464 = {
+			add_base_tax = 3
+			add_base_production = 2
+			add_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+			add_center_of_trade_level = 1
+		}
+		set_country_flag = mass_colonization_volga
+		custom_tooltip = VU_Russia_Events_122_at
+	}
+}
+
+#End of colonization on the Volga
+country_event = {
+	id = VU_Russia_Events.123
+	title = VU_Russia_Events.123.t
+	desc = VU_Russia_Events.123.desc
+	picture = ENTERING_MOSCOW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 1082
+		owns = 1081
+		owns = 473
+		owns = 303
+		owns = 1971
+		owns = 302
+		owns = 304
+		owns = 464
+		had_country_flag = {
+			flag = mass_colonization_volga
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.123.a
+		add_prestige = 15
+		1082 = {
+			add_base_tax = 3
+			add_base_production = 2
+			add_base_manpower = 3
+		}
+		1081 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+		473 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+		303 = {
+			add_base_tax = 2
+			add_base_production = 3
+			add_base_manpower = 2
+		}
+		1971 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		302 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		304 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+		464 = {
+			add_base_tax = 2
+			add_base_production = 3
+			add_base_manpower = 2
+		}
+		set_country_flag = end_colonization_volga
+		clr_country_flag = mass_colonization_volga
+	}
+}
+
+#New towns on the Novorossiya
+country_event = {
+	id = VU_Russia_Events.130
+	title = VU_Russia_Events.130.t
+	desc = VU_Russia_Events.130.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = VU_Russia_Events.130.a
+		291 = {
+			add_base_tax = 2
+			add_base_manpower = 2
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		7196 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 2
+			change_religion = ROOT
+			change_culture = ROOT
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+		}
+		2406 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		282 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 1
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		set_country_flag = colonization_novorossiya
+		custom_tooltip = VU_Russia_Events_130_at
+	}
+}
+
+#Colonization of the Novorossiya
+province_event = {
+	id = VU_Russia_Events.131
+	title = VU_Russia_Events.131.t
+	desc = VU_Russia_Events.131.desc
+	picture = PEASANTS_ON_STEPPES_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = colonization_novorossiya
+			OR = {
+				NOT = {
+					has_country_flag = colonization_novorossiya_cooldown
+				}
+				had_country_flag = {
+					flag = colonization_novorossiya_cooldown
+					days = 1095					#3 years
+				}
+			}
+		}
+		OR = {
+			culture = crimean
+			AND = {
+				NOT = {
+					development = 6
+				}
+				culture_group = east_slavic
+			}
+		}
+		OR = {
+			area = sloboda_ukraine_area
+			area = maeotida_area
+			area = zaporizhia_area
+			area = yedisan_area
+		}
+		NOT = {
+			province_id = 291
+		}
+		NOT = {
+			province_id = 7196
+		}
+		NOT = {
+			province_id = 2406
+		}
+		NOT = {
+			province_id = 282
+		}
+	}
+	mean_time_to_happen = {
+		months = 48
+	}
+	option = {
+		name = VU_Russia_Events.131.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = united_slavs
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						province_id = 7258
+						province_id = 3247
+						province_id = 7205
+						province_id = 3302
+						province_id = 7202
+						province_id = 7204
+					}
+				}
+				change_culture = cossack
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					OR = {
+						province_id = 7258
+						province_id = 3247
+						province_id = 7205
+						province_id = 3302
+						province_id = 7202
+						province_id = 7204
+					}
+				}
+				change_culture = cossack_new
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = slavic_pagan_reformed
+				}
+			}
+			change_religion = slavic_pagan_reformed
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = orthodox
+				}
+			}
+			change_religion = orthodox
+		}
+		set_base_tax = 2
+		set_base_production = 2
+		set_base_manpower = 2
+		owner = {
+			set_country_flag = colonization_novorossiya_cooldown
+		}
+	}
+}
+
+#Growth of towns on the Novorossiya
+country_event = {
+	id = VU_Russia_Events.132
+	title = VU_Russia_Events.132.t
+	desc = VU_Russia_Events.132.desc
+	picture = CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 291
+		owns = 7196
+		owns = 2406
+		owns = 282
+		had_country_flag = {
+			flag = colonization_novorossiya
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.132.a
+		291 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		7196 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		2406 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 3
+		}
+		282 = {
+			add_base_tax = 2
+			add_base_production = 3
+			add_base_manpower = 2
+		}
+		set_country_flag = mass_colonization_novorossiya
+		custom_tooltip = VU_Russia_Events_132_at
+	}
+}
+
+#End of colonization on the Novorossiya
+country_event = {
+	id = VU_Russia_Events.133
+	title = VU_Russia_Events.133.t
+	desc = VU_Russia_Events.133.desc
+	picture = ENTERING_MOSCOW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 291
+		owns = 7196
+		owns = 2406
+		owns = 282
+		had_country_flag = {
+			flag = mass_colonization_novorossiya
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.133.a
+		add_prestige = 15
+		291 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		7196 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		2406 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		282 = {
+			add_base_tax = 3
+			add_base_production = 3
+			add_base_manpower = 3
+		}
+		set_country_flag = end_colonization_novorossiya
+		clr_country_flag = mass_colonization_novorossiya
+	}
+}
+
+#New towns on the Priazovye
+country_event = {
+	id = VU_Russia_Events.140
+	title = VU_Russia_Events.140.t
+	desc = VU_Russia_Events.140.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = VU_Russia_Events.140.a
+		7203 = {
+			change_province_name = "Taganrog"
+			rename_capital = "Taganrog"
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = cossack
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+		}
+		1974 = {
+			change_province_name = "Kherson"
+			rename_capital = "Kherson"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 2
+			change_religion = ROOT
+			change_culture = ROOT
+		}
+		2410 = {
+			change_province_name = "Sevastopol"
+			rename_capital = "Sevastopol"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 3
+			change_religion = ROOT
+			change_culture = ROOT
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_shipyard_building_trigger = yes
+					}
+				}
+				add_building = shipyard
+			}
+			add_center_of_trade_level = 1
+			add_province_modifier = {
+				name = rus_founding_of_sevastopol
+				duration = -1
+			}
+		}
+		set_country_flag = colonization_priazovye
+		custom_tooltip = VU_Russia_Events_140_at
+	}
+}
+
+#Colonization of the Priazovye
+province_event = {
+	id = VU_Russia_Events.141
+	title = VU_Russia_Events.141.t
+	desc = VU_Russia_Events.141.desc
+	picture = PEASANTS_ON_STEPPES_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = colonization_priazovye
+			OR = {
+				NOT = {
+					has_country_flag = colonization_priazovye_cooldown
+				}
+				had_country_flag = {
+					flag = colonization_priazovye_cooldown
+					days = 3285					#9 years
+				}
+			}
+		}
+		culture = crimean
+		OR = {
+			area = crimea_area
+			area = lower_dnieper_area
+			area = pryazovia_area
+		}
+		NOT = {
+			province_id = 7203
+		}
+		NOT = {
+			province_id = 1974
+		}
+		NOT = {
+			province_id = 2410
+		}
+		NOT = {
+			province_id = 7193
+		}
+		NOT = {
+			province_id = 3244
+		}
+		NOT = {
+			province_id = 285
+		}
+	}
+	mean_time_to_happen = {
+		months = 108
+	}
+	option = {
+		name = VU_Russia_Events.141.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = united_slavs
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						province_id = 7201
+					}
+				}
+				change_culture = cossack
+			}
+			else = {
+				change_culture = russian
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					OR = {
+						province_id = 7201
+					}
+				}
+				change_culture = cossack_new
+			}
+			else = {
+				change_culture = russian_new
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = slavic_pagan_reformed
+				}
+			}
+			change_religion = slavic_pagan_reformed
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = orthodox
+				}
+			}
+			change_religion = orthodox
+		}
+		set_base_tax = 2
+		set_base_production = 2
+		set_base_manpower = 2
+		owner = {
+			set_country_flag = colonization_priazovye_cooldown
+		}
+	}
+}
+
+#Growth of towns on the Priazovye
+country_event = {
+	id = VU_Russia_Events.142
+	title = VU_Russia_Events.142.t
+	desc = VU_Russia_Events.142.desc
+	picture = CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 7203
+		owns = 1974
+		owns = 2410
+		had_country_flag = {
+			flag = colonization_priazovye
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.142.a
+		7203 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		1974 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 3
+		}
+		2410 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		set_country_flag = mass_colonization_priazovye
+		custom_tooltip = VU_Russia_Events_142_at
+	}
+}
+
+#End of colonization on the Priazovye
+country_event = {
+	id = VU_Russia_Events.143
+	title = VU_Russia_Events.143.t
+	desc = VU_Russia_Events.143.desc
+	picture = ENTERING_MOSCOW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 7203
+		owns = 1974
+		owns = 2410
+		had_country_flag = {
+			flag = mass_colonization_priazovye
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.143.a
+		add_prestige = 15
+		7203 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 1
+			change_culture = ROOT
+		}
+		1974 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+		2410 = {
+			add_base_tax = 2
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		set_country_flag = end_colonization_priazovye
+		clr_country_flag = mass_colonization_priazovye
+	}
+}
+
+#New towns on the Kuban
+country_event = {
+	id = VU_Russia_Events.150
+	title = VU_Russia_Events.150.t
+	desc = VU_Russia_Events.150.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = VU_Russia_Events.150.a
+		286 = {
+			change_province_name = "Rostov-on-Don"
+			rename_capital = "Rostov-on-Don"
+			set_base_tax = 2
+			set_base_production = 2
+			set_base_manpower = 2
+			change_religion = ROOT
+			change_culture = cossack
+			if = {
+				limit = {
+					NOT = {
+						has_shipyard_building_trigger = yes
+					}
+				}
+				add_building = shipyard
+			}
+		}
+		2413 = {
+			change_province_name = "Novocherkassk"
+			rename_capital = "Novocherkassk"
+			set_base_tax = 3
+			set_base_production = 2
+			set_base_manpower = 2
+			change_religion = ROOT
+			change_culture = cossack
+			if = {
+				limit = {
+					NOT = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				add_building = fort_15th
+			}
+		}
+		set_country_flag = colonization_kuban
+		custom_tooltip = VU_Russia_Events_150_at
+	}
+}
+
+#Colonization of the Kuban
+province_event = {
+	id = VU_Russia_Events.151
+	title = VU_Russia_Events.151.t
+	desc = VU_Russia_Events.151.desc
+	picture = PEASANTS_ON_STEPPES_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = colonization_kuban
+			OR = {
+				NOT = {
+					has_country_flag = colonization_kuban_cooldown
+				}
+				had_country_flag = {
+					flag = colonization_kuban_cooldown
+					days = 2555					#7 years
+				}
+			}
+		}
+		OR = {
+			AND = {
+				area = azov_area
+				culture = crimean
+			}
+			province_id = 287
+			province_id = 3341
+			province_id = 2416
+			province_id = 3263
+		}
+		NOT = {
+			province_id = 286
+		}
+		NOT = {
+			province_id = 2413
+		}
+	}
+	mean_time_to_happen = {
+		months = 96
+	}
+	option = {
+		name = VU_Russia_Events.151.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = united_slavs
+				}
+			}
+			change_culture = cossack
+		}
+		else = {
+			change_culture = cossack_new
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = slavic_pagan_reformed
+				}
+			}
+			change_religion = slavic_pagan_reformed
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = orthodox
+				}
+			}
+			change_religion = orthodox
+		}
+		set_base_tax = 2
+		set_base_production = 2
+		set_base_manpower = 2
+		owner = {
+			set_country_flag = colonization_kuban_cooldown
+		}
+	}
+}
+
+#Growth of towns on the Kuban
+country_event = {
+	id = VU_Russia_Events.152
+	title = VU_Russia_Events.152.t
+	desc = VU_Russia_Events.152.desc
+	picture = CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 286
+		owns = 2413
+		had_country_flag = {
+			flag = colonization_kuban
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.152.a
+		286 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 1
+		}
+		2413 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 3
+		}
+		set_country_flag = mass_colonization_kuban
+		custom_tooltip = VU_Russia_Events_152_at
+	}
+}
+
+#End of colonization on the Kuban
+country_event = {
+	id = VU_Russia_Events.153
+	title = VU_Russia_Events.153.t
+	desc = VU_Russia_Events.153.desc
+	picture = ENTERING_MOSCOW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		owns = 286
+		owns = 2413
+		had_country_flag = {
+			flag = mass_colonization_kuban
+			days = 18250			#50 years
+		}
+	}
+	option = {
+		name = VU_Russia_Events.153.a
+		add_prestige = 15
+		286 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+			change_culture = ROOT
+		}
+		2413 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		set_country_flag = end_colonization_kuban
+		clr_country_flag = mass_colonization_kuban
+	}
+}
+
+#Caucasian War
+country_event = {
+	id = VU_Russia_Events.160
+	title = VU_Russia_Events.160.t
+	desc = VU_Russia_Events.160.desc
+	picture = muslimgfx_RELIGIOUS_WARS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		num_of_owned_provinces_with = {
+			value = 3
+			has_owner_accepted_culture = no
+			OR = {
+				area = dagestan_area
+				area = circassia_area
+				area = caucasia_stepp_area
+			}
+			OR = {
+				culture = karachay
+				culture = balkar
+				culture = alan
+				culture_group = nakh_daghestani
+				culture_group = caucasian
+			}
+			religion_group = muslim
+		}
+	}
+	option = {
+		name = VU_Russia_Events.160.a
+		custom_tooltip = VU_Russia_Events.160.tta
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_owner_accepted_culture = no
+					OR = {
+						area = dagestan_area
+						area = circassia_area
+						area = caucasia_stepp_area
+					}
+					OR = {
+						culture = karachay
+						culture = balkar
+						culture = alan
+						culture_group = nakh_daghestani
+						culture_group = caucasian
+					}
+					religion_group = muslim
+				}
+				add_province_modifier = {
+					name = rus_caucasian_war
+					duration = 18250					#50 years
+				}
+				set_province_flag = rus_caucasian_war_began
+			}
+		}
+		set_country_flag = rus_caucasian_war_flag
+	}
+}
+
+province_event = {
+	id = VU_Russia_Events.161
+	title = VU_Russia_Events.161.t
+	desc = VU_Russia_Events.161.desc
+	picture = muslimgfx_RELIGIOUS_WARS_eventPicture
+	hidden = yes
+	trigger = {
+		owner = {
+			has_country_flag = rus_caucasian_war_flag
+		}
+		NOT = {
+			has_province_flag = rus_caucasian_war_began
+		}
+		has_owner_accepted_culture = no
+		OR = {
+			area = dagestan_area
+			area = circassia_area
+			area = caucasia_stepp_area
+		}
+		OR = {
+			culture = karachay
+			culture = balkar
+			culture = alan
+			culture_group = nakh_daghestani
+			culture_group = caucasian
+		}
+		religion_group = muslim
+	}
+	option = {
+		name = VU_Russia_Events.161.a
+		add_province_modifier = {
+			name = rus_caucasian_war
+			duration = 18250			#50 years
+		}
+		set_province_flag = rus_caucasian_war_began
+	}
+}
+
+#Khmelnytsky Uprising
+country_event = {
+	id = VU_Russia_Events.170
+	title = VU_Russia_Events.170.t
+	desc = VU_Russia_Events.170.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	hidden = yes
+	trigger = {
+		OR = {
+			tag = LIT
+			tag = POL
+			tag = PLC
+		}
+		OR = {
+			exists = RUS
+			exists = TZR
+		}
+		NOT = {
+			exists = ZAZ
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture = cossack
+			is_core = ZAZ
+		}
+		NOT = {
+			has_global_flag = LIT_POL_PLC_annexed_ZAZ
+		}
+	}
+	option = {
+		name = VU_Russia_Events.170.a
+		set_global_flag = LIT_POL_PLC_annexed_ZAZ
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.171
+	title = VU_Russia_Events.171.t
+	desc = VU_Russia_Events.171.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	hidden = yes
+	trigger = {
+		OR = {
+			tag = LIT
+			tag = POL
+			tag = PLC
+		}
+		OR = {
+			AND = {
+				NOT = {
+					exists = RUS
+				}
+				NOT = {
+					exists = TZR
+				}
+			}
+			exists = ZAZ
+			AND = {
+				LIT = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+				POL = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+				PLC = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+			}
+		}
+		has_global_flag = LIT_POL_PLC_annexed_ZAZ
+	}
+	option = {
+		name = VU_Russia_Events.171.a
+		clr_global_flag = LIT_POL_PLC_annexed_ZAZ
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.172
+	title = VU_Russia_Events.172.t
+	desc = VU_Russia_Events.172.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = LIT
+			tag = POL
+			tag = PLC
+		}
+		NOT = {
+			exists = ZAZ
+		}
+		OR = {
+			exists = RUS
+			exists = TZR
+		}
+		had_global_flag = {
+			flag = LIT_POL_PLC_annexed_ZAZ
+			days = 18250
+		}
+		NOT = {
+			accepted_culture = cossack
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture = cossack
+			is_core = ZAZ
+		}
+		OR = {
+			war_exhaustion = 5
+			NOT = {
+				stability = 3
+			}
+			num_of_loans = 2
+		}
+	}
+	option = {
+		name = VU_Russia_Events.172.a
+		random_owned_province = {
+			limit = {
+				culture = cossack
+				exists = RUS
+			}
+			spawn_rebels = {
+				type = bohdan_khmelnytsky_rebels
+				size = 10
+				win = yes
+				leader = "Bohdan Khmelnytsky"
+				separatists_target = RUS
+				friend = RUS
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture = cossack
+				exists = TZR
+			}
+			spawn_rebels = {
+				type = bohdan_khmelnytsky_rebels
+				size = 10
+				win = yes
+				leader = "Bohdan Khmelnytsky"
+				separatists_target = TZR
+				friend = TZR
+			}
+		}
+		add_estate_loyalty = {
+			estate = estate_cossacks
+			loyalty = -30
+		}
+		add_stability = -2
+		set_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+	}
+	option = {
+		name = VU_Russia_Events.172.b
+		ai_chance = {
+			factor = 0
+		}
+		release = ZAZ
+		if = {
+			limit = {
+				exists = RUS
+			}
+			RUS = {
+				create_subject = {
+					who = ZAZ
+					subject_type = march
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = TZR
+			}
+			TZR = {
+				create_subject = {
+					who = ZAZ
+					subject_type = march
+				}
+			}
+		}
+		add_prestige = -25
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.173
+	title = VU_Russia_Events.173.t
+	desc = VU_Russia_Events.173.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		AND = {
+			LIT = {
+				NOT = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+			POL = {
+				NOT = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+			PLC = {
+				NOT = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+		}
+		has_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+	}
+	option = {
+		name = VU_Russia_Events.173.a
+		clr_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.174
+	title = VU_Russia_Events.174.t
+	desc = VU_Russia_Events.174.desc
+	picture = ORTHODOX_ICON_FLAG_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = RUS
+			tag = TZR
+		}
+		had_global_flag = {
+			flag = LIT_POL_PLC_Khmelnytsky_Uprising
+			days = 365
+		}
+		OR = {
+			AND = {
+				LIT = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+				NOT = {
+					war_with = LIT
+				}
+			}
+			AND = {
+				POL = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+				NOT = {
+					war_with = POL
+				}
+			}
+			AND = {
+				PLC = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+				NOT = {
+					war_with = PLC
+				}
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.174.a
+		if = {
+			limit = {
+				LIT = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+			declare_war_with_cb = {
+				who = LIT
+				casus_belli = cb_annex
+			}
+		}
+		if = {
+			limit = {
+				POL = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+			declare_war_with_cb = {
+				who = POL
+				casus_belli = cb_annex
+			}
+		}
+		if = {
+			limit = {
+				PLC = {
+					has_spawned_rebels = bohdan_khmelnytsky_rebels
+				}
+			}
+			declare_war_with_cb = {
+				who = PLC
+				casus_belli = cb_annex
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.174.b
+		add_estate_loyalty = {
+			estate = estate_cossacks
+			loyalty = -30
+		}
+		add_prestige = -15
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.175
+	title = VU_Russia_Events.175.t
+	desc = VU_Russia_Events.175.desc
+	picture = ORTHODOX_ICON_FLAG_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = RUS
+			tag = TZR
+		}
+		has_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+		OR = {
+			AND = {
+				war_with = LIT
+				war_score_against = {
+					who = LIT
+					value = 33
+				}
+			}
+			AND = {
+				war_with = POL
+				war_score_against = {
+					who = POL
+					value = 33
+				}
+			}
+			AND = {
+				war_with = PLC
+				war_score_against = {
+					who = PLC
+					value = 33
+				}
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.172.a
+		if = {
+			limit = {
+				war_with = LIT
+			}
+			white_peace = LIT
+			LIT = {
+				disband_rebels = bohdan_khmelnytsky_rebels
+				release = ZAZ
+			}
+		}
+		if = {
+			limit = {
+				war_with = POL
+			}
+			white_peace = POL
+			POL = {
+				disband_rebels = bohdan_khmelnytsky_rebels
+				release = ZAZ
+			}
+		}
+		if = {
+			limit = {
+				war_with = PLC
+			}
+			white_peace = PLC
+			PLC = {
+				disband_rebels = bohdan_khmelnytsky_rebels
+				release = ZAZ
+			}
+		}
+		clr_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+		if = {
+			limit = {
+				exists = RUS
+			}
+			RUS = {
+				create_subject = {
+					who = ZAZ
+					subject_type = march
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = TZR
+			}
+			TZR = {
+				create_subject = {
+					who = ZAZ
+					subject_type = march
+				}
+			}
+		}
+		ZAZ = {
+			define_ruler = {
+				name = "Bohdan Khmelnytsky"
+				dynasty = "Khmelnytsky"
+				dip = 4
+				adm = 4
+				mil = 6
+				claim = 75
+				age = 53
+				attach_leader = "Bohdan Khmelnytsky"
+			}
+		}
+		hidden_effect = {
+			ZAZ = {
+				change_government = republic
+				add_government_reform = cossacks_reform
+				change_religion = orthodox
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = united_slavs
+						}
+					}
+					change_primary_culture = cossack
+				}
+				else = {
+					change_primary_culture = cossack_new
+				}
+				set_prestige_to_zero = yes
+				add_adm_power = 50
+				add_dip_power = 50
+				add_mil_power = 50
+				set_capital = 3243
+				define_ruler_to_general = {
+					shock = 6
+					fire = 4
+					manuever = 5
+					siege = 2
+				}
+				every_owned_province = {
+					clear_rebels = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.175.b
+	}
+}
+
+country_event = {
+	id = VU_Russia_Events.176
+	title = VU_Russia_Events.176.t
+	desc = VU_Russia_Events.176.desc
+	picture = IMPALED_SOLDIERS_eventPicture
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		OR = {
+			tag = LIT
+			tag = POL
+			tag = PLC
+		}
+		has_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+		OR = {
+			LIT = {
+				has_spawned_rebels = bohdan_khmelnytsky_rebels
+			}
+			POL = {
+				has_spawned_rebels = bohdan_khmelnytsky_rebels
+			}
+			PLC = {
+				has_spawned_rebels = bohdan_khmelnytsky_rebels
+			}
+		}
+		OR = {
+			exists = ZAZ
+			AND = {
+				LIT = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+				POL = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+				PLC = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							culture = cossack
+							is_core = ZAZ
+						}
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = VU_Russia_Events.174.a
+		LIT = {
+			disband_rebels = bohdan_khmelnytsky_rebels
+		}
+		POL = {
+			disband_rebels = bohdan_khmelnytsky_rebels
+		}
+		PLC = {
+			disband_rebels = bohdan_khmelnytsky_rebels
+		}
+		clr_global_flag = LIT_POL_PLC_Khmelnytsky_Uprising
+	}
+}

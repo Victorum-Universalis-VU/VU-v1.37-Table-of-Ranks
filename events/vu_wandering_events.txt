@@ -1,0 +1,516 @@
+namespace = vu_wandering_wenches
+namespace = vu_wandering_gamblers
+namespace = vu_wandering_musicians
+namespace = vu_wandering_artists
+#Put Subject Types in 00_on_actions
+country_event = {
+	id = vu_wandering_wenches.1
+	title = "vu_wandering_wenches_title"
+	picture = "vu_wandering_wenches_eventPicture"
+	desc = "vu_wandering_wenches_desc"
+	mean_time_to_happen = {
+		months = 20
+	}
+	trigger = {
+		NOT = {
+			AND = {
+				exists = STE
+				has_country_flag = denied_the_wenches
+			}
+		}
+		OR = {
+			owns = 1858
+			any_owned_province = {
+				has_province_modifier = vu_wandering_wenches_of_stettin
+			}
+		}
+	}
+	immediate = {
+	}
+	option = {
+		#they can go!
+		name = vu_wandering_wenches.1a
+		custom_tooltip = vu_wandering_wenches.1a.tt
+		add_prestige = -10
+		add_legitimacy = 10
+		add_treasury = 1
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_wenches_of_stettin
+				}
+				remove_province_modifier = vu_wandering_wenches_of_stettin
+			}
+			random_province = {
+				limit = {
+					continent = europe
+					religion_group = christian
+					NOT = {
+						OR = {
+							religion = reformed
+							religion = mormon
+							religion = orthodox
+							religion = miaphysite
+							religion = marcionite
+							religion = coptic
+							religion = cathar
+							religion = waldensian
+							religion = nestorian
+							religion = bogomilist_new
+							religion = monothelite
+						}
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_wenches_of_stettin
+					duration = -1
+				}
+			}
+			set_country_flag = denied_the_wenches
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		#they can stay
+		name = vu_wandering_wenches.1b
+		custom_tooltip = vu_wandering_wenches.1b.tt
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = denied_the_wenches
+					}
+					owns = 1858
+				}
+				1858 = {
+					add_building_construction = {
+						building = cinema
+						speed = 0.25
+						cost = 0
+					}
+				}
+			}
+			else = {
+				add_prestige = 10
+				add_legitimacy = -10
+				every_owned_province = {
+					limit = {
+						has_province_modifier = vu_wandering_wenches_of_stettin
+					}
+					add_building_construction = {
+						building = cinema
+						speed = 0.75
+						cost = 0.75
+					}
+				}
+			}
+		}
+		set_country_flag = denied_the_wenches
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = vu_wandering_gamblers.1
+	title = "vu_wandering_gamblers_title"
+	picture = "vu_wandering_gamblers_eventPicture"
+	desc = "vu_wandering_gamblers_desc"
+	mean_time_to_happen = {
+		months = 20
+	}
+	trigger = {
+		any_owned_province = {
+			has_province_modifier = vu_wandering_gamblers
+		}
+	}
+	immediate = {
+	}
+	option = {
+		#Force them to move out!
+		name = vu_wandering_gamblers.1a
+		custom_tooltip = vu_wandering_gamblers.1a.tt
+		add_treasury = -50
+		add_dip_power = -25
+		set_country_flag = deny_the_gamblers
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_gamblers
+				}
+				remove_province_modifier = vu_wandering_gamblers
+			}
+			random_province = {
+				limit = {
+					continent = europe
+					is_capital = yes
+					owner = {
+						NOT = {
+							has_country_flag = deny_the_gamblers
+						}
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_gamblers
+					duration = -1
+				}
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		#Destroy them once for all!
+		name = vu_wandering_gamblers.1b
+		custom_tooltip = vu_wandering_gamblers.1b.tt
+		set_country_flag = deny_the_gamblers
+		add_mil_power = -15
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_gamblers
+				}
+				remove_province_modifier = vu_wandering_gamblers
+				spawn_rebels = {
+					size = 0.75
+					type = noble_rebels
+				}
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = vu_wandering_musicians.1
+	title = "vu_wandering_musicians_title"
+	picture = "vu_wandering_musicians_eventPicture"
+	desc = "vu_wandering_musicians_desc"
+	mean_time_to_happen = {
+		months = 20
+	}
+	trigger = {
+		OR = {
+			AND = {
+				NOT = {
+					has_country_flag = deny_the_musicians
+				}
+				owns = 112
+			}
+			any_owned_province = {
+				has_province_modifier = vu_wandering_musicians
+			}
+		}
+	}
+	immediate = {
+	}
+	option = {
+		#Thank you for your stay!
+		name = vu_wandering_musicians.1a
+		custom_tooltip = vu_wandering_musicians.1a.tt
+		add_treasury = -50
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_musicians
+				}
+				remove_province_modifier = vu_wandering_musicians
+			}
+			random_province = {
+				limit = {
+					continent = europe
+					is_capital = yes
+					owner = {
+						NOT = {
+							has_country_flag = deny_the_musicians
+						}
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_musicians
+					duration = -1
+				}
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		#Go away and never come back again!
+		name = vu_wandering_musicians.1b
+		custom_tooltip = vu_wandering_musicians.1b.tt
+		add_prestige = -1
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_musicians
+				}
+				remove_province_modifier = vu_wandering_musicians
+			}
+			random_province = {
+				limit = {
+					continent = europe
+					is_capital = yes
+					owner = {
+						NOT = {
+							has_country_flag = deny_the_musicians
+						}
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_musicians
+					duration = -1
+				}
+			}
+		}
+		set_country_flag = deny_the_musicians
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		#Force them to stay
+		name = vu_wandering_musicians.1c
+		custom_tooltip = vu_wandering_musicians.1c.tt
+		add_mil_power = -15
+		add_prestige = -15
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_musicians
+				}
+				remove_province_modifier = vu_wandering_musicians
+				add_building_construction = {
+					building = theatrics
+					speed = 0.5
+					cost = 0
+				}
+				spawn_rebels = {
+					size = 0.5
+					type = anti_tax_rebels
+				}
+			}
+		}
+		set_country_flag = deny_the_musicians
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		#Bribe them to stay
+		name = vu_wandering_musicians.1d
+		custom_tooltip = vu_wandering_musicians.1d.tt
+		add_corruption = 1
+		add_dip_power = -15
+		add_years_of_income = -0.5
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_musicians
+				}
+				add_building_construction = {
+					building = theatrics
+					speed = 0.5
+					cost = 1
+				}
+			}
+		}
+		set_country_flag = deny_the_musicians
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = vu_wandering_artists.1
+	title = "vu_wandering_artists_1_title"
+	picture = "vu_wandering_artists_eventPicture"
+	desc = "vu_wandering_artists_1_desc"
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 1000
+			treasury = 1000
+		}
+		modifier = {
+			factor = 0.5
+			is_in_deficit = yes
+		}
+		modifier = {
+			factor = 0.25
+			num_of_loans = 1
+		}
+		modifier = {
+			factor = 0
+			is_bankrupt = yes
+		}
+	}
+	trigger = {
+		OR = {
+			AND = {
+				NOT = {
+					OR = {
+						has_country_flag = deny_the_artists
+						has_country_flag = dont_spawn_the_artists
+					}
+				}
+				owns = 112
+			}
+			any_owned_province = {
+				has_province_modifier = vu_wandering_artists
+			}
+		}
+	}
+	immediate = {
+	}
+	option = {
+		#Let them leave
+		name = vu_wandering_artists.1a
+		custom_tooltip = vu_wandering_artists.1a.tt
+		add_prestige = -15
+		add_splendor = -15
+		add_dip_power = -50
+		add_treasury = -50
+		every_owned_province = {
+			limit = {
+				has_province_modifier = vu_wandering_artists
+			}
+			remove_province_modifier = vu_wandering_artists
+		}
+		hidden_effect = {
+			set_country_flag = dont_spawn_the_artists
+			random_province = {
+				limit = {
+					continent = europe
+					owner = {
+						NOT = {
+							has_country_flag = deny_the_artists
+						}
+						prestige = 1
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_artists
+					duration = -1
+				}
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		#Go away and never come back again!
+		name = vu_wandering_artists.1b
+		custom_tooltip = vu_wandering_artists.1b.tt
+		add_prestige = -1
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_artists
+				}
+				remove_province_modifier = vu_wandering_artists
+			}
+			random_province = {
+				limit = {
+					continent = europe
+					owner = {
+						NOT = {
+							has_country_flag = deny_the_artists
+						}
+						prestige = 1
+					}
+				}
+				add_province_modifier = {
+					name = vu_wandering_artists
+					duration = -1
+				}
+			}
+		}
+		set_country_flag = deny_the_artists
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		#Force them to stay
+		name = vu_wandering_artists.1c
+		custom_tooltip = vu_wandering_artists.1c.tt
+		add_prestige = -20
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_artists
+				}
+				remove_province_modifier = vu_wandering_artists
+				change_trade_goods = marble_sculpture
+				spawn_rebels = {
+					size = 0.5
+					type = anti_tax_rebels
+				}
+			}
+		}
+		set_country_flag = deny_the_artists
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = vu_wandering_artists.2
+	title = "vu_wandering_artists_2_title"
+	picture = "vu_wandering_artists_eventPicture"
+	desc = "vu_wandering_artists_2_desc"
+	trigger = {
+		artist = 1
+		any_owned_province = {
+			has_province_modifier = vu_wandering_artists
+		}
+	}
+	immediate = {
+	}
+	option = {
+		#Fire the advisor
+		name = vu_wandering_artists.2a
+		custom_tooltip = vu_wandering_artists.2a.tt
+		remove_advisor = artist
+	}
+	option = {
+		name = vu_wandering_artists.2b
+		custom_tooltip = vu_wandering_artists.2b.tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = vu_wandering_artists
+				}
+				remove_province_modifier = vu_wandering_artists
+			}
+			hidden_effect = {
+				random_province = {
+					limit = {
+						continent = europe
+						owner = {
+							NOT = {
+								has_country_flag = deny_the_artists
+							}
+						}
+					}
+					add_province_modifier = {
+						name = vu_wandering_artists
+						duration = -1
+					}
+				}
+			}
+		}
+		set_country_flag = deny_the_artists
+	}
+}

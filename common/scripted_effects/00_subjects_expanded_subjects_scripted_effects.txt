@@ -1,0 +1,432 @@
+# Audax Validator "!" Ignore_1006
+transfer_subjects_of_type_to = {
+	set_country_flag = transfer_subjects_of_type_$type$
+	if = {
+		limit = {
+			has_subject_of_type = $type$
+		}
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = $type$
+			}
+			grant_independence = yes
+			$who$ = {
+				create_subject = {
+					subject = PREV
+					subject_type = $type$
+				}
+			}
+		}
+	}
+	clr_country_flag = transfer_subjects_of_type_$type$
+}
+
+count_num_of_subjects_of_type = {
+	set_global_flag = count_num_of_subjects_of_type_$type$
+	REB = {
+		set_variable = { which = num_of_subjects_of_type_$type$ value = 0 }
+		every_country = {
+			limit = {
+				is_subject_of_type = $type$
+			}
+			PREV = {
+				change_variable = { which = num_of_subjects_of_type_$type$ value = 1 }
+			}
+		}
+	}
+	clr_global_flag = count_num_of_subjects_of_type_$type$
+}
+
+display_subjects_of_type = {
+	if = {
+		limit = {
+			REB = {
+				NOT = { check_variable = { which = num_of_subjects_of_type_$type$ value = 10 } }
+			}
+		}
+		custom_tooltip = display_$type$_title_tt
+		custom_tooltip = display_$type$_desc_tt
+	}
+	if = {
+		limit = {
+			REB = {
+				check_variable = { which = num_of_subjects_of_type_$type$ value = 1 }
+			}
+		}
+		every_province = {
+			limit = {
+				is_capital = yes
+				owner = {
+					is_subject_of_type = $type$
+				}
+			}
+			custom_tooltip = DISPLAY_SUBJECTS_OF_TYPE_TT_OWNER_IS_SUBJECT_OF_TYPE
+		}
+		custom_tooltip = " "
+	}
+}
+
+clear_display_variable_for_subjects_of_type = {
+	REB = {
+		set_variable = { which = num_of_subjects_of_type_$type$ value = 0 }
+	}
+}
+
+display_info_for_subject_type = {
+	custom_tooltip = display_$type$_title_tt
+	custom_tooltip = " "
+	if = {
+		limit = {
+			can_be_overlord = $type$
+		}
+		custom_tooltip = display_information_for_subject_tt_conditions_overlord
+	}
+	else = {
+		custom_tooltip = display_information_for_subject_tt_conditions_overlord_impossible
+	}
+	custom_tooltip = display_information_for_$type$_tt_conditions_overlord
+	custom_tooltip = " "
+	if = {
+		limit = {
+			any_known_country = {
+				ROOT = {
+					can_create_subject_type = {
+						subject = PREV
+						subject_type = $type$
+					}
+				}
+				if = {
+					limit = {
+						variable_arithmetic_trigger = {
+							export_to_variable = {
+								which = subject_$type$_selected
+								value = 1
+							}
+							OR = {
+								check_variable = { which = subject_protectorate_selected value = 1 }
+								check_variable = { which = subject_puppet_state_selected value = 1 }
+								check_variable = { which = subject_puppet_pirate_brotherhood_vassal_selected value = 1 }
+								check_variable = { which = subject_puppet_imperial_tributary_state_selected value = 1 }
+								check_variable = { which = subject_puppet_trade_outpost_selected value = 1 }
+							}
+						}
+					}
+					capital_scope = { trade_range = ROOT }
+				}
+				else_if = {
+					limit = {
+						variable_arithmetic_trigger = {
+							export_to_variable = {
+								which = subject_$type$_selected
+								value = 1
+							}
+							check_variable = { which = subject_puppet_stato_da_mar_vassal_selected value = 1 }
+						}
+					}
+					capital_scope = {
+						trade_range = ROOT
+						NOT = {
+							any_trade_node_member_country = {
+								is_subject_of_type_with_overlord = {
+									who = ROOT
+									type = stato_da_mar_vassal
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = display_information_for_subject_tt_conditions_subject
+	}
+	else = {
+		custom_tooltip = display_information_for_subject_tt_conditions_subject_impossible
+	}
+	custom_tooltip = display_information_for_$type$_tt_conditions_subject
+	custom_tooltip = " "
+	custom_tooltip = display_information_for_subject_tt
+	custom_tooltip = display_information_for_$type$_tt
+	custom_tooltip = " "
+	if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				#NOT = { check_variable = { which = subject_salic_personal_union_selected value = 1 } }
+				NOT = { check_variable = { which = subject_nahuatl_vassal_selected value = 1 } }
+				NOT = { check_variable = { which = subject_puppet_state_selected value = 1 } }
+				NOT = { check_variable = { which = subject_voivodeship_selected value = 1 } }
+				NOT = { check_variable = { which = subject_sister_republic_selected value = 1 } }
+				NOT = { check_variable = { which = subject_naval_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_native_reserve_selected value = 1 } }
+				NOT = { check_variable = { which = subject_integrated_tribe_subject_selected value = 1 } }
+				NOT = { check_variable = { which = subject_palatinate_vassal_selected value = 1 } }
+				NOT = { check_variable = { which = subject_defensive_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_annexable_colony_selected value = 1 } }
+				NOT = { check_variable = { which = subject_agricultural_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_religious_march_selected value = 1 } }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS
+		tooltip = {
+			add_country_modifier = {
+				name = $type$_modifier
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				variable_arithmetic_trigger = {
+					export_to_variable = {
+						which = subject_$type$_selected
+						value = 1
+					}
+					check_variable = { which = subject_banking_family_subject_selected value = 1 }
+				}
+			}
+			custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_PER_OWNED_PROVINCE
+			tooltip = {
+				add_country_modifier = {
+					name = banking_family_subject_size_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				OR = {
+					check_variable = { which = subject_puppet_state_selected value = 1 }
+					check_variable = { which = subject_voivodeship_selected value = 1 }
+				}
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_SMALL
+		tooltip = {
+			add_country_modifier = {
+				name = $type$_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				OR = {
+					check_variable = { which = subject_sister_republic_selected value = 1 }
+					check_variable = { which = subject_naval_march_selected value = 1 }
+					check_variable = { which = subject_defensive_march_selected value = 1 }
+					check_variable = { which = subject_agricultural_march_selected value = 1 }
+					check_variable = { which = subject_religious_march_selected value = 1 }
+				}
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_SMALL
+		tooltip = {
+			add_country_modifier = {
+				name = $type$_low_dev_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_native_reserve_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_TRIBAL
+		tooltip = {
+			add_country_modifier = {
+				name = native_reserve_uncivilized_modifier
+				duration = -1
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_NOT_TRIBAL
+		tooltip = {
+			add_country_modifier = {
+				name = native_reserve_civilized_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_integrated_tribe_subject_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_SAME_CULTURE
+		tooltip = {
+			add_country_modifier = {
+				name = integrated_tribe_subject_same_culture_modifier
+				duration = -1
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_NOT_SAME_CULTURE
+		tooltip = {
+			add_country_modifier = {
+				name = integrated_tribe_subject_different_culture_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_palatinate_vassal_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_OVERLORD_EMPEROR
+		tooltip = {
+			add_country_modifier = {
+				name = palatinate_vassal_emperor_modifier
+				duration = -1
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_SUBJECT_GETS_IF_OVERLORD_NOT_EMPEROR_AND_HRE_REFORM_PASSED
+		tooltip = {
+			add_country_modifier = {
+				name = palatinate_vassal_non_emperor_modifier
+				duration = -1
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				NOT = { check_variable = { which = subject_protectorate_selected value = 1 } }
+				NOT = { check_variable = { which = subject_naval_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_integrated_personal_union_selected value = 1 } }
+				NOT = { check_variable = { which = subject_voivodeship_selected value = 1 } }
+				NOT = { check_variable = { which = subject_native_reserve_selected value = 1 } }
+				NOT = { check_variable = { which = subject_nahuatl_vassal_selected value = 1 } }
+				#NOT = { check_variable = { which = subject_salic_personal_union_selected value = 1 } }
+				NOT = { check_variable = { which = subject_integrated_tribe_subject_selected value = 1 } }
+				NOT = { check_variable = { which = subject_imperial_feud_subject_selected value = 1 } }
+				NOT = { check_variable = { which = subject_palatinate_vassal_selected value = 1 } }
+				NOT = { check_variable = { which = subject_defensive_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_annexable_colony_selected value = 1 } }
+				NOT = { check_variable = { which = subject_agricultural_march_selected value = 1 } }
+				NOT = { check_variable = { which = subject_religious_march_selected value = 1 } }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS
+		tooltip = {
+			add_country_modifier = {
+				name = $type$_overlord_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_native_reserve_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS_IF_TRIBAL
+		tooltip = {
+			add_country_modifier = {
+				name = native_reserve_uncivilized_overlord_modifier
+				duration = -1
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS_IF_NOT_TRIBAL
+		tooltip = {
+			add_country_modifier = {
+				name = native_reserve_civilized_overlord_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				OR = {
+					check_variable = { which = subject_nahuatl_vassal_selected value = 1 }
+					check_variable = { which = subject_imperial_feud_subject_selected value = 1 }
+				}
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS_IF_SUBJECT_IS_LOYAL
+		tooltip = {
+			add_country_modifier = {
+				name = $type$_overlord_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_palatinate_vassal_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS_IF_EMPEROR
+		tooltip = {
+			add_country_modifier = {
+				name = palatinate_vassal_emperor_overlord_modifier
+				duration = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			variable_arithmetic_trigger = {
+				export_to_variable = {
+					which = subject_$type$_selected
+					value = 1
+				}
+				check_variable = { which = subject_defensive_march_selected value = 1 }
+			}
+		}
+		custom_tooltip = DISPLAY_INFORMATION_SE_OVERLORD_GETS_IF_SUBJECT_IS_SMALL_AND_NOT_IN_OFF_WAR
+		tooltip = {
+			add_country_modifier = {
+				name = defensive_march_low_dev_overlord_modifier
+				duration = -1
+			}
+		}
+	}
+}

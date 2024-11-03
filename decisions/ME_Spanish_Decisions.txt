@@ -1,0 +1,71 @@
+#country_decisions = {
+#	SPA_build_el_escorial = {
+#		major = yes
+#		potential = {
+#			tag = SPA
+#			government = monarchy
+#			NOT = { current_age = age_of_discovery }
+#			owns_core_province = 8505
+#			217 = {
+#				NOT = { has_construction = building }
+#			}
+#			NOT = {
+#				any_province = {
+#					has_great_project = {
+#						type = el_escorial
+#					}
+#				}
+#			}
+#		}
+#		allow = {
+#			is_year = 1560
+#			government = monarchy
+#			if = {
+#				limit = {
+#					has_dlc = "Common Sense"
+#				}
+#				government_rank = 8
+#			}
+#			else = {
+#				total_development = 300
+#			}
+#			treasury = 10000
+#			capital = 8505
+#			8505 = {
+#				NOT = { has_construction = missionary }
+#				NOT = { has_construction = culture }
+#				NOT = { has_construction = core }
+#				NOT = { has_construction = building }
+#				variable_arithmetic_trigger = {
+#					custom_tooltip = HAS_NOT_USED_ALL_12_BUILDING_SLOTS
+#					export_to_variable = {
+#						which = num_of_used_building_slots
+#						value = 1 #was modifier:allowed_num_of_buildings but changed by San Felipe to 1
+#					}
+#					OR = {
+#						NOT = { check_variable = { which = num_of_used_building_slots value = 12 } }
+#						num_free_building_slots = 1
+#					}
+#				}
+#			}
+#		}
+#		effect = {
+#			8505 = {
+#				custom_tooltip = START_CONSTRUCTION_OF_EL_ESCORIAL
+#				hidden_effect = {
+#					add_great_project = {
+#						type = el_escorial
+#					}
+#				}
+#			}
+#			custom_tooltip = EFFECTS_OF_EL_ESCORIAL
+#		}
+#		ai_will_do = {
+#			factor = 1
+#			modifier = {
+#				factor = 0
+#				NOT = { treasury = 15000 }
+#			}
+#		}
+#	}
+#}

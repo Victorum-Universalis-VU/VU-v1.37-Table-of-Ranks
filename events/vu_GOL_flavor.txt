@@ -1,0 +1,430 @@
+# New disaster events for Great Horde
+# Initially added by docRobert
+
+# ====================================
+namespace = vu_GOL
+
+country_event = { # Muscovy stops paying tribute to Sarai
+	id = vu_GOL.1
+	title = vu_GOL.1.t
+	desc = vu_GOL.1.d
+	picture = LAND_MILITARY_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	goto = 6975
+	
+	trigger = {
+		tag = GOL
+		is_year = 1469
+		exists = MOS
+		NOT = {
+			MOS = {
+				has_opinion = {
+					who = ROOT
+					value = 25
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	immediate = {
+		add_casus_belli = {
+			target = MOS
+			type = cb_force_tributary
+			months = 12
+		}
+	}
+	
+	option = { # We will put them back under yoke
+		name = vu_GOL.1.a
+		highlight = yes
+		ai_chance = { factor = 100 } #AI will always launch punitive raid, to accelerate the downfall and chance of further events
+		declare_war_with_cb = {
+			who = MOS
+			casus_belli = cb_force_tributary
+		}
+		set_country_flag = moscov_no_tribute
+	}
+	
+	option = { # We aren't ready for another invasion
+		name = vu_GOL.1.b
+		ai_chance = { factor = 0 }
+		add_prestige = -20
+		add_horde_unity = -25
+		add_mil_power = -20
+		set_country_flag = moscov_no_tribute
+	}
+}
+
+country_event = { # Grand stand on the Ugra river - Horde crumbles
+	id = vu_GOL.2
+	title = vu_GOL.2.t
+	desc = vu_GOL.2.d
+	picture = LAND_MILITARY_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = GOL
+		exists = MOS
+		has_country_flag = moscov_no_tribute
+		war_with = MOS
+		NOT = {
+			war_score_against = {
+				who = MOS
+				value = -20
+			}
+		}
+	}
+	
+	option = { # Muscovy is superior
+		name = vu_GOL.2.a
+		add_stability = -2
+		add_prestige = -25
+		add_horde_unity = -50
+		add_mil_power = -50
+		add_war_exhaustion = 10
+		add_country_modifier = {
+			name = great_horde_humiliated
+			duration = 7300	#20 years should be enough
+			hidden = yes
+		}
+		clr_country_flag = moscov_no_tribute
+		set_country_flag = decline_of_great_horde
+	}
+}
+
+country_event = { # Falling horde is easy target
+	id = vu_GOL.3
+	title = vu_GOL.3.t
+	desc = vu_GOL.3.d
+	picture = BORDER_TENSION_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = GOL
+		exists = MOS
+		exists = CRI
+		has_country_flag = decline_of_great_horde
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = { # Enemies everywhere
+		name = vu_GOL.3.a
+		add_stability = -1
+		add_horde_unity = -20
+		CRI = {
+			add_casus_belli = {
+				target = GOL
+				type = cb_vassalize_mission
+				months = 120
+			}
+		}
+		MOS = {
+			add_casus_belli = {
+				target = GOL
+				type = cb_annex
+				months = 120
+			}
+		}
+		if = {
+			limit = { exists = RYA }
+			RYA = {
+				add_casus_belli = {
+					target = GOL
+					type = cb_annex
+					months = 120
+				}
+			}
+		}
+		clr_country_flag = decline_of_great_horde
+		set_country_flag = horde_will_soon_fall
+	}
+}
+
+country_event = { # Dismantle Great Horde
+	id = vu_GOL.4
+	title = vu_GOL.4.t
+	desc = vu_GOL.4.d
+	picture = COMET_SIGHTED_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	goto = 466
+	
+	trigger = {
+		OR = {
+			tag = CRI
+			tag = MOS
+			tag = RUS
+			tag = TZR
+		}
+		exists = GOL
+		exists = CRI
+		GOL = { ai = yes }
+		OR = {
+			exists = MOS
+			exists = RUS
+			exists = TZR
+		}
+		GOL = {
+			has_country_flag = horde_will_soon_fall
+		}
+		war_score_against = {
+			who = GOL
+			value = 70
+		}
+	}
+	
+	option = { # Horde is over
+		name = vu_GOL.4.a
+		white_peace = GOL
+		add_prestige = 20
+		add_treasury = 400
+		add_splendor = 100
+		if = {
+			limit = {
+				exists = GAZ
+				2208 = { owned_by = GOL }
+			}
+			2208 = {
+				cede_province = GAZ
+			}
+		}
+		if = {
+			limit = {
+				exists = DRZ
+				3330 = { owned_by = GOL }
+			}
+			3330 = {
+				cede_province = DRZ
+			}
+		}
+		if = {
+			limit = {
+				2416 = { owned_by = GOL }
+			}
+			2416 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				468 = { owned_by = GOL }
+			}
+			468 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3263 = { owned_by = GOL }
+			}
+			3263 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3340 = { owned_by = GOL }
+			}
+			3340 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3333 = { owned_by = GOL }
+			}
+			3333 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3341 = { owned_by = GOL }
+			}
+			3341 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3339 = { owned_by = GOL }
+			}
+			3339 = {
+				cede_province = CIR
+			}
+		}
+		if = {
+			limit = {
+				5553 = { owned_by = GOL }
+			}
+			5553 = {
+				cede_province = CIR
+			}
+		}
+		if = {
+			limit = {
+				3332 = { owned_by = GOL }
+			}
+			3332 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3264 = { owned_by = GOL }
+			}
+			3264 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				1971 = { owned_by = GOL }
+			}
+			1971 = {
+				cede_province = AST
+			}
+		}
+		GOL = {
+			release = AST
+			clr_country_flag = horde_will_soon_fall
+		}
+		AST = {
+			change_religion = sunni
+			adopt_reform_progress = ROOT
+			change_government = tribal
+			set_government_rank = 6
+		}
+		if = {
+			limit = {
+				288 = { owned_by = GOL }
+			}
+			288 = {
+				cede_province = CRI
+			}
+		}
+		if = {
+			limit = {
+				2409 = { owned_by = GOL }
+			}
+			2409 = {
+				cede_province = CRI
+			}
+		}
+		if = {
+			limit = {
+				7205 = { owned_by = GOL }
+			}
+			7205 = {
+				cede_province = CRI
+			}
+		}
+		if = {
+			limit = {
+				1971 = { owned_by = GOL }
+			}
+			1971 = {
+				cede_province = CRI
+			}
+		}
+		if = {
+			limit = {
+				3266 = { owned_by = GOL }
+			}
+			3266 = {
+				cede_province = CRI
+			}
+		}
+		if = {
+			limit = {
+				3265 = { owned_by = GOL }
+			}
+			3265 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				2415 = { owned_by = GOL }
+			}
+			2415 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				3331 = { owned_by = GOL }
+			}
+			3331 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				303 = { owned_by = GOL }
+			}
+			303 = {
+				cede_province = AST
+			}
+		}
+		if = {
+			limit = {
+				exists = RYA
+				2408 = { owned_by = GOL }
+			}
+			2408 = {
+				cede_province = RYA
+			}
+		}
+		if = {
+			limit = {
+				exists = MOS
+			}
+			MOS = {
+				inherit = GOL
+			}
+		}
+		if = {
+			limit = {
+				exists = RUS
+			}
+			RUS = {
+				inherit = GOL
+			}
+		}
+		if = {
+			limit = {
+				exists = TZR
+			}
+			TZR = {
+				inherit = GOL
+			}
+		}
+		466 = {
+			add_base_tax = -3
+			add_base_production = -4
+			add_base_manpower = -2
+			add_devastation = 50
+		}
+	}
+}

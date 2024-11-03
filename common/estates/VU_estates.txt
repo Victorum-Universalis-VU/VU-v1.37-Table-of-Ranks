@@ -1,0 +1,1133 @@
+#VU_jews
+estate_jews = {
+	icon = 18	
+
+	# If true, country will get estate
+	trigger = {
+		OR = {
+			AND = {
+			    NOT = { religion = jewish }
+			    any_owned_province = { has_province_modifier = jewish_population }
+			}
+			AND = {
+			    NOT = { religion = jewish }
+			    capital_scope = {
+			    	OR = {
+			    		continent = europe
+			    		region = mesopotamia_region 
+			    		region = libya_region 
+			    		region = maghreb_region
+			    		region = anatolia_region
+			    		region = egypt_region
+			    		region = persia_region
+			    		region = mashriq_region
+			    		region = arabia_region
+			    	}
+			    }
+			}
+		}
+	}
+
+	country_modifier_happy = {
+		global_unrest = 1
+		papal_influence = -0.5
+		interest = -1
+		production_efficiency = 0.1
+		inflation_reduction = 0.2
+		tolerance_heathen = 2
+	}
+	country_modifier_neutral = {
+		interest = 1
+	}
+	country_modifier_angry = {
+		global_unrest = 1
+		global_tax_modifier = 0.2
+		papal_influence = 0.5
+		tolerance_heathen = -1
+	}
+	land_ownership_modifier = {
+		estate_jews_loyalty_modifier = 0.2
+		global_tax_modifier = 0.1
+		inflation_reduction = 0.1
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			base_manpower = 5
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { is_state_core = owner }
+		}
+	}
+
+	# Influence modifiers
+	base_influence = 10
+	influence_modifier = {
+		desc = EST_VAL_JEWISH_MINORITIES
+		trigger = {
+			any_province = { has_province_modifier = jewish_population }
+		}	
+		influence = 10
+	}
+	color = { 0 255 255 }
+
+	privileges = {
+		estate_jews_foster_jews 
+		estate_jews_jewish_quarters
+		estate_jews_foster_jews_banking 
+		estate_jews_foster_jews_homes 
+		estate_jews_land_privileges 
+		estate_jews_jewish_independence
+		estate_jews_suck_privileges 
+		estate_jews_suck_2 
+	}
+
+	agendas = {
+		estate_jews_build_temple_in_y 
+		estate_jews_build_trade_building_in_y 
+		estate_jews_build_production_building_in_y 
+		estate_jews_build_manufactory_in_y 
+		estate_jews_build_university_in_y 
+		estate_jews_develop_x 
+		estate_jews_increase_privileges 
+	}
+	
+	influence_from_dev_modifier = 1.0
+}
+
+trade_outpost_release_estate = {
+	icon = 4
+
+	color = { 200 150 150 }
+
+	# Used for when declaring independence
+	independence_government = republic
+	starting_reform = merchants_reform
+	independence_tech_group = western
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = { has_province_flag = release_trade_outpost_here_@ROOT }
+		}
+	}
+
+	# If true, country will get estate
+	trigger = {
+		has_country_flag = is_releasing_trade_outpost
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+	}
+	country_modifier_neutral = {
+	}
+	country_modifier_angry = {
+	}
+
+	land_ownership_modifier = {
+	}
+
+	# Influence modifiers
+	base_influence = 0
+
+	agendas = {
+	}
+
+	privileges = {
+	}
+}
+
+#GE_08_peasants
+estate_peasants = {
+	icon = 17
+
+	trigger = {
+		OR = {
+			has_reform = parliamentary_order_reform
+			has_government_attribute = enables_peasant_estate
+			has_reform = peasants_republic
+			has_country_flag = estate_peasants_enabled
+		}
+	}
+
+	country_modifier_happy = {
+		state_maintenance_modifier = -0.20
+		rural_goods_produced_modifier = 0.40
+	}
+	country_modifier_neutral = {
+		rural_goods_produced_modifier = 0.20
+	}	
+	country_modifier_angry = {
+		state_maintenance_modifier = 0.20
+		rural_goods_produced_modifier = -0.10
+		global_unrest = 2
+	}
+	land_ownership_modifier = {
+		peasants_loyalty_modifier = 0.2
+
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			culture_group = owner
+			religion_group = owner
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 5
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { is_state_core = owner }
+		}
+	}
+	custom_name = {
+		desc = estate_razesi
+		trigger = {
+			culture_group = dacian
+		}
+	}
+	# Influence modifiers
+	base_influence = 10
+	
+	
+	# Influence modifiers from Events:
+	
+	# Loyalty modifiers
+	
+	
+	#Alternative naming of estates
+
+	# Does the AI want to give any extra territory beyond the minimum?
+
+	# For province assignment
+
+	color = { 128 128 128 }
+	
+	privileges = {
+		estate_peasants_land_rights
+		estate_peasants_guild_assembly
+		estate_peasants_manpower_drive
+		estate_peasants_voting_rights
+		estate_peasants_conscription
+		estate_peasants_fight_the_elite
+		estate_peasants_bear_arms
+		estate_peasants_land_privileges
+		estate_peasant_expand_hajduk 
+	}
+
+	agendas = {
+		estate_peasants_develop_grain
+		estate_peasants_herd_cattle
+		estate_peasants_build_wood_workshop
+		estate_peasants_harvest_time
+		estate_peasants_increase_privileges
+		estate_peasants_expand_lebensraum
+		estate_peasants_inspire_peasants
+	}
+	
+	influence_from_dev_modifier = 1.0
+}
+
+#GE_09_junkers
+estate_junkers = {
+	icon = 16
+
+	# If true, country will get estate
+	trigger = {
+		has_government_attribute = enables_junker_estate
+	}
+
+	country_modifier_happy = {
+		army_tradition_decay = -0.005
+		manpower_recovery_speed = 0.20
+		land_maintenance_modifier = -0.1
+	}
+	country_modifier_neutral = {
+		army_tradition_decay = -0.005
+		manpower_recovery_speed = 0.20 
+	}	
+	country_modifier_angry = {
+		army_tradition_decay = 0.005
+		global_unrest = 2
+	}
+	land_ownership_modifier = {
+		nobles_loyalty_modifier = 0.20
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 1.5
+			culture_group = owner
+			religion_group = owner
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 5
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { is_state_core = owner }
+		}
+	}
+
+	# Influence modifiers
+	base_influence = 10
+	influence_modifier = {
+		desc = EST_VAL_EASTERN_TECH
+		trigger = {
+			OR = {
+				technology_group = eastern
+			    technology_group = bohemian_tech_group
+			    technology_group = byzantine_tech_group
+			    technology_group = hungarian_tech_group
+			    technology_group = polish_tech_group
+			    technology_group = russian_tech_group
+				technology_group = bulgarian_tech_group
+			}
+		}	
+		influence = 5
+	}
+	
+	# Influence modifiers from Events:
+
+	color = { 144 0 32 }
+	
+	privileges = {
+		estate_nobles_land_rights
+		estate_nobles_nobility_primacy
+		estate_nobles_officer_corp
+		estate_nobles_levies
+		estate_nobles_advisors
+		estate_nobles_right_of_counsel
+		estate_nobles_french_strong_duchies
+		estate_nobles_supremacy_over_crown
+		estate_nobles_junker_primacy
+		estate_nobles_strong_duchies
+		estate_nobles_golden_liberty
+		estate_nobles_veto_heir_apparent
+		estate_nobles_nieszawa_privileges
+		estate_nobles_pacta_conventa
+		estate_nobles_monopoly_of_metals
+		estate_nobles_monopoly_of_livestock
+		estate_nobles_monopoly_of_gems
+		estate_nobles_statutory_rights
+		estate_noble_hajduk
+		estate_nobles_command_of_the_military
+		estate_nobles_better_integration
+		estate_nobles_cawa_peace_keepers
+		estate_nobles_cawa_offensive_fighters
+		estate_nobles_neighbor_raids
+		estate_nobles_decentralized_tribe
+		estate_nobles_tribe_unification
+		estate_nobles_tribe_centralization
+		estate_nobles_grant_power_to_the_bashorun
+		estate_nobles_danish_nobility
+		estate_nobles_nobles_instead_of_royal_court
+		estate_nobles_leidang_conscription
+		estate_nobles_carolean_march
+		estate_nobles_carolean_charge
+		estate_nobles_religious_conscription
+		estate_nobles_leidang_mass_conscription
+		estate_nobles_leidang_elite_conscription
+		estate_nobles_sponsor_hussars
+		estate_nobles_mansabdari_cav_maintenance
+		estate_nobles_mansabdari_military_service
+		estate_nobles_mansabdari_royal_rule
+		estate_nobles_mestnichestvo
+		estate_nobles_early_serfdom
+		estate_nobles_legalized_serfdom
+		estate_nobles_total_serfdom
+		estate_nobles_restricted_serfdom
+		estate_nobles_devastating_serfdom
+		estate_nobles_increased_peasant_freedom
+		estate_nobles_peasant_liberation
+		estate_nobles_rynda
+		estate_nobles_landed_army
+		estate_nobles_factionalist_nobility
+		estate_nobles_consolidated_noble_contracts
+		estate_nobles_english_villeinage
+		estate_nobles_english_copyhold_tenure
+		estate_nobles_development_of_castles
+		estate_nobles_statesman_servitude
+		estate_nobles_royal_court_tasks
+		estate_nobles_diet_right
+		estate_nobles_force_conscription
+		estate_nobles_noble_officer_right
+		estate_nobles_expedition_rights
+		estate_nobles_highland_fortifications
+		estate_nobles_emirs_of_baghdad
+		estate_nobles_deteriorating_army
+		estate_nobles_defensive_policy
+		estate_nobles_tofangchi_regiment
+		estate_nobles_tupchi_artillery_corps
+		estate_nobles_qurchi_service
+		estate_nobles_mamlukian_administration
+		estate_nobles_enlist_the_mamluks
+		estate_nobles_order_of_dragon 
+		#VU-specific privileges
+		estate_nobles_very_strong_duchies
+		estate_nobles_extremely_strong_duchies
+		estate_nobles_british_strong_marches
+		#End of VU-specific privileges
+		#GE
+		estate_nobles_diplomatic_privilege
+		estate_nobles_magnate_law_privilege
+		estate_nobles_timariot_privilege
+		estate_nobles_noble_officer_privilege
+		estate_nobles_grand_captain_privilege
+		estate_nobles_call_cortez
+		estate_nobles_call_privy_council
+		estate_nobles_white_knights
+		estate_noble_land_privileges
+		estate_nobles_kreditwerk_appointment
+		estate_nobles_blood_tax
+		estate_nobles_establish_serfdom
+		estate_nobles_berber_guides
+		estate_nobles_elite_guards
+		#ME
+		estate_nobles_anatolian_theme
+		#HRE
+		estate_nobles_imperial_court
+		estate_nobles_imperial_marshall
+		#PE
+		estate_noble_baron_pensions
+		estate_noble_baron_courts
+		estate_noble_baron_courtier
+		estate_noble_baron_squires
+		estate_noble_baron_titles
+		estate_noble_absolute_taxation
+		#ME Privileges:
+		estate_nobles_recruit_grenzens
+		estate_nobles_conscription_law
+		ME_estate_nobles_theme_system
+	}
+
+	agendas = {
+		estate_nobles_develop_x
+		estate_nobles_build_army_building_in_y
+		estate_nobles_build_fort_building_in_y
+		estate_nobles_build_university_in_y
+		estate_nobles_build_manufactory_in_y
+		estate_nobles_get_allies
+		estate_nobles_befriend_rival_of_rival
+		estate_nobles_restore_legitimacy
+		estate_nobles_relations_with_X
+		estate_nobles_break_coalition
+		estate_nobles_condottieri_rivals
+		estate_nobles_support_independence
+		estate_nobles_retake_core
+		estate_nobles_crush_revolts
+		estate_nobles_regain_liberty
+		estate_nobles_convert_province_culture
+		estate_nobles_protect_our_culture
+		estate_nobles_expand_into_x
+		estate_nobles_complete_conquest_of_x
+		estate_nobles_annex_subject
+		estate_nobles_build_an_army
+		estate_nobles_bigger_army_than_rival
+		estate_nobles_build_up_manpower_reserves
+		estate_nobles_recover_abysmal_prestige
+		estate_nobles_improve_prestige
+		estate_nobles_hire_advisor
+		estate_nobles_fire_advisor
+	}
+	
+	influence_from_dev_modifier = 1.0
+}
+
+#estate_turkic_tribes
+estate_turkic_tribes = {
+	icon = 5 
+	
+	color = { 79 162 43 }
+
+	trigger = {
+		OR = {
+			tag = QAR
+			tag = AKK 
+			tag = TRK
+			tag = BAG
+			tag = QIZ
+			primary_culture = azerbaijani
+			primary_culture = turkish
+		}
+		OR = {
+			ME_tribal_federation_trigger = yes
+			num_of_estate_privileges = {
+				estate = estate_turkic_tribes
+				value = 1
+			}
+		}
+	}
+
+	country_modifier_happy = {
+		yearly_government_power = 0.5
+		reform_progress_growth = 0.2 
+	}
+	country_modifier_neutral = {
+		reform_progress_growth = 0.1 
+	}
+	country_modifier_angry = {
+		reform_progress_growth = -0.2 
+	}
+	land_ownership_modifier = {
+	}
+
+	province_independence_weight = {
+		factor = 1
+	}
+	
+	# influence_modifier = {
+		# desc = MOR_base
+		# trigger = {
+			# always = yes
+		# }	
+		# influence = 10
+	# }
+	# loyalty_modifier = {
+		# desc = MOR_base
+		# trigger = {
+			# always = yes
+		# }	
+		# loyalty = 10
+	# }
+	
+	influence_from_dev_modifier = 0.25
+	
+	base_influence = 30
+	
+	privileges = {
+		estate_turkic_tribes_guarantee_tribal_autonomy
+		estate_turkic_tribes_land_grants
+		estate_turkic_tribes_recruit_tribes
+		estate_turkic_tribes_integrate_new_tribes
+		estate_turkic_tribes_demand_new_oaths
+		estate_turkic_tribes_tribal_cavalry
+		estate_turkic_tribes_settle_the_tribes
+		estate_turkic_tribes_promote_shia
+		estate_turkic_tribes_recruit_generals
+		estate_turkic_tribes_primacy_of_the_tribes
+		estate_turkic_tribes_QIR_tribal_herding_rights
+		estate_turkic_tribes_QIR_sedentary_tribes
+		estate_turkic_tribes_QIR_exploit_tribal_connections
+		estate_turkic_tribes_QIR_tribal_contribution
+		estate_turkic_tribes_QIR_maintain_tribal_unity
+	}
+
+	agendas = {
+		estate_turkic_tribes_increase_tribal_allegiance
+		estate_turkic_tribes_hire_root_culture_advisor
+		estate_turkic_tribes_develop
+		estate_turkic_tribes_build_manpower_building
+		estate_turkic_tribes_expand_tribal_land
+		estate_turkic_tribes_build_tax_building
+	}
+}
+
+#estate_maya
+estate_maya = {
+	icon = 11
+
+	color = { 79 162 43 }
+
+	# If true, country will get estate
+	trigger = {
+		has_country_flag = estate_maya_enabled
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		adm_tech_cost_modifier = -0.1
+		core_creation = -0.15
+		embracement_cost = -0.15
+	}
+	country_modifier_neutral = {
+		core_creation = -0.1
+		embracement_cost = -0.1
+	}
+	country_modifier_angry = {
+		adm_tech_cost_modifier = 0.05
+		core_creation = 0.1
+		embracement_cost = 0.1
+	}
+
+	land_ownership_modifier = {
+		global_institution_spread = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+	}
+
+	# Influence modifiers
+	base_influence = 20
+	influence_modifier = {
+		desc = EST_VAL_OVER_95_INFLUENCE
+		trigger = {
+			estate_influence = {
+				estate = estate_maya
+				influence = 95
+			}
+		}
+		influence = 5
+	}
+	
+	influence_modifier = {
+		desc = EST_VAL_AHEAD_IN_ANY_TECH
+		trigger = {
+			all_country = {
+				OR = {
+					NOT = { adm_tech = ROOT }
+					NOT = { dip_tech = ROOT }
+					NOT = { mil_tech = ROOT }
+				}
+			}
+			any_country = {
+				OR = {
+					adm_tech = ROOT
+					dip_tech = ROOT
+					mil_tech = ROOT
+				}
+			}
+		}
+		influence = 5
+	}
+	influence_modifier = {
+		desc = EST_VAL_AHEAD_IN_ALL_TECH
+		trigger = {
+			all_country = {
+				NOT = { adm_tech = ROOT }
+				NOT = { dip_tech = ROOT }
+				NOT = { mil_tech = ROOT }
+			}
+		}
+		influence = 10
+	}
+	influence_modifier = {
+		desc = EST_VAL_LOW_LEGITIMACY_EQUIVALENT
+		trigger = {
+			NOT = { legitimacy_equivalent = 50 }
+		}
+		influence = 10
+	}
+
+	# Loyalty modifiers
+	loyalty_modifier = {
+		desc = EST_VAL_MAYA_ESTATE_IN_10_MESOAMERICAN_RELIGION_PROVS
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_estate = estate_maya
+				religion = mesoamerican_religion
+			}
+		}
+		loyalty = 5
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_COMPETED_INNOVATIVENESS_IDEAS
+		trigger = {
+			full_idea_group = innovativeness_ideas
+		}
+		loyalty = 5
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_COMPETED_ADMINISTRATIVE_IDEAS
+		trigger = {
+			full_idea_group = administrative_ideas
+		}
+		loyalty = 5
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_OWN_INSTITUTION_ORIGIN
+		trigger = {
+			num_of_owned_and_controlled_institutions = 1
+		}
+		loyalty = 10
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_MAYA_ESTATE_HAS_HIGH_INFLUENCE
+		trigger = {
+			has_country_modifier = estate_maya_high_influence
+		}
+		loyalty = -99
+	}
+
+	influence_from_dev_modifier = 0.5
+
+	privileges = {
+		estate_maya_honor_kuhun
+		estate_maya_recruit_sage
+		estate_maya_create_great_stella
+		estate_maya_support_mayan_schools
+		estate_maya_edit_the_chronicles
+		estate_maya_teach_heir_privilege
+		estate_maya_reduce_influence_of_scribes
+	}
+
+	agendas = {
+		estate_maya_build_university
+		estate_maya_develop_province
+		estate_maya_teach_ruler
+		estate_maya_advisor_employed
+	}
+}
+
+#estate_industrial
+estate_industrial = {
+	icon = 3
+
+	color = { 79 162 43 }
+
+	# If true, country will get estate
+	trigger = {
+		has_country_flag = estate_industrial_enabled
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		global_trade_goods_size_modifier = 0.1
+	}
+	country_modifier_neutral = {
+		global_trade_goods_size_modifier = 0.05
+	}
+	country_modifier_angry = {
+		global_trade_goods_size_modifier = -0.1
+	}
+
+	land_ownership_modifier = {
+		global_trade_goods_size = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+	}
+	influence_from_dev_modifier = 0.5
+	
+	base_influence = 30
+	
+	privileges = {
+		estate_industrial_establish_industrial_parks
+		estate_industrial_more_worker_rights
+		estate_industrial_private_armies
+		estate_industrial_give_governmental_loans
+		estate_industrial_industrial_bureaucracy
+		estate_industrial_centralized_industry
+		estate_industrial_decentralized_industry
+		estate_industrial_land_appropriation
+		estate_industrial_facilitate_industrial_growth
+	}
+
+	agendas = {
+		estate_industrial_conquer_good
+		estate_industrial_workshop
+		estate_industrial_manufactory
+		estate_industrial_production_dev
+		estate_industrial_blast_furnaces
+	}
+}
+
+#estate_cultural_minorities
+me_estate_cultural_minorities = {
+	icon = 3
+
+	color = { 79 162 43 }
+
+	# If true, country will get estate
+	trigger = {
+		has_country_flag = me_hab_allow_minorities_estate
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		promote_culture_cost = -0.25
+		reform_progress_growth = 0.2
+	}
+	country_modifier_neutral = {
+		promote_culture_cost = -0.1
+	}
+	country_modifier_angry = {
+		global_unrest = 2
+		global_manpower_modifier = -0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+	}
+
+	land_ownership_modifier = {
+		global_manpower_modifier = -0.2
+	}
+	
+	influence_from_dev_modifier = 0.5
+	
+	base_influence = 30
+	
+	privileges = {
+		estate_cultural_minorities_land_rights
+		estate_cultural_minorities_foreign_advisors
+		estate_cultural_minorities_foreign_generals
+		estate_cultural_minorities_foreign_invest_in_minority_land
+		estate_cultural_minorities_elevate_cultural_status
+		estate_cultural_minorities_conscription_law
+		estate_cultural_minorities_recruit_grenzens
+	}
+
+	agendas = {
+		estate_cultural_minorities_increase_autonomy
+		estate_cultural_minorities_fire_advisor
+		estate_cultural_minorities_develop_x
+		estate_cultural_minorities_build_courthouse_in_y
+	}
+}
+
+#estate_berbers
+estate_berbers = {
+	icon = 5 
+	
+	color = { 79 162 43 }
+
+	trigger = {
+		OR = {
+			tag = GRA
+			tag = ADU
+			AND = {
+				culture_group = berber_group
+				any_owned_province = { 
+					culture_group = berber_group
+				}
+			}
+			num_of_estate_privileges = {
+				estate = estate_berbers
+				value = 1
+			}
+			has_country_flag = AYY_may_use_berbers_estate
+		}
+		
+	}
+
+	country_modifier_happy = {
+		land_attrition = -0.1
+		cavalry_cost = -0.2
+	}
+	country_modifier_neutral = {
+		cavalry_cost = -0.2
+	}
+	country_modifier_angry = {
+		cavalry_cost = 0.2
+	}
+	
+	influence_modifier = {
+		desc = MOR_berber_dynasty
+		trigger = {
+			OR = {
+				dynasty = "Hafsid"
+				dynasty = "Wattasid"
+				dynasty = "Marinid"
+				dynasty = "Zayyanid"
+			}
+		}	
+		influence = 10
+	}
+
+	province_independence_weight = {
+		factor = 1
+	}
+
+	land_ownership_modifier = {
+		global_supply_limit_modifier = 1
+	}
+
+	influence_modifier = {
+		desc = MOR_berber_is_primary
+		trigger = {
+			culture_group = berber_group
+		}	
+		influence = 5
+	}
+	#dominant culture
+	loyalty_modifier = {
+		desc = MOR_berber_is_accepted
+		trigger = {
+			OR = {
+				culture_group = berber_group
+				accepted_culture = tuareg
+				accepted_culture = shilha
+				accepted_culture = zayane
+				accepted_culture = riffian
+				accepted_culture = ait_atta
+				accepted_culture = guanche
+				accepted_culture = kabylian
+				accepted_culture = shawiya
+				accepted_culture = shenwa
+				accepted_culture = mozabite
+				accepted_culture = lamtuna
+				accepted_culture = libyan_berber_culture
+				accepted_culture = siwa_culture
+			}
+		}	
+		loyalty = 5
+	}
+	
+	loyalty_modifier = {
+		desc = MOR_base
+		trigger = {
+			always = yes
+		}	
+		loyalty = 10
+	}
+	
+	loyalty_modifier = {
+		desc = MOR_employs_berber_adviosr
+		trigger = {
+		    OR = {
+			    employed_advisor = {
+				    culture = tuareg
+				}
+				employed_advisor = {
+				    culture = shilha
+				}
+				employed_advisor = {
+				    culture = zayane
+				}
+				employed_advisor = {
+				    culture = riffian
+				}
+				employed_advisor = {
+				    culture = ait_atta
+				}
+				employed_advisor = {
+				    culture = guanche
+				}
+				employed_advisor = {
+				    culture = kabylian
+				}
+				employed_advisor = {
+				    culture = shawiya
+				}
+				employed_advisor = {
+				    culture = shenwa
+				}
+				employed_advisor = {
+				    culture = mozabite
+				}
+				employed_advisor = {
+				    culture = lamtuna
+				}
+				employed_advisor = {
+				    culture = libyan_berber_culture
+				}
+				employed_advisor = {
+				    culture = siwa_culture
+				}
+			}
+		}	
+		loyalty = 5
+	}
+	
+	
+	influence_from_dev_modifier = 0.25
+	
+	base_influence = 30
+	
+	privileges = {
+		estate_berbers_recruit_general
+		estate_berbers_invite_berbers_to_court
+		estate_berbers_development_cost
+		estate_berbers_hintata_mor_autonomy #mor mission exclusive
+		estate_berbers_cavalry
+		estate_berbers_seize_land
+		estate_berbers_recruit_berbers
+		estate_berbers_promote_berbers
+		estate_berbers_political_concessions
+		estate_berbers_berber_settlements_gra_adu
+		estate_berbers_MZB_berber_converts 
+	}
+
+	agendas = {
+		estate_berbers_develop
+		estate_berbers_expand_tribal_land
+		estate_berbers_accept_culture
+		estate_berbers_increase_autonomy
+		estate_berbers_build_manpower_building
+		estate_berbers_build_tax_building
+	}
+}
+
+#08_vu_polish_magnates
+estate_magnates = {
+	icon = 10	#Temporary icon
+	# If true, country will get estate
+	trigger = {
+		OR = {
+			tag = PLC
+			tag = POL
+		}
+		OR = {
+			has_reform = elective_monarchy
+			has_reform = phoenician_elective_monarchical_republic
+		}
+		NOT = {
+			has_estate = estate_vaisyas
+		}
+		NOT = {
+			has_estate = estate_jains
+		}
+		NOT = {
+			has_reform = pirate_republic_reform
+		}
+		NOT = {
+			has_government_attribute = is_merchant_republic
+		}
+		NOT = {
+			has_reform = veche_republic
+		}
+		NOT = {
+			has_reform = trading_city
+		}
+		NOT = {
+			is_revolutionary_republic_trigger = yes
+		}
+		NOT = {
+			has_reform = cossacks_reform
+		}
+		NOT = {
+			government = native
+		}
+		NOT = {
+			has_reform = siberian_tribe
+		}
+		OR = {
+			NOT = {
+				has_reform = celestial_empire
+			}
+			has_dlc = "Mandate of Heaven"
+		}
+		is_nomad = no
+		is_colonial_nation = no
+		NOT = {
+			has_reform = revolutionary_empire_reform
+		}
+	}
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		yearly_corruption = -0.1
+		production_efficiency = 0.1
+	}
+	country_modifier_neutral = {
+		production_efficiency = 0.1
+	}
+	country_modifier_angry = {
+		global_trade_goods_size_modifier = -0.2
+		global_manpower_modifier = -0.2
+		stability_cost_to_declare_war = 2
+		global_unrest = 2
+	}
+	land_ownership_modifier = {
+		magnates_loyalty_modifier = 0.2
+	}
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			NOT = {
+				development = 5
+			}
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				NOT = {
+					development = 10
+				}
+				NOT = {
+					province_trade_power = 5
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			development = 20
+		}
+		modifier = {
+			factor = 0.5
+			is_territorial_core = owner
+		}
+		modifier = {
+			factor = 1.5
+			province_trade_power = 10
+		}
+		modifier = {
+			factor = 1.5
+			province_trade_power = 20
+		}
+		modifier = {
+			factor = 1.5
+			has_province_modifier = thankful_guilds
+		}
+	}
+	# Influence modifiers
+	base_influence = 10
+	influence_modifier = {
+		desc = EST_HIGH_DEVELOPMENT_PROVINCE
+		trigger = {
+			any_owned_province = {
+				development = 30
+			}
+		}
+		influence = 5
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER_LOY
+		trigger = {
+			OR = {
+				has_disaster = estate_nobility_disaster
+				has_disaster = estate_church_disaster
+				has_disaster = estate_brahmins_disaster
+				has_disaster = estate_jains_disaster
+			}
+		}
+		loyalty = -20
+	}
+	color = { 170 40 195 }
+	privileges = {
+		estate_magnates_land_rights
+		estate_magnates_folwarks
+		estate_magnates_production_law
+		estate_magnates_supremacy_over_szlachta
+		estate_magnates_free_printing_rights
+		estate_magnates_settle_rus
+		estate_magnates_supremacy_over_king
+		estate_magnates_royal_advisors
+		estate_magnates_curtail_cossacks
+		estate_magnates_priviliges_and_promises
+		estate_magnates_anti_absolutism
+	}
+	agendas = {
+		estate_magnates_hire_advisor
+		estate_magnates_lower_recruitment
+	}
+	influence_from_dev_modifier = 1
+}
+
+#

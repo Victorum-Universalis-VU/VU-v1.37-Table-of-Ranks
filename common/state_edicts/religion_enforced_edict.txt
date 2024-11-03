@@ -1,0 +1,65 @@
+edict_religion_enforced = {
+	potential = {
+		is_primitive = no
+		is_religion_enabled = protestant
+	}
+	allow = {
+		is_religion_enabled = protestant
+	}
+	modifier = {
+		local_religious_conversion_resistance = 1
+		local_religious_unity_contribution = 0.2
+	}
+	color = {
+		120
+		200
+		240
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 5
+			owner = {
+				has_opinion = {
+					who = PAP
+					value = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				has_opinion = {
+					who = PAP
+					value = 100
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				OR = {
+					alliance_with = PAP
+					papal_influence = 25
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				is_papal_controller = yes
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				religion = catholic
+				is_emperor = yes
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_religion_enforced
+		}
+	}
+}

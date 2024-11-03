@@ -1,0 +1,552 @@
+namespace = subjects_expanded_medieval_vassal_events
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.1
+	title = subjects_expanded_medieval_vassal_events.EVTNAME1
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC1
+	picture = BATTLE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events1.EVTOPT1
+
+		tooltip = {
+			add_liberty_desire = 25
+			join_all_defensive_wars_of = FROM
+			join_all_offensive_wars_of = FROM
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.2
+	title = subjects_expanded_medieval_vassal_events.EVTNAME2
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events2.EVTOPT1
+
+		custom_tooltip = MEDIEVAL_VASSAL_DISALLOWED_WAR_TT
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.3
+	title = subjects_expanded_medieval_vassal_events.EVTNAME3
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events3.EVTOPT1
+
+		custom_tooltip = MEDIEVAL_VASSAL_ALLOWED_WAR_TT
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.5
+	title = subjects_expanded_medieval_vassal_events.EVTNAME5
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC5
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events5.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		FROM = {
+			add_prestige = 10
+		}
+		if = {
+			limit = {
+				is_rival = FROM
+			}
+			remove_rival = FROM
+		}
+		if = {
+			limit = {
+				is_enemy = FROM
+			}
+			FROM = {
+				remove_rival = ROOT
+			}
+		}
+		add_prestige = 10
+		add_opinion = {
+			who = FROM
+			modifier = treaty_of_bonn_opinion_positive
+		}
+		reverse_add_opinion = {
+			who = FROM
+			modifier = treaty_of_bonn_opinion_positive
+		}
+		create_subject = {
+			subject = LOT
+			subject_type = medieval_vassal
+		}
+		LOT = {
+			add_liberty_desire = -25
+		}
+		if = {
+			limit = {
+				FROM = {
+					OR = {
+						owns = 82
+						owns = 83
+						owns = 85
+						owns = 86
+						owns = 1760
+						owns = 2975
+					}
+				}
+				LOT = {
+					num_of_cities = 3
+				}
+			}
+			84 = {
+				if = {
+					limit = {
+						owned_by = LOT
+					}
+					cede_province = FROM
+					add_core = FROM
+					if = {
+						limit = {
+							is_core = LOT
+						}
+						remove_core = LOT
+					}
+				}
+			}
+			69 = {
+				if = {
+					limit = {
+						owned_by = LOT
+					}
+					cede_province = FROM
+					add_core = FROM
+					if = {
+						limit = {
+							is_core = LOT
+						}
+						remove_core = LOT
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events5.EVTOPT2
+
+		ai_chance = { factor = 0 }
+
+		add_legitimacy = 10
+		add_opinion = {
+			who = FROM
+			modifier = treaty_of_bonn_opinion_negative
+		}
+		reverse_add_opinion = {
+			who = FROM
+			modifier = treaty_of_bonn_opinion_negative
+		}
+		FROM = {
+			add_casus_belli = {
+				target = LOT
+				type = cb_force_medieval_vassal_triggered_only
+			}
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.6
+	title = subjects_expanded_medieval_vassal_events.EVTNAME6
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC6
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				random_ally = {
+					limit = {
+						NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+						NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+					}
+					save_event_target_as = medieval_vassal_target_ally_1
+				}
+				random_ally = {
+					limit = {
+						NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+						NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+					}
+					save_event_target_as = medieval_vassal_target_ally_2
+				}
+				random_ally = {
+					limit = {
+						NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+						NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+					}
+					save_event_target_as = medieval_vassal_target_ally_3
+				}
+				random_ally = {
+					limit = {
+						NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+						NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+					}
+					save_event_target_as = medieval_vassal_target_ally_4
+				}
+				random_ally = {
+					limit = {
+						NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+						NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+						NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+					}
+					save_event_target_as = medieval_vassal_target_ally_5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT1
+
+		trigger = {
+			has_saved_event_target = medieval_vassal_target_ally_1
+			event_target:medieval_vassal_target_ally_1 = {
+				NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_1_TT
+		event_target:medieval_vassal_target = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = ROOT
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				add_rival = event_target:medieval_vassal_target_ally_1
+				remove_rival = event_target:medieval_vassal_target_ally_1
+				event_target:medieval_vassal_target_ally_1 = {
+					PREV = {
+						clr_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+						set_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+					}
+					save_event_target_as = medieval_vassal_target_final_ally_target
+				}
+				country_event = { id = subjects_expanded_medieval_vassal_events.8 }
+			}
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT2
+
+		trigger = {
+			has_saved_event_target = medieval_vassal_target_ally_2
+			event_target:medieval_vassal_target_ally_2 = {
+				NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_2_TT
+		event_target:medieval_vassal_target = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = ROOT
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				add_rival = event_target:medieval_vassal_target_ally_2
+				remove_rival = event_target:medieval_vassal_target_ally_2
+				event_target:medieval_vassal_target_ally_2 = {
+					PREV = {
+						clr_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+						set_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+					}
+					save_event_target_as = medieval_vassal_target_final_ally_target
+				}
+				country_event = { id = subjects_expanded_medieval_vassal_events.8 }
+			}
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT3
+
+		trigger = {
+			has_saved_event_target = medieval_vassal_target_ally_3
+			event_target:medieval_vassal_target_ally_3 = {
+				NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_3_TT
+		event_target:medieval_vassal_target = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = ROOT
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				add_rival = event_target:medieval_vassal_target_ally_3
+				remove_rival = event_target:medieval_vassal_target_ally_3
+				event_target:medieval_vassal_target_ally_3 = {
+					PREV = {
+						clr_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+						set_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+					}
+					save_event_target_as = medieval_vassal_target_final_ally_target
+				}
+				country_event = { id = subjects_expanded_medieval_vassal_events.8 }
+			}
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT4
+
+		trigger = {
+			has_saved_event_target = medieval_vassal_target_ally_4
+			event_target:medieval_vassal_target_ally_4 = {
+				NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_4_TT
+		event_target:medieval_vassal_target = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = ROOT
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				add_rival = event_target:medieval_vassal_target_ally_4
+				remove_rival = event_target:medieval_vassal_target_ally_4
+				event_target:medieval_vassal_target_ally_4 = {
+					PREV = {
+						clr_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+						set_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+					}
+					save_event_target_as = medieval_vassal_target_final_ally_target
+				}
+				country_event = { id = subjects_expanded_medieval_vassal_events.8 }
+			}
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT5
+
+		trigger = {
+			has_saved_event_target = medieval_vassal_target_ally_5
+			event_target:medieval_vassal_target_ally_5 = {
+				NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_5_TT
+		event_target:medieval_vassal_target = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = ROOT
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+		hidden_effect = {
+			event_target:medieval_vassal_target = {
+				add_rival = event_target:medieval_vassal_target_ally_5
+				remove_rival = event_target:medieval_vassal_target_ally_5
+				event_target:medieval_vassal_target_ally_5 = {
+					PREV = {
+						clr_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+						set_country_flag = forced_medieval_vassal_to_annul_alliances_with_@PREV
+					}
+					save_event_target_as = medieval_vassal_target_final_ally_target
+				}
+				country_event = { id = subjects_expanded_medieval_vassal_events.8 }
+			}
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT6
+
+		trigger = {
+			event_target:medieval_vassal_target = {
+				any_ally = {
+					NOT = { has_country_flag = medieval_vassal_target_ally_rejected_@ROOT }
+					NOT = { tag = event_target:medieval_vassal_target_ally_1 }
+					NOT = { tag = event_target:medieval_vassal_target_ally_2 }
+					NOT = { tag = event_target:medieval_vassal_target_ally_3 }
+					NOT = { tag = event_target:medieval_vassal_target_ally_4 }
+					NOT = { tag = event_target:medieval_vassal_target_ally_5 }
+				}
+			}
+		}
+
+		ai_chance = { factor = 0 }
+
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						tag = event_target:medieval_vassal_target_ally_1
+						tag = event_target:medieval_vassal_target_ally_2
+						tag = event_target:medieval_vassal_target_ally_3
+						tag = event_target:medieval_vassal_target_ally_4
+						tag = event_target:medieval_vassal_target_ally_5
+					}
+				}
+				set_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+		}
+		country_event = { id = subjects_expanded_medieval_vassal_events.7 }
+	}
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events6.EVTOPT7
+
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+				}
+				clr_country_flag = medieval_vassal_target_ally_rejected_@ROOT
+			}
+			clr_country_flag = force_medieval_vassal_to_annul_alliances
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.7
+	title = subjects_expanded_medieval_vassal_events.EVTNAME6
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC6
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events7.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		country_event = { id = subjects_expanded_medieval_vassal_events.6 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_medieval_vassal_events.8
+	title = subjects_expanded_medieval_vassal_events.EVTNAME8
+	desc = subjects_expanded_medieval_vassal_events.EVTDESC8
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	major_trigger = {
+		tag = event_target:medieval_vassal_target_final_ally_target
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_medieval_vassal_events8.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		custom_tooltip = MEDIEVAL_VASSAL_ANNUL_ALLIANCE_TT
+		tooltip = {
+			add_liberty_desire = 35
+			add_opinion = {
+				who = FROM
+				modifier = medieval_vassal_forced_annul_alliance
+			}
+		}
+	}
+}

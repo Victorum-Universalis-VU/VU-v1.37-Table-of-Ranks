@@ -1,0 +1,83 @@
+edict_religious_unity = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		always = yes
+	}
+	modifier = {
+		local_missionary_strength = 0.02
+		local_missionary_maintenance_cost = -0.2
+	}
+	#ROOT - Country, FROM - Province, if all provinces in a state, that are owned by the country,
+	#	meet this requirement, the alert will appear.
+	notify_trigger = {
+		FROM = {
+			has_owner_religion = yes
+		}
+	}
+	color = {
+		120
+		40
+		140
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			all_province_in_state = {
+				religion = FROM
+			}
+		}
+		modifier = {
+			factor = 10
+			calc_true_if = {
+				amount = 2
+				all_province_in_state = {
+					religion = FROM
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			calc_true_if = {
+				amount = 4
+				all_province_in_state = {
+					religion = FROM
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			any_province_in_state = {
+				has_missionary = yes
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				is_defender_of_faith = yes
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				NOT = {
+					religious_unity = 0.5
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			owner = {
+				NOT = {
+					religious_unity = 0.75
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_religious_unity
+		}
+	}
+}

@@ -1,0 +1,332 @@
+namespace = VULegacyItalianFlavour
+
+#Written by Driaocht 18-9-26
+#Note the province specific affiliations aren't going to make it in, no time to research and assign them at the moment.
+#Also note credit to Dub for some coding additons in the coming-soon province specific alligances (fun scripted variable stuff).
+
+#Province won over to the Guelph side
+#province_event = {
+#	id = VULegacyItalianFlavour.1
+#	title = "VULegacyItalianFlavour.EVTNAME1"
+#	desc = "VULegacyItalianFlavour.EVTDESC1"
+#	picture = CITY_VIEW_eventPicture
+#
+#	trigger = { always = no }
+#
+#	mean_time_to_happen = { months = 999 }
+#	
+#	option = {
+#		name = "VULegacyItalianFlavour.EVTOPTA1"
+#		hidden_effect = {  }
+#	}
+#}
+
+#Province won over to the Ghibelline side
+#province_event = {
+#	id = VULegacyItalianFlavour.2
+#	title = "VULegacyItalianFlavour.EVTNAME2"
+#	desc = "VULegacyItalianFlavour.EVTDESC2"
+#	picture = CITY_VIEW_eventPicture
+#
+#	trigger = { always = no }
+#
+#	mean_time_to_happen = { months = 999 }
+#	
+#	option = {
+#		name = "VULegacyItalianFlavour.EVTOPTA2"
+#		hidden_effect = {  }
+#	}
+#}
+
+#Province loses Guelph affiliations
+#province_event = {
+#	id = VULegacyItalianFlavour.3
+#	title = "VULegacyItalianFlavour.EVTNAME3"
+#	desc = "VULegacyItalianFlavour.EVTDESC3"
+#	picture = CITY_VIEW_eventPicture
+#
+#	trigger = { always = no }
+#
+#	mean_time_to_happen = { months = 999 }
+#	
+#	option = {
+#		name = "VULegacyItalianFlavour.EVTOPTA3"
+#		hidden_effect = {  }
+#	}
+#}
+
+#Province loses Ghibelline affiliations
+#province_event = {
+#	id = VULegacyItalianFlavour.4
+#	title = "VULegacyItalianFlavour.EVTNAME4"
+#	desc = "VULegacyItalianFlavour.EVTDESC4"
+#	picture = CITY_VIEW_eventPicture
+#
+#	trigger = { always = no }
+#
+#	mean_time_to_happen = { months = 999 }
+#	
+#	option = {
+#		name = "VULegacyItalianFlavour.EVTOPTA4"
+#		hidden_effect = {  }
+#	}
+#}
+
+#Pope happy with Guelph tag
+country_event = {
+	id = VULegacyItalianFlavour.5
+	title = "VULegacyItalianFlavour.EVTNAME5"
+	desc = "VULegacyItalianFlavour.EVTDESC5"
+	picture = POPE_PREACHING_eventPicture
+
+	trigger = {
+		vu_guelph_ghibelline_drama_enabled = yes
+		has_country_modifier = vu_guelph_nation
+		NOT = { has_country_modifier = vu_traitorous_nation }
+		NOT = { war_with = PAP }
+		PAP = { has_opinion = { who = ROOT value = 50 } }
+	}
+
+	mean_time_to_happen = {
+		months = 480
+		modifier = {
+			factor = 0.8
+			PAP = { has_opinion = { who = ROOT value = 100 } }
+		}
+		modifier = {
+			factor = 0.8
+			PAP = { has_opinion = { who = ROOT value = 150 } }
+		}
+		modifier = {
+			factor = 0.8
+			PAP = { has_opinion = { who = ROOT value = 200 } }
+		}
+	}
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTA5"
+		add_papal_influence = 10
+		if = {
+			limit = { uses_devotion = yes }
+			add_devotion = 10
+		}
+		PAP = {
+			add_opinion = {
+				who = ROOT
+				modifier = vu_pope_is_pleased
+			}
+		}
+		add_opinion = {
+			who = PAP
+			modifier = vu_loyal_subject
+		}
+	}
+}
+
+#Emperor happy with Ghibelline tag
+country_event = {
+	id = VULegacyItalianFlavour.6
+	title = "VULegacyItalianFlavour.EVTNAME6"
+	desc = "VULegacyItalianFlavour.EVTDESC6"
+	picture = HRE_eventPicture
+
+	trigger = {
+		vu_guelph_ghibelline_drama_enabled = yes
+		has_country_modifier = vu_ghibelline_nation
+		NOT = { has_country_modifier = vu_traitorous_nation }
+		NOT = { has_country_modifier = vu_emperors_approval }
+		NOT = { war_with = emperor }
+		emperor = { has_opinion = { who = ROOT value = 50 } }
+	}
+
+	mean_time_to_happen = {
+		months = 480
+		modifier = {
+			factor = 0.8
+			emperor = { has_opinion = { who = ROOT value = 100 } }
+		}
+		modifier = {
+			factor = 0.8
+			emperor = { has_opinion = { who = ROOT value = 150 } }
+		}
+		modifier = {
+			factor = 0.8
+			emperor = { has_opinion = { who = ROOT value = 200 } }
+		}
+	}
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTA6"
+		add_legitimacy = 10
+		add_country_modifier = {
+			name = "vu_emperors_approval"
+			duration = 10
+		}
+		emperor = {
+			add_opinion = {
+				who = ROOT
+				modifier = vu_emperor_is_pleased
+			}
+		}
+		add_opinion = {
+			who = emperor
+			modifier = vu_loyal_subject
+		}
+	}
+}
+
+#Tag outgrows Guelph and Ghibelline drama
+country_event = {
+	id = VULegacyItalianFlavour.7
+	title = "VULegacyItalianFlavour.EVTNAME7"
+	desc = "VULegacyItalianFlavour.EVTDESC7"
+	picture = CITY_VIEW_eventPicture
+
+	trigger = {
+		OR = {
+			has_country_modifier = vu_guelph_nation
+			has_country_modifier = vu_ghibelline_nation
+		}
+		OR = {
+			government_rank = 8
+			is_emperor = yes
+		}
+	}
+
+	mean_time_to_happen = { days = 3 }
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTA7"
+		trigger = {
+			has_country_modifier = vu_guelph_nation
+		}
+		remove_country_modifier = vu_guelph_nation
+		PAP = {
+			add_opinion = {
+				who = ROOT
+				modifier = vu_pope_is_pleased
+			}
+		}
+	}
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTB7"
+		trigger = {
+			has_country_modifier = vu_ghibelline_nation
+			NOT = { is_emperor = yes }
+		}
+		remove_country_modifier = vu_ghibelline_nation
+		emperor = {
+			add_opinion = {
+				who = ROOT
+				modifier = vu_emperor_is_pleased
+			}
+		}
+	}
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTC7"
+		trigger = {
+			has_country_modifier = vu_ghibelline_nation
+			is_emperor = yes
+		}
+		remove_country_modifier = vu_ghibelline_nation
+		if = {
+			limit = { has_country_modifier = vu_emperors_approval }
+			remove_country_modifier = vu_emperors_approval
+		}
+		add_prestige = 30
+	}
+}
+
+#Tag somehow has Guelph and Ghibelline modifiers when it shouldn't
+country_event = {
+	id = VULegacyItalianFlavour.8
+	title = "VULegacyItalianFlavour.EVTNAME8"
+	desc = "VULegacyItalianFlavour.EVTDESC8"
+	picture = CITY_VIEW_eventPicture
+
+	trigger = {
+		OR = {
+			has_country_modifier = vu_guelph_nation
+			has_country_modifier = vu_ghibelline_nation
+			has_country_modifier = vu_apathetic_guelph_or_ghibellines
+		}
+		NOT = { vu_guelph_ghibelline_drama_enabled = yes }
+	}
+	hidden = yes
+
+	mean_time_to_happen = {
+		days = 3
+		modifier = {
+			factor = 50.0
+			government_rank = 8
+		}
+		modifier = {
+			factor = 50.0
+			is_emperor = yes
+		}
+	}
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTA7"
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_country_modifier = vu_guelph_nation }
+			remove_country_modifier = vu_guelph_nation
+		}
+		if = {
+			limit = { has_country_modifier = vu_ghibelline_nation }
+			remove_country_modifier = vu_ghibelline_nation
+		}
+		if = {
+			limit = { has_country_modifier = vu_apathetic_guelph_or_ghibellines }
+			remove_country_modifier = vu_apathetic_guelph_or_ghibellines
+		}
+	}
+}
+
+#9 to 16 reserved for more Guelph Ghinelline drama
+
+#Papal vassal fix
+country_event = {
+	id = VULegacyItalianFlavour.17
+	title = "VULegacyItalianFlavour.EVTNAME17"
+	desc = "VULegacyItalianFlavour.EVTDESC17"
+	picture = CITY_VIEW_eventPicture
+
+	trigger = {
+		NOT = { tag = PAP }
+		any_subject_country = { is_subject_of_type = papal_subject_vu }
+	}
+
+	mean_time_to_happen = { days = 3 }
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTA17"
+		trigger = { any_subject_country = { tag = PAP } }
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = papal_subject_vu
+				ai = yes
+			}
+			PAP = { inherit = PREV }
+		}
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = papal_subject_vu
+				ai = no
+			}
+			ROOT = { vassalize = PREV }
+		}
+		add_dip_power = -50
+	}
+	
+	option = {
+		name = "VULegacyItalianFlavour.EVTOPTB17"
+		trigger = { NOT = { any_subject_country = { tag = PAP } } }
+		every_subject_country = {
+			limit = { is_subject_of_type = papal_subject_vu }
+			ROOT = { vassalize = PREV }
+		}
+		add_dip_power = -100
+	}
+}

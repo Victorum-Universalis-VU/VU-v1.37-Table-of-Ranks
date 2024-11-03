@@ -1,0 +1,9311 @@
+#VU - Updated by San Felipe for v1.36.2.*
+#Victorum Universalis Note -
+#There is no way to modify this carefully overriding parts of it.
+#File has been documented well and organised to the best of our abilities. Any submods or addons desiring to add their own entries will need to manually update this entirely
+#after every VU update. This is out of our hands and there are no suggestions for this.
+#Furthermore, this file contains new entries throughout various sections and should not crash the game if said entries have been entered and linked correctly with respective files.
+#Many thanks to you all - San Felipe.
+# Do not change tags in here without changing every other reference to them.
+# If adding new buildings, make sure they are uniquely named.
+# cost = x #==> cost in $ to build (subject to other modifiers)
+# time = x #==> number of months to build.
+# modifier = m # a modifier on the province that the building gives
+# trigger = t # an and trigger that needs to be fullfilled to build and keep the building
+# one_per_country = yes/no # if yes, only one of these can exist in a country
+# manufactory = { trade_good trade_good } # list of trade goods that get a production bonus
+# onmap = yes/no # show as a sprite on the map
+# FROM = owner
+# ROOT = province
+# Building AI is now mainly hard-coded. The AI will estimate how much it gains yearly from each building,
+# convert the value to ducats, and take the building with biggest yearly return as a percentage of the build cost.
+# If lower than 1%, the AI will not consider the yearly return worth it.
+# It will also require higher yearly return if the economy in not in prime shape.
+# Forts' value also get converted to a yearly return based on terrain and strategic position, as well as available budget for fort maintenance.
+# AI can still be modded though; it will multiply the yearly return with the value of ai_will_do.
+# If you don't want the AI to build a building at all, make ai_will_do become 0.
+# AI will consider each building to be worth 0.01 ducats per year as a base, so making ai_will_do above cost will have them build it at some point.
+# It will still check whether it can afford a building before doing so though, but may save up to it.
+#
+############################################################
+# All of AI has been re-done by DonBrom for the VU project #
+############################################################
+#
+################################################
+### PRODUCTION
+#Tier 1 Production - Workshop
+workshop = {
+	cost = 75	#VU - Kept at 150 to 200 in v1.36.2.* by San Felipe
+	time = 12
+	#Returned price to 100 due to the production efficiency increase.
+	modifier = {
+		local_production_efficiency = 0.5
+		trade_goods_size = 0.25		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+	}
+	on_built = {
+		add_development_from_building = {
+			building = workshop
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = workshop
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	allow_in_gold_provinces = no
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+#Tier 2 Production - Counting House
+counting_house = {
+	cost = 175	#VU - Kept at 400 in v1.36.2.* by San Felipe
+	time = 24
+	#VU AddOn price changed from 400 to 200. Part of the comprehensive balance overhaul to adjust buildings to the VU map (with all its new provinces).
+	#VU AddOn time changed from 12 to 24. Doubling upgraded buildings' build time.
+	make_obsolete = workshop
+	modifier = {
+		local_production_efficiency = 0.5
+		trade_goods_size = 0.2		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.15
+		local_core_creation = 0.03
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = counting_house
+			obsolete_building = workshop
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = counting_house
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	allow_in_gold_provinces = no
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+#Tier 3 Production - Factory 
+factory = {
+	cost = 255	#VU - Kept at 800 in v1.36.2.* by San Felipe
+	time = 48
+	#Factories are expensive and take a long time to build because they're the last tier of the production category and are quite powerful (as they should be).
+	make_obsolete = counting_house
+	modifier = {
+		local_production_efficiency = 1
+		trade_goods_size = 0.5		#Don	
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+	}
+	build_trigger = {
+		is_state = yes
+		NOT = {
+			any_province_in_state = {
+				OR = {
+					has_building = counting_house
+					has_building = factory
+					has_construction = counting_house
+					has_construction = factory
+				}
+			}
+		}
+	}
+	keep_trigger = {
+		AND = {
+			calc_true_if = {
+				amount = 1
+				all_province_in_state = {
+					OR = {
+						has_building = counting_house
+						has_building = factory
+						has_construction = counting_house
+						has_construction = factory
+					}
+				}
+			}
+			NOT = {
+				calc_true_if = {
+					amount = 2
+					all_province_in_state = {
+						OR = {
+							has_building = counting_house
+							has_building = factory
+							has_construction = counting_house
+							has_construction = factory
+						}
+					}
+				}
+			}
+		}
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = factory
+			obsolete_building = treasury
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = factory
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	allow_in_gold_provinces = no
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+################################################
+### TRADE
+#Tier 1 Trade - Marketplace
+marketplace = {
+	cost = 75	#VU - Increased from 100 to 200 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		province_trade_power_modifier = 0.25
+		trade_value = 0.15		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_building = {
+			building = marketplace
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = marketplace
+			type = production
+			value = 1
+		}
+	}
+	on_construction_started = {
+	}
+	#Fires when you start the construction,  ROOT - Province FROM - Country that started
+	on_construction_canceled = {
+	}
+	#Fires when you cancel the construction, ROOT - Province FROM - Country that canceled
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		############################
+		# Trade buildings specific #
+		############################
+		#AI already considers income from the province, taking COTs into account, I just wanted to put extra emphasis on them
+		modifier = {
+			factor = 2
+			province_has_center_of_trade_of_level = 1
+		}
+		#The Estuary trigger was a good idea, I'm keeping this one... (although with changed factors)
+		modifier = {
+			factor = 2
+			has_river_estuary_trigger = yes
+		}
+		#As much as taking mercentalism into account is cool, it causes lag, and it's already considered in the base calculation as income.
+	}
+}
+
+#Tier 2 Trade - Trade Depot
+trade_depot = {
+	cost = 400	#VU - Increased from 300 to 400 in v1.36.2.* by San Felipe
+	time = 24
+	#VU AddOn price changed from 300.
+	#VU AddOn time changed from 12. Doubling upgraded buildings' build time.
+	make_obsolete = marketplace
+	modifier = {
+		province_trade_power_modifier = 0.5
+		trade_value = 0.25		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.15
+		local_core_creation = 0.03
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	build_trigger = {
+		is_state = yes
+		NOT = {
+			any_province_in_state = {
+				OR = {
+					has_building = trade_depot
+					has_building = corporative_headquarters
+					has_construction = trade_depot
+					has_construction = corporative_headquarters
+				}
+			}
+		}
+	}
+	keep_trigger = {
+		AND = {
+			calc_true_if = {
+				amount = 1
+				all_province_in_state = {
+					OR = {
+						has_building = trade_depot
+						has_building = corporative_headquarters
+						has_construction = trade_depot
+						has_construction = corporative_headquarters
+					}
+				}
+			}
+			NOT = {
+				calc_true_if = {
+					amount = 2
+					all_province_in_state = {
+						OR = {
+							has_building = trade_depot
+							has_building = corporative_headquarters
+							has_construction = trade_depot
+							has_construction = corporative_headquarters
+						}
+					}
+				}
+			}
+		}
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = trade_depot
+			obsolete_building = marketplace
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = trade_depot
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		############################
+		# Trade buildings specific #
+		############################
+		#AI already considers income from the province, taking COTs into account, I just wanted to put extra emphasis on them
+		modifier = {
+			factor = 2
+			province_has_center_of_trade_of_level = 1
+		}
+		#The Estuary trigger was a good idea, I'm keeping this one... (although with changed factors)
+		modifier = {
+			factor = 2
+			has_river_estuary_trigger = yes
+		}
+		#As much as taking mercentalism into account is cool, it causes lag, and it's already considered in the base calculation as income.
+	}
+}
+
+#Tier 3 Trade - Corporative Headquarters
+corporative_headquarters = {
+	cost = 800	#VU - Kept at 800 in v1.36.2.* by San Felipe
+	time = 48
+	make_obsolete = trade_depot
+	modifier = {
+		province_trade_power_modifier = 1
+		trade_value = 0.5 			#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	build_trigger = {
+		is_state = yes
+		NOT = {
+			any_province_in_state = {
+				OR = {
+					has_building = trade_depot
+					has_building = corporative_headquarters
+					has_construction = trade_depot
+					has_construction = corporative_headquarters
+				}
+			}
+		}
+	}
+	keep_trigger = {
+		AND = {
+			calc_true_if = {
+				amount = 1
+				all_province_in_state = {
+					OR = {
+						has_building = trade_depot
+						has_building = corporative_headquarters
+						has_construction = trade_depot
+						has_construction = corporative_headquarters
+					}
+				}
+			}
+			NOT = {
+				calc_true_if = {
+					amount = 2
+					all_province_in_state = {
+						OR = {
+							has_building = trade_depot
+							has_building = corporative_headquarters
+							has_construction = trade_depot
+							has_construction = corporative_headquarters
+						}
+					}
+				}
+			}
+		}
+	}
+	on_built = {
+		if = {
+			limit = {
+				has_province_flag = built_dev_stock_exchange
+			}
+			add_development_from_upgrading_or_building = {
+				building = corporative_headquarters
+				obsolete_building = stock_exchange
+				type = production
+				value = 4
+				upgrade_value = 2
+			}
+		}
+		if = {
+			limit = {
+				has_province_flag = built_dev_trade_depot
+			}
+			add_development_from_upgrading_or_building = {
+				building = corporative_headquarters
+				obsolete_building = trade_depot
+				type = production
+				value = 4
+				upgrade_value = 2
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_flag = built_dev_marketplace
+			}
+			add_development_from_upgrading_or_building = {
+				building = corporative_headquarters
+				obsolete_building = marketplace
+				type = production
+				value = 4
+				upgrade_value = 3
+			}
+		}
+		else = {
+			add_development_from_building = {
+				building = corporative_headquarters
+				type = production
+				value = 4
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = corporative_headquarters
+			type = production
+			value = 4
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		############################
+		# Trade buildings specific #
+		############################
+		#AI already considers income from the province, taking COTs into account, I just wanted to put extra emphasis on them
+		modifier = {
+			factor = 2
+			province_has_center_of_trade_of_level = 1
+		}
+		#The Estuary trigger was a good idea, I'm keeping this one... (although with changed factors)
+		modifier = {
+			factor = 2
+			has_river_estuary_trigger = yes
+		}
+		#As much as taking mercentalism into account is cool, it causes lag, and it's already considered in the base calculation as income.
+	}
+}
+
+################################################
+### ARMY
+#Tier 1 Army - Barracks
+barracks = {
+	cost = 125		#VU - Increased from 100 to 150 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		local_manpower_modifier = 0.25
+		local_manpower = 0.5		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_manpower = 1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = 0.001
+			}
+		}
+		add_development_from_building = {
+			building = barracks
+			type = manpower
+			value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = barracks
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_manpower = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = -0.001
+			}
+		}
+		remove_development_from_building = {
+			building = barracks
+			type = manpower
+			value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = barracks
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Manpower Specific #
+		#####################
+		modifier = {
+			factor = 2
+			OR = {
+				trade_goods = livestock
+				trade_goods = grain
+			}
+		}
+		#AI will favor recruiting from their own populace
+		modifier = {
+			factor = 1.25
+			culture_group = owner
+		}
+		#If the AI is low on manpower (right after a war) they will favor this
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					manpower_percentage = 0.25
+				}
+			}
+		}
+		#If the AI has plenty of manpower, it shouln't build anymore of these
+		modifier = {
+			factor = 0.75
+			owner = {
+				manpower_percentage = 0.9
+			}
+		}
+		#If the AI has "low" max manpower pool, it will build more to help itself out...
+		modifier = {
+			factor = 2
+			NOT = {
+				owner = {
+					#The base manpower is 6k, so this is here to help small TAGs win wars against bigger TAGs
+					max_manpower = 10
+				}
+			}
+		}
+	}
+}
+
+#Tier 2 Army - Training Fields
+training_fields = {
+	cost = 225	#VU - Kept at 300 in v1.36.2.* by San Felipe
+	time = 24
+	#VU AddOn price changed from 300. Part of the comprehensive balance overhaul to adjust buildings to the VU map (with all its new provinces).
+	#VU AddOn time changed from 12. Doubling second level military buildings build time.
+	make_obsolete = barracks
+	modifier = {
+		local_manpower_modifier = 1
+		local_manpower = 0.5		#Don
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_manpower = 1
+			}
+		}
+		add_development_from_upgrading_or_building = {
+			building = training_fields
+			obsolete_building = barracks
+			type = manpower
+			value = 2
+			upgrade_value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = training_fields
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = 0.001
+			}
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_manpower = -1
+			}
+		}
+		update_improved_military_buildings_modifier = {
+			building = training_fields
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = -0.001
+			}
+		}
+		remove_development_from_building = {
+			building = training_fields
+			type = manpower
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Manpower Specific #
+		#####################
+		modifier = {
+			factor = 2
+			OR = {
+				trade_goods = livestock
+				trade_goods = grain
+			}
+		}
+		#AI will favor recruiting from their own populace
+		modifier = {
+			factor = 1.25
+			culture_group = owner
+		}
+		#If the AI is low on manpower (right after a war) they will favor this
+		modifier = {
+			factor = 1.25
+			NOT = {
+				owner = {
+					manpower_percentage = 0.25
+				}
+			}
+		}
+		#If the AI has plenty of manpower, it shouln't build anymore of these
+		modifier = {
+			factor = 0.75
+			owner = {
+				manpower_percentage = 0.9
+			}
+		}
+		#If the AI has "low" max manpower pool, it will build more to help itself out...
+		modifier = {
+			factor = 2
+			NOT = {
+				owner = {
+					#The base manpower is 6k, so this is here to help small TAGs win wars against bigger TAGs
+					max_manpower = 10
+				}
+			}
+		}
+	}
+}
+
+#Tier 1 Army - Regimental Camp
+regimental_camp = {
+	cost = 125		#VU - Decreased from 200 to 150 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		land_forcelimit = 0.5
+		regiment_recruit_speed = -0.15
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_building = {
+			building = regimental_camp
+			type = manpower
+			value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = regimental_camp
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = 0.001
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = regimental_camp
+			type = manpower
+			value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = regimental_camp
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = -0.001
+			}
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Forcelimit Specific #
+		#######################
+		modifier = {
+			factor = 2
+			OR = {
+				trade_goods = copper
+				trade_goods = grain
+			}
+		}
+		#AI will favor recruiting from their own populace
+		modifier = {
+			factor = 1.25
+			culture_group = owner
+		}
+		#If the AI has "low" forcelimit, it will build more to help itself out...
+		modifier = {
+			factor = 2
+			NOT = {
+				owner = {
+					#The base forcelimit is 3k, so this is here to help small TAGs win wars against bigger TAGs
+					land_forcelimit = 10
+				}
+			}
+		}
+		#In an attempt to prevent doom-stacking, the AI won't build these after they have enough forcelimit
+		modifier = {
+			factor = 0.25
+			owner = {
+				land_forcelimit = 100
+			}
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				#set specifically at 200 due to china starting at that... fuck the CCP
+				land_forcelimit = 200
+			}
+		}
+	}
+}
+
+#Tier 2 Army - Conscription Center
+conscription_center = {
+	cost = 250	#VU - Decreased from 400 to 300 in v1.36.2.* by San Felipe
+	time = 24
+	make_obsolete = regimental_camp
+	modifier = {
+		land_forcelimit = 1
+		regiment_recruit_speed = -0.25
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	#THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = conscription_center
+			obsolete_building = regimental_camp
+			type = manpower
+			value = 2
+			upgrade_value = 1
+		}
+		update_improved_military_buildings_modifier = {
+			building = conscription_center
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = 0.001
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = conscription_center
+			type = manpower
+			value = 2
+		}
+		update_improved_military_buildings_modifier = {
+			building = conscription_center
+		}
+		if = {
+			limit = {
+				FROM = {
+					mission_completed = jap_tanegashima_teppo
+					has_dlc = "Cradle of Civilization"
+				}
+			}
+			FROM = {
+				add_army_professionalism = -0.001
+			}
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Forcelimit Specific #
+		#######################
+		modifier = {
+			factor = 2
+			OR = {
+				trade_goods = copper
+				trade_goods = grain
+			}
+		}
+		#AI will favor recruiting from their own populace
+		modifier = {
+			factor = 1.25
+			culture_group = owner
+		}
+		#If the AI has "low" forcelimit, it will build more to help itself out...
+		modifier = {
+			factor = 2
+			NOT = {
+				owner = {
+					#The base forcelimit is 3k, so this is here to help small TAGs win wars against bigger TAGs
+					land_forcelimit = 10
+				}
+			}
+		}
+		#In an attempt to prevent doom-stacking, the AI won't build these after they have enough forcelimit
+		modifier = {
+			factor = 0.25
+			owner = {
+				land_forcelimit = 100
+			}
+		}
+		modifier = {
+			factor = 0
+			owner = {
+				#set specifically at 200 due to china starting at that... fuck the CCP
+				land_forcelimit = 200
+			}
+		}
+	}
+}
+
+################################################
+### Navy
+#Tier 1 Navy - Shipyard
+shipyard = {
+	cost = 125	#VU - Increased from 100 to 150 in v1.36.2.* by San Felipe
+	time = 12
+	#VU AddOn notes - leaving cost here despite lowering most others. Dramtically improving naval capabilities was a bit overpowered, in my opinion.
+	#Especially compared to the regimental camp with half effect at double the price.
+	modifier = {
+		province_trade_power_modifier = 0.15
+		local_sailors_modifier = 0.5
+		local_sailors = 250
+		local_has_man_of_war = yes
+		local_has_galleass = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	build_trigger = {
+		has_port = yes
+	}
+	on_built = {
+		add_development_from_building = {
+			building = shipyard
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = shipyard
+			type = production
+			value = 1
+		}
+		if = {
+			limit = {
+				has_province_modifier = sca_swe_danish_shipyard
+			}
+			remove_province_modifier = sca_swe_danish_shipyard
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Shipyard Specific #
+		#####################
+		#Added because the building allows you to build these ships, so having access to them
+		#should make the AI more inclined to build these...
+		#PS. There is no way to check if the nation has access to them, so the second best
+		#thing that I can do is check if they have any hired
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_man_of_war = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_galleass = 1
+			}
+		}
+	}
+}
+
+#Tier 2 Navy - Training Fields
+grand_shipyard = {
+	cost = 250	#VU - Kept at 300 in v1.36.2.* by San Felipe
+	time = 24
+	make_obsolete = shipyard
+	build_trigger = {
+		has_port = yes
+	}
+	modifier = {
+		province_trade_power_modifier = 0.15
+		local_sailors_modifier = 0.5
+		local_sailors = 500
+		local_has_man_of_war = yes
+		local_has_galleass = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = grand_shipyard
+			obsolete_building = shipyard
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = grand_shipyard
+			type = production
+			value = 2
+		}
+		if = {
+			limit = {
+				has_province_modifier = sca_swe_danish_shipyard
+			}
+			remove_province_modifier = sca_swe_danish_shipyard
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Shipyard Specific #
+		#####################
+		#Added because the building allows you to build these ships, so having access to them
+		#should make the AI more inclined to build these...
+		#PS. There is no way to check if the nation has access to them, so the second best
+		#thing that I can do is check if they have any hired
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_man_of_war = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_galleass = 1
+			}
+		}
+	}
+}
+
+#Tier 1 Navy - Dock
+dock = {
+	cost = 125	#VU - Increased from 100 to 150 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		naval_forcelimit = 0.5
+		ship_recruit_speed = -0.25
+		local_ship_repair = 0.25
+		local_has_man_of_war = yes
+		local_has_galleass = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	build_trigger = {
+		has_port = yes
+	}
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_sailors = 200
+			}
+		}
+		add_development_from_building = {
+			building = dock
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_sailors = -200
+			}
+		}
+		remove_development_from_building = {
+			building = dock
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Dockyard Specific #
+		#####################
+		#Added because the building allows you to build these ships, so having access to them
+		#should make the AI more inclined to build these...
+		#PS. There is no way to check if the nation has access to them, so the second best
+		#thing that I can do is check if they have any hired
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_man_of_war = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_galleass = 1
+			}
+		}
+		#If the AI has "low" naval forcelimit, it will be more inclined to build these
+		modifier = {
+			factor = 2
+			owner = {
+				#the base is only 1.
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						naval_forcelimit = 50
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						naval_forcelimit = 25
+					}
+				}
+				else = {
+					NOT = {
+						naval_forcelimit = 10
+					}
+				}
+			}
+		}
+		#If the AI has "high" naval forcelimit, it will be disencuraged to build these because LAG
+		modifier = {
+			factor = 0.5
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					naval_forcelimit = 100
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					naval_forcelimit = 50
+				}
+				else = {
+					naval_forcelimit = 25
+				}
+			}
+		}
+		#AI won't build anymore of these after they get a "very large" naval forcelimit to prevent LAG
+		modifier = {
+			factor = 0
+			owner = {
+				naval_forcelimit = 200
+			}
+		}
+	}
+}
+
+#Tier 2 Navy - Drydock
+drydock = {
+	cost = 250	#VU - Kept at 300 in v1.36.2.* by San Felipe
+	time = 24
+	make_obsolete = dock
+	modifier = {
+		naval_forcelimit = 1
+		ship_recruit_speed = -0.5
+		local_ship_repair = 0.5
+		local_has_man_of_war = yes
+		local_has_galleass = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	build_trigger = {
+		has_port = yes
+	}
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_sailors = 200
+			}
+		}
+		add_development_from_upgrading_or_building = {
+			building = drydock
+			obsolete_building = dock
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = manpower_sailors_on_build
+				}
+			}
+			FROM = {
+				add_sailors = -200
+			}
+		}
+		remove_development_from_building = {
+			building = drydock
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Dockyard Specific #
+		#####################
+		#Added because the building allows you to build these ships, so having access to them
+		#should make the AI more inclined to build these...
+		#PS. There is no way to check if the nation has access to them, so the second best
+		#thing that I can do is check if they have any hired
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_man_of_war = 1
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				num_of_galleass = 1
+			}
+		}
+		#If the AI has "low" naval forcelimit, it will be more inclined to build these
+		modifier = {
+			factor = 2
+			owner = {
+				#the base is only 1.
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						naval_forcelimit = 50
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						naval_forcelimit = 25
+					}
+				}
+				else = {
+					NOT = {
+						naval_forcelimit = 10
+					}
+				}
+			}
+		}
+		#If the AI has "high" naval forcelimit, it will be disencuraged to build these because LAG
+		modifier = {
+			factor = 0.5
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					naval_forcelimit = 100
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					naval_forcelimit = 50
+				}
+				else = {
+					naval_forcelimit = 25
+				}
+			}
+		}
+		#AI won't build anymore of these after they get a "very large" naval forcelimit to prevent LAG
+		modifier = {
+			factor = 0
+			owner = {
+				naval_forcelimit = 200
+			}
+		}
+	}
+}
+
+################################################
+### GOVERNMENT
+#Tier 1 Government - Courthouse
+courthouse = {
+	cost = 150	#Decreased from 750
+	time = 12
+	build_trigger = {
+		is_state = yes
+	}
+	modifier = {
+		local_autonomy = -0.05
+		local_governing_cost = -0.25
+		allowed_num_of_buildings = 1
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_governing_cost_increase = -5
+	}
+	on_built = {
+		add_development_from_building = {
+			building = courthouse
+			type = tax
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = fra_courthouse_bonus_flag
+				}
+			}
+			add_province_modifier = {
+				name = fra_improved_court_houses_modifier
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = courthouse
+			type = tax
+			value = 1
+		}
+		remove_province_modifier = fra_improved_court_houses_modifier
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Courthouse Specific #
+		#######################
+		#Since they add gov-capacity, it seems like a good idea to make the AI consider building these when needed (OR NOT)
+		modifier = {
+			factor = 0.5
+			owner = {
+				NOT = {
+					governing_capacity_percentage = 0.65
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				governing_capacity_percentage = 0.9
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				governing_capacity_percentage = 1
+			}
+		}
+		modifier = {
+			factor = 20
+			owner = {
+				governing_capacity_percentage = 1.1
+			}
+		}
+		#Considering that they bring down the autonomy, I've kept an adapted version the of previous one
+		#BTW these all multiply, so if the autonomy is 86% they will get 1.5*2*2*2 = 12 factor, this further
+		#multiplies the base factor and all the other ones.
+		modifier = {
+			factor = 1.5
+			local_autonomy = 25
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 50
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 65
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 80
+		}
+	}
+}
+
+#Tier 1 Government - Hall
+hall = {
+	cost = 100	#VU - Increased from 150 to 200 in v1.36.2.* by San Felipe
+	time = 12
+	#VU AddOn changed from 12. Doubling upgraded buildings' build time.
+	#VU 13 added to balance states territories and tradecompanies.
+	build_trigger = {
+		is_state = yes
+	}
+	modifier = {
+		local_state_maintenance_modifier = -0.25
+		local_tax_modifier = 0.1
+		local_autonomy = -0.1
+		allowed_num_of_buildings = 1
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.15
+<<<<<<< HEAD
+		governing_capacity = 10
+=======
+		local_governing_cost_increase = -2.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = hall
+			type = tax
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = hall
+			type = tax
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Gooberment Specific #
+		#######################
+		#Considering that they bring down the autonomy, I've kept an adapted version the of previous one
+		#BTW these all multiply, so if the autonomy is 86% they will get 1.5*2*2*2 = 12 factor, this further
+		#multiplies the base factor and all the other ones.
+		modifier = {
+			factor = 1.5
+			local_autonomy = 25
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 50
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 65
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 80
+		}
+	}
+}
+
+#Tier 2 Government - Town Hall
+town_hall = {
+	cost = 200	#VU - Increased from 300 to 400 in v1.36.2.* by San Felipe
+	time = 24
+	#VU AddOn changed from 12. Doubling upgraded buildings' build time.
+	#VU 13 added to balance states territories and tradecompanies.
+	build_trigger = {
+		is_state = yes
+	}
+	make_obsolete = hall
+	modifier = {
+		local_state_maintenance_modifier = -0.5
+		local_tax_modifier = 0.2
+		local_autonomy = -0.2
+		allowed_num_of_buildings = 1
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+<<<<<<< HEAD
+		governing_capacity = 20
+=======
+		local_governing_cost_increase = -5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = town_hall
+			obsolete_building = hall
+			type = tax
+			value = 2
+			upgrade_value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = fra_hall_bonus_flag
+				}
+				NOT = {
+					has_province_modifier = fra_improved_halls_modifier
+				}
+			}
+			add_province_modifier = {
+				name = fra_improved_halls_modifier
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = town_hall
+			type = tax
+			value = 2
+		}
+		remove_province_modifier = fra_improved_halls_modifier
+	}
+	on_obsolete = {
+		remove_development_from_building = {
+			building = town_hall
+			type = tax
+			value = 2
+		}
+		remove_province_modifier = fra_improved_halls_modifier
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Gooberment Specific #
+		#######################
+		#Considering that they bring down the autonomy, I've kept an adapted version the of previous one
+		#BTW these all multiply, so if the autonomy is 86% they will get 1.5*2*2*2 = 12 factor, this further
+		#multiplies the base factor and all the other ones.
+		modifier = {
+			factor = 1.5
+			local_autonomy = 25
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 50
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 65
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 80
+		}
+	}
+}
+
+#Tier 3 Government - City Hall
+city_hall = {
+	cost = 300	#VU - Increased from 450 to 600 in v1.36.2.* by San Felipe
+	time = 36
+	#VU AddOn changed from 12. Doubling upgraded buildings' build time.
+	#VU 13 added to balance states territories and tradecompanies.
+	build_trigger = {
+		is_state = yes
+	}
+	make_obsolete = town_hall
+	modifier = {
+		local_state_maintenance_modifier = -0.75
+		local_tax_modifier = 0.3
+		local_autonomy = -0.3
+		allowed_num_of_buildings = 2
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.3
+<<<<<<< HEAD
+		governing_capacity = 30
+=======
+		local_governing_cost_increase = -10
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_upgrading_or_building = {
+			building = city_hall
+			obsolete_building = town_hall
+			type = tax
+			value = 2
+			upgrade_value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = fra_town_hall_bonus_flag
+				}
+				NOT = {
+					has_province_modifier = fra_improved_town_hall_modifier
+				}
+			}
+			add_province_modifier = {
+				name = fra_improved_town_hall_modifier
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = city_hall
+			type = tax
+			value = 2
+		}
+		remove_province_modifier = fra_improved_town_hall_modifier
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#######################
+		# Gooberment Specific #
+		#######################
+		#Considering that they bring down the autonomy, I've kept an adapted version the of previous one
+		#BTW these all multiply, so if the autonomy is 86% they will get 1.5*2*2*2 = 12 factor, this further
+		#multiplies the base factor and all the other ones.
+		modifier = {
+			factor = 1.5
+			local_autonomy = 25
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 50
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 65
+		}
+		modifier = {
+			factor = 2
+			local_autonomy = 80
+		}
+	}
+}
+
+#Tier 1 Education - Library
+library = {
+	cost = 100	#VU - Kept at 300 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		local_development_cost = -0.1
+		local_institution_spread = 0.5
+		local_prosperity_growth = 0.1
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = -1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_building = {
+			building = library
+			type = tax
+			value = 2
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = library
+			type = tax
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		######################
+		# Education Specific #
+		######################
+		#If the AI doesn't have the newest institution, it will consider building these to speed shit up
+		modifier = {
+			factor = 2
+			NOT = {
+				current_institution = 0
+			}
+		}
+		#If the province already has solid institution growth, why not have it go EVEN faster?
+		modifier = {
+			factor = 2
+			current_institution_growth = 12
+		}
+		#For cases of african natives and the like, if the province is not gaining the institution it won't be built
+		modifier = {
+			factor = 0
+			NOT = {
+				current_institution_growth = 0.1
+			}
+		}
+	}
+}
+
+#Tier 2 Education - School
+school = {
+	cost = 200	#VU - Increased from 300 to 600 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		local_development_cost = -0.1
+		local_institution_spread = 0.5
+		local_prosperity_growth = 0.2
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = -2
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		add_development_from_building = {
+			building = school
+			type = tax
+			value = 2
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = school
+			type = tax
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	#Neart perfect copy because I'm not spending my time organising this. Economy 101 was shoved at the end.
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		######################
+		# Education Specific #
+		######################
+		#If the AI doesn't have the newest institution, it will consider building these to speed shit up
+		modifier = {
+			factor = 2
+			NOT = {
+				current_institution = 0
+			}
+		}
+		#If the province already has solid institution growth, why not have it go EVEN faster?
+		modifier = {
+			factor = 2
+			current_institution_growth = 12
+		}
+		#For cases of african natives and the like, if the province is not gaining the institution it won't be built
+		modifier = {
+			factor = 0
+			NOT = {
+				current_institution_growth = 0.1
+			}
+		}
+	}
+}
+
+################################################
+### TAXATION
+#Tier 1 Taxation - Temple
+temple = {
+	cost = 125		#VU - Increased from 100 to 250 in v1.36.2.* by San Felipe
+	time = 12
+	modifier = {
+		local_missionary_strength = 0.02
+		local_tax_modifier = 0.5
+		local_religious_unity_contribution = 0.1
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.025
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 0.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		on_built_tax_building_effect = yes
+		on_province_tax_building_built_estate_privileges_effect = yes
+		add_development_from_building = {
+			building = temple
+			type = tax
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 2
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = temples_modifier
+				}
+				owned_by = FROM
+			}
+			add_province_modifier = {
+				name = gov_expanded_temple_rights_mod
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = mosque_local_unrest_flag
+				}
+			}
+			add_province_modifier = {
+				name = turkoman_peaceful_worshipping
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_modifier = mam_mosque_great_mosque_generates_crown_land_modifier
+				}
+			}
+			FROM = {
+				change_estate_land_share = {
+					estate = all
+					share = -0.25
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_mechanic = blood_gathering_mechanic
+				}
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = blood_gathering_mechanic
+					power_type = blood
+					value = 0.5
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = azt_temples_buffs_flag
+				}
+			}
+			add_province_modifier = {
+				name = azt_religious_classes
+				duration = -1
+				hidden = yes
+			}
+		}
+	}
+	on_destroyed = {
+		on_province_tax_building_destroyed_estate_privileges_effect = yes
+		remove_development_from_building = {
+			building = temple
+			type = tax
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = mosque_local_unrest_flag
+				}
+			}
+			remove_province_modifier = turkoman_peaceful_worshipping
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = -2
+				}
+			}
+		}
+		remove_province_modifier = gov_expanded_temple_rights_mod
+		if = {
+			limit = {
+				FROM = {
+					has_country_modifier = mam_mosque_great_mosque_generates_crown_land_modifier
+				}
+			}
+			FROM = {
+				change_estate_land_share = {
+					estate = all
+					share = 0.25
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_mechanic = blood_gathering_mechanic
+				}
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = blood_gathering_mechanic
+					power_type = blood
+					value = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_province_modifier = azt_religious_classes
+			}
+			remove_province_modifier = azt_religious_classes
+		}
+	}
+	on_obsolete = {
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+	}
+	onmap = yes
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		###################
+		# Church Specific #
+		###################
+		#The only other modifier other than tax (already in) it adds missionary strenght, so the AI should consider it when building...
+		modifier = {
+			factor = 5
+			NOT = {
+				religion = owner
+			}
+			NOT = {
+				owner = {
+					has_idea_group = humanist_ideas
+				}
+			}
+		}
+	}
+}
+
+#Tier 2 Taxation - Cathedral
+cathedral = {
+	make_obsolete = temple
+	cost = 250		#VU - Increased from 300 to 500 in v1.36.2.* by San Felipe
+	time = 24
+	modifier = {
+		local_missionary_strength = 0.03
+		local_tax_modifier = 1
+		local_religious_unity_contribution = 0.2
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.15
+		local_core_creation = 0.03
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	#VU AddOn changed price from 300. Part of the comprehensive balance overhaul to adjust buildings to the VU map (with all its new provinces).
+	#VU AddOn changed from 12. Doubling upgraded buildings' build time.
+	on_built = {
+		on_built_tax_building_effect = yes
+		on_province_tax_building_built_estate_privileges_effect = yes
+		add_development_from_upgrading_or_building = {
+			building = cathedral
+			obsolete_building = temple
+			type = tax
+			value = 2
+			upgrade_value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = temples_modifier
+				}
+				owned_by = FROM
+			}
+			add_province_modifier = {
+				name = gov_expanded_temple_rights_mod
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = mosque_local_unrest_flag
+				}
+			}
+			add_province_modifier = {
+				name = turkoman_peaceful_worshipping
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_modifier = mam_mosque_great_mosque_generates_crown_land_modifier
+				}
+			}
+			FROM = {
+				change_estate_land_share = {
+					estate = all
+					share = -0.25
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_mechanic = blood_gathering_mechanic
+				}
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = blood_gathering_mechanic
+					power_type = blood
+					value = 0.5
+				}
+			}
+		}
+	}
+	on_destroyed = {
+		on_province_tax_building_destroyed_estate_privileges_effect = yes
+		remove_development_from_building = {
+			building = cathedral
+			type = tax
+			value = 2
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = mosque_local_unrest_flag
+				}
+			}
+			remove_province_modifier = turkoman_peaceful_worshipping
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = -5
+				}
+			}
+		}
+		remove_province_modifier = gov_expanded_temple_rights_mod
+		if = {
+			limit = {
+				FROM = {
+					has_country_modifier = mam_mosque_great_mosque_generates_crown_land_modifier
+				}
+			}
+			FROM = {
+				change_estate_land_share = {
+					estate = all
+					share = 0.25
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_mechanic = blood_gathering_mechanic
+				}
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = blood_gathering_mechanic
+					power_type = blood
+					value = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_province_modifier = azt_religious_classes
+			}
+			remove_province_modifier = azt_religious_classes
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		###################
+		# Church Specific #
+		###################
+		#The only other modifier other than tax (already in) it adds missionary strenght, so the AI should consider it when building...
+		modifier = {
+			factor = 5
+			NOT = {
+				religion = owner
+			}
+			NOT = {
+				owner = {
+					has_idea_group = humanist_ideas
+				}
+			}
+		}
+	}
+}
+
+#Tier 3 Taxation - Grand Cathedral
+grand_cathedral = {
+	make_obsolete = cathedral
+	cost = 325	#VU - Increased from 400 to 750 in v1.36.2.* by San Felipe
+	time = 36
+	modifier = {
+		local_missionary_strength = 0.05
+		local_tax_modifier = 1.5
+		local_religious_unity_contribution = 0.3
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = 1.5
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+	}
+	on_built = {
+		on_province_tax_building_built_estate_privileges_effect = yes
+		add_development_from_upgrading_or_building = {
+			building = grand_cathedral
+			obsolete_building = cathedral
+			type = tax
+			value = 3
+			upgrade_value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 7
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = temples_modifier
+				}
+				owned_by = FROM
+			}
+			add_province_modifier = {
+				name = gov_expanded_temple_rights_mod
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		on_province_tax_building_destroyed_estate_privileges_effect = yes
+		remove_development_from_building = {
+			building = grand_cathedral
+			type = tax
+			value = 3
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_church_built_clergy_loyalty
+				}
+			}
+			FROM = {
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = -7
+				}
+			}
+		}
+		remove_province_modifier = gov_expanded_temple_rights_mod
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			FROM = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		###################
+		# Church Specific #
+		###################
+		#The only other modifier other than tax (already in) it adds missionary strenght, so the AI should consider it when building...
+		modifier = {
+			factor = 5
+			NOT = {
+				religion = owner
+			}
+			NOT = {
+				owner = {
+					has_idea_group = humanist_ideas
+				}
+			}
+		}
+	}
+}
+
+################################################
+### TRANSPORTATION
+#Tier 1 Transportation - Road System
+road_system = {
+	cost = 50	#VU - Kept at 100 in v1.36.2.* by San Felipe
+	time = 6
+	modifier = {
+		local_friendly_movement_speed = 0.15		#all changed by Don
+		local_development_cost = -0.1
+		trade_value = 0.15
+		trade_goods_size = 0.15
+		allowed_num_of_buildings = 1
+		#VU 2.0 Buffs
+		tax_income = 1.8
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = -2
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_core_creation = 0.02
+	}
+	on_built = {
+		add_development_from_building = {
+			building = road_network
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = road_network
+			type = production
+			value = 1
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#################
+		# Road Specific #
+		#################
+		#
+		modifier = {
+			factor = 3
+			any_neighbor_province = {
+				has_building = road_system
+			}
+		}
+		modifier = {
+			factor = 5
+			is_capital = yes
+		}
+	}
+}
+
+#Tier 2 Transportation - Canal System
+canal_system = {
+	cost = 75	#VU - Increased from 100 to 150 in v1.36.2.* by San Felipe
+	time = 8
+	make_obsolete = road_system
+	modifier = {
+		local_friendly_movement_speed = 0.25
+		local_development_cost = -0.15
+		trade_value = 0.25
+		trade_goods_size = 0.25
+		allowed_num_of_buildings = 1
+		#VU 2.0 Buffs
+		tax_income = 3
+<<<<<<< HEAD
+=======
+		local_governing_cost_increase = -3
+>>>>>>> f3045d807fc43126eb62e0b2881b6582e563f67f
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.15
+		local_core_creation = 0.03
+	}
+	build_trigger = {
+		AND = {
+			#Can only build if province is coastal or a neighbouring province has it
+			OR = {
+				has_port = yes
+				any_neighbor_province = {
+					has_building = canal_system
+				}
+			}
+			#Can't build if province has a terrain not suitable for canals.
+			NOT = {
+				OR = {
+					has_terrain = mountain
+					has_terrain = cold_mountains
+					has_terrain = desert_ranges
+					has_terrain = tundra_terrain
+					has_terrain = glacier
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		##################
+		# Canal Specific #
+		##################
+		#
+		modifier = {
+			factor = 3
+			any_neighbor_province = {
+				has_building = canal_system
+			}
+		}
+		modifier = {
+			factor = 5
+			is_capital = yes
+		}
+	}
+}
+
+#Tier 3 Transportation - Railway System
+railway_system = {
+	cost = 150	#VU - Increased from 250 to 300 in v1.36.2.* by San Felipe
+	time = 12
+	make_obsolete = canal_system
+	#Changed cost from 400. While railways should be expensive, they shouldn't be as expensive as entire buildings.
+	#Changed time from 12 because railways are significantly better than roads and canals.
+	#Removed the DLC requirements so those that don't have them can still have railways.
+	#Change the building triggers to favour terrain restrictions instead of coal production, railway adjacency or rail boom.
+	modifier = {
+		local_friendly_movement_speed = 0.5
+		local_development_cost = -0.25
+		trade_value = 0.5
+		trade_goods_size = 0.5
+		allowed_num_of_buildings = 2
+		#VU 2.0 Buffs
+		tax_income = 6
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_core_creation = 0.05
+	}
+	build_trigger = {
+		#Can't build if province has a terrain not suitable for railways.
+		NOT = {
+			OR = {
+				#has_terrain = mountain       #VU - Hashed these out as it doesn't really make any sense that you can't build railroads in or on top mountains.
+				#has_terrain = cold_mountains
+				#has_terrain = desert_ranges
+				#has_terrain = tundra_terrain
+				has_terrain = glacier
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		####################
+		# Railway Specific #
+		####################
+		#
+		modifier = {
+			factor = 3
+			any_neighbor_province = {
+				has_building = railway_system
+			}
+		}
+		modifier = {
+			factor = 5
+			is_capital = yes
+		}
+	}
+}
+
+################################################
+### COASTAL DEFENCE
+#Tier 1 Coastal - Naval Base
+naval_base = {
+	cost = 250	#VU - Increased from 100 to 250 in v1.36.2.* by San Felipe
+	time = 12
+	build_trigger = {
+		has_port = yes
+	}
+	modifier = {
+		blockade_force_required = 0.5
+		hostile_disembark_speed = 0.5
+		hostile_fleet_attrition = 1
+		block_slave_raid = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.1
+		local_hostile_movement_speed = -0.1
+		local_core_creation = 0.025
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+#Tier 2 Coastal - Naval Arsenal
+naval_arsenal = {
+	cost = 500
+	time = 24
+	build_trigger = {
+		has_port = yes
+	}
+	make_obsolete = naval_base
+	modifier = {
+		blockade_force_required = 1
+		hostile_disembark_speed = 2
+		hostile_fleet_attrition = 5
+		block_slave_raid = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.2
+		local_hostile_movement_speed = -0.2
+		local_core_creation = 0.05
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+#Tier 3 Coastal - Coastal Artillery
+coastal_artillery = {
+	cost = 750
+	time = 36
+	build_trigger = {
+		has_port = yes
+	}
+	make_obsolete = naval_arsenal
+	modifier = {
+		blockade_force_required = 2
+		hostile_disembark_speed = 2
+		hostile_fleet_attrition = 5
+		block_slave_raid = yes
+		#VU 2.0 Debufs
+		local_warscore_cost_modifier = 0.3
+		local_hostile_movement_speed = -0.3
+		local_core_creation = 0.1
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+################################################
+### DEFENSE
+#Tier 1 Fortification - Castle
+fort_15th = {
+	cost = 250	#VU - Increased from 200 to 250 in v1.36.2.* by San Felipe
+	time = 12
+	#VU AddOn changed price from original 200. Castles were way too cheap to build but also too expensive to maintain in VU. Note upkeep is controlled in defines and is generated based on fort level, I believe with reduced fort levels the vanilla .5 per month per level is fine
+	#Time changed from 30 to 24 so fort levels are 2y, 3y, 4y and 5y respectively.
+	modifier = {
+		fort_level = 1
+		#local_unrest = -0.5 #hashed out due to unrest oversaturation
+		local_defensiveness = 0.25
+	}
+	# THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					NOT = {
+						mil_tech = 14
+					}
+					has_government_attribute = on_fort_built_nobles_loyalty
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_maratha
+					}
+					add_estate_loyalty = {
+						estate = estate_maratha
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_rajput
+					}
+					add_estate_loyalty = {
+						estate = estate_rajput
+						loyalty = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_development_of_castles
+				}
+				NOT = {
+					has_province_modifier = estate_nobles_development_of_castles_mod
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_development_of_castles_mod
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = orm_forts_trade_power_buff_flag
+				}
+			}
+			add_province_modifier = {
+				name = orm_forts_buff
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = ned_buffed_forts_flag
+					NOT = {
+						full_idea_group = defensive_ideas
+					}
+				}
+				region = low_countries_region
+			}
+			add_province_modifier = {
+				name = ned_low_countries_fort_buff
+				duration = -1
+				hidden = yes
+			}
+		}
+		else_if = {
+			limit = {
+				owner = {
+					has_country_flag = ned_buffed_forts_flag
+					full_idea_group = defensive_ideas
+				}
+				region = low_countries_region
+			}
+			add_province_modifier = {
+				name = ned_low_countries_fort_buff_buffed
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = ven_defensive_reward_flag
+				}
+				NOT = {
+					has_province_modifier = ven_defensive_stance_modifier
+				}
+			}
+			add_province_modifier = {
+				name = ven_defensive_stance_modifier
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_vegvar_system
+				}
+				any_neighbor_province = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_vegvar_system_modifier
+				duration = -1
+			}
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
+	on_destroyed = {
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_vegvar_system_modifier
+			}
+			remove_province_modifier = estate_nobles_vegvar_system_modifier
+		}
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+		if = {
+			limit = {
+				has_province_modifier = ven_defensive_stance_modifier
+			}
+			remove_province_modifier = ven_defensive_stance_modifier
+		}
+		if = {
+			limit = {
+				has_province_modifier = orm_forts_buff
+			}
+			remove_province_modifier = orm_forts_buff
+		}
+		if = {
+			limit = {
+				has_province_modifier = ned_low_countries_fort_buff
+			}
+			remove_province_modifier = ned_low_countries_fort_buff
+		}
+		if = {
+			limit = {
+				has_province_modifier = ned_low_countries_fort_buff_buffed
+			}
+			remove_province_modifier = ned_low_countries_fort_buff_buffed
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings destroyed!
+	on_obsolete = {
+	}
+	onmap = yes
+	influencing_fort = yes
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#################
+		# Fort Specific #
+		#################
+		#Preventing fort-spam + grasslands attacker dice-roll bonus BS
+		modifier = {
+			factor = 0
+			OR = {
+				any_neighbor_province = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				any_province_in_state = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				has_terrain = grasslands
+			}
+		}
+		modifier = {
+			factor = 2
+			is_capital = yes
+		}
+	}
+}
+
+#Tier 2 Fortification - Bastion
+fort_16th = {
+	cost = 500	#VU - Increased from 400 to 500 in v1.36.2.* by San Felipe
+	time = 24
+	make_obsolete = fort_15th
+	modifier = {
+		fort_level = 2
+		#local_unrest = -1 #Hashed out due to unrest oversaturation
+		local_defensiveness = 0.5
+	}
+	# THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					NOT = {
+						mil_tech = 19
+					}
+					has_government_attribute = on_fort_built_nobles_loyalty
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_maratha
+					}
+					add_estate_loyalty = {
+						estate = estate_maratha
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_rajput
+					}
+					add_estate_loyalty = {
+						estate = estate_rajput
+						loyalty = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_development_of_castles
+				}
+				NOT = {
+					has_province_modifier = estate_nobles_development_of_castles_mod
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_development_of_castles_mod
+				duration = -1
+			}
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
+	on_destroyed = {
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings destroyed!
+	on_obsolete = {
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+	}
+	onmap = yes
+	influencing_fort = yes
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#################
+		# Fort Specific #
+		#################
+		#Preventing fort-spam + grasslands attacker dice-roll bonus BS
+		modifier = {
+			factor = 0
+			OR = {
+				any_neighbor_province = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				any_province_in_state = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				has_terrain = grasslands
+			}
+		}
+		modifier = {
+			factor = 2
+			is_capital = yes
+		}
+	}
+}
+
+#Tier 3 Fortification - Star Fort
+fort_17th = {
+	cost = 750	#VU - Increased from 400 to 750 in v1.36.2.* by San Felipe
+	time = 36
+	make_obsolete = fort_16th
+	modifier = {
+		fort_level = 3
+		#local_unrest = -1.5 #Hashed out due to unrest oversaturation
+		local_defensiveness = 0.75
+	}
+	# THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					NOT = {
+						mil_tech = 19
+					}
+					has_government_attribute = on_fort_built_nobles_loyalty
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_maratha
+					}
+					add_estate_loyalty = {
+						estate = estate_maratha
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_rajput
+					}
+					add_estate_loyalty = {
+						estate = estate_rajput
+						loyalty = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_development_of_castles
+				}
+				NOT = {
+					has_province_modifier = estate_nobles_development_of_castles_mod
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_development_of_castles_mod
+				duration = -1
+			}
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
+	on_destroyed = {
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings destroyed!
+	on_obsolete = {
+	}
+	onmap = yes
+	influencing_fort = yes
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#################
+		# Fort Specific #
+		#################
+		#Preventing fort-spam + grasslands attacker dice-roll bonus BS
+		modifier = {
+			factor = 0
+			OR = {
+				any_neighbor_province = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				any_province_in_state = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				has_terrain = grasslands
+			}
+		}
+		modifier = {
+			factor = 2
+			is_capital = yes
+		}
+	}
+}
+
+#Tier 4 Fortification - Fortress
+fort_18th = {
+	cost = 1000	#VU - Increased from 800 to 1000 in v1.36.2.* by San Felipe
+	time = 48
+	#VU AddOn cost changed from original 800
+	#Time changed from 72 to 96 so fort levels are 1y, 2y, 3y and 4y respectively.
+	make_obsolete = fort_17th
+	modifier = {
+		fort_level = 5
+		#local_unrest = -2 #Hashed out due to unrest oversaturation
+		local_defensiveness = 1
+	}
+	# THIS = Province, FROM = Builder(not nessecairly owner, can be overlord)
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = on_fort_built_nobles_loyalty
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_maratha
+					}
+					add_estate_loyalty = {
+						estate = estate_maratha
+						loyalty = 5
+					}
+				}
+				if = {
+					limit = {
+						has_estate = estate_rajput
+					}
+					add_estate_loyalty = {
+						estate = estate_rajput
+						loyalty = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_development_of_castles
+				}
+				NOT = {
+					has_province_modifier = estate_nobles_development_of_castles_mod
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_development_of_castles_mod
+				duration = -1
+			}
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
+	on_destroyed = {
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+	}
+	# THIS = Province, FROM = Destroyer, Will not be called on buildings destroyed!
+	on_obsolete = {
+	}
+	onmap = yes
+	influencing_fort = yes
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#################
+		# Fort Specific #
+		#################
+		#Preventing fort-spam + grasslands attacker dice-roll bonus BS
+		modifier = {
+			factor = 0
+			OR = {
+				any_neighbor_province = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				any_province_in_state = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+				has_terrain = grasslands
+			}
+		}
+		modifier = {
+			factor = 2
+			is_capital = yes
+		}
+	}
+}
+
+################################################
+### FORTIFICATION
+#Tier 1 Fortification - Trench
+#trench = {
+#	cost = 50
+#	time = 2
+#	#Not possible to build a trench if the province already has a fort.
+#	build_trigger = {
+#		NOT = {
+#			OR = {
+#				has_building = fort_15th
+#				has_building = fort_16th
+#				has_building = fort_17th
+#				has_building = fort_18th
+#			}
+#		}
+#	}
+#	modifier = {
+#		#Trench is equal in defense to a Bastion (Tier 2 Fort) with the exception of not reducing unrest.
+#		fort_level = 2
+#		local_defensiveness = 0.5
+#		#Trenches weren't like buildings that took space near city centers, so costing building slots doesn't really suit them.
+#		allowed_num_of_buildings = 1
+#		#While many died in trenches due to warfare, deaths caused by their terrible conditions (disease) were just as common.
+#		attrition = 10
+#		max_attrition = 10
+#		#To avoid making a trench be just like a fort but cheaper and faster, they're devastating to the development of provinces.
+#		local_monthly_devastation = 0.5
+#		local_development_cost = 0.5
+#	}
+#	onmap = yes
+#	influencing_fort = yes
+#	ai_will_do = {
+#		factor = 1
+#		modifier = {
+#			factor = 0
+#			NOT = {
+#				any_neighbor_province = {
+#					NOT = {
+#						controller = {
+#							tag = ROOT
+#						}
+#					}
+#				}
+#			}
+#		}
+#		#AI will only be build during a war
+#		modifier = {
+#			factor = 0
+#			owner = {
+#				is_at_war = no
+#			}
+#		}
+#		#AI will build in provinces that border enemy or occupied provinces
+#		modifier = {
+#			factor = 2
+#			any_neighbor_province = {
+#				controller = {
+#					war_with = ROOT
+#				}
+#			}
+#		}
+#	}
+#}
+################################################
+### MANUFACTORY
+manufactory = {
+	cost = 250
+	time = 24	#VU AddOn changed from 60. 5 year construction times are way out of line with all other buildings, and quite unneccessary, I think. Reducing this to comparable with other buildings.
+	modifier = {
+		trade_goods_size = 1
+	}
+}
+
+#If trade good assignment changes, also update scripted trigger "has_manufactory trigger"!
+wharf = {
+	manufactory = {
+		salt
+		fish
+		naval_supplies
+		tropical_wood
+		seafood
+		tar
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		naval_forcelimit = 1		#VU AddOn new - Just a fun little new bonus
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = fish
+			trade_goods = naval_supplies
+			trade_goods = salt
+			trade_goods = seafood
+			trade_goods = tar
+			trade_goods = tropical_wood
+		}
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+weapons = {
+	manufactory = {
+		copper
+		iron
+		lead
+		mercury
+		tin
+		metalworking
+		munitions
+		zinc
+		cannon
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		land_forcelimit = 0.5		#VU AddOn new - Just a fun little new bonus
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = cannon
+			trade_goods = copper
+			trade_goods = iron
+			trade_goods = lead
+			trade_goods = mercury
+			trade_goods = metalworking
+			trade_goods = munitions
+			trade_goods = tin
+			trade_goods = zinc
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+textile = {
+	manufactory = {
+		wool
+		cloth
+		silk
+		books
+		dyes
+		indigo
+		uniforms
+		lace
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		local_tax_modifier = 0.25		#VU AddOn new - Just a fun little new bonus
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = books
+			trade_goods = cloth
+			trade_goods = dyes
+			trade_goods = indigo
+			trade_goods = silk
+			trade_goods = uniforms
+			trade_goods = wool
+			trade_goods = lace
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+plantations = {
+	manufactory = {
+		coffee
+		cotton
+		sugar
+		tobacco
+		tea
+		cocoa
+		palm_oil
+		saffron
+		cinnamon
+		cloves
+		opium
+		dates
+		vanilla
+		nutmeg
+		chocolate
+	}
+	modifier = {
+		#Changed for VU: With different effects of slaves/indentured servants the plantation gets better and better
+		#As I don't know how it interacts if the same modifier is 2 times active, I have added them together within the if-clause -Lord_Bowser
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		local_production_efficiency = 0.25		#VU AddOn new - Just a fun little new bonus#
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = chocolate
+			trade_goods = cinnamon
+			trade_goods = cloves
+			trade_goods = cocoa
+			trade_goods = coffee
+			trade_goods = cotton
+			trade_goods = dates
+			trade_goods = nutmeg
+			trade_goods = opium
+			trade_goods = palm_oil
+			trade_goods = saffron
+			trade_goods = sugar
+			trade_goods = tea
+			trade_goods = tobacco
+			trade_goods = vanilla
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+tradecompany = {
+	manufactory = {
+		ivory
+		slaves
+		spices
+		fur
+		canned_goods
+		cider
+		cloves
+		incense
+		whaling
+		beer
+		rum
+		jade
+		marble
+		gunpowder
+		cheese
+		carpet
+		exotic_animals
+		sulfur
+		leather
+		woodworking
+		jewellery
+		maple_syrup
+		sea_turtle
+		cigars
+		marble_sculpture
+		jade_sculptures
+		exotic_fur
+		fur_clothing
+		String_Instruments
+		sweet_confectioneries
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		province_trade_power_modifier = 0.5		#VU AddOn new - Just a fun little new bonus
+		#Changed for VU: With different effects of slaves/indentured servants more spices and cloves get produced
+		#As I don't know how it interacts if the same modifier is 2 times active, I have added them together within the if-clause -Lord_Bowser
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = beer
+			trade_goods = canned_goods
+			trade_goods = cider
+			trade_goods = carpet
+			trade_goods = cheese
+			trade_goods = cigars
+			trade_goods = cloves
+			trade_goods = exotic_animals
+			trade_goods = fur
+			trade_goods = gunpowder
+			trade_goods = incense
+			trade_goods = ivory
+			trade_goods = jade
+			trade_goods = jewellery
+			trade_goods = leather
+			trade_goods = maple_syrup
+			trade_goods = marble
+			trade_goods = marble_sculpture
+			trade_goods = rum
+			trade_goods = sea_turtle
+			trade_goods = slaves
+			trade_goods = spices
+			trade_goods = sulfur
+			trade_goods = sweet_confectioneries
+			trade_goods = whaling
+			trade_goods = woodworking
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+farm_estate = {
+	manufactory = {
+		beer
+		cider
+		fruit
+		grain
+		livestock
+		wine
+		apiculture
+		rice
+		horses
+		olive_oil
+		camel
+		elephants
+		citrus
+		potato
+		maize
+		tomato
+		champagne_bottle
+		llama
+		millet
+		vegetables		#Makes sense to have vegetables in a farm doesn't it ?
+		vodka
+		whiskey
+	}
+	modifier = {
+		trade_goods_size = 1		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.5		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		local_production_efficiency = 0.5		#VU AddOn new - Just a fun little new bonus
+		#Changed for VU: With different effects of serfs farm estates can produce more
+		#As I don't know how it interacts if the same modifier is 2 times active, I have added them together within the if-clause -Lord_Bowser
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = geo_wine_manufactory_flag
+				}
+			}
+			add_base_production = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = geo_wine_manufactory_flag
+				}
+			}
+			add_base_production = -1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = apiculture
+			trade_goods = beer
+			trade_goods = cider
+			trade_goods = camel
+			trade_goods = champagne_bottle
+			trade_goods = citrus
+			trade_goods = elephants
+			trade_goods = fruit
+			trade_goods = grain
+			trade_goods = horses
+			trade_goods = livestock
+			trade_goods = llama
+			trade_goods = maize
+			trade_goods = olive_oil
+			trade_goods = potato
+			trade_goods = rice
+			trade_goods = tomato
+			trade_goods = vegetables			#Makes sense to have vegetables in a farm doesn't it ?
+			trade_goods = vodka
+			trade_goods = wine
+			trade_goods = whiskey
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+mills = {
+	manufactory = {
+		paper
+		amber
+		lacquerware
+		diamonds
+		gems
+		pearls
+		tropical_wood
+		glass
+		chinaware
+		lumber
+		ebony
+		amber
+		steam_engine
+		optics
+		bamboo
+		pottery
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		local_tax_modifier = 0.25		#VU AddOn new - Just a fun little new bonus
+	}
+	onmap = yes
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		OR = {
+			trade_goods = amber
+			trade_goods = chinaware
+			trade_goods = diamonds
+			trade_goods = ebony
+			trade_goods = gems
+			trade_goods = glass
+			trade_goods = lumber
+			trade_goods = optics
+			trade_goods = paper
+			trade_goods = pearls
+			trade_goods = steam_engine
+			trade_goods = tropical_wood
+			trade_goods = bamboo
+			trade_goods = pottery
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+furnace = {
+	manufactory = {
+		coal
+	}
+	potential = {
+		has_dlc = "Rule Britannia"
+	}
+	modifier = {
+		trade_goods_size = 1.5		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 1		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		global_trade_goods_size_modifier = 0.05		#VU AddOn changed from 0.05. This was just too huge, especially with all the new provinces.
+	}
+	onmap = yes
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	keep_trigger = {
+		trade_goods = coal
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+soldier_households = {
+	manufactory = {
+		all
+	}
+	bonus_manufactory = {
+		# Will apply an extra modifier if these goods
+		beer
+		cider
+		grain
+		fish
+		livestock
+		wine
+		apiculture
+		rice
+		horses
+		olive_oil
+		camel
+		elephants
+		citrus
+		potato
+		maize
+		llama
+		champagne_bottle
+		millet
+		vodka
+		whiskey
+	}
+	modifier = {
+		local_manpower = 0.50
+		land_forcelimit = 0.5
+		local_regiment_cost = -0.15
+	}
+	bonus_modifier = {
+		local_manpower = 0.50
+		land_forcelimit = 0.5
+		local_regiment_cost = -0.15
+	}
+	onmap = no
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	on_built = {
+		add_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		add_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_attribute = improved_military_buildings
+				}
+			}
+			add_province_modifier = {
+				name = wei_suo_system_reform_soldier_households_modifier
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = manufactory
+			type = production
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+		if = {
+			limit = {
+				has_province_modifier = wei_suo_system_reform_soldier_households_modifier
+			}
+			remove_province_modifier = wei_suo_system_reform_soldier_households_modifier
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+ramparts = {
+	manufactory = {
+		all
+	}
+	modifier = {
+		local_hostile_attrition = 0.5
+		local_defensiveness = 0.15
+		local_defender_dice_roll_bonus = 1
+	}
+	onmap = no
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	on_built = {
+		add_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+		if = {
+			limit = {
+				owner = {
+					has_estate_privilege = estate_nobles_development_of_castles
+				}
+				NOT = {
+					has_province_modifier = estate_nobles_development_of_castles_ramparts_mod
+				}
+			}
+			add_province_modifier = {
+				name = estate_nobles_development_of_castles_ramparts_mod
+				duration = -1
+			}
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				has_province_modifier = per_reinforced_defenses
+			}
+			remove_province_modifier = per_reinforced_defenses
+		}
+		remove_dev_from_building = {
+			building = manufactory
+			type = manpower
+			value = 1
+		}
+		if = {
+			limit = {
+				has_province_modifier = estate_nobles_development_of_castles_ramparts_mod
+			}
+			remove_province_modifier = estate_nobles_development_of_castles_ramparts_mod
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+		#####################
+		# Ramparts Specific #
+		#####################
+		modifier = {
+			factor = 2
+			has_building = fort_15th
+		}
+		modifier = {
+			factor = 3
+			has_building = fort_16th
+		}
+		modifier = {
+			factor = 4
+			has_building = fort_17th
+		}
+		modifier = {
+			factor = 5
+			has_building = fort_18th
+		}
+	}
+}
+
+impressment_offices = {
+	manufactory = {
+		all
+	}
+	bonus_manufactory = {
+		# Will apply an extra modifier if these goods
+		salt
+		beer
+		cider
+		fish
+		lumber
+		naval_supplies
+		tropical_wood
+		seafood
+		tar
+	}
+	build_trigger = {
+		has_port = yes
+	}
+	modifier = {
+		local_sailors = 150
+		ship_recruit_speed = -0.1
+		local_ship_cost = -0.05
+	}
+	bonus_modifier = {
+		local_sailors = 150
+		ship_recruit_speed = -0.1
+		local_ship_cost = -0.05
+	}
+	onmap = no
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	on_built = {
+		add_development_from_building = {
+			building = impressment_offices
+			type = manpower
+			value = 2
+		}
+		add_dev_from_building = {
+			building = impressment_offices
+			type = manpower
+			value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = impressment_offices
+			type = manpower
+			value = 2
+		}
+		remove_dev_from_building = {
+			building = impressment_offices
+			type = manpower
+			value = 1
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#ECONOMY 101
+		#AI avoids building with loans
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 3
+			}
+		}
+		modifier = {
+			factor = 0.3
+			owner = {
+				num_of_loans = 2
+			}
+		}
+		modifier = {
+			factor = 0.5
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids building when in deficit
+		modifier = {
+			factor = 0.75
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money
+		modifier = {
+			factor = 0.75
+			owner = {
+				NOT = {
+					treasury = 1400
+				}
+			}
+		}
+	}
+}
+
+state_house = {
+	manufactory = {
+		all
+	}
+	bonus_manufactory = {
+		# Will apply an extra modifier if these goods
+		paper
+		gems
+		tropical_wood
+		glass
+		chinaware
+		diamonds
+		marble
+		gems
+		jade
+		jewellery
+		lumber
+		ebony
+		amber
+		steam_engine
+		optics
+	}
+	build_trigger = {
+		NOT = {
+			area_for_scope_province = {
+				owner = {
+					tag = ROOT
+				}
+				OR = {
+					has_building = state_house
+					has_construction = state_house
+				}
+			}
+		}
+	}
+	keep_trigger = {
+		NOT = {
+			area_for_scope_province = {
+				NOT = {
+					province_id = root
+				}
+				owner = {
+					tag = ROOT
+				}
+				OR = {
+					has_building = state_house
+					has_construction = state_house
+				}
+			}
+		}
+	}
+	modifier = {
+		statewide_governing_cost = -0.2
+		min_local_autonomy = -5
+		local_governing_cost = -0.15
+	}
+	bonus_modifier = {
+		statewide_governing_cost = -0.2
+		min_local_autonomy = -5
+		local_governing_cost = -0.15
+	}
+	onmap = no
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	on_built = {
+		add_development_from_building = {
+			building = state_house
+			type = tax
+			value = 2
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = state_house
+			type = tax
+			value = 2
+		}
+	}
+	on_obsolete = {
+	}
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}
+
+oil_well = {
+	manufactory = {
+		oil
+	}
+	potential = {
+		has_dlc = "Rule Britannia"
+	}
+	keep_trigger = {
+		trade_goods = oil
+	}
+	modifier = {
+		trade_goods_size = 0.4		#VU Addon Note - Alright, alright. I'm giving in. It makes no sense, but vanilla apparently didn't bother to code in compatibility with the modifier version, so I have little choice but to give a flat bonus here.
+		trade_goods_size_modifier = 0.25		#VU AddOn changed from flat trade good size increase. Logic above at the top of Manufactories entries.
+		monthly_splendor = 0.25		#VU AddOn new - Just a fun little new bonus
+	}
+	onmap = yes
+	show_separate = yes	# Means as a manufactory it will be shown according to the old way
+	ai_will_do = {
+		factor = 1
+		#############################
+		# Don's Improved Economy AI #
+		#############################
+		#AI doesn't build if it's in debt
+		modifier = {
+			factor = 0
+			owner = {
+				num_of_loans = 1
+			}
+		}
+		#AI avoids builfing while in deficit
+		modifier = {
+			factor = 0.25
+			owner = {
+				is_in_deficit = yes
+			}
+		}
+		#AI will try to stockpile some amount of money, now based on Gov rank
+		modifier = {
+			factor = 0.25
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					NOT = {
+						treasury = 500
+					}
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					NOT = {
+						treasury = 250
+					}
+				}
+				else = {
+					NOT = {
+						treasury = 150
+					}
+				}
+			}
+		}
+		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
+		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
+		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
+		modifier = {
+			factor = 0.25
+			OR = {
+				has_climate = arctic
+				has_climate = arid
+				has_climate = tropical
+			}
+		}
+		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 750
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 500
+				}
+				else = {
+					treasury = 250
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1000
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 750
+				}
+				else = {
+					treasury = 500
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				if = {
+					limit = {
+						government_rank = 9
+					}
+					treasury = 1500
+				}
+				else_if = {
+					limit = {
+						government_rank = 8
+					}
+					treasury = 1250
+				}
+				else = {
+					treasury = 750
+				}
+			}
+		}
+	}
+}

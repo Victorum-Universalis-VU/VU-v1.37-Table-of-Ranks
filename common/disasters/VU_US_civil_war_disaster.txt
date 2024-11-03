@@ -1,0 +1,77 @@
+US_civil_war = {
+	ended_by_country_breaking_to_rebels = no
+	potential = {
+		OR = {
+			tag = USA
+		}
+		NOT = { has_country_flag = us_civil_war_over }
+		is_free_or_tributary_trigger = yes
+	}
+	can_start = {
+		has_any_disaster = no
+		custom_trigger_tooltip = {
+			any_province = { is_core = CSA }	
+			tooltip = US_civil_war_trigger_tt
+		}
+	}	
+	can_stop = { always = no }
+	progress = {
+		modifier = {
+			factor = 1
+			custom_trigger_tooltip = {
+				tooltip = US_civil_war_progress_1
+				calc_true_if = {
+					all_province = { is_core = CSA }
+					amount = 5
+				}
+			}
+		}
+		modifier = {
+			factor = 4
+			custom_trigger_tooltip = {
+				tooltip = US_civil_war_progress_2
+				calc_true_if = {
+					all_province = { is_core = CSA }
+					amount = 10
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			custom_trigger_tooltip = {
+				tooltip = US_civil_war_progress_3
+				calc_true_if = {
+					all_province = { is_core = CSA }
+					amount = 25
+				}
+			}
+		}
+	}
+	modifier = {
+		global_unrest = 5
+		production_efficiency = -0.25
+		global_trade_goods_size_modifier = -0.25
+		global_manpower_modifier = -0.25
+		manpower_recovery_speed = -0.25
+	}	
+	
+	can_end = {
+		NOT = { num_of_rebel_armies = 1 }
+		NOT = { num_of_rebel_controlled_provinces = 1 }
+		stability = 1
+		NOT = { exists = CSA }
+		hidden_trigger = { has_country_flag = started_civil_war }
+	}
+	
+	on_start = lotf_events.13
+	on_end = lotf_events.14
+	
+	on_monthly = {
+		events = { }
+		random_events = {
+			1000 = 0
+			100 = lotf_events.20
+		}
+	}
+}
+

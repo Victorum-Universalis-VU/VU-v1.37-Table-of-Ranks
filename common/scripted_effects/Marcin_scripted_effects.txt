@@ -1,0 +1,1040 @@
+#Unsorted Scripted effects:
+
+#General effect for extending or adding province modifier
+#Province Scope
+
+update_goods = {
+	set_variable = { which = $GOODS$ value = 0.00 }          	
+	set_variable = { which = $GOODS$_total value = 0.00 }
+
+	every_owned_province = { 
+		limit = {
+			trade_goods = $GOODS$
+		}
+
+		export_to_variable = {
+			variable_name = $GOODS$      
+			value = modifier:trade_goods_size                         
+		}	
+		
+		export_to_variable = {
+			variable_name = tradegood_modifier     
+			value = modifier:trade_goods_size_modifier                        
+		}
+		
+		export_to_variable = {
+			variable_name = tradegood_modifier_glob    
+			value = modifier:global_trade_goods_size_modifier 
+			who = owner 
+		}
+		
+		change_variable = {            
+			which = tradegood_modifier 
+			which = tradegood_modifier_glob  
+		}
+
+		multiply_variable = {
+			which = tradegood_modifier
+			which = $GOODS$ 
+		}
+
+		change_variable = {            
+			which = $GOODS$ 
+			which = tradegood_modifier 
+		}
+		
+		owner = {
+			change_variable = {            
+				which = $GOODS$ 
+				which = PREV  
+			}
+		}
+	}
+
+	## NEW TEST STUFF
+	if = {
+		limit = { is_subject = no }
+		change_variable = {            
+			which = $GOODS$
+			which = from_subjects_$GOODS$  
+		}
+		
+		change_variable = {            
+			which = $GOODS$_total 
+			which = $GOODS$  
+		}
+	}
+	else = {
+		change_variable = {            
+			which = $GOODS$_total 
+			which = $GOODS$  
+		}
+		
+		subtract_variable = {            
+			which = $GOODS$
+			which = from_subjects_$GOODS$  
+		}	
+	}
+	##
+
+	subtract_variable = {            
+		which = $GOODS$
+		which = $GOODS$_used
+	}
+
+}
+
+update_goods_subjects = {	
+	owner = {
+		overlord = { 
+			set_variable = { which = from_subjects_$GOODS$ value = 0.00 } 
+			every_subject_country = { 
+				set_variable = { which = from_subjects_$GOODS$ value = 0.00 }
+				every_owned_province = { 
+					limit = { 
+						trade_goods = $GOODS$ 
+						has_province_modifier = import_from_subjects_modifier
+					}	
+					owner = {
+						set_variable = {            
+							which = import_$GOODS$ 
+							value = 0
+						}
+					}
+					ROOT = {
+						export_to_variable = {
+							variable_name = $GOODS$      
+							value = modifier:trade_goods_size                         
+						}	
+						
+						export_to_variable = {
+							variable_name = tradegood_modifier     
+							value = modifier:trade_goods_size_modifier                        
+						}
+
+						multiply_variable = {
+							which = tradegood_modifier
+							which = $GOODS$ 
+						}
+		
+						change_variable = {            
+							which = $GOODS$ 
+							which = tradegood_modifier 
+						}	
+						
+						set_variable = {            
+							which = import_$GOODS$
+							which = $GOODS$ 
+						}
+					}
+					owner = {
+						change_variable = {            
+							which = import_$GOODS$  
+							which = PREV
+						}
+						
+						change_variable = {            
+							which = from_subjects_$GOODS$ 
+							which = import_$GOODS$  
+						}		
+						overlord = {
+							change_variable = {            
+								which = from_subjects_$GOODS$ 
+								which = PREV  
+							}
+						}	
+					}	
+				}
+			}
+		}
+	}
+}
+
+update_goods_subjects_monthly = {	
+	FROM = {
+		set_variable = { which = from_subjects_$GOODS$ value = 0.00 } 
+		every_subject_country = { 
+			set_variable = { which = from_subjects_$GOODS$ value = 0.00 }
+			every_owned_province = { 
+				limit = { 
+					trade_goods = $GOODS$ 
+					has_province_modifier = import_from_subjects_modifier
+				}	
+				owner = {
+					set_variable = {            
+						which = import_$GOODS$ 
+						value = 0
+					}
+				}
+				ROOT = {
+					export_to_variable = {
+						variable_name = $GOODS$      
+						value = modifier:trade_goods_size                         
+					}	
+					
+					export_to_variable = {
+						variable_name = tradegood_modifier     
+						value = modifier:trade_goods_size_modifier                        
+					}
+					
+					multiply_variable = {
+						which = tradegood_modifier
+						which = $GOODS$ 
+					}
+		
+					change_variable = {            
+						which = $GOODS$ 
+						which = tradegood_modifier 
+					}	
+					
+					set_variable = {            
+						which = import_$GOODS$
+						which = $GOODS$ 
+					}
+				}
+				owner = {
+					change_variable = {            
+						which = import_$GOODS$  
+						which = PREV
+					}
+					
+					change_variable = {            
+						which = from_subjects_$GOODS$ 
+						which = import_$GOODS$  
+					}		
+					overlord = {
+						change_variable = {            
+							which = from_subjects_$GOODS$ 
+							which = PREV  
+						}
+					}	
+				}	
+			}
+		}
+	}
+}
+
+
+
+update_goods_subjects_province = {	
+	set_variable = {            
+		which = import_$GOODS$ 
+		value = 0
+	}
+	every_owned_province = {
+		limit = {
+			trade_goods = $GOODS$ 
+			has_province_modifier = import_from_subjects_modifier
+		}
+		export_to_variable = {
+			variable_name = $GOODS$      
+			value = modifier:trade_goods_size                         
+		}	
+		
+		export_to_variable = {
+			variable_name = tradegood_modifier     
+			value = modifier:trade_goods_size_modifier                        
+		}
+		
+		set_variable = {            
+			which = import_$GOODS$ 
+			value = 0
+		}
+		
+		set_variable = {            
+			which = $GOODS$_modifier 
+			which = $GOODS$
+		}
+		
+		multiply_variable = {
+			which = $GOODS$_modifier 
+			which = tradegood_modifier
+		}
+		
+		change_variable = {            
+			which = $GOODS$ 
+			which = $GOODS$_modifier  
+		}	
+		
+		change_variable = {            
+			which = import_$GOODS$
+			which = $GOODS$ 
+		}
+	
+		owner = {
+			change_variable = {            
+				which = import_$GOODS$  
+				which = PREV
+			}
+			
+			subtract_variable = {            
+				which = from_subjects_$GOODS$ 
+				which = import_$GOODS$ 
+			}		
+		}	
+	}
+}
+
+goods_save = {
+	if = {
+		limit = { trade_goods = grain}
+		set_variable = { which = goods_num value = 1 }
+	}
+	else_if = {
+		limit = { trade_goods = wine}
+		set_variable = { which = goods_num value = 2 }
+	}
+	else_if = {
+		limit = { trade_goods = wool}
+		set_variable = { which = goods_num value = 3 }
+	}
+	else_if = {
+		limit = { trade_goods = cloth}
+		set_variable = { which = goods_num value = 4 }
+	}
+	else_if = {
+		limit = { trade_goods = fish}
+		set_variable = { which = goods_num value = 5 }
+	}
+	else_if = {
+		limit = { trade_goods = fur}
+		set_variable = { which = goods_num value = 6 }
+	}
+	else_if = {
+		limit = { trade_goods = salt}
+		set_variable = { which = goods_num value = 7 }
+	}
+	else_if = {
+		limit = { trade_goods = naval_supplies}
+		set_variable = { which = goods_num value = 8 }
+	}
+	else_if = {
+		limit = { trade_goods = copper}
+		set_variable = { which = goods_num value = 9 }
+	}
+	else_if = {
+		limit = { trade_goods = gold}
+		set_variable = { which = goods_num value = 10}
+	}
+	else_if = {
+		limit = { trade_goods = iron}
+		set_variable = { which = goods_num value = 11}
+	}
+	else_if = {
+		limit = { trade_goods = slaves}
+		set_variable = { which = goods_num value = 12}
+	}
+	else_if = {
+		limit = { trade_goods = ivory}
+		set_variable = { which = goods_num value = 13}
+	}
+	else_if = {
+		limit = { trade_goods = tea}
+		set_variable = { which = goods_num value = 14}
+	}
+	else_if = {
+		limit = { trade_goods = chinaware}
+		set_variable = { which = goods_num value = 15}
+	}
+	else_if = {
+		limit = { trade_goods = spices}
+		set_variable = { which = goods_num value = 16}
+	}
+	else_if = {
+		limit = { trade_goods = coffee}
+		set_variable = { which = goods_num value = 17}
+	}
+	else_if = {
+		limit = { trade_goods = cotton}
+		set_variable = { which = goods_num value = 18}
+	}
+	else_if = {
+		limit = { trade_goods = sugar}
+		set_variable = { which = goods_num value = 19}
+	}
+	else_if = {
+		limit = { trade_goods = tobacco}
+		set_variable = { which = goods_num value = 20}
+	}
+	else_if = {
+		limit = { trade_goods = cocoa}
+		set_variable = { which = goods_num value = 21}
+	}
+	else_if = {
+		limit = { trade_goods = silk}
+		set_variable = { which = goods_num value = 22}
+	}
+	else_if = {
+		limit = { trade_goods = dyes}
+		set_variable = { which = goods_num value = 23}
+	}
+	else_if = {
+		limit = { trade_goods = tropical_wood}
+		set_variable = { which = goods_num value = 24}
+	}
+	else_if = {
+		limit = { trade_goods = livestock}
+		set_variable = { which = goods_num value = 25}
+	}
+	else_if = {
+		limit = { trade_goods = incense}
+		set_variable = { which = goods_num value = 26}
+	}
+	else_if = {
+		limit = { trade_goods = glass}
+		set_variable = { which = goods_num value = 27}
+	}
+	else_if = {
+		limit = { trade_goods = paper}
+		set_variable = { which = goods_num value = 28}
+	}
+	else_if = {
+		limit = { trade_goods = gems}
+		set_variable = { which = goods_num value = 29}
+	}
+	else_if = {
+		limit = { trade_goods = coal}
+		set_variable = { which = goods_num value = 30}
+	}
+	else_if = {
+		limit = { trade_goods = beer}
+		set_variable = { which = goods_num value = 31}
+	}
+	else_if = {
+		limit = { trade_goods = cider}
+		set_variable = { which = goods_num value = 31}
+	}
+	else_if = {
+		limit = { trade_goods = apiculture}
+		set_variable = { which = goods_num value = 32}
+	}
+	else_if = {
+		limit = { trade_goods = whaling}
+		set_variable = { which = goods_num value = 33}
+	}
+	else_if = {
+		limit = { trade_goods = lumber}
+		set_variable = { which = goods_num value = 34}
+	}
+	else_if = {
+		limit = { trade_goods = palm_oil}
+		set_variable = { which = goods_num value = 35}
+	}
+	else_if = {
+		limit = { trade_goods = cinnamon}
+		set_variable = { which = goods_num value = 36}
+	}
+	else_if = {
+		limit = { trade_goods = saffron}
+		set_variable = { which = goods_num value = 37}
+	}
+	else_if = {
+		limit = { trade_goods = rice}
+		set_variable = { which = goods_num value = 38}
+	}
+	else_if = {
+		limit = { trade_goods = opium}
+		set_variable = { which = goods_num value = 39}
+	}
+	else_if = {
+		limit = { trade_goods = rum}
+		set_variable = { which = goods_num value = 40}
+	}
+	else_if = {
+		limit = { trade_goods = horses}
+		set_variable = { which = goods_num value = 41}
+	}
+	else_if = {
+		limit = { trade_goods = olive_oil}
+		set_variable = { which = goods_num value = 42}
+	}
+	else_if = {
+		limit = { trade_goods = amber}
+		set_variable = { which = goods_num value = 43}
+	}
+	else_if = {
+		limit = { trade_goods = jade}
+		set_variable = { which = goods_num value = 44}
+	}
+	else_if = {
+		limit = { trade_goods = marble}
+		set_variable = { which = goods_num value = 45}
+	}
+	else_if = {
+		limit = { trade_goods = lead}
+		set_variable = { which = goods_num value = 46}
+	}
+	else_if = {
+		limit = { trade_goods = cloves}
+		set_variable = { which = goods_num value = 47}
+	}
+	else_if = {
+		limit = { trade_goods = mercury}
+		set_variable = { which = goods_num value = 48}
+	}
+	else_if = {
+		limit = { trade_goods = camel}
+		set_variable = { which = goods_num value = 49}
+	}
+	else_if = {
+		limit = { trade_goods = gunpowder}
+		set_variable = { which = goods_num value = 50}
+	}
+	else_if = {
+		limit = { trade_goods = elephants}
+		set_variable = { which = goods_num value = 51}
+	}
+	else_if = {
+		limit = { trade_goods = tin}
+		set_variable = { which = goods_num value = 52}
+	}
+	else_if = {
+		limit = { trade_goods = dates}
+		set_variable = { which = goods_num value = 53}
+	}
+	else_if = {
+		limit = { trade_goods = cheese}
+		set_variable = { which = goods_num value = 54}
+	}
+	else_if = {
+		limit = { trade_goods = citrus}
+		set_variable = { which = goods_num value = 55}
+	}
+	else_if = {
+		limit = { trade_goods = seafood}
+		set_variable = { which = goods_num value = 56}
+	}
+	else_if = {
+		limit = { trade_goods = carpet}
+		set_variable = { which = goods_num value = 57}
+	}
+	else_if = {
+		limit = { trade_goods = maize}
+		set_variable = { which = goods_num value = 58}
+	}
+	else_if = {
+		limit = { trade_goods = pearls}
+		set_variable = { which = goods_num value = 59}
+	}
+	else_if = {
+		limit = { trade_goods = silver}
+		set_variable = { which = goods_num value = 60}
+	}
+	else_if = {
+		limit = { trade_goods = exotic_animals}
+		set_variable = { which = goods_num value = 61}
+	}
+	else_if = {
+		limit = { trade_goods = vanilla}
+		set_variable = { which = goods_num value = 62}
+	}
+	else_if = {
+		limit = { trade_goods = ebony}
+		set_variable = { which = goods_num value = 63}
+	}
+	else_if = {
+		limit = { trade_goods = tar}
+		set_variable = { which = goods_num value = 64}
+	}
+	else_if = {
+		limit = { trade_goods = sulfur}
+		set_variable = { which = goods_num value = 65}
+	}
+	else_if = {
+		limit = { trade_goods = maple_syrup}
+		set_variable = { which = goods_num value = 66}
+	}
+	else_if = {
+		limit = { trade_goods = potato}
+		set_variable = { which = goods_num value = 67}
+	}
+	else_if = {
+		limit = { trade_goods = zinc}
+		set_variable = { which = goods_num value = 68}
+	}
+	else_if = {
+		limit = { trade_goods = tomato}
+		set_variable = { which = goods_num value = 69}
+	}
+	else_if = {
+		limit = { trade_goods = champagne_bottle }
+		set_variable = { which = goods_num value = 70}
+	}
+	else_if = {
+		limit = { trade_goods = llama}
+		set_variable = { which = goods_num value = 71}
+	}
+	else_if = {
+		limit = { trade_goods = indigo}
+		set_variable = { which = goods_num value = 72}
+	}
+	else_if = {
+		limit = { trade_goods = sea_turtle}
+		set_variable = { which = goods_num value = 73}
+	}
+	else_if = {
+		limit = { trade_goods = nutmeg}
+		set_variable = { which = goods_num value = 74}
+	}
+	else_if = {
+		limit = { trade_goods = millet}
+		set_variable = { which = goods_num value = 75}
+	}
+	else_if = {
+		limit = { trade_goods = exotic_fur}
+		set_variable = { which = goods_num value = 76}
+	}
+	
+}
+
+goods_back = {
+	if = {
+		limit = { is_variable_equal = { which = goods_num value = 1 } }
+		change_trade_goods = grain	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 2 } }
+		change_trade_goods = wine	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 3 } }
+		change_trade_goods = wool	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 4 } }
+		change_trade_goods = cloth	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 5 } }
+		change_trade_goods = fish	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 6 } }
+		change_trade_goods = fur	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 7 } }
+		change_trade_goods = salt	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 8 } }
+		change_trade_goods = naval_supplies	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 9 } }
+		change_trade_goods = copper	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 10} }
+		change_trade_goods = gold
+		if = {
+			limit = {
+				has_production_building_trigger = yes
+			}
+			remove_building = workshop
+			remove_building = counting_house
+			remove_building = treasury
+			remove_building = factory
+		}
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 11} }
+		change_trade_goods = iron	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 12} }
+		change_trade_goods = slaves	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 13} }
+		change_trade_goods = ivory	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 14} }
+		change_trade_goods = tea	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 15} }
+		change_trade_goods = chinaware	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 16} }
+		change_trade_goods = spices	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 17} }
+		change_trade_goods = coffee	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 18} }
+		change_trade_goods = cotton	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 19} }
+		change_trade_goods = sugar	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 20} }
+		change_trade_goods = tobacco	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 21} }
+		change_trade_goods = cocoa	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 22} }
+		change_trade_goods = silk	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 23} }
+		change_trade_goods = dyes	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 24} }
+		change_trade_goods = tropical_wood	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 25} }
+		change_trade_goods = livestock	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 26} }
+		change_trade_goods = incense	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 27} }
+		change_trade_goods = glass	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 28} }
+		change_trade_goods = paper	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 29} }
+		change_trade_goods = gems	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 30} }
+		change_trade_goods = coal	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 31} }
+		change_trade_goods = beer	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 31} }
+		change_trade_goods = cider	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 32} }
+		change_trade_goods = apiculture	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 33} }
+		change_trade_goods = whaling	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 34} }
+		change_trade_goods = lumber	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 35} }
+		change_trade_goods = palm_oil	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 36} }
+		change_trade_goods = cinnamon	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 37} }
+		change_trade_goods = saffron	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 38} }
+		change_trade_goods = rice	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 39} }
+		change_trade_goods = opium	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 40} }
+		change_trade_goods = rum	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 41} }
+		change_trade_goods = horses	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 42} }
+		change_trade_goods = olive_oil	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 43} }
+		change_trade_goods = amber	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 44} }
+		change_trade_goods = jade	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 45} }
+		change_trade_goods = marble	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 46} }
+		change_trade_goods = lead	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 47} }
+		change_trade_goods = cloves	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 48} }
+		change_trade_goods = mercury	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 49} }
+		change_trade_goods = camel	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 50} }
+		change_trade_goods = gunpowder	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 51} }
+		change_trade_goods = elephants	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 52} }
+		change_trade_goods = tin	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 53} }
+		change_trade_goods = dates	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 54} }
+		change_trade_goods = cheese	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 55} }
+		change_trade_goods = citrus	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 56} }
+		change_trade_goods = seafood
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 57} }
+		change_trade_goods = carpet	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 58} }
+		change_trade_goods = maize	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 59} }
+		change_trade_goods = pearls	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 60} }
+		change_trade_goods = silver	
+		if = {
+			limit = {
+				has_production_building_trigger = yes
+			}
+			remove_building = workshop
+			remove_building = counting_house
+			remove_building = treasury
+			remove_building = factory
+		}
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 61} }
+		change_trade_goods = exotic_animals	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 62} }
+		change_trade_goods = vanilla	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 63} }
+		change_trade_goods = ebony	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 64} }
+		change_trade_goods = tar	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 65} }
+		change_trade_goods = sulfur	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 66} }
+		change_trade_goods = maple_syrup	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 67} }
+		change_trade_goods = potato	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 68} }
+		change_trade_goods = zinc	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 69} }
+		change_trade_goods = tomato	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 70} }
+		change_trade_goods = champagne_bottle	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 71} }
+		change_trade_goods = llama	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 72} }
+		change_trade_goods = indigo	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 73} }
+		change_trade_goods = sea_turtle	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 74} }
+		change_trade_goods = nutmeg	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 75} }
+		change_trade_goods = millet	
+	}
+	else_if = {
+		limit = { is_variable_equal = { which = goods_num value = 76} }
+		change_trade_goods = exotic_fur	
+	}
+}
+
+
+
+on_trade_good_changed_government_effect_TGE = {
+	if = {
+		limit = {
+			owner = { has_reform = monastic_breweries_reform }
+		}
+		if = {
+			limit = {
+				trade_goods = grain
+			}
+			remove_province_modifier = wine_bonus_prod
+			remove_province_modifier = beer_modifier_bonus
+			remove_province_modifier = honey_modifier_bonus
+			add_province_modifier = { 
+				name = grain_bonus_prod
+				duration = -1
+				hidden = yes
+			}
+		}
+		else_if = {
+			limit = {
+				trade_goods = wine
+			}
+			remove_province_modifier = honey_modifier_bonus
+			remove_province_modifier = grain_bonus_prod
+			remove_province_modifier = beer_modifier_bonus
+			add_province_modifier = { 
+				name = grain_bonus_prod
+				duration = -1
+				hidden = yes
+			}
+		}
+		else_if = {
+			limit = {
+				trade_goods = apiculture
+			}
+			remove_province_modifier = beer_modifier_bonus
+			remove_province_modifier = wine_bonus_prod
+			remove_province_modifier = grain_bonus_prod
+			add_province_modifier = { 
+				name = honey_modifier_bonus
+				duration = -1
+				hidden = yes
+			}
+		}
+		else_if = {
+			limit = {
+				trade_goods = beer
+			}
+			remove_province_modifier = wine_bonus_prod
+			remove_province_modifier = grain_bonus_prod
+			remove_province_modifier = honey_modifier_bonus
+			add_province_modifier = { 
+				name = beer_modifier_bonus
+				duration = -1
+				hidden = yes
+			}
+		}
+		else = {
+			remove_province_modifier = wine_bonus_prod
+			remove_province_modifier = grain_bonus_prod
+			remove_province_modifier = honey_modifier_bonus
+			remove_province_modifier = beer_modifier_bonus
+		}
+	}
+	else = {
+		remove_province_modifier = wine_bonus_prod
+		remove_province_modifier = grain_bonus_prod
+		remove_province_modifier = honey_modifier_bonus
+		remove_province_modifier = beer_modifier_bonus
+	}
+	if = {
+		limit = {
+			owner = { has_government_attribute = extra_trade_goods_from_naval_supplies }
+		}
+		if = {
+			limit = {
+				trade_goods = naval_supplies
+			}
+			add_province_modifier = { 
+				name = naval_supplies_bonus_prod
+				duration = -1
+				hidden = yes
+			}
+		}
+		else = {
+			remove_province_modifier = naval_supplies_bonus_prod
+		}
+	}
+	else = {
+		remove_province_modifier = naval_supplies_bonus_prod
+	}
+	if = {
+		limit = {
+			owner = { has_country_modifier = swe_support_of_the_peasantry }
+		}
+		if = {
+			limit = {
+				OR = {
+					trade_goods = grain
+					trade_goods = fish
+					trade_goods = livestock
+				}
+			}
+			add_province_modifier = { 
+				name = swe_support_of_the_peasantry_prov
+				duration = -1
+				hidden = yes
+			}
+		}
+		else = {
+			remove_province_modifier = swe_support_of_the_peasantry_prov
+		}
+	}
+	else = {
+		remove_province_modifier = swe_support_of_the_peasantry_prov
+	}
+}
+
+
+

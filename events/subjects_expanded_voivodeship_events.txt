@@ -1,0 +1,226 @@
+namespace = subjects_expanded_voivodeship_events
+
+country_event = {
+	id = subjects_expanded_voivodeship_events.1
+	title = subjects_expanded_voivodeship_events.EVTNAME1
+	desc = subjects_expanded_voivodeship_events.EVTDESC1
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	fire_only_once = yes
+
+	trigger = {
+		can_be_overlord = voivodeship
+		BOH = {
+			ai = yes
+			was_player = no
+			junior_union_with = ROOT
+			NOT = { liberty_desire = 50 }
+		}
+		OR = {
+			SIL = {
+				ai = yes
+				was_player = no
+				vassal_of = BOH
+				NOT = { is_subject_of_type = voivodeship }
+			}
+			GLG = {
+				ai = yes
+				was_player = no
+				vassal_of = BOH
+				NOT = { is_subject_of_type = voivodeship }
+			}
+			OPL = {
+				ai = yes
+				was_player = no
+				vassal_of = BOH
+				NOT = { is_subject_of_type = voivodeship }
+			}
+			AND = {
+				exists = LEG
+				BOH = {
+					any_subject_country = {
+						tag = LEG
+						ai = yes
+						was_player = no
+						vassal_of = BOH
+						NOT = { is_subject_of_type = voivodeship }
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					exists = LEG
+					BOH = {
+						any_subject_country = {
+							tag = LEG
+							ai = yes
+							was_player = no
+							vassal_of = BOH
+							NOT = { is_subject_of_type = voivodeship }
+						}
+					}
+				}
+				hidden_effect = {
+					BOH = {
+						random_subject_country = {
+							limit = {
+								tag = LEG
+								ai = yes
+								was_player = no
+								vassal_of = BOH
+								NOT = { is_subject_of_type = voivodeship }
+							}
+							save_event_target_as = legnica
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_voivodeship_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		if = {
+			limit = {
+				SIL = {
+					ai = yes
+					was_player = no
+					vassal_of = BOH
+					NOT = { is_subject_of_type = voivodeship }
+				}
+			}
+			hidden_effect = {
+				BOH = {
+					SIL = {
+						grant_independence = yes
+					}
+				}
+			}
+			create_subject = {
+				subject = SIL
+				subject_type = voivodeship
+			}
+			hidden_effect = {
+				SIL = {
+					add_liberty_desire = -15
+				}
+			}
+		}
+		if = {
+			limit = {
+				GLG = {
+					ai = yes
+					was_player = no
+					vassal_of = BOH
+					NOT = { is_subject_of_type = voivodeship }
+				}
+			}
+			hidden_effect = {
+				BOH = {
+					GLG = {
+						grant_independence = yes
+					}
+				}
+			}
+			create_subject = {
+				subject = GLG
+				subject_type = voivodeship
+			}
+			hidden_effect = {
+				GLG = {
+					add_liberty_desire = -15
+				}
+			}
+			264 = {
+				if = {
+					limit = {
+						owned_by = BOH
+					}
+					cede_province = GLG
+					hidden_effect = { add_core = GLG }
+				}
+			}
+		}
+		if = {
+			limit = {
+				OPL = {
+					ai = yes
+					was_player = no
+					vassal_of = BOH
+					NOT = { is_subject_of_type = voivodeship }
+				}
+			}
+			hidden_effect = {
+				BOH = {
+					OPL = {
+						grant_independence = yes
+					}
+				}
+			}
+			create_subject = {
+				subject = OPL
+				subject_type = voivodeship
+			}
+			hidden_effect = {
+				OPL = {
+					add_liberty_desire = -15
+				}
+			}
+			263 = {
+				if = {
+					limit = {
+						owned_by = BOH
+					}
+					cede_province = OPL
+					hidden_effect = { add_core = OPL }
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_saved_event_target = legnica
+				event_target:legnica = {
+					ai = yes
+					was_player = no
+					vassal_of = BOH
+					NOT = { is_subject_of_type = voivodeship }
+				}
+			}
+			hidden_effect = {
+				BOH = {
+					event_target:legnica = {
+						grant_independence = yes
+					}
+				}
+			}
+			create_subject = {
+				subject = event_target:legnica
+				subject_type = voivodeship
+			}
+			hidden_effect = {
+				event_target:legnica = {
+					add_liberty_desire = -15
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_voivodeship_events1.EVTOPT2
+
+		ai_chance = { factor = 0 }
+
+		add_prestige = -5
+	}
+}

@@ -1,0 +1,762 @@
+namespace = GE_Italian_Reforms_Events
+
+#Mantua House of Gonzaga reform modifier
+country_event = {
+	id = GE_Italian_Reforms_Events.1
+	title = GE_Italian_Reforms_Events.1.T
+	desc = GE_Italian_Reforms_Events.1.D
+	picture = GOOD_WITH_MONARCH_eventPicture
+	hidden = yes
+
+	trigger = {
+		OR = {
+			has_government_attribute = enables_marriage_policies
+			AND = {
+				NOT = { has_government_attribute = enables_marriage_policies }
+				OR = {
+					has_country_modifier = GE_Mantua_Marriage_Policies_1
+					has_country_modifier = GE_Mantua_Marriage_Policies_2
+					has_country_modifier = GE_Mantua_Marriage_Policies_3
+					has_country_modifier = GE_Mantua_Marriage_Policies_4
+					has_country_modifier = GE_Mantua_Marriage_Policies_5
+				}
+			}
+		}
+		OR = {
+			AND = {
+				NOT = { diplomatic_reputation = 1 }
+				OR = {
+					has_country_modifier = GE_Mantua_Marriage_Policies_1
+					has_country_modifier = GE_Mantua_Marriage_Policies_2
+					has_country_modifier = GE_Mantua_Marriage_Policies_3
+					has_country_modifier = GE_Mantua_Marriage_Policies_4
+					has_country_modifier = GE_Mantua_Marriage_Policies_5
+				}
+			}
+			AND = {
+				diplomatic_reputation = 1
+				NOT = { diplomatic_reputation = 2 }
+				NOT = { has_country_modifier = GE_Mantua_Marriage_Policies_1 }
+			}
+			AND = {
+				diplomatic_reputation = 2
+				NOT = { diplomatic_reputation = 3 }
+				NOT = { has_country_modifier = GE_Mantua_Marriage_Policies_2 }
+			}
+			AND = {
+				diplomatic_reputation = 3
+				NOT = { diplomatic_reputation = 4 }
+				NOT = { has_country_modifier = GE_Mantua_Marriage_Policies_3 }
+			}
+			AND = {
+				diplomatic_reputation = 4
+				NOT = { diplomatic_reputation = 5 }
+				NOT = { has_country_modifier = GE_Mantua_Marriage_Policies_4 }
+			}
+			AND = {
+				diplomatic_reputation = 5
+				NOT = { has_country_modifier = GE_Mantua_Marriage_Policies_5 }
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 60
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_government_attribute = enables_marriage_policies }
+				OR = {
+					has_country_modifier = GE_Mantua_Marriage_Policies_1
+					has_country_modifier = GE_Mantua_Marriage_Policies_2
+					has_country_modifier = GE_Mantua_Marriage_Policies_3
+					has_country_modifier = GE_Mantua_Marriage_Policies_4
+					has_country_modifier = GE_Mantua_Marriage_Policies_5
+				}
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				NOT = { diplomatic_reputation = 1 }
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				NOT = { diplomatic_reputation = 2 }
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Marriage_Policies_1
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				NOT = { diplomatic_reputation = 3 }
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Marriage_Policies_2
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				NOT = { diplomatic_reputation = 4 }
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Marriage_Policies_3
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				NOT = { diplomatic_reputation = 5 }
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Marriage_Policies_4
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_5
+		}
+		else_if = {
+			limit = {
+				diplomatic_reputation = 5
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Marriage_Policies_5
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Marriage_Policies_1
+			remove_country_modifier = GE_Mantua_Marriage_Policies_2
+			remove_country_modifier = GE_Mantua_Marriage_Policies_3
+			remove_country_modifier = GE_Mantua_Marriage_Policies_4
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.1.OPT1
+	}
+}
+
+#Mantua Knightly Orders reform modifier
+country_event = {
+	id = GE_Italian_Reforms_Events.2
+	title = GE_Italian_Reforms_Events.2.T
+	desc = GE_Italian_Reforms_Events.2.D
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			has_government_attribute = enables_ordine_cordone_giallo
+			AND = {
+				NOT = { has_government_attribute = enables_ordine_cordone_giallo }
+				OR = {
+					has_country_modifier = GE_Mantua_Knightly_Orders_1
+					has_country_modifier = GE_Mantua_Knightly_Orders_2
+					has_country_modifier = GE_Mantua_Knightly_Orders_3
+					has_country_modifier = GE_Mantua_Knightly_Orders_4
+				}
+			}
+		}
+		OR = {
+			AND = {
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 4 }
+				}
+				OR = {
+					has_country_modifier = GE_Mantua_Knightly_Orders_1
+					has_country_modifier = GE_Mantua_Knightly_Orders_2
+					has_country_modifier = GE_Mantua_Knightly_Orders_3
+					has_country_modifier = GE_Mantua_Knightly_Orders_4
+				}
+			}
+			AND = {
+				has_global_modifier_value = {
+					which = tolerance_own
+					value = 4
+				}
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 6 }
+				}
+				NOT = { has_country_modifier = GE_Mantua_Knightly_Orders_1 }
+			}
+			AND = {
+				has_global_modifier_value = {
+					which = tolerance_own
+					value = 6
+				}
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 8 }
+				}
+				NOT = { has_country_modifier = GE_Mantua_Knightly_Orders_2 }
+			}
+			AND = {
+				has_global_modifier_value = {
+					which = tolerance_own
+					value = 8
+				}
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 10 }
+				}
+				NOT = { has_country_modifier = GE_Mantua_Knightly_Orders_3 }
+			}
+			AND = {
+				has_global_modifier_value = {
+					which = tolerance_own
+					value = 10
+				}
+				NOT = { has_country_modifier = GE_Mantua_Knightly_Orders_4 }
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 60
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_government_attribute = enables_ordine_cordone_giallo }
+				OR = {
+					has_country_modifier = GE_Mantua_Knightly_Orders_1
+					has_country_modifier = GE_Mantua_Knightly_Orders_2
+					has_country_modifier = GE_Mantua_Knightly_Orders_3
+					has_country_modifier = GE_Mantua_Knightly_Orders_4
+				}
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_1
+			remove_country_modifier = GE_Mantua_Knightly_Orders_2
+			remove_country_modifier = GE_Mantua_Knightly_Orders_3
+			remove_country_modifier = GE_Mantua_Knightly_Orders_4
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 4 }
+				}
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_1
+			remove_country_modifier = GE_Mantua_Knightly_Orders_2
+			remove_country_modifier = GE_Mantua_Knightly_Orders_3
+			remove_country_modifier = GE_Mantua_Knightly_Orders_4
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 6 }
+				}
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Knightly_Orders_1
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_2
+			remove_country_modifier = GE_Mantua_Knightly_Orders_3
+			remove_country_modifier = GE_Mantua_Knightly_Orders_4
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 8 }
+				}
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Knightly_Orders_2
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_1
+			remove_country_modifier = GE_Mantua_Knightly_Orders_3
+			remove_country_modifier = GE_Mantua_Knightly_Orders_4
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_global_modifier_value = { which = tolerance_own value = 10 }
+				}
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Knightly_Orders_3
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_1
+			remove_country_modifier = GE_Mantua_Knightly_Orders_2
+			remove_country_modifier = GE_Mantua_Knightly_Orders_4
+		}
+		else_if = {
+			limit = {
+				has_global_modifier_value = {
+					which = tolerance_own
+					value = 10
+				}
+			}
+			add_country_modifier = {
+				name = GE_Mantua_Knightly_Orders_4
+				duration = -1
+			}
+			remove_country_modifier = GE_Mantua_Knightly_Orders_1
+			remove_country_modifier = GE_Mantua_Knightly_Orders_2
+			remove_country_modifier = GE_Mantua_Knightly_Orders_3
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.2.OPT1
+	}
+}
+
+#Genoa Ianuensis
+country_event = {
+	id = GE_Italian_Reforms_Events.3
+	title = GE_Italian_Reforms_Events.3.T
+	desc = GE_Italian_Reforms_Events.3.D
+	picture = WESTERNISATION_eventPicture
+
+	hidden = yes	
+
+	trigger = {
+		OR = {
+			AND = {
+				NOT = { has_government_attribute = enables_ianuensis_ergo_mercator }
+				OR = {
+					has_country_modifier = GE_Genoese_Merchants_Explorers_1
+					has_country_modifier = GE_Genoese_Merchants_Explorers_2
+					has_country_modifier = GE_Genoese_Merchants_Explorers_3
+					has_country_modifier = GE_Genoese_Merchants_Explorers_4
+					has_country_modifier = GE_Genoese_Merchants_Explorers_5
+				}
+			}
+			AND = {
+				has_government_attribute = enables_ianuensis_ergo_mercator
+				OR = {
+					AND = {
+						NOT = { trade_efficiency = 0.30 }
+						OR = {
+							has_country_modifier = GE_Genoese_Merchants_Explorers_1
+							has_country_modifier = GE_Genoese_Merchants_Explorers_2
+							has_country_modifier = GE_Genoese_Merchants_Explorers_3
+							has_country_modifier = GE_Genoese_Merchants_Explorers_4
+							has_country_modifier = GE_Genoese_Merchants_Explorers_5
+						}
+					}
+					AND = {
+						NOT = { trade_efficiency = 0.40 }
+						NOT = { has_country_modifier = GE_Genoese_Merchants_Explorers_1 }
+					}
+					AND = {
+						NOT = { trade_efficiency = 0.50 }
+						NOT = { has_country_modifier = GE_Genoese_Merchants_Explorers_2 }
+					}
+					AND = {
+						NOT = { trade_efficiency = 0.60 }
+						NOT = { has_country_modifier = GE_Genoese_Merchants_Explorers_3 }
+					}
+					AND = {
+						NOT = { trade_efficiency = 0.70 }
+						NOT = { has_country_modifier = GE_Genoese_Merchants_Explorers_4 }
+					}
+					AND = {
+						trade_efficiency = 0.70
+						NOT = { has_country_modifier = GE_Genoese_Merchants_Explorers_5 }
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 60
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_government_attribute = enables_ianuensis_ergo_mercator }
+					AND = {
+						NOT = { trade_efficiency = 0.30 }
+						OR = {
+							has_country_modifier = GE_Genoese_Merchants_Explorers_1
+							has_country_modifier = GE_Genoese_Merchants_Explorers_2
+							has_country_modifier = GE_Genoese_Merchants_Explorers_3
+							has_country_modifier = GE_Genoese_Merchants_Explorers_4
+							has_country_modifier = GE_Genoese_Merchants_Explorers_5
+						}
+					}
+				}
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_1
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_2
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_3
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_4
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_5
+		}
+		else_if = {
+			limit = {
+				trade_efficiency = 0.70
+			}
+			add_country_modifier = {
+				name = GE_Genoese_Merchants_Explorers_5
+				duration = -1
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_1
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_2
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_3
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_4
+		}
+		else_if = {
+			limit = {
+				trade_efficiency = 0.60
+			}
+			add_country_modifier = {
+				name = GE_Genoese_Merchants_Explorers_4
+				duration = -1
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_1
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_2
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_3
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_5
+		}
+		else_if = {
+			limit = {
+				trade_efficiency = 0.50
+			}
+			add_country_modifier = {
+				name = GE_Genoese_Merchants_Explorers_3
+				duration = -1
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_1
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_2
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_4
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_5
+		}
+		else_if = {
+			limit = {
+				trade_efficiency = 0.40
+			}
+			add_country_modifier = {
+				name = GE_Genoese_Merchants_Explorers_2
+				duration = -1
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_1
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_3
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_4
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_5
+		}
+		else = {
+			add_country_modifier = {
+				name = GE_Genoese_Merchants_Explorers_1
+				duration = -1
+			}
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_2
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_3
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_4
+			remove_country_modifier = GE_Genoese_Merchants_Explorers_5
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.3.OPT1
+	}
+}
+
+#Custom House of Apena Sheep
+country_event = {
+	id = GE_Italian_Reforms_Events.4
+	title = GE_Italian_Reforms_Events.4.T
+	desc = GE_Italian_Reforms_Events.4.D
+	picture = WESTERNISATION_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			AND = {
+				has_government_attribute = enables_customs_house
+				any_owned_province = {
+					OR = {
+						trade_goods = cloth
+						trade_goods = livestock
+						trade_goods = wool
+					}
+					NOT = {	has_province_modifier = GE_Customs_House }
+				}
+			}
+			AND = {
+				NOT = { has_government_attribute = enables_customs_house }
+				any_owned_province = {
+					has_province_modifier = GE_Customs_House
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_government_attribute = enables_customs_house }
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = GE_Customs_House
+				}
+				remove_province_modifier = GE_Customs_House
+			}
+		}
+		else = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = cloth
+						trade_goods = livestock
+						trade_goods = wool
+					}
+					NOT = {	has_province_modifier = GE_Customs_House }
+				}
+				add_province_modifier = {
+					name = GE_Customs_House
+					duration = -1
+					hidden = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.4.OPT1
+	}
+}
+
+#Mary of the Purity
+country_event = {
+	id = GE_Italian_Reforms_Events.5
+	title = GE_Italian_Reforms_Events.5.t
+	desc = GE_Italian_Reforms_Events.5.d
+	picture = WESTERNISATION_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			AND = {
+				NOT = { has_government_attribute = enables_mary_of_the_purity }
+				OR = {
+					has_country_modifier = GE_Mary_Of_The_Purity_1
+					has_country_modifier = GE_Mary_Of_The_Purity_2
+					has_country_modifier = GE_Mary_Of_The_Purity_3
+					has_country_modifier = GE_Mary_Of_The_Purity_4
+				}
+			}
+			AND = {
+				has_government_attribute = enables_mary_of_the_purity
+				OR = {
+					has_country_modifier = GE_Mary_Of_The_Purity_1
+					has_country_modifier = GE_Mary_Of_The_Purity_2
+					has_country_modifier = GE_Mary_Of_The_Purity_3
+					has_country_modifier = GE_Mary_Of_The_Purity_4
+					AND = {
+						has_global_modifier_value = { which = tolerance_own value = 6 }
+						NOT = { has_global_modifier_value = { which = tolerance_own value = 7 } }
+						NOT = { has_country_modifier = GE_Mary_Of_The_Purity_1 }
+					}
+					AND = {
+						has_global_modifier_value = { which = tolerance_own value = 7 }
+						NOT = { has_global_modifier_value = { which = tolerance_own value = 8 } }
+						NOT = { has_country_modifier = GE_Mary_Of_The_Purity_2 }
+					}
+					AND = {
+						has_global_modifier_value = { which = tolerance_own value = 8 }
+						NOT = { has_global_modifier_value = { which = tolerance_own value = 9 } }
+						NOT = { has_country_modifier = GE_Mary_Of_The_Purity_3 }
+					}
+					AND = {
+						has_global_modifier_value = { which = tolerance_own value = 9 }
+						NOT = { has_country_modifier = GE_Mary_Of_The_Purity_4 }
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_government_attribute = enables_mary_of_the_purity }
+			}
+			remove_country_modifier = GE_Mary_Of_The_Purity_1
+			remove_country_modifier = GE_Mary_Of_The_Purity_2
+			remove_country_modifier = GE_Mary_Of_The_Purity_3
+			remove_country_modifier = GE_Mary_Of_The_Purity_4
+		}
+		else = {
+			if = {
+				limit = {
+					has_global_modifier_value = { which = tolerance_own value = 9 }
+				}
+				add_country_modifier = {
+					name = GE_Mary_Of_The_Purity_4
+					duration = -1
+					hidden = yes
+				}
+				remove_country_modifier = GE_Mary_Of_The_Purity_1
+				remove_country_modifier = GE_Mary_Of_The_Purity_2
+				remove_country_modifier = GE_Mary_Of_The_Purity_3
+			}
+			else_if = {
+				limit = {
+					has_global_modifier_value = { which = tolerance_own value = 8 }
+				}
+				add_country_modifier = {
+					name = GE_Mary_Of_The_Purity_3
+					duration = -1
+					hidden = yes
+				}
+				remove_country_modifier = GE_Mary_Of_The_Purity_1
+				remove_country_modifier = GE_Mary_Of_The_Purity_2
+				remove_country_modifier = GE_Mary_Of_The_Purity_4
+			}
+			else_if = {
+				limit = {
+					has_global_modifier_value = { which = tolerance_own value = 7 }
+				}
+				add_country_modifier = {
+					name = GE_Mary_Of_The_Purity_2
+					duration = -1
+					hidden = yes
+				}
+				remove_country_modifier = GE_Mary_Of_The_Purity_1
+				remove_country_modifier = GE_Mary_Of_The_Purity_3
+				remove_country_modifier = GE_Mary_Of_The_Purity_4
+			}
+			else_if = {
+				limit = {
+					has_global_modifier_value = { which = tolerance_own value = 6 }
+				}
+				add_country_modifier = {
+					name = GE_Mary_Of_The_Purity_1
+					duration = -1
+					hidden = yes
+				}
+				remove_country_modifier = GE_Mary_Of_The_Purity_2
+				remove_country_modifier = GE_Mary_Of_The_Purity_3
+				remove_country_modifier = GE_Mary_Of_The_Purity_4
+			}
+			else = {
+				remove_country_modifier = GE_Mary_Of_The_Purity_1
+				remove_country_modifier = GE_Mary_Of_The_Purity_2
+				remove_country_modifier = GE_Mary_Of_The_Purity_3
+				remove_country_modifier = GE_Mary_Of_The_Purity_4
+			}
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.5.a
+	}
+}
+
+#Mountain Warfare
+country_event = {
+	id = GE_Italian_Reforms_Events.6
+	title = GE_Italian_Reforms_Events.6.T
+	desc = GE_Italian_Reforms_Events.6.D
+	picture = WESTERNISATION_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			AND = {
+				has_government_attribute = enables_mountain_warfare
+				italy_region = {
+					owned_by = ROOT
+					OR = {
+						has_terrain = hills
+						has_terrain = mountain
+					}
+					NOT = { has_province_modifier = GE_Mountain_Warfare }
+				}
+			}
+			AND = {
+				NOT = { has_government_attribute = enables_customs_house }
+				italy_region = {
+					owned_by = ROOT
+					has_province_modifier = GE_Mountain_Warfare
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_government_attribute = enables_customs_house }
+			}
+			italy_region = {
+				limit = {
+					owned_by = ROOT
+				}
+				remove_province_modifier = GE_Mountain_Warfare
+			}
+		}
+		else = {
+			italy_region = {
+				limit = {
+					owned_by = ROOT
+					OR = {
+						has_terrain = hills
+						has_terrain = mountain
+					}
+				}
+				add_province_modifier = {
+					name = GE_Mountain_Warfare
+					duration = -1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = GE_Italian_Reforms_Events.6.OPT1
+	}
+}

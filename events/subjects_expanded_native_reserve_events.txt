@@ -1,0 +1,124 @@
+namespace = subjects_expanded_native_reserve_events
+
+country_event = {
+	id = subjects_expanded_native_reserve_events.1
+	title = subjects_expanded_native_reserve_events.EVTNAME1
+	desc = subjects_expanded_native_reserve_events.EVTDESC1
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	trigger = {
+		OR = {
+			AND = {
+				NOT = {
+					calc_true_if = {
+						all_subject_country = {
+							is_colonial_subject_type = yes
+						}
+						amount = 1
+					}
+				}
+				is_former_colonial_nation = no
+				capital_scope = {
+					NOT = { continent = north_america }
+					NOT = { continent = south_america }
+					NOT = { continent = oceania }
+					NOT = { continent = africa }
+				}
+				has_subject_of_type = native_reserve
+			}
+			any_subject_country = {
+				is_subject_of_type = native_reserve
+				OR = {
+					capital_scope = {
+						NOT = { continent = north_america }
+						NOT = { continent = south_america }
+						NOT = { continent = oceania }
+						NOT = { continent = africa }
+					}
+					OR = {
+		            	technology_group = western
+		            	technology_group = dutch_tech_group
+		            	technology_group = english_tech_group
+		            	technology_group = french_tech_group
+		            	technology_group = german_tech_group
+		            	technology_group = italian_tech_group
+		            	technology_group = portuguese_tech_group
+		            	technology_group = roman_tech_group
+		            	technology_group = scandinavian_tech_group
+		            	technology_group = spanish_tech_group
+		            	technology_group = swiss_tech_group
+		            }
+				}
+			}
+		}
+		NOT = {
+			is_in_war = {
+				defender_leader = ROOT
+				casus_belli = cb_independence_war
+			}
+		}
+		#NOT = {
+		#	is_in_war = {
+		#		defender_leader = ROOT
+		#		casus_belli = cb_colonial_independance_war
+		#	}
+		#}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = subjects_expanded_native_reserve_events1.EVTOPT1
+
+		if = {
+			limit = {
+				NOT = { colony = 1 }
+				is_former_colonial_nation = no
+				capital_scope = {
+					NOT = { continent = north_america }
+					NOT = { continent = south_america }
+					NOT = { continent = oceania }
+					NOT = { continent = africa }
+				}
+				has_subject_of_type = native_reserve
+			}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = native_reserve
+				}
+				grant_independence = yes
+			}
+		}
+		else = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = native_reserve
+					OR = {
+						capital_scope = {
+							NOT = { continent = north_america }
+							NOT = { continent = south_america }
+							NOT = { continent = oceania }
+							NOT = { continent = africa }
+						}
+						OR = {
+		                	technology_group = western
+		                	technology_group = dutch_tech_group
+		                	technology_group = english_tech_group
+		                	technology_group = french_tech_group
+		                	technology_group = german_tech_group
+		                	technology_group = italian_tech_group
+		                	technology_group = portuguese_tech_group
+		                	technology_group = roman_tech_group
+		                	technology_group = scandinavian_tech_group
+		                	technology_group = spanish_tech_group
+		                	technology_group = swiss_tech_group
+		                }
+					}
+				}
+				grant_independence = yes
+			}
+		}
+	}
+}

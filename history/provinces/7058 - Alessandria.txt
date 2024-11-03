@@ -1,0 +1,76 @@
+#7058 - Alessandria
+
+#Default
+owner = ASD
+controller = ASD
+add_core = ASD
+culture = piedmontese #Eastern Piedmontese. It has influence from neighboring Emilian, Lombard, and Ligurian, but is not classified as Lombard despite Darth Modus putting it that way in the history files.
+religion = catholic
+capital = "Alessandria"
+base_tax = 8
+base_production = 8
+base_manpower = 4
+trade_goods = gunpowder #was grain, gunpowder introduced from east and brought by genosese traders
+is_city = yes
+hre = yes
+
+#Claimants
+
+#Buildings
+fort_15th = yes
+
+#Special Modifiers
+
+#Known by Technology groups
+
+
+
+
+
+
+
+#Province history completed by - Driaocht
+#First Shattering not used
+#First Performance Start not used
+#1385 Gian Galeazzo Visconti takes control through treachery, but proves an exceedingly good leader and extends Milan's influence through conquest, diplomacy, hegemony, and wealth. Supposedly had an annual income of nearly 2,000,000 gold florins.
+1396.1.1 = {
+	base_tax = 15 
+	base_production = 15
+	base_manpower = 9
+} # Visconti relationship with the HRE emperor elevates Milan to a duchy, which we'll call a kingdom in HRE game terms. Also calling this good for the city's wealth, though this is probably a bit reversed. Strongly Ghibelline at this point.
+#1402.9.3 = { } #At the death of Gian Galeazzo Visconti, the Duchy's conquests quickly crumbled.
+#1426.1.1 = { } #Major war with Venice follows Filippo Maria Visconti's renewed expansionist policies.
+#1433.1.1 = { } #Treaty of Ferrara, ceding to the cities of Brescia and Bergamo
+#Second Shattering not used
+#Second Performance Start not used
+#Just ignoring the Visconti to Sforza drama for now. Easier to just change rulers and not mess with tag changes or such nonsense.
+#1495.1.1 = { hre = no }	#Shadow Kingdom. Vanilla calls Northern Italy out of the HRE by 1500, VU is going with 1648, when the Peace of Westphalia definitively and formally ended HRE influence in Italy.
+#Vanilla block of history for Milan proper. Just going with it, as it looks quite good, and this is a complicated area that would take unfortunately long to check one by one.
+1499.8.10 = { controller = FRA } # Louis XII of France invades...
+1504.1.31 = { owner = FRA add_core = FRA } # ...and seizes Milan, Treaty of Lyon
+1512.1.1 = { controller = MLO owner = MLO } # Massimiliano Sforza restored by the Swiss
+1515.1.1 = { controller = FRA }  # Francis I of France invades...
+1516.8.1 = { owner = FRA }  # ...and seizes Milan, Treaty of Noyon
+1521.4.22 = { controller = SPA }  # The Spanish invades...
+1522.5.1 = { controller = MLO owner = MLO } # ...and restores the Sforzas
+1526.5.22 = { controller = HAB }  # Milan joined the League of Cognac, and is invaded by the Emperor
+1529.8.3 = { controller = MLO remove_core = FRA } # Treaty of Cambrai restores the Sforzas and includes renounciation of French claims
+1535.1.1 = { owner = SPA controller = SPA add_core = SPA } # Annexed to Spain after the last Sforza died
+#End of Vanilla block of history for Milan proper. Just going with it, as it looks quite good, and this is a complicated area that would take unfortunately long to check one by one.
+1583.1.1 = { fort_15th = no fort_16th = yes }
+#1630.1.1 = { } #Great Plague of Milan kills half of the city's population
+1648.1.1 = { hre = no }	#Peace of Westphalia, the 'Kingdom of Italy' definitively leaves the Holy Roman Empire
+1648.2.1 = { fort_16th = no fort_17th = yes }
+#1713.4.12 = { owner = SIC controller = SIC add_core = SIC } # Treaty of Utrecht gives Sicily to Savoy, who becomes the King of Sicily  -VU is calling this still Savoy, rather than Sicily.
+1720.2.17 = { owner = SPI controller = SPI add_core = SPI remove_core = SAV } # Treaty of the Hague, Victor Amadeus II trades Sicily for Sardinia, founding the Kingdom of Piedmont-Sardinia
+1792.9.1 = { controller = FRA } # Conquered by Napoleon without a siege at the beginning of the War of the First Coalition
+1796.4.26 = { owner = FRA add_core = FRA add_local_autonomy = 65 } # The Republic of Alba proclaimed in the town of Alba. Calling it high autonomy because I don't want to mess with client states in history
+1796.4.28 = { controller = SPI owner = SPI add_local_autonomy = -65 } # Victor Amadeus III given back control of Savoy with the Armistice of Cherasco
+#1796.5.18 = {} #Actual date Sardinia-Piedmont left the war according to the vanilla files.
+1798.9.10 = { controller = FRA owner = FRA add_local_autonomy = 65 } # Piedmontese Republic founded, though in reality it seems to have been mainly just an occupation. I'd just call it controller = FRA, but vanilla doesn't have SPI in the proper wars files so I'm doing full ownership to avoid bugs
+1799.6.20 = { controller = SPI owner = SPI add_local_autonomy = -65 } # Austro-Hungarian and Russian troops reoccupy Piedmont, returning it to Sardinia-Piedmont
+1800.6.20 = { owner = FRA add_core = FRA add_local_autonomy = 65 } # Napoleon retakes it, renaming the Piedmontese Republic to the Subalpine Republic, though in reality it seems to have been mainly just an occupation. I'd just call it controller = FRA, but vanilla doesn't have SPI in the proper wars files so I'm doing full ownership to avoid bugs
+#1802.9.11 = {} # Subalpine Republic disolved and land annexed to France & Republic of Italy, later the Napoleonic Kingdom of Italy. 
+#1805.3.17 = {} # Napoleonic Kingdom of Italy founded
+#1806.7.12 = { hre = no } # The Holy Roman Empire is dissolved
+1814.4.11 = { owner = SPI controller = SPI remove_core = FRA add_local_autonomy = -65 } # Napoleon abdicates and Victor Emmanuel is able to return to Turin

@@ -1,0 +1,858 @@
+#VU updated by San Felipe for 1.35
+namespace = flavor_byz
+
+#########################
+# Events for Byzantium  #
+#                       #
+# written by San Felipe #
+#########################
+
+# Conversion of Egypt
+country_event = {
+	id = flavor_byz.4
+	title = "flavor_byz.EVTNAME4"
+	desc = "flavor_byz.EVTDESC4"
+	picture = BYZ_ORTHODOX_CONVERSION_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = BYZ
+        NOT = { exists = MAM }
+		religion = orthodox
+		is_at_war = no
+		any_owned_province = {
+		    OR = {
+		    	region = egypt_region
+		    	region = mashriq_region
+		    }
+			religion_group = muslim
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = byz_egyptian_inquisition
+		}
+	}
+	#Let us make a clean sweep for the Glory of God
+	option = {
+		name = "flavor_byz.EVTOPTA4"
+
+		every_owned_province = {
+			limit = {
+				OR = {	
+					region = egypt_region
+					region = mashriq_region
+				}
+				religion_group = muslim
+			}
+			change_religion = orthodox
+			add_province_modifier = {
+				name = forced_conversion
+				duration = 3650
+			}
+		}
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.5 days = 10 tooltip = "flavor_byz.EVTTOOLTIP4" }
+		}
+		set_country_flag = egyptian_muslims_expelled
+		add_reform_desire = 0.02
+
+	}
+	#Toleration is key to the nation's prosperity
+	option = {
+		name = "flavor_byz.EVTOPTC4"
+		ai_chance = { factor = 0 }
+		custom_tooltip = flavor_byz.c.4.tt
+		add_reform_desire = -0.01
+		add_stability_or_adm_power = yes
+		add_ruler_modifier = {
+			name = religious_tolerance
+		}
+	}
+}
+
+# Expulsion of Egyptian Muslims
+country_event = {
+	id = flavor_byz.5
+	title = "flavor_byz.EVTNAME5"
+	desc = "flavor_byz.EVTDESC5"
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+
+	#They are a welcome addition
+	option = {
+		name = "flavor_byz.EVTOPTA5"
+		ai_chance = { factor = 90 }
+		random_owned_province = {
+			add_base_tax = 1
+		}
+	}
+}
+
+# War of Cairo
+country_event = {
+	id = flavor_byz.6
+	title = "flavor_byz.EVTNAME6"
+	desc = "flavor_byz.EVTDESC6"
+	picture = BORDER_TENSION_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		tag = BYZ
+		religion = catholic
+		NOT = { is_year = 1600 } #Resurgent Mamluks unlikely
+		has_country_flag = byz_egyptian_inquisition
+		NOT = { exists = MAM }
+		owns = 361 #Cairo
+		any_owned_province = {
+			NOT = { has_province_modifier = forced_conversion }
+			region = egypt_region
+			culture = al_misr_arabic
+			is_core = MAM
+		}
+		OR = {
+			has_country_flag = egyptian_muslims_expelled
+			AND = {
+				NOT = { has_country_flag = egyptian_muslims_expelled }
+				any_owned_province = {
+					is_core = MAM
+					has_missionary = yes #Persecution despite choosing tolerance
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					region = egypt_region
+					is_core = MAM
+					OR = {
+						fort_level = 1
+						province_id = 361
+					}
+				}
+				set_province_flag = mamlukan_centre_of_revolt
+			}
+			every_owned_province = {
+				limit = {
+					region = egypt_region
+					is_core = MAM
+					NOT = { has_province_flag = mamlukan_centre_of_revolt }
+				}
+				set_province_flag = mamlukan_revolt
+			}
+		}
+	}
+
+	option = {		# Ok.
+		name = "flavor_byz.EVTOPTA6"
+		add_stability = -1
+		set_country_flag = mamlukan_revolt_happened
+		random_owned_province = {
+			limit = {
+				has_province_flag = mamlukan_centre_of_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				leader = "Ahmed"
+				friend = MAM
+				size = 2
+				win = yes
+			}
+			clr_province_flag = mamlukan_centre_of_revolt
+		}
+		every_owned_province = {
+			limit = {
+				has_province_flag = mamlukan_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				friend = MAM
+				size = 1
+			}
+			clr_province_flag = mamlukan_revolt
+		}
+	}
+}
+
+#Fate of Egyptian Muslims
+country_event = {
+	id = flavor_byz.7
+	title = "flavor_byz.EVTNAME7"
+	desc = "flavor_byz.EVTDESC7"
+	picture = MILITARY_CAMP_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		OR = {
+			has_country_flag = fate_of_mameluks_mission_flag
+			AND = {
+				NOT = { has_dlc = "Golden Century" }
+				tag = BYZ
+				has_country_flag = mamlukan_revolt_happened
+				NOT = { has_country_flag = end_of_mameluks }
+				NOT = { exists = MAM }
+				owns = 361 #Cairo
+				NOT = {
+					any_owned_province = {
+						is_core = MAM
+						controlled_by = REB
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {		# Expulsion or conversion!
+		name = "flavor_byz.EVTOPTA7"
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = end_of_mameluks
+		add_stability = -2
+		every_owned_province = {
+			limit = {
+				is_core = MAM
+			}
+			change_religion = orthodox
+			remove_core = MAM
+		}
+		#Repeat of effect from earlier persecutions:
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.5 days = 10 tooltip = "flavor_byz.EVTTOOLTIP4" }
+		}
+	}
+	option = {		# We must mend these wounds not cut off the limb itself.
+		name = "flavor_byz.EVTOPTB7"
+		if = {
+			limit = { NOT = { stability = 3 } }
+			add_stability_or_adm_power = yes
+		}
+		if = {
+			limit = { stability = 3 }
+			every_owned_province = {
+				limit = {
+					is_core = MAM
+				}
+				add_unrest = -2
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Conversion of Anatolia
+country_event = {
+	id = flavor_byz.8
+	title = "flavor_byz.EVTNAME8"
+	desc = "flavor_byz.EVTDESC8"
+	picture = BYZ_ORTHODOX_CONVERSION_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = BYZ
+		NOT = { exists = TUR }
+		religion = orthodox
+		is_at_war = no
+		any_owned_province = {
+			OR = {
+				region = anatolia_region
+				region = mesopotamia_region
+			}
+			religion_group = muslim
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = byz_anatolian_inquisition
+		}
+	}
+	#Let us make a clean sweep for the Glory of God
+	option = {
+		name = "flavor_byz.EVTOPTA8"
+
+		every_owned_province = {
+			limit = {
+			OR = {
+				region = anatolia_region
+				region = mesopotamia_region
+			}
+				religion_group = muslim
+			}
+			change_religion = orthodox
+			add_province_modifier = {
+				name = forced_conversion
+				duration = 3650
+			}
+		}
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.9 days = 10 tooltip = "flavor_byz.EVTTOOLTIP8" }
+		}
+		set_country_flag = anatolian_muslims_expelled
+		add_reform_desire = 0.02
+
+	}
+	#Toleration is key to the nation's prosperity
+	option = {
+		name = "flavor_byz.EVTOPTC8"
+		ai_chance = { factor = 0 }
+		custom_tooltip = flavor_byz.c.8.tt
+		add_reform_desire = -0.01
+		add_stability_or_adm_power = yes
+		add_ruler_modifier = {
+			name = religious_tolerance
+		}
+	}
+}
+
+# Expulsion of Anatolian Muslims
+country_event = {
+	id = flavor_byz.9
+	title = "flavor_byz.EVTNAME9"
+	desc = "flavor_byz.EVTDESC9"
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+
+	#They are a welcome addition
+	option = {
+		name = "flavor_byz.EVTOPTA9"
+		ai_chance = { factor = 90 }
+		random_owned_province = {
+			add_base_tax = 1
+		}
+	}
+
+}
+
+# War of Bursa
+country_event = {
+	id = flavor_byz.10
+	title = "flavor_byz.EVTNAME10"
+	desc = "flavor_byz.EVTDESC10"
+	picture = BORDER_TENSION_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		tag = BYZ
+		religion = catholic
+		NOT = { is_year = 1600 } #Resurgent Ottomans unlikely
+		has_country_flag = byz_anatolian_inquisition
+		NOT = { exists = TUR }
+		owns = 317 #Bursa
+		any_owned_province = {
+			NOT = { has_province_modifier = forced_conversion }
+			region = anatolia_region
+			culture = turkish
+			is_core = TUR
+		}
+		OR = {
+			has_country_flag = anatolian_muslims_expelled
+			AND = {
+				NOT = { has_country_flag = anatolian_muslims_expelled }
+				any_owned_province = {
+					is_core = TUR
+					has_missionary = yes #Persecution despite choosing tolerance
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					region = anatolia_region
+					is_core = TUR
+					OR = {
+						fort_level = 1
+						province_id = 317
+					}
+				}
+				set_province_flag = ottoman_centre_of_revolt
+			}
+			every_owned_province = {
+				limit = {
+					region = anatolia_region
+					is_core = TUR
+					NOT = { has_province_flag = ottoman_centre_of_revolt }
+				}
+				set_province_flag = ottoman_revolt
+			}
+		}
+	}
+
+	option = {		# Ok.
+		name = "flavor_byz.EVTOPTA10"
+		add_stability = -1
+		set_country_flag = ottoman_revolt_happened
+		random_owned_province = {
+			limit = {
+				has_province_flag = ottoman_centre_of_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				leader = "Yusuf"
+				friend = TUR
+				size = 2
+				win = yes
+			}
+			clr_province_flag = ottoman_centre_of_revolt
+		}
+		every_owned_province = {
+			limit = {
+				has_province_flag = ottoman_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				friend = TUR
+				size = 1
+			}
+			clr_province_flag = ottoman_revolt
+		}
+	}
+}
+
+#Fate of Anatolian Muslims
+country_event = {
+	id = flavor_byz.11
+	title = "flavor_byz.EVTNAME11"
+	desc = "flavor_byz.EVTDESC11"
+	picture = MILITARY_CAMP_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		OR = {
+			has_country_flag = fate_of_ottoman_mission_flag
+			AND = {
+				NOT = { has_dlc = "Golden Century" }
+				tag = BYZ
+				has_country_flag = ottoman_revolt_happened
+				NOT = { has_country_flag = end_of_ottomans }
+				NOT = { exists = TUR }
+				owns = 317 #Bursa
+				NOT = {
+					any_owned_province = {
+						is_core = TUR
+						controlled_by = REB
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {		# Expulsion or conversion!
+		name = "flavor_byz.EVTOPTA11"
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = end_of_ottomans
+		add_stability = -2
+		every_owned_province = {
+			limit = {
+				is_core = TUR
+			}
+			change_religion = orthodox
+			remove_core = TUR
+		}
+		#Repeat of effect from earlier persecutions:
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.9 days = 10 tooltip = "flavor_byz.EVTTOOLTIP8" }
+		}
+	}
+	option = {		# We must mend these wounds not cut off the limb itself.
+		name = "flavor_byz.EVTOPTB11"
+		if = {
+			limit = { NOT = { stability = 3 } }
+			add_stability_or_adm_power = yes
+		}
+		if = {
+			limit = { stability = 3 }
+			every_owned_province = {
+				limit = {
+					is_core = TUR
+				}
+				add_unrest = -2
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Conversion of the Levant
+country_event = {
+	id = flavor_byz.12
+	title = "flavor_byz.EVTNAME12"
+	desc = "flavor_byz.EVTDESC12"
+	picture = BYZ_ORTHODOX_CONVERSION_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = BYZ
+        NOT = { exists = MAM }
+		religion = orthodox
+		is_at_war = no
+		any_owned_province = {
+			region = mashriq_region
+			religion_group = muslim
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = byz_levantine_inquisition
+		}
+	}
+	#Let us make a clean sweep for the Glory of God
+	option = {
+		name = "flavor_byz.EVTOPTA12"
+
+		every_owned_province = {
+			limit = {
+				region = mashriq_region
+				religion_group = muslim
+			}
+			change_religion = orthodox
+			add_province_modifier = {
+				name = forced_conversion
+				duration = 3650
+			}
+		}
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.13 days = 10 tooltip = "flavor_byz.EVTTOOLTIP12" }
+		}
+		set_country_flag = levatine_muslims_expelled
+		add_reform_desire = 0.02
+
+	}
+	#Toleration is key to the nation's prosperity
+	option = {
+		name = "flavor_byz.EVTOPTC12"
+		ai_chance = { factor = 0 }
+		custom_tooltip = flavor_byz.c.12.tt
+		add_reform_desire = -0.01
+		add_stability_or_adm_power = yes
+		add_ruler_modifier = {
+			name = religious_tolerance
+		}
+	}
+}
+
+# Expulsion of Levantine Muslims
+country_event = {
+	id = flavor_byz.13
+	title = "flavor_byz.EVTNAME13"
+	desc = "flavor_byz.EVTDESC13"
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+
+	#They are a welcome addition
+	option = {
+		name = "flavor_byz.EVTOPTA13"
+		ai_chance = { factor = 90 }
+		random_owned_province = {
+			add_base_tax = 1
+		}
+	}
+}
+
+# War of Jerusalem
+country_event = {
+	id = flavor_byz.14
+	title = "flavor_byz.EVTNAME14"
+	desc = "flavor_byz.EVTDESC14"
+	picture = BORDER_TENSION_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		tag = BYZ
+		religion = catholic
+		NOT = { is_year = 1600 } #Resurgent Levantines unlikely
+		has_country_flag = byz_levantine_inquisition
+		NOT = { exists = MAM }
+		owns = 379 #Jerusalem
+		any_owned_province = {
+			NOT = { has_province_modifier = forced_conversion }
+			region = mashriq_region
+			culture = al_misr_arabic
+			is_core = MAM
+		}
+		OR = {
+			has_country_flag = levatine_muslims_expelled
+			AND = {
+				NOT = { has_country_flag = levatine_muslims_expelled }
+				any_owned_province = {
+					is_core = MAM
+					has_missionary = yes #Persecution despite choosing tolerance
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					region = mashriq_region
+					is_core = MAM
+					OR = {
+						fort_level = 1
+						province_id = 379
+					}
+				}
+				set_province_flag = levantine_centre_of_revolt
+			}
+			every_owned_province = {
+				limit = {
+					region = mashriq_region
+					is_core = MAM
+					NOT = { has_province_flag = levantine_centre_of_revolt }
+				}
+				set_province_flag = levantine_revolt
+			}
+		}
+	}
+
+	option = {		# Ok.
+		name = "flavor_byz.EVTOPTA14"
+		add_stability = -1
+		set_country_flag = levantine_revolt_happened
+		random_owned_province = {
+			limit = {
+				has_province_flag = levantine_centre_of_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				leader = "Gamal"
+				friend = MAM
+				size = 2
+				win = yes
+			}
+			clr_province_flag = levantine_centre_of_revolt
+		}
+		every_owned_province = {
+			limit = {
+				has_province_flag = levantine_revolt
+			}
+			if = {
+				limit = { NOT = { religion = sunni } }
+				change_religion = sunni #Crypto-Muslims
+			}
+			spawn_rebels = {
+				type = nationalist_rebels
+				friend = MAM
+				size = 1
+			}
+			clr_province_flag = levantine_revolt
+		}
+	}
+}
+
+#Fate of Levantine Muslims
+country_event = {
+	id = flavor_byz.15
+	title = "flavor_byz.EVTNAME15"
+	desc = "flavor_byz.EVTDESC15"
+	picture = MILITARY_CAMP_eventPicture
+
+	fire_only_once = yes
+
+
+	trigger = {
+		OR = {
+			has_country_flag = fate_of_levant_mission_flag
+			AND = {
+				NOT = { has_dlc = "Golden Century" }
+				tag = BYZ
+				has_country_flag = levantine_revolt_happened
+				NOT = { has_country_flag = end_of_levant }
+				NOT = { exists = MAM }
+				owns = 379 #Jerusalem
+				NOT = {
+					any_owned_province = {
+						is_core = MAM
+						controlled_by = REB
+					}
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {		# Expulsion or conversion!
+		name = "flavor_byz.EVTOPTA15"
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = end_of_levant
+		add_stability = -2
+		every_owned_province = {
+			limit = {
+				is_core = MAM
+			}
+			change_religion = orthodox
+			remove_core = MAM
+		}
+		#Repeat of effect from earlier persecutions:
+		random_country = {
+			limit = {
+				religion_group = muslim
+				any_owned_province = {
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = ROOT
+						}
+					}
+				}
+			}
+			country_event = {  id = flavor_byz.13 days = 10 tooltip = "flavor_byz.EVTTOOLTIP12" }
+		}
+	}
+	option = {		# We must mend these wounds not cut off the limb itself.
+		name = "flavor_byz.EVTOPTB15"
+		if = {
+			limit = { NOT = { stability = 3 } }
+			add_stability_or_adm_power = yes
+		}
+		if = {
+			limit = { stability = 3 }
+			every_owned_province = {
+				limit = {
+					is_core = MAM
+				}
+				add_unrest = -2
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}

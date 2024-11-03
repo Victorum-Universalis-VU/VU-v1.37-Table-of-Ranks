@@ -1,0 +1,212 @@
+namespace = subjects_expanded_fief_subject_events
+
+country_event = {
+	id = subjects_expanded_fief_subject_events.1
+	title = subjects_expanded_fief_subject_events.EVTNAME1
+	desc = subjects_expanded_fief_subject_events.EVTDESC1
+	picture = BATTLE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_fief_subject_events1.EVTOPT1
+
+		custom_tooltip = FIEF_OVERLORD_DEMANDED_TROOPS
+		tooltip = {
+			add_liberty_desire = 10
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_fief_subject_events.2
+	title = subjects_expanded_fief_subject_events.EVTNAME2
+	desc = subjects_expanded_fief_subject_events.EVTDESC2
+	picture = BATTLE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_fief_subject_events2.EVTOPT1
+
+		tooltip = {
+			add_liberty_desire = 25
+			join_all_defensive_wars_of = FROM
+			join_all_offensive_wars_of = FROM
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_fief_subject_events.3
+	title = subjects_expanded_fief_subject_events.EVTNAME3
+	desc = subjects_expanded_fief_subject_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = FRA
+		started_in = 1444.11.11
+		NOT = { is_year = 1450 }
+		has_estate = estate_nobles
+		NOT = { has_estate_privilege = estate_nobles_french_strong_duchies }
+		NOT = {
+			calc_true_if = {
+				all_subject_country = {
+					OR = {
+						is_vassal = yes
+						is_march = yes
+					}
+				}
+				amount = 2
+			}
+		}
+		calc_true_if = {
+			all_subject_country = {
+				is_subject_of_type = fief_subject
+			}
+			amount = 2
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					ORL = {
+						is_subject_of = ROOT
+						is_subject_of_type = fief_subject
+					}
+					BOU = {
+						is_subject_of = ROOT
+						is_subject_of_type = fief_subject
+					}
+				}
+				ORL = {
+					save_event_target_as = first_fief_to_make_vassal
+				}
+				BOU = {
+					save_event_target_as = second_fief_to_make_vassal
+				}
+			}
+			else = {
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = fief_subject
+						NOT = { tag = event_target:first_fief_to_make_vassal }
+						NOT = { tag = event_target:second_fief_to_make_vassal }
+					}
+					save_event_target_as = first_fief_to_make_vassal
+				}
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = fief_subject
+						NOT = { tag = event_target:first_fief_to_make_vassal }
+						NOT = { tag = event_target:second_fief_to_make_vassal }
+					}
+					save_event_target_as = second_fief_to_make_vassal
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_fief_subject_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		vassalize = event_target:first_fief_to_make_vassal
+		event_target:first_fief_to_make_vassal = {
+			add_liberty_desire = 15
+		}
+		vassalize = event_target:second_fief_to_make_vassal
+		event_target:second_fief_to_make_vassal = {
+			add_liberty_desire = 15
+		}
+		set_estate_privilege = estate_nobles_french_strong_duchies
+	}
+
+	option = {
+		name = subjects_expanded_fief_subject_events3.EVTOPT2
+
+		ai_chance = { factor = 0 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_fief_subject_events.4
+	title = subjects_expanded_fief_subject_events.EVTNAME4
+	desc = subjects_expanded_fief_subject_events.EVTDESC4
+	picture = BATTLE_eventPicture
+
+	fire_only_once = yes
+	major = yes
+	major_trigger = {
+		is_in_war = {
+			attacker_leader = ENG
+			defender_leader = FRA
+			attackers = THIS
+			casus_belli = cb_hundred_years_war
+		}
+	}
+
+	trigger = {
+		tag = FRA
+		started_in = 1444.11.11
+		NOT = { is_year = 1450 }
+		exists = ENG
+		is_in_war = {
+			attacker_leader = ENG
+			defender_leader = ROOT
+			casus_belli = cb_hundred_years_war
+		}
+		has_subject_of_type = fief_subject
+		any_subject_country = {
+			is_subject_of_type = fief_subject
+			NOT = { war_with = ENG }
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = subjects_expanded_fief_subject_events4.EVTOPT1
+
+		ai_chance = { factor = 0.6 }
+
+		every_subject_country = {
+			limit = {
+				is_subject_of_type = fief_subject
+				NOT = { war_with = ENG }
+			}
+			add_liberty_desire = 10
+			join_all_defensive_wars_of = ROOT
+		}
+	}
+
+	option = {
+		name = subjects_expanded_fief_subject_events4.EVTOPT2
+
+		ai_chance = { factor = 0.4 }
+
+		custom_tooltip = FRA_FIEFDOM_GET_MANPOWER
+		hidden_effect = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = fief_subject
+					NOT = { war_with = ENG }
+				}
+				ROOT = {
+					add_manpower = 1
+				}
+			}
+		}
+	}
+}

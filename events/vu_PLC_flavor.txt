@@ -1,0 +1,1715 @@
+#VU updated by San Felipe for 1.35
+# New disaster events for Commonwealth
+# Initially added by docRobert
+
+# ====================================
+namespace = vu_plc
+
+country_event = { # Swedish plunder during Deluge
+	id = vu_plc.1
+	title = vu_plc.1.t
+	desc = vu_plc.1.d
+	picture = LAND_MILITARY_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = POL
+			tag = PLC
+		}
+		is_year = 1600
+		OR = {
+			war_with = SWE
+			war_with = SCA
+		}
+		OR = {
+			SWE = {
+				war_score_against = {
+					who = ROOT
+					value = 30
+				}
+			}
+			SCA = {
+				war_score_against = {
+					who = ROOT
+					value = 30
+				}
+			}
+		}
+	}
+	
+	option = { # Swedes run-sack Commonwealth during Deluge
+		name = vu_plc.1.a
+		add_years_of_income = -1
+		add_adm_power = -25
+		add_dip_power = -25
+		if = {
+			limit = { exists = SWE }
+			SWE = {
+				add_treasury = 1000
+				add_years_of_income = 1
+				add_adm_power = 25
+				add_dip_power = 25
+				add_mil_power = 20
+				add_splendor = 200
+			}
+		}
+		if = {
+			limit = { exists = SCA }
+			SCA = {
+				add_treasury = 1000
+				add_years_of_income = 1
+				add_adm_power = 25
+				add_dip_power = 25
+				add_mil_power = 20
+				add_splendor = 200
+			}
+		}
+		every_owned_province = {
+			limit = {
+				OR = {
+					controlled_by = SWE
+					controlled_by = SCA
+				}
+			}
+			add_devastation = 60
+			add_base_tax = -1
+			add_base_production = -1
+		}
+		every_owned_province = {
+			limit = {
+				OR = {
+					NOT = { controlled_by = SWE }
+					NOT = { controlled_by = SCA }
+				}
+			}
+			add_devastation = 20
+		}
+	}
+}
+
+country_event = { # Chmielnicki's Uprising
+	id = vu_plc.2
+	title = vu_plc.2.t
+	desc = vu_plc.2.d
+	picture = SIEGE_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_year = 1600
+		OR = {
+			tag = POL
+			tag = PLC
+		}
+		estate_influence = {
+			estate = estate_cossacks
+			influence = 20
+		}
+		NOT = {
+			estate_loyalty = {
+				estate = estate_cossacks
+				loyalty = 55
+			}
+		}
+		any_owned_province = {
+			OR = {
+				area = zaporizhia_area
+				area = yedisan_area
+				area = east_dniepr_area
+				area = sloboda_ukraine_area
+				area = lower_dnieper_area
+			}
+			is_core = ROOT
+			is_core = ZAZ
+		}
+		NOT = { exists = ZAZ }
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					2407 = {
+						owned_by = ROOT
+					}
+				}
+				2407 = {
+					add_core = ZAZ
+				}
+			}
+			if = {
+				limit = {
+					4542 = {
+						owned_by = ROOT
+					}
+				}
+				4542 = {
+					add_core = ZAZ
+				}
+			}
+			if = {
+				limit = {
+					7255 = {
+						owned_by = ROOT
+					}
+				}
+				7255 = {
+					add_core = ZAZ
+				}
+			}
+			if = {
+				limit = {
+					7256 = {
+						owned_by = ROOT
+					}
+				}
+				7256 = {
+					add_core = ZAZ
+				}
+			}
+			release = ZAZ
+			ZAZ = {
+				capital_scope = {
+					build_to_forcelimit = {
+						infantry = 0.5
+						cavalry = 0.3
+						artillery = 0.2
+					}
+				}
+				capital_scope = {
+      					infantry = ZAZ
+      					infantry = ZAZ
+      					infantry = ZAZ
+      					infantry = ZAZ
+      					infantry = ZAZ
+				}
+				change_government = monarchy
+				add_government_reform = autocracy_reform
+				adopt_reform_progress = PLC
+				set_government_rank = 6
+				add_mil_power = 50
+				add_dip_power = 50
+				add_adm_power = 50
+				add_manpower = 10
+				add_treasury = 250
+				define_general = {
+					shock = 5
+					fire = 4
+					manuever = 5
+					siege = 4
+					name = "Bohdan Chmielnicki"
+				}
+			}
+		}
+	}
+	
+	option = { # Poland agrees to Cossack's demands
+		name = vu_plc.2.a
+		ai_chance = { factor = 25 }
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = west_dniepr_area
+					area = eastern_volhynia_area
+					area = east_dniepr_area
+					province_id = 7209
+					province_id = 1943
+					province_id = 7206
+					province_id = 3241
+					province_id = 4540
+				}
+			}
+			cede_province = ZAZ
+		}
+		add_prestige = -25
+		create_march = ZAZ
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					is_core = PLT
+				}
+				spawn_rebels = {
+					type = nationalist_rebels
+					size = 1.5
+					friend = PLT
+				}
+			}
+		}
+	}
+	
+	option = { # Chmielnicki's uprising starts
+		name = vu_plc.2.b
+		ai_chance = { factor = 75 }
+		set_global_flag = chmielnicki_uprising
+		ZAZ = {
+			add_casus_belli = {
+				target = ROOT
+				type = cb_insult
+				months = 12
+			}
+			declare_war_with_cb = {
+				who = ROOT
+				casus_belli = cb_insult
+			}
+			capital_scope = {
+				add_unit_construction = {
+					type = infantry
+					amount = 10
+					speed = 1
+					cost = 0
+				}
+				add_unit_construction = {
+					type = cavalry
+					amount = 5
+					speed = 1
+					cost = 0
+				}
+			}
+		}
+		add_stability = -1
+	}
+}
+
+country_event = { # Russian help Cossacks and intervene in war
+	id = vu_plc.3
+	title = vu_plc.3.t
+	desc = vu_plc.3.d
+	picture = BORDER_TENSION_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = RUS
+			tag = MOS
+			tag = TZR
+		}
+		has_global_flag = chmielnicki_uprising
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = { # Russia will not help
+		name = vu_plc.3.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				NOT = { alliance_with = PLC }
+			}
+			modifier = {
+				factor = 0
+				NOT = { alliance_with = POL }
+			}
+		}
+		add_dip_power = 10
+		clr_global_flag = chmielnicki_uprising
+	}
+	option = { # Russia will intervene
+		name = vu_plc.3.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 200
+				is_rival = PLC
+			}
+			modifier = {
+				factor = 200
+				is_rival = POL
+			}
+			modifier = {
+				factor = 200
+				NOT = {
+					has_opinion = {
+						who = PLC
+						value = 10
+					}
+				}
+			}
+		}
+		create_alliance = ZAZ
+		create_guarantee = ZAZ
+		join_all_offensive_wars_of = ZAZ
+		join_all_defensive_wars_of = ZAZ
+		add_casus_belli = {
+			target = PLC
+			type = cb_insult
+			months = 60
+		}
+		clr_global_flag = chmielnicki_uprising
+	}
+}
+
+country_event = { # Second Peace of Thorn
+	id = vu_plc.4
+	title = vu_plc.4.t
+	desc = vu_plc.4.d
+	picture = SEJM_eventPicture
+	
+	goto = 1859
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = POL
+			tag = PLC
+		}
+		TEU = {
+			ai = yes
+		}
+		DNZ = {
+			ai = yes
+		}
+		is_at_war = no
+		has_country_flag = supported_prussian_confederation_flag
+		OR = {
+			DNZ = { vassal_of = ROOT }
+			AND = {
+				NOT = { exists = DNZ }
+				43 = { owned_by = ROOT }
+			}
+		}
+		OR = {
+			AND = {
+				NOT = { exists = TEU }
+				41 = { owned_by = ROOT }
+			}
+			AND = {
+				exists = TEU
+				army_strength = {
+					who = TEU
+					value = 1.5
+				}
+			prestige = TEU
+			}
+		}
+		OR = {
+			41 = {
+				OR = {
+					owned_by = ROOT
+					owned_by = DNZ
+					owned_by = TEU
+				}
+			}
+			1841 = {
+				OR = {
+					owned_by = ROOT
+					owned_by = DNZ
+					owned_by = TEU
+				}
+			}
+			43 = {
+				OR = {
+					owned_by = ROOT
+					owned_by = DNZ
+					owned_by = TEU
+				}
+			}
+		}
+		#has_won_war_against = { # Supposedly doesn't work and causes problems
+		#	who = TEU
+		#	max_years_since = 25
+		#}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = { # Don't agree to Peace
+		name = vu_plc.4.a
+		ai_chance = { factor = 25 }
+	}
+	
+	option = { # Sign Peace
+		name = vu_plc.4.b
+		ai_chance = { factor = 75 }
+		custom_tooltip = vu_plc.4.tooltip
+		if = {
+			limit = {
+				exists = DNZ
+			}
+			inherit = DNZ
+		}
+		if = {
+			limit = {
+				exists = TEU
+			}
+			inherit = TEU
+		}
+		if = {
+			limit = {
+				exists = PMS
+				PMS = { ai = yes }
+			}
+			inherit = PMS
+		}
+		if = {
+			limit = {
+				exists = KLL
+				KLL = { ai = yes }
+			}
+			inherit = KLL
+		}
+		if = {
+			limit = {
+				exists = WRM
+				WRM = { ai = yes }
+			}
+			inherit = WRM
+		}
+		if = {
+			limit = {
+				exists = SGA
+				SGA = { ai = yes }
+			}
+			inherit = SGA
+		}
+		create_vassal = WRM
+		create_vassal = TEU
+		if = {
+			limit = {
+				7828 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7828 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7825 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7825 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7826 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7826 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7828 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7828 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7827 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7827 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				5097 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			5097 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				2997 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			2997 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				43 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			43 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7819 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			7819 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				4747 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			4747 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				49 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			49 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				1859 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			1859 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				1841 = {
+					OR = {
+						owned_by = TEU
+						owned_by = MAZ
+					}
+				}
+			}
+			1841 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7829 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7829 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7830 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7830 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				2958 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			2958 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				42 = {
+					OR = {
+						owned_by = TEU
+						owned_by = ROOT
+						owned_by = MAZ
+					}
+				}
+			}
+			42 = {
+				add_core = WRM
+				cede_province = WRM
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7831 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7831 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7832 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7832 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7862 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7862 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				767 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			767 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				41 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			41 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7835 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7835 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				3224 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+						owned_by = SMG
+						owned_by = LIT
+					}
+				}
+			}
+			3224 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7837 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+						owned_by = DNZ
+						owned_by = SMG
+						owned_by = LIT
+					}
+				}
+			}
+			7837 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7836 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+						owned_by = DNZ
+					}
+				}
+			}
+			7836 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7834 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7834 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				7833 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+					}
+				}
+			}
+			7833 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				40 = {
+					OR = {
+						owned_by = MAZ
+						owned_by = ROOT
+						owned_by = SMG
+						owned_by = LIT
+					}
+				}
+			}
+			40 = {
+				add_core = TEU
+				cede_province = TEU
+				remove_core = ROOT
+			}
+		}
+		add_prestige = 10
+		TEU = {
+			override_country_name = VU_DUCAL_PRUSSIA
+		}
+		set_country_flag = vu_pol_peace_of_thorn
+	}
+}
+
+country_event = { # Purchase of Frauenstadt
+	id = vu_plc.5
+	title = vu_plc.5.t
+	desc = vu_plc.5.d
+	picture = WESTERNIZATION_eventPicture
+	
+	goto = 8176
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = POL
+			tag = PLC
+		}
+		is_at_war = no
+		is_year = 1450
+		8176 = {
+			OR = {
+				owned_by = ASC
+				owned_by = BOH
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = vu_plc.5.a
+		add_adm_power = 10
+		add_treasury = 10
+		ai_chance = {
+			factor = 10
+		}
+	}
+	option = {
+		name = vu_plc.5.b
+		add_adm_power = -10
+		add_treasury = -25
+		ai_chance = {
+			factor = 90
+		}
+		ASC = {
+			add_treasury = 25
+		}
+		hidden_effect = {
+			BOH = {
+				add_treasury = 25
+			}
+		}
+		8176 = {
+			remove_core = ASC
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+}
+
+country_event = { # Lithuania integrates some vassals
+	id = vu_plc.6
+	title = vu_plc.6.t
+	desc = vu_plc.6.d
+	picture = WESTERNIZATION_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = POL
+		}
+		senior_union_with = LIT
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	
+	option = {
+		name = vu_plc.6.a
+		ai_chance = {
+			factor = 10
+		}
+	}
+	option = {
+		name = vu_plc.6.b
+		add_adm_power = -10
+		add_dip_power = -10
+		ai_chance = {
+			factor = 90
+		}
+		if = {
+			limit = {
+				exists = BSV
+				BSV = {
+					ai = yes
+					is_subject_of = LIT
+				}
+			}
+			LIT = {
+				inherit = BSV
+			}
+		}
+		if = {
+			limit = {
+				exists = KIE
+				KIE = {
+					ai = yes
+					is_subject_of = LIT
+				}
+			}
+			LIT = {
+				inherit = KIE
+			}
+		}
+		if = {
+			limit = {
+				exists = SMG
+				SMG = {
+					ai = yes
+					is_subject_of = LIT
+				}
+			}
+			LIT = {
+				inherit = SMG
+			}
+		}
+		if = {
+			limit = {
+				exists = CHR
+				CHR = {
+					ai = yes
+					is_subject_of = LIT
+					owns = 4246
+				}
+			}
+			4246 = {
+				cede_province = LIT
+				add_core = LIT
+			}
+		}
+		if = {
+			limit = {
+				exists = CHR
+				CHR = {
+					ai = yes
+					is_subject_of = LIT
+					owns = 7238
+				}
+			}
+			7238 = {
+				cede_province = LIT
+				add_core = LIT
+			}
+		}
+		if = {
+			limit = {
+				exists = CHR
+				CHR = {
+					ai = yes
+					is_subject_of = LIT
+					owns = 7229
+				}
+			}
+			7229 = {
+				cede_province = LIT
+				add_core = LIT
+			}
+		}
+		if = {
+			limit = {
+				exists = CHR
+				CHR = {
+					ai = yes
+					is_subject_of = LIT
+					owns = 7240
+				}
+			}
+			7240 = {
+				cede_province = LIT
+				add_core = LIT
+			}
+		}
+		if = {
+			limit = {
+				exists = CHR
+				CHR = {
+					ai = yes
+					is_subject_of = LIT
+					owns = 4115
+				}
+			}
+			4115 = {
+				cede_province = LIT
+				add_core = LIT
+			}
+		}
+	}
+}
+
+country_event = { # Elective monarchy estates influence
+	id = vu_plc.7
+	title = vu_plc.7.t
+	desc = vu_plc.7.d
+	picture = SEJM_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_reform = elective_monarchy
+		OR = {
+			has_estate = estate_church
+			has_estate = estate_nobles
+			has_estate = estate_magnates
+			has_estate = estate_burghers
+		}
+	}
+	
+	option = { # Nobles influence
+		name = vu_plc.7.a
+		trigger = {
+			has_estate = estate_nobles
+		}
+		add_estate_influence_modifier = {
+			estate = estate_nobles
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 7
+			duration = 3650
+		}
+	}
+	option = { # Magnates influence
+		name = vu_plc.7.b
+		trigger = {
+			has_estate = estate_magnates
+		}
+		add_estate_influence_modifier = {
+			estate = estate_magnates
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 7
+			duration = 3650
+		}
+	}
+	option = { # Burghers influence
+		name = vu_plc.7.c
+		trigger = {
+			has_estate = estate_burghers
+		}
+		add_estate_influence_modifier = {
+			estate = estate_burghers
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 7
+			duration = 3650
+		}
+	}
+	option = { # Church influence
+		name = vu_plc.7.e
+		trigger = {
+			has_estate = estate_church
+		}
+		add_estate_influence_modifier = {
+			estate = estate_church
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 7
+			duration = 3650
+		}
+	}
+	option = { # No influence
+		name = vu_plc.7.f
+		add_legitimacy = -20
+		add_adm_power = -20
+		add_dip_power = -20
+		add_mil_power = -20
+	}
+}
+
+country_event = { # Estate influence from foreign ruler based on his nationality
+	id = vu_plc.8
+	title = vu_plc.8.t
+	desc = vu_plc.8.d
+	picture = SEJM_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_reform = elective_monarchy
+		OR = {
+			has_estate = estate_church
+			has_estate = estate_nobles
+			has_estate = estate_magnates
+			has_estate = estate_burghers
+		}
+		OR = {
+			ruler_is_foreigner = yes
+			NOT = { ruler_culture = ROOT }
+		}
+	}
+	
+	option = { # Habsburg or French or lithuanian
+		name = vu_plc.8.a
+		ai_chance = {
+			factor = 99
+		}
+		trigger = {
+			has_estate = estate_nobles
+			OR = {
+				ruler_culture = austrian
+				ruler_culture = cosmopolitan_french
+				ruler_culture = lithuanian
+			}
+		}
+		add_estate_influence_modifier = {
+			estate = estate_nobles
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 10
+			duration = 3650
+		}
+	}
+	option = { # Russian or english or italian or hungarian
+		name = vu_plc.8.b
+		ai_chance = {
+			factor = 99
+		}
+		trigger = {
+			has_estate = estate_magnates
+			OR = {
+				ruler_culture = russian
+				ruler_culture = muscovite
+				ruler_culture = english
+				ruler_culture = lombard
+				ruler_culture = tuscan
+				ruler_culture = romagnan
+				ruler_culture = ligurian
+				ruler_culture = venetian
+				ruler_culture = neapolitan
+				ruler_culture = hungarian
+				ruler_culture = umbrian
+				ruler_culture = piedmontese
+			}
+		}
+		add_estate_influence_modifier = {
+			estate = estate_magnates
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 10
+			duration = 3650
+		}
+	}
+	option = { #Prussian or saxon
+		name = vu_plc.8.c
+		ai_chance = {
+			factor = 99
+		}
+		trigger = {
+			has_estate = estate_burghers
+			OR = {
+				ruler_culture = prussian
+				ruler_culture = pommeranian
+				ruler_culture = lower_saxon
+				ruler_culture = saxon
+			}
+		}
+		add_estate_influence_modifier = {
+			estate = estate_burghers
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 10
+			duration = 3650
+		}
+	}
+	option = { # Bavarian or swedish or czech
+		name = vu_plc.8.e
+		ai_chance = {
+			factor = 99
+		}
+		trigger = {
+			has_estate = estate_church
+			OR = {
+				ruler_culture = swedish
+				ruler_culture = bavarian
+				ruler_culture = czech
+			}
+		}
+		add_estate_influence_modifier = {
+			estate = estate_church
+			desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+			influence = 10
+			duration = 3650
+		}
+	}
+	option = { # Other culture, always active
+		name = vu_plc.8.f
+		ai_chance = {
+			factor = 1
+		}
+		random_list = {
+			25 = {
+				add_estate_influence_modifier = {
+					estate = estate_church
+					desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+					influence = 10
+					duration = 3650
+				}
+			}
+			25 = {
+				add_estate_influence_modifier = {
+					estate = estate_burghers
+					desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+					influence = 10
+					duration = 3650
+				}
+			}
+			25 = {
+				add_estate_influence_modifier = {
+					estate = estate_nobles
+					desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+					influence = 10
+					duration = 3650
+				}
+			}
+			25 = {
+				add_estate_influence_modifier = {
+					estate = estate_magnates
+					desc = EST_VAL_ELECTIVE_MONARCHY_SUPPORT
+					influence = 10
+					duration = 3650
+				}
+			}
+		}
+	}
+	option = { # We a certain historical ruler, add more options below
+		name = vu_plc.8.g
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = { has_country_flag = pol_had_ruler_henry_devalois }
+			is_year = 1550
+			NOT = { is_year = 1600 }
+		}
+		highlight = yes
+		add_legitimacy = -10
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		define_ruler = {
+			name = "Henry III"
+			dynasty = "de Valois"
+			adm = 2
+			dip = 4
+			mil = 4
+			culture = cosmopolitan_french
+			religion = catholic
+			age = 22
+			claim = 70
+			male = yes
+		}
+		set_country_flag = pol_had_ruler_henry_devalois
+	}
+	option = { # We a certain historical ruler, add more options below
+		name = vu_plc.8.h
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = { has_country_flag = pol_had_ruler_stefan_batory }
+			is_year = 1560
+			NOT = { is_year = 1610 }
+		}
+		highlight = yes
+		add_legitimacy = -10
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		define_ruler = {
+			name = "Stephen"
+			dynasty = "Bathory"
+			adm = 5
+			dip = 4
+			mil = 6
+			culture = romanian
+			religion = catholic
+			age = 43
+			claim = 80
+			male = yes
+		}
+		set_country_flag = pol_had_ruler_stefan_batory
+	}
+	option = { # We a certain historical ruler, add more options below
+		name = vu_plc.8.i
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = { has_country_flag = pol_had_ruler_sigismund_vasa }
+			is_year = 1590
+			NOT = { is_year = 1640 }
+		}
+		highlight = yes
+		add_legitimacy = -10
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		define_ruler = {
+			name = "Sigismund"
+			dynasty = "Vasa"
+			adm = 5
+			dip = 5
+			mil = 5
+			culture = swedish
+			religion = catholic
+			age = 20
+			claim = 80
+			male = yes
+		}
+		set_country_flag = pol_had_ruler_sigismund_vasa
+	}
+	option = { # We a certain historical ruler, add more options below
+		name = vu_plc.8.j
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = { has_country_flag = pol_had_ruler_jan_sobieski }
+			is_year = 1640
+			NOT = { is_year = 1690 }
+		}
+		highlight = yes
+		add_legitimacy = -10
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		define_ruler = {
+			name = "Jan III"
+			dynasty = "Sobieski"
+			adm = 4
+			dip = 6
+			mil = 6
+			culture = polish
+			religion = catholic
+			age = 35
+			claim = 80
+			male = yes
+		}
+		set_country_flag = pol_had_ruler_jan_sobieski
+	}
+	option = { # We a certain historical ruler, add more options below
+		name = vu_plc.8.k
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			NOT = { has_country_flag = pol_had_ruler_august_sas }
+			is_year = 1690
+			NOT = { is_year = 1730 }
+		}
+		highlight = yes
+		add_legitimacy = -10
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+		define_ruler = {
+			name = "Augustus II the Strong"
+			dynasty = "von Wettin"
+			adm = 4
+			dip = 4
+			mil = 2
+			culture = polish
+			religion = catholic
+			age = 35
+			claim = 80
+			male = yes
+		}
+		set_country_flag = pol_had_ruler_august_sas
+	}
+}
+
+country_event = { # Sejm of Lublin 1569
+	id = vu_plc.9
+	title = vu_plc.9.t
+	desc = vu_plc.9.d
+	picture = SEJM_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	goto = 260
+	
+	trigger = {
+		tag = POL
+		is_year = 1560
+		NOT = { is_year = 1580 }
+		NOT = { exists = PLC }
+		LIT = {
+			exists = yes
+			is_subject_of = ROOT
+			owns = 280
+		}
+		owns = 260
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = { # Annex Ukraine
+		name = vu_plc.9.a
+		ai_chance = {
+			factor = 80
+		}
+		highlight = yes
+		add_adm_power = -20
+		every_province = {
+			limit = {
+				owned_by = LIT
+				NOT = { province_id = 7244 }
+				OR = {
+					area = west_dniepr_area
+					area = east_dniepr_area
+					area = zaporizhia_area
+					area = podolia_volhynia_area
+					area = volhynia_area
+					area = eastern_volhynia_area
+					area = sloboda_ukraine_area
+					area = severia_area
+					area = yedisan_area
+					province_id = 7237
+					province_id = 3223
+					province_id = 7262
+					province_id = 269
+				}
+			}
+			cede_province = ROOT
+			add_core = ROOT
+			#remove_core = LIT
+		}
+	}
+	option = { # Let them keep it
+		name = vu_plc.9.b
+		ai_chance = {
+			factor = 20
+		}
+		add_dip_power = 25
+		add_adm_power = 25
+		add_prestige = -5
+	}
+}
+
+country_event = { # Secularization of Teutonic Order
+	id = vu_plc.10
+	title = vu_plc.10.t
+	desc = vu_plc.10.d
+	picture = CONQUEST_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			tag = POL
+			tag = PLC
+			has_country_flag = vu_pol_peace_of_thorn
+		}
+		is_year = 1510
+		TEU = {
+			exists = yes
+			is_subject_of = ROOT
+			owns = 41
+		}
+		is_religion_enabled = protestant
+		adm_tech = 25
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+	}
+	
+	option = { # Teutons secularized and Prussia formed
+		name = vu_plc.10.a
+		ai_chance = {
+			factor = 100
+		}
+		highlight = yes
+		clr_country_flag = vu_pol_peace_of_thorn
+		TEU = {
+			change_religion = protestant
+			change_primary_culture = prussian
+			set_capital = 41
+			restore_country_name = yes
+			change_tag = PRU
+			swap_non_generic_missions = yes
+			if = {
+				limit = { NOT = { government_rank = 6 } }
+				set_government_rank = 6
+			}
+			if = {
+				limit = {
+					NOT = { government = monarchy }
+					is_revolutionary = no
+				}
+				change_government_to_monarchy = yes
+			}
+			#add_government_reform = prussian_monarchy
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			add_prestige = 10
+			add_legitimacy = 10
+		}
+		create_subject = {
+			subject_type = march
+			subject = PRU
+		}
+		every_province = {
+			limit = {
+				owned_by = PRU
+			}
+			change_religion = protestant
+			#remove_core = TEU
+		}
+	}
+	option = { # We will annex them
+		name = vu_plc.10.b
+		ai_chance = {
+			factor = 0
+		}
+		clr_country_flag = vu_pol_peace_of_thorn
+		inherit = TEU
+		add_dip_power = -75
+		add_adm_power = -75
+		reverse_add_opinion = {
+			who = PAP
+			modifier = renounced_as_heretics
+		}
+	}
+	option = { # Keep status quo
+		name = vu_plc.10.c
+		ai_chance = {
+			factor = 0
+		}
+		add_prestige = -5
+		TEU = { add_liberty_desire = 20 }
+		41 = { change_religion = protestant }
+		clr_country_flag = vu_pol_peace_of_thorn
+	}
+	option = { # LEMME PLAY PRUSSIA!
+		name = vu_plc.10.e
+		trigger = { ai = no }
+		ai_chance = {
+			factor = 0
+		}
+		highlight = yes
+		clr_country_flag = vu_pol_peace_of_thorn
+		TEU = {
+			change_religion = protestant
+			change_primary_culture = prussian
+			set_capital = 41
+			restore_country_name = yes
+			change_tag = PRU
+			swap_non_generic_missions = yes
+			if = {
+				limit = { NOT = { government_rank = 6 } }
+				set_government_rank = 6
+			}
+			if = {
+				limit = {
+					NOT = { government = monarchy }
+					is_revolutionary = no
+				}
+				change_government_to_monarchy = yes
+			}
+			#add_government_reform = prussian_monarchy
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			add_prestige = 10
+			add_legitimacy = 10
+		}
+		create_subject = {
+			subject_type = march
+			subject = PRU
+		}
+		every_province = {
+			limit = {
+				owned_by = PRU
+			}
+			change_religion = protestant
+			#remove_core = TEU
+		}
+		switch_tag = PRU
+	}
+}

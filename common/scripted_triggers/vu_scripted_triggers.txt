@@ -1,0 +1,54 @@
+#VU addition for 1.36.2.* by San Felipe
+#country_has_both_paradox_and_golden_bull_missions = {}
+
+has_production_building_trigger = { #There are 2 of those, should remove one
+	OR = {
+		has_building = workshop
+		has_building = counting_house
+		has_building = steam_engine_manu
+		custom_trigger_tooltip = {
+			tooltip = silver_tooltip
+			OR = {
+				trade_goods = silver
+				trade_goods = gold
+			}
+		}
+	}
+}
+
+has_manufactory_trigger = { #Province Scope
+	custom_trigger_tooltip = { #There are 2 of those, should remove one
+		tooltip = has_manufactory_trigger_tooltip
+		OR = {
+			has_building = wharf
+			has_building = weapons
+			has_building = textile
+			has_building = tradecompany
+			has_building = farm_estate
+			has_building = mills
+			has_building = furnace
+			has_building = plantations
+			has_building = ramparts
+			has_building = soldier_households
+			has_building = impressment_offices
+			has_building = state_house
+			trade_goods = silver
+			trade_goods = gold
+		}
+	}
+}
+
+has_education_building_trigger = {
+	OR = {
+		has_building = library
+		has_building = school
+	}
+}
+
+has_transportation_trigger = {
+	OR = {
+		has_building = road_system #VU addition
+		has_building = canal_system #VU addition
+		has_building = railway_system #VU addition
+	}
+}

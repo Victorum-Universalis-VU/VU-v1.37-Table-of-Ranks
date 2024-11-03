@@ -1,0 +1,184 @@
+namespace = belgian_revolt
+
+# on disaster end event
+country_event = {
+	id = belgian_revolt.1
+	title = "belgian_revolt.1.t"
+	desc = {
+		trigger = {
+			NOT = { exists = BEL }
+		}
+		desc = "belgian_revolt.1.d" # everything went pretty well
+	}
+	desc = {
+		trigger = {
+			exists = BEL
+		}
+		desc = "belgian_revolt.1.d2" # oh no the belgian are revolting
+	}
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = had_belgian_revolt
+			every_owned_province = {
+				limit = {
+					has_province_modifier = belgian_revolt_modifier
+				}
+				remove_province_modifier = belgian_revolt_modifier
+			}
+		}
+	}
+	
+	option = {
+		name = belgian_revolt.1.a
+		trigger = {
+			exists = BEL
+		}
+	}
+	option = {
+		name = belgian_revolt.1.b
+		trigger = {
+			NOT = { exists = BEL }
+		}
+		low_countries_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			add_local_autonomy = -25
+		}
+	}
+}
+
+# mock incident
+country_event = {
+	id = belgian_revolt.2
+	title = "belgian_revolt.2.t"
+	desc = "belgian_revolt.2.d"
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	major = yes
+	
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = {
+					has_country_flag = belgian_revolt_target
+				}
+				save_event_target_as = belgian_revolt_country
+			}
+		}
+	}
+	
+	option = { # britain backs belgium
+		name = belgian_revolt.2.a
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 1000
+				event_target:belgian_revolt_country = {
+					is_rival = ROOT
+				}
+			}
+			modifier = {
+				factor = 1000
+				alliance_with = BEL
+			}
+		}
+		if = {
+			limit = {
+				NOT = { alliance_with = BEL }
+			}
+			create_alliance = BEL
+		}
+		if = {
+			limit = {
+				BEL = {
+					war_with = event_target:belgian_revolt_country
+				}
+			}
+			join_all_offensive_wars_of = BEL
+		}
+		BEL = {
+			add_opinion = {
+				who = ROOT
+				modifier = great_britain_helped_belgians
+			}
+		}
+	}
+	option = { # do not intervene
+		name = belgian_revolt.2.b
+		ai_chance = { factor = 75 }
+		add_prestige = -10
+		set_global_flag = great_britain_did_not_support_belgians	
+		custom_tooltip = belgian_will_leave_later		
+	}
+	
+	option = { # suppress the belgian revolt
+		name = belgian_revolt.2.c
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 1000
+				has_opinion = {
+					who = event_target:belgian_revolt_country
+					value = 100
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					alliance_with = event_target:belgian_revolt_country
+				}
+			}
+			create_alliance = event_target:belgian_revolt_country
+		}
+		if = {
+			limit = {
+				BEL = {
+					war_with = event_target:belgian_revolt_country
+				}
+			}
+			join_all_defensive_wars_of = event_target:belgian_revolt_country
+		}
+		set_global_flag = great_britain_did_not_support_belgians		
+		BEL = {
+			add_opinion = {
+				who = ROOT
+				modifier = great_britain_sided_against_belgians
+			}
+		}
+		custom_tooltip = belgian_will_leave_later
+	}
+}
+
+# The Kingdom of Belgium is Alone
+country_event = {
+	id = belgian_revolt.3
+	title = "belgian_revolt.3.t"
+	desc = "belgian_revolt.3.d"
+	picture = HRE_eventPicture
+	
+	fire_only_once = yes
+	major = yes
+	
+	trigger = {
+		tag = BEL
+		has_global_flag = great_britain_did_not_support_belgians
+		is_at_war = no
+		num_of_cities = 7
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = { # We're alone
+		name = belgian_revolt.3.a
+	}
+}

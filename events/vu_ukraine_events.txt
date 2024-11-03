@@ -1,0 +1,234 @@
+namespace = vu_ukraine
+#Tsardom or cossacks
+country_event = {
+	id = vu_ukraine.1
+	title = "vu_ukraine_tsardom_title"
+	desc = {
+		trigger = {
+			has_reform = cossacks_reform
+		}
+		desc = "vu_ukraine_tsardom_s_desc"
+	}
+	desc = {
+		trigger = {
+			NOT = {
+				has_reform = cossacks_reform
+			}
+		}
+		desc = "vu_ukraine_tsardom_t_desc"
+	}
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = "vu_ukraine_tsardom_tsar"
+		if = {
+			limit = {
+				is_revolutionary = no
+				NOT = {
+					government = monarchy
+				}
+			}
+			change_government_to_monarchy = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_reform = ruthenian_tsardom
+				}
+			}
+			add_government_reform = ruthenian_tsardom
+		}
+		if = {
+			limit = {
+				has_custom_ideas = no
+				NOT = {
+					has_idea_group = ruthenian_ideas
+				}
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+	option = {
+		name = "vu_ukraine_tsardom_hetman"
+		set_government_rank = 9
+		if = {
+			limit = {
+				is_revolutionary = no
+				NOT = {
+					government = republic
+				}
+			}
+			change_government_to_republic = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_reform = cossacks_reform
+				}
+			}
+			add_government_reform = cossacks_reform
+		}
+		if = {
+			limit = {
+				has_custom_ideas = no
+				NOT = {
+					has_idea_group = cossack_ideas
+				}
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			#Swap Ideas
+		}
+	}
+}
+
+#Legacy events
+country_event = {
+	id = vu_ukraine.2
+	title = "vu_ukraine_yaroslav_legacy_title"
+	desc = "vu_ukraine_yaroslav_legacy_desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = UKR
+		adm = 6
+		NOT = {
+			has_ruler_flag = vu_ukraine_legacy_obtained
+		}
+		owns_core_province = 280
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = "vu_ukraine_yaroslav_legacy_option"
+		add_adm_power = 100
+		add_ruler_modifier = {
+			name = "vu_ukraine_yaroslav_legacy_modifier"
+			duration = -1
+		}
+		set_ruler_flag = vu_ukraine_legacy_obtained
+	}
+}
+
+country_event = {
+	id = vu_ukraine.3
+	title = "vu_ukraine_olga_legacy_title"
+	desc = "vu_ukraine_olga_legacy_desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = UKR
+		dip = 6
+		NOT = {
+			has_ruler_flag = vu_ukraine_legacy_obtained
+		}
+		owns_core_province = 280
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = "vu_ukraine_olga_legacy_option"
+		add_dip_power = 100
+		add_ruler_modifier = {
+			name = "vu_ukraine_olga_legacy_modifier"
+			duration = -1
+		}
+		set_ruler_flag = vu_ukraine_legacy_obtained
+	}
+}
+
+country_event = {
+	id = vu_ukraine.4
+	title = "vu_ukraine_sviatoslav_legacy_title"
+	desc = "vu_ukraine_sviatoslav_legacy_desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = UKR
+		mil = 6
+		NOT = {
+			has_ruler_flag = vu_ukraine_legacy_obtained
+		}
+		owns_core_province = 280
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = "vu_ukraine_sviatoslav_legacy_option"
+		add_mil_power = 100
+		add_ruler_modifier = {
+			name = "vu_ukraine_sviatoslav_legacy_modifier"
+			duration = -1
+		}
+		set_ruler_flag = vu_ukraine_legacy_obtained
+	}
+}
+
+country_event = {
+	id = vu_ukraine.5
+	title = "vu_ukraine_vladimir_legacy_title"
+	desc = "vu_ukraine_vladimir_legacy_desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = UKR
+		religious_unity = 1
+		patriarch_authority = 0.5
+		NOT = {
+			has_ruler_flag = vu_ukraine_legacy_obtained
+		}
+		owns_core_province = 280
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = "vu_ukraine_vladimir_legacy_option"
+		add_stability_or_adm_power = yes
+		add_ruler_modifier = {
+			name = "vu_ukraine_vladimir_legacy_modifier"
+			duration = -1
+		}
+		set_ruler_flag = vu_ukraine_legacy_obtained
+	}
+}
+
+country_event = {
+	id = vu_ukraine.6
+	title = "vu_ukraine_vsevolod_legacy_title"
+	desc = "vu_ukraine_vsevolod_legacy_desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = UKR
+		prestige = 75
+		power_projection = 50
+		NOT = {
+			has_ruler_flag = vu_ukraine_legacy_obtained
+		}
+		owns_core_province = 280
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = "vu_ukraine_vsevolod_legacy_option"
+		add_prestige = 25
+		add_ruler_modifier = {
+			name = "vu_ukraine_vsevolod_legacy_modifier"
+			duration = -1
+		}
+		set_ruler_flag = vu_ukraine_legacy_obtained
+	}
+}

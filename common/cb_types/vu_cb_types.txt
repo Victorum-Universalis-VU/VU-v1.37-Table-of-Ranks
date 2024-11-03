@@ -1,0 +1,1496 @@
+#VU_cb_types
+#New Additions by San Felipe
+unify_germany = {
+	valid_for_subject = no
+
+	prerequisites = {
+		is_free_or_tributary_trigger = yes
+		is_emperor = no
+		culture_group = germanic
+		has_government_attribute = has_unify_germany_cb #Is it set anywhere ? cwtools seems to think it isn't
+		
+		FROM = { #Applies against other powers in Germany
+			NOT = { is_subject_of = ROOT }
+			culture_group = germanic
+			any_owned_province = {
+				OR = {
+					region = north_german_region
+					region = south_german_region
+					area = alsace_area
+				}
+			}
+			is_emperor = no
+		}
+		is_neighbor_of = FROM
+	}
+
+	attacker_disabled_po = {
+		po_become_tributary_state
+		po_subjugate_tributary_state
+	}
+
+	war_goal = unify_germany_war_goal
+}
+
+#New Additions from Subjects Expanded by San Felipe
+cb_force_imperial_tributary_state = {
+	valid_for_subject = no
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = imperial_tributary_state
+		}
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+		NOT = { truce_with = FROM }
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+	}
+
+	war_goal = take_capital_force_imperial_tributary_state
+}
+
+cb_force_mandala_trade_vassal = {
+	valid_for_subject = no
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = mandala_trade_vassal
+		}
+		NOT = { truce_with = FROM }
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+			NOT = { is_subject_of = ROOT }
+		}
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+	}
+
+	war_goal = take_capital_force_mandala_trade_vassal
+}
+
+cb_force_persian_satrapy_triggered_only = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = persian_satrapy
+		}
+		FROM = {
+			is_subject = no
+		}
+	}
+
+	war_goal = take_capital_force_persian_satrapy
+}
+
+cb_force_trade_outpost = {
+	valid_for_subject = no
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = trade_outpost
+		}
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+		NOT = { truce_with = FROM }
+		NOT = { overlord_of = FROM }
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+	}
+
+	war_goal = take_capital_force_trade_outpost
+}
+
+cb_convert_heathen_for_iqta = {
+	valid_for_subject = no
+
+	prerequisites = {
+		can_be_overlord = iqta_vassal
+		cb_on_religious_enemies = yes
+		is_revolution_target = no
+		has_subject_of_type = iqta_vassal
+		NOT = { religion_group = FROM }
+		NOT = { truce_with = FROM }
+		NOT = { alliance_with = FROM }
+		OR = {
+			is_neighbor_of = FROM
+			any_subject_country = {
+				is_subject_of_type = iqta_vassal
+				is_neighbor_of = FROM
+			}
+		}
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+	}
+
+	war_goal = superiority_convert_heathen_for_iqta
+}
+
+cb_vassalize_papal_sanctuary_subject = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 12
+
+	prerequisites = {
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = papal_sanctuary_subject
+		}
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+	}
+
+	war_goal = take_capital_vassalize_papal_sanctuary_subject
+}
+
+cb_disloyal_imperial_feud_subject = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 66
+
+	prerequisites = {
+		can_be_overlord = imperial_feud_subject
+		FROM = {
+			NOT = { is_subject_of = ROOT }
+		}
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+	}
+
+	war_goal = take_capital_force_imperial_feud_subject
+}
+
+cb_disloyal_brother_kingdom = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 80
+
+	prerequisites = {
+		can_be_overlord = brother_kingdom
+		FROM = {
+			NOT = { is_subject_of = ROOT }
+		}
+	}
+
+	war_goal = take_capital_restore_brother_kingdom
+}
+
+cb_disloyal_banking_family_subject = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 100
+
+	prerequisites = {
+		is_subject = no
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = banking_family_subject
+		}
+		FROM = {
+			NOT = { is_subject_of = ROOT }
+		}
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+	}
+
+	war_goal = take_capital_restore_banking_family_subject
+}
+
+cb_liberate_elector_palatinate_vassal = {
+	valid_for_subject = no
+
+	prerequisites = {
+		is_emperor = yes
+		FROM = {
+			any_subject_country = {
+				is_elector = yes
+				is_subject_of_type = palatinate_vassal
+			}
+		}
+		is_revolutionary = no
+	}
+
+	attacker_disabled_po = {
+		po_demand_provinces
+	}
+
+	war_goal = superiority_liberation_palatinate_vassal
+}
+
+cb_force_pirate_brotherhood_vassal_triggered_only = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = pirate_brotherhood_vassal
+		}
+		FROM = {
+			is_subject = no
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+
+	war_goal = blockade_ports_force_pirate_brotherhood_vassal
+}
+
+#albania_missions_cb_types
+cb_alb_dismantle_empire = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 240
+	
+	war_goal = take_province_alb
+}
+
+#ansbach_missions_cb_types
+cb_margrave_war = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	war_goal = margrave_war
+}
+
+cb_abbasid_jihad = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+	
+	prerequisites = {
+	}
+
+	war_goal = superiority_jihad
+}
+
+cb_punish_qara_qoyunlu = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+	
+
+	war_goal = superiority_punish_qara_qoyunlu
+}
+
+cb_curb_baghdad_qq = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+	
+
+	war_goal = take_capital_cb_curb_baghdad_qq
+}
+
+cb_qq_ambition = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+	
+
+	war_goal = take_capital_cb_qq_ambition
+}
+
+cb_aq_ambition = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+	
+
+	war_goal = take_capital_cb_aq_ambition
+}
+
+cb_ARB_expel_crusaders = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+	
+
+	war_goal = take_capital_expel_crusaders_arb
+}
+
+#austria_missions_cb_types
+cb_order_in_the_empire = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		is_emperor = yes
+		has_country_flag = me_hab_reformation_cb
+		NOT = { religion = FROM }
+		FROM = { is_part_of_hre = yes }
+	}
+	
+	war_goal = HAB_convert_to_religion
+}
+
+cb_order_crusade = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	
+	war_goal = HAB_crusade_against_ottomans
+}
+
+
+cb_austria_balkanize_poland = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	
+	war_goal = HAB_balkanize_poland
+}
+
+cb_austria_balkanize_france = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	
+	war_goal = HAB_balkanize_france
+}
+
+cb_austria_expand_empire = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	
+	war_goal = HAB_take_capital_add_to_empire
+}
+
+cb_expand_empire = {
+	valid_for_subject = no
+	is_triggered_only = yes
+	
+	war_goal = take_capital_add_to_empire
+}
+
+#aztecs_missions_cb_types
+cb_sunset_invasion = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		tag = AZT
+		has_global_flag = sunset_invasion
+		FROM = {
+			capital_scope = { continent = europe }
+		}
+	}
+	
+	war_goal = sunset_invasion_on_europe
+}
+
+#bavaria_missions_cb_types
+cb_bavaria_conquer_italy_for_ferrara = {
+	valid_for_subject = no
+
+	prerequisites = {
+		NOT = { has_dlc = "Art of War" }
+		has_country_flag = me_bav_ferrara_subject_can_form_italy
+		OR = {
+			AND = {
+				NOT = { exists = ITA }
+				overlord_of = FER
+				FROM = {
+					any_owned_province = {
+						region = italy_region
+						is_permanent_claim = FER
+					}
+				}
+			}
+			AND = {
+				overlord_of = ITA
+				FROM = {
+					any_owned_province = {
+						region = italy_region
+						is_permanent_claim = ITA
+					}
+				}
+			}
+		}
+	}
+
+	war_goal = take_province_bavaria_conquer_italy_for_ferrara
+}
+
+#brazil_missions_cb_types
+cb_abolishment = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		has_country_flag = BRZ_a_lei
+		FROM = {
+			OR = {
+				technology_group = western
+				technology_group = dutch_tech_group
+				technology_group = english_tech_group
+				technology_group = french_tech_group
+				technology_group = german_tech_group
+				technology_group = italian_tech_group
+				technology_group = portuguese_tech_group
+				technology_group = roman_tech_group
+				technology_group = scandinavian_tech_group
+				technology_group = spanish_tech_group
+				technology_group = swiss_tech_group
+			}
+			slaves = 1
+		}
+	}
+	
+	war_goal = BRZ_superiority_abolishment 
+}
+
+#daimyo_missions_cb_types
+cb_onin_war = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = -1
+
+	war_goal = onin_war_war_goal
+}
+
+#france_missions_cb_types
+cb_disloyal_french_hre_subject = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+
+	prerequisites = {
+		can_be_overlord = french_hre_subject
+	}
+
+	war_goal = take_capital_disloyal_french_hre_subject
+}
+
+cb_liberate_europe_from_ottomans = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+
+	war_goal = superiority_liberation
+}
+
+cb_grand_iberian_campaign = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	war_goal = annex_iberia
+}
+
+cb_grand_rhenish_campaign = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	war_goal = annex_rhineland
+}
+
+cb_grand_polish_campaign = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	war_goal = annex_poland
+}
+
+cb_grand_russian_campaign = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	war_goal = annex_russia
+}
+
+cb_grand_british_campaign = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	war_goal = annex_britain
+}
+
+cb_fra_crusade_against_tur = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 360
+
+	holy_war = yes
+
+	war_goal = superiority_crusade
+}
+
+#hesse_missions_cb_types
+cb_hesse_schmalkaldic_war = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	war_goal = hesse_schmalkaldic_war
+}
+
+#hre_claim_electorate
+cb_hre_claim_electorate = {
+	valid_for_subject = no
+
+	prerequisites = {
+		NOT = { truce_with = FROM }
+		has_country_flag = emperor_claim_electorate_approved
+		is_part_of_hre = yes
+		FROM = {
+			is_part_of_hre = yes
+			is_subject = no
+			is_elector = yes
+			is_emperor = no
+		}
+	}
+
+	attacker_disabled_po = {
+		po_become_vassal
+		po_change_religion
+		po_demand_provinces
+	}
+
+	war_goal = hre_claim_electorate
+}
+
+#ilkhanate_missions_cb_types
+cb_ilkhanate_mongol_vassal = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 120
+
+	war_goal = take_capital_ilkhanate_mongol_vassal
+}
+
+cb_ilkhanate_jihad = {
+	valid_for_subject = no
+
+	prerequisites = {
+		has_country_flag = ilkhanate_call_jihad_used
+		NOT = { had_country_flag = { flag = ilkhanate_call_jihad_used days = 5475 } }
+		religion_group = muslim
+		is_neighbor_of = FROM
+		NOT = { religion = FROM }
+		NOT = {	has_matching_religion = FROM }
+		is_revolution_target = no
+	}
+
+	war_goal = superiority_crusade
+}
+
+#inca_missions_cb_types
+cb_inca_expulse_europeans = {
+	valid_for_subject = no
+
+	prerequisites = {
+		mission_completed = SUN_punish_colonialism #Was inca_expel_the_foreigners but changed by SF
+		OR = {
+			AND = {
+				has_dlc = "El Dorado"
+				is_religion_reformed = yes
+			}
+			AND = {
+				NOT = { has_dlc = "El Dorado" }
+				is_primitive = no
+				is_tribal = no
+				army_size = 30
+			}
+			NOT = { religion_group = pagan }
+		}
+		FROM = {
+			OR = {
+				capital_scope = {
+					continent = europe
+				}
+				AND = {
+					is_colonial_nation = yes
+					overlord = {
+						capital_scope = {
+							continent = europe
+						}
+					}
+				}
+			}
+		}
+		OR = {
+			FROM = {
+				any_owned_province = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+					colony_claim = ROOT
+				}
+			}
+			any_owned_province = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				OR = {
+					any_neighbor_province = {
+						owned_by = FROM
+					}
+					sea_zone = {
+						any_neighbor_province = {
+							owned_by = FROM
+						}
+					}
+				}
+			}
+		}
+	}
+
+	war_goal = expel_the_foreigners_wg
+}
+
+#italy_cb_types
+cb_italy_humiliation_rivals = {
+	valid_for_subject = no
+
+	prerequisites = {
+	}
+	is_triggered_only = yes
+
+	attacker_disabled_po = {
+		po_become_tributary_state
+		po_transfer_vassals
+	}
+
+	war_goal = italy_humiliation_rivals
+}
+
+#lithuania_missions_cb_types
+cb_livonian_wars = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = -1
+
+	prerequisites = {
+		always = yes
+	}
+
+	war_goal = livonian_wars_war_goal
+}
+
+cb_subjugate_lithuania = {
+	valid_for_subject = no
+
+	prerequisites = {
+		has_country_flag = LIT_subjugate_cb
+		FROM = {
+			culture_group = east_slavic
+			NOT = { total_development = 150 }
+		}
+	}
+
+	war_goal = lithuania_sphere 
+}
+
+#lotf_cb_types
+#New Additions for VU by San Felipe
+##New Additions from lotf by San Felipe
+cb_manifest_destiny = {
+	valid_for_subject = no
+	prerequisites = {
+		#mission_completed = USA_missions_proper_nation
+		#owner = {
+			capital_scope = {
+			    continent = north_america
+			}
+		#}
+	}
+	war_goal = manifest_destiny_war_goal
+}
+
+lotf_civil_war = {
+	exclusive = yes
+	independence = yes
+	is_triggered_only = yes
+	war_goal = civil_war_wargoal
+	months = 12
+	ai_peace_desire = -35
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_revoke_cores
+		po_release_vassals
+		po_release_annexed
+		po_change_religion
+		po_form_personal_union
+		po_gold
+		po_become_vassal
+		po_subjugate_vassal 
+		po_concede_defeat
+		po_annul_treaties
+		po_change_government
+		po_revoke_elector
+		po_trade_power
+		po_humiliate
+		po_enforce_rebel_demands
+	}
+}
+
+#mainz_missions_cb_types
+cb_mainz_feud = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	war_goal = mainz_feud
+}
+
+#malaya_missions_cb_types
+cb_defeat_chinese_enemies = { #Only is triggered_only = yes works
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		OR = {
+			has_country_flag = MSA_swayed_flag
+			has_country_flag = MSA_absolutely_loyal_flag
+		}
+		FROM = {
+			has_country_flag = MSA_insulting_flag
+		}
+	}
+
+	war_goal = MSA_defeat_chinese_enemies_wargoal
+}
+
+cb_rise_of_brunei = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		has_country_flag = BEI_rise_of_brunei
+		FROM = {
+			capital_scope = {
+				MSA_is_in_borneo = yes
+			}
+		}
+	}
+
+	war_goal = BEI_rise_of_brunei_wargoal
+}
+
+cb_aceh_campaigns = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		OR = {
+			AND = {
+				has_country_flag = PSA_ATJ_cb_sumatra
+				FROM = {
+					capital_scope = {
+						MSA_is_in_sumatra = yes
+					}
+				}
+			}
+			AND = {
+				has_country_flag = PSA_ATJ_cb_malaya
+				FROM = {
+					capital_scope = {
+						MSA_is_in_malaya = yes
+					}
+				}
+			}
+		}
+	}
+
+	war_goal = PSA_ATJ_wargoal
+}
+
+cb_palapa_oath = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		has_country_flag = MAJ_palapa_campaigns_cb
+		claim = FROM
+		FROM = {
+			culture_group = malay
+		}
+	}
+
+	war_goal = MAJ_wargoal
+}
+
+#mamluks_missions_cb_types
+cb_mam_cut_down_in_size = {
+	valid_for_subject = no
+
+	prerequisites = {
+		OR = {
+			AND = {
+				has_country_flag = MAM_maghreb_flag
+				FROM = {
+					capital_scope = {
+						region = maghreb_region
+					}
+				}
+			}
+			AND = {
+				has_country_flag = MAM_nubia_flag
+				FROM = {
+					capital_scope = {
+						region = horn_of_africa_region
+					}
+				}
+			}
+		}
+	}
+
+	war_goal = superiority_mam_size
+}
+
+cb_mam_civil_war = {
+	valid_for_subject = no
+	ai_peace_desire = -300
+
+	prerequisites = {
+		always = no
+	}
+
+	war_goal = superiority_mam_civil_war
+}
+
+#ME_Maghreb_CB_Types
+cb_maghreb_expel_europeans = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 12000
+	
+	war_goal = maghreb_expel_europeans
+}
+
+cb_granada_fight_crusaders = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 12000
+	
+	war_goal = GRA_fight_crusaders
+}
+
+cb_andalusia_convert_fetishists = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		has_country_flag = GRA_cb_on_fetishists_flag
+		FROM = {
+			religion = shamanism 
+			capital_scope = {
+				OR = {
+					region = kongo_region
+					region = niger_region
+					region = guinea_region
+				}
+			}
+		}
+	}
+		
+	war_goal = andalusia_convert_fetishists
+}
+
+cb_fight_caliph_holder = {
+	valid_for_subject = no
+	
+	
+	prerequisites = {
+		has_country_flag = TUN_cb_on_caliphate_holder_flag
+		FROM = {
+			has_reform = caliphate_reform #VU - ET entry used by PDX that they've not given any credit to ET for. 
+		}
+	}
+	
+	war_goal = ME_fight_caliph_holder
+}
+
+cb_oran_fatwa = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		capital_scope = {
+			region = maghreb_region
+		}
+		religion_group = muslim
+		has_global_flag = TUN_oran_fatwa_issued
+		FROM = {
+			religion_group = christian
+		}
+		iberia_region = {
+			owned_by = FROM
+			culture = andalucian
+		}
+	}
+	
+	war_goal = oran_fatwa_wargoal
+}
+
+cb_tunis_capture_islands = {
+	valid_for_subject = no
+		
+	prerequisites = {
+		has_country_flag = TUN_cb_on_the_island_nations_flag
+		OR = {
+			aegean_archipelago_area = { owned_by = FROM }
+			163 = { owned_by = FROM }
+			321 = { owned_by = FROM }
+			4698 = { owned_by = FROM }
+			142 = { owned_by = FROM }
+		}
+	}
+
+	war_goal = tunis_capture_islands_wargoal
+}
+
+#ME_Timurid_cb_types
+#najd_missions_cb_types
+cb_najd_war = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		has_country_flag = NAJ_special_cb 
+		NOT = { religious_ideas = 7 }
+		FROM = { is_neighbor_of = ROOT }
+		OR = {
+			AND = { 
+				ROOT = {
+					religious_school = {
+						group = muslim
+						school = hanbali_school
+					}
+				}
+				FROM = {
+					OR = {
+						NOT = { religion = ROOT }
+						NOT = { 
+							religious_school = {
+								group = muslim
+								school = hanbali_school
+							}
+						}
+					}
+				}
+			}
+			NOT = { has_dlc = "Cradle of Civilization" }
+		}
+	}
+
+	war_goal = NAJ_special_cb_wargoal
+}
+
+cb_najd_war_2 = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		has_country_flag = NAJ_special_cb
+		religious_ideas = 7
+		FROM = { is_neighbor_of = ROOT }
+		OR = {
+			AND = {
+				religious_school = {
+					group = muslim
+					school = hanbali_school
+				}
+				FROM = {
+					OR = {
+						NOT = { religion = ROOT }
+						NOT = { 
+							religious_school = {
+								group = muslim
+								school = hanbali_school
+							}
+						}
+					}
+				}
+			}
+			NOT = { has_dlc = "Cradle of Civilization" }
+		}
+	}
+
+	war_goal = NAJ_special_cb_wargoal_2
+}
+
+#persia_missions_cb_types
+cb_persia_indian_hegemony_vassalization = {
+	valid_for_subject = no
+
+	prerequisites = {
+		has_country_flag = me_persia_indian_hegemony_mechanic
+		NOT = { overlord_of = FROM }
+		FROM = {
+			is_free_or_tributary_trigger = yes
+			OR = {
+				owns = 522
+				owns = 563
+				owns = 1948
+				owns = 541
+			}
+		}
+	}
+
+	war_goal = persia_indian_hegemony_vassalization_war_goal
+}
+
+cb_persia_indian_hegemony_coup = {
+	is_triggered_only = yes
+	months = 1
+
+	war_goal = persia_indian_hegemony_coup_war_goal
+}
+
+#poland_missions_cb_types
+cb_revenge_for_varna = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	prerequisites = {
+		current_age = age_of_discovery
+	}
+
+	war_goal = revenge_for_varna
+}
+
+cb_poland_deluge = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 9999999
+
+	prerequisites = {
+		always = yes
+	}
+
+	war_goal = swedish_deluge
+}
+
+cb_fidei_defensor = {
+	valid_for_subject = no
+
+#	is_triggered_only = no
+	months = 120
+
+	prerequisites = {
+		has_country_flag = POL_Custom_Cb_flag #From the Bulwark of Christendom Mission
+		FROM = {
+			religion_group = muslim
+			balkan_region = {
+				country_or_non_sovereign_subject_holds = FROM
+			}
+		}
+	}
+
+	war_goal = POL_repel_ottomans
+}
+
+#prussia_missions_cb_types
+cb_humiliate_prussia = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		has_country_flag = PRU_TARGET_INITIALIZED
+		FROM = {
+			has_country_flag = ME_PRU_a_target
+		}
+	}
+	
+	war_goal = humiliate_prussia
+}
+
+cb_liberate_prussia = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	war_goal = liberate_prussia
+}
+
+#rum_missions_cb_types
+cb_rum_enforce_trading_rights = {
+	valid_for_subject = no
+
+	prerequisites = {
+		has_country_flag = RUM_casus_belli_on_trade_node_flag
+		FROM = {
+			OR = {
+				1308 = {
+					trade_share = {
+						country = PREV
+						share = 10
+					}
+				}
+				1298 = {
+					trade_share = {
+						country = PREV
+						share = 10
+					}
+				}
+				1295 = {
+					trade_share = {
+						country = PREV
+						share = 10
+					}
+				}
+			}
+		}
+	}
+	
+	war_goal = enforce_trading_rights_rum_wargoal_type
+}
+
+#saxony_missions_cb_types
+cb_restore_personal_union_saxony_poland = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 240
+
+	prerequisites = {
+		OR = {
+			government = monarchy
+			has_reform = dutch_republic
+		}
+		is_revolutionary = no
+		FROM = {
+			OR = {
+				government = monarchy
+				has_reform = ambrosian_republic
+				has_country_flag = neapolitan_republic
+			}
+			is_subject = no
+		}
+	}
+
+	war_goal = take_capital_personal_union_saxony_poland
+}
+
+#spain_missions_cb_types
+cb_conquer_center_of_trades = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	prerequisites = {
+		mission_completed = spa_dominate_sevilla
+		FROM = {
+			any_owned_province = {
+				province_has_center_of_trade_of_level = 1
+			}
+		}
+	}
+
+	war_goal = take_cot
+}
+
+#stettin_wolgast_pomerania_missions_cb_types
+cb_pomeranian_succession = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+
+	war_goal = pom_succession_war
+}
+
+#subjects_expanded_cb_types
+cb_independence_war_semi_volunteer = {
+	exclusive = yes
+	independence = yes
+
+	prerequisites = {
+		is_subject_of = FROM
+		NOT = { is_colonial_nation_of = FROM }
+		is_similar_tributary_subject = yes
+		NOT = { is_subject_of_type = brother_kingdom }
+		NOT = { is_subject_of_type = papal_sanctuary_subject }
+		NOT = { is_subject_of_type = imperial_feud_subject }
+		NOT = { is_subject_of_type = banking_family_subject }
+	}
+
+	war_goal = defend_capital_independence
+}
+
+cb_force_medieval_vassal_triggered_only = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+	months = 60
+
+	prerequisites = {
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = medieval_vassal
+		}
+		FROM = {
+			is_subject = no
+		}
+	}
+
+	war_goal = superiority_force_medieval_vassal
+
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_become_vassal
+	}
+}
+
+#swabia_missions_cb_types
+cb_swabia_add_provinces_back_to_hre = {
+	valid_for_subject = no
+	
+	prerequisites = {
+		is_emperor = yes
+		NOT = { truce_with = FROM }
+		FROM = {
+			is_subject = no
+			OR = {
+				is_neighbor_of = ROOT
+				any_neighbor_country = {
+					is_part_of_hre = yes
+				}
+				any_owned_province = {
+					is_part_of_hre = yes
+				}
+			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = SWA_Low_countries
+				mission_completed = SWA_Low_countries
+				low_countries_region = {
+					owned_by = FROM
+					is_part_of_hre = no
+				}
+			}
+			AND = {
+				has_global_flag = SWA_Northern_Italy
+				mission_completed = SWA_North_italy
+				OR = {
+					lombardy_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					venetia_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					piedmont_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					liguria_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					tuscany_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					emilia_romagna_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+				}
+			}
+			AND = {
+				has_global_flag = SWA_France
+				mission_completed = SWA_France
+				france_region = {
+					owned_by = FROM
+					is_part_of_hre = no
+				}
+			}
+			AND = {
+				has_global_flag = SWA_Southern_Italy
+				mission_completed = SWA_South_italy
+				OR = {
+					corsica_sardinia_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					sicily_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					naples_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					calabria_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					apulia_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					central_italy_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+					san_marino_area = {
+						owned_by = FROM
+						is_part_of_hre = no
+					}
+				}
+			}
+		}
+	}
+	
+	attacker_disabled_po = {
+		po_demand_provinces
+	}
+
+	war_goal = take_province_swabia_add_provinces_back_to_hre
+}
+
+#usa_missions_cb_types
+cb_usa_defense_of_the_americas = {
+	valid_for_subject = no
+
+	is_triggered_only = yes
+
+	prerequisites = {
+		tag = USA
+		mission_completed = usa_expel_the_invaders
+		FROM = {
+			capital_scope = {
+				continent = europe
+			}
+			any_subject_country = {
+				capital_scope = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+				}
+			}
+		}
+	}
+	
+	attacker_disabled_po = {
+		po_demand_provinces
+		po_release_annexed
+		po_return_cores
+		po_become_vassal
+		po_become_tributary_state
+		po_form_personal_union
+		po_transfer_vassals
+	}
+
+	war_goal = usa_defense_of_the_americas_wargoal
+}
+
+#westphalia_missions_cb_types
+cb_expel_cologne = {
+	valid_for_subject = no
+	
+	is_triggered_only = yes
+	months = 120
+	
+	war_goal = expel_cologne
+}
+
+#_caliphate_cb_types
+cb_take_caliphate = {
+	valid_for_subject = no
+
+	prerequisites = {
+		is_subject = no
+		is_neighbor_of = FROM
+		OR = {
+			AND = {
+				religion = sunni
+				FROM = {
+					OR = {
+						has_reform = caliphate_reform 
+						has_reform = ME_caliphate_reform_sunni_andalusia 
+						has_reform = ME_caliphate_reform_sunni_arabian
+					}
+				}
+			}
+			AND = {
+				OR = {
+					religion = shiite
+					religion = ibadi
+				}
+				FROM = {
+					religion = ROOT 
+					has_reform = ME_caliphate_reform_shia_ibadi
+				}
+			}
+		}
+	}
+
+	war_goal = take_capital_take_caliphate
+}

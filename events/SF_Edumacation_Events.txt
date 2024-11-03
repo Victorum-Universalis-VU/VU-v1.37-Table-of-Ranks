@@ -1,0 +1,1028 @@
+namespace = SF_Edumacation_Events
+#Revisted broken file and fixed on 25 Sept 2023 by San Felipe
+#DonBrom was here on 24-9-2023
+#DonBrom was hare on 10-8-2024 again
+#Monarch update
+country_event = {
+	id = SF_Edumacation_Events.1
+	title = "SF_Edumacation_Events.1.name"
+	desc = "SF_Edumacation_Events.1.desc"
+	picture = REFORM_eventPicture
+	trigger = {
+		ai = no		#might be removed soon
+		has_regency = no
+		#government = monarchy #all get to suffer
+		#has_institution = feudalism #Kom: Otherwise it doesn't work for nomads etc
+		NOT = { government = native }
+		NOT = {
+			OR = {
+				ruler_age = 40
+				has_ruler_flag = vu_ruler_n/a
+			}
+		}
+		NOT = {
+			OR = {
+				ruler_has_personality = vu_uneducated_personality
+				ruler_has_personality = vu_literate_personality
+				ruler_has_personality = vu_scholarly_personality
+				ruler_has_personality = vu_bachelorette_personality
+				ruler_has_personality = vu_masters_personality
+				ruler_has_personality = vu_doctorate_personality
+			}
+		}
+	}
+	immediate = {
+	}
+	option = {
+		name = "SF_Edumacation_Events.1.a"
+		highlight = yes
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						has_institution = feudalism
+					}
+					NOT = {
+						ruler_age = 6
+					}
+				}
+			}
+			add_ruler_personality = vu_uneducated_personality
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					ruler_age = 12
+				}
+			}
+			#6-12
+			random_list = {
+				50 = {
+					add_ruler_personality = vu_literate_personality
+				}
+				50 = {
+					add_ruler_personality = vu_uneducated_personality
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					ruler_age = 18
+				}
+			}
+			#12-18
+			random_list = {
+				50 = {
+					add_ruler_personality = vu_scholarly_personality
+				}
+				50 = {
+					add_ruler_personality = vu_literate_personality
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					ruler_age = 22
+				}
+			}
+			#18-22
+			if = {
+				limit = {
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_ruler_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					ruler_age = 30
+				}
+			}
+			#22-30
+			if = {
+				limit = {
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_masters_personality
+					}
+					50 = {
+						add_ruler_personality = vu_bachelorette_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = printing_press
+					}
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_ruler_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		else = {
+			#30-x
+			if = {
+				limit = {
+					NOT = {
+						has_institution = enlightenment
+					}
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_doctorate_personality
+					}
+					50 = {
+						add_ruler_personality = vu_masters_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = enlightenment
+					}
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_masters_personality
+					}
+					50 = {
+						add_ruler_personality = vu_bachelorette_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = printing_press
+					}
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_ruler_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_ruler_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		set_ruler_flag = vu_ruler_n/a
+	}
+}
+
+#Heir update
+country_event = {
+	id = SF_Edumacation_Events.2
+	title = "SF_Edumacation_Events.2.name"
+	desc = "SF_Edumacation_Events.2.desc"
+	picture = REFORM_eventPicture
+	trigger = {
+		ai = no		#might be removed soon
+		has_regency = no
+		has_heir = yes
+		NOT = {
+			OR = {
+				heir_age = 15
+				has_heir_flag = vu_heir_n/a
+				#Educated traits
+				heir_has_personality = vu_uneducated_personality
+				heir_has_personality = vu_scholarly_personality
+				heir_has_personality = vu_bachelorette_personality
+				heir_has_personality = vu_masters_personality
+				heir_has_personality = vu_doctorate_personality
+				#ruler_personalities/00_core
+				heir_has_personality = just_personality
+				heir_has_personality = righteous_personality
+				heir_has_personality = tolerant_personality
+				heir_has_personality = kind_hearted_personality
+				heir_has_personality = free_thinker_personality
+				heir_has_personality = well_connected_personality
+				heir_has_personality = calm_personality
+				heir_has_personality = careful_personality
+				heir_has_personality = secretive_personality
+				heir_has_personality = intricate_web_weaver_personality
+				heir_has_personality = fertile_personality
+				heir_has_personality = well_advised_personality
+				heir_has_personality = benevolent_personality
+				heir_has_personality = zealot_personality
+				heir_has_personality = pious_personality
+				heir_has_personality = lawgiver_personality
+				heir_has_personality = midas_touched_personality
+				heir_has_personality = incorruptible_personality
+				heir_has_personality = architectural_visionary_personality
+				heir_has_personality = scholar_personality
+				heir_has_personality = entrepreneur_personality
+				heir_has_personality = industrious_personality
+				heir_has_personality = expansionist_personality
+				heir_has_personality = charismatic_negotiator_personality
+				heir_has_personality = silver_tongue_personality
+				heir_has_personality = conqueror_personality
+				heir_has_personality = tactical_genius_personality
+				heir_has_personality = bold_fighter_personality
+				heir_has_personality = strict_personality
+				heir_has_personality = inspiring_leader_personality
+				heir_has_personality = martial_educator_personality
+				heir_has_personality = navigator_personality
+				heir_has_personality = fierce_negotiator_personality
+				heir_has_personality = babbling_buffoon_personality
+				heir_has_personality = embezzler_personality
+				heir_has_personality = infertile_personality
+				heir_has_personality = drunkard_personality
+				heir_has_personality = sinner_personality
+				heir_has_personality = greedy_personality
+				heir_has_personality = cruel_personality
+				heir_has_personality = naive_personality
+				heir_has_personality = craven_personality
+				heir_has_personality = loose_lips_personality
+				heir_has_personality = obsessive_perfectionist_personality
+				heir_has_personality = malevolent_personality
+				heir_has_personality = immortal_personality
+				heir_has_personality = reformist_personality
+				heir_has_personality = legendary_pirate_personality
+				#ruler_personalities/vu_ruler_personalities.txt
+				heir_has_personality = vu_absolutist_personality
+				heir_has_personality = vu_legendary_statesman_personality
+				heir_has_personality = me_enlightened_despote_personality
+				heir_has_personality = maximilian_personality
+				heir_has_personality = me_piety_pious_personality
+				heir_has_personality = patron_of_arts_personality
+			}
+		}
+		#government = monarchy #all get to suffer
+		#has_institution = feudalism #Kom: Otherwise it doesn't work for nomads etc
+		NOT = { government = native }
+	}
+	immediate = {
+	}
+	option = {
+		name = "SF_Edumacation_Events.2.a"
+		highlight = yes
+		if = {
+			limit = {
+				OR = {
+					NOT = {
+						has_institution = feudalism
+					}
+					NOT = {
+						heir_age = 6
+					}
+				}
+			}
+			add_heir_personality = vu_uneducated_personality
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					heir_age = 12
+				}
+			}
+			#6-12
+			random_list = {
+				50 = {
+					add_heir_personality = vu_literate_personality
+				}
+				50 = {
+					add_heir_personality = vu_uneducated_personality
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					heir_age = 18
+				}
+			}
+			#12-18
+			random_list = {
+				50 = {
+					add_heir_personality = vu_scholarly_personality
+				}
+				50 = {
+					add_heir_personality = vu_literate_personality
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					heir_age = 22
+				}
+			}
+			#18-22
+			if = {
+				limit = {
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_heir_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					heir_age = 30
+				}
+			}
+			#22-30
+			if = {
+				limit = {
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_masters_personality
+					}
+					50 = {
+						add_heir_personality = vu_bachelorette_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = printing_press
+					}
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_heir_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		else = {
+			#30-x
+			if = {
+				limit = {
+					NOT = {
+						has_institution = enlightenment
+					}
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_doctorate_personality
+					}
+					50 = {
+						add_heir_personality = vu_masters_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = enlightenment
+					}
+					has_institution = printing_press
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_masters_personality
+					}
+					50 = {
+						add_heir_personality = vu_bachelorette_personality
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_institution = printing_press
+					}
+					has_institution = renaissance
+				}
+				random_list = {
+					50 = {
+						add_heir_personality = vu_bachelorette_personality
+					}
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						add_heir_personality = vu_scholarly_personality
+					}
+					50 = {
+						add_heir_personality = vu_literate_personality
+					}
+				}
+			}
+		}
+		set_heir_flag = vu_heir_n/a
+	}
+}
+
+#Ruler graduation
+country_event = {
+	id = SF_Edumacation_Events.3
+	title = "SF_Edumacation_Events.3.name"
+	desc = "SF_Edumacation_Events.3.desc"
+	picture = REFORM_eventPicture
+	trigger = {
+		has_ruler_flag = vu_ruler_studying
+	}
+	mean_time_to_happen = {
+		years = 6
+		modifier = {
+			factor = 1.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				OR = {
+					prestige = 0
+					legitimacy = 33
+					republican_tradition = 33
+					devotion = 33
+					horde_unity = 33
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			is_in_deficit = yes
+		}
+		modifier = {
+			factor = 999
+			is_bankrupt = yes
+		}
+		modifier = {
+			factor = 0.75
+			innovativeness = 10
+		}
+		modifier = {
+			factor = 0.75
+			OR = {
+				natural_scientist = 1
+				reformist = 1
+				trader = 1
+				statesman = 1
+				theologian = 1
+				physician = 1
+				economist = 1
+				philosopher = 1
+				state_overseer = 1
+				researcher = 1
+				diplomat = 1
+				negotiator = 1
+				artist = 1
+				treasurer = 1
+				spymaster = 1
+				administrator = 1
+				naval_reformer = 1
+				army_reformer = 1
+				civil_engineer = 1
+				combat_engineer = 1
+				cavalier = 1
+				mariner = 1
+				colonial_governor = 1
+				navarch = 1
+				propagandist = 1
+			}
+		}
+		modifier = {
+			factor = 0.7
+			#Theology
+			OR = {
+				has_idea_group = religious_ideas
+				has_idea_group = theocracy_gov_ideas
+			}
+		}
+		modifier = {
+			factor = 0.7
+			#Medical
+			has_idea_group = health_ideas
+		}
+		modifier = {
+			factor = 0.75
+			#Politics
+			OR = {
+				has_idea_group = court_ideas
+				has_idea_group = administrative_ideas
+				has_idea_group = aristocracy_ideas
+				has_idea_group = state_affairs_ideas
+				has_idea_group = plutocracy_ideas
+				has_idea_group = centralisation_ideas
+			}
+		}
+		modifier = {
+			factor = 0.75
+			#Law
+			has_idea_group = judiciary_ideas
+		}
+		modifier = {
+			factor = 0.75
+			#Science
+			OR = {
+				has_idea_group = innovativeness_ideas
+				has_idea_group = humanist_ideas
+			}
+		}
+		modifier = {
+			factor = 0.8
+			#International relations
+			OR = {
+				has_idea_group = diplomatic_ideas
+				has_idea_group = propaganda_ideas
+				has_idea_group = spy_ideas
+				has_idea_group = colonial_empire
+				has_idea_group = society_ideas
+				has_idea_group = nationalism_ideas
+			}
+		}
+		modifier = {
+			factor = 0.85
+			#Economy & Trade
+			OR = {
+				has_idea_group = economic_ideas
+				has_idea_group = trade_ideas
+				has_idea_group = industry_ideas
+				has_idea_group = war_economy_ideas
+			}
+		}
+		modifier = {
+			factor = 0.85
+			#Engineering
+			OR = {
+				has_idea_group = infrastructure_ideas
+				has_idea_group = logistics_ideas
+			}
+		}
+		modifier = {
+			factor = 0.95
+			#Military
+			OR = {
+				has_idea_group = general_staff_ideas
+				has_idea_group = maritime_ideas
+				has_idea_group = naval_ideas
+				has_idea_group = offensive_ideas
+				has_idea_group = defensive_ideas
+			}
+		}
+		modifier = {
+			factor = 0.75
+			if = {
+				limit = {
+					NOT = {
+						has_institution = renaissance
+					}
+				}
+				temple = 1
+				cathedral = 1
+				grand_cathedral = 1
+			}
+			else = {
+				school = 1
+				library = 1
+			}
+		}
+	}
+	option = {
+		name = "SF_Edumacation_Events.3.a"
+		highlight = yes
+		if = {
+			limit = { ruler_has_personality = vu_uneducated_personality	}
+			remove_ruler_personality = vu_uneducated_personality
+			add_ruler_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_literate_personality }
+			remove_ruler_personality = vu_literate_personality
+			add_ruler_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_scholarly_personality }
+			remove_ruler_personality = vu_scholarly_personality
+			add_ruler_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_bachelorette_personality }
+			remove_ruler_personality = vu_bachelorette_personality
+			add_ruler_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_masters_personality }
+			remove_ruler_personality = vu_masters_personality
+			add_ruler_personality = vu_doctorate_personality
+		}
+		change_adm = 1
+
+		clr_ruler_flag = vu_ruler_studying
+	}
+	option = {
+		name = "SF_Edumacation_Events.3.b"
+		highlight = yes
+		if = {
+			limit = { ruler_has_personality = vu_uneducated_personality	}
+			remove_ruler_personality = vu_uneducated_personality
+			add_ruler_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_literate_personality }
+			remove_ruler_personality = vu_literate_personality
+			add_ruler_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_scholarly_personality }
+			remove_ruler_personality = vu_scholarly_personality
+			add_ruler_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_bachelorette_personality }
+			remove_ruler_personality = vu_bachelorette_personality
+			add_ruler_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_masters_personality }
+			remove_ruler_personality = vu_masters_personality
+			add_ruler_personality = vu_doctorate_personality
+		}
+		change_dip = 1
+
+		clr_ruler_flag = vu_ruler_studying
+	}
+	option = {
+		name = "SF_Edumacation_Events.3.c"
+		highlight = yes
+		if = {
+			limit = { ruler_has_personality = vu_uneducated_personality	}
+			remove_ruler_personality = vu_uneducated_personality
+			add_ruler_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_literate_personality }
+			remove_ruler_personality = vu_literate_personality
+			add_ruler_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_scholarly_personality }
+			remove_ruler_personality = vu_scholarly_personality
+			add_ruler_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_bachelorette_personality }
+			remove_ruler_personality = vu_bachelorette_personality
+			add_ruler_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { ruler_has_personality = vu_masters_personality }
+			remove_ruler_personality = vu_masters_personality
+			add_ruler_personality = vu_doctorate_personality
+		}
+		change_mil = 1
+
+		clr_ruler_flag = vu_ruler_studying
+	}
+}
+
+#Heir Graduation ceremony
+country_event = {
+	id = SF_Edumacation_Events.4
+	title = "SF_Edumacation_Events.4.name"
+	desc = "SF_Edumacation_Events.4.desc"
+	picture = REFORM_eventPicture
+	trigger = {
+		has_heir_flag = vu_heir_studying
+	}
+	mean_time_to_happen = {
+		years = 6
+		modifier = {
+			factor = 1.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 1.25
+			NOT = {
+				OR = {
+					prestige = 0
+					legitimacy = 33
+					republican_tradition = 33
+					devotion = 33
+					horde_unity = 33
+				}
+			}
+		}
+		modifier = {
+			factor = 1.25
+			is_in_deficit = yes
+		}
+		modifier = {
+			factor = 999
+			is_bankrupt = yes
+		}
+		modifier = {
+			factor = 0.75
+			innovativeness = 10
+		}
+		modifier = {
+			factor = 0.75
+			OR = {
+				natural_scientist = 1
+				reformist = 1
+				trader = 1
+				statesman = 1
+				theologian = 1
+				physician = 1
+				economist = 1
+				philosopher = 1
+				state_overseer = 1
+				researcher = 1
+				diplomat = 1
+				negotiator = 1
+				artist = 1
+				treasurer = 1
+				spymaster = 1
+				administrator = 1
+				naval_reformer = 1
+				army_reformer = 1
+				civil_engineer = 1
+				combat_engineer = 1
+				cavalier = 1
+				mariner = 1
+				colonial_governor = 1
+				navarch = 1
+				propagandist = 1
+			}
+		}
+		modifier = {
+			factor = 0.7
+			#Theology
+			OR = {
+				has_idea_group = religious_ideas
+				has_idea_group = theocracy_gov_ideas
+			}
+		}
+		modifier = {
+			factor = 0.7
+			#Medical
+			has_idea_group = health_ideas
+		}
+		modifier = {
+			factor = 0.75
+			#Politics
+			OR = {
+				has_idea_group = court_ideas
+				has_idea_group = administrative_ideas
+				has_idea_group = aristocracy_ideas
+				has_idea_group = state_affairs_ideas
+				has_idea_group = plutocracy_ideas
+				has_idea_group = centralisation_ideas
+			}
+		}
+		modifier = {
+			factor = 0.75
+			#Law
+			has_idea_group = judiciary_ideas
+		}
+		modifier = {
+			factor = 0.75
+			#Science
+			OR = {
+				has_idea_group = innovativeness_ideas
+				has_idea_group = humanist_ideas
+			}
+		}
+		modifier = {
+			factor = 0.8
+			#International relations
+			OR = {
+				has_idea_group = diplomatic_ideas
+				has_idea_group = propaganda_ideas
+				has_idea_group = spy_ideas
+				has_idea_group = colonial_empire
+				has_idea_group = society_ideas
+				has_idea_group = nationalism_ideas
+			}
+		}
+		modifier = {
+			factor = 0.85
+			#Economy & Trade
+			OR = {
+				has_idea_group = economic_ideas
+				has_idea_group = trade_ideas
+				has_idea_group = industry_ideas
+				has_idea_group = war_economy_ideas
+			}
+		}
+		modifier = {
+			factor = 0.85
+			#Engineering
+			OR = {
+				has_idea_group = infrastructure_ideas
+				has_idea_group = logistics_ideas
+			}
+		}
+		modifier = {
+			factor = 0.95
+			#Military
+			OR = {
+				has_idea_group = general_staff_ideas
+				has_idea_group = maritime_ideas
+				has_idea_group = naval_ideas
+				has_idea_group = offensive_ideas
+				has_idea_group = defensive_ideas
+			}
+		}
+		modifier = {
+			factor = 0.75
+			if = {
+				limit = {
+					NOT = {
+						has_institution = renaissance
+					}
+				}
+				temple = 1
+				cathedral = 1
+				grand_cathedral = 1
+			}
+			else = {
+				school = 1
+				library = 1
+			}
+		}
+	}
+	option = {
+		name = "SF_Edumacation_Events.4.a"
+		highlight = yes
+		if = {
+			limit = { heir_has_personality = vu_uneducated_personality }
+			remove_heir_personality = vu_uneducated_personality
+			add_heir_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_literate_personality }
+			remove_heir_personality = vu_literate_personality
+			add_heir_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_scholarly_personality }
+			remove_heir_personality = vu_scholarly_personality
+			add_heir_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_bachelorette_personality }
+			remove_heir_personality = vu_bachelorette_personality
+			add_heir_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_masters_personality }
+			remove_heir_personality = vu_masters_personality
+			add_heir_personality = vu_doctorate_personality
+		}
+		change_heir_adm = 1
+
+		clr_heir_flag = vu_heir_studying
+	}
+	option = {
+		name = "SF_Edumacation_Events.4.b"
+		highlight = yes
+		if = {
+			limit = { heir_has_personality = vu_uneducated_personality }
+			remove_heir_personality = vu_uneducated_personality
+			add_heir_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_literate_personality }
+			remove_heir_personality = vu_literate_personality
+			add_heir_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_scholarly_personality }
+			remove_heir_personality = vu_scholarly_personality
+			add_heir_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_bachelorette_personality }
+			remove_heir_personality = vu_bachelorette_personality
+			add_heir_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_masters_personality }
+			remove_heir_personality = vu_masters_personality
+			add_heir_personality = vu_doctorate_personality
+		}
+		change_heir_dip = 1
+
+		clr_heir_flag = vu_heir_studying
+	}
+	option = {
+		name = "SF_Edumacation_Events.4.c"
+		highlight = yes
+		if = {
+			limit = { heir_has_personality = vu_uneducated_personality }
+			remove_heir_personality = vu_uneducated_personality
+			add_heir_personality = vu_literate_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_literate_personality }
+			remove_heir_personality = vu_literate_personality
+			add_heir_personality = vu_scholarly_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_scholarly_personality }
+			remove_heir_personality = vu_scholarly_personality
+			add_heir_personality = vu_bachelorette_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_bachelorette_personality }
+			remove_heir_personality = vu_bachelorette_personality
+			add_heir_personality = vu_masters_personality
+		}
+		else_if = {
+			limit = { heir_has_personality = vu_masters_personality }
+			remove_heir_personality = vu_masters_personality
+			add_heir_personality = vu_doctorate_personality
+		}
+		change_heir_mil = 1
+
+		clr_heir_flag = vu_heir_studying
+	}
+}

@@ -1,0 +1,71 @@
+liberalism_mechanic = {
+	alert_icon_gfx = GFX_liberalism_mechanic_alert_icon
+	alert_icon_index = 1
+	available = {
+		always = yes
+	}
+
+	powers = {
+		liberalism = {
+			min = 0
+			max = 100
+			default = 0
+			scaled_modifier = {
+				modifier = {
+					all_power_cost = -0.1
+					years_of_nationalism = -10
+					yearly_corruption = -0.1
+					republican_tradition = 0.2
+					max_absolutism = -100
+					monthly_liberalism = -1
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_parliament = yes
+				}
+				modifier = {
+					parliament_backing_chance = 0.1
+					parliament_chance_of_decision = 0.1
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_government_attribute = enables_capitalism
+				}
+				modifier = {
+					global_trade_goods_size_modifier = 0.25
+				}
+			}
+		}
+	}
+
+	interactions = {
+		boost_liberalism = {
+			gui = liberalism_mechanic
+			center = no
+			cost_type = liberalism
+			trigger = {
+				government_reform_progress = 25
+				NOT = {
+					has_government_power = {
+						mechanic_type = liberalism_mechanic
+						power_type = liberalism
+						value = 100
+					}
+				}
+			}
+			effect = {
+				change_government_reform_progress = -25
+				add_government_power = {
+					mechanic_type = liberalism_mechanic
+					power_type = liberalism
+					value = 10
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}

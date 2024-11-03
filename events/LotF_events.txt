@@ -1,0 +1,1065 @@
+namespace = lotf_events
+
+
+country_event = { #Changes to USA tag from colonial
+    id = lotf_events.2
+    title = lotf_events.2.t
+    desc = lotf_events.2.d
+    picture = USA_GREAT_FIRE_eventPicture
+    major = yes
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = lotf_events.2.a
+        change_tag = USA
+        swap_non_generic_missions = yes
+        hidden_effect = { 
+			if = {
+				limit = {
+					NOT = { government_rank = 8 }
+				}
+				set_government_rank = 8
+			}
+			remove_country_modifier = navigation_acts_1
+			GBR = { remove_country_modifier = navigation_acts_2 }
+			UNK = { remove_country_modifier = navigation_acts_2 }
+			remove_country_modifier = lotf_events.7_modifier
+		}
+        swap_free_idea_group = yes #Swap Ideas
+        if = {
+            limit = {
+                has_dlc = "American Dream"
+            }
+            add_government_reform = federal_republic
+        }
+        else = {
+            add_government_reform = noble_elite_reform
+        }
+		custom_tooltip = blank_space
+		add_country_modifier = {
+			name = "centralization_modifier"
+			duration = 7300
+		}
+		set_country_flag = independent_usa
+		hidden_effect = { remove_country_modifier = cont_cong_election }
+    }
+}
+country_event = { #Change name to USA, fires on war dec on GB
+    id = lotf_events.3
+    title = lotf_events.3.t
+    desc = lotf_events.3.d
+    picture = DECLARATION_INDEPENDENCE_eventPicture
+    major = yes
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = lotf_events.3.a
+		override_country_name = usarebel
+		define_ruler = {
+			name = "Continental Congress"
+			adm = 3
+			dip = 3
+			mil = 3
+			regency = yes
+		}
+		hidden_effect = { add_country_modifier = { name = cont_cong_election duration = -1 } }
+		set_country_flag = usarebel
+		set_ruler_flag = cont_congress
+	}
+}
+country_event = { #Navigation Act
+	id = lotf_events.4
+	title = lotf_events.4.t
+	desc = lotf_events.4.d
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.4.a
+		add_country_modifier = {
+			name = navigation_acts_1
+			duration = -1
+		}
+		FROM = {
+			hidden_effect = { 
+				country_event = { id = lotf_events.5 days = 21 random = 7 }
+			}
+			tooltip = {
+				country_event = { id = lotf_events.5 }
+			}
+		}
+	}
+}
+country_event = { #Colonies Protest
+	id = lotf_events.5
+	title = lotf_events.5.t
+	desc = lotf_events.5.d
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.5.a
+		add_country_modifier = {
+			name = navigation_acts_2
+			duration = 3650
+		}
+		set_country_flag = navigation_acts_chain_end
+		custom_tooltip = lotf_events.5.tt
+	}	
+}
+
+country_event = { #Revolution event chain begins FOR 13 COLONIES BOSTON TEA PARTY
+	id = lotf_events.6
+	title = lotf_events.6.t
+	desc = lotf_events.6.d
+	picture = USA_TEA_PARTY_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	major = yes
+	major_trigger = { 
+		OR = { 
+			colonial_parent = { tag = GBR }
+			colonial_parent = { tag = UNK }
+			tag = GBR
+			tag = UNK
+		}
+	}
+	option = {
+		name = lotf_events.6.a
+		add_country_modifier = {
+			name = lotf_events.6_modifier
+			duration = -1
+		}
+		colonial_parent = {			
+			hidden_effect = {
+				country_event = { id = lotf_events.8 days = 21 random = 7 }				
+			}
+			tooltip = { 
+				country_event = { id = lotf_events.8 }
+			}
+		}	
+	}
+}
+country_event = { #Revolution event chain continue FOR 13 COLONIES BATTLES OF LEXINGTON AND CONCORD
+	id = lotf_events.7
+	title = lotf_events.7.t
+	desc = lotf_events.7.d
+	picture = SIEGE_eventPicture
+	is_triggered_only = yes
+	major = yes
+	major_trigger = { 
+		OR = { 
+			colonial_parent = { tag = GBR }
+			colonial_parent = { tag = UNK }
+			tag = GBR
+			tag = UNK
+		}
+	}
+    fire_only_once = yes
+	option = {
+		name = lotf_events.7.a
+		add_stability = -2
+		custom_tooltip = lotf_events.7.tt
+		hidden_effect = {
+			remove_country_modifier = lotf_events.6_modifier
+			add_country_modifier = {
+				name = lotf_events.7_modifier
+				duration = -1
+			}
+		}
+		declare_war_with_cb = {    ###################################### WAR DEC ON GBR
+			who = FROM
+			casus_belli = cb_colonial_independence_war
+		}
+		country_event = { id = lotf_events.3 days = 3 } #Change name to USA
+		hidden_effect = {
+			968 = { 
+				change_controller = FROM 
+				infantry = FROM infantry = FROM infantry = FROM infantry = FROM infantry = FROM 
+				infantry = FROM infantry = FROM infantry = FROM infantry = FROM infantry = FROM 
+				infantry = FROM infantry = FROM infantry = FROM infantry = FROM infantry = FROM 
+				infantry = FROM infantry = FROM infantry = FROM infantry = FROM infantry = FROM 
+				cavalry = FROM cavalry = FROM cavalry = FROM cavalry = FROM cavalry = FROM cavalry = FROM 
+				artillery = FROM artillery = FROM artillery = FROM artillery = FROM artillery = FROM 
+				artillery = FROM artillery = FROM artillery = FROM artillery = FROM artillery = FROM 
+				artillery = FROM artillery = FROM artillery = FROM artillery = FROM artillery = FROM 
+			}
+			966 = { change_controller = FROM }
+		}
+		hidden_effect = {
+			FROM = {
+				define_general = { name = "Charles Cornwallis" fire = 5 shock = 5 manuever = 4 siege = 3 }
+			}
+		}
+	}	
+}
+country_event = { #Revolution event chain continue FOR BRITIAN
+	id = lotf_events.8
+	title = lotf_events.8.t
+	desc = lotf_events.8.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	major = yes
+	major_trigger = { 
+		OR = { 
+			colonial_parent = { tag = GBR }
+			colonial_parent = { tag = UNK }
+			tag = GBR
+			tag = UNK
+		}
+	}
+    fire_only_once = yes
+	option = {
+		name = lotf_events.8.a
+		add_historical_rival = FROM
+		FROM = { add_historical_rival = ROOT }
+		FROM = {			
+			hidden_effect = {
+				country_event = { id = lotf_events.7 days = 21 random = 7 }				
+			}
+			tooltip = { country_event = { id = lotf_events.7 }
+			}	
+		}
+		add_opinion = { who = FROM modifier = boston_tea_party }		
+	}	
+}
+country_event = { #CSA Gains Cores SC
+	id = lotf_events.9
+	title = lotf_events.9.t
+	desc = lotf_events.9.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	trigger = {
+		tag = USA
+		mission_completed = USA_missions_abolish_slavery
+	}
+	mean_time_to_happen = { months = 8 }
+    fire_only_once = yes
+	option = {
+		name = lotf_events.9.a	
+		south_carolina_area = { add_core = CSA }
+		hidden_effect = {
+				country_event = { id = lotf_events.10 days = 15 random = 60 }	
+		}
+	}	
+}
+country_event = { #CSA Gains Cores Florida
+	id = lotf_events.10
+	title = lotf_events.10.t
+	desc = lotf_events.10.d
+	picture = LAND_MILITARY_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.10.a	
+		florida_area = { add_core = CSA }
+		923 = { add_core = CSA }
+		2533 = { add_core = CSA }
+		hidden_effect = {
+				country_event = { id = lotf_events.11 days = 15 random = 45 }	
+		}
+	}	
+}
+country_event = { #CSA Gains Cores Alabama and Georgia
+	id = lotf_events.11
+	title = lotf_events.11.t
+	desc = lotf_events.11.d
+	picture = MILITARY_CAMP_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.11.a	
+		alabama_area = { add_core = CSA }
+		922 = { add_core = CSA }
+		american_georgia_area = { add_core = CSA }
+		upper_american_georgia_area = { add_core = CSA }
+		hidden_effect = {
+				country_event = { id = lotf_events.12 days = 15 random = 45 }	
+		}
+	}	
+}
+country_event = { #CSA Gains Cores Virginia and Tennesse and NC
+	id = lotf_events.12
+	title = lotf_events.12.t
+	desc = lotf_events.12.d
+	picture = SIEGE_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.12.a	
+		great_valley_area = { add_core = CSA }
+		chesapeake_area = { add_core = CSA }
+		choctaw_area = { add_core = CSA }
+		carolinas_area = { add_core = CSA }	
+	}
+}	
+country_event = { #CSA Pops and Declares Independence
+	id = lotf_events.13
+	title = lotf_events.13.t
+	desc = lotf_events.13.d
+	picture = CIVIL_WAR_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	immediate = {
+		add_stability = -5
+	}
+	option = {
+		name = lotf_events.13.a
+		hidden_effect  = { set_country_flag = started_civil_war }
+		release = CSA
+		CSA = { 
+			hidden_effect = {
+				change_primary_culture = american
+				add_government_reform = federal_republic
+			}
+			define_ruler = {
+				name = "Jefferson Davis"
+				adm = 3
+				dip = 3
+				mil = 5
+			}
+		}
+		declare_war_with_cb = { who = CSA casus_belli = lotf_civil_war }
+		hidden_effect = {
+			CSA = {
+				add_yearly_manpower = 10
+				add_treasury = 200
+				define_general = {
+					name = "Robert E. Lee"
+					fire = 5
+					shock = 5
+					manuever = 4
+					siege = 3
+					trait = master_of_arms_personality
+				}
+				define_general = {
+					name = "Stonewall Jackson"
+					fire = 4
+					shock = 4
+					manuever = 3
+					siege = 2
+				}
+				define_general = {
+					name = "Nathan Bedford Forrest"
+					fire = 3
+					shock = 5
+					manuever = 4
+					siege = 1
+				}
+				if = {
+					limit = {
+						NOT = { num_of_cities = 60 }
+					}
+					add_country_modifier = { name = csa_civil_war_modifier duration = -1 }
+					2549 = { 
+						infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA artillery = CSA
+						infantry = CSA infantry = CSA artillery = CSA
+					}
+					4913 = { 
+						infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA artillery = CSA
+						infantry = CSA infantry = CSA artillery = CSA					
+					}
+				}
+				else = {
+					add_country_modifier = { name = csa_civil_war_modifier_2 duration = -1 } 
+					2549 = { 
+						infantry = CSA infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA artillery = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA artillery = CSA artillery = CSA
+					}
+					4913 = { 
+						infantry = CSA infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA cavalry = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA artillery = CSA artillery = CSA
+						infantry = CSA infantry = CSA infantry = CSA artillery = CSA artillery = CSA				
+					}
+				}
+				country_event = { id = lotf_events.16 days = 30 }
+				capital_scope = {
+					if = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					if = {
+						limit = {
+							NOT = { has_building = fort_17th }
+							NOT = { has_building = fort_18th }
+						}
+						add_building = fort_17th
+					}
+				}
+			}
+		}
+		custom_tooltip = blank_space
+		define_general = {
+			name = "Ulysses S. Grant"
+			fire = 5
+			shock = 4
+			manuever = 4
+			siege = 2
+			trait = ironside_personality
+		}
+		define_general = {
+			name = "William T. Sherman"
+			fire = 4
+			shock = 4
+			manuever = 5
+			siege = 3
+			trait = hardy_warrior_personality
+		}
+		define_general = {
+			name = "George McClellan"
+			fire = 4
+			shock = 3
+			manuever = 3
+			siege = 1
+			trait = hardy_warrior_personality
+		}	
+	}
+}
+country_event = { #US Civil War Ends
+	id = lotf_events.14
+	title = lotf_events.14.t
+	desc = lotf_events.14.d
+	picture = WOUNDED_SOLDIERS_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	immediate = { set_country_flag = us_civil_war_over }
+	option = {
+		name = lotf_events.14.a
+		add_stability_or_adm_power = yes
+		add_republican_tradition = 5
+		add_country_modifier = { name = reconstuction_modifier_1 duration = 3650 }
+		if = {
+			limit = { has_global_flag = advisors_expanded_mod_active } 
+			define_advisor = {
+				name = "Robert E. Lee"
+				type = commander 
+				skill = 3 
+				cost_multiplier = 0.50 
+			}
+		}
+		else = {
+			define_advisor = {
+				name = "Robert E. Lee"
+				type = grand_captain 
+				skill = 3 
+				cost_multiplier = 0.50 
+			}	
+		}
+		custom_tooltip = blank_space
+		northeast_america_region = {
+			add_province_modifier = { name = reconstruction_anger_modifier duration = 3650 }
+		}
+		
+	}		
+	option = {
+		name = lotf_events.14.b
+		add_corruption = -2
+		add_republican_tradition = 5
+		add_country_modifier = { name = reconstuction_modifier_2 duration = 3650 }
+		southeast_america_region = {
+			add_province_modifier = { name = reconstruction_anger_modifier duration = 3650 }
+		}
+	}	
+}
+country_event = { #Passed Slavery SALE outlawed
+	id = lotf_events.15
+	title = lotf_events.15.t
+	desc = lotf_events.15.d
+	picture = ACCUSATION_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.15.a
+		add_stability = -1
+		add_country_modifier = { name = abolish_slavery_modifier_1 duration = -1 }
+	}
+	option = {
+		name = lotf_events.15.b
+		add_stability = -2
+		add_country_modifier = { name = abolish_slavery_modifier_2 duration = -1 }
+	}
+	option = {
+		name = lotf_events.15.c
+		add_stability = -3
+		add_country_modifier = { name = abolish_slavery_modifier_3 duration = -1 }
+	}
+}
+country_event = { #Gib Confederates Armies
+	id = lotf_events.16
+	title = lotf_events.16.t
+	desc = lotf_events.16.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	hidden = yes
+	option = {
+		name = lotf_events.16.a
+		add_years_of_income = 5
+		2549 = { build_to_forcelimit = { infantry = 0.2 cavalry = 0.025 artillery = 0.075 } }
+		4913 = { build_to_forcelimit = { infantry = 0.3 cavalry = 0.05 artillery = 0.15 } }
+		936 = { build_to_forcelimit = { infantry = 0.5 cavalry = 0.1 artillery = 0.3 } }
+	}
+}
+country_event = { #Construct White House
+	id = lotf_events.17
+	title = lotf_events.17.t
+	desc = lotf_events.17.d
+	picture = GREAT_BUILDING_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.17.a
+		set_global_flag = can_upgrade_white_house
+		add_republican_tradition = 10
+		953 = {
+			change_province_name = Washington
+			rename_capital = "District of Columbia"
+			add_great_project_tier = { type = white_house tier = 1 } 
+			custom_tooltip = blank_space
+			add_base_tax = 3
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		custom_tooltip = blank_space
+		set_capital = 953
+	}
+}
+country_event = { #Construct West Point
+	id = lotf_events.18
+	title = lotf_events.18.t
+	desc = lotf_events.18.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = lotf_events.18.a
+		ai_chance = { factor = 100 }
+		set_global_flag = can_upgrade_west_point
+		add_army_professionalism = 0.05
+		add_army_tradition = 10
+		5953 = {
+			add_great_project = { #Add since it doesn't appear in 1444
+				type = west_point 
+				instant = no
+			}
+		}
+	}
+	option = {	#Better spend money on something else
+		name = lotf_events.18.b
+		ai_chance = { factor = 0 }
+		set_global_flag = can_upgrade_west_point
+		add_army_tradition = 5
+		add_treasury = 1500
+	}
+}
+country_event = { #Choose your gov path
+	id = lotf_events.19
+	title = lotf_events.19.t
+	desc = lotf_events.19.d
+	picture = BAD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+	option = {
+		name = lotf_events.19.a
+		set_country_flag = usa_monarchy
+		change_government = monarchy
+		add_government_reform = american_monarchy
+		hidden_effect = { country_event = { id = lotf_hidden_events.14 } }
+	}
+	option = {
+		name = lotf_events.19.b
+		set_country_flag = usa_republic
+		custom_tooltip = lotf_events.19_tt
+	}
+}
+country_event = { #Civil War Defecation to CSA CHECK
+	id = lotf_events.20
+	title = lotf_events.20.t
+	desc = lotf_events.20.d
+	picture = BORDER_TENSION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = { 
+        any_province = {
+            is_capital = no
+            OR = {
+                AND = {
+                    owned_by = USA
+                    controlled_by = CSA 
+                    any_neighbor_province = { owned_by = CSA }
+                    area_for_scope_province = {
+						is_capital = no
+                        type = all
+                        controlled_by = CSA
+                        owned_by = USA
+                    }
+                }
+                AND = {
+                    owned_by = CSA
+                    controlled_by = USA 
+                    any_neighbor_province = { owned_by = USA }
+                    area_for_scope_province = {
+						is_capital = no
+                        type = all
+                        controlled_by = USA
+                        owned_by = CSA
+                    }
+                }
+            }
+        }
+    }
+	option = {
+        name = lotf_events.20.a
+        random_province = {
+            limit = {
+                is_capital = no
+                OR = {
+                    AND = {
+                        owned_by = USA
+                        controlled_by = CSA 
+                        any_neighbor_province = { owned_by = CSA }
+                        area_for_scope_province = {
+							is_capital = no
+                            type = all
+                            controlled_by = CSA
+                            owned_by = USA
+                        }
+                    }
+                    AND = {
+                        owned_by = CSA
+                        controlled_by = USA 
+                        any_neighbor_province = { owned_by = USA }
+                        area_for_scope_province = {
+							is_capital = no
+                            type = all
+                            controlled_by = USA
+                            owned_by = CSA
+                        }
+                    }
+                }
+            }
+            save_event_target_as = civil_war_province_to_cede
+			owner = {
+				if = {
+					limit = {
+						tag = USA
+					}					
+					CSA = { country_event = { id = lotf_events.21 } }
+				}
+				else = {
+					CSA = { country_event = { id = lotf_events.210 } }
+				}
+			}
+        }
+    }
+}
+country_event = { #Civil War Defecation MESSAGE TO TAG RECEIVING DEFECTION
+    id = lotf_events.21
+    title = lotf_events.21.t
+    desc = lotf_events.21.d
+    picture = BORDER_TENSION_eventPicture
+    goto = civil_war_province_to_cede
+    is_triggered_only = yes  
+    option = {
+        name = lotf_events.21.a
+        
+        event_target:civil_war_province_to_cede = {
+            area = {
+                limit = {
+                    owned_by = FROM
+                    controlled_by = ROOT
+                }
+                add_core = ROOT
+                cede_province = ROOT
+            }
+        }
+		FROM = { country_event = { id = lotf_events.22 } }
+    }
+}
+country_event = { #Civil War Defecation MESSAGE TO TAG LOSING DEFECTION
+    id = lotf_events.22
+    title = lotf_events.22.t
+    desc = lotf_events.22.d
+    picture = BORDER_TENSION_eventPicture
+    goto = civil_war_province_to_cede
+    is_triggered_only = yes   
+    option = {
+        name = lotf_events.22.a
+
+    }
+}
+country_event = { #Civil War Defecation HIDDEN EVENT FOR DEFECTION TO USA
+    id = lotf_events.210
+    title = lotf_events.210.t
+    desc = lotf_events.210.d
+    picture = BORDER_TENSION_eventPicture
+    hidden = yes
+    is_triggered_only = yes   
+    option = {
+        name = lotf_events.210.a
+		USA = { country_event = { id = lotf_events.21 } }
+    }
+}
+
+country_event = { #Tobacco Price Boost
+	id = lotf_events.23
+	title = lotf_events.23.t
+	desc = lotf_events.23.d
+	picture = TRADEGOODS_eventPicture
+	major = yes
+	trigger = { 
+		mission_completed = USA_missions_cotton_king
+		trading_bonus = { trade_goods = tobacco value = yes }
+		NOT = { has_global_flag = tobacy_boom_event }
+	}
+	mean_time_to_happen = { months = 6 }
+	option = {
+		name = lotf_events.23.a
+		change_price = {
+			trade_goods = tobacco
+			key = COTTON_KING
+			value = 0.5
+			duration = 12775
+		}
+		set_global_flag = tobacy_boom_event
+	}
+}
+country_event = { #Culture Assimilation
+	id = lotf_events.24
+	title = lotf_events.24.t
+	desc = lotf_events.24.d
+	picture = NATIVES_eventPicture
+	trigger = { 
+		OR = {
+			tag = USA
+			tag = CSA
+		}
+		any_owned_province = {
+			OR = {
+				culture_group = iroquoian
+				culture_group = eastern_algonquian
+				culture_group = plains_algonquian
+				culture_group = central_algonquian
+				culture_group = eskaleut
+				culture_group = siouan
+				culture_group = caddoan
+				culture_group = muskogean
+				culture_group = sonoran
+				culture_group = apachean
+				culture_group = na_dene
+				culture_group = penutian
+				culture_group = carribean
+				culture_group = araucanian
+				culture_group = mataco
+			}
+		}
+		NOT = { has_country_modifier = culture_assimilation_modifier }
+	}
+	mean_time_to_happen = {
+		years = 20
+		modifier = {
+			factor = 1.5
+			is_at_war = yes
+		}
+	}
+
+	option = {
+		name = lotf_events.24.a
+		add_dip_power = 100
+		add_prestige = 20
+		add_country_modifier = { name = culture_assimilation_modifier duration = 3650 }
+	}
+	option = {
+		name = lotf_events.24.b
+		add_dip_power = 50
+		add_stability_or_adm_power = yes
+		add_country_modifier = { name = culture_assimilation_modifier_2 duration = 5475 }
+	}
+}
+province_event = { #Native Religious Assimilation
+	id = lotf_events.25
+	title = lotf_events.25.t
+	desc = lotf_events.25.d
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	trigger = { 
+		owner = {
+			OR = {
+				tag = USA
+				tag = CSA
+			}
+		}
+		OR = {
+			culture_group = iroquoian
+			culture_group = eastern_algonquian
+			culture_group = plains_algonquian
+			culture_group = central_algonquian
+			culture_group = eskaleut
+			culture_group = siouan
+			culture_group = caddoan
+			culture_group = muskogean
+			culture_group = sonoran
+			culture_group = apachean
+			culture_group = na_dene
+			culture_group = penutian
+			culture_group = carribean
+			culture_group = araucanian
+			culture_group = mataco
+		}
+		OR = {
+			religion = arctolatry
+			religion = totemism
+		}
+	}
+	mean_time_to_happen = {
+		years = 30
+		modifier = {
+			factor = 2.5
+			FROM = { is_at_war = yes } #Added FROM since it was just written as 'is_at_war = yes'
+		}
+		modifier = {
+			factor = 1.5
+			devastation = 1
+		}
+		modifier = {
+			factor = 0.75
+			NOT = { devastation = 1 }
+		}
+	}
+	option = {
+		name = lotf_events.25.a
+		change_religion = owner
+		custom_tooltip = blank_space
+		add_province_modifier = { name = native_religious_assimiliation_modifier duration = 3650 }
+	}
+}
+
+country_event = { #Mississippi Joins Confederacy
+    id = lotf_events.26
+    title = lotf_events.26.t
+    desc = lotf_events.26.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		mississippi_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		921 = { owned_by = ROOT }
+		2530 = { owned_by = ROOT }
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+	}
+	mean_time_to_happen = { 
+		months = 2
+	}
+    option = {
+        name = lotf_events.26.a
+		mississippi_area = { add_core = CSA }
+		921 = { add_core = CSA }
+		2530 = { add_core = CSA }
+    }
+}
+country_event = { #Louisiana Joins Confederacy
+    id = lotf_events.27
+    title = lotf_events.27.t
+    desc = lotf_events.27.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		lower_louisiana_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+	}
+	mean_time_to_happen = { 
+		months = 2
+	}
+    option = {
+        name = lotf_events.27.a
+		lower_louisiana_area = { add_core = CSA }
+    }
+}
+country_event = { #Arkansas Joins Confederacy
+    id = lotf_events.28
+    title = lotf_events.28.t
+    desc = lotf_events.28.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		ozarks_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		lower_louisiana_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		2515 = { owned_by = ROOT is_capital = no }
+		4886 = { owned_by = ROOT is_capital = no }
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+	}
+	mean_time_to_happen = { 
+		days = 90
+	}
+    option = {
+        name = lotf_events.28.a
+		ozarks_area = { add_core = CSA }
+		lower_louisiana_area = { add_core = CSA }
+		2515 = { add_core = CSA }
+		4886 = { add_core = CSA }
+    }
+}
+country_event = { #East Texas Joins Confederacy
+    id = lotf_events.29
+    title = lotf_events.29.t
+    desc = lotf_events.29.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		texas_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+		2666 = { owned_by = ROOT is_capital = no }
+		2499 = { owned_by = ROOT is_capital = no }
+	}
+	mean_time_to_happen = { 
+		days = 120
+	}
+    option = {
+        name = lotf_events.29.a
+		texas_area = { add_core = CSA }
+		2666 = { add_core = CSA }
+		2499 = { add_core = CSA }
+    }
+}
+country_event = { #West Texas Joins Confederacy
+    id = lotf_events.30
+    title = lotf_events.30.t
+    desc = lotf_events.30.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		texas_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		885 = {
+			owned_by = ROOT
+			is_capital = no
+		}
+		2497 = {
+			owned_by = ROOT
+			is_capital = no
+		}
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+	}
+	mean_time_to_happen = { 
+		months = 6
+	}
+    option = {
+        name = lotf_events.30.a
+		texas_area = { add_core = CSA }
+		885 = { add_core = CSA }
+		2497 = { add_core = CSA }
+    }
+}
+country_event = { #Central Texas and OK Joins Confederacy
+    id = lotf_events.31
+    title = lotf_events.31.t
+    desc = lotf_events.31.d
+    picture = BORDER_TENSION_eventPicture
+	fire_only_once = yes
+    trigger = {
+		tag = USA
+		lower_plains_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		texas_area = {
+			type = all
+			owned_by = ROOT
+			is_capital = no
+		}
+		889 = {
+			owned_by = ROOT
+			is_capital = no
+		}
+		calc_true_if = {
+			all_province = { is_core = CSA }
+			amount = 1
+		}
+	}
+	mean_time_to_happen = { 
+		months = 4
+	}
+    option = {
+        name = lotf_events.31.a
+		lower_plains_area = { add_core = CSA }
+		texas_area = { add_core = CSA }
+		889 = { add_core = CSA }
+    }
+}
+
+# country_event = { #MORMONS!
+    # id = lotf_events.32
+    # title = lotf_events.32.t
+    # desc = lotf_events.32.d
+    # picture = BORDER_TENSION_eventPicture
+    # trigger = {
+		# tag = USA
+		# 2490 = { owned_by = ROOT is_city = yes }
+	# }
+	# mean_time_to_happen = { 
+		# months = 120
+	# }
+    # option = {
+        # name = lotf_events.32.a
+		# 236 = { 
+			# change_religion = mormon
+			# add_reform_center = mormon
+		# }
+    # }
+# }

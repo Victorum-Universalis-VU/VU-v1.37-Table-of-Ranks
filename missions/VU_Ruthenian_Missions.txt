@@ -1,0 +1,543 @@
+############### SLOT 1 ###############
+vu_UKR_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = UKR
+		NOT = {
+			map_setup = map_setup_random
+		}
+	}
+	has_country_shield = yes
+	vu_UKR_the_anvil = {
+		position = 2
+		required_missions = {
+			vu_UKR_independent_ruthenia
+		}
+		icon = jageillonian_union
+		provinces_to_highlight = {
+			if = {
+				limit = {
+					exists = POL
+				}
+				OR = {
+					owned_by = POL
+				}
+			}
+			else_if = {
+				limit = {
+					exists = PLC
+					NOT = {
+						exists = POL
+					}
+				}
+				owned_by = PLC
+			}
+			else = {
+				area = red_ruthenia_area
+				area = volhynia_area
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					exists = POL
+				}
+				OR = {
+					is_rival = POL
+					alliance_with = POL
+				}
+			}
+			else_if = {
+				limit = {
+					exists = PLC
+					NOT = {
+						exists = POL
+					}
+				}
+				OR = {
+					is_rival = PLC
+					alliance_with = PLC
+				}
+			}
+			else = {
+				red_ruthenia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				volhynia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			poland_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	vu_UKR_defeat_the_western_slavs = {
+		position = 3
+		required_missions = {
+			vu_UKR_the_anvil
+		}
+		icon = mission_partition_poland
+		provinces_to_highlight = {
+			OR = {
+				area = mazovia_area
+				area = malopolska_area
+			}
+		}
+		trigger = {
+			malopolska_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mazovia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			baltic_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "vu_defeat_poland"
+				duration = -1
+			}
+		}
+	}
+}
+
+############### SLOT 2 ###############
+vu_UKR_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = UKR
+		NOT = {
+			map_setup = map_setup_random
+		}
+	}
+	has_country_shield = yes
+	vu_UKR_independent_ruthenia = {
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				area = west_dniepr_area
+				area = podolia_volhynia_area
+				area = east_dniepr_area
+			}
+		}
+		required_missions = {
+		}
+		icon = mission_rule_ruthenia
+		trigger = {
+			is_subject = no
+			west_dniepr_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			podolia_volhynia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_dniepr_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			ruthenia_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	vu_UKR_the_hammer = {
+		position = 2
+		required_missions = {
+			vu_UKR_independent_ruthenia
+		}
+		icon = mission_defeat_muscovy
+		provinces_to_highlight = {
+			if = {
+				limit = {
+					exists = MOS
+				}
+				OR = {
+					owned_by = MOS
+				}
+			}
+			else_if = {
+				limit = {
+					exists = RUS
+					NOT = {
+						exists = MOS
+					}
+				}
+				owned_by = RUS
+			}
+			else = {
+				area = sloboda_ukraine_area
+				area = oka_area
+			}
+		}
+		trigger = {
+			if = {
+				limit = {
+					exists = MOS
+				}
+				OR = {
+					is_rival = MOS
+					alliance_with = MOS
+				}
+			}
+			else_if = {
+				limit = {
+					exists = RUS
+					NOT = {
+						exists = MOS
+					}
+				}
+				OR = {
+					is_rival = RUS
+					alliance_with = RUS
+				}
+			}
+			else = {
+				sloboda_ukraine_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				oka_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			add_adm_power = 100
+			russia_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	vu_UKR_defeat_the_eastern_slavs = {
+		position = 3
+		required_missions = {
+			vu_UKR_the_hammer
+		}
+		icon = mission_steppe_warriors
+		provinces_to_highlight = {
+			OR = {
+				area = moscow_area
+			}
+		}
+		trigger = {
+			moscow_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_mil_power = 100
+			ural_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "vu_defeat_russia"
+				duration = -1
+			}
+		}
+	}
+	vu_UKR_ruthenian_legacy = {
+		position = 4
+		required_missions = {
+			vu_UKR_defeat_the_eastern_slavs
+			vu_UKR_defeat_the_tatars
+			vu_UKR_defeat_the_western_slavs
+		}
+		icon = mission_monarch_in_throne_room
+		trigger = {
+			total_development = 1000
+			prestige = 75
+		}
+		effect = {
+			add_mil_power = 100
+			add_country_modifier = {
+				name = "vu_defeat_russia"
+				duration = -1
+			}
+		}
+	}
+}
+
+############### SLOT 3 ###############
+vu_UKR_missions_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = UKR
+		NOT = {
+			map_setup = map_setup_random
+		}
+	}
+	has_country_shield = yes
+	vu_UKR_build_workshops = {
+		position = 2
+		required_missions = {
+			vu_UKR_embrace_renaissance
+		}
+		icon = mission_state_manufactories
+		trigger = {
+			num_of_owned_provinces_with = {
+				region = ruthenia_region
+				has_building = workshop
+				value = 10
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "vu_develop_ruthenia"
+				duration = -1
+			}
+		}
+	}
+	vu_UKR_defeat_the_tatars = {
+		position = 3
+		required_missions = {
+			vu_UKR_the_hammer
+		}
+		icon = mission_cossack_cavalry
+		provinces_to_highlight = {
+			OR = {
+				region = crimea_region
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				region = crimea_region
+				value = 12
+			}
+		}
+		effect = {
+			add_adm_power = 100
+			crimea_region = {
+				limit = {
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "vu_defeat_tatars"
+				duration = -1
+			}
+		}
+	}
+}
+
+############### SLOT 4 ###############
+vu_UKR_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = UKR
+		NOT = {
+			map_setup = map_setup_random
+		}
+	}
+	has_country_shield = yes
+	vu_UKR_embrace_renaissance = {
+		position = 1
+		required_missions = {
+		}
+		icon = mission_early_game_buildings
+		trigger = {
+			has_institution = renaissance
+		}
+		effect = {
+			add_country_modifier = {
+				name = "vu_develop_ruthenia"
+				duration = 7300
+			}
+		}
+	}
+	vu_UKR_develop_ruthenia = {
+		position = 2
+		required_missions = {
+			vu_UKR_embrace_renaissance
+		}
+		icon = mission_colonial
+		trigger = {
+			num_of_owned_provinces_with = {
+				region = ruthenia_region
+				development = 15
+				value = 10
+			}
+		}
+		effect = {
+			add_years_of_income = 1
+			capital_scope = {
+				add_base_manpower = 3
+				add_base_tax = 3
+				add_base_production = 3
+			}
+		}
+	}
+	vu_UKR_riches_of_ukraine = {
+		position = 3
+		required_missions = {
+			vu_UKR_develop_ruthenia
+		}
+		icon = mission_dominate_home_trade_node
+		trigger = {
+			treasury = 2000
+			monthly_income = 100
+			NOT = {
+				num_of_loans = 1
+			}
+			calc_true_if = {
+				desc = build_manufactories_mission_tooltip
+				all_owned_province = {
+					OR = {
+						has_building = mills
+						has_building = farm_estate
+						has_building = tradecompany
+						has_building = plantations
+						has_building = textile
+						has_building = weapons
+						has_building = wharf
+						has_building = furnace
+					}
+				}
+				amount = 20
+			}
+		}
+		effect = {
+			custom_tooltip = vu_ukr_every_prov_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					add_base_tax = 1
+					add_base_production = 1
+				}
+			}
+		}
+	}
+	vu_UKR_industralization = {
+		position = 4
+		required_missions = {
+			vu_UKR_riches_of_ukraine
+		}
+		icon = mission_rb_prospect_for_coal
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					has_building = furnace
+				}
+				amount = 3
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "vu_ruthenian_industralization"
+				duration = -1
+			}
+		}
+	}
+}
+
+############### SLOT 5 ###############
+vu_UKR_missions_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = UKR
+		NOT = {
+			map_setup = map_setup_random
+		}
+	}
+	has_country_shield = yes
+	vu_UKR_united_in_faith = {
+		position = 1
+		required_missions = {
+		}
+		icon = mission_hands_praying
+		trigger = {
+			religious_unity = 1
+		}
+		effect = {
+			add_prestige = 10
+		}
+	}
+	vu_UKR_great_church = {
+		position = 2
+		required_missions = {
+			vu_UKR_united_in_faith
+		}
+		icon = mission_european_church
+		trigger = {
+			capital_scope = {
+				has_building = temple
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_building = grand_cathedral
+			}
+		}
+	}
+}

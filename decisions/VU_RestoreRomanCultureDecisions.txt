@@ -1,0 +1,44 @@
+country_decisions = {
+	vu_restore_roman_culture = {
+		major = yes
+		potential = {
+			ai = no
+			OR = {
+				tag = ROM
+				tag = BYZ
+				culture_group = old_latin
+			}
+			NOT = { has_country_flag = used_vu_restore_roman_culture_decision }
+			NOT = { has_country_flag = no_more_roman_culture }
+			NOT = {
+				check_variable = {
+					which = vu_romano_culture_to_convert
+					value = 8
+				}
+			}
+		}
+		allow = {
+			always = yes
+		}
+		effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = setup_complete_on_romanization }
+					}
+					set_variable = {
+  						which = vu_romano_culture_to_convert
+    						value = 0
+					}
+					set_country_flag = setup_complete_on_romanization
+				}
+			}
+			set_country_flag = used_vu_restore_roman_culture_decision
+			country_event = { id = vu_restore_roman_culture.1 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+}

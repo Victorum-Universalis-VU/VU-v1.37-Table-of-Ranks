@@ -1,0 +1,438 @@
+namespace = subjects_expanded_banking_family_subject_events
+
+country_event = {
+	id = subjects_expanded_banking_family_subject_events.1
+	title = subjects_expanded_banking_family_subject_events.EVTNAME1
+	desc = subjects_expanded_banking_family_subject_events.EVTDESC1
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	trigger = {
+		has_subject_of_type = banking_family_subject
+		OR = {
+			any_subject_country = {
+				is_subject_of_type = banking_family_subject
+				OR = {
+					NOT = { government = republic }
+					num_of_cities = 5
+				}
+			}
+			calc_true_if = {
+				all_subject_country = {
+					is_subject_of_type = banking_family_subject
+				}
+				amount = 2
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						is_subject_of_type = banking_family_subject
+						OR = {
+							NOT = { government = republic }
+							num_of_cities = 5
+						}
+					}
+				}
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = banking_family_subject
+						OR = {
+							NOT = { government = republic }
+							num_of_cities = 5
+						}
+					}
+					save_event_target_as = banking_family_subject_to_release
+				}
+			}
+			else = {
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = banking_family_subject
+						OR = {
+							NOT = {
+								years_in_vassalage_under = {
+									who = ROOT
+									years = 2
+									all_subject_country = yes
+								}
+							}
+							ROOT = {
+								NOT = {
+									any_subject_country = {
+										is_subject_of_type = banking_family_subject
+										NOT = {
+											years_in_vassalage_under = {
+												who = ROOT
+												years = 2
+												all_subject_country = yes
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					save_event_target_as = banking_family_subject_to_release
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		event_target:banking_family_subject_to_release = {
+			grant_independence = yes
+		}
+		hidden_effect = {
+			remove_casus_belli = {
+				target = event_target:banking_family_subject_to_release
+				type = cb_disloyal_banking_family_subject
+			}
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_banking_family_subject_events.2
+	title = subjects_expanded_banking_family_subject_events.EVTNAME2
+	desc = subjects_expanded_banking_family_subject_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	major_trigger = {
+		tag = event_target:banking_family_subject_target
+	}
+
+	trigger = {
+		has_subject_of_type = banking_family_subject
+		NOT = { has_country_modifier = banking_family_subject_build_connections_overlord_modifier }
+		NOT = { has_country_modifier = banking_family_subject_redistribute_currency_overlord_modifier }
+		NOT = { has_country_modifier = banking_family_subject_demand_dues_overlord_modifier }
+		NOT = { has_country_modifier = banking_family_subject_seek_out_reliable_funding_overlord_modifier }
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_subject_country = {
+				limit = {
+					is_subject_of_type = banking_family_subject
+				}
+				save_event_target_as = banking_family_subject_target
+			}
+			export_to_variable = {
+				which = their_current_income
+				value = monthly_income
+				who = event_target:banking_family_subject_target
+			}
+			multiply_variable = { which = their_current_income value = 12 }
+			divide_variable = { which = their_current_income value = 1000 }
+			multiply_variable = { which = their_current_income value = 1000 }
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events2.EVTOPT1
+
+		ai_chance = {
+			factor = 0.33
+			modifier = {
+				factor = 0
+				NOT = { years_of_income = 3 }
+			}
+		}
+
+		add_years_of_income = -1
+		add_country_modifier = {
+			name = banking_family_subject_build_connections_overlord_modifier
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events2.EVTOPT2
+
+		ai_chance = {
+			factor = 0.33
+			modifier = {
+				factor = 0
+				num_of_loans = 1
+			}
+		}
+
+		add_country_modifier = {
+			name = banking_family_subject_redistribute_currency_overlord_modifier
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events2.EVTOPT3
+
+		ai_chance = {
+			factor = 0.33
+			modifier = {
+				factor = 0
+				OR = {
+					treasury = 10000
+					event_target:banking_family_subject_target = {
+						liberty_desire = 40
+					}
+				}
+			}
+		}
+
+		custom_tooltip = BANKING_FAMILY_SUBJECT_DEMAND_DUES_TT
+		hidden_effect = {
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 100000 }
+				}
+				change_variable = { which = their_current_income value = -100000 }
+				add_treasury = 100000
+				event_target:banking_family_subject_target = {
+					add_treasury = -100000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 10000 }
+				}
+				change_variable = { which = their_current_income value = -10000 }
+				add_treasury = 10000
+				event_target:banking_family_subject_target = {
+					add_treasury = -10000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 1000 }
+				}
+				change_variable = { which = their_current_income value = -1000 }
+				add_treasury = 1000
+				event_target:banking_family_subject_target = {
+					add_treasury = -1000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 100 }
+				}
+				change_variable = { which = their_current_income value = -100 }
+				add_treasury = 100
+				event_target:banking_family_subject_target = {
+					add_treasury = -100
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 10 }
+				}
+				change_variable = { which = their_current_income value = -10 }
+				add_treasury = 10
+				event_target:banking_family_subject_target = {
+					add_treasury = -10
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = their_current_income value = 1 }
+				}
+				change_variable = { which = their_current_income value = -1 }
+				add_treasury = 1
+				event_target:banking_family_subject_target = {
+					add_treasury = -1
+				}
+			}
+		}
+		event_target:banking_family_subject_target = {
+			add_country_modifier = {
+				name = banking_family_subject_demand_dues_modifier
+				duration = 3650
+			}
+		}
+		add_country_modifier = {
+			name = banking_family_subject_demand_dues_overlord_modifier
+			duration = 3650
+			hidden = yes
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events2.EVTOPT4
+
+		ai_chance = {
+			factor = 0.33
+			modifier = {
+				factor = 2
+				num_of_loans = 3
+			}
+		}
+
+		add_country_modifier = {
+			name = banking_family_subject_seek_out_reliable_funding_overlord_modifier
+			duration = 3650
+		}
+	}
+
+	after = {
+		set_variable = { which = their_current_income value = 0 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_banking_family_subject_events.3
+	title = subjects_expanded_banking_family_subject_events.EVTNAME3
+	desc = subjects_expanded_banking_family_subject_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				country_event = { id = subjects_expanded_banking_family_subject_events.4 }
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_banking_family_subject_events.4
+	title = subjects_expanded_banking_family_subject_events.EVTNAME4
+	desc = subjects_expanded_banking_family_subject_events.EVTDESC4
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	major_trigger = {
+		tag = event_target:subject_target
+	}
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				save_event_target_as = subject_target
+			}
+			export_to_variable = {
+				which = subject_income
+				value = monthly_income
+				who = FROM
+			}
+			multiply_variable = { which = subject_income value = 12 }
+			divide_variable = { which = subject_income value = 1000 }
+			multiply_variable = { which = subject_income value = 1000 }
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		custom_tooltip = BANKING_FAMILY_SUBJECT_EXTORT_EMERGENCY_FUNDS_TT
+		hidden_effect = {
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 100000 }
+				}
+				change_variable = { which = subject_income value = -100000 }
+				add_treasury = 100000
+				FROM = {
+					add_treasury = -100000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 10000 }
+				}
+				change_variable = { which = subject_income value = -10000 }
+				add_treasury = 10000
+				FROM = {
+					add_treasury = -10000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 1000 }
+				}
+				change_variable = { which = subject_income value = -1000 }
+				add_treasury = 1000
+				FROM = {
+					add_treasury = -1000
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 100 }
+				}
+				change_variable = { which = subject_income value = -100 }
+				add_treasury = 100
+				FROM = {
+					add_treasury = -100
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 10 }
+				}
+				change_variable = { which = subject_income value = -10 }
+				add_treasury = 10
+				FROM = {
+					add_treasury = -10
+				}
+			}
+			while = {
+				limit = {
+					check_variable = { which = subject_income value = 1 }
+				}
+				change_variable = { which = subject_income value = -1 }
+				add_treasury = 1
+				FROM = {
+					add_treasury = -1
+				}
+			}
+		}
+		FROM = {
+			add_liberty_desire = 80
+			add_opinion = {
+				who = ROOT
+				modifier = banking_family_subject_extord_emergency_funds_opinion
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_banking_family_subject_events4.EVTOPT2
+
+		ai_chance = { factor = 0 }
+
+		clr_country_flag = banking_family_subject_extort_emergency_funds_used
+	}
+
+	after = {
+		set_variable = { which = subject_income value = 0 }
+	}
+}

@@ -1,0 +1,138 @@
+#on_province_culture_converted_estate_privilges_effect = {
+#	PDX_on_province_culture_converted_estate_privilges_effect = yes
+#	ME_on_province_culture_converted_estate_privilges_effect = yes
+#}
+
+#PDX_on_province_culture_converted_estate_privilges_effect = {
+#	if = {
+#		limit = {
+#			owner = {
+##				OR = {
+#					has_estate_privilege = estate_church_one_faith_one_culture
+#					has_estate_privilege = estate_brahmins_one_faith_one_culture
+#				}
+##			}
+#		}
+#		if = {
+#			limit = {
+#				owner = {
+#					OR = {
+#						accepted_culture = ROOT
+#						culture_group = ROOT
+#					}
+#					OR = {
+#						religion = ROOT
+#						has_harmonized_with = ROOT
+#						secondary_religion = ROOT
+#					}
+#				}
+#			}
+#			if = {
+#				limit = {
+#					has_province_modifier = estate_church_false_culture
+#				}
+#				remove_province_modifier = estate_church_false_culture
+#			}
+#			add_province_modifier = {
+#				name = estate_church_united_faith_and_culture
+#				duration = -1
+#			}
+#		}
+#		if = {
+#			limit = {
+#				owner = {
+#					NOT = { culture_group = ROOT }
+#					NOT = { accepted_culture = ROOT }
+#				}
+#			}
+#			if = {
+#				limit = {
+#					has_province_modifier = estate_church_united_faith_and_culture
+##				}
+#				remove_province_modifier = estate_church_united_faith_and_culture
+#			}
+#			add_province_modifier = {
+#				name = estate_church_false_culture
+#				duration = -1
+#			}
+#		}
+#	}
+#}
+
+#ME_on_province_culture_converted_estate_privilges_effect = {
+#	owner = {
+#		change_variable = {
+#			which = num_of_culture_converted_provinces
+#			value = 1
+#		}
+#	}
+#
+#	if = {
+#		limit = {
+#			culture = armenian
+#			owner = {
+#				has_estate_privilege = ME_estate_dhimmi_AKK_armenians
+#			}
+#		}
+#		if = {
+##			limit = {
+#				owner = { has_country_flag = AKK_empower_the_tolerating_armenians_privilege_flag }
+#			}
+#			add_province_modifier = {
+#				name = AKK_upgraded_armenia
+#				duration = -1
+#			}
+#		}
+#		else = {
+#			add_province_modifier = {
+#				name = AKK_non_upgraded_armenia
+#				duration = -1
+#			}
+#		}
+#	}
+#	
+#	if = {
+#		limit = {
+#			owner = {
+#				has_estate_privilege = ME_estate_burghers_QIR_persian_development
+#			}
+#			has_terrain = mountain
+#			OR = {
+#				culture = persian
+#				culture = azerbaijani
+#			}
+#		}
+#		add_province_modifier = {
+#			name = QIR_persian_city_development
+##			duration = -1
+#		}
+#	}
+#	
+#	if = {
+#		limit = {
+#			owner = {
+##				has_country_flag = QIR_culture_conversion_grants_5_tribal_allegiance_flag
+#			}
+#		}
+#		owner = {
+#			add_government_power = {
+#				mechanic_type = tribal_federation_mechanic
+##				power_type = tribal_allegiance
+#				value = 5
+#			}
+#		}
+#	}
+##	
+#	if = {
+#		limit = {
+#			owner = {
+#				has_country_flag = QIR_10_development_cost_in_primary_culture_Flag
+#			}
+#			culture = owner
+#		}
+#		add_province_modifier = {
+#			name = QIR_primary_culture
+#			duration = -1
+#		}
+#	}
+#}

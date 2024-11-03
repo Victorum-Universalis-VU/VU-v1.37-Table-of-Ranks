@@ -1,0 +1,61 @@
+namespace = governments_expanded_events
+
+# Set GE global flag
+country_event = {
+	id = governments_expanded_events.1
+	title = governments_expanded_events.EVTNAME1
+	desc = governments_expanded_events.EVTDESC1
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_global_flag = governments_expanded_mod_active
+			if = {
+				limit = {
+					OR = {
+						NOT = { 101 = { has_province_modifier = GE_maritime_republic_triggered_modifier } }
+						NOT = { 112 = { has_province_modifier = GE_maritime_republic_triggered_modifier } }
+						NOT = { 115 = { has_province_modifier = GE_maritime_republic_triggered_modifier } }
+						NOT = { 2983 = { has_province_modifier = GE_maritime_republic_triggered_modifier } }
+					}
+					OR = {
+						has_government_mechanic = maritime_republic_mechanic
+						any_country = {
+							has_government_mechanic = maritime_republic_mechanic
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_government_mechanic = maritime_republic_mechanic
+					}
+					country_event = {
+						id = GE_Maritime_Republics_Events.1
+						days = 1
+					}
+				}
+				else = {
+					random_country = {
+						limit = {
+							has_government_mechanic = maritime_republic_mechanic
+						}
+						country_event = {
+							id = GE_Maritime_Republics_Events.1
+							days = 1
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = governments_expanded_events.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}

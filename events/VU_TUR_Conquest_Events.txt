@@ -1,0 +1,774 @@
+namespace = VU_TUR_Conquest_Events
+
+country_event = { #Turkish Conquest of Mamluks
+	id = VU_TUR_Conquest_Events.1
+	title = VU_TUR_Conquest_Events.1.t
+	desc = VU_TUR_Conquest_Events.1.d
+	picture = SELIM_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = TUR
+		war_with = MAM 
+		is_great_power = yes	#Prevents weak Ottomans from abusing it
+		is_year = 1480		#Prevents player from rushing it and becomming ustoppable early game
+		war_score_against = {
+			who = MAM
+			value = 85
+		}
+		MAM = { total_development = 300 }
+		NOT = { 
+		    MAM = { total_development = 2000 }	#Shouldn't work if Mamluks are super strong and super big
+		}
+	}
+	
+	mean_time_to_happen = { months = 1 } 
+	
+	option = { 
+		name = VU_TUR_Conquest_Events.1.a
+		highlight = yes
+		ai_chance = { factor = 90 } 
+		
+		set_country_flag = tur_chose_annexation_flag
+		custom_tooltip = tur_conquest_of_mam
+		hidden_effect = {
+			white_peace = MAM
+			MAM = { 
+				every_owned_province = { 
+					add_territorial_core = TUR  
+				}
+			}
+			inherit = MAM
+		}
+		add_treasury = 3500
+		add_prestige = 30
+		add_army_tradition = 10
+		add_manpower = 2
+		add_inflation = 2
+		add_corruption = 1.25
+	}
+
+	option = { 
+		name = VU_TUR_Conquest_Events.1.b
+		
+		ai_chance = { factor = 10 } 
+		add_country_modifier = { 
+			name = tur_push_for_egypt_modifier
+			duration = 2190 
+		}
+	}
+}
+
+
+country_event = { #Turkish Conquest of Hungary
+	id = VU_TUR_Conquest_Events.2
+	title = VU_TUR_Conquest_Events.2.t
+	desc = VU_TUR_Conquest_Events.2.d
+	picture = SULEIMAN_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = TUR
+		war_with = HUN 
+		is_great_power = yes	#At least be a great power to insta-annex another nation
+		is_year = 1490			#Don't rush it to skyrocket yourself in early game
+		war_score_against = {
+			who = HUN
+			value = 75
+		}
+		HUN = { total_development = 200 }
+		NOT = { 
+		    HUN = { total_development = 2000 }	#Should not work if Hungary is powerhouse on its own
+		}
+	}
+	
+	mean_time_to_happen = { months = 1 } 
+	
+	option = { 
+		name = VU_TUR_Conquest_Events.2.a
+		highlight = yes
+		ai_chance = { factor = 80 }
+		
+		set_country_flag = tur_chose_annexation_flag
+		hidden_effect = {
+			white_peace = HUN
+			HUN = { 
+				every_owned_province = { 
+					add_territorial_core = TUR  
+				}
+				add_war_exhaustion = 20
+			}
+			#inherit = HUN
+		}
+		custom_tooltip = tur_conquest_of_hun
+		hidden_effect = {			#Long and painful process of creating accurate borders
+			if = {
+				limit = { 
+					CRO = {
+						is_subject_of = HUN
+						ai = yes
+					}
+				}
+				HUN = { inherit = CRO }
+			}
+			if = {
+				limit = { 
+					TRA = {
+						is_subject_of = HUN
+						ai = yes
+					}
+				}
+				HUN = { inherit = TRA }
+			}
+			if = {
+				limit = { 
+					SZE = {
+						is_subject_of = HUN
+						ai = yes
+					}
+				}
+				HUN = { inherit = SZE }
+			}
+			if = {
+				limit = { 4239 = { owned_by = HUN } }
+				4239 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7718 = { owned_by = HUN } }
+				7718 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7739 = { owned_by = HUN } }
+				7739 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 1767 = { owned_by = HUN } }
+				1767 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 1828 = { owned_by = HUN } }
+				1828 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 3190 = { owned_by = HUN } }
+				3190 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7727 = { owned_by = HUN } }
+				7727 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7738 = { owned_by = HUN } }
+				7738 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8187 = { owned_by = HUN } }
+				8187 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7728 = { owned_by = HUN } }
+				7728 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7733 = { owned_by = HUN } }
+				7733 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7725 = { owned_by = HUN } }
+				7725 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 1864 = { owned_by = HUN } }
+				1864 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8190 = { owned_by = HUN } }
+				8190 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8191 = { owned_by = HUN } }
+				8191 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 4240 = { owned_by = HUN } }
+				4240 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 6974 = { owned_by = HUN } }
+				6974 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8184 = { owned_by = HUN } }
+				8184 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 153 = { owned_by = HUN } }
+				153 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8194 = { owned_by = HUN } }
+				8194 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 4126 = { owned_by = HUN } }
+				4126 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8192 = { owned_by = HUN } }
+				8192 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8193 = { owned_by = HUN } }
+				8193 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8200 = { owned_by = HUN } }
+				8200 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 3148 = { owned_by = HUN } }
+				3148 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8202 = { owned_by = HUN } }
+				8202 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 156 = { owned_by = HUN } }
+				156 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7743 = { owned_by = HUN } }
+				7743 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7745 = { owned_by = HUN } }
+				7745 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 1954 = { owned_by = HUN } }
+				1954 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7741 = { owned_by = HUN } }
+				7741 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7740 = { owned_by = HUN } }
+				7740 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 4173 = { owned_by = HUN } }
+				4173 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8201 = { owned_by = HUN } }
+				8201 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8188 = { owned_by = HUN } }
+				8188 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8189 = { owned_by = HUN } }
+				8189 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 3193 = { owned_by = HUN } }
+				3193 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 140 = { owned_by = HUN } }
+				140 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 3002 = { owned_by = HUN } }
+				3002 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 3194 = { owned_by = HUN } }
+				3194 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7724 = { owned_by = HUN } }
+				7724 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 4755 = { owned_by = HUN } }
+				4755 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7722 = { owned_by = HUN } }
+				7722 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 155 = { owned_by = HUN } }
+				155 = { cede_province = TUR }
+			}
+		}
+		HUN = {
+			country_event = {	#Collapse of the state
+				id = VU_TUR_Conquest_Events.3
+				days = 1
+			}
+		}
+		if = {
+			limit = { 4125 = { owned_by = HUN } }
+			country_event = {	#Eger Castle
+				id = VU_TUR_Conquest_Events.4
+				days = 2
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					TRA = { exists = no }
+					TRA = { is_subject_of = TUR }
+				}
+			}
+			country_event = { 	#Transylvanian vassal
+				id = VU_TUR_Conquest_Events.5
+				days = 1
+			}
+		}
+		custom_tooltip = tur_conquest_of_hun_2
+		add_treasury = 2000
+		add_manpower = 5
+		add_prestige = 20
+		add_army_tradition = 15
+		add_inflation = 1
+		add_corruption = 0.75
+	}
+
+	option = { 
+		name = VU_TUR_Conquest_Events.2.b
+		
+		ai_chance = { factor = 10 } 
+		add_country_modifier = { 
+			name = tur_push_for_europe_modifier
+			duration = 2190 
+		}
+	}
+}
+
+country_event = { #Aftermatch of the conquest - Collapse of Hungary
+	id = VU_TUR_Conquest_Events.3
+	title = VU_TUR_Conquest_Events.3.t
+	desc = VU_TUR_Conquest_Events.3.d
+	picture = COMET_SIGHTED_eventPicture
+	fire_only_once = yes
+	major = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = HUN
+	}
+	
+	option = {	#Save what can be saved and let it shatter
+		name = VU_TUR_Conquest_Events.3.a
+		highlight = yes
+		ai_chance = { factor = 30 } 
+		custom_tooltip = tur_collapse_hun_1
+		if = {
+			limit = { 135 = { owned_by = ROOT } }
+			set_capital = 135
+		}
+		release = SLO
+		release = CRO
+		release = UHU
+		add_prestige = -30
+		add_legitimacy = -20
+		add_corruption = 2
+		add_war_exhaustion = -20
+		add_stability = -1
+		add_army_professionalism = -0.05
+		if = {
+			limit = { 8218 = { owned_by = HUN } }
+			8218 = {
+				cede_province = UHU
+				add_core = UHU
+			}
+		}
+	}
+
+	option = { 	#Transfer throne to Habsburgs and limited shatter
+		name = VU_TUR_Conquest_Events.3.b
+		highlight = yes
+		ai_chance = { factor = 60 }
+		custom_tooltip = tur_collapse_hun_2 
+		if = {
+			limit = { 135 = { owned_by = ROOT } }
+			set_capital = 135
+		}
+		create_vassal = UHU
+		create_vassal = LHU
+		if = {
+			limit = { 8218 = { owned_by = HUN } }
+			8218 = {
+				cede_province = UHU
+				add_core = UHU
+			}
+		}
+		add_prestige = -25
+		add_legitimacy = -20
+		add_corruption = 1
+		add_war_exhaustion = -10
+		add_stability = -1
+		add_army_professionalism = -0.05
+		if = {
+			limit = { exists = HAB }
+			HAB = { create_union = HUN }
+		}
+		else_if = {
+			limit = { exists = POL }
+			POL = { create_union = HUN }
+		}
+		else_if = {
+			limit = { exists = PLC }
+			PLC = { create_union = HUN }
+		}
+		else_if = {
+			limit = { exists = BOH }
+			BOH = { create_union = HUN }
+		}
+		else = { 
+			add_stability = -1
+			define_ruler = {
+				name = "Ferdinand"
+				dynasty = "von Habsburg"
+				culture = austrian
+				adm = 2
+				dip = 2
+				mil = 1
+				claim = 50
+			}
+			random_neighbor_country = {
+				add_casus_belli = {
+					target = ROOT
+					type = cb_vassalize_mission
+					months = 120
+				}
+			}
+		}
+	}
+	
+	option = {	#Shatter and seek help in HRE
+		name = VU_TUR_Conquest_Events.3.c
+		highlight = yes
+		ai_chance = { factor = 10 } 
+		custom_tooltip = tur_collapse_hun_3
+		if = {
+			limit = { 135 = { owned_by = ROOT } }
+			set_capital = 135
+			135 = {
+				add_base_tax = 2 
+				add_base_manpower = 2
+			}
+		}
+		release = SLA
+		release = CRO
+		release = UHU
+		add_prestige = -30
+		add_legitimacy = -30
+		add_corruption = 3
+		add_war_exhaustion = -20
+		add_stability = -1
+		if = {
+			limit = { 8218 = { owned_by = HUN } }
+			8218 = {
+				cede_province = UHU
+				add_core = UHU
+			}
+		}
+		if = {
+			limit = { 1772 = { owned_by = HUN } }
+			1772 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 8175 = { owned_by = HUN } }
+			8175 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 8173 = { owned_by = HUN } }
+			8173 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 8174 = { owned_by = HUN } }
+			8174 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 8177 = { owned_by = HUN } }
+			8177 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 154 = { owned_by = HUN } }
+			154 = { cede_province = LHU }
+		}
+		if = {
+			limit = { 8183 = { owned_by = HUN } }
+			8183 = { cede_province = LHU }
+		}
+		LHU = { adopt_reform_progress = ROOT }
+		release = SLO
+		if = {
+			limit = { 8195 = { owned_by = UHU } }
+			8195 = { cede_province = SLO }
+		}
+		if = {
+			limit = { 1318 = { owned_by = UHU } }
+			1318 = { cede_province = SLO }
+		}
+		HUN = { set_in_empire = yes }
+		if = {
+			limit = { exists = HAB }
+			HAB = { create_march = HUN }
+		}
+		CRO = { set_in_empire = yes }
+		SLA = { set_in_empire = yes }
+		SLO = { set_in_empire = yes }
+		LHU = { set_in_empire = yes }
+		UHU = { set_in_empire = yes }
+	}
+}
+
+country_event = { #Fort of Eger
+	id = VU_TUR_Conquest_Events.4
+	title = VU_TUR_Conquest_Events.4.t
+	desc = VU_TUR_Conquest_Events.4.d
+	picture = SIEGE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	goto = 4125
+	
+	trigger = {
+		tag = TUR
+	}
+	
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					4125 = { NOT = { fort_level = 1 } }
+				}
+				4125 = { add_building = fort_15th }
+			}
+		}
+	}
+	
+	option = { #Throw men at it until it falls
+		name = VU_TUR_Conquest_Events.4.a
+		ai_chance = { factor = 20 }
+		goto = 4125
+		add_yearly_manpower = -1
+		add_mil_power = -60
+		add_war_exhaustion = 4
+		4125 = {
+			cede_province = TUR
+			add_devastation = 25
+		}
+	}
+
+	option = { #We don't need a single castle
+		name = VU_TUR_Conquest_Events.4.b
+		ai_chance = { factor = 80 } 
+		4125 = {
+			add_base_tax = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+country_event = { #Transylvanian March
+	id = VU_TUR_Conquest_Events.5
+	title = VU_TUR_Conquest_Events.5.t
+	desc = VU_TUR_Conquest_Events.5.d
+	picture = SIEGE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	goto = 1951
+	
+	trigger = {
+		tag = TUR
+	}
+	
+	option = { #Establish the march and give out land
+		name = VU_TUR_Conquest_Events.5.a
+		ai_chance = { factor = 90 }
+		add_war_exhaustion = -2
+		if = {
+			limit = {	#If TRA does not exist, TUR will annex some land from HUN and release TRA first
+				TRA = { exists = no }
+			}
+			if = {
+				limit = { 7746 = { owned_by = HUN } }
+				7746 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 7744 = { owned_by = HUN } }
+				7744 = { cede_province = TUR }
+			}
+			if = {
+				limit = { 8203 = { owned_by = HUN } }
+				8203 = { cede_province = TUR }
+			}
+			create_vassal = TRA	#Creates vassal out of owned territory
+			create_march = TRA	#Turns vassal into march
+		}
+		else_if = {
+			limit = {	#If TRA exists but as a vassal of TUR
+				TRA = {
+					exists = yes
+					is_subject_of = TUR
+					is_subject_of_type = vassal
+				}
+			}
+			create_march = TRA	#Turns vassal into march
+		}
+		if = {			#Now giving historical land to TRA
+			limit = { 7746 = { owned_by = HUN } }
+			7746 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 7744 = { owned_by = HUN } }
+			7744 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8203 = { owned_by = HUN } }
+			8203 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 1951 = { owned_by = HUN } }
+			1951 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8207 = { owned_by = HUN } }
+			8207 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 157 = { owned_by = HUN } }
+			157 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8206 = { owned_by = HUN } }
+			8206 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 3154 = { owned_by = HUN } }
+			3154 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8208 = { owned_by = HUN } }
+			8208 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8213 = { owned_by = HUN } }
+			8213 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8210 = { owned_by = HUN } }
+			8210 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8214 = { owned_by = HUN } }
+			8214 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 4128 = { owned_by = HUN } }
+			4128 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8211 = { owned_by = HUN } }
+			8211 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 158 = { owned_by = HUN } }
+			158 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8209 = { owned_by = HUN } }
+			8209 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8212 = { owned_by = HUN } }
+			8212 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8215 = { owned_by = HUN } }
+			8215 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 3101 = { owned_by = HUN } }
+			3101 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8205 = { owned_by = HUN } }
+			8205 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 4127 = { owned_by = HUN } }
+			4127 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 3097 = { owned_by = HUN } }
+			3097 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 3098 = { owned_by = HUN } }
+			3098 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 8204 = { owned_by = HUN } }
+			8204 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 3188 = { owned_by = HUN } }
+			3188 = { cede_province = TRA }
+		}
+		if = {
+			limit = { 1952 = { owned_by = HUN } }
+			1952 = { cede_province = TRA }
+		}
+		1951 = {
+			add_base_tax = 1
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+		TRA = {
+			set_capital = 1951
+			add_adm_power = 50
+			add_dip_power = 50
+			add_mil_power = 50
+			add_treasury = 250
+		}
+		if = {
+			limit = { 156 = { owned_by = TRA } }
+			156 = { cede_province = TUR }
+		}
+	}
+
+	option = { #Occupy the provinces yourself
+		name = VU_TUR_Conquest_Events.5.b
+		ai_chance = { factor = 10 } 
+		custom_tooltip = tur_collapse_tra
+		add_adm_power = -100
+		add_dip_power = -100
+		add_war_exhaustion = 2
+		HUN = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = banat_area
+						area = transylvania_area
+						area = southern_transylvania_area
+					}
+				}
+				cede_province = TUR
+			}
+		}
+	}
+	
+	option = { #We actually don't care about those lands
+		name = VU_TUR_Conquest_Events.5.c
+		ai_chance = { factor = 0 } 
+		add_war_exhaustion = -2
+	}
+}

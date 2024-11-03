@@ -1,0 +1,541 @@
+namespace = vu_remove_ai_allies
+namespace = vu_constantinople_to_istanbul
+#Put Subject Types in 00_on_actions
+#When game is loaded up.
+
+country_event = {
+	#Don's shenanagins... removes AIs allies after they reach their cap
+	#no more 20+ allies of Saxony/Palatinate, to be used in cojunction
+	#with historical rivals, as this only fixes the number of allies,
+	#rather than who they ally... (though I tried to make them remove bad
+	#allies, but It's still the AI)
+	id = vu_remove_ai_allies.1
+	title = "vu_remove_ai_allies_title"
+	picture = "RELIGIOUS_WARS_eventPicture"
+	desc = "vu_remove_ai_allies_desc"
+	#hidden = yes
+	mean_time_to_happen = {
+		days = 1
+	}
+	trigger = {
+		ai = yes
+		NOT = {
+			num_of_free_diplomatic_relations = 1
+		}
+		NOT = {
+			is_year = 1650
+		}
+		is_great_power = no
+		OR = {
+			if = {
+				limit = {
+					is_elector = no
+					government_rank = 6
+					NOT = {
+						total_development = 100
+					}
+					NOT = {
+						OR = {
+							technology_group = italian_tech_group
+							technology_group = english_tech_group
+							technology_group = indian
+							technology_group = chinese
+							technology_group = japanese
+							full_idea_group = diplomatic_ideas
+						}
+					}
+				}
+				num_of_allies = 3
+			}
+			else_if = {
+				limit = {
+					government_rank = 6
+					OR = {
+						total_development = 100
+						is_elector = yes
+						technology_group = italian_tech_group
+						technology_group = english_tech_group
+						technology_group = indian
+						technology_group = chinese
+						technology_group = japanese
+					}
+					NOT = {
+						full_idea_group = diplomatic_ideas
+					}
+				}
+				num_of_allies = 4
+			}
+			else_if = {
+				limit = {
+					OR = {
+						government_rank = 8
+						AND = {
+							government_rank = 6
+							full_idea_group = diplomatic_ideas
+							OR = {
+								is_elector = yes
+								technology_group = italian_tech_group
+								technology_group = english_tech_group
+								technology_group = indian
+								technology_group = chinese
+								technology_group = japanese
+							}
+						}
+					}
+				}
+				num_of_allies = 5
+			}
+			else_if = {
+				limit = {
+					government_rank = 9
+				}
+				num_of_allies = 6
+			}
+		}
+	}
+	immediate = {
+	}
+	#All of the AI alliance breaking is done between AIs, and it will ignore the player.
+	option = {
+		name = vu_remove_ai_allies.1a
+		#break alliance with random ally
+		random_ally = {
+			limit = {
+				ai = yes
+			}
+			break_alliance = root
+			break_marriage = root
+			#added cause AI would get over diplo relations as they
+			#refuse to break royal marriages with anybody	
+		}
+		ai_chance = {
+			#1 is the default if there are no other better options as a fallback...
+			factor = 1
+		}
+	}
+	option = {
+		name = vu_remove_ai_allies.1b
+		#remove allies outside of the HRE
+		trigger = {
+			OR = {
+				#if ROOT is in HRE, it checks if any allies are outsife of it
+				AND = {
+					ai = yes
+					is_part_of_hre = yes
+					any_ally = {
+						is_part_of_hre = no
+					}
+				}
+				#if ROOT is outside of HRE, it checks if any allies are in it
+				AND = {
+					ai = yes
+					is_part_of_hre = no
+					any_ally = {
+						is_part_of_hre = yes
+					}
+				}
+			}
+		}
+		if = {
+			#if ROOT is a part of HRE it will break alliance with random ally outside of it
+			limit = {
+				is_part_of_hre = yes
+			}
+			random_ally = {
+				limit = {
+					ai = yes
+					is_part_of_hre = no
+				}
+				break_alliance = root
+				break_marriage = root
+			}
+		}
+		else_if = {
+			#if ROOT is not a part of HRE it will break alliance with random ally in it
+			limit = {
+				is_part_of_hre = no
+			}
+			random_ally = {
+				limit = {
+					ai = yes
+					is_part_of_hre = yes
+				}
+				break_alliance = root
+				break_marriage = root
+			}
+		}
+		ai_chance = {
+			#all factors are defaulted to 1, modifiers are multiplicative, 
+			#since it's multiplication making any modifier or the factor 0, 
+			#makes the AI unable to willingly choose this option.
+			#(ex. factor = 1, modifier 1 = 1.5, modifier 2 = 2, then AI factor = 1*1.5*2 = 3) 
+			#PDX made it so that the AI is somewhat random, picking from the highest factor options.
+			#If I'm not mistaken, the all factors from the options get summed up, and their
+			#percentage value in the total is the chance the AI will pick this option. 
+			#(ex. option 1 = 5, option 2 = 2.5, option 3 = 2.5, then chance of 1 is 50%, of 2 is 25%)
+			#Therefore in theory, making all the options have very high modifiers like making all
+			#modifiers factors of 10 instead of 2 or so, it should make it less random.
+			#(ex. option 1 = 50, option 2 = 1, therefore the chance of 1 is 50x as likely as 2)
+			#therefore when you make an option have 0 factor, you effectively remove it from this 
+			#pool. It may still be auto-picked if the event times out, if it's the first 
+			#(citation needed) option (or the default one if I'm wrong with my first assumption).
+			factor = 3
+			modifier = {
+				#small HRE princes consideration
+				factor = 2
+				OR = {
+					AND = {
+						NOT = {
+							total_development = 100
+						}
+						any_ally = {
+							is_part_of_hre = no
+						}
+					}
+					AND = {
+						ai = yes
+						is_part_of_hre = no
+						any_ally = {
+							AND = {
+								is_part_of_hre = yes
+								NOT = {
+									total_development = 100
+								}
+							}
+						}
+					}
+				}
+			}
+			modifier = {
+				#Electors tend to ally outside of the HRE quite often. They are weighted to ally eachother more 
+				#so that they can try to go for the emperorship, giving the player in HRE a bit more of a challenge
+				#secondly, Electors didn't really ally themselves with any foreign powers (exeptions being SAX, BRA)
+				factor = 2
+				ai = yes
+				is_elector = yes
+				any_ally = {
+					is_part_of_hre = no
+				}
+			}
+		}
+	}
+	option = {
+		name = vu_remove_ai_allies.1c
+		#break alliances with nations at war (to prevent AIs from warmongering)
+		trigger = {
+			any_ally = {
+				ai = yes
+				is_at_war = yes
+			}
+			is_at_war = no
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				is_at_war = yes
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			#simple this one is.
+			factor = 2.5
+		}
+	}
+	option = {
+		name = vu_remove_ai_allies.1d
+		#Remove alliance with a heretic/heathen nation
+		trigger = {
+			#check if the AI has any allies with differing religious views
+			any_ally = {
+				ai = yes
+				NOT = {
+					religion = root
+				}
+			}
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				NOT = {
+					religion = root
+				}
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			factor = 3
+			modifier = {
+				#Made especially likely around the 30 years war, as this era was dominated by religious tensions
+				factor = 5
+				any_ally = {
+					NOT = {
+						religion = root
+					}
+				}
+				OR = {
+					current_age = age_of_reformation
+					hre_leagues_enabled = yes
+				}
+			}
+		}
+	}
+	option = {
+		#Remove too strong allies
+		name = vu_remove_ai_allies.1e
+		trigger = {
+			#If the nation has 3x the army strenght this option pops up
+			any_ally = {
+				ai = yes
+				army_strength = {
+					who = root
+					value = 3
+				}
+			}
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				army_strength = {
+					who = root
+					value = 2
+				}
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			#this was added due to two phenomena, first being the tendancy of the small AI's to ally bigger tags for 
+			#protection. While it's a great idea, in practice this causes the AI to ally the biggest regional tag 
+			#creating an alliance block, and a complete stagnation of diplomatic situation.
+			#second being the real life issue of foreign influece on their nations, as historically, small dukes allied
+			#for protection, but often had to swear fealty to their 'protectors' 
+			factor = 2
+			modifier = {
+				factor = 2
+				any_ally = {
+					#4x times check, just to make alliances of OPMs with Great powers less likely.
+					ai = yes
+					army_strength = {
+						who = root
+						value = 4
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#Coalition target ally
+		name = vu_remove_ai_allies.1f
+		trigger = {
+			any_ally = {
+				ai = yes
+				coalition_target = from
+			}
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				coalition_target = from
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			#The AI should consider ceasing their alliance if their ally is in a coalition, to avoid getting dragged in
+			factor = 3
+			#If the ally is already in a coalition war, and it hasn't called ROOT in yet, ROOT will break alliance
+			modifier = {
+				factor = 3
+				any_ally = {
+					ai = yes
+					is_in_coalition_war = yes
+				}
+			}
+		}
+	}
+	option = {
+		#Colonial shenanagins...
+		trigger = {
+			#If ROOT has colonial claim on their ally the'll yeet them
+			any_ally = {
+				ai = yes
+				ROOT = {
+					colony_claim = prev
+				}
+			}
+		}
+		name = vu_remove_ai_allies.1g
+		random_ally = {
+			limit = {
+				ai = yes
+				ROOT = {
+					colony_claim = prev
+				}
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			factor = 5
+			#This was added to make the colonial game more interesting, as this will stimulate the colonial wars
+			#between Europeans. Also, no more SPA/POR alliance of south america, yay
+			modifier = {
+				#Extremely likely if their ally has a sizable colonial empire
+				factor = 25
+				any_ally = {
+					num_of_colonies = 3
+				}
+			}
+		}
+	}
+	option = {
+		#Mirror copy of Remove too strong allies
+		name = vu_remove_ai_allies.1h
+		trigger = {
+			#If the nation has 3x the army strenght this option pops up
+			any_ally = {
+				ai = yes
+				ROOT = {
+					army_strength = {
+						who = PREV
+						value = 3
+					}
+				}
+			}
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				ROOT = {
+					army_strength = {
+						who = PREV
+						value = 3
+					}
+				}
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			#this was added due to two phenomena, first being the tendancy of the small AI's to ally bigger tags for 
+			#protection. While it's a great idea, in practice this causes the AI to ally the biggest regional tag 
+			#creating an alliance block, and a complete stagnation of diplomatic situation.
+			#second being the real life issue of foreign influece on their nations, as historically, small dukes allied
+			#for protection, but often had to swear fealty to their 'protectors' 
+			factor = 2
+			modifier = {
+				factor = 2
+				any_ally = {
+					#4x times check, just to make alliances of OPMs with Great powers less likely.
+					ai = yes
+					ROOT = {
+						army_strength = {
+							who = PREV
+							value = 4
+						}
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#Remove bankrupt/incompetent allies
+		name = vu_remove_ai_allies.1i
+		trigger = {
+			#If the nation has bancrupcy, or has high war exhastion
+			any_ally = {
+				ai = yes
+				OR = {
+					is_bankrupt = yes
+					war_exhaustion = 10
+				}
+			}
+		}
+		random_ally = {
+			limit = {
+				ai = yes
+				OR = {
+					is_bankrupt = yes
+					war_exhaustion = 10
+				}
+			}
+			break_alliance = root
+			break_marriage = root
+		}
+		ai_chance = {
+			factor = 2
+			modifier = {
+				#If the AI is also loosing money, they'll be less than useful...
+				factor = 2
+				any_ally = {
+					ai = yes
+					is_in_deficit = yes
+				}
+			}
+		}
+	}
+}
+
+#When game is loaded up.
+#country_event = {
+#	id = vu_remove_ai_allies.2
+#	title = "vu_remove_ai_allies_title"
+#	picture = "RELIGIOUS_WARS_eventPicture"
+#	desc = "vu_remove_ai_allies_desc"
+#	hidden = yes
+#	mean_time_to_happen = {
+#		days = 1
+#	}
+#	trigger = {
+#		is_subject_of_type = islamic_governate
+#		NOT = {
+#			dynasty = overlord
+#		}
+#	}
+#	immediate = {
+#		kill_heir = {}
+#		kill_ruler = yes
+#		define_ruler = {
+#			dynasty = overlord
+#			culture = ROOT
+#			religion = ROOT
+#		}
+#	}
+#	option = {
+#		name = vu_remove_ai_allies.2a
+#	}
+#}
+
+country_event = {
+	id = vu_constantinople_to_istanbul.1
+	title = "vu_constantinople_to_istanbul_title"
+	picture = "vu_constantinople_to_istanbul_eventPicture"
+	desc = "vu_constantinople_to_istanbul_desc"
+	hidden = yes
+	fire_only_once = yes
+	trigger = {
+		151 = {
+			AND = {
+				NOT = {
+					owned_by = BYZ
+				}
+				owner = {
+					religion_group = muslim
+				}
+			}
+		}
+	}
+	immediate = {
+		151 = {
+			destroy_great_project = {
+				type = vu_university_of_constantinople
+			}
+		}
+	}
+	option = {
+		name = vu_constantinople_to_istanbul.1a
+		add_treasury = 1
+	}
+}

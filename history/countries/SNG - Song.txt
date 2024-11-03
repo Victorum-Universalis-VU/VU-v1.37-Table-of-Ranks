@@ -1,0 +1,209 @@
+#VU 1.35 addition by San Felipe
+government = monarchy
+add_government_reform = celestial_empire
+government_rank = 9 #Empire
+technology_group = chinese
+religion = confucianism
+add_harmonized_religion = mahayana
+add_harmonized_religion = taoism
+primary_culture = zhongyuan
+capital = 688	# Kaifeng
+
+add_country_modifier = {
+    name = "mercenary_upkeep_XV"
+    duration = -1
+}
+
+if = {
+	limit = {
+		OR = {
+			has_dlc = "Dharma"
+			has_dlc = "Emperor"
+		}
+	}
+	change_estate_land_share = {
+		estate = estate_burghers
+		share = 10
+	}
+	change_estate_land_share = {
+		estate = estate_church
+		share = 10
+	}
+	change_estate_land_share = {
+		estate = estate_nobles
+		share = -20
+	}
+}
+
+add_prestige = 45
+
+if = { 
+	limit = { has_dlc = "Domination" }
+	every_owned_province = { 
+		limit = { region = south_china_region } 
+		add_local_autonomy = 25 
+	}
+
+	every_owned_province = { 
+		limit = { region = north_china_region } 
+		add_local_autonomy = 10
+	}
+
+	every_owned_province = { 
+		limit = { region = xinan_region } 
+		add_local_autonomy = 50
+	}
+}
+
+if = { 
+	limit = { has_dlc = "Domination" }
+	set_estate_privilege = estate_eunuchs_delegate_subject_diplomacy_privilege
+}
+
+1205.07.24 = {
+	monarch = {
+		name = "Ningzong"
+		#monarch_name = "Jingkang" #Jingkang Emperor
+		dynasty = "Zhao Kuo"
+		birth_date = 1168.1.26
+		death_date = 1224.11.16
+		adm = 4
+		dip = 2
+		mil = 2
+	}
+	heir = {
+		name = "Lizong"
+		monarch_name = "Baoqing" #Baoqing Emperor
+		dynasty = "Zhao Yun"
+		birth_date = 1205.1.26
+		death_date = 1264.11.16
+		claim = 95
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1240.9.17 = {
+	monarch = {
+		name = "Lizong" #Baoqing Emperor
+		dynasty = "Zhao Yun"
+		birth_date = 1205.1.26
+		death_date = 1264.11.16
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+	queen = { #Empress Dowager Xie
+		country_of_origin = SNG		
+		name = "Xie"
+		dynasty = "Daoqing"         #Exact house is unknown due to her coming from low birth
+		birth_date = 1210.1.1		#Exact date of her birth is unknown.
+		death_date = 1283.1.1
+		female = yes
+		adm = 1			#Nothing in particular.
+		dip = 1			#Nothing in particular.
+		mil = 1			#Nothing in particular.
+	}
+	heir = {
+		name = "Duzong"
+		monarch_name = "Tiansheng" #Tiansheng Emperor
+		dynasty = "Zhao Zi"
+		birth_date = 1240.5.2
+		death_date = 1274.8.12
+		claim = 95
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1264.11.16 = {
+	monarch = {
+		name = "Duzong" #Tiansheng Emperor
+		dynasty = "Zhao Zi"
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1271.11.17 = {
+	monarch = {
+		name = "Xie Daoqing"
+		#monarch_name = "Two Empress Regency" #Grand Empress Dowager Xie Daoqing & Empress Dowager Quan
+		birth_date = 1210.1.1		#Exact date of her birth is unknown.
+		death_date = 1283.1.1
+		regent = yes
+		female = yes
+		adm = 2
+		dip = 2
+		mil = 1
+	}
+	heir = {
+		name = "Gong"
+		monarch_name = "Dade" #Dade Emperor
+		dynasty = "Zhao Xian"
+		birth_date = 1271.11.2
+		death_date = 1323.8.12
+		claim = 95
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1274.8.12 = {
+	monarch = {
+		name = "Gong" #Dade Emperor
+		dynasty = "Zhao Xian"
+		birth_date = 1271.11.2
+		death_date = 1323.8.12
+		adm = 1
+		dip = 1
+		mil = 1
+		leader = { name = "Jia Sidao"	type = general	fire = 3	shock = 3	manuever = 3	siege = 0 }
+	}
+	heir = {
+		name = "Duanzong"
+		monarch_name = "Jingyan" #Jingyan Emperor
+		dynasty = "Zhao Shi"
+		birth_date = 1269.7.10
+		death_date = 1278.5.8
+		claim = 95
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1276.6.15 = { 
+	monarch = {
+		name = "Duanzong" #Jingyan Emperor
+		dynasty = "Zhao Shi"
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+	heir = { #Seventh brother of Emperor Duanzong
+		name = "Bing"
+		monarch_name = "Duanping" #Duanping Emperor 
+		dynasty = "Zhao Bing"
+		birth_date = 1272.2.12
+		death_date = 1279.3.19
+		claim = 95
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}
+
+1278.5.10 = {
+	monarch = {
+		name = "Bing" #Duanping Emperor
+		dynasty = "Zhao Bing"
+		adm = 1
+		dip = 1
+		mil = 1
+	}
+}

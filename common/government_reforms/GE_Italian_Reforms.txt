@@ -1,0 +1,2152 @@
+#VU - Updated by San Felipe for v1.36.2.*
+#Tier 1
+duchi_montefeltro_reform = {
+	icon = urbino_duchi_montefeltro
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			have_had_reform = duchi_montefeltro_reform
+			tag = URB
+			was_tag = URB
+		}
+	}
+	trigger = {
+		OR = {
+			have_had_reform = duchi_montefeltro_reform
+			tag = URB
+			was_tag = URB
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 20
+	modifiers = {
+		idea_cost = -0.05
+		mercenary_cost = -0.15
+		possible_condottieri = 0.25
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			hessian_militarization_mechanic
+		}
+	}
+	# conditional = {
+	# 	allow = {
+	# 		NOT = { has_dlc = "Domination" }
+	# 	}
+	# 	government_abilities = {
+	# 		italian_condottieri_mechanic
+	# 	}
+	# }
+}
+florentine_republic = {
+	icon = florentine_republic
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			have_had_reform = florentine_republic
+			tag = LAN
+			tag = TUS
+		}
+	}
+	fixed_rank = 6
+	valid_for_nation_designer = yes
+	nation_designer_cost = 20
+	modifiers = {
+		trade_efficiency = 0.1
+		max_absolutism = -30
+		trade_deals_slots = 1
+	}
+	boost_income = yes
+	duration = 6
+	factions = {
+		mr_aristocrats
+		mr_traders
+		mr_guilds
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		#can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		#can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		has_candidate_bonus = yes
+		enables_aristocratic_idea_group = no
+		#is_merchant_republic = yes
+	}
+}
+genoese_republic = {
+	icon = genoa
+	allow_normal_conversion = yes
+	modifiers = {
+		max_absolutism = -50
+		global_trade_goods_size_modifier = 0.10
+		merchants = 1
+		trade_deals_slots = 3
+	}
+	fixed_rank = 6
+	valid_for_nation_designer = yes
+	nation_designer_cost = 50
+	legacy_equivalent = merchant_republic
+	potential = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+		}
+	}
+	boost_income = yes
+	duration = 4
+	factions = {
+		mr_aristocrats
+		mr_traders
+		mr_guilds
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		has_candidate_bonus = yes
+		enables_aristocratic_idea_group = no
+		is_merchant_republic = yes
+	}
+	government_abilities = {
+		albergo_nobili_mechanic
+	}
+	removed_effect = {
+		remove_country_modifier = albergo_nobili_uso_di_mare_modifier
+		remove_country_modifier = albergo_nobili_doria_modifier
+		remove_country_modifier = albergo_nobili_fieschi_modifier
+	}
+}
+giudicati_sardi_reform = {
+	icon = sardinia_giudicati_sardi
+	allow_normal_conversion = yes
+	potential = {
+		government_rank = 8
+		OR = {
+			have_had_reform = giudicati_sardi_reform
+			tag = SAR
+			was_tag = SAR
+		}
+	}
+	trigger = {
+		government_rank = 8
+		OR = {
+			have_had_reform = giudicati_sardi_reform
+			tag = SAR
+			was_tag = SAR
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 20
+	modifiers = {
+		defensiveness = 0.15
+		state_maintenance_modifier = -0.15
+	}
+}
+house_of_este_reform = {
+	icon = ferrara_house_of_este
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			have_had_reform = house_of_este_reform
+			tag = FER
+			was_tag = FER
+		}
+	}
+	trigger = {
+		OR = {
+			have_had_reform = house_of_este_reform
+			tag = FER
+			was_tag = FER
+		}
+	}
+	fixed_rank = 6
+	valid_for_nation_designer = yes
+	nation_designer_cost = 20
+	modifiers = {
+		development_cost_in_primary_culture = -0.05
+		same_culture_advisor_cost = -0.10
+	}
+	government_abilities = {
+		italian_dinasties_mechanic
+	}
+}
+house_of_gonzaga_reform = {
+	icon = mantua_house_of_gonzaga
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			tag = MAN
+			was_tag = MAN
+			has_reform = house_of_gonzaga_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = MAN
+			was_tag = MAN
+			has_reform = house_of_gonzaga_reform
+		}
+	}
+	fixed_rank = 6
+	modifiers = {
+		cavalry_cost = -0.10
+		same_culture_advisor_cost = -0.10
+	}
+	ai = {
+		factor = 100
+	}
+	government_abilities = {
+		italian_dinasties_mechanic
+	}
+	custom_attributes = {
+		enables_marriage_policies = yes
+	}
+}
+italian_monarchy_reform = {
+	icon = italian_monarchy_reform
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		tag = ITA
+		government_rank = 8
+	}
+	modifiers = {
+		legitimacy = 1
+		governing_capacity = 150
+	}
+	custom_attributes = {
+		has_italian_lordship = yes
+		has_italian_barony = yes
+		has_italian_viscounty = yes
+		has_italian_county = yes
+		has_italian_marquisate = yes
+		has_italian_duchy = yes
+		has_italian_principality = yes
+		has_italian_kingdom = yes
+	}
+	government_abilities = {
+		republican_vs_monarchist_mechanic
+	}
+}
+italian_republic_reform = {
+	icon = italian_republic_reform
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		tag = ITA
+	}
+	modifiers = {
+		republican_tradition = 0.3
+		governing_capacity = 150
+	}
+	duration = 5
+	government_abilities = {
+		republican_vs_monarchist_mechanic
+	}
+	conditional = {
+		allow = { has_dlc = "Common Sense" }
+		has_parliament = yes
+	}
+	custom_attributes = {
+		has_candidate_bonus = yes
+	}
+}
+kingdom_of_sardinia_reform = {
+	icon = kingdom_of_sardinia
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	fixed_rank = 8
+	potential = {
+		OR = {
+			primary_culture = sardinian
+			primary_culture = piedmontese
+			has_reform = kingdom_of_sardinia_reform
+		}
+	}
+	trigger = {
+		tag = SPI
+		OR = {
+			primary_culture = sardinian
+			primary_culture = piedmontese
+			has_reform = kingdom_of_sardinia_reform
+		}
+	}
+	modifiers = {
+		max_absolutism = 5
+		state_maintenance_modifier = -0.10
+		development_cost_in_primary_culture = -0.10
+	}
+	custom_attributes = {
+		has_italian_kingdom = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+kingdom_of_sicily_reform = {
+	icon = sicily_kingdom_of_sicily
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		government_rank = 8
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = kingdom_of_sicily_reform
+		}
+	}
+	trigger = {
+		government_rank = 8
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = kingdom_of_sicily_reform
+		}
+	}
+	modifiers = {
+		max_absolutism = 5
+		global_autonomy = -0.025
+		development_cost_in_primary_culture = -0.10
+	}
+	government_abilities = {
+		sicilian_kingdom_mechanic
+	}
+	ai = {
+		factor = 100
+	}
+}
+palaiologos_montferrat_reform = {
+	icon = montferrat_palaiologos_montferrat
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			tag = MFA
+			was_tag = MFA
+			has_reform = palaiologos_montferrat_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = MFA
+			was_tag = MFA
+			has_reform = palaiologos_montferrat_reform
+		}
+	}
+	fixed_rank = 6
+	modifiers = {
+		advisor_cost = -0.10
+		core_creation = -0.05
+	}
+	ai = {
+		factor = 100
+	}
+}
+republic_of_saint_blaise = {
+	icon = ragusa_republic_of_saint_blaise
+	allow_normal_conversion = yes
+	modifiers = {
+		monthly_maritime_republic = 0.15
+		province_trade_power_modifier = 0.15
+		tolerance_of_heretics_capacity = 0.5
+		tolerance_heretic = 0.5
+		relation_with_same_religion = 15
+		relation_with_heretics = 15
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 50
+	legacy_equivalent = merchant_republic
+	potential = {
+		OR = {
+			tag = RAG
+			was_tag = RAG
+		}
+	}
+	boost_income = yes
+	duration = 2
+	factions = {
+		mr_aristocrats
+		mr_traders
+		mr_guilds
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		has_candidate_bonus = yes
+		enables_aristocratic_idea_group = no
+		is_merchant_republic = yes
+		can_create_stato_da_mar_vassal_rule = yes
+	}
+	government_abilities = {
+		maritime_republic_mechanic
+	}
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					NOT = { 101 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 112 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 115 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 2983 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+				}
+			}
+			country_event = {
+				id = GE_Maritime_Republics_Events.1
+			}
+		}
+	}
+}
+savoia_reform = {
+	icon = savoy_savoia
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			tag = SAV
+			was_tag = SAV
+			has_reform = savoia_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = SAV
+			was_tag = SAV
+			has_reform = savoia_reform
+		}
+	}
+	modifiers = {
+		ae_impact = -0.05
+		development_cost_in_primary_culture = -0.10
+	}
+	fixed_rank = 6
+	custom_attributes = {
+		has_italian_duchy = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+signoria_baglioni_reform = {
+	icon = perugia_signoria_baglioni
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	nation_designer_trigger = {
+		culture_group = latin
+	}
+	potential = {
+		OR = {
+			have_had_reform = signoria_baglioni_reform
+			tag = PGA
+			was_tag = PGA
+		}
+	}
+	trigger = {
+		OR = {
+			have_had_reform = signoria_baglioni_reform
+			tag = PGA
+			was_tag = PGA
+		}
+	}
+	fixed_rank = 6
+	queen = no
+	duration = 12
+	royal_marriage = yes
+	modifiers = {
+		reform_progress_growth = 0.15
+		mercenary_cost = -0.15
+		possible_condottieri = 0.25
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		enables_nepotism = yes
+		has_candidate_bonus = yes
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			hessian_militarization_mechanic
+		}
+	}
+	# conditional = {
+	# 	allow = {
+	# 		NOT = { has_dlc = "Domination" }
+	# 	}
+	# 	government_abilities = {
+	# 		italian_condottieri_mechanic
+	# 	}
+	# }
+}
+
+#Tier 2
+growth_signoria_reform = {
+	icon = "king"
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Noble_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Noble_Influence
+			value = -1
+		}
+	}
+	potential = {
+		culture_group = latin
+		is_year = 1490
+	}
+	trigger = {
+		culture_group = latin
+	}
+	modifiers = {
+		stability_cost_modifier = -0.15
+		army_tradition = 0.25
+		nobles_influence_modifier = 0.05
+	}
+	ai = {
+		factor = 10
+	}
+}
+legacy_of_st_ambrose_reform = {
+	icon = hansa_trade
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			primary_culture = lombard
+			has_reform = legacy_of_st_ambrose_reform
+		}
+	}
+	effect = {
+		change_variable = {
+			which = Populist_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Populist_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		tolerance_own = 1
+		innovativeness_gain = 0.5
+		monarch_lifespan = 0.10
+	}
+	ai = {
+		factor = 100
+	}
+	#5% Burgher Influence, 10% Burgher Loyalty
+}
+support_borghese_reform = {
+	icon = "peasants"
+	allow_normal_conversion = yes
+	potential = {
+		culture_group = latin
+		NOT = { has_reform = pirate_republic_reform }
+		is_year = 1490
+	}
+	effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		republican_tradition = 0.3
+		burghers_influence_modifier = 0.10
+	}
+	ai = {
+		factor = 10
+	}
+}
+support_ghibbelline_reform = {
+	icon = "italy_ghibbelline"
+	allow_normal_conversion = yes
+	effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Oliarch_Influence
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Noble_Influence
+				value = 1
+			}
+		}
+		custom_tooltip = SUPPORT_GHIBELLINES_REFORM_TT
+		hidden_effect = {
+			every_country = {
+				if = {
+					limit = {
+						has_reform = support_ghibbelline_reform
+						OR = {
+							NOT = {
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_same_ghuelpsghibbellines
+								}
+							}
+							NOT = {
+								reverse_has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_same_ghuelpsghibbellines
+								}
+							}
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_same_ghuelpsghibbellines
+					}
+					reverse_add_opinion = {
+						who = ROOT
+						modifier = opinion_same_ghuelpsghibbellines
+					}
+				}
+				else_if = {
+					limit = {
+						has_reform = support_guelphs_reform
+						OR = {
+							NOT = {
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_opposite_ghuelpsghibbellines
+								}
+							}
+							NOT = {
+								reverse_has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_opposite_ghuelpsghibbellines
+								}
+							}
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_opposite_ghuelpsghibbellines
+					}
+					reverse_add_opinion = {
+						who = ROOT
+						modifier = opinion_opposite_ghuelpsghibbellines
+					}
+				}
+			}
+		}
+		add_army_tradition = 5
+	}
+	removed_effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Oliarch_Influence
+				value = -1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Noble_Influence
+				value = -1
+			}
+		}
+		every_country = {
+			if = {
+				limit = {
+					OR = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_same_ghuelpsghibbellines
+						}
+						reverse_has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_same_ghuelpsghibbellines
+						}
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines_timed
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines_timed
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_opposite_ghuelpsghibbellines
+						}
+						reverse_has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_opposite_ghuelpsghibbellines
+						}
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines_timed
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines_timed
+				}
+			}
+		}
+	}
+	potential = {
+		culture_group = latin
+		NOT = { is_year = 1490 }
+	}
+	trigger = {
+		NOT = { is_year = 1490 }
+	}
+	modifiers = {
+		diplomatic_reputation = 1
+		improve_relation_modifier = 0.15
+		army_tradition = 0.25
+		republican_tradition = -0.25
+	}
+	custom_attributes = {
+		enables_support_ghibbellines = yes #Fuckdapope
+	}
+	ai = {
+		factor = 10
+	}
+}
+support_guelphs_reform = {
+	icon = "italy_guelph"
+	allow_normal_conversion = yes
+	effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Burgher_Influence
+				value = 1
+			}
+		}
+		custom_tooltip = SUPPORT_GUELPH_REFORM_TT
+		hidden_effect = {
+			every_country = {
+				if = {
+					limit = {
+						has_reform = support_guelphs_reform
+						OR = {
+							NOT = {
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_same_ghuelpsghibbellines
+								}
+							}
+							NOT = {
+								reverse_has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_same_ghuelpsghibbellines
+								}
+							}
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_same_ghuelpsghibbellines
+					}
+					reverse_add_opinion = {
+						who = ROOT
+						modifier = opinion_same_ghuelpsghibbellines
+					}
+				}
+				else_if = {
+					limit = {
+						has_reform = support_ghibbelline_reform
+						OR = {
+							NOT = {
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_opposite_ghuelpsghibbellines
+								}
+							}
+							NOT = {
+								reverse_has_opinion_modifier = {
+									who = ROOT
+									modifier = opinion_opposite_ghuelpsghibbellines
+								}
+							}
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_opposite_ghuelpsghibbellines
+					}
+					reverse_add_opinion = {
+						who = ROOT
+						modifier = opinion_opposite_ghuelpsghibbellines
+					}
+				}
+			}
+		}
+	}
+	removed_effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = -1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Burgher_Influence
+				value = -1
+			}
+		}
+		every_country = {
+			if = {
+				limit = {
+					OR = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_same_ghuelpsghibbellines
+						}
+						reverse_has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_same_ghuelpsghibbellines
+						}
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines_timed
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = opinion_same_ghuelpsghibbellines_timed
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_opposite_ghuelpsghibbellines
+						}
+						reverse_has_opinion_modifier = {
+							who = ROOT
+							modifier = opinion_opposite_ghuelpsghibbellines
+						}
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines_timed
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = opinion_opposite_ghuelpsghibbellines_timed
+				}
+			}
+		}
+	}
+
+	potential = {
+		culture_group = latin
+		NOT = { is_year = 1490 }
+	}
+	trigger = {
+		NOT = { is_year = 1490 }
+	}
+	modifiers = {
+		development_cost = -0.05
+		global_trade_goods_size_modifier = 0.10
+		papal_influence = 0.5
+		legitimacy = -0.5
+	}
+	custom_attributes = {
+		enables_support_ghuelps = yes #Fuckdaemprah
+	}
+	ai = {
+		factor = 10
+	}
+}
+
+angevin_nobles_reform = {
+	icon = blood_tax
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Noble_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Noble_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = angevin_nobles_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = angevin_nobles_reform
+		}
+	}
+	modifiers = {
+		state_maintenance_modifier = -0.25
+		nobles_influence_modifier = 0.10
+	}
+	custom_attributes = {
+		enables_magnate_law = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+archdiocese_of_pisa_reform = {
+	icon = admiralty_reform
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = PIS
+			has_reform = archdiocese_of_pisa_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = PIS
+			has_reform = archdiocese_of_pisa_reform
+		}
+	}
+	effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		tolerance_own = 0.5
+		republican_tradition = 0.2
+	}
+	ai = {
+		factor = 100
+	}
+}
+demedici_dynasty_reform = {
+	icon = de_medici
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			has_reform = demedici_dynasty_reform
+			tag = LAN
+		}
+		NOT = { has_reform = pirate_republic_reform }
+	}
+	trigger = {
+		OR = {
+			has_reform = demedici_dynasty_reform
+			tag = LAN
+		}
+	}
+	effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		max_absolutism = 5
+		republican_tradition = -0.1
+	}
+	custom_attributes = {
+		enables_demedici = yes
+		enables_influencial_ties = yes
+	}
+	royal_marriage = yes
+	ai = {
+		factor = 100
+	}
+}
+genoa_merchants_reform = {
+	icon = "merchant"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+			AND = {
+				tag = ITA
+				owns_core_province = 101
+			}
+		}
+		NOT = { has_reform = pirate_republic_reform }
+	}
+	trigger = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+			AND = {
+				tag = ITA
+				owns_core_province = 101
+			}
+		}
+	}
+	modifiers = {
+		trade_range_modifier = 0.20
+		envoy_travel_time = -0.15
+	}
+	custom_attributes = {
+		enables_ianuensis_ergo_mercator = yes #10 global settler per every 30% Trade Efficiency
+	}
+	ai = {
+		factor = 100
+	}
+}
+parliament_of_sicily_reform = {
+	icon = sicily_parliament_of_sicily
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = parliament_of_sicily_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = parliament_of_sicily_reform
+		}
+	}
+	modifiers = {
+		stability_cost_modifier = -0.15
+		nobles_influence_modifier = -0.10
+	}
+	custom_attributes = {
+		enables_noble_estate = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Common Sense"
+		}
+		has_parliament = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+rule_by_consent_reform = {
+	icon = "peasants"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+		}
+		NOT = { has_reform = pirate_republic_reform }
+	}
+	trigger = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+		}
+	}
+	effect = {
+		change_variable = {
+			which = Populist_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Populist_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		republican_tradition = 0.5
+		stability_cost_modifier = 0.1
+		max_absolutism = -10
+	}
+	custom_attributes = {
+		enables_deposition = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+#Tier 3
+customs_house_of_apena_sheep_reform = {
+	icon = custom_house_apena_sheep
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = customs_house_of_apena_sheep_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = customs_house_of_apena_sheep_reform
+		}
+	}
+	modifiers = {
+		development_cost = -0.05
+		governing_capacity_modifier = 0.05
+	}
+	custom_attributes = {
+		enables_customs_house = yes #+25% Goods produced in Wool and Cloth provinces
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+
+#Tier 5
+italian_mercenaries_reform = {
+	icon = italian_mercenary
+	allow_normal_conversion = yes
+	effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = 1
+			}
+		}
+		else_if = {
+			limit = {
+				uses_republican_tradition = no #Was uses_legitimacy = yes but changed on Altan's suggestion. By SF
+			}
+			change_variable = {
+				which = Burgher_Influence
+				value = 1
+			}
+		}
+	}
+	removed_effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = -1
+			}
+		}
+		else_if = {
+			limit = {
+				uses_republican_tradition = no #Was uses_legitimacy = yes but changed on Altan's suggestion. By SF
+			}
+			change_variable = {
+				which = Burgher_Influence
+				value = -1
+			}
+		}
+	}
+	potential = {
+		OR = {
+			culture_group = latin
+			has_reform = italian_mercenaries_reform
+		}
+	}
+	trigger = {
+		OR = {
+			culture_group = latin
+			has_reform = italian_mercenaries_reform
+		}
+	}
+	modifiers = {
+		mercenary_discipline = 0.05
+		mercenary_manpower = 0.25
+		war_exhaustion = -0.01
+	}
+	ai = {
+		factor = 10
+		modifier = {
+			factor = 2
+			has_idea_group = plutocracy_ideas
+		}
+	}
+}
+milizia_nationale_reform = {
+	icon = latin_militia
+	allow_normal_conversion = yes
+	effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Royal_Influence
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Populist_Influence
+				value = 1
+			}
+		}
+	}
+	removed_effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Royal_Influence
+				value = -1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Populist_Influence
+				value = -1
+			}
+		}
+	}
+	potential = {
+		OR = {
+			culture_group = latin
+			has_reform = milizia_nationale_reform
+		}
+	}
+	trigger = {
+		OR = {
+			culture_group = latin
+			has_reform = milizia_nationale_reform
+		}
+	}
+	modifiers = {
+		land_morale = 0.05
+		manpower_in_own_culture_provinces = 0.25
+	}
+	ai = {
+		factor = 10
+	}
+}
+
+almogavars_reform = {
+	icon = catalan_company
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			accepted_culture = catalan
+			has_reform = almogavars_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			accepted_culture = catalan
+			has_reform = almogavars_reform
+		}
+	}
+	modifiers = {
+		spy_offence = 0.15
+		infantry_power = 0.05
+	}
+	custom_attributes = {
+		enables_fury_of_the_reconquista = yes #2.5% mercenary discipline and +5% Morale while at war with heathens
+	}
+	ai = {
+		factor = 100
+	}
+}
+alpini_reform = {
+	icon = hesse_jaegers
+	allow_normal_conversion = yes
+	effect = { }
+	removed_effect = { }
+	potential = {
+		OR = {
+			tag = ITA
+			has_reform = alpini_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = ITA
+			has_reform = alpini_reform
+		}
+	}
+	modifiers = {
+		land_attrition = -0.10
+		morale_damage = 0.05
+	}
+	custom_attributes = {
+		enables_mountain_warfare = yes #+1 roll in Italy's hill, highlands and mountains provinces
+	}
+	conditional = {
+		allow = { }
+		# allow_alpini = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+berberi_mantovani_reform = {
+	icon = mantua_knightly_orders
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			tag = MAN
+			was_tag = MAN
+			AND = {
+				culture_group = latin
+				owns_core_province = 109
+			}
+			have_had_reform = berberi_mantovani_reform
+		}
+	}
+	trigger = {
+		religion = catholic
+		OR = {
+			tag = MAN
+			was_tag = MAN
+			AND = {
+				culture_group = latin
+				owns_core_province = 109
+			}
+			have_had_reform = berberi_mantovani_reform
+		}
+	}
+	modifiers = {
+		cav_to_inf_ratio = 0.15
+		cavalry_flanking = 0.35
+	}
+	custom_attributes = {
+		enables_ordine_cordone_giallo = yes #+5% CCA and 1 PI for each 2 ToTf over 4
+	}
+	ai = {
+		factor = 100
+	}
+}
+crusading_tradition_reform = {
+	icon = brothers_in_arms
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = PIS
+			has_reform = crusading_tradition_reform
+		}
+	}
+	effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		manpower_recovery_speed = 0.10
+		siege_blockade_progress = 1
+	}
+	custom_attributes = {
+		enables_fury_of_the_reconquista = yes #2.5% mercenary discipline and +5% Morale while at war with heathens
+	}
+	ai = {
+		factor = 100
+	}
+}
+fanti_da_mar_reform = {
+	icon = pirate_king
+	allow_normal_conversion = yes
+	potential = {
+		num_of_total_ports = 1
+		OR = {
+			culture_group = latin
+			have_had_reform = fanti_da_mar_reform
+		}
+	}
+	modifiers = {
+		allowed_marine_fraction = 0.15
+		global_sailors_modifier = 0.15
+		sailors_recovery_speed = 0.25
+	}
+	ai = {
+		factor = 100
+		modifier = {
+			factor = 0
+			NOT = { num_of_marines = 1 }
+		}
+	}
+	effect = {
+		add_country_modifier = {
+			name = GE_Fanti_Da_Mar
+			duration = -1
+		}
+	}
+	removed_effect = {
+		remove_country_modifier = GE_Fanti_Da_Mar
+	}
+}
+fonderie_ferraresi_reform = {
+	icon = gustavan_artillery
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = FER
+			was_tag = FER
+			AND = {
+				culture_group = latin
+				owns_core_province = 113
+			}
+			have_had_reform = fonderie_ferraresi_reform
+		}
+	}
+	modifiers = {
+		artillery_cost = -0.10
+		monarch_military_power = 1
+	}
+	ai = {
+		factor = 100
+	}
+}
+nunziatella_reform = {
+	icon = king
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			tag = TTS
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = nunziatella_reform
+			AND = {
+				culture_group = latin
+				owns_core_province = 121
+			}
+		}
+	}
+	trigger = {
+		OR = {
+			tag = TTS
+			AND = {
+				OR = {
+					primary_culture = neapolitan
+					primary_culture = sicilian
+				}
+				absolutism = 50
+			}
+			AND = {
+				culture_group = latin
+				owns_core_province = 121
+			}
+			has_reform = nunziatella_reform
+		}
+	}
+	modifiers = {
+		artillery_power = 0.10
+		siege_ability = 0.10
+	}
+	custom_attributes = {
+		enables_artillery_academia = yes #+1 Land Leader Siege
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+#Tier 6
+
+#Tier 7
+advanced_bookkeeping_reform = {
+	icon = "paper_money_map"
+	allow_normal_conversion = yes
+	effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Burgher_Influence
+				value = 1
+			}
+		}
+	}
+	removed_effect = {
+		if = {
+			limit = { uses_republican_tradition = yes }
+			change_variable = {
+				which = Plutocrat_Influence
+				value = -1
+			}
+		}
+		else = {
+			change_variable = {
+				which = Burgher_Influence
+				value = -1
+			}
+		}
+	}
+	potential = {
+		culture_group = latin
+	}
+	trigger = {
+		culture_group = latin
+	}
+	modifiers = {
+		placed_merchant_power = 10
+		interest = -1.0
+	}
+	ai = {
+		factor = 10
+	}
+}
+union_of_italian_states_reform = {
+	icon = map_2
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			culture_group = latin
+			has_reform = union_of_italian_states_reform
+		}
+	}
+	trigger = {
+		culture_group = latin
+	}
+	modifiers = {
+		min_autonomy = 10
+		global_unrest = -2
+		global_spy_defence = 0.20
+	}
+	ai = {
+		factor = 10
+	}
+}
+
+advanced_bookkeeping_reform_republic_venice = {
+	icon = "paper_money_map"
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			has_reform = advanced_bookkeeping_reform_republic_venice
+			primary_culture = venetian
+		}
+	}
+	trigger = {
+		OR = {
+			has_reform = advanced_bookkeeping_reform_republic_venice
+			primary_culture = venetian
+		}
+	}
+	modifiers = {
+		merchants = 1
+		placed_merchant_power = 10
+		interest = -1.0
+	}
+	ai = {
+		factor = 10
+	}
+}
+communal_territories_reform = {
+	icon = "map_2"
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+			has_reform = communal_territories_reform
+		}
+	}
+	modifiers = {
+		years_of_nationalism = -5
+		min_autonomy_in_territories = -0.1
+	}
+	ai = {
+		factor = 100
+	}
+}
+mantua_mecenatismo_mantovano_reform = {
+	icon = mantua_mecenatismo_mantovano
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			tag = MAN
+			has_reform = mantua_mecenatismo_mantovano_reform
+		}
+	}
+	trigger = {
+		OR = {
+			tag = MAN
+			has_reform = mantua_mecenatismo_mantovano_reform
+		}
+	}
+	modifiers = {
+		idea_cost = -0.05
+		global_institution_spread = 0.10
+		advisor_pool = 1
+	}
+	ai = {
+		factor = 100
+	}
+}
+neapolitan_renaissance_reform = {
+	icon = aragon_alfonso
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Burgher_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = neapolitan_renaissance_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = neapolitan_renaissance_reform
+		}
+	}
+	modifiers = {
+		idea_cost = -0.10
+		global_institution_spread = 0.25
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+#Tier 8
+council_of_petitions_reform = {
+	icon = council_of_petitions_reform
+	allow_normal_conversion = yes
+	potential = {
+		culture_group = latin
+		NOT = {
+			has_reform = pirate_republic_reform
+		}
+	}
+	trigger = {
+		culture_group = latin
+	}
+	effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Plutocrat_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		global_unrest = -1
+		reelection_cost = -0.1
+	}
+	ai = {
+		factor = 10
+	}
+}
+legacy_of_constitutionalism_reform = {
+	icon = king_2
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			culture_group = latin
+			has_reform = legacy_of_constitutionalism_reform
+		}
+	}
+	trigger = {
+		OR = {
+			culture_group = latin
+			has_reform = legacy_of_constitutionalism_reform
+		}
+	}	
+	modifiers = {
+		max_absolutism = 5
+		yearly_absolutism = 0.50
+		legitimacy = -0.25
+	}
+	ai = {
+		factor = 10
+	}
+}
+the_consigliere_reform = {
+	icon = the_consigliere_reform
+	allow_normal_conversion = yes
+	potential = {
+		culture_group = latin
+		NOT = {
+			has_reform = pirate_republic_reform
+		}
+	}
+	trigger = {
+		culture_group = latin
+	}
+	effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		yearly_absolutism = 1
+		candidate_random_bonus = 1
+	}
+	ai = {
+		factor = 10
+	}
+}
+
+andrea_doria_constitution_reform = {
+	icon = andrea_doria
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = GEN
+			was_tag = GEN
+			has_reform = andrea_doria_constitution_reform
+		}
+		NOT = {
+			has_reform = pirate_republic_reform
+		}
+	}
+	trigger = {
+		NOT = { has_reform = frequent_elections_reform }
+		has_reform = rule_by_consent_reform
+	}
+	effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Oliarch_Influence
+			value = -1
+		}
+	}
+	modifiers = {
+		stability_cost_modifier = -0.25
+		max_absolutism = 10
+		election_cycle = -2
+	}
+	custom_attributes = {
+		enables_disables_deposition = yes
+	}
+	ai = {
+		factor = 100
+	}
+}
+maritime_republic_reform = {
+	icon = war_ship
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	potential = {
+		OR = {
+			culture_group = latin
+			have_had_reform = maritime_republic_reform
+		}
+	}
+	trigger = {
+		OR = {
+			culture_group = latin
+			have_had_reform = maritime_republic_reform
+		}
+		OR = {
+			owns = 101
+			owns = 112
+			owns = 115
+			owns = 2983
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					NOT = { 101 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 112 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 115 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+					NOT = { 2983 = { has_province_modifier = GE_maritime_republic_triggered_modifier } } 
+				}
+			}
+			country_event = {
+				id = GE_Maritime_Republics_Events.1
+			}
+		}
+	}
+	modifiers = {
+		merchants = 1
+		global_prov_trade_power_modifier = 0.15
+	}
+	government_abilities = {
+		maritime_republic_mechanic
+	}
+}
+theatines_reform = {
+	icon = theatines
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Clergy_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Clergy_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = theatines_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = theatines_reform
+		}
+	}
+	modifiers = {
+		papal_influence = 1
+		global_missionary_strength = 0.02
+	}
+	custom_attributes = {
+		enables_mary_of_the_purity = yes # -0.025 corruption per year per tolerance of the true faith over 4
+	}
+	ai = {
+		factor = 100
+	}
+}
+
+banco_dei_medici_reform = {
+	icon = paper_money_map
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			was_tag = LAN
+			tag = LAN
+			has_reform = banco_dei_medici_reform
+			have_had_reform = banco_dei_medici_reform
+		}
+	}
+	trigger = {
+		OR = {
+			was_tag = LAN
+			tag = LAN
+			has_reform = banco_dei_medici_reform
+			have_had_reform = banco_dei_medici_reform
+		}
+	}
+	modifiers = {
+		inflation_reduction = 0.1
+		inflation_action_cost = -0.25
+	}
+	government_abilities = {
+		corruption_mechanic
+	}
+	ai = {
+		factor = 0
+	}
+}
+#Tier 9
+
+#Tier 10
+
+#Tier 11
+constitution_of_melfi_reform = {
+	icon = sicily_melfi
+	allow_normal_conversion = yes
+	effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = 1
+		}
+	}
+	removed_effect = {
+		change_variable = {
+			which = Royal_Influence
+			value = -1
+		}
+	}
+	potential = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = constitution_of_melfi_reform
+		}
+	}
+	trigger = {
+		OR = {
+			primary_culture = neapolitan
+			primary_culture = sicilian
+			has_reform = constitution_of_melfi_reform
+		}
+	}
+	modifiers = {
+		max_absolutism = 5
+		trade_efficiency = 0.05
+		nobles_influence_modifier = -0.05
+		church_influence_modifier = -0.10
+	}
+	custom_attributes = {
+		enables_liber_augustalis = yes #-10% Estate Loyalty while you are over 90% Legitimacy
+	}
+	ai = {
+		factor = 100
+	}
+}

@@ -1,0 +1,75 @@
+namespace = vu_latent_colonization
+
+# Hard to Colonise (former Malaria)
+province_event = {
+	id = vu_latent_colonization.1
+	title = vu_latent_colonization.1.t
+	desc = vu_latent_colonization.1.d
+	picture = BANKRUPTCY_eventPicture
+	
+	trigger = {
+		has_province_modifier = vu_malaria_present
+
+	    # If player selected to disable 'Hard to Colonise' this event will NEVER fire.
+		NOT = { has_global_flag = malaria_turned_off }
+
+		owner = {
+			# Diplomatic Technology 47 (~1850s) will unlock malaria provinces, preventing this event.
+			NOT = { dip_tech = 47 }
+			
+			# If the province isn't from the same continent as the owner's capital, the event will trigger.
+			# Colonial nations should still be affected - at least before their independence.
+			OR = {
+				NOT = { same_continent = ROOT }
+				AND = { 
+					is_colonial_nation = yes
+					NOT = { is_subject_of_type = self_governing_dominion_vu }
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	# Choosees random previous owner of the core
+	immediate = {
+		hidden_effect = {
+			random_core_country = {
+				limit = { 
+					#VU - Changed owner to ROOT for v1.36.2.* by San Felipe
+					NOT = { 
+						tag = ROOT 
+					} 
+				}
+				save_event_target_as = original_core_target
+			}
+			owner = { save_event_target_as = current_owner_target }
+		}
+	}
+	
+	# Cede province back to previous owner
+	option = {
+		name = vu_latent_colonization.1.a
+		ai_chance = { factor = 75 }		#AI always prefers to return it
+		remove_core = event_target:current_owner_target
+		cede_province = event_target:original_core_target
+	}
+	
+	# Abandon/decolonise it
+	option = {
+		name = vu_latent_colonization.1.b
+		ai_chance = { factor = 25 }		#AI will eventually decolonize this (prevents dangerous loops of shifting ownership)
+		remove_core = event_target:current_owner_target
+		decolonize = yes
+	}
+	
+	# Just in case there is no previous owner
+	after = {
+		if = {	
+			limit = { owned_by = event_target:current_owner_target }
+			decolonize = yes
+		}
+	}
+}

@@ -1,0 +1,485 @@
+country_decisions = {
+	lotf_navigation_acts_decision = {
+		potential = {
+			OR = {
+			    mission_completed = lotf_gb_invest_northern_colonies
+			    mission_completed = lotf_gb_invest_southern_colonies
+			}
+			NOT = { has_country_flag = navigations_act_passed }
+		}	
+		provinces_to_highlight = { }
+		allow = { is_at_war = no }
+		effect = {
+			random_country = { 
+				limit = { 
+					capital_scope = { 
+						colonial_region = colonial_eastern_america
+					}
+					is_colonial_nation_of = ROOT
+				}
+				add_tariff_value = 0.25
+				hidden_effect = {
+					country_event = { id = lotf_events.4 days = 21 random = 7 }
+				}
+				tooltip = { 
+					country_event = { id = lotf_events.4 }
+				} # COME BACK TO THIS IT DOESN'T WORK
+			}
+			set_country_flag = navigations_act_passed
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	# lotf_abolish_slavery = {
+		# major = yes
+		# potential = {
+			# mission_completed = USA_missions_dixie_land
+			# mission_completed = USA_missions_proper_nation
+			# NOT = { has_country_flag = abolished_slavery_passed }
+		# }	
+		# major = yes
+		# provinces_to_highlight = { }
+		# allow = { 
+			# custom_trigger_tooltip = {
+				# tooltip = lotf_abolish_slavery_allow
+				# has_country_flag = dred_scott
+			# }		
+		# }
+		# effect = {
+			# set_country_flag = abolished_slavery_passed
+			# country_event = { id = lotf_events.15 }
+		# }
+		# ai_will_do = {
+			# factor = 1
+		# }
+	# }
+	
+	
+	#### REPUBLIC NATIONS DECISION
+	
+	lotf_release_canada = {
+		potential = { 
+			mission_completed = USA_missions_republican_values
+			NOT = { has_global_flag = released_canada }
+			NOT = { exists = CAN }
+			OR = {
+				colonial_canada = { country_or_non_sovereign_subject_holds = ROOT }	
+				2598 = { country_or_non_sovereign_subject_holds = ROOT }
+				2005 = { country_or_non_sovereign_subject_holds = ROOT }	
+				athabasca_area = { country_or_non_sovereign_subject_holds = ROOT }
+				prairies_area = { country_or_non_sovereign_subject_holds = ROOT }
+				interior_plateau_area = { country_or_non_sovereign_subject_holds = ROOT }
+				straits_of_georgia_area = { country_or_non_sovereign_subject_holds = ROOT }
+				hecate_strait_area = { country_or_non_sovereign_subject_holds = ROOT }
+			}
+		}
+		major = yes
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				colonial_region = colonial_canada
+				province_id = 2598
+				province_id = 2005
+			}
+		}
+		allow = { is_at_war = no }
+		effect = {
+			custom_tooltip = release_canada_tt
+			hidden_effect = {
+				colonial_canada = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				athabasca_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				prairies_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				interior_plateau_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				straits_of_georgia_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				hecate_strait_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CAN	
+					remove_core = owner
+					cede_province = CAN
+				}
+				2598 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = CAN	
+						remove_core = owner
+						cede_province = CAN
+					}
+				}
+				2005 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = CAN	
+						remove_core = owner
+						cede_province = CAN
+					}
+				}
+				set_global_flag = released_canada
+				ROOT = { add_country_modifier = { name = canada_vassal duration = -1 } }
+			}
+			hidden_effect = {
+				random_country = {
+					limit = { tag = CAN }
+					lotf_republic_vassals = yes
+					override_country_name = canada_vassal_name
+					colonial_canada = { add_permanent_claim = PREV }
+				}
+			}
+			
+		}		
+		ai_will_do = { factor = 1 }
+	}
+	lotf_release_mexico = {
+		potential = { 
+			mission_completed = USA_missions_republican_values
+			NOT = { has_global_flag = released_mexico }
+			NOT = { exists = MEX }
+			OR = {
+				central_america_region = { country_or_non_sovereign_subject_holds = ROOT }	
+				mexico_region = { country_or_non_sovereign_subject_holds = ROOT }	
+				sonora_area = { country_or_non_sovereign_subject_holds = ROOT }	
+				chihuahua_area = { country_or_non_sovereign_subject_holds = ROOT }	
+				baja_california_area = { country_or_non_sovereign_subject_holds = ROOT }
+				858 = { country_or_non_sovereign_subject_holds = ROOT }
+				2614 = { country_or_non_sovereign_subject_holds = ROOT }
+				2619 = { country_or_non_sovereign_subject_holds = ROOT }
+				4606 = { country_or_non_sovereign_subject_holds = ROOT }
+				861 = { country_or_non_sovereign_subject_holds = ROOT }
+				2668 = { country_or_non_sovereign_subject_holds = ROOT }
+				2667 = { country_or_non_sovereign_subject_holds = ROOT }
+			}
+		}
+		major = yes
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				region = central_america_region
+				region = mexico_region
+				area = sonora_area
+				area = chihuahua_area
+				area = baja_california_area
+				province_id = 858
+				province_id = 2619
+				province_id = 2614
+				province_id = 4606
+				province_id = 861
+				province_id = 2668
+				province_id = 2667
+			}
+		}
+		allow = { is_at_war = no }
+		effect = {
+			custom_tooltip = release_mexico_tt
+			hidden_effect = {
+				central_america_region = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = MEX	
+					remove_core = owner
+					cede_province = MEX
+				}
+				mexico_region = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = MEX	
+					remove_core = owner
+					cede_province = MEX
+				}
+				sonora_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = MEX	
+					remove_core = owner
+					cede_province = MEX
+				}
+				chihuahua_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = MEX	
+					remove_core = owner
+					cede_province = MEX
+				}
+				baja_california_area = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = MEX	
+					remove_core = owner
+					cede_province = MEX
+				}
+				858 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				2619 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				2614 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				4606 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				861 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				2667 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+				2668 = {
+					if = {
+						limit = { country_or_non_sovereign_subject_holds = ROOT }
+						add_core = MEX	
+						remove_core = owner
+						cede_province = MEX
+					}
+				}
+			set_global_flag = released_mexico
+			ROOT = { add_country_modifier = { name = mexico_vassal duration = -1 } }
+			}
+			hidden_effect = {
+				random_country = {
+					limit = { tag = MEX }
+					lotf_republic_vassals = yes
+					override_country_name = mexico_vassal_name
+					central_america_region = { add_permanent_claim = PREV }
+					mexico_region = { add_permanent_claim = PREV }
+					chihuahua_area = { add_permanent_claim = PREV }
+					sonora_area = { add_permanent_claim = PREV }
+					baja_california_area = { add_permanent_claim = PREV }
+					858 = { add_permanent_claim = PREV }
+					2619 = { add_permanent_claim = PREV }
+					2614 = { add_permanent_claim = PREV }
+					4606 = { add_permanent_claim = PREV }
+					861 = { add_permanent_claim = PREV }
+					2668 = { add_permanent_claim = PREV }
+					2667 = { add_permanent_claim = PREV }
+				}
+			}
+		}		
+		ai_will_do = { factor = 1 }
+	}
+	lotf_release_colombia = {
+		potential = { 
+			mission_completed = USA_missions_republican_values
+			NOT = { has_global_flag = released_colombia }
+			NOT = { exists = COL }
+			OR = { colonial_colombia = { country_or_non_sovereign_subject_holds = ROOT } }
+		}
+		major = yes
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = { colonial_region = colonial_colombia }
+		}
+		allow = { is_at_war = no }
+		effect = {
+			custom_tooltip = release_colombia_tt
+			hidden_effect = {
+				colonial_colombia = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = COL	
+					remove_core = owner
+					cede_province = COL
+				}
+				set_global_flag = released_colombia
+				ROOT = { add_country_modifier = { name = colombia_vassal duration = -1 } }
+			}
+			hidden_effect = {
+				random_country = {
+					limit = { tag = COL }
+					lotf_republic_vassals = yes
+					override_country_name = colombia_vassal_name
+					colonial_colombia = { add_permanent_claim = PREV }
+				}
+			}
+			
+		}		
+		ai_will_do = { factor = 1 }
+	}
+	lotf_release_peru = {
+		potential = { 
+			mission_completed = USA_missions_republican_values
+			NOT = { has_global_flag = released_peru }
+			NOT = { exists = PEU }
+			OR = { colonial_peru = { country_or_non_sovereign_subject_holds = ROOT } }
+		}
+		major = yes
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = { colonial_region = colonial_peru }
+		}
+		allow = { is_at_war = no }
+		effect = {
+			custom_tooltip = release_peru_tt
+			hidden_effect = {
+				colonial_peru = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = PEU	
+					remove_core = owner
+					cede_province = PEU
+				}
+				set_global_flag = released_peru
+				ROOT = { add_country_modifier = { name = peru_vassal duration = -1 } }
+			}
+			hidden_effect = {
+				random_country = {
+					limit = { tag = PEU }
+					lotf_republic_vassals = yes
+					override_country_name = peru_vassal_name
+					colonial_peru = { add_permanent_claim = PREV }
+				}
+			}		
+		}		
+		ai_will_do = { factor = 1 }
+	}
+	lotf_release_cuba = {
+		potential = { 
+			mission_completed = USA_missions_republican_values
+			NOT = { has_global_flag = released_cuba }
+			NOT = { exists = CUB }
+			OR = { colonial_the_carribean = { country_or_non_sovereign_subject_holds = ROOT } }
+		}
+		major = yes
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = { colonial_region = colonial_the_carribean }
+		}
+		allow = { is_at_war = no }
+		effect = {
+			custom_tooltip = release_cuba_tt
+			hidden_effect = {
+				colonial_the_carribean = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT }
+					add_core = CUB	
+					remove_core = owner
+					cede_province = CUB
+				}
+				set_global_flag = released_cuba
+				ROOT = { add_country_modifier = { name = cuban_vassal duration = -1 } }
+			}
+			hidden_effect = {
+				random_country = {
+					limit = { tag = CUB }
+					lotf_republic_vassals = yes
+					override_country_name = cuban_vassal_name
+					colonial_the_carribean = { add_permanent_claim = PREV }
+				}
+			}
+			
+		}		
+		ai_will_do = { factor = 1 }
+	}
+	lotf_USA_republic = {
+		potential = {
+			mission_completed = USA_missions_stabilize_republic
+			NOT = { has_country_flag = USA_republic_dec }
+		}	
+		provinces_to_highlight = { }
+		allow = { is_at_war = no }
+		effect = {
+			add_country_modifier = { name = USA_republic_dec_modifier duration = -1 }
+			set_country_flag = USA_republic_dec
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+		
+	lotf_USA_annex_hawaii = {
+		potential = {
+			tag = USA
+			mission_completed = USA_missions_american_heartland
+			NOT = { has_country_flag = annexed_hawaii }
+		}	
+		provinces_to_highlight = { area = northern_polynesia_area }
+		allow = {
+			is_at_war = no
+			mission_completed = USA_missions_cross_rockies
+			northern_polynesia_area = {
+				owner = {
+					OR = {
+						has_opinion = {
+							who = ROOT
+							value = 100
+						}
+						is_subject_of = ROOT
+					}
+				}
+			}
+		}
+		effect = {
+			set_country_flag = annexed_hawaii
+			northern_polynesia_area = {
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								is_subject_of = ROOT
+								has_opinion = {
+									who = ROOT
+									value = 100
+								}
+							}
+						}
+					}
+					add_core = ROOT
+					cede_province = ROOT
+				}
+				else = {
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

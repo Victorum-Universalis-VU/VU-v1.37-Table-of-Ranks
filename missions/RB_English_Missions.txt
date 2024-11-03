@@ -1,0 +1,451 @@
+#VU updated for 1.35 by San Felipe
+#eng_rb_slot_2 = { 
+#	slot = 2
+#	generic = no
+#	ai = yes
+#
+#	potential_on_load = {
+#		has_dlc = "Rule Britannia"
+#	}
+#	potential = {
+#		OR = {
+#			tag = ENG
+#			tag = GBR
+#			tag = UNK
+#		}
+#		has_dlc = "Rule Britannia"
+#		NOT = { map_setup = map_setup_random }
+#	}
+#	has_country_shield = yes
+#		
+#	eng_rb_establish_trade_in_home_cot = {
+#	    icon = mission_high_income
+#	    required_missions = { eng_rb_mighty_navy }
+#	
+#	    provinces_to_highlight = {
+#	        province_id = 1269
+#	        has_discovered = ROOT
+#	    }
+#	
+#	    trigger = {
+#	        1269 = {
+#		        is_strongest_trade_power = ROOT
+#	        }
+#	    }
+#	
+#	    effect = {
+#	        add_country_modifier = {
+#		        name = "eng_channel_dominance"
+#		        duration = -1
+#	        }
+#	    }
+#    }
+#}
+
+#eng_rb_slot_4 = {
+#	slot = 4
+#	generic = no
+#	ai = yes
+#	potential_on_load = {
+#		has_dlc = "Rule Britannia"
+#	}
+#	potential = {
+#		OR = {
+#			tag = ENG
+#			tag = GBR
+#			tag = UNK
+#		}
+#		has_dlc = "Rule Britannia"
+#		NOT = { map_setup = map_setup_random }
+#	}
+#	has_country_shield = yes
+#
+#	eng_rb_war_of_roses = {
+#		icon = mission_rb_war_of_the_roses
+#		required_missions = { }
+#		completed_by = 1530.1.1
+#		position = 1
+#
+#		trigger = {
+#			custom_trigger_tooltip = {
+#				tooltip = eng_rb_war_of_roses.tooltip
+#				OR = {
+#					has_country_flag = war_of_the_roses_ended
+#					NOT = {
+#						current_age = age_of_discovery
+#					}
+#				}
+#			}
+#		}
+#
+#		effect = {
+#			add_country_modifier = {
+#				name = "eng_rb_roses_legit"
+#				duration = 7300
+#			}
+#		}
+#	}
+#	
+#	eng_rb_yeomen_of_the_guard = {
+#		icon = mission_rb_yeomen_bodyguards
+#		required_missions = { eng_rb_war_of_roses }
+#		position = 2
+#		completed_by = 1485.1.1
+#		
+#		trigger = {
+#			army_size_percentage = 1
+#			manpower_percentage = 0.6
+#			num_of_generals = 1
+#		}
+#		
+#		effect = {
+#			add_country_modifier = {
+#				name = "eng_rb_the_kings_bodyguards"
+#				duration = 5475
+#			}
+#		}
+#	}
+#}
+
+#eng_rb_take_baleares = {
+#
+#	slot = 4
+#	generic = no
+#	ai = yes
+#
+#	potential_on_load = {
+#		has_dlc = "Rule Britannia"
+#	}
+#	potential = {
+#		OR = {
+#			tag = ENG
+#			tag = GBR
+#			tag = UNK
+#		}
+#		has_dlc = "Rule Britannia"
+#		NOT = { map_setup = map_setup_random }
+#	}
+#	has_country_shield = yes
+#	
+#	eng_rb_angevin = {
+#		icon = mission_rb_angevin_kingdom
+#		required_missions = { eng_brittany }
+#		position = 4
+#	
+#		provinces_to_highlight = {
+#			eng_rb_angevin_provinces = yes
+#			NOT = { owned_by = ROOT }
+#		}
+#	
+#		trigger = {
+#			has_fulfiled_province_requirement_for_mission_trigger = {
+#				tooltip=country_holds_or_non_sovereign_subject_holds_highlighted
+#				provinces=eng_rb_angevin_provinces
+#				owner_type=country_or_non_sovereign_subject_holds
+#			}
+#		}
+#	
+#		effect = {
+#			178 = { #I'm *this* close to making it the English capital, disabling formation of Great Britain and changing the name of England to Angevin Empire for 1.30.
+#				add_base_tax = 6
+#				add_base_production = 6
+#				add_base_manpower = 5
+#				add_province_modifier = {
+#					name = "eng_rb_angers_summer_court"
+#					duration = -1
+#				}
+#			}
+#			give_permaclaims_for_mission = { mission=eng_rb_conquer_burgundy }
+#			champagne_area = {
+#				limit = {
+#					NOT = { is_core = ROOT }
+#					NOT = { owned_by = ROOT }
+#				}
+#				add_permanent_claim = ROOT
+#			}
+#		}
+#	}
+#
+#	eng_rb_conquer_burgundy = {
+#		icon = mission_rb_repatriate_burgundy
+#		required_missions = { eng_rb_angevin }
+#		position = 5
+#	
+#		provinces_to_highlight = {
+#			eng_rb_conquer_burgundy_provinces = yes
+#			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+#		}
+#	
+#		ai_weight = {
+#			factor = 2
+#			modifier = {
+#				factor = 0
+#				exists = BUR
+#				BUR = {
+#					alliance_with = ROOT
+#				}
+#			}
+#		}
+#	
+#		trigger = {
+#			has_fulfiled_province_requirement_for_mission_trigger = {
+#				tooltip=country_holds_or_non_sovereign_subject_holds_highlighted
+#				provinces=eng_rb_conquer_burgundy_provinces
+#				owner_type=country_or_non_sovereign_subject_holds
+#			}
+#		}
+#	
+#		effect = {
+#			picardy_area = {
+#				add_province_modifier = {
+#					name = "eng_rb_local_conv"
+#					duration = 5475
+#				}
+#			}
+#			bourgogne_area = {
+#				add_province_modifier = {
+#					name = "eng_rb_local_conv"
+#					duration = 5475
+#				}
+#			}
+#			west_burgundy_area = {
+#				add_province_modifier = {
+#					name = "eng_rb_local_conv"
+#					duration = 5475
+#				}
+#			}
+#		}
+#	}
+#	
+#	vassalize_france = {
+#		icon = mission_monarch_in_throne_room
+#		required_missions = { eng_rb_conquer_burgundy }
+#		position = 6
+#		
+#		provinces_to_highlight = {
+#			vassalize_france_provinces = yes
+#			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+#		}
+#		
+#		trigger = {
+#			has_fulfiled_province_requirement_for_mission_trigger = {
+#				tooltip=country_holds_or_non_sovereign_subject_holds_highlighted 
+#				provinces=vassalize_france_provinces
+#				owner_type=country_or_non_sovereign_subject_holds
+#			}
+#		}
+#		
+#		effect = {
+#			add_prestige = 25
+#			add_country_modifier = {
+#				name = "eng_french_recovery"
+#				duration = 5475
+#			}
+#		}
+#	}
+#	
+#	eng_rb_empire_status = {
+#		icon = mission_rb_empire
+#		required_missions = { vassalize_france }
+#		position = 7
+#	
+#		trigger = {
+#			if = {
+#				limit = {
+#					has_dlc = "Common Sense"
+#				}
+#				government_rank	= 3
+#				else = {
+#					total_development = 2000
+#				}
+#			}
+#		}
+#	
+#		effect = {
+#			add_adm_power = 75
+#			add_dip_power = 75
+#			add_mil_power = 75
+#			add_prestige = 100
+#		}
+#	}
+#	
+#	eng_rb_british_india = {
+#		icon = mission_rb_british_india
+#		required_missions = { england_discovers_india }
+#		completed_by = 1858.1.1
+#	    position = 8
+#		
+#		provinces_to_highlight = {
+#			eng_rb_british_india_provinces = yes
+#			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+#		}
+#		
+#		trigger = {
+#			has_fulfiled_province_requirement_for_mission_trigger = {
+#				tooltip=country_holds_or_non_sovereign_subject_holds_highlighted 
+#				provinces=eng_rb_british_india_provinces
+#				owner_type=country_or_non_sovereign_subject_holds
+#			}
+#		}
+#	
+#		effect = {
+#			add_dip_power = 100
+#			add_navy_tradition = 20
+#			add_treasury = 40000
+#		}
+#	}
+#
+#	eng_rb_coal = {
+#		icon = mission_rb_prospect_for_coal
+#		required_missions = { eng_universities }
+#		position = 12
+#	
+#		trigger = {
+#			has_institution = enlightenment
+#			calc_true_if = {
+#				all_owned_province = {
+#					OR = {
+#						has_building = mills
+#						has_building = farm_estate
+#						has_building = tradecompany
+#						has_building = plantations
+#						has_building = textile
+#						has_building = weapons
+#						has_building = wharf
+#						has_building = furnace
+#					}
+#				}
+#				amount = 20
+#			}
+#			#NB: Add every possible coal-producing province here.
+#			1861 = {
+#				owned_by = ROOT
+#			}
+#			241 = {
+#				owned_by = ROOT
+#			}
+#			4375 = {
+#				owned_by = ROOT
+#			}
+#			4368 = {
+#				owned_by = ROOT
+#			}
+#			246 = {
+#				owned_by = ROOT
+#			}
+#		}
+#	
+#		effect = {
+#			every_province = {
+#				limit = {
+#					OR = {
+#						has_latent_trade_goods = coal
+#						trade_goods = coal
+#					}
+#					region = british_isles_region
+#					owned_by = ROOT
+#				}
+#				add_base_tax = 5
+#				add_base_production = 5
+#				add_base_manpower = 5
+#				add_province_modifier = {
+#					name = "eng_rb_coal_produced_mod"
+#					duration = -1
+#				}
+#			}
+#			#NB: Add every possible coal-producing province here.
+#			# 1861 = {
+#				# add_base_production = 3
+#				# add_base_manpower = 3
+#				# add_province_modifier = {
+#					# name = "eng_rb_coal_produced_mod"
+#					# duration = -1
+#				# }
+#			# }
+#			# 241 = {
+#				# add_base_production = 3
+#				# add_base_manpower = 3
+#				# add_province_modifier = {
+#					# name = "eng_rb_coal_produced_mod"
+#					# duration = -1
+#				# }
+#			# }
+#			# 4375 = {
+#				# add_base_production = 3
+#				# add_base_manpower = 3
+#				# add_province_modifier = {
+#					# name = "eng_rb_coal_produced_mod"
+#					# duration = -1
+#				# }
+#			# }
+#			# 4368 = {
+#				# add_base_production = 3
+#				# add_base_manpower = 3
+#				# add_province_modifier = {
+#					# name = "eng_rb_coal_produced_mod"
+#					# duration = -1
+#				# }
+#			# }
+#			# 246 = {
+#				# add_base_production = 3
+#				# add_base_manpower = 3
+#				# add_province_modifier = {
+#					# name = "eng_rb_coal_produced_mod"
+#					# duration = -1
+#				# }
+#			# }
+#		}
+#	}
+#}
+
+#eng_rb_slot_5 = {
+#	slot = 5
+#	generic = no
+#	ai = yes
+#	potential_on_load = {
+#		has_dlc = "Rule Britannia"
+#	}
+#	potential = {
+#		OR = {
+#			tag = ENG
+#			tag = GBR
+#			tag = UNK
+#		}
+#		has_dlc = "Rule Britannia"
+#		NOT = { map_setup = map_setup_random }
+#	}
+#	has_country_shield = yes
+#
+#	eng_rb_new_palace_of_westminster = {
+#		icon = mission_rb_palace_of_westminster
+#		required_missions = { eng_rb_trade_value }
+#		position = 27
+#	
+#		provinces_to_highlight = {
+#			province_id = 7437
+#		}
+#	
+#		trigger = {
+#			7437 = {
+#				owned_by = ROOT
+#				OR = {
+#					has_building = courthouse
+#					has_building = town_hall
+#				}
+#			}
+#		}
+#	
+#		effect = {
+#		    add_prestige = 100
+#			add_country_modifier = {
+#				name = "eng_westminster_palace"
+#				duration = -1
+#			}
+#			#change_innovativeness = 5
+#			#country_event = {
+#			#	id = flavor_eng.9880
+#			#	days = 1
+#			#}
+#		}
+#	}
+#}

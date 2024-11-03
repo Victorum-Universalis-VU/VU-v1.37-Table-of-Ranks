@@ -1,0 +1,1344 @@
+#subjects_expanded_banking_family_subject_peace_treaty
+make_banking_family_subject = {
+	# The following strings need localization:
+	#		"make_banking_family_subject_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_banking_family_subject" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_banking_family_subject" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.65 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.163 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.33 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.8 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.0 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = 100 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = yes # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		is_subject = no
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = banking_family_subject
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = banking_family_subject_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = banking_family_subject
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			always = yes
+		}
+	}
+}
+
+#subjects_expanded_fief_subject_peace_treaty
+make_fief_subject = {
+	# The following strings need localization:
+	#		"make_fief_subject_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_fief_subject" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_fief_subject" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = fief_subject
+		}
+		FROM = {
+			is_subject = no
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = fief_subject_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = fief_subject
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			num_of_free_diplomatic_relations = 1
+			FROM = {
+				NOT = { total_development = 100 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_iqta_vassal_peace_treaty
+make_iqta_vassal = {
+	# The following strings need localization:
+	#		"make_iqta_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_iqta_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_iqta_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = iqta_vassal
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = iqta_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = iqta_vassal
+		}
+		FROM = {
+			country_event = { id = subjects_expanded_iqta_vassal_events.3 }
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			OR = {
+				is_defender_of_faith = yes
+				has_reform = iqta
+				# Missions Expanded reforms
+				has_reform = caliphate_theocracy_reform
+				has_reform = caliphate_reform
+				has_reform = ME_caliphate_reform_sunni_andalusia
+				has_reform = ME_caliphate_reform_sunni_arabian
+				# Extended Timeline reforms
+				#ME_has_abbasid_caliph = yes #Was this but changed to 'caliphate_reform' as it is already in the base game - by SF
+			}
+			OR = {
+				num_of_free_diplomatic_relations = 1
+				FROM = {
+					religion = ROOT
+					religious_unity = 0.75
+				}
+			}
+			FROM = {
+				NOT = { total_development = 125 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_medieval_vassal_peace_treaty
+make_medieval_vassal = {
+	# The following strings need localization:
+	#		"make_medieval_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_medieval_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_medieval_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.35 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.1 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.253 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.4 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = medieval_vassal
+		}
+		FROM = {
+			is_subject = no
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+		NOT = {
+			is_in_war = {
+				attacker_leader = ROOT
+				defender_leader = FROM
+				casus_belli = cb_force_medieval_vassal_triggered_only
+			}
+		}
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = medieval_vassal_forced
+		}
+		FROM = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = medieval_vassal
+				}
+				set_country_flag = was_medieval_vassal_of_enemy_@ROOT
+			}
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = medieval_vassal
+		}
+		every_country = {
+			limit = {
+				has_country_flag = was_medieval_vassal_of_enemy_@ROOT
+			}
+			clr_country_flag = was_medieval_vassal_of_enemy_@ROOT
+			if = {
+				limit = {
+					is_subject_of = ROOT
+					is_subject_of_type = medieval_vassal
+				}
+				add_liberty_desire = 25
+				add_opinion = {
+					who = ROOT
+					modifier = medieval_vassal_forced_small
+				}
+			}
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			num_of_free_diplomatic_relations = 1
+			OR = {
+				current_age = age_of_discovery
+				NOT = { is_year = 1450 }
+			}
+			NOT = { core_claim = ROOT }
+			NOT = { calc_true_if = { all_subject_country = { is_subject_of_type = medieval_vassal } amount = 5 } }
+			FROM = {
+				num_of_cities = 5
+				total_development = 100
+				NOT = { total_development = 200 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						is_claim = ROOT
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_muslim_tributary_vassal_peace_treaty
+make_muslim_tributary_vassal = {
+	# The following strings need localization:
+	#		"make_muslim_tributary_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_muslim_tributary_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_muslim_tributary_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = muslim_tributary_vassal
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = muslim_tributary_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = muslim_tributary_vassal
+		}
+		FROM = {
+			country_event = { id = subjects_expanded_muslim_tributary_vassal_events.1 }
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			num_of_free_diplomatic_relations = 1
+			religion = sunni
+			FROM = {
+				capital_scope = {
+					continent = europe
+				}
+				NOT = { total_development = 150 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_native_reserve_peace_treaty
+make_native_reserve = {
+	# The following strings need localization:
+	#		"make_native_reserve_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_native_reserve" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_native_reserve" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.65 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.163 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.33 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.8 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.0 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = native_reserve
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = native_reserve_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = native_reserve
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			OR = {
+				ai = no
+				tag = CAN
+				tag = USA
+				tag = FRA
+				is_former_colonial_nation = yes
+			}
+			FROM = {
+				NOT = { total_development = 200 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_palatinate_vassal_peace_treaty
+make_palatinate_vassal = {
+	# The following strings need localization:
+	#		"make_palatinate_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_palatinate_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_palatinate_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.38 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = palatinate_vassal
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = palatinate_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = palatinate_vassal
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			num_of_free_diplomatic_relations = 1
+		}
+	}
+}
+
+#subjects_expanded_peasant_vassal_peace_treaty
+make_peasant_vassal = {
+	# The following strings need localization:
+	#		"make_peasant_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_peasant_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_peasant_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 10.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = peasant_vassal
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = peasant_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = peasant_vassal
+		}
+		FROM = {
+			country_event = { id = subjects_expanded_peasant_vassal_events.1 }
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			has_global_modifier_value = {
+				which = global_tax_income
+				value = 2
+			}
+			monthly_income = 5
+			num_of_free_diplomatic_relations = 1
+			FROM = {
+				NOT = { total_development = 100 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_pirate_vassal_peace_treaty
+make_pirate_brotherhood_vassal = {
+	# The following strings need localization:
+	#		"make_pirate_brotherhood_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_pirate_brotherhood_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_pirate_brotherhood_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 10.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = pirate_brotherhood_vassal
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+		NOT = {
+			is_in_war = {
+				attacker_leader = ROOT
+				defender_leader = FROM
+				casus_belli = cb_force_pirate_brotherhood_vassal_triggered_only
+			}
+		}
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = pirate_brotherhood_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = pirate_brotherhood_vassal
+		}
+		FROM = {
+			country_event = { id = subjects_expanded_pirate_brotherhood_vassal_events.1 }
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			num_of_free_diplomatic_relations = 1
+		}
+	}
+}
+
+#subjects_expanded_protectorate_peace_treaty
+make_protectorate = {
+	# The following strings need localization:
+	#		"make_protectorate_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_protectorate" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_protectorate" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.37 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.334 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.1 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 100.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.0 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = 100 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = protectorate
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = protectorate_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = protectorate
+		}
+		if = {
+			limit = {
+				any_country = {
+					is_subject_of = FROM
+					is_colonial_nation = no
+				}
+			}
+			every_country = {
+				limit = {
+					is_subject_of = FROM
+					is_colonial_nation = no
+				}
+				FROM = {
+					PREV = { grant_independence = yes }
+				}
+			}
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 10
+		}
+		limit = {
+			NOT = {
+				has_casus_belli = {
+					type = cb_imperial
+					target = FROM
+				}
+			}
+			FROM = {
+				total_development = 70
+				NOT = { total_development = 200 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 3
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+				OR = {
+					ai = no
+					capital_scope = {
+						NOT = { continent = north_america }
+						NOT = { continent = south_america }
+						region_for_scope_province = {
+							type = all
+							owner = {
+								NOT = { is_subject_of = ROOT }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_puppet_state_peace_treaty_imperialism
+make_puppet_state_imperial = {
+	# The following strings need localization:
+	#		"make_puppet_state_imperial_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_puppet_state_imperial" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_puppet_state_imperial" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.5 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		is_in_war = {
+			participants = ROOT
+			participants = FROM
+			casus_belli = cb_imperial
+		}
+		#VU - Hashed this out as it has nothing to do with our mod. By San Felipe
+		#NOT = { has_global_flag = extended_timeline_mod }
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = puppet_state
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = puppet_state_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = puppet_state
+		}
+		FROM = {
+			if = {
+				limit = {
+					government = monarchy
+				}
+				set_country_flag = was_monarchy_flag
+			}
+			else_if = {
+				limit = {
+					government = theocracy
+				}
+				set_country_flag = was_theocracy_flag
+			}
+			change_government = republic
+			add_government_reform = presidential_despot_reform
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 10
+		}
+		limit = {
+			NOT = {
+				border_distance = {
+					who = FROM
+					distance = 100
+				}
+			}
+			num_of_free_diplomatic_relations = 1
+			FROM = {
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 3
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+				num_of_cities = 5
+				NOT = { total_development = 300 }
+			}
+			is_revolution_target = no
+			OR = {
+				is_neighbor_of = FROM
+				any_rival_country = {
+					is_neighbor_of = FROM
+				}
+			}
+			OR = {
+				NOT = { great_power_rank = 4 }
+				tag = USA
+				tag = ENG
+				tag = GBR
+				tag = RUS
+				# Fascist Government Type
+				#has_reform = fascist_government
+				#has_reform = military_government
+				has_reform = presidential_despot_reform
+				# Communist Government Type
+				has_reform = peasants_republic
+				#has_reform = communist_government
+				# Capitalist Government Type
+				has_reform = administrative_monarchy
+				has_reform = constitutional_monarchy
+				has_reform = merchants_reform
+				has_reform = oligarchy_reform
+				has_reform = administrative_republic
+				has_reform = constitutional_republic
+				has_reform = bureaucratic_despotism
+				has_reform = english_monarchy
+				has_reform = british_monarchy
+				has_reform = scottish_monarchy
+				has_reform = trading_city
+				has_reform = dutch_republic
+				has_reform = american_republic
+				has_reform = federal_republic
+			}
+		}
+	}
+}
+
+#subjects_expanded_puppet_state_peace_treaty
+make_puppet_state = {
+	# The following strings need localization:
+	#		"make_puppet_state_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_puppet_state" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_puppet_state" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.7 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		NOT = {
+			is_in_war = {
+				participants = ROOT
+				participants = FROM
+				casus_belli = cb_imperial
+			}
+		}
+		#VU - Hashed this out as it has nothing to do with our mod. By San Felipe
+		#NOT = { has_global_flag = extended_timeline_mod }
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = puppet_state
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = puppet_state_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = puppet_state
+		}
+		FROM = {
+			if = {
+				limit = {
+					government = monarchy
+				}
+				set_country_flag = was_monarchy_flag
+			}
+			else_if = {
+				limit = {
+					government = theocracy
+				}
+				set_country_flag = was_theocracy_flag
+			}
+			change_government = republic
+			add_government_reform = presidential_despot_reform
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 10
+		}
+		limit = {
+			NOT = {
+				border_distance = {
+					who = FROM
+					distance = 100
+				}
+			}
+			num_of_free_diplomatic_relations = 1
+			FROM = {
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 3
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+				num_of_cities = 5
+				NOT = { total_development = 300 }
+			}
+			is_revolution_target = no
+			OR = {
+				is_neighbor_of = FROM
+				any_rival_country = {
+					is_neighbor_of = FROM
+				}
+			}
+			OR = {
+				NOT = { great_power_rank = 4 }
+				tag = USA
+				tag = ENG
+				tag = GBR
+				tag = RUS
+				# Fascist Government Type
+				#has_reform = fascist_government
+				#has_reform = military_government
+				has_reform = presidential_despot_reform
+				# Communist Government Type
+				has_reform = peasants_republic
+				#has_reform = communist_government
+				# Capitalist Government Type
+				has_reform = administrative_monarchy
+				has_reform = constitutional_monarchy
+				has_reform = merchants_reform
+				has_reform = oligarchy_reform
+				has_reform = administrative_republic
+				has_reform = constitutional_republic
+				has_reform = bureaucratic_despotism
+				has_reform = english_monarchy
+				has_reform = british_monarchy
+				has_reform = scottish_monarchy
+				has_reform = trading_city
+				has_reform = dutch_republic
+				has_reform = american_republic
+				has_reform = federal_republic
+			}
+		}
+	}
+}
+
+#subjects_expanded_roman_client_kingdom_peace_treaty
+make_roman_client_kingdom = {
+	# The following strings need localization:
+	#		"make_roman_client_kingdom_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_roman_client_kingdom" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_roman_client_kingdom" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = roman_client_kingdom
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			OR = {
+				capital_scope = { controlled_by = ROOT }
+				AND = {
+					government = monarchy
+					NOT = { legitimacy = 30 }
+				}
+			}
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = roman_client_kingdom_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = roman_client_kingdom
+		}
+		if = {
+			limit = {
+				FROM = {
+					NOT = { government = monarchy }
+				}
+			}
+			FROM = {
+				change_government = monarchy
+				add_government_reform = autocracy_reform
+			}
+		}
+		FROM = { country_event = { id = subjects_expanded_roman_client_kingdom_events.1 } }
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			OR = {
+				tag = ROM
+				#tag = ROW
+				tag = BYZ
+			}
+			OR = {
+				num_of_free_diplomatic_relations = 1
+				FROM = {
+					any_neighbor_country = {
+						OR = {
+							is_rival = FROM
+							is_enemy = FROM
+						}
+					}
+				}
+			}
+			OR = {
+				is_neighbor_of = FROM
+				AND = {
+					NOT = {
+						border_distance = {
+							who = FROM
+							distance = 400
+						}
+					}
+					FROM = {
+						any_owned_province = {
+							has_port = yes
+						}
+					}
+				}
+				FROM = {
+					capital_scope = {
+						region = egypt_region
+					}
+				}
+			}
+			FROM = {
+				NOT = { total_development = 150 }
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 3
+						OR = {
+							is_claim = ROOT
+							is_core = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#subjects_expanded_stato_da_mar_vassal_peace_treaty
+make_stato_da_mar_vassal = {
+	# The following strings need localization:
+	#		"make_stato_da_mar_vassal_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+	#		"CB_ALLOWED_make_stato_da_mar_vassal" (uses plain localization) ("Enforced Dumbness")
+	#		"PEACE_make_stato_da_mar_vassal" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+	# Values default to 0 or "no" unless otherwise stated
+
+	category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+	power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+	power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+	prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.0 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.8 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+	is_visible = { # Defaults to equivalent of "always = yes"
+		can_create_subject_type = {
+			subject = FROM
+			subject_type = stato_da_mar_vassal
+		}
+		FROM = {
+			capital_scope = {
+				NOT = {
+					any_trade_node_member_country = {
+						is_subject_of_type_with_overlord = {
+							who = ROOT
+							type = stato_da_mar_vassal
+						}
+					}
+				}
+			}
+		}
+		capital_scope = {
+			FROM = {
+				capital_scope = {
+					NOT = { region = PREV_PREV }
+				}
+			}
+		}
+		NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		FROM = {
+			capital_scope = { trade_range = ROOT }
+		}
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		reverse_add_opinion = {
+			who = FROM
+			modifier = stato_da_mar_vassal_forced
+		}
+		create_subject = {
+			subject = FROM
+			subject_type = stato_da_mar_vassal
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1
+		}
+		limit = {
+			OR = {
+				tag = VEN
+				primary_culture = venetian
+			}
+			FROM = {
+				capital_scope = {
+					has_merchant = ROOT
+					OR = {
+						continent = europe
+						continent = africa
+						continent = asia
+					}
+				}
+				NOT = {
+					any_owned_province = {
+						OR = {
+							is_core = ROOT
+							is_permanent_claim = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}

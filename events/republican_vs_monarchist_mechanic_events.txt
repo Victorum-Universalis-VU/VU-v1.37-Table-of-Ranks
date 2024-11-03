@@ -1,0 +1,195 @@
+namespace = republican_vs_monarchist_mechanic_events
+
+#Culla del Rinascimento
+country_event = {
+	id = republican_vs_monarchist_mechanic_events.1
+	title = republican_vs_monarchist_mechanic_events.1.T
+	desc = republican_vs_monarchist_mechanic_events.1.D
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = republican_vs_monarchist_mechanic_events.1.OPT1
+
+		trigger = {
+			NOT = { has_country_flag = republican_vs_monarchist_mechanic_events_1 }
+			OR = {
+				piedmont_area = { owned_by = ROOT }
+				lombardy_area = { owned_by = ROOT }
+				po_valley_area = { owned_by = ROOT }
+				venetia_area = { owned_by = ROOT }
+				emilia_romagna_area = { owned_by = ROOT }
+			}
+		}
+
+		ai_chance = {
+			factor = 33
+		}
+
+		set_country_flag = republican_vs_monarchist_mechanic_events_1
+		piedmont_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		lombardy_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		po_valley_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		venetia_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		emilia_romagna_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+	}
+
+	option = {
+		name = republican_vs_monarchist_mechanic_events.1.OPT2
+
+		trigger = {
+			NOT = { has_country_flag = republican_vs_monarchist_mechanic_events_2 }
+			OR = {
+				liguria_area = { owned_by = ROOT }
+				corsica_sardinia_area = { owned_by = ROOT }
+				tuscany_area = { owned_by = ROOT }
+				central_italy_area = { owned_by = ROOT }
+				san_marino_area = { owned_by = ROOT }
+				lazio_area = { owned_by = ROOT }
+			}
+		}
+
+		ai_chance = {
+			factor = 33
+		}
+
+		set_country_flag = republican_vs_monarchist_mechanic_events_2
+		liguria_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		corsica_sardinia_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		tuscany_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		central_italy_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		san_marino_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		lazio_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+	}
+
+	option = {
+		name = republican_vs_monarchist_mechanic_events.1.OPT3
+
+		trigger = {
+			NOT = { has_country_flag = republican_vs_monarchist_mechanic_events_3 }
+			OR = {
+				naples_area = { owned_by = ROOT }
+				apulia_area = { owned_by = ROOT }
+				calabria_area = { owned_by = ROOT }
+				sicily_area = { owned_by = ROOT }
+			}
+		}
+
+		ai_chance = {
+			factor = 33
+		}
+
+		set_country_flag = republican_vs_monarchist_mechanic_events_3
+		naples_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		apulia_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		calabria_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+		sicily_area = {
+			limit = { owned_by = ROOT }
+			add_province_modifier = {
+				name = republican_vs_monarchist_culla_rinascimento_focus_modifier_province
+				duration = 5475
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				calc_true_if = {
+					amount = 2
+					has_country_flag = republican_vs_monarchist_mechanic_events_1
+					has_country_flag = republican_vs_monarchist_mechanic_events_2
+					has_country_flag = republican_vs_monarchist_mechanic_events_3
+				}
+			}
+			clr_country_flag = republican_vs_monarchist_mechanic_events_1
+			clr_country_flag = republican_vs_monarchist_mechanic_events_2
+			clr_country_flag = republican_vs_monarchist_mechanic_events_3
+		}
+	}
+}

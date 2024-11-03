@@ -1,0 +1,315 @@
+namespace = subjects_expanded_integrated_personal_union_events
+
+country_event = {
+	id = subjects_expanded_integrated_personal_union_events.1
+	title = subjects_expanded_integrated_personal_union_events.EVTNAME1
+	desc = subjects_expanded_integrated_personal_union_events.EVTDESC1
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject_of_type = integrated_personal_union
+		OR = {
+			NOT = { has_country_flag = integrated_personal_union_automatic_integration_chance }
+			had_country_flag = { flag = integrated_personal_union_automatic_integration_chance days = 3650 }
+		}
+		overlord = {
+			ROOT = {
+				years_in_vassalage_under = {
+					who = PREV
+					years = 10
+					all_subject_country = yes
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = integrated_personal_union_automatic_integration_chance
+			set_country_flag = integrated_personal_union_automatic_integration_chance
+			change_variable = { which = num_of_integrated_pu_random_chance_iterations value = 1 }
+			if = {
+				limit = {
+					NOT = { liberty_desire = 50 }
+				}
+				if = {
+					limit = {
+						has_country_modifier = increase_chance_to_integrate_integrated_personal_union_modifier
+					}
+					if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 11 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 100 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 10 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 90 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 9 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 80 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 8 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 70 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 7 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 60 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 6 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 50 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 5 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 40 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 4 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 35 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 3 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 30 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 2 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 25 }
+					}
+					else = {
+						random_chance_to_annex_integrated_personal_union = { chance = 20 }
+					}
+				}
+				else = {
+					if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 12 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 100 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 11 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 90 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 10 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 80 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 9 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 70 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 8 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 60 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 7 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 50 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 6 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 40 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 5 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 30 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 4 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 25 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 3 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 20 }
+					}
+					else_if = {
+						limit = {
+							check_variable = { which = num_of_integrated_pu_random_chance_iterations value = 2 }
+						}
+						random_chance_to_annex_integrated_personal_union = { chance = 15 }
+					}
+					else = {
+						random_chance_to_annex_integrated_personal_union = { chance = 10 }
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_integrated_personal_union_events1.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_integrated_personal_union_events.2
+	title = subjects_expanded_integrated_personal_union_events.EVTNAME2
+	desc = subjects_expanded_integrated_personal_union_events.EVTDESC2
+	picture = GOOD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				set_variable = { which = num_of_integrated_pu_random_chance_iterations value = 0 }
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_integrated_personal_union_events2.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		inherit = FROM
+		add_dip_power = -100
+		hidden_effect = {
+			remove_country_modifier = annexers_legacy
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = no_integrate_penalty }
+			}
+			add_country_modifier = {
+				name = annexers_legacy
+				duration = 3650
+			}
+		}
+		every_subject_country = {
+			limit = {
+				NOT = { tag = FROM }
+				OR = {
+					is_subject_of_type = personal_union
+					is_subject_of_type = integrated_personal_union
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_annex_vassal
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_integrated_personal_union_events2.EVTOPT2
+
+		ai_chance = { factor = 0 }
+
+		FROM = {
+			add_liberty_desire = -25
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_integrated_personal_union_events.3
+	title = subjects_expanded_integrated_personal_union_events.EVTNAME3
+	desc = subjects_expanded_integrated_personal_union_events.EVTDESC3
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			is_subject_of_type = integrated_personal_union
+			is_subject_of_type = personal_union
+		}
+		OR = {
+			has_subject_of_type = integrated_personal_union
+			has_subject_of_type = personal_union
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			overlord = {
+				every_country = {
+					limit = {
+						is_subject_of = ROOT
+						OR = {
+							is_subject_of_type = integrated_personal_union
+							is_subject_of_type = personal_union
+						}
+					}
+					if = {
+						limit = {
+							is_subject_of_type = integrated_personal_union
+						}
+						PREV = {
+							create_subject = {
+								subject = PREV
+								subject_type = integrated_personal_union
+							}
+						}
+					}
+					else = {
+						PREV = {
+							create_subject = {
+								subject = PREV
+								subject_type = personal_union
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_integrated_personal_union_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}

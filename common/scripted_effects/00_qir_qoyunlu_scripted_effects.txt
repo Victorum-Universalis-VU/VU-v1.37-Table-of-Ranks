@@ -1,0 +1,170 @@
+#VU - Hashed out by San Felipe for 1.37.*
+#QIR_complete_into_arabia_missions = {
+#	hidden_effect = {
+#		complete_mission = AKK_into_arabia
+#		complete_mission = QAR_expand_into_arabia
+#	}
+#	ME_give_claims = { area = mascat_area }
+#	ME_give_claims = { area = oman_area }
+#	if = {
+#		limit = {
+#			has_country_flag = QIR_tribal
+#		}
+#		ME_give_claims = { area = nafud_area }
+#		ME_give_claims = { area = qasim_area }
+#		ME_give_claims = { area = yamamah_area }
+#	}
+#}
+#
+#QIR_complete_syria_missions = {
+#	hidden_effect = {
+#		complete_mission = AKK_syria
+#		complete_mission = QAR_syria
+#	}
+#	if = {
+#		limit = {
+#			has_country_flag = QIR_tribal
+#		}
+#		ME_give_claims = { area = palestine_area }
+#		ME_give_claims = { area = trans_jordan_area }
+#	}
+#}
+#
+#AKK_complete_QAR_ardabil_missions = {
+#	hidden_effect = {
+#		complete_mission = QAR_ardabil
+#		#complete_mission = AKK_northern_turkomans
+#	}
+#	if = {
+#		limit = {
+#			has_country_flag = QIR_tribal
+#		}
+#		ME_give_claims = { region = caucasia_region }
+#	}
+#}	
+#
+#QAR_complete_AKK_ardabil_missions = {
+#	hidden_effect = {
+#		complete_mission = AKK_northern_turkomans
+#	}
+#	if = {
+#		limit = {
+#			has_country_flag = QIR_tribal
+#		}
+#		ME_give_claims = { region = caucasia_region }
+#	}
+#}
+#
+#QIR_complete_persian_missions = {
+#	hidden_effect = {
+#		complete_mission = QAR_persia
+#		complete_mission = AKK_persia
+#	}
+#	ME_give_claims = { area = mogostan_area }
+#	ME_give_claims = { area = kerman_area }
+#	ME_give_claims = { area = sistan_area }
+#	ME_give_claims = { area = birjand_area }
+#	ME_give_claims = { area = mashhad_area }
+#	ME_give_claims = { area = herat_area }
+#}
+#
+#QIR_end_preview_mode = {
+#	if = {
+#		limit = {
+#			has_country_flag = QIR_tribal
+#		}
+#		if = {
+#			limit = {
+#				OR = {
+#					mission_completed = AKK_northern_turkomans
+#					mission_completed = QAR_ardabil
+#				}
+#			}
+#			ME_give_claims = { region = caucasia_region }
+#		}
+#		else = { }
+#		if = {
+#			limit = {
+#				OR = {
+#					mission_completed = AKK_syria
+#					mission_completed = QAR_syria
+#				}
+#			}
+#			ME_give_claims = { area = palestine_area }
+#			ME_give_claims = { area = trans_jordan_area }
+#		}
+#		else = { }
+#		if = {
+#			limit = {
+#				OR = {
+#					mission_completed = AKK_into_arabia
+#					mission_completed = QAR_expand_into_arabia
+#				}
+#			}
+#			ME_give_claims = { area = nafud_area }
+#			ME_give_claims = { area = qasim_area }
+#			ME_give_claims = { area = yamamah_area }
+#		}
+#		else = { }
+#		
+#		if = {
+#			limit = {
+#				NOT = { government = tribal }
+#			}
+#			change_government = tribal
+#		}
+#		add_government_reform = ME_tribal_federation_steppe_horde
+#	}
+#	else_if = {
+#		limit = {
+#			has_country_flag = QIR_sedentary
+#		}
+#		if = {
+#			limit = {
+#				NOT = { government = monarchy }
+#			}
+#			change_government = monarchy
+#			
+#		}
+#		add_government_reform = ME_tribal_federation_monarchy
+#	}
+#	else = {
+#	}
+#}
+#
+#QIR_complete_anatolia_missions = {
+#	hidden_effect = {
+#		complete_mission = AKK_anatolia
+#		complete_mission = QAR_anatolia
+#	}
+#	ME_give_claims = { region = anatolia_region }
+#}
+
+QIR_give_legitimacy_or_tribal_allegiance = {
+	if = {
+		limit = {
+			has_dlc = "Cradle of Civilization"
+			has_government_mechanic = tribal_federation_mechanic
+		}
+		add_government_power = {
+			mechanic_type = tribal_federation_mechanic
+			power_type = tribal_allegiance
+			value = $t_amount$
+		}
+	}
+	else = {
+		add_legitimacy = $l_amount$
+	}
+}
+
+#QIR_add_turkic_tribes_loyalty = {
+#	if = {
+#		limit = {
+#			has_estate = estate_turkic_tribes
+#		}
+#		add_estate_loyalty = {
+#			estate = estate_turkic_tribes
+#			loyalty = $amount$
+#		}
+#	}
+#}

@@ -1,0 +1,139 @@
+######################################################################
+# Abu Sa'id revolt against Ulugh Beg
+
+#modified noble_rebels file
+######################################################################
+bohdan_khmelnytsky_rebels = {
+
+	color = { 25 175 32 }
+
+	area = nation_rebel_tag #Was nation			        # Stays within provinces of their rebel tag
+	government = any				                    # No special preference
+	defection = nation_rebel_tag #Was cossack	        # If the country seeks independence, defection specifies what type of provinces it wants.
+	independence = nation_rebel_tag #Was cossack        # Seeks independence for spawn province culture. Will not spawn at all if there is no suitable tag.
+	defect_delay = 60				                    # Can spontaneously declare independence after 60 months (earliest)
+	unit_transfer = yes				                    # Units switch allegiance after enforcing demands.
+	gfx_type = culture_province
+	will_relocate = yes
+
+	resilient = yes
+	reinforcing = yes
+	general = yes
+	smart = yes
+
+	artillery = 0.0
+	infantry = 0.5
+	cavalry = 0.6
+
+	morale = 1.75
+
+	# Possible handle actions
+	handle_action_negotiate = yes
+	handle_action_stability = yes
+	handle_action_build_core = yes
+	handle_action_send_missionary = yes
+	handle_action_change_culture = yes
+
+	#triggered by event
+	spawn_chance = {
+		factor = 0
+	}
+
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 5.0
+			culture = cossack
+		}
+		modifier = {
+			factor = 5.0
+			has_terrain = steppe
+		}		
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+
+
+	# Country scope
+	can_negotiate_trigger = {
+		is_at_war = no
+	}
+
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+	siege_won_trigger = {
+		culture = cossack
+ 	}
+	siege_won_effect = {
+		add_nationalism = 15
+	}
+
+	# Localisation for their demands
+	demands_description = "bohdan_khmelnytsky_rebels_demand"
+
+	# Country scope
+	demands_enforced_effect = {
+		add_prestige = -25
+		release = ZAZ
+		ZAZ = {
+			define_ruler = {
+				name = "Bohdan Khmelnytsky"
+				dynasty = "Khmelnytsky"
+				dip = 4
+				adm = 4
+				mil = 6
+				claim = 50
+				age = 53
+				attach_leader = "Bohdan Khmelnytsky"
+			}
+		}
+		hidden_effect = {
+			ZAZ = {
+				change_government = republic
+				add_government_reform = cossacks_reform
+				change_religion = orthodox
+				if = {
+					limit = {
+						NOT = { has_global_flag = united_slavs }
+					}
+					change_primary_culture = cossack
+				}
+				else = {
+					change_primary_culture = cossack_new
+				}
+				set_prestige_to_zero = yes
+				add_adm_power = 50
+				add_dip_power = 50
+				add_mil_power = 50
+				set_capital = 3243
+				define_ruler_to_general = {
+					shock = 6
+					fire = 4
+					manuever = 5
+					siege = 2
+				}
+			}
+		}
+	}
+}

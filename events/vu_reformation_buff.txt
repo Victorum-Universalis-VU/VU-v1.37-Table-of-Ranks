@@ -1,0 +1,332 @@
+# New events and falvor related to boosting up reformation spread
+# Initially added by docRobert
+
+# ====================================
+namespace = vu_reformation
+
+#Protestants spread to Scandinavia
+country_event = {
+	id = vu_reformation.1
+	title = vu_reformation.1.t
+	desc = vu_reformation.1.d
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		current_age = age_of_reformation
+		is_religion_enabled = protestant
+		is_year = 1525
+		capital_scope = {
+			region = scandinavia_region
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = { # Oh well...
+		name = vu_reformation.1.a
+		ai_chance = { factor = 50 }
+		custom_tooltip = vu_reformation.1.tooltip
+		if = {
+			limit = {
+				NOT = { religion = protestant }
+			}
+			add_stability = -1
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					region = scandinavia_region
+					religion = catholic
+				}
+				random = {
+					chance = 50
+					change_religion = protestant
+				}
+			}
+		}
+	}
+	
+	option = { # Sure, we join the reformation
+		name = vu_reformation.1.b
+		ai_chance = { 
+			factor = 50
+			modifier = {
+				factor = 0.2
+				stability = 2
+			}
+			modifier = {
+				factor = 10
+				NOT = { stability = 1 }
+			}
+			modifier = {
+				factor = 0
+				ruler_has_personality = zealot_personality
+			}
+			modifier = {
+				factor = 0
+				religion = protestant
+			}
+		}
+		custom_tooltip = vu_reformation.1.tooltip
+		change_religion = protestant
+		capital_scope = {
+			change_religion = protestant
+		}
+		hidden_effect = {
+			add_prestige = 50 #To counter -100 prestige for changing religion
+			every_province = {
+				limit = {
+					region = scandinavia_region
+					religion = catholic
+				}
+				random = {
+					chance = 50
+					change_religion = protestant
+				}
+			}
+		}
+	}
+}
+
+#Lollards join the reformation
+country_event = {
+	id = vu_reformation.2
+	title = vu_reformation.2.t
+	desc = vu_reformation.2.d
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		current_age = age_of_reformation
+		OR = {
+			is_religion_enabled = protestant
+			is_religion_enabled = reformed
+			is_religion_enabled = anglican
+		}
+		is_year = 1500
+		any_owned_province = {
+			religion = lollardy
+		}
+		OR = {
+			stability = 1
+			religion = protestant
+			religion = reformed
+			religion = anglican
+		}
+		NOT = { religion = lollardy }
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = { # Oh well...
+		name = vu_reformation.2.a
+		ai_chance = { factor = 95 }
+		custom_tooltip = vu_reformation.2.tooltip
+		if = {
+			limit = {
+				religion = catholic
+			}
+			add_stability = -1
+		}
+		hidden_effect = {
+			if = {
+				limit = { 
+					OR = {
+						religion = protestant
+						religion = anglican
+						religion = reformed
+					}
+				}
+				every_owned_province = {
+					limit = { religion = lollardy }
+					change_religion = ROOT
+				}
+			}
+			if = {
+				limit = { religion = catholic }
+				every_owned_province = {
+					limit = { religion = lollardy }
+					change_religion = reformed
+				}
+			}
+		}
+	}
+	
+	option = { # Lollards cannot disappear
+		name = vu_reformation.2.b
+		ai_chance = { factor = 5 }
+		if = { 				#Anglicans convert to lollardy
+			limit = { religion = anglican }
+			change_religion = lollardy
+			capital_scope = { change_religion = lollardy }
+		}
+		if = {				#Others trigger rebellion
+			limit = { 
+				OR = {
+					religion = protestant
+					religion = reformed
+					religion = catholic
+				}
+			}
+			add_stability = -1
+			random_owned_province = {
+				limit = { religion = lollardy }
+				spawn_rebels = {
+					type = lollardy_rebels
+					size = 1.5
+				}
+			}
+		}
+		
+	}
+}
+
+#Lollard revolts during war of roses
+country_event = {
+	id = vu_reformation.3
+	title = vu_reformation.3.t
+	desc = vu_reformation.3.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = ENG
+		any_owned_province = {
+			religion = lollardy
+		}
+		NOT = { religion = lollardy }
+		has_disaster = war_of_the_roses
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = { #To arms!
+		name = vu_reformation.3.a
+		ai_chance = { factor = 70 }
+		random_owned_province = {
+			limit = { religion = lollardy }
+			spawn_rebels = {
+				type = lollardy_rebels
+				size = 1
+				win = yes
+			}
+		}
+		random_owned_province = {
+			limit = { religion = lollardy }
+			spawn_rebels = {
+				type = lollardy_rebels
+				size = 1
+				win = yes
+			}
+		}
+		add_corruption = 1
+	}
+	
+	option = { #Bend the knee
+		name = vu_reformation.3.b
+		ai_chance = { factor = 30 }
+		highlight = yes
+		add_adm_power = -25
+		add_dip_power = -25
+		add_prestige = -10
+		every_owned_province = {
+			limit = { religion = lollardy }
+			add_local_autonomy = 25
+		}
+		8123 = { change_religion = lollardy }
+		3116 = { change_religion = lollardy }
+		7439 = { change_religion = lollardy }
+		8125 = { change_religion = lollardy }
+		4376 = { change_religion = lollardy }
+		7425 = { change_religion = lollardy }
+		8144 = { change_religion = lollardy }
+		4372 = { change_religion = lollardy }
+		7419 = { change_religion = lollardy }
+		3008 = { change_religion = lollardy }
+		set_country_flag = vu_strong_lollard_influence
+		custom_tooltip = vu_reformation.3.tooltip
+	}
+}
+
+#Lollards demand change of religion
+country_event = {
+	id = vu_reformation.4
+	title = vu_reformation.4.t
+	desc = vu_reformation.4.d
+	picture = RELIGIOUS_CONVERSION_eventPicture
+
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = ENG
+		any_owned_province = {
+			religion = lollardy
+		}
+		NOT = { religion = lollardy }
+		has_country_flag = vu_strong_lollard_influence
+		has_any_disaster = no
+		OR = {
+			is_religion_enabled = protestant
+			is_year = 1500
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = { #We are lollard now
+		name = vu_reformation.4.a
+		ai_chance = { factor = 85 }
+		clr_country_flag = vu_strong_lollard_influence
+		change_religion = lollardy
+		capital_scope = {
+			change_religion = lollardy
+			add_reform_center = lollardy
+		}
+		hidden_effect = {
+			add_prestige = 25	#Counters -100 from conversion
+			add_stability = -1
+		}
+		add_country_modifier = {
+			name = "conversion_zeal"
+			duration = 3650
+		}
+		random_owned_province = {
+			limit = { religion = lollardy }
+			add_reform_center = lollardy
+		}
+	}
+	
+	option = { #Another rebellion...
+		name = vu_reformation.4.b
+		ai_chance = { factor = 15 }
+		clr_country_flag = vu_strong_lollard_influence
+		random_owned_province = {
+			limit = { religion = lollardy }
+			spawn_rebels = {
+				type = lollardy_rebels
+				size = 2
+				win = yes
+			}
+		}
+		add_stability = -1
+		add_corruption = 2
+	}
+}	

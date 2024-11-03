@@ -1,0 +1,60 @@
+#Decisions for setting alternate names for the countries
+#By Robert.K (docRobert)
+
+country_decisions = {
+	vu_restore_country_name = { #Restore name of the country. Always active!
+		major = yes
+		potential = { ai = no }
+		allow = { ai = no }
+		effect = {
+			restore_country_name = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	########################################
+	# Alternate names for various nations: #
+	########################################
+	vu_restore_byz_name = { #Byzantium
+		potential = {
+			ai = no
+			tag = BYZ
+			NOT = { has_country_flag = changed_name_byz }
+		}
+		allow = {
+			ai = no
+			tag = BYZ
+			government_rank = 9
+			culture_group = byzantine
+			owns_core_province = 151
+		}
+		effect = {
+			override_country_name = VU_NAME_BYZ
+			set_country_flag = changed_name_byz
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	vu_restore_tun_name = { #Ifriqiya
+		potential = {
+			ai = no
+			tag = TUN
+			NOT = { has_country_flag = changed_name_tun }
+		}
+		allow = {
+			ai = no
+			tag = TUN
+			owns_core_province = 341
+		}
+		effect = {
+			override_country_name = VU_NAME_TUN
+			set_country_flag = changed_name_tun
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

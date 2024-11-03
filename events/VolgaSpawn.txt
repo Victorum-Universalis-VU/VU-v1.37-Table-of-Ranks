@@ -1,0 +1,353 @@
+#VU Quonton
+#Crimean = 7193
+#Sibearian = 2429 2359 2434 
+#Ural = 1077 5675 
+#Volga = 303 2419 2418
+#volga 2 = 473 2444
+#blacksea = 5557 7295 7203 7196 282
+#moscow = 2422 296 7869
+#valhynian = 3242 7268 7226 7236 7232 7207 292
+#caucasus = 4305 3251
+
+
+namespace = volga_spawn
+
+country_event = {
+	id = volga_spawn.1
+	title = "volga_spawn.1.t"
+	desc = "volga_spawn.1.d"
+	picture = easterngfx_COURT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff }
+		Or = { 
+		culture_group = east_slavic
+		culture_group = germanic
+		}
+		adm_tech = 30
+		303 = {owned_by = ROOT}
+		2418 = {owned_by = ROOT}
+		2419 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 120
+}
+
+	option = {
+		name = "volga_spawn.1.a"
+		add_dip_power = -75
+		change_innovativeness = 6
+		set_country_flag = german_imigration_stuff
+		custom_tooltip = german_imigration_stuff
+	}
+
+	option = {
+		name = "volga_spawn.1.b"
+		add_treasury = 275
+		add_adm_power = 100
+	}
+}
+
+#Volga 1 
+country_event = {
+	id = volga_spawn.2
+	title = "volga_spawn.2.t"
+	desc = "volga_spawn.2.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_1 }
+		has_country_flag = german_imigration_stuff
+		303 = {owned_by = ROOT}
+		2418 = {owned_by = ROOT}
+		2419 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 76
+}
+
+	option = {
+		name = "volga_spawn.2.a"
+		set_country_flag = german_imigration_stuff_1
+		add_accepted_culture = pontic_steppe_german
+		303 = { add_core = VOG add_base_tax = 7 add_base_production = 6 add_base_manpower = 2 add_prosperity = 10 change_culture = pontic_steppe_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		2418 = { add_core = VOG add_base_tax = 3 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = pontic_steppe_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		2419 = { add_core = VOG add_base_tax = 3 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = pontic_steppe_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#Volga 2 
+country_event = {
+	id = volga_spawn.3
+	title = "volga_spawn.3.t"
+	desc = "volga_spawn.3.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_2 }
+		has_country_flag = german_imigration_stuff
+		473 = {owned_by = ROOT}
+		2444 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 120
+}
+
+	option = {
+		name = "volga_spawn.3.a"
+		set_country_flag = german_imigration_stuff_2
+		add_accepted_culture = pontic_steppe_german
+		473 = { add_core = VOG add_base_tax = 5 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = pontic_steppe_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		2444 = { add_core = VOG add_base_tax = 4 add_base_production = 2 add_base_manpower = 1 add_prosperity = 10 change_culture = pontic_steppe_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#Crimean = 7193
+country_event = {
+	id = volga_spawn.4
+	title = "volga_spawn.4.t"
+	desc = "volga_spawn.4.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_3 }
+		has_country_flag = german_imigration_stuff
+		7193 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 45
+}
+
+	option = {
+		name = "volga_spawn.4.a"
+		set_country_flag = german_imigration_stuff_3
+		add_accepted_culture = crimean_german
+		7193 = { add_core = GCR add_base_tax = 3 add_base_production = 3 add_base_manpower = 1 add_prosperity = 10 change_culture = crimean_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+
+#Sibearian = 2429 2359 2434 
+country_event = {
+	id = volga_spawn.5
+	title = "volga_spawn.5.t"
+	desc = "volga_spawn.5.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_4 }
+		has_country_flag = german_imigration_stuff
+		2429 = {owned_by = ROOT}
+		2359 = {owned_by = ROOT}
+		2434 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 190
+}
+
+	option = {
+		name = "volga_spawn.5.a"
+		set_country_flag = german_imigration_stuff_4
+		add_accepted_culture = siberian_german
+		2429 = { add_core = SBR add_base_tax = 3 add_base_production = 3 add_base_manpower = 1 add_prosperity = 10 change_culture = siberian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		2359 = { add_core = SBR add_base_tax = 5 add_base_production = 4 add_base_manpower = 1 add_prosperity = 10 change_culture = siberian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		2434 = { add_core = SBR add_base_tax = 2 add_base_production = 2 add_base_manpower = 1 add_prosperity = 10 change_culture = siberian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#Ural = 1077 5675 
+country_event = {
+	id = volga_spawn.6
+	title = "volga_spawn.6.t"
+	desc = "volga_spawn.6.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_5 }
+		has_country_flag = german_imigration_stuff
+		1077 = {owned_by = ROOT}
+		5675 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 135
+}
+
+	option = {
+		name = "volga_spawn.6.a"
+		set_country_flag = german_imigration_stuff_5
+		add_accepted_culture = ural_german
+		1077 = { add_core = URG add_base_tax = 5 add_base_production = 4 add_base_manpower = 1 add_prosperity = 10 change_culture = ural_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		5675 = { add_core = URG add_base_tax = 2 add_base_production = 3 add_base_manpower = 1 add_prosperity = 10 change_culture = ural_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#blacksea = 5557 7295 7203 7196 282
+country_event = {
+	id = volga_spawn.7
+	title = "volga_spawn.7.t"
+	desc = "volga_spawn.7.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_6 }
+		has_country_flag = german_imigration_stuff
+		5557 = {owned_by = ROOT}
+		7195 = {owned_by = ROOT}
+		7203 = {owned_by = ROOT}
+		7196 = {owned_by = ROOT}
+		282 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 75
+}
+
+	option = {
+		name = "volga_spawn.7.a"
+		set_country_flag = german_imigration_stuff_6
+		add_accepted_culture = ukraine_german
+		282 = { add_core = GBL add_base_tax = 5 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = ukraine_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7195 = { add_core = GBL add_base_tax = 4 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = ukraine_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7203 = { add_core = GBL add_base_tax = 3 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = ukraine_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7196 = { add_core = GBL add_base_tax = 2 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = ukraine_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		5557 = { add_core = GBL add_base_tax = 2 add_base_production = 2 add_base_manpower = 2 add_prosperity = 10 change_culture = ukraine_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#moscow = 2422 296 7869 5646
+country_event = {
+	id = volga_spawn.8
+	title = "volga_spawn.8.t"
+	desc = "volga_spawn.8.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_7 }
+		has_country_flag = german_imigration_stuff
+		2422 = {owned_by = ROOT}
+		296 = {owned_by = ROOT}
+		7869 = {owned_by = ROOT}
+		5646 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 120
+}
+
+	option = {
+		name = "volga_spawn.8.a"
+		set_country_flag = german_imigration_stuff_7
+		add_accepted_culture = russian_german
+		2422 = { add_core = GMK add_base_tax = 5 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = russian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		296 = { add_core = GMK add_base_tax = 3 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = russian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7869 = { add_core = GMK add_base_tax = 3 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = russian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		5646 = { add_core = GMK add_base_tax = 5 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = russian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#valhynian = 3242 7268 7226 7236 7232 7207 292\
+country_event = {
+	id = volga_spawn.9
+	title = "volga_spawn.9.t"
+	desc = "volga_spawn.9.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_8 }
+		has_country_flag = german_imigration_stuff
+		3242 = {owned_by = ROOT}
+		7268 = {owned_by = ROOT}
+		7226 = {owned_by = ROOT}
+		7236 = {owned_by = ROOT}
+		7232 = {owned_by = ROOT}
+		7207 = {owned_by = ROOT}
+		292 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 90
+}
+
+	option = {
+		name = "volga_spawn.8.a"
+		set_country_flag = german_imigration_stuff_8
+		add_accepted_culture = volhynian_german
+		3242 = { add_core = VLH add_base_tax = 5 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7268 = { add_core = VLH add_base_tax = 3 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7226 = { add_core = VLH add_base_tax = 5 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7236 = { add_core = VLH add_base_tax = 5 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7232 = { add_core = VLH add_base_tax = 3 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7207 = { add_core = VLH add_base_tax = 3 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		292 = { add_core = VLH add_base_tax = 4 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = volhynian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}
+
+#baltic = 7840 7843 1842 7856 37 7839
+country_event = {
+	id = volga_spawn.10
+	title = "volga_spawn.10.t"
+	desc = "volga_spawn.10.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_9 }
+		has_country_flag = german_imigration_stuff
+		7840 = {owned_by = ROOT}
+		7843 = {owned_by = ROOT}
+		1842 = {owned_by = ROOT}
+		7856 = {owned_by = ROOT}
+		37 = {owned_by = ROOT}
+		7839 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 66
+}
+
+	option = {
+		name = "volga_spawn.8.a"
+		set_country_flag = german_imigration_stuff_9
+		add_accepted_culture = baltic_german
+		7840 = { add_core = UBD add_base_tax = 3 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7843 = { add_core = UBD add_base_tax = 5 add_base_production = 5 add_base_manpower = 2 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		1842 = { add_core = UBD add_base_tax = 4 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7856 = { add_core = UBD add_base_tax = 3 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		37 = { add_core = UBD add_base_tax = 3 add_base_production = 4 add_base_manpower = 2 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		7839 = { add_core = UBD add_base_tax = 3 add_base_production = 4 add_base_manpower = 1 add_prosperity = 10 change_culture = baltic_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		38 = { add_core = UBD }
+		1834 = { add_core = UBD }
+	}
+}
+
+#caucasus = 4305 3251
+country_event = {
+	id = volga_spawn.11
+	title = "volga_spawn.11.t"
+	desc = "volga_spawn.11.d"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		NOT = { has_country_flag = german_imigration_stuff_10 }
+		has_country_flag = german_imigration_stuff
+		4305 = {owned_by = ROOT}
+		3251 = {owned_by = ROOT}
+	}
+
+mean_time_to_happen = {
+	months = 100
+}
+
+	option = {
+		name = "volga_spawn.8.a"
+		set_country_flag = german_imigration_stuff_10
+		add_accepted_culture = caucasian_german
+		4305 = { add_core = GCU add_base_tax = 3 add_base_production = 3 add_base_manpower = 1 add_prosperity = 10 change_culture = caucasian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+		3251 = { add_core = GCU add_base_tax = 2 add_base_production = 3 add_base_manpower = 2 add_prosperity = 10 change_culture = caucasian_german add_permanent_province_modifier = { name = vu_german_settlement duration = -1 } if = { limit = { is_religion_enabled = protestant ROOT = { religion = orthodox } } change_religion = protestant } else_if = { limit = { NOT = { is_religion_enabled = protestant } ROOT = { religion = orthodox } } change_religion = catholic } else_if = { limit = { ROOT = { religion = catholic } } change_religion = catholic } else = { change_religion = protestant }  } 
+	}
+}

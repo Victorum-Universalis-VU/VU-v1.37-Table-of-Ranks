@@ -1,0 +1,53 @@
+# usage:
+## has_advisors_expanded_advisor = { adm = yes skill = 3 }
+has_advisors_expanded_advisor = {
+	[[adm]
+		if = {
+			limit = {
+				always = $adm$
+			}
+			# ADM
+			OR = {
+				administrator = $skill$
+				state_overseer = $skill$
+				civil_engineer = $skill$
+				researcher = $skill$
+				reformist = $skill$
+				religious_representative = $skill$
+			}
+		}
+	]
+	[[dip]
+		if = {
+			limit = {
+				always = $dip$
+			}
+			# DIP
+			OR = {
+				negotiator = $skill$
+				pioneer = $skill$
+				marauder_captain = $skill$
+				marketeer = $skill$
+				mercantile_influencer = $skill$
+				navarch = $skill$
+				subject_mediator = $skill$
+			}
+		}
+	]
+	[[mil]
+		if = {
+			limit = {
+				always = $mil$
+			}
+			# MIL
+			OR = {
+				commander = $skill$
+				drill_instructor = $skill$
+				combat_engineer = $skill$
+				tactician = $skill$
+				mercenary_captain = $skill$
+				defensive_planner = $skill$
+			}
+		}
+	]
+}

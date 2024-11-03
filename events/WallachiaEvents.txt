@@ -1,0 +1,338 @@
+namespace = wal_events
+
+country_event = {
+	id = wal_events.1
+	title = wal_events.1.t
+	desc = wal_events.1.d
+	picture = IMPALED_SOLDIERS_eventPicture
+
+	is_triggered_only = yes
+	option = {
+		name = wal_events.1.a
+		add_estate_influence_modifier = {
+   			estate = estate_nobles
+    			desc = EST_VAL_IMPALED_NOBLES
+    			influence = -50
+    			duration = 7300
+		}
+		add_estate_loyalty = {
+   			estate = estate_nobles
+    			loyalty = 10
+		}
+		change_estate_land_share = {
+   			estate = estate_nobles
+    			share = -5
+		}
+	}
+}
+
+country_event = {
+	id = wal_events.2
+	title = wal_events.2.t
+	desc = wal_events.2.d
+	picture = MILITARY_CAMP_eventPicture
+
+	is_triggered_only = yes
+	option = {
+		name = wal_events.2.a
+		add_country_modifier = { 
+    		name = "vu_wal_forcelimit"
+   			duration = -1  
+		}
+		add_army_professionalism = 0.05
+	}
+}
+
+country_event = {
+	id = wal_events.3
+	title = wal_events.3.t
+	desc = wal_events.3.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = { 
+    			name = "vu_wal_morale"
+   				duration = -1  
+			}
+		}
+	}
+	option = {
+		name = wal_events.3.a	
+		custom_tooltip = wal_otto_war	
+		set_country_flag = war_ottoman_wal
+	}
+}
+
+country_event = {
+	id = wal_events.4
+	title = wal_events.4.t
+	desc = wal_events.4.d
+	picture = FARMING_eventPicture
+
+	fire_only_once = yes
+
+	trigger ={
+		tag = WAL
+		has_country_flag = war_ottoman_wal
+		is_at_war = no
+   	}
+	option = {
+		name = wal_events.4.a
+		remove_country_modifier = vu_wal_morale
+	}
+}
+
+country_event = {
+	id = wal_events.5
+	title = wal_events.5.t
+	desc = wal_events.5.d
+	picture = BATTLE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = wal_events.5.a
+		add_mil_power = 100
+		add_prestige = 15
+		add_power_projection = {
+			type = mission_rewards_power_projection
+			amount = 15
+		}
+		random_list = {
+    		80 = {
+      			country_event = { id = flavor_wal.2 }
+    		}
+    		20 = {
+    		}
+		}
+	}
+}
+
+country_event = {
+	id = wal_events.6
+	title = wal_events.6.t
+	desc = wal_events.6.d
+	picture = BAD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = wal_events.6.a
+		set_country_flag = wal_turk_cuck
+		swap_non_generic_missions = yes 
+		add_treasury = -1000
+		hidden_effect = {
+		    TUR = {
+			    set_country_flag = forced_tributary_state
+				create_subject = {
+					subject_type = tributary_state
+					subject = WAL
+				}
+				clr_country_flag = forced_tributary_state
+			}
+		}
+		TUR = { 
+			add_treasury = 1000
+			add_opinion = {
+				who = ROOT
+				modifier = wal_turk_cuck
+			}
+		}
+		custom_tooltip = wal_cuck_bleh
+		define_ruler = {
+    		name = "Mihai II of Draculesti"
+    		dynasty = "Draculesti"
+    		adm = 6
+    		dip = 5
+    		mil = 5
+    		age = 20
+    		claim = 80
+		}
+		WAL = { add_liberty_desire = 100 }
+	}
+
+	option = { 
+		name = wal_events.6.b
+		set_country_flag = wal_independence 
+		swap_non_generic_missions = yes 
+		define_ruler = {
+    		name = "Mihai II of Draculesti"
+    		dynasty = "Draculesti"
+    		adm = 6
+    		dip = 5
+    		mil = 5
+    		age = 20
+    		claim = 100
+		}
+		TUR = {
+		add_opinion = {
+			who = ROOT
+			modifier = wal_turk_chad
+			}
+		}
+		TUR = {declare_war = WAL}
+	}
+}
+
+country_event = {
+	id = wal_events.7
+	title = wal_events.7.t
+	desc = wal_events.7.d
+	picture = BATTLE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = wal_events.7.a
+        define_general = {
+        	name = "Baba Novak"
+    		shock = 6
+    		fire = 6
+    		manuever = 6
+    		siege = 6
+		}
+		define_advisor = {
+   			type = commandant
+    		name = "Starina Novak"
+   			skill = 3
+    		culture = serbian
+    		religion = orthodox
+    		cost_multiplier = 0.25
+		}
+	}
+}
+
+country_event = {
+	id = wal_events.8
+	title = wal_events.8.t
+	desc = wal_events.8.d
+	picture = HORDE_ON_HORSEBACK_eventPicture
+
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = { 
+    			name = "vu_wal_maitenence_war"
+   				duration = -1  
+			}
+		}
+	}
+	option = {
+		name = wal_events.8.a	
+		custom_tooltip = wal_otto_war2	
+		set_country_flag = war_ottoman_wal2
+	}
+}
+
+country_event = {
+	id = wal_events.9
+	title = wal_events.9.t
+	desc = wal_events.9.d
+	picture = FARMING_eventPicture
+
+	fire_only_once = yes
+
+	trigger ={
+		tag = WAL
+		has_country_flag = war_ottoman_wal2
+		is_at_war = no
+   	}
+	option = {
+		name = wal_events.9.a
+		remove_country_modifier = vu_wal_maitenence_war
+	}
+}
+country_event = {
+	id = wal_events.10
+	title = wal_events.10.t
+	desc = wal_events.10.d
+	picture = DIET_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = wal_events.10.a
+			custom_tooltip = rom_remove	
+			set_country_flag = estate_peasants_enabled
+			set_country_flag = voronet_monastry
+			add_government_reform = romanian_united_principality
+			hidden_effect = { 
+				add_country_modifier = { 
+    			name = "rom_great_mod"
+   				duration = -1  
+			}
+			remove_country_modifier = vu_wal_high_productivity
+			remove_country_modifier = vu_mol_piety 
+			remove_country_modifier = vu_mol_diplo_legit 
+			remove_country_modifier = vu_mol_discipline 
+			remove_country_modifier = vu_mol_calv_army 
+			remove_country_modifier = vu_mol_force_limit 
+			remove_country_modifier = vu_mol_tax 
+			remove_country_modifier = vu_mol_mercccsss 
+			remove_country_modifier = vu_mol_prestige 
+			remove_country_modifier = vu_WAL_merc_cost 
+			remove_country_modifier = vu_bulgarian_discipline 
+			remove_country_modifier = vu_wal_forcelimit  
+			remove_country_modifier = vu_wal_force_limit 
+			remove_country_modifier = tsarigrad 
+			remove_country_modifier = vu_wal_merc 
+			remove_country_modifier = vu_wal_annex 
+			remove_country_modifier = vu_da_cup 
+			remove_country_modifier = vu_greek_trade 
+		}
+	}
+}
+
+country_event = {
+	id = wal_events.11
+	title = wal_events.11.t
+	desc = wal_events.11.d
+	picture = DIET_eventPicture
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = wal_events.11.a
+			custom_tooltip = rom_remove2	
+			set_country_flag = estate_peasants_enabled
+			set_country_flag = voronet_monastry
+			set_country_flag = rmn_conversion_of_england_flag
+			set_country_flag = rmn_dev_tax_in_latin_provinces_flag
+			set_country_flag = rmn_conversion_of_africa_flag
+			hidden_effect = { 
+				add_country_modifier = { 
+    				name = "rom_great_mod2"
+   				duration = -1  
+			}
+			remove_country_modifier = vu_wal_high_productivity
+			remove_country_modifier = vu_mol_piety 
+			remove_country_modifier = vu_mol_diplo_legit 
+			remove_country_modifier = vu_mol_discipline 
+			remove_country_modifier = vu_mol_calv_army 
+			remove_country_modifier = vu_mol_force_limit 
+			remove_country_modifier = vu_mol_tax 
+			remove_country_modifier = vu_mol_mercccsss 
+			remove_country_modifier = vu_mol_prestige 
+			remove_country_modifier = vu_WAL_merc_cost 
+			remove_country_modifier = vu_bulgarian_discipline 
+			remove_country_modifier = vu_wal_forcelimit  
+			remove_country_modifier = vu_wal_force_limit 
+			remove_country_modifier = tsarigrad 
+			remove_country_modifier = vu_wal_merc 
+			remove_country_modifier = vu_wal_annex 
+			remove_country_modifier = vu_da_cup 
+			remove_country_modifier = vu_greek_trade 
+			remove_country_modifier = rom_great_mod
+			remove_country_modifier = rmn_hispania_tercio
+			remove_country_modifier = rmn_latin_brothers 
+			remove_country_modifier = rmn_romanian_dev 
+		}
+	}
+}

@@ -1,0 +1,52 @@
+french_infrastructure_network = {
+	potential = {
+		is_primitive = no
+		OR = {
+			has_country_flag = fra_enable_infrastructure_network_flag
+			has_idea_group = logistics_ideas
+		}
+	}
+	allow = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = unlocked_if_tt
+				has_country_flag = fra_enable_infrastructure_network_flag
+			}
+			has_idea_group = logistics_ideas
+		}
+	}
+	modifier = {
+		local_friendly_movement_speed = 0.2
+		supply_limit = 25
+	}
+	color = {
+		50
+		90
+		160
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 10
+			any_province_in_state = {
+				infantry_in_province = 25
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = french_infrastructure_network
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				army_size = 100
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				tag = FRA
+			}
+		}
+	}
+}

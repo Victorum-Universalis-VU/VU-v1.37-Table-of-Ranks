@@ -1,0 +1,75 @@
+edict_protect_trade = {
+	potential = {
+		is_primitive = no
+		NOT = {
+			OR = {
+				has_idea_group = industry_ideas
+				has_country_flag = fra_improve_trade_power_state_edict_flag
+			}
+		}
+	}
+	allow = {
+		always = yes
+	}
+	modifier = {
+		province_trade_power_modifier = 0.25
+		province_trade_power_value = 0.15
+	}
+	color = {
+		190
+		90
+		30
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			all_province_in_state = {
+				NOT = {
+					province_trade_power = 10
+				}
+			}
+		}
+		modifier = {
+			factor = 4
+			owner = {
+				OR = {
+					has_idea_group = industry_ideas
+					has_idea_group = trade_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				government = republic
+			}
+		}
+		modifier = {
+			factor = 5
+			any_province_in_state = {
+				OR = {
+					has_building = marketplace
+					has_building = trade_depot
+					has_building = corporative_headquarters
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			any_province_in_state = {
+				province_trade_power = 60
+			}
+		}
+		modifier = {
+			factor = 5
+			all_province_in_state = {
+				province_trade_power = 30
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_protect_trade
+		}
+	}
+}

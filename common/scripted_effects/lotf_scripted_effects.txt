@@ -1,0 +1,20 @@
+lotf_republic_vassals = {
+	ROOT = { vassalize = PREV }
+	change_religion = ROOT
+	change_government = republic
+	add_prestige = 200
+	add_republican_tradition = 100
+	add_stability = 3
+	add_treasury = 3000
+	add_historical_friend = ROOT
+	ROOT = { add_historical_friend = PREV }
+	add_liberty_desire = -100
+	every_province = {
+        limit = {
+            has_discovered = ROOT
+            NOT = { has_discovered = PREV }
+        }
+        discover_country = PREV
+	}
+	add_country_modifier = { name = republican_vassal_modifier duration = -1 }
+}

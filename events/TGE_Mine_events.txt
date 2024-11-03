@@ -1,0 +1,121 @@
+namespace = mine_marcin
+
+province_event = {
+	id = mine_marcin.1
+	title = mine_marcin.1.t
+	desc = mine_marcin.1.d
+	picture = TRADE_GOODS_PLANTATION_GOODS_IN_WAREHOUSE_eventPicture
+
+	trigger = {
+		has_building = mine
+	}
+	
+	option = {
+		name = mine_marcin.1.a
+		ai_chance = { factor = 75 }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					random_list = {
+						50 = {
+							add_permanent_province_modifier = { 
+								name = copper_mine_small
+								duration = -1  
+							}
+						}
+						50 = {
+							add_permanent_province_modifier = { 
+								name = copper_mine
+								duration = -1  
+							}
+						}
+					}
+				}
+				50 = {
+					random_list = {
+						50 = {
+							add_permanent_province_modifier = { 
+								name = tin_mine_small
+								duration = -1  
+							}
+						}
+						50 = {
+							add_permanent_province_modifier = { 
+								name = tin_mine
+								duration = -1  
+							}
+						}
+					}
+				}
+				50 = {
+					random_list = {
+						50 = {
+							add_permanent_province_modifier = { 
+								name = zinc_mine_small
+								duration = -1  
+							}
+						}
+						50 = {
+							add_permanent_province_modifier = { 
+								name = zinc_mine
+								duration = -1  
+							}
+						}
+					}
+				}
+				25 = {
+					random_list = {
+						50 = {
+							add_permanent_province_modifier = { 
+								name = iron_mine_small
+								duration = -1  
+							}
+						}
+						50 = {
+							add_permanent_province_modifier = { 
+								name = iron_mine
+								duration = -1  
+							}
+						}
+					}
+				}
+				25 = {
+					random_list = {
+						50 = {
+							add_permanent_province_modifier = { 
+								name = lead_mine_small
+								duration = -1  
+							}
+						}
+						50 = {
+							add_permanent_province_modifier = { 
+								name = lead_mine
+								duration = -1  
+							}
+						}
+					}
+				}
+			}
+		}	
+		if = {
+			limit = { 
+				owner = {
+					ai = no 
+				}
+			}
+			owner = { add_dip_power = -100 }
+		}
+	}
+	
+	immediate = { 
+		FROM = { remove_building = mine }
+		ROOT = { set_province_flag = has_mine }
+	}
+}
+
+
+
+
+
+
+

@@ -1,0 +1,848 @@
+namespace = lotf_flavor_event
+
+country_event = { #Elect George Washington
+    id = lotf_flavor_event.1
+    title = lotf_flavor_event.1.t
+    desc = lotf_flavor_event.1.d
+    picture = CONGRESS_eventPicture
+    major = yes
+	trigger = { has_country_flag = independent_usa }
+	mean_time_to_happen = { months = 3 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.1.a
+		define_ruler = { 
+			name = "George Washington" 
+			adm = 5
+			dip = 4
+			mil = 6
+			age = 57
+		}
+		hidden_effect = { add_ruler_personality = calm_personality }
+	}
+	option = {
+        name = lotf_flavor_event.1.b
+		define_ruler = { 
+			name = "John Adams" 
+			adm = 5
+			dip = 5
+			mil = 5
+			age = 54
+		}
+		hidden_effect = { add_ruler_personality = well_connected_personality }
+	}
+}
+country_event = { #Constitution
+    id = lotf_flavor_event.2
+    title = lotf_flavor_event.2.t
+    desc = lotf_flavor_event.2.d
+    picture = CONSTITUTION_eventPicture
+    major = yes
+	trigger = { has_country_flag = independent_usa }
+	mean_time_to_happen = { years = 2 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.2.a
+		add_country_modifier = { name = consitution_modifier duration = 5475 }
+		set_country_flag = constitution_signed
+	}
+}
+country_event = { #Whisky Rebellion
+    id = lotf_flavor_event.3
+    title = lotf_flavor_event.3.t
+    desc = lotf_flavor_event.3.d
+    picture = ANGRY_MOB_eventPicture
+    major = yes
+	trigger = { has_country_flag = constitution_signed }
+	mean_time_to_happen = { years = 10 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.3.a
+		random_owned_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 12
+			}
+		}
+		random_owned_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 12
+			}
+		}
+		random_owned_province = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 12
+			}
+		}
+		define_advisor = {
+			name = "Alexander Hamilton"
+			type = treasurer 
+			skill = 3 
+			cost_multiplier = 0.5 
+		}
+		add_country_modifier = { name = whiskey_rebellion_modifier duration = 3650 }
+	}
+}
+country_event = { #Era of Common Man
+    id = lotf_flavor_event.4
+    title = lotf_flavor_event.4.t
+    desc = lotf_flavor_event.4.d
+    picture = REFORM_eventPicture
+	trigger = { has_country_flag = constitution_signed }
+	mean_time_to_happen = { years = 25 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.4.a
+		if = {
+			limit = { has_global_flag = advisors_expanded_mod_active } 
+			define_advisor = {
+				name = "Andrew Jackson"
+				type = commander 
+				skill = 3 
+				cost_multiplier = 0.50 
+			}
+		}
+		else = {
+			define_advisor = {
+				name = "Andrew Jackson"
+				type = grand_captain 
+				skill = 3 
+				cost_multiplier = 0.50 
+			}	
+		}
+		set_country_flag = common_man
+	}
+	option = {
+        name = lotf_flavor_event.4.b
+		define_general = {
+			name = "Andrew Jackson"
+			fire = 5
+			shock = 4
+			manuever = 5
+			siege = 3
+		}
+		set_country_flag = common_man
+	}
+}
+country_event = { #Dred Scott
+    id = lotf_flavor_event.5
+    title = lotf_flavor_event.5.t
+    desc = lotf_flavor_event.5.d
+    picture = ANGRY_MOB_eventPicture
+	trigger = { has_country_flag = common_man }
+	mean_time_to_happen = { years = 10 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.5.a
+		add_stability = -2
+		add_country_modifier = { name = dred_scott_modifier duration = 3650 }
+		set_country_flag = dred_scott
+	}
+}
+country_event = { #Bill of Rights
+    id = lotf_flavor_event.6
+    title = lotf_flavor_event.6.t
+    desc = lotf_flavor_event.6.d
+    picture = CONGRESS_eventPicture
+    major = yes
+	trigger = { has_country_flag = constitution_signed }
+	mean_time_to_happen = { years = 5 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.6.a
+		add_stability_or_adm_power = yes
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+	}
+}
+country_event = { #Stock Exchange
+    id = lotf_flavor_event.7
+    title = lotf_flavor_event.7.t
+    desc = lotf_flavor_event.7.d
+    picture = GREAT_BUILDING_eventPicture
+    major = yes
+	trigger = { has_country_flag = constitution_signed }
+	mean_time_to_happen = { years = 30 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.7.a
+		add_country_modifier = { name = stock_exchange_1 duration = 7300 }
+		set_country_flag = stock_exchange_founded
+	}
+}
+country_event = { #Federal Reserve
+    id = lotf_flavor_event.8
+    title = lotf_flavor_event.8.t
+    desc = lotf_flavor_event.8.d
+    picture = UNIVERSITY_eventPicture
+    major = yes
+	trigger = { has_country_flag = constitution_signed }
+	mean_time_to_happen = { years = 25 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.8.a
+		add_inflation = -5
+		add_country_modifier = { name = wells_fargo_modifier_1 duration = 7300 }
+	}   
+	option = {
+        name = lotf_flavor_event.8.b
+		add_inflation = -5
+		add_country_modifier = { name = wells_fargo_modifier_2 duration = 7300 }
+	}
+}
+country_event = { #Build Roads
+    id = lotf_flavor_event.9
+    title = lotf_flavor_event.9.t
+    desc = lotf_flavor_event.9.d
+    picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	trigger = { has_country_flag = stock_exchange_founded }
+	mean_time_to_happen = { years = 35 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.9.a
+		add_country_modifier = { name = build_roads_modifier duration = 12775 }
+	}   
+}
+country_event = { #Thomas Edison
+    id = lotf_flavor_event.11
+    title = lotf_flavor_event.11.t
+    desc = lotf_flavor_event.11.d
+    picture = INVENTION_eventPicture
+	trigger = { mission_completed = USA_missions_great_lakes }
+	mean_time_to_happen = { months = 12 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.11.a
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		change_innovativeness = 3
+		add_country_modifier = { name = thomas_edison_modifier duration = 7300 }
+	}   
+}
+country_event = { #Lewis and Clark
+    id = lotf_flavor_event.12
+    title = lotf_flavor_event.12.t
+    desc = lotf_flavor_event.12.d
+    picture = EXPLORERS_eventPicture
+	trigger = { mission_completed = USA_missions_american_heartland }
+	mean_time_to_happen = { months = 6 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.12.a
+		custom_tooltip = lotf_flavor_event.12.tt
+		custom_tooltip = blank_space
+		hidden_effect = {
+		    utah_area = { discover_country = ROOT }
+			upper_platte_area = { discover_country = ROOT }
+			central_rockies_area = { discover_country = ROOT }
+			oregon_area = { discover_country = ROOT }
+			salish_sea_area = { discover_country = ROOT }
+			oregon_area = { discover_country = ROOT }
+			colonial_louisiana = { discover_country = ROOT }
+		}
+		define_conquistador = {
+			name = "William Clark"
+			fire = 4
+			shock = 4
+			manuever = 5
+			siege = 2
+		}
+	}   
+}
+country_event = { #Cotton Gin
+    id = lotf_flavor_event.13
+    title = lotf_flavor_event.13.t
+    desc = lotf_flavor_event.13.d
+    picture = INVENTION_eventPicture
+	trigger = { mission_completed = USA_missions_cotton_king }
+	mean_time_to_happen = { months = 12 }
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.13.a
+		change_innovativeness = 3
+		custom_tooltip = cotton_gin_modifier_tt
+		tooltip = {
+			add_province_modifier = { name = cotton_gin_modifier duration = -1 }
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = { trade_goods = cotton }
+				add_province_modifier = { name = cotton_gin_modifier duration = -1 }
+			}
+		}
+	}
+	option = {
+        name = lotf_flavor_event.13.b
+		change_innovativeness = 3
+		custom_tooltip = cotton_gin_modifier_tt
+		tooltip = {
+			add_province_modifier = { name = cotton_gin_modifier_2 duration = 5475 }
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = { trade_goods = cotton }
+				add_province_modifier = { name = cotton_gin_modifier_2 duration = 5475 }
+			}
+		}
+		define_advisor = {
+			name = "Eli Whitney"
+			type = natural_scientist 
+			skill = 3 
+			cost_multiplier = 0.5 
+		}
+	}
+}
+country_event = { #Cotton Price Boost
+	id = lotf_flavor_event.14
+	title = lotf_flavor_event.14.t
+	desc = lotf_flavor_event.14.d
+	picture = TRADEGOODS_eventPicture
+	major = yes
+	is_triggered_only = yes
+	trigger = { 
+		mission_completed = USA_missions_cotton_king
+		trading_bonus = { trade_goods = cotton value = yes }
+	}
+
+	option = {
+		name = lotf_flavor_event.14.a
+		change_price = {
+			trade_goods = cotton
+			key = COTTON_KING_2
+			value = 0.5
+			duration = 1
+		}
+	}
+}
+province_event = { #Convert English Culture to American
+    id = lotf_flavor_event.10
+    title = lotf_flavor_event.10.t
+    desc = lotf_flavor_event.10.d
+    picture = CITY_VIEW_eventPicture
+	trigger = {
+		owner = {
+			tag = USA
+			is_subject = no
+		}
+		culture = english
+	}
+	mean_time_to_happen = {
+		years = 30
+		modifier = {
+			factor = 3
+			owner = { is_at_war = yes }
+		}
+		modifier = {
+			factor = 1.25
+			is_state = no
+		}
+		modifier = {
+			factor = 1.5
+			devastation = 1
+		}
+		modifier = {
+			factor = 0.75
+			NOT = { devastation = 1 }
+		}
+		modifier = {
+			factor = 2
+			devastation = 10
+		}
+	}
+    option = {
+        name = lotf_flavor_event.10.a
+		change_culture = american		
+	}   
+}
+
+province_event = { #Colony Boost 1
+    id = lotf_flavor_event.15
+    title = lotf_flavor_event.15.t
+    desc = lotf_flavor_event.15.d
+    picture = CITY_VIEW_eventPicture
+	trigger = {
+		owner = {
+			tag = USA
+			is_subject = no
+			is_subject = no
+		}
+		is_colony = yes
+		colonysize = 250
+	}
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 1.5
+			devastation = 1
+		}
+		modifier = {
+			factor = 3
+			owner = { is_at_war = yes }
+		}
+	}
+    option = {
+        name = lotf_flavor_event.15.a
+		add_province_modifier = { name = colonial_frontier_modifier duration = 1825 }	
+	}   
+    option = {
+        name = lotf_flavor_event.15.b
+		add_colonysize = 200	
+		#add_adm_power = -25
+		#add_dip_power = -25
+	}   
+}
+province_event = { #Tobacco Bountiful Harvest
+    id = lotf_flavor_event.16
+    title = lotf_flavor_event.16.t
+    desc = lotf_flavor_event.16.d
+    picture = FARMING_eventPicture
+	trigger = {
+		owner = {
+			tag = USA
+			is_subject = no
+			is_subject = no
+		}
+		trade_goods = tobacco
+		base_production = 5
+		NOT = { has_province_flag = bountiful_harvest_flag }
+	}
+	mean_time_to_happen = {
+		years = 100
+		modifier = {
+			factor = 1.5
+			devastation = 1
+		}
+		modifier = {
+			factor = 1.25
+			owner = { is_at_war = yes }
+		}
+		modifier = {
+			factor = 0.25
+			base_production = 7
+		}
+		modifier = {
+			factor = 0.1
+			base_production = 10
+		}
+	}
+    option = {
+        name = lotf_flavor_event.16.a
+		add_base_tax = 1
+		add_base_production = 2
+		add_base_manpower = 1
+		add_province_modifier = { name = bountiful_harvest_modifier duration = 3650 }
+		set_province_flag = bountiful_harvest_flag
+	}    
+}
+
+province_event = { #Cotton Bountiful Harvest
+    id = lotf_flavor_event.17
+    title = lotf_flavor_event.17.t
+    desc = lotf_flavor_event.17.d
+    picture = FARMING_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owner = {
+			tag = USA
+			is_subject = no
+			is_subject = no
+		}
+		trade_goods = cotton
+		base_production = 5
+	}
+	mean_time_to_happen = {
+		years = 50
+		modifier = {
+			factor = 1.5
+			devastation = 1
+		}
+		modifier = {
+			factor = 1.25
+			owner = { is_at_war = yes }
+		}
+		modifier = {
+			factor = 0.25
+			base_production = 7
+		}
+		modifier = {
+			factor = 0.1
+			base_production = 10
+		}
+	}
+    option = {
+        name = lotf_flavor_event.17.a
+		add_base_tax = 1
+		add_base_production = 2
+		add_base_manpower = 1
+		add_province_modifier = { name = bountiful_harvest_modifier duration = 3650 }
+	}    
+}
+
+country_event = { #FRANCE INTERVENTION REVOLUTIONARY WAR
+    id = lotf_flavor_event.18
+    title = lotf_flavor_event.18.t
+    desc = lotf_flavor_event.18.d
+    picture = INVENTION_eventPicture
+	trigger = {
+	    OR = {
+		    tag = FRA
+			tag = BFR
+		}
+		is_subject = no
+		NOT = { alliance_with = GBR }
+		NOT = { alliance_with = UNK }
+		any_country = {
+			capital_scope = {
+				colonial_region = colonial_eastern_america
+			}
+			colonial_parent = {
+			    OR = {
+				    tag = GBR
+					tag = UNK
+				}
+			}
+			OR = {
+			    war_with = GBR
+				war_with = UNK
+			}
+			NOT = { war_with = ROOT }
+		}
+	}
+    fire_only_once = yes
+	mean_time_to_happen = { months = 4 }
+    option = {
+        name = lotf_flavor_event.18.a
+		if = { 
+			limit = { manpower = 5 }
+			add_manpower = -5
+			set_global_flag = france_manpower_USA
+		}
+		else = {
+			add_mil_power = -100
+			set_global_flag = france_milmana_USA
+		}
+		add_treasury = -250
+		random_country = {
+		    if = {
+		    	limit = {
+		    		capital_scope = {
+		    			colonial_region = colonial_eastern_america
+		    		}
+		    		colonial_parent = {
+		    		    OR = {
+						    tag = GBR
+							tag = UNK
+						}
+		    		}
+		    		OR = {
+					    war_with = GBR
+						war_with = UNK
+					}
+		    		NOT = { war_with = ROOT }
+		    	}
+		    	country_event = { id = lotf_flavor_event.19 }
+		    	reverse_add_opinion = { who = FROM modifier = assisted_in_revolution }
+		    }
+		}
+	}   
+}
+country_event = { #FRANCE HELPS 13 COLONIES IN REV WAR
+    id = lotf_flavor_event.19
+    title = lotf_flavor_event.19.t
+    desc = lotf_flavor_event.19.d
+    picture = PORT_BLOCKADED_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.19.a
+		add_opinion = { who = FROM modifier = assisted_in_revolution }
+		if = { 
+			limit = { has_global_flag = france_manpower_USA }
+			add_manpower = 5
+		}
+		else = {
+			add_mil_power = 100
+		}
+		if = {
+			limit = {
+				capital_scope = { has_port = yes controlled_by = ROOT }
+			}
+			capital_scope = { heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT }
+		}
+		else_if = {
+			limit = {
+				950 = { owned_by = ROOT controlled_by = ROOT }
+			}
+			950 = { heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT heavy_ship = ROOT }
+		}
+		else = { add_treasury = 250 }
+		define_general = {
+			name = "Marquis de La Fayette" 
+			fire = 3 shock = 4 manuever = 4 siege = 1 
+		}
+	}   
+	after = {
+		clr_global_flag = france_manpower_USA
+		clr_global_flag = france_milmana_USA
+	}
+}
+country_event = { #SPAIN INTERVENTION REVOLUTIONARY WAR
+    id = lotf_flavor_event.20
+    title = lotf_flavor_event.20.t
+    desc = lotf_flavor_event.20.d
+    picture = INVENTION_eventPicture
+	trigger = {
+		OR = {
+			AND = {
+				tag = CAS
+				NOT = { exists = SPA }
+				NOT = { exists = BSP }
+				NOT = { exists = SPB }
+				NOT = { exists = BBS }
+				NOT = { exists = CSP }
+			}
+			tag = SPA
+			tag = BSP
+			tag = SPB
+			tag = BBS
+			tag = CSP
+		}
+		is_subject = no
+		NOT = { alliance_with = GBR }
+		NOT = { alliance_with = UNK }
+		any_country = {
+			capital_scope = {
+				colonial_region = colonial_eastern_america
+			}
+			colonial_parent = {
+				OR = {
+				    tag = GBR
+					tag = UNK
+				}
+			}
+			OR = {
+			    war_with = GBR
+				war_with = UNK
+			}
+			NOT = { war_with = ROOT }
+		}
+	}
+    fire_only_once = yes
+	mean_time_to_happen = { months = 6 }
+    option = {
+        name = lotf_flavor_event.20.a
+		if = { 
+			limit = { manpower = 5 }
+			add_manpower = -5
+			set_global_flag = spain_manpower_USA
+		}
+		else = {
+			add_mil_power = -100
+			set_global_flag = spain_milmana_USA
+		}
+		add_treasury = -200
+		random_country = {
+			limit = {
+				capital_scope = {
+					colonial_region = colonial_eastern_america
+				}
+				colonial_parent = {
+					OR = {
+					    tag = GBR
+						tag = UNK
+					}
+				}
+				OR = {
+				    war_with = GBR
+					war_with = UNK
+				}
+				NOT = { war_with = ROOT }
+			}
+			country_event = { id = lotf_flavor_event.21 }
+			reverse_add_opinion = { who = FROM modifier = assisted_in_revolution }
+		}		
+	}   
+}
+country_event = { #SPAIN HELPS 13 COLONIES IN REV WAR
+    id = lotf_flavor_event.21
+    title = lotf_flavor_event.21.t
+    desc = lotf_flavor_event.21.d
+    picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.21.a
+		add_opinion = { who = FROM modifier = assisted_in_revolution }
+		if = { 
+			limit = { has_global_flag = spain_manpower_USA }
+			add_manpower = 5
+		}
+		else = {
+			add_mil_power = 100
+		}
+		add_treasury = 200
+	}   
+	after = {
+		clr_global_flag = spain_manpower_USA
+		clr_global_flag = spain_milmana_USA
+	}
+}
+country_event = { #GERMANY INTERVENTION REVOLUTIONARY WAR
+    id = lotf_flavor_event.22
+    title = lotf_flavor_event.22.t
+    desc = lotf_flavor_event.22.d
+    picture = INVENTION_eventPicture
+	trigger = {
+		OR = {
+			primary_culture = prussian
+			primary_culture = saxon
+		}
+		OR = {
+			tag = PRU
+			AND = {
+				tag = BRA
+				NOT = { exists = PRU }
+			}
+			AND = {
+				tag = SAX
+				NOT = { exists = BRA }
+				NOT = { exists = PRU }
+			}
+			AND = {
+				tag = MKL
+				NOT = { exists = SAX }
+				NOT = { exists = BRA }
+				NOT = { exists = PRU }
+			}
+		}
+		is_subject = no
+		NOT = { alliance_with = GBR }
+		NOT = { alliance_with = UNK }
+		any_country = {
+			capital_scope = {
+				colonial_region = colonial_eastern_america
+			}
+			colonial_parent = {
+				OR = {
+				    tag = GBR
+				    tag = UNK
+				}
+			}
+			OR = {
+			    war_with = GBR
+				war_with = UNK
+			}
+			NOT = { war_with = ROOT }
+		}
+	}
+    fire_only_once = yes
+	mean_time_to_happen = { months = 8 }
+    option = {
+        name = lotf_flavor_event.22.a
+		add_treasury = -100
+		add_mil_power = -50
+		add_army_tradition = -15
+		random_country = {
+			limit = {
+				capital_scope = {
+					colonial_region = colonial_eastern_america
+				}
+				colonial_parent = {
+					OR = {
+				        tag = GBR
+				        tag = UNK
+					}
+				}
+				OR = {
+			        war_with = GBR
+				    war_with = UNK
+				}
+				NOT = { war_with = ROOT }
+			}
+			country_event = { id = lotf_flavor_event.23 }
+			reverse_add_opinion = { who = FROM modifier = assisted_in_revolution }
+		}
+	}   
+}
+country_event = { #GERMANY HELPS 13 COLONIES IN REV WAR
+    id = lotf_flavor_event.23
+    title = lotf_flavor_event.23.t
+    desc = lotf_flavor_event.23.d
+    picture = GENERALS_DISCUSSING_eventPicture
+	is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = lotf_flavor_event.23.a
+		add_opinion = { who = FROM modifier = assisted_in_revolution }
+		add_treasury = 100
+		add_mil_power = 50
+		add_army_tradition = 15
+		custom_tooltip = blank_space
+		define_general = {
+			name = "Friedrich Wilhelm von Steuben" 
+			fire = 5 shock = 4 manuever = 4 siege = 2 
+		}
+	}   
+}
+
+
+country_event = { #Presidential Assassination
+	id = lotf_flavor_event.24
+	title = lotf_flavor_event.24.t
+	desc = lotf_flavor_event.24.d
+	picture = ELECTION_REPUBLICAN_eventPicture
+	trigger = { 
+		tag = USA
+		NOT = { stability = 0 }
+		NOT = { has_country_flag = usa_monarchy }
+		NOT = { has_country_modifier = presidential_assassination_modifier }
+	}
+	mean_time_to_happen = {
+		months = 120
+		modifier = {
+			factor = 1.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_idea_group = humanist_ideas	
+		}
+	}
+	option = {
+		name = lotf_flavor_event.24.a
+		add_stability = -1
+		kill_ruler = yes
+		add_country_modifier = { name = presidential_assassination_modifier duration = 3650 }
+	}
+}
+
+country_event = { #ELECTION OF LINCOLN
+	id = lotf_flavor_event.25
+	title = lotf_flavor_event.25.t
+	desc = lotf_flavor_event.25.d
+	picture = LINCOLN_eventPicture
+	fire_only_once = yes
+	trigger = { 
+		tag = USA
+		any_province = { is_core = CSA }
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	option = {
+		name = lotf_flavor_event.25.a
+		define_ruler = {
+			name = "Abraham"
+			adm = 6
+            dip = 5
+            mil = 5
+			age = 52
+		}
+		hidden_effect = { set_dynasty = "Lincoln" }
+		set_ruler_flag = abe_lincoln
+	}
+}

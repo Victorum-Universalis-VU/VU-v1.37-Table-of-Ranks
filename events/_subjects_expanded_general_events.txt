@@ -1,0 +1,1478 @@
+namespace = subjects_expanded_general_events
+
+country_event = {
+	id = subjects_expanded_general_events.1
+	title = subjects_expanded_general_events.EVTNAME1
+	desc = subjects_expanded_general_events.EVTDESC1
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_general_events1.EVTOPT1
+
+		tooltip = {
+			add_liberty_desire = 20
+			add_country_modifier = {
+				name = disallow_subject_from_annexing_subjects_modifier
+				duration = 7300
+			}
+		}
+		custom_tooltip = desc_disallow_subject_from_annexing_subjects_modifier
+	}
+}
+
+country_event = {
+	id = subjects_expanded_general_events.2
+	title = subjects_expanded_general_events.EVTNAME2
+	desc = subjects_expanded_general_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			random_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+				}
+				set_country_flag = selected_for_transfer_subject_to_subject
+				save_event_target_as = transfer_to_subject_target_1
+			}
+			random_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+				}
+				set_country_flag = selected_for_transfer_subject_to_subject
+				save_event_target_as = transfer_to_subject_target_2
+			}
+			random_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+				}
+				set_country_flag = selected_for_transfer_subject_to_subject
+				save_event_target_as = transfer_to_subject_target_3
+			}
+			random_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+				}
+				set_country_flag = selected_for_transfer_subject_to_subject
+				save_event_target_as = transfer_to_subject_target_4
+			}
+			random_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+				}
+				set_country_flag = selected_for_transfer_subject_to_subject
+				save_event_target_as = transfer_to_subject_target_5
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT1
+
+		trigger = {
+			event_target:transfer_to_subject_target_1 = {
+				is_subject_of = ROOT
+				NOT = { has_country_flag = rejected_for_transfer_subject_to_subject }
+			}
+		}
+
+		event_target:transfer_to_subject_target_1 = {
+			if = {
+				limit = {
+					is_subject_of_type = vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = naval_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = naval_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = defensive_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = defensive_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = agricultural_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = agricultural_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = religious_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = religious_march
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT2
+
+		trigger = {
+			event_target:transfer_to_subject_target_2 = {
+				is_subject_of = ROOT
+				NOT = { has_country_flag = rejected_for_transfer_subject_to_subject }
+			}
+		}
+
+		event_target:transfer_to_subject_target_2 = {
+			if = {
+				limit = {
+					is_subject_of_type = vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = naval_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = naval_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = defensive_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = defensive_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = agricultural_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = agricultural_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = religious_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = religious_march
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT3
+
+		trigger = {
+			event_target:transfer_to_subject_target_3 = {
+				is_subject_of = ROOT
+				NOT = { has_country_flag = rejected_for_transfer_subject_to_subject }
+			}
+		}
+
+		event_target:transfer_to_subject_target_3 = {
+			if = {
+				limit = {
+					is_subject_of_type = vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = naval_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = naval_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = defensive_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = defensive_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = agricultural_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = agricultural_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = religious_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = religious_march
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT4
+
+		trigger = {
+			event_target:transfer_to_subject_target_4 = {
+				is_subject_of = ROOT
+				NOT = { has_country_flag = rejected_for_transfer_subject_to_subject }
+			}
+		}
+
+		event_target:transfer_to_subject_target_4 = {
+			if = {
+				limit = {
+					is_subject_of_type = vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = naval_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = naval_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = defensive_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = defensive_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = agricultural_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = agricultural_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = religious_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = religious_march
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT5
+
+		trigger = {
+			event_target:transfer_to_subject_target_5 = {
+				is_subject_of = ROOT
+				NOT = { has_country_flag = rejected_for_transfer_subject_to_subject }
+			}
+		}
+
+		event_target:transfer_to_subject_target_5 = {
+			if = {
+				limit = {
+					is_subject_of_type = vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_vassal
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_vassal
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = client_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = client_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = naval_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = naval_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = defensive_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = defensive_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = agricultural_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = agricultural_march
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_subject_of_type = religious_march
+				}
+				hidden_effect = {
+					ROOT = {
+						PREV = {
+							grant_independence = yes
+						}
+					}
+				}
+				event_target:transfer_to_subject_target_overlord_target = {
+					create_subject = {
+						subject = PREV
+						subject_type = religious_march
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT6
+
+		trigger = {
+			any_subject_country = {
+				is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+				OR = {
+					is_subject_of_type = vassal
+					is_subject_of_type = client_vassal
+					is_subject_of_type = march
+					is_subject_of_type = client_march
+					is_subject_of_type = naval_march
+					is_subject_of_type = defensive_march
+					is_subject_of_type = agricultural_march
+					is_subject_of_type = religious_march
+				}
+				NOT = { has_country_flag = selected_for_transfer_subject_to_subject }
+			}
+		}
+
+		hidden_effect = {
+			every_subject_country = {
+				limit = {
+					is_neighbor_of = event_target:transfer_to_subject_target_overlord_target
+					OR = {
+						is_subject_of_type = vassal
+						is_subject_of_type = client_vassal
+						is_subject_of_type = march
+						is_subject_of_type = client_march
+						is_subject_of_type = naval_march
+						is_subject_of_type = defensive_march
+						is_subject_of_type = agricultural_march
+						is_subject_of_type = religious_march
+					}
+					has_country_flag = selected_for_transfer_subject_to_subject
+				}
+				set_country_flag = rejected_for_transfer_subject_to_subject
+			}
+		}
+		country_event = { id = subjects_expanded_general_events.3 }
+	}
+
+	option = {
+		name = subjects_expanded_general_events2.EVTOPT7
+
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						is_subject_of = ROOT
+						is_subject_of = event_target:transfer_to_subject_target_overlord_target
+					}
+				}
+				clr_country_flag = selected_for_transfer_subject_to_subject
+				clr_country_flag = rejected_for_transfer_subject_to_subject
+			}
+			clr_country_flag = uses_transfer_vassal_to_subject
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_general_events.3
+	title = subjects_expanded_general_events.EVTNAME2
+	desc = subjects_expanded_general_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_general_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			country_event = { id = subjects_expanded_general_events.2 }
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_general_events.4
+	title = subjects_expanded_general_events.EVTNAME4
+	desc = subjects_expanded_general_events.EVTDESC4
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject = yes
+		is_defensive_subject_only = yes
+		is_at_war = yes
+		is_in_war = {
+			attackers = ROOT
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			export_to_variable = {
+				which = current_prestige_temp
+				value = trigger_value:prestige
+			}
+			every_country = {
+				limit = {
+					is_in_war = {
+						defender_leader = THIS
+						attackers = ROOT
+					}
+				}
+				white_peace = ROOT
+			}
+			if = {
+				limit = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							which = current_prestige_temp_temp
+							value = trigger_value:prestige
+						}
+						NOT = { check_variable = { which = current_prestige_temp_temp which = current_prestige_temp } }
+					}
+				}
+				while = {
+					limit = {
+						variable_arithmetic_trigger = {
+							export_to_variable = {
+								which = current_prestige_temp_temp
+								value = trigger_value:prestige
+							}
+							NOT = { check_variable = { which = current_prestige_temp_temp which = current_prestige_temp } }
+						}
+					}
+					add_prestige = 1
+				}
+			}
+			set_variable = { which = current_prestige_temp value = 0 }
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = subjects_expanded_general_events.5
+	title = subjects_expanded_general_events.EVTNAME5
+	desc = subjects_expanded_general_events.EVTDESC5
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	major_trigger = {
+		OR = {
+			tag = event_target:subject_to_force_release_subject_target
+			tag = event_target:release_subject_target_1
+			tag = event_target:release_subject_target_2
+			tag = event_target:release_subject_target_3
+			tag = event_target:release_subject_target_4
+			tag = event_target:release_subject_target_5
+		}
+	}
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				random_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						NOT = { has_country_flag = selected_for_release_subject_from_subject }
+					}
+					set_country_flag = selected_for_release_subject_from_subject
+					save_event_target_as = release_subject_target_1
+				}
+				random_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						NOT = { has_country_flag = selected_for_release_subject_from_subject }
+					}
+					set_country_flag = selected_for_release_subject_from_subject
+					save_event_target_as = release_subject_target_2
+				}
+				random_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						NOT = { has_country_flag = selected_for_release_subject_from_subject }
+					}
+					set_country_flag = selected_for_release_subject_from_subject
+					save_event_target_as = release_subject_target_3
+				}
+				random_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						NOT = { has_country_flag = selected_for_release_subject_from_subject }
+					}
+					set_country_flag = selected_for_release_subject_from_subject
+					save_event_target_as = release_subject_target_4
+				}
+				random_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						NOT = { has_country_flag = selected_for_release_subject_from_subject }
+					}
+					set_country_flag = selected_for_release_subject_from_subject
+					save_event_target_as = release_subject_target_5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT1
+
+		trigger = {
+			event_target:release_subject_target_1 = {
+				is_subject_of = event_target:subject_to_force_release_subject_target
+				NOT = { has_country_flag = rejected_for_release_subject_from_subject }
+			}
+		}
+
+		add_truce_with = event_target:release_subject_target_1
+		event_target:subject_to_force_release_subject_target = {
+			add_liberty_desire = 10
+			event_target:release_subject_target_1 = {
+				grant_independence = yes
+				hidden_effect = {
+					add_truce_with = ROOT
+					add_truce_with = PREV
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT2
+
+		trigger = {
+			event_target:release_subject_target_2 = {
+				is_subject_of = event_target:subject_to_force_release_subject_target
+				NOT = { has_country_flag = rejected_for_release_subject_from_subject }
+			}
+		}
+
+		add_truce_with = event_target:release_subject_target_2
+		event_target:subject_to_force_release_subject_target = {
+			add_liberty_desire = 10
+			event_target:release_subject_target_2 = {
+				grant_independence = yes
+				hidden_effect = {
+					add_truce_with = ROOT
+					add_truce_with = PREV
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT3
+
+		trigger = {
+			event_target:release_subject_target_3 = {
+				is_subject_of = event_target:subject_to_force_release_subject_target
+				NOT = { has_country_flag = rejected_for_release_subject_from_subject }
+			}
+		}
+
+		add_truce_with = event_target:release_subject_target_3
+		event_target:subject_to_force_release_subject_target = {
+			add_liberty_desire = 10
+			event_target:release_subject_target_3 = {
+				grant_independence = yes
+				hidden_effect = {
+					add_truce_with = ROOT
+					add_truce_with = PREV
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT4
+
+		trigger = {
+			event_target:release_subject_target_4 = {
+				is_subject_of = event_target:subject_to_force_release_subject_target
+				NOT = { has_country_flag = rejected_for_release_subject_from_subject }
+			}
+		}
+
+		add_truce_with = event_target:release_subject_target_4
+		event_target:subject_to_force_release_subject_target = {
+			add_liberty_desire = 10
+			event_target:release_subject_target_4 = {
+				grant_independence = yes
+				hidden_effect = {
+					add_truce_with = ROOT
+					add_truce_with = PREV
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT5
+
+		trigger = {
+			event_target:release_subject_target_5 = {
+				is_subject_of = event_target:subject_to_force_release_subject_target
+				NOT = { has_country_flag = rejected_for_release_subject_from_subject }
+			}
+		}
+
+		add_truce_with = event_target:release_subject_target_5
+		event_target:subject_to_force_release_subject_target = {
+			add_liberty_desire = 10
+			event_target:release_subject_target_5 = {
+				grant_independence = yes
+				hidden_effect = {
+					add_truce_with = ROOT
+					add_truce_with = PREV
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT6
+
+		trigger = {
+			event_target:subject_to_force_release_subject_target = {
+				any_subject_country = {
+					OR = {
+						is_subject_of_type = tributary_state
+						is_subject_of_type = protectorate
+						is_subject_of_type = imperial_tributary_state
+						is_subject_of_type = papal_sanctuary_subject
+						is_subject_of_type = imperial_feud_subject
+						is_subject_of_type = trade_outpost
+					}
+					NOT = { has_country_flag = selected_for_release_subject_from_subject }
+				}
+			}
+		}
+
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					limit = {
+						OR = {
+							is_subject_of_type = tributary_state
+							is_subject_of_type = protectorate
+							is_subject_of_type = imperial_tributary_state
+							is_subject_of_type = papal_sanctuary_subject
+							is_subject_of_type = imperial_feud_subject
+							is_subject_of_type = trade_outpost
+						}
+						has_country_flag = selected_for_release_subject_from_subject
+					}
+					set_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+		}
+		country_event = { id = subjects_expanded_general_events.6 }
+	}
+
+	option = {
+		name = subjects_expanded_general_events5.EVTOPT7
+
+		hidden_effect = {
+			event_target:subject_to_force_release_subject_target = {
+				every_subject_country = {
+					clr_country_flag = selected_for_release_subject_from_subject
+					clr_country_flag = rejected_for_release_subject_from_subject
+				}
+			}
+			clr_country_flag = uses_release_subject_from_subject
+		}
+	}
+}
+
+country_event = {
+	id = subjects_expanded_general_events.6
+	title = subjects_expanded_general_events.EVTNAME5
+	desc = subjects_expanded_general_events.EVTDESC5
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = subjects_expanded_general_events6.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			country_event = { id = subjects_expanded_general_events.5 }
+		}
+	}
+}

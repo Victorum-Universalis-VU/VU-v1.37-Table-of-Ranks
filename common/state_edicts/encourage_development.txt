@@ -1,0 +1,77 @@
+edict_encourage_development = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		always = yes
+	}
+	#years_to_notify = 3	#specifies how many years an edict needs to be active to show an alert
+	modifier = {
+		local_development_cost = -0.1
+		local_development_cost_modifier = -0.05
+	}
+	color = {
+		250
+		220
+		10
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			owner = {
+				is_at_war = yes
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				has_idea_group = infrastructure_ideas
+			}
+		}
+		modifier = {
+			factor = 5
+			any_province_in_state = {
+				province_has_center_of_trade_of_level = 1
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				any_neighbor_country = {
+					tech_difference = 2
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				NOT = {
+					num_of_states = 10
+				}
+			}
+		}
+		modifier = {
+			factor = 6
+			owner = {
+				adm_power = 600
+			}
+		}
+		modifier = {
+			factor = 7
+			owner = {
+				dip_power = 600
+			}
+		}
+		modifier = {
+			factor = 5
+			owner = {
+				mil_power = 600
+			}
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_encourage_development 
+		}
+	}
+}

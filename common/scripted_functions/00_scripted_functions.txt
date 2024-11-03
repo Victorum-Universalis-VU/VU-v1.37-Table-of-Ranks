@@ -1,0 +1,2612 @@
+# Hard-coded functions made fully or partly scripted
+#
+# Note that most functions use unique mechanics
+
+# ROOT = country
+can_join_hre_league = {
+	condition = {
+		tooltip = "CANNOT_JOIN_LEAGUE_AT_WAR"
+		potential = {
+		}
+		allow = {
+			is_at_war = no
+		}
+	}
+}
+
+can_leave_hre_league = {
+}
+
+can_harsh_treatment = {
+}
+
+can_reduce_war_exhaustion = {
+	condition = {
+		tooltip = "MAY_CANNOT_REDUCE_WAR_EXHAUSTION_OR_AUTONOMY"
+		potential = {
+			has_country_modifier = MAY_mayan_reform
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = MAY_mayan_reform
+			}
+		}
+	}
+}
+
+can_reduce_inflation = {
+}
+
+can_declare_bankruptcy = {
+}
+
+#VU update
+can_release_colonial_nation = {
+    condition = {
+        tooltip = "CAN_RELEASE_CN_WE_ARE_AT_WAR"
+        potential = {
+        }
+        allow = {
+            is_at_war = no
+        }
+    }
+    condition = {
+        tooltip = "no_release_gb"
+        potential = {
+        }
+        allow = {
+            NOT = {
+				OR = {
+					tag = ENG
+					tag = GBR
+					tag = UNK
+				}
+			}
+        }
+    }
+}
+
+can_claim_defender_of_faith = {
+    condition = {
+        tooltip = "defender_of_faith_limits_tt"
+        potential = {
+            always = yes
+        }
+        allow = {
+            army_size = 25
+            any_neighbor_country = {
+                NOT = {
+                    religion = ROOT
+                }
+            }
+        }
+    }
+}
+
+can_change_national_focus = {
+}
+
+#ME addition
+can_increase_stability = {
+	condition = {
+		tooltip = me_disabled_manual_stability
+		potential = {
+			has_country_flag = ME_cannot_increase_stability
+		}
+		allow = {
+			NOT = {
+				has_country_flag = ME_cannot_increase_stability
+			}
+		}
+	}
+}
+
+# ROOT = province, FROM = country
+can_add_province_to_hre = {
+	
+}
+
+#ROOT = province, FROM = country
+can_remove_province_from_hre = {
+	condition = {
+		potential = {
+			owner = {
+				ai = yes
+			}
+		}
+		allow = {
+			owner = {
+				NOT = {
+					has_country_flag = permanently_left_hre_flag
+				}
+			}
+		}
+	}
+}
+
+can_increase_autonomy = {
+	condition = {
+		tooltip = "MAY_CANNOT_REDUCE_WAR_EXHAUSTION_OR_AUTONOMY"
+		potential = {
+			owner = {
+				has_country_modifier = MAY_mayan_reform
+			}
+		}
+		allow = {
+			owner = {
+				NOT = {
+					has_country_modifier = MAY_mayan_reform
+				}
+			}
+		}
+	}
+}
+
+can_decrease_autonomy = {
+}
+
+can_make_core = {
+}
+
+can_make_state = {
+}
+
+can_abandon_state = {
+}
+
+#VU update
+can_improve_tax = {
+	condition = {
+		tooltip = me_disabled_manual_developing
+		potential = {
+			owner = {
+				has_country_flag = ME_tim_deny_developing_arabian_provinces
+			}
+			region = arabia_region
+		}
+		allow = {
+			OR = {
+				owner = {
+					NOT = {
+						has_country_flag = ME_tim_deny_developing_arabian_provinces
+					}
+				}
+				NOT = { region = arabia_region }
+			}
+		}
+	}
+}
+
+#ME update
+can_improve_production = {
+	condition = {
+		tooltip = me_disabled_manual_developing
+		potential = {
+			owner = {
+				has_country_flag = ME_tim_deny_developing_arabian_provinces
+			}
+			region = arabia_region
+		}
+		allow = {
+			OR = {
+				owner = {
+					NOT = {
+						has_country_flag = ME_tim_deny_developing_arabian_provinces
+					}
+				}
+				NOT = { region = arabia_region }
+			}
+		}
+	}
+}
+
+#ME update
+can_improve_manpower = {
+	condition = {
+		tooltip = me_disabled_manual_developing
+		potential = {
+			owner = {
+				has_country_flag = ME_tim_deny_developing_arabian_provinces
+			}
+			region = arabia_region
+		}
+		allow = {
+			OR = {
+				owner = {
+					NOT = {
+						has_country_flag = ME_tim_deny_developing_arabian_provinces
+					}
+				}
+				NOT = { region = arabia_region }
+			}
+		}
+	}
+}
+
+can_exploit_tax = {
+}
+
+can_exploit_production = {
+}
+
+can_exploit_manpower = {
+}
+
+can_change_culture = {
+}
+
+can_move_capital = {
+	condition = {
+		tooltip = "NO_CAPITAL_MOVE_SHOGUN"
+		potential = {
+			FROM = {
+				has_reform = shogunate
+			}
+		}
+		allow = {
+			always = no
+		}
+	}
+}
+
+can_move_trade_port = {
+}
+
+can_order_assault = {
+}
+
+can_order_force_march = {
+}
+
+can_scorch_earth = {
+}
+
+can_garrison_sorties = {
+}
+
+can_seize_colony = {
+}
+
+can_burn_colony = {
+}
+
+can_colonize_province = {
+	
+	### Colonial Nations can't colonize other CRs
+	#Condition - disables colonize button for situations included in potential
+	condition = {
+		tooltip = "VU_Colonial_Region_Colonization"
+		
+		#Potential - what causes the button to be disabled?
+		potential = {
+			FROM = { is_colonial_nation = yes }
+			FROM = { ai = yes }
+		}
+		
+		#Allow - what conditons must be met for the button to be enabled again?
+		allow = {
+			FROM = { capital_scope = { colonial_region = ROOT } }
+		}
+	}
+	
+	### Non-colonial Subjects can't colonize other continents
+	condition = {
+		tooltip = "VU_Subject_Colonization"
+		
+		potential = {
+			FROM = { is_colonial_nation = no }
+			FROM = { is_subject = yes }
+			FROM = { is_lesser_in_union = no } #Personal Unions can colonize other continents
+			FROM = { ai = yes }
+		}
+		
+		allow = {
+			FROM = { capital_scope = { continent = ROOT } }
+		}
+	}
+	
+	
+	### Hard to Colonize
+	condition = {
+		tooltip = "VU_malaria_province_cant_be_colonized"
+		
+		potential = {
+			has_province_modifier = vu_malaria_present
+		}
+		
+		allow = {
+			FROM = { 
+				OR = {
+					technology_group = north_american
+					technology_group = mesoamerican
+					technology_group = south_american
+					technology_group = andean
+					technology_group = high_american
+					technology_group = east_african
+					technology_group = central_african
+					technology_group = sub_saharan
+					technology_group = aboriginal_tech
+					technology_group = polynesian_tech
+					is_subject_of_type = self_governing_dominion_vu
+					dip_tech = 35 #After 1856 the restrictions are lifted
+				}
+			}
+		}
+	}
+	
+	### Age Restrictions
+	
+	#Age of Reformation (1550 to 1650)
+	#condition = {
+	#	tooltip = "VU_Age_Restriction_Reformation"
+	#	
+   	#    potential = {
+	#		NOT = {
+	#			OR = {
+	#				current_age = age_of_reformation
+	#				current_age = age_of_absolutism
+	#				current_age = age_of_revolutions
+	#				current_age = age_of_change
+	#			}
+	#		}
+	#		
+	#		OR = {
+	#			colonial_region = colonial_la_plata
+	#			colonial_region = colonial_guyana
+	#			colonial_region = colonial_florida
+	#			colonial_region = colonial_eastern_america
+	#			colonial_region = colonial_acadia
+	#			colonial_region = colonial_newfoundland
+	#			colonial_region = colonial_canada
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			has_global_flag = vu_no_age_restrictions
+	#			FROM = {
+	#				OR = {
+	#					technology_group = north_american
+	#					technology_group = mesoamerican
+	#					technology_group = south_american
+	#					technology_group = high_american
+	#					technology_group = east_african
+	#					technology_group = central_african
+	#					technology_group = sub_saharan
+	#					technology_group = aboriginal_tech
+	#					technology_group = polynesian_tech
+	#				}
+	#			}
+	#			FROM = {
+	#				is_former_colonial_nation = yes
+	#				is_subject = no
+	#			}
+	#		}
+	#	}
+	#}
+	
+	#Age of Absolutism (1650 to 1750)
+	#condition = {
+	#	tooltip = "VU_Age_Restriction_Absolutism"
+	#	
+    	#    potential = {
+	#		NOT = {
+	#			OR = {
+	#				current_age = age_of_absolutism
+	#				current_age = age_of_revolutions
+	#				current_age = age_of_change
+	#			}
+	#		}
+	#		
+	#		OR = {
+	#			colonial_region = colonial_texas
+	#			colonial_region = colonial_mississippi
+	#			colonial_region = colonial_louisiana
+	#			colonial_region = colonial_great_lakes
+	#			colonial_region = colonial_hudson_bay
+	#			colonial_region = colonial_california
+	#			colonial_region = colonial_cape
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			has_global_flag = vu_no_age_restrictions
+	#				OR = {
+	#	 				technology_group = north_american
+	#					technology_group = mesoamerican
+	#					technology_group = south_american
+	#					technology_group = andean
+	#					technology_group = high_american
+	#					technology_group = east_african
+	#					technology_group = central_african
+	#					technology_group = sub_saharan
+	#					technology_group = aboriginal_tech
+	#					technology_group = polynesian_tech
+	#				}
+	#			}
+	#			FROM = {
+	#				is_former_colonial_nation = yes
+	#				is_subject = no
+	#			}
+	#		}
+	#	}
+	#}
+	
+	#Age of Revolutions (1750 onwards)
+	#condition = {
+	#	tooltip = "VU_Age_Restriction_Revolutions"
+	#	
+    	#    potential = {	
+	#		NOT = {
+	#			OR = {
+	#				current_age = age_of_revolutions
+	#				current_age = age_of_change
+	#			}
+	#		}
+	#		
+	#		OR = {
+	#			colonial_region = colonial_cascadia
+	#			colonial_region = colonial_northwest_territories
+	#			colonial_region = colonial_alaska
+	#			colonial_region = colonial_australia
+	#			colonial_region = colonial_polynesia
+	#			colonial_region = colonial_papua
+	#			colonial_region = colonial_solomons
+	#			colonial_region = colonial_vanuatu
+	#			colonial_region = colonial_new_caledonia
+	#			colonial_region = colonial_fiji
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			has_global_flag = vu_no_age_restrictions
+	#			FROM = { 
+	#				OR = {
+	#					technology_group = north_american
+	#					technology_group = mesoamerican
+	#					technology_group = south_american
+	#					technology_group = andean
+	#					technology_group = high_american
+	#					technology_group = east_african
+	#					technology_group = central_african
+	#					technology_group = sub_saharan
+	#					technology_group = aboriginal_tech
+	#					technology_group = polynesian_tech
+	#				}
+	#			}
+	#			FROM = {
+	#				is_former_colonial_nation = yes
+	#				is_subject = no
+	#			}
+	#		}
+	#	}
+	#}
+	
+	### Historical Colonisation
+	
+	#Portuguese Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				#Portuguese Cultures
+				FROM = { primary_culture = portugese }
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Portuguese America
+				colonial_region = colonial_brazil
+				
+				#Portugese Africa
+				region = angola_region
+				
+				area = limpopo_area
+				area = lower_zambezi_area
+				area = uticulo_makuana_area
+				area = quelimane_area
+				
+				province_id = 788 #Angoche
+				province_id = 1096 #Cape Verde
+				province_id = 1097 #Fernando Po
+				province_id = 1114 #Gabu
+				province_id = 1195 #Mozambique
+				province_id = 1306 #Sao Tome
+				province_id = 4049 #Ibo
+				province_id = 4079 #Ngoyo
+				province_id = 4094 #Chokwe
+				province_id = 6665 #High Zambeze
+				province_id = 7368 #Cacheu
+				province_id = 7369 #Oio
+				province_id = 7370 #Biombo
+				province_id = 7371 #Bafata
+				province_id = 7372 #Tombali
+				province_id = 7373 #Quinara
+				province_id = 7374 #Bolama
+				
+				#Portuguese Asia
+				province_id = 2695 #Dili
+				province_id = 8725 #Oekusi
+				province_id = 8726 #Cova Lima
+				province_id = 8727 #Maubara
+				
+				
+				#New places that were colonized ONLY by Portugal go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Spanish Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Spanish Cultures
+					FROM = { primary_culture = andalucian } #AndalucianFROM = { primary_culture = aragonese } #Aragonese
+				    FROM = { primary_culture = castillian } #Castillian
+				    FROM = { primary_culture = catalan } #Catalan
+				    FROM = { primary_culture = galician } #Galician
+				    FROM = { primary_culture = leonese } #Leonese
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Spanish America
+				colonial_region = colonial_venezuela
+				colonial_region = colonial_colombia
+				colonial_region = colonial_ecuador
+				colonial_region = colonial_peru
+				colonial_region = colonial_bolivia
+				colonial_region = colonial_chile
+				colonial_region = colonial_mexico
+				colonial_region = colonial_central_america
+				colonial_region = colonial_cuba
+				colonial_region = colonial_la_plata
+				
+				#Spanish Africa
+				area = northern_morocco_area
+				area = western_sahara_area
+				
+				province_id = 1165 #Gabon
+				province_id = 4565 #Achinet
+				province_id = 5096 #Tamarán
+				
+				#Spanish East Asia
+				region = philippines_region
+				
+				#New places that were colonized ONLY by Spain go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+					FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British America
+				colonial_region = colonial_hudson_bay
+				colonial_region = colonial_northwest_territories
+				
+				province_id = 481 #Bermuda
+				province_id = 1095 #Falklands
+				province_id = 2025 #South Georgia
+				
+				#British Oceania
+				colonial_region = colonial_australia
+				colonial_region = colonial_fiji
+				colonial_region = colonial_polynesia
+				colonial_region = colonial_solomons
+				
+				#British Africa
+				region = central_africa_region
+				region = sudan_region
+				region = uganda_region
+				region = zimbabwe_region
+				
+				area = adamawa_plateau_area
+				area = benin_area
+				area = hausa_area
+				area = lower_niger_area
+				area = lower_volta_area
+				area = ngonde_area
+				area = somaliland_area
+				area = shire_area
+				area = syrian_desert_area
+				area = upper_zambezi_area
+				area = zambia_area
+				area = zazzau_area
+				
+				province_id = 1098 #St Helena
+				province_id = 1118 #Sierra Leone
+				province_id = 1139 #Gold Coast
+				province_id = 1148 #Gobir
+				province_id = 1149 #Katsina
+				province_id = 1157 #Borno
+				province_id = 1160 #Mandara
+				province_id = 2239 #Siine
+				province_id = 2257 #Denkyira
+				province_id = 2258 #Cape Coast
+				province_id = 2283 #Bedde
+				province_id = 4095 #Ishindi
+				province_id = 4107 #Kanongesha
+				province_id = 5027 #Tristan da Cunha
+				province_id = 5717 #Matru
+				province_id = 5719 #Anloga
+				province_id = 7362 #Kerewan
+				province_id = 7363 #Janjanbureh
+				province_id = 7364 #Banjul
+				province_id = 7365 #Brikama
+				province_id = 7366 #Upper River
+				province_id = 7381 #Bonthe
+				province_id = 7379 #Freetown
+				province_id = 7380 #Kono
+				
+				#British India
+				province_id = 574 #The Andamans
+				province_id = 8581 #Nicobar Islands
+				
+				#British East Asia
+				region = malaya_region #Malaya
+				
+				area = brunei_area #Brunei
+				area = riau_islands_area #Riau Islands
+				
+				#New places that were colonized ONLY by Great Britain go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#French Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#French Oceania
+				colonial_region = colonial_new_caledonia
+				
+				#French Africa
+				region = madagascar_region
+				
+				area = adrar_area
+				area = ahaggar_area
+				area = azbin_area
+				area = baghena_area				
+				area = bagirmi_area
+				area = bahr_salamat_area
+				area = central_africa_area
+				area = dendi_area
+				area = east_azbin_area
+				area = futa_jallon_area
+				area = gabon_area
+				area = jenne_area
+				area = kanem_area
+				area = kong_area
+				area = manding_area
+				area = mascarenes_area
+				area = massina_area
+				area = niger_bend_area
+				area = tademait_area
+				area = tanezrouft_area
+				area = tekrur_area
+				area = upper_kongo_area
+				area = upper_volta_area
+				area = wadai_area
+				area = west_africa_coast_area
+				
+				province_id = 1100 #Mahe
+				province_id = 1102 #Mauritius
+				province_id = 1103 #Ile Bourbon
+				province_id = 1113 #Cayor
+				province_id = 1116 #Wolof
+				province_id = 1141 #Whydah
+				province_id = 1143 #Kandi 
+				province_id = 1215 #Tajura
+				province_id = 2241 #Kindia
+				province_id = 2279 #Daura
+				province_id = 2282 #Muniyo
+				province_id = 2284 #Manga
+				province_id = 2291 #Ketu
+				province_id = 2292 #Djougou
+				province_id = 3047 #Ndar
+				province_id = 4020 #Comoros
+				province_id = 5221 #Béchar
+				province_id = 5222 #Talbalbala
+				province_id = 5715 #Boké
+				province_id = 5716 #Conakry
+				province_id = 5720 #Parakou
+				province_id = 5721 #Natitingou
+				province_id = 6960 #Oum El Assel
+				province_id = 7103 #Hogbonu
+				province_id = 7104 #Bohicon
+				province_id = 7105 #Azove
+				province_id = 7121 #Boffa
+				province_id = 7119 #Telimele
+				province_id = 7357 #Cap-Vert
+				province_id = 7358 #Thies
+				province_id = 7359 #Louga
+				province_id = 7361 #Kaolack
+				province_id = 7719 #Kissi
+				
+				#French India
+				province_id = 5093 #Desolation Islands
+				province_id = 8545 #Crozet Islands
+
+				#New places that were colonized ONLY by France go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }	
+	
+	#German Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#German Cultures
+				    FROM = { primary_culture = alsatian } #Alsatian
+				    FROM = { primary_culture = austrian } #Austrian
+				    FROM = { primary_culture = bavarian } #Bavarian
+				    FROM = { primary_culture = franconian } #Franconian
+				    FROM = { primary_culture = hannoverian } #Westphalian
+				    FROM = { primary_culture = hessian } #Rhenish
+				    FROM = { primary_culture = holsatian } #Holsatian
+				    FROM = { primary_culture = lower_saxon } #Low Saxon
+				    FROM = { primary_culture = pommeranian } #Pomeranian
+				    FROM = { primary_culture = prussian } #Prussian
+				    FROM = { primary_culture = saxon } #High Saxon
+				    FROM = { primary_culture = silesian_german } #Low Silesian
+				    FROM = { primary_culture = swabian } #Swabian
+				    FROM = { primary_culture = swiss } #Low Swiss
+				    FROM = { primary_culture = transylvanian_saxons } #Carpathian
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#German Africa
+				region = namibia_region
+				region = tanzania_region
+				
+				area = cameroon_area
+				
+				province_id = 1140 #Abomey
+				province_id = 1163 #Calabar
+				province_id = 1164 #Cameroon
+				province_id = 2295 #Atakora
+				province_id = 7073 #Atakpame
+				province_id = 7069 #Kara
+				province_id = 7116 #Dapaong
+				province_id = 7478 #Mvila
+				
+				#New places that were colonized ONLY by France go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Nordic Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Nordic Cultures
+				    FROM = { primary_culture = danish } #Danish
+				    FROM = { primary_culture = faroese } #Faroese
+				    FROM = { primary_culture = gotlander } #Gutnish
+				    FROM = { primary_culture = icelandic } #Icelandic
+				    FROM = { primary_culture = norwegian } #Norwegian
+				    FROM = { primary_culture = swedish } #Swedish
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Nordic America
+				colonial_region = colonial_greenland
+				
+				province_id = 5591 #Jan Mayen
+				
+				#New places that were colonized ONLY by Nordic go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Russian Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {				
+				OR = {
+					#Russian Cultures
+					FROM = { primary_culture = byelorussian } #Belarusian
+				    FROM = { primary_culture = cossack } #Cossack
+				    FROM = { primary_culture = novgorodian } #Novgorodian
+				    FROM = { primary_culture = russian } #Russian
+					FROM = { primary_culture = muscovite } #Muscovite
+					FROM = { primary_culture = ryazanian } #Ryazanian
+					FROM = { primary_culture = rusyn } #Russyn
+				    FROM = { primary_culture = ruthenian } #Ruthenian
+					FROM = { primary_culture = volhynian } #Volhynian
+					FROM = { primary_culture = polesian } #Polesian
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Siberia
+				region = ural_region
+				region = west_siberia_region
+				region = east_siberia_region
+				
+				#New places that were colonized ONLY by Russia go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Japanese Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Japanese Cultures
+					FROM = { primary_culture = ainu } #Ainu
+				    FROM = { primary_culture = japanese } #Saigoku
+				    FROM = { primary_culture = kyushuan } #Kyushuan
+				    FROM = { primary_culture = togoku } #Togoku
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {				
+				#Japan
+				province_id = 1032 #The Kurils
+				province_id = 1033 #Enchiw
+				province_id = 5292 #Poronay
+				province_id = 6425 #Chishima
+				province_id = 6440 #Shirutoru
+				
+				#New places that were colonized ONLY by Japan go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Belgian Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Belgian Cultures
+					FROM = { primary_culture = flemish } #Flemish
+				    FROM = { primary_culture = luxembourgish } #Luxembourgish
+				    FROM = { primary_culture = wallonian } #Walloon
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Belgian Africa
+				area = katanga_area
+				area = lower_kasai
+				area = lower_kongo_area
+				area = luba_area
+				area = sankuru_area
+				
+				province_id = 1901 #Mpangu
+				
+				#New places that were colonized ONLY by Belgium go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Dutch Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR ={
+					#Dutch Cultures
+					FROM = { primary_culture = brabantian } #Brabatian
+				    FROM = { primary_culture = dutch } #Hollander
+				    FROM = { primary_culture = dutch_saxon } #Nedersaksisch
+				    FROM = { primary_culture = east_frisian } #East Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = guelders } #Guelderish
+				    FROM = { primary_culture = limburgish } #Limburgish
+				    FROM = { primary_culture = north_frisian } #North Frisian
+				    FROM = { primary_culture = zeelandic } #Zeelander
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Dutch America
+				area = suriname_area
+				
+				#Belgian Africa
+				area = katanga_area
+				area = lower_kasai
+				area = lower_kongo_area
+				area = luba_area
+				area = sankuru_area
+				
+				province_id = 1901 #Mpangu
+				
+				#Dutch East Asia
+				region = sumatran_region #Sumatra
+				region = indonesia_region #Java
+				region = celebes_region #Celebes
+				region = moluccas_region #Moluccas
+				area = lesser_sunda_islands_area #Lesser Sunda Islands
+				area = kutai_area #Kutai
+				area = kalimantan_area #Kalimantan
+				area = kapuas_area #Kapuas
+				
+				province_id = 635 #Sonbai
+				province_id = 8547 #Lasan
+				province_id = 8698 #Kahajan
+				province_id = 8699 #Sampit
+				province_id = 8703 #Dusun
+				province_id = 8724 #Wehali
+				
+				#New places that were colonized ONLY by the Netherlands go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Chinese Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Chinese Cultures
+					FROM = { primary_culture = cantonese } #Cantonese
+				    FROM = { primary_culture = chihan } #Zhili
+				    FROM = { primary_culture = chimin } #Min
+				    FROM = { primary_culture = gan } #Gan
+				    FROM = { primary_culture = hakka } #Hakka
+				    FROM = { primary_culture = hubei } #Hubei
+				    FROM = { primary_culture = jianghuai } #Jianghuai
+				    FROM = { primary_culture = jin } #Jin
+				    FROM = { primary_culture = shandong_culture } #Shandong
+				    FROM = { primary_culture = sichuanese } #Sichuanese
+				    FROM = { primary_culture = wu } #Wu
+				    FROM = { primary_culture = xiang } #Xiang
+				    FROM = { primary_culture = xibei } #Xibei
+				    FROM = { primary_culture = zhongyuan } #Zhongyuan
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#China
+				area = south_china_sea_islands_area
+				
+				#New places that were colonized ONLY by China go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Italian Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Italian Cultures
+					FROM = { primary_culture = corsican_culture } #Corsican
+				    FROM = { primary_culture = dalmatian } #Dalmatian
+				    FROM = { primary_culture = friulian_culture } #Frisian
+				    FROM = { primary_culture = ladin_culture } #Ladin
+				    FROM = { primary_culture = ligurian } #Ligurian
+				    FROM = { primary_culture = lombard } #Lombard
+				    FROM = { primary_culture = neapolitan } #Neapolitan
+				    FROM = { primary_culture = piedmontese } #Piedmontese
+				    FROM = { primary_culture = romagnan } #Romagnol
+				    FROM = { primary_culture = romanch_culture } #Romansh
+				    FROM = { primary_culture = sardinian } #Sardinian
+				    FROM = { primary_culture = sicilian } #Sicilian
+				    FROM = { primary_culture = tuscan } #Tuscan
+				    FROM = { primary_culture = umbrian } #Umbrian
+				    FROM = { primary_culture = venetian } #Venetian
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Italian Africa
+				area = ajuuran_area
+				area = central_ethiopia_area
+				area = damot_area
+				area = djerba_area
+				area = hadiya_area
+				area = ifat_area
+				area = majarteen_area
+				area = medri_bahri_area
+				area = mogadishu_area
+				area = northern_swahili_coast_area
+				area = ogaden_area
+				area = shewa_area
+				area = southern_ethiopia_area
+				area = tigray_area
+				area = tunisia_area
+				
+				province_id = 2764 #Ausa
+				province_id = 2768 #Angot
+				
+				#New places that were colonized ONLY by China go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British and American
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+					FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #American Cultures
+				    FROM = { primary_culture = american } #American
+				    FROM = { primary_culture = dixie } #Dixie
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British America
+				colonial_region = colonial_cascadia
+				colonial_region = colonial_eastern_america
+				
+				#American Africa
+				area = grain_coast_area #Liberia
+				
+				#American Oceania
+				area = northern_polynesia_area #Hawaii
+				
+				#New places that were colonized ONLY by Great Britain or the USA go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#American and Spanish
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#American Cultures
+				    FROM = { primary_culture = american } #American
+				    FROM = { primary_culture = dixie } #Dixie
+				    #Spanish Cultures
+				    FROM = { primary_culture = andalucian } #Andalucian
+				    FROM = { primary_culture = aragonese } #Aragonese
+				    FROM = { primary_culture = castillian } #Castillian
+				    FROM = { primary_culture = catalan } #Catalan
+				    FROM = { primary_culture = galician } #Galician
+				    FROM = { primary_culture = leonese } #Leonese
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#American-Spanish America
+				colonial_region = colonial_texas
+				colonial_region = colonial_california
+				colonial_region = colonial_florida
+				
+				#American-Spanish Asia
+				region = philippines_region
+				
+				#New CRs that were colonized by the USA or Spain go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#American and French
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#American Cultures
+				    FROM = { primary_culture = american } #American
+				    FROM = { primary_culture = dixie } #Dixie
+				    #French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#American-French America
+				colonial_region = colonial_louisiana
+				
+				#New CRs that were colonized by the USA or France go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British and French
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {				
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British-French America
+				colonial_region = colonial_acadia
+				colonial_region = colonial_canada
+				
+				#British-French Oceania
+				colonial_region = colonial_vanuatu
+				#New CRs that were colonized by Great Britain or France go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British and Dutch
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #Dutch Cultures
+				    FROM = { primary_culture = brabantian } #Brabatian
+				    FROM = { primary_culture = dutch } #Hollander
+				    FROM = { primary_culture = dutch_saxon } #Nedersaksisch
+				    FROM = { primary_culture = east_frisian } #East Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = guelders } #Guelderish
+				    FROM = { primary_culture = limburgish } #Limburgish
+				    FROM = { primary_culture = north_frisian } #North Frisian
+				    FROM = { primary_culture = zeelandic } #Zeelander
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {				
+				#British-Dutch Africa
+				colonial_region = colonial_cape
+				
+				#British-Dutch East Asia
+				colonial_region = colonial_papua
+				
+				#New CRs that were colonized by Great Britain or the Netherlands go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#American and Russian
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {		
+				OR = {
+					#American Cultures
+				    FROM = { primary_culture = american } #American
+				    FROM = { primary_culture = dixie } #Dixie
+				    #Russian Cultures
+				    FROM = { primary_culture = byelorussian } #Belarusian
+				    FROM = { primary_culture = cossack } #Cossack
+				    FROM = { primary_culture = novgorodian } #Novgorodian
+			    	FROM = { primary_culture = russian } #Russian
+					FROM = { primary_culture = muscovite } #Muscovite
+					FROM = { primary_culture = ryazanian } #Ryazanian
+					FROM = { primary_culture = rusyn } #Russyn
+				    FROM = { primary_culture = ruthenian } #Ruthenian
+					FROM = { primary_culture = volhynian } #Volhynian
+					FROM = { primary_culture = polesian } #Polesian
+				}		
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#American-Russian America
+				colonial_region = colonial_alaska
+				
+				#New CRs that were colonized by the USA or Russia go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British and Nordic
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #Nordic Cultures
+				    FROM = { primary_culture = danish } #Danish
+				    FROM = { primary_culture = faroese } #Faroese
+				    FROM = { primary_culture = gotlander } #Gutnish
+				    FROM = { primary_culture = icelandic } #Icelandic
+				    FROM = { primary_culture = norwegian } #Norwegian
+				    FROM = { primary_culture = swedish } #Swedish
+				}			
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British-Nordic America
+				colonial_region = colonial_newfoundland
+				
+				#New places that were colonized by British or Nordic go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British and Spanish
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {		
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #Spanish Cultures
+				    FROM = { primary_culture = andalucian } #Andalucian
+				    FROM = { primary_culture = aragonese } #Aragonese
+				    FROM = { primary_culture = castillian } #Castillian
+				    FROM = { primary_culture = catalan } #Catalan
+				    FROM = { primary_culture = galician } #Galician
+				    FROM = { primary_culture = leonese } #Leonese
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British-Spanish America
+				area = lucayan_area #Bahamas
+				
+				province_id = 2025 #South Georgia
+				province_id = 5709 #Kingston
+				province_id = 5710 #Montego Bay
+				
+				#New places that were colonized by British or Nordic go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#French and Spanish
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				    #Spanish Cultures
+				    FROM = { primary_culture = andalucian } #Andalucian
+				    FROM = { primary_culture = aragonese } #Aragonese
+				    FROM = { primary_culture = castillian } #Castillian
+				    FROM = { primary_culture = catalan } #Catalan
+				    FROM = { primary_culture = galician } #Galician
+				    FROM = { primary_culture = leonese } #Leonese
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#French-Spanish America
+				colonial_region = colonial_hispaniola
+				
+				#New places that were colonized by British or Nordic go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British, French and American
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				    #American Cultures
+				    FROM = { primary_culture = american } #American
+				    FROM = { primary_culture = dixie } #Dixie
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British-French-American America
+				colonial_region = colonial_great_lakes
+				colonial_region = colonial_mississippi
+				
+				#New CRs that were colonized by Great Britain, France or the USA go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#British, French and Dutch
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#British Cultures
+				    FROM = { primary_culture = english } #English
+				    FROM = { primary_culture = northumbrian } #Northumbrian
+				    FROM = { primary_culture = scottish } #Scottish
+				    #French Cultures
+				    FROM = { primary_culture = angevin_culture } #Angevin
+				    FROM = { primary_culture = aquitaine } #Provençal
+				    FROM = { primary_culture = arpitan } #Arpitan
+				    FROM = { primary_culture = auvergnat_culture } #Auvergnat
+				    FROM = { primary_culture = breton } #Breton
+				    FROM = { primary_culture = burgundian } #Burgundian
+				    FROM = { primary_culture = cosmopolitan_french } #Francien
+				    #FROM = { primary_culture = gallo_culture } #Gallo #Hashed out by Prussia because Gallo culture had died out in France by 1444 and it has no tags for it. - SF
+				    FROM = { primary_culture = gascon } #Gascon
+				    FROM = { primary_culture = lorraine_culture } #Lorraine
+				    FROM = { primary_culture = normand } #Norman
+				    FROM = { primary_culture = occitain } #Occitain
+				    FROM = { primary_culture = picard_culture } #Picard
+				    FROM = { primary_culture = poitevin_culture } #Poitevin
+				    #Dutch Cultures
+				    FROM = { primary_culture = brabantian } #Brabatian
+				    FROM = { primary_culture = dutch } #Hollander
+				    FROM = { primary_culture = dutch_saxon } #Nedersaksisch
+				    FROM = { primary_culture = east_frisian } #East Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = guelders } #Guelderish
+				    FROM = { primary_culture = limburgish } #Limburgish
+				    FROM = { primary_culture = north_frisian } #North Frisian
+				    FROM = { primary_culture = zeelandic } #Zeelander
+				}			
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#British-French-Dutch America
+				colonial_region = colonial_guyana
+				
+				#New CRs that were colonized by Great Britain, France or the Netherlands go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonisation
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonisation in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonisation in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+	
+	#Chinese, Dutch and Spanish
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {
+				OR = {
+					#Chinese Cultures
+				    FROM = { primary_culture = cantonese } #Cantonese
+				    FROM = { primary_culture = chihan } #Zhili
+				    FROM = { primary_culture = chimin } #Min
+				    FROM = { primary_culture = gan } #Gan
+				    FROM = { primary_culture = hakka } #Hakka
+				    FROM = { primary_culture = hubei } #Hubei
+				    FROM = { primary_culture = jianghuai } #Jianghuai
+				    FROM = { primary_culture = jin } #Jin
+				    FROM = { primary_culture = shandong_culture } #Shandong
+				    FROM = { primary_culture = sichuanese } #Sichuanese
+				    FROM = { primary_culture = wu } #Wu
+				    FROM = { primary_culture = xiang } #Xiang
+				    FROM = { primary_culture = xibei } #Xibei
+				    FROM = { primary_culture = zhongyuan } #Zhongyuan
+				    #Dutch Cultures
+				    FROM = { primary_culture = brabantian } #Brabatian
+				    FROM = { primary_culture = dutch } #Hollander
+				    FROM = { primary_culture = dutch_saxon } #Nedersaksisch
+				    FROM = { primary_culture = east_frisian } #East Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = frisian } #Frisian
+				    FROM = { primary_culture = guelders } #Guelderish
+				    FROM = { primary_culture = limburgish } #Limburgish
+				    FROM = { primary_culture = north_frisian } #North Frisian
+				    FROM = { primary_culture = zeelandic } #Zeelander
+				    #Spanish Cultures
+				    FROM = { primary_culture = andalucian } #Andalucian
+				    FROM = { primary_culture = aragonese } #Aragonese
+				    FROM = { primary_culture = castillian } #Castillian
+				    FROM = { primary_culture = catalan } #Catalan
+				    FROM = { primary_culture = galician } #Galician
+				    FROM = { primary_culture = leonese } #Leonese
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#China
+				area = taiwan_area
+				
+				#New places that were colonized ONLY by China, the Netherlands or Spain go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						#Natives ignore Historical Colonization
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						
+						#Colonial Nations ignore Historical Colonization in their capital's Colonial Region
+						AND = {
+							is_colonial_nation = yes
+							capital_scope = { colonial_region = ROOT }
+						}
+						
+						#Former Colonial Subjects ignore Historical Colonization in their capital's Continent
+						AND = {
+							is_former_colonial_nation = yes
+							is_subject = no
+							capital_scope = { continent = ROOT }
+						}
+					}
+				}
+			}
+		}
+    }
+}
+
+can_colonize_province_siberian_frontier = {
+	#condition = {
+	#	tooltip = "MAY_COLONIZE_ONCE_EVERY_5_YEARS"
+	#	potential = {
+	#		FROM = {
+	#			has_country_modifier = MAY_american_frontiers
+	#		}
+	#	}
+	#	allow = {
+	#		FROM = {
+	#			OR = {
+	#				NOT = { has_country_flag = MAY_american_frontier_cooldown }
+	#				had_country_flag = {
+	#					flag = MAY_american_frontier_cooldown
+	#					days = 1825
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	
+	### Colonial Nations can't colonize other CRs
+	#Condition - disables colonize button for situations included in potential
+	condition = {
+		tooltip = "VU_Colonial_Region_Colonization"
+		
+		#Potential - what causes the button to be disabled?
+		potential = {
+			FROM = { is_colonial_nation = yes }
+			FROM = { ai = yes }
+		}
+		
+		#Allow - what conditons must be met for the button to be enabled again?
+		allow = {
+			FROM = { capital_scope = { colonial_region = ROOT } }
+		}
+	}
+	
+	### Non-colonial Subjects can't colonize other continents
+	condition = {
+		tooltip = "VU_Subject_Colonization"
+		
+		potential = {
+			FROM = { is_colonial_nation = no }
+			FROM = { is_subject = yes }
+			FROM = { is_lesser_in_union = no } #Personal Unions can colonize other continents
+			FROM = { ai = yes }
+		}
+		
+		allow = {
+			FROM = { capital_scope = { continent = ROOT } }
+		}
+	}
+	
+	### Colonial Nations can't use Siberian Frontier (added for balance)
+	condition = {					
+		tooltip = "VU_No_Frontier_Colonization"
+		
+		potential = {
+			FROM = { is_colonial_nation = yes }
+			NOT = { FROM = { is_subject_of_type = self_governing_dominion_vu } }
+			FROM = { ai = yes }
+		}
+		
+		allow = {
+			always = no
+		}
+	}
+	
+	### Historical Colonisation
+	
+	#Russian Only
+	condition = {
+		tooltip = "VU_Historical_Colonization"
+		
+        potential = {
+			NOT = {				
+				OR = {
+					#Russian Cultures
+				    FROM = { primary_culture = byelorussian } #Belarusian
+				    FROM = { primary_culture = cossack } #Cossack
+				    FROM = { primary_culture = novgorodian } #Novgorodian
+			    	FROM = { primary_culture = russian } #Russian
+					FROM = { primary_culture = muscovite } #Muscovite
+					FROM = { primary_culture = ryazanian } #Ryazanian
+					FROM = { primary_culture = rusyn } #Russyn
+				    FROM = { primary_culture = ruthenian } #Ruthenian
+					FROM = { primary_culture = volhynian } #Volhynian
+					FROM = { primary_culture = polesian } #Polesian
+				}
+			}
+			
+			FROM = { ai = yes }
+			
+			OR = {
+				#Siberia
+				region = ural_region
+				region = west_siberia_region
+				region = east_siberia_region
+				
+				#New places that were colonized ONLY by Russia go here
+			}
+		}
+		
+		allow = {
+			OR = {
+				has_global_flag = vu_no_historical_colonization
+				FROM = { 
+					OR = {
+						technology_group = north_american
+						technology_group = mesoamerican
+						technology_group = south_american
+						technology_group = andean
+						technology_group = high_american
+						technology_group = east_african
+						technology_group = central_african
+						technology_group = sub_saharan
+						technology_group = aboriginal_tech
+						technology_group = polynesian_tech
+						NOT = { FROM = { is_subject_of_type = self_governing_dominion_vu } }
+					}
+				}
+			}
+		}
+    }
+}
+
+can_add_seat_in_parliament = {
+}
+
+can_remove_seat_in_parliament = {
+}
+
+can_add_estate = {
+}
+
+can_expel_minority_from = {
+	condition = {
+		potential = {
+			OR = {
+				is_religious_center_province = yes
+				is_reformation_center = yes
+			}
+		}
+		allow = {
+			always = no
+		}
+	}
+}
+
+#hardcoded: has a colonial parent or is in the same colonial region as the capital
+can_have_colonial_nations = {
+	condition = {
+		potential = {
+			FROM = {
+				has_country_flag = no_colonial_nations
+			}
+		}
+		allow = {
+			always = no 
+		}
+	}
+}
+
+### Special functions
+
+# Called by can_add_province_to_hre
+is_possible_hre_province = {
+	condition = {
+		tooltip = "APH_ONLY_EUROPE"
+		potential = {
+		}
+		allow = {
+			continent = europe
+		}
+	}
+}
+
+will_demand_annexation = {
+	condition = {
+		potential = {
+			is_elector = yes
+		}
+		allow = {
+			NOT = { hre_reform_passed = landfriede }
+		}
+	}
+}
+
+can_join_hre = {
+	condition = {
+		tooltip = "PERMANENTLY_LEFT_HRE"
+		potential = {
+		}
+		allow = {
+			NOT = {
+				has_country_flag = permanently_left_hre_flag
+			}
+		}
+	}
+}
+
+can_leave_hre = {
+}

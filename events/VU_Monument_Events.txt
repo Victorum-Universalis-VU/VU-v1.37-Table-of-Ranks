@@ -1,0 +1,168 @@
+namespace = FU_Monument_Events
+
+country_event = { #The Brandenburg Gate
+	id = FU_Monument_Events.1
+	title = FU_Monument_Events.1.t 
+	desc = FU_Monument_Events.1.d 
+	picture = vu_brandenburg_gate_eventPicture
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = FU_Monument_Events.1.a 
+		
+		if = {
+			limit = {
+				NOT = { dip = 6 }
+			}
+			change_dip = 1 
+		}
+		else = { add_dip_power = 50 }
+		
+		add_ruler_modifier = {
+			name = vu_brandenburg_gate_modifier
+			duration = -1 
+		}
+		add_absolutism = 10  
+	}
+}
+
+country_event = { #Hidden event for personality addition
+	id = FU_Monument_Events.2
+	title = FU_Monument_Events.2.t 
+	desc = FU_Monument_Events.2.d 
+	picture = vu_brandenburg_gate_eventPicture
+	
+	is_triggered_only = yes 
+	hidden = yes 
+	
+	immediate = {
+		if = {
+			limit = {
+				has_dlc = "Rights of Man"
+			}
+			add_ruler_personality = entrepreneur_personality
+		}
+		else = { change_dip = 1 }
+	}
+	
+	option = {
+		name = FU_Monument_Events.2.a 
+	}
+}
+
+country_event = { #The Glory of Arts & Culture
+	id = FU_Monument_Events.3
+	title = FU_Monument_Events.3.t 
+	desc = FU_Monument_Events.3.d 
+	picture = vu_porcelain_tower_eventPicture
+	
+	is_triggered_only = yes  
+	
+	
+	option = {
+		name = FU_Monument_Events.3.a 
+		
+		add_dip_power = 100
+		
+	}
+}
+
+country_event = { #Shakespeare's Globe Theatre
+	id = FU_Monument_Events.4
+	title = FU_Monument_Events.4.t 
+	desc = FU_Monument_Events.4.d 
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes  
+	
+	
+	option = {
+		name = FU_Monument_Events.4.a 
+		
+		if = {
+			limit = { has_estate = estate_burghers }
+			add_estate_loyalty = {
+				estate = estate_burghers 
+				loyalty = 15
+			}
+		}
+		add_absolutism = 10 
+		add_legitimacy = 10
+		add_republican_tradition = 5
+		add_devotion = 10
+		add_horde_unity = 10
+	}
+}
+
+country_event = { #Hidden event for personality addition
+	id = FU_Monument_Events.6
+	title = FU_Monument_Events.6.t 
+	desc = FU_Monument_Events.6.d 
+	picture = vu_brandenburg_gate_eventPicture
+	
+	is_triggered_only = yes 
+	hidden = yes 
+	
+	immediate = {
+		if = {
+			limit = {
+				has_dlc = "Rights of Man"
+			}
+			add_ruler_personality = patron_of_arts_personality
+		}
+		else = { change_dip = 1 }
+	}
+	
+	option = {
+		name = FU_Monument_Events.6.a 
+	}
+}
+
+country_event = { #Hidden event for personality addition
+	id = FU_Monument_Events.7
+	title = FU_Monument_Events.7.t 
+	desc = FU_Monument_Events.7.d 
+	picture = vu_brandenburg_gate_eventPicture
+	
+	is_triggered_only = yes 
+	hidden = yes 
+	
+	immediate = {
+		if = { #TODO: make this choice
+			limit = {
+				has_dlc = "Rights of Man"
+			}
+			add_ruler_personality = vu_absolutist_personality
+		}
+		else = { change_adm = 1 }
+	}
+	
+	option = {
+		name = FU_Monument_Events.7.a 
+	}
+}
+
+country_event = { #Hidden event for personality addition
+	id = FU_Monument_Events.8
+	title = FU_Monument_Events.8.t 
+	desc = FU_Monument_Events.8.d 
+	picture = vu_brandenburg_gate_eventPicture
+	
+	is_triggered_only = yes 
+	hidden = yes 
+	
+	immediate = {
+		if = { #TODO: make this choice
+			limit = {
+				has_dlc = "Rights of Man"
+			}
+			add_ruler_personality = vu_legendary_statesman_personality
+		}
+		else = { change_dip = 1 }
+	}
+	
+	option = {
+		name = FU_Monument_Events.8.a 
+	}
+}

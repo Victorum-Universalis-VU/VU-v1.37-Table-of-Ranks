@@ -1,0 +1,3420 @@
+#VU - Updated by San Felipe for 1.36.*
+byz_pp_balkans_north_italy = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Purple Phoenix"
+	}
+	potential = {
+		tag = BYZ
+		has_dlc = "Purple Phoenix"
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_dlc = "King of Kings" }
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+	
+	recover_the_balkans = { #Recover East Balkans
+		icon = mission_east_balkans
+		required_missions = { recover_greece }
+		position = 2
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 1765
+				province_id = 4703
+				province_id = 7703
+				province_id = 7705
+				area = danubian_plain_area
+				area = northern_thrace_area
+				area = silistria_area
+				area = upper_thrace_area
+				area = vidin_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 1765
+			owns = 4703
+			owns = 7703
+			owns = 7705
+			danubian_plain_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_thrace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			silistria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_thrace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			vidin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			serbia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			moldavia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			oltenia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_muntenia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			wallachia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_permanent_claim = 3000
+			add_permanent_claim = 7711
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+	
+	recover_southern_dacia = { #Recover Southern Dacia
+		icon = mission_our_dacian_cousins
+		required_missions = { recover_the_balkans }
+		position = 3
+		provinces_to_highlight = {
+			OR = {
+				area = moldavia_area
+				area = oltenia_area
+				area = upper_muntenia_area
+				area = wallachia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			moldavia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			oltenia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_muntenia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			wallachia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    banat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			bukovina_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			southern_transylvania_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			western_moldovia = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	recover_northern_dacia = { #Recover Northern Dacia
+		icon = mission_into_draculas_lair
+		required_missions = { recover_southern_dacia }
+		position = 4
+		provinces_to_highlight = {
+			OR = {
+				area = banat_area
+				area = bukovina_area
+				area = southern_transylvania_area
+				area = western_moldovia
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			banat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bukovina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			western_moldovia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    transylvania_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_permanent_claim = 3152
+			add_permanent_claim = 157
+			add_permanent_claim = 8203
+			add_country_modifier = {
+				name = "dacian_gold"
+				duration = -1
+			}
+		}
+	}
+
+	recover_albania = {
+		icon = mission_when_in_pella
+		required_missions = { recover_macedon }
+		position = 5
+		provinces_to_highlight = {
+			area = albania_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			albania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_permanent_claim = 1828
+		    add_permanent_claim = 3000
+			add_permanent_claim = 7711
+			add_permanent_claim = 7727
+			bosnia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_adriatic_coast_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			ragusa_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		    herzegovina_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			montenegro_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		    rascia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			serbia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			syrmia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	recover_western_balkans = {
+	    position = 6
+		icon = mission_recover_western_balkans
+		required_missions = { recover_albania } #None
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 1828
+				province_id = 3000
+				province_id = 7711
+				province_id = 7727
+			    area = bosnia_area
+				area = east_adriatic_coast_area
+				area = ragusa_area
+				area = herzegovina_area
+				area = montenegro_area
+				area = rascia_area
+				area = serbia_area
+				area = syrmia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 1828
+			owns = 3000
+			owns = 7711
+			owns = 7727
+			bosnia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_adriatic_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ragusa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			herzegovina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			montenegro_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			rascia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			serbia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			syrmia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+
+		}
+		effect = {
+		    add_permanent_claim = 7728
+		    add_permanent_claim = 7729
+			croatia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			slavonia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			transdanubia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "balkan_empire"
+				duration = 5475
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_northern_balkans = { #Replaces Istria
+	    position = 7
+		icon = mission_northern_border
+		required_missions = { recover_western_balkans }
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 7728
+				province_id = 7729
+				area = croatia_area
+				area = slavonia_area
+				area = transdanubia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 7728
+			owns = 7729
+			croatia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			slavonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			transdanubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = vu_venice_perm_claims
+			hidden_effect = {
+				italy_region = {
+					limit = {
+						owned_by = VEN
+						NOT = { owned_by = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			hidden_effect = {
+				balkan_region = {
+					limit = {
+						owned_by = VEN
+						NOT = { owned_by = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			hidden_effect = {
+				south_german_region = {
+					limit = {
+						owned_by = VEN
+						NOT = { owned_by = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			112 = {
+				if = {
+					limit = {
+						NOT = { owned_by = ROOT	}
+						NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+	
+	destroy_venice_pp = { #New
+	    position = 8
+		icon = mission_destroy_venice
+		required_missions = { recover_northern_balkans }
+		provinces_to_highlight = {
+			OR = {
+				region = balkan_region
+				region = italy_region
+				region = south_german_region
+			}
+			OR = {
+				owner = { tag = VEN }
+				area = venetia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			balkan_region = {
+				type = all
+				OR = {
+					NOT = { owned_by = VEN }
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			italy_region = {
+				type = all
+				OR = {
+					NOT = { owned_by = VEN }
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			south_german_region = {
+				type = all
+				OR = {
+					NOT = { owned_by = VEN }
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			112 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event = { id = flavor_byz.1 }
+			add_country_modifier = {
+				name = "venetian_revenge"
+				duration = 7300
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+}
+
+byz_pp_italian = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Purple Phoenix"
+	}
+	potential = {
+		tag = BYZ
+		has_dlc = "Purple Phoenix"
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_dlc = "King of Kings" }
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+
+	recover_rome_pp = {
+		position = 9
+		icon = mission_recover_rome
+		required_missions = {
+			recover_south_italy
+			destroy_venice_pp
+		}
+		provinces_to_highlight = {
+		    OR = {
+				province_id = 118
+				province_id = 6976
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			owns = 118
+			owns = 6976
+		}
+		effect = {
+			add_country_modifier = {
+				name = "roman_italy"
+				duration = 5475
+			}
+			custom_tooltip = vu_mission_tooltip_northern_italy_minus_lombardy_perm_claims
+			hidden_effect = {
+				italy_region = {
+					limit = {
+						vu_trigger_northeastern_italy_areas = yes
+						NOT = { is_permanent_claim = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	}
+	recover_north_italy = {
+	    position = 10
+		icon = mission_recover_north_italy
+		required_missions = {
+			recover_rome_pp
+		}
+		provinces_to_highlight = {
+			region = italy_region
+			vu_trigger_northeastern_italy_areas = yes
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = vu_mission_tooltip_northern_italy_conquest_minus_lombardy
+				#italy_region = {
+				#	type = all
+				#	#vu_trigger_northeastern_italy_areas = yes #Caused bug with mission being impossible to complete
+				#	country_or_non_sovereign_subject_holds = ROOT
+				#}
+				emilia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				south_tuscany_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				tuscany_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				emilia_romagna_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				central_italy_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				umbria_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		effect = {
+			italy_region = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			lombardy_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			piedmont_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			po_valley_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			north_piedmont_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			south_piedmont_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			#montferrat_area = {
+			#	limit = {
+			#		NOT = { owned_by = ROOT	}
+			#		NOT = { is_core = ROOT	}
+			#	}
+			#	add_permanent_claim = ROOT
+			#}
+			upper_emilia_area = {
+				limit = {
+					NOT = { owned_by = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_lombardia = {
+	    position = 11
+		icon = mission_recover_lombardia
+		required_missions = {
+			recover_north_italy
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = lombardy_area
+				area = piedmont_area
+				area = po_valley_area
+				area = north_piedmont_area
+				area = south_piedmont_area
+				#area = montferrat_area
+				area = upper_emilia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			lombardy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			piedmont_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			po_valley_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_piedmont_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_piedmont_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			#montferrat_area = {
+			#	type = all
+			#	country_or_non_sovereign_subject_holds = ROOT
+			#}
+			upper_emilia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_permanent_claim = 64
+			add_permanent_claim = 65
+			add_permanent_claim = 68
+			add_permanent_claim = 1868
+			add_permanent_claim = 1872
+		    add_permanent_claim = 4707
+			add_permanent_claim = 4709
+			add_permanent_claim = 4710
+			add_permanent_claim = 4712
+			add_permanent_claim = 4760
+			add_permanent_claim = 6979
+			add_permanent_claim = 7566
+			add_permanent_claim = 7576
+			add_permanent_claim = 7577
+			add_permanent_claim = 7578
+			add_permanent_claim = 7579
+			add_permanent_claim = 7580
+			add_permanent_claim = 7581
+			add_permanent_claim = 7582
+			add_permanent_claim = 7583
+			add_permanent_claim = 7584
+			add_permanent_claim = 7585
+			add_permanent_claim = 7586
+			add_permanent_claim = 7587
+			add_permanent_claim = 7588
+			add_permanent_claim = 7589
+			add_permanent_claim = 7590
+			add_permanent_claim = 7591
+			add_permanent_claim = 7592
+			add_permanent_claim = 7593
+			add_permanent_claim = 7594
+		    add_permanent_claim = 7595
+			add_permanent_claim = 7596
+			add_permanent_claim = 7597
+			add_permanent_claim = 7598
+			add_permanent_claim = 7599
+			add_permanent_claim = 7600
+			add_permanent_claim = 7605
+			add_permanent_claim = 7663
+			add_permanent_claim = 8524
+			add_permanent_claim = 8533
+			add_permanent_claim = 8538
+			add_permanent_claim = 8539
+			add_permanent_claim = 8540
+			add_country_modifier = {
+				name = "byzantine_unification_of_italy"
+				duration = 7300
+			}
+			austria_proper_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			inner_austria_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			romandie_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			switzerland_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			liechtenstein_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			tirol_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			wien_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	alpine_minerals = {
+	    position = 12
+		icon = mission_alpine_minerals
+		required_missions = {
+			recover_lombardia
+		}
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 64
+			    province_id = 65
+			    province_id = 68
+				province_id = 134
+			    province_id = 1868
+			    province_id = 1872
+				province_id = 3051
+		        province_id = 4707
+			    province_id = 4709
+			    province_id = 4710
+			    province_id = 4712
+			    province_id = 4760
+				province_id = 4761
+                province_id = 4762
+			    province_id = 6979
+			    province_id = 7566
+			    province_id = 7576
+			    province_id = 7577
+			    province_id = 7578
+			    province_id = 7579
+			    province_id = 7580
+			    province_id = 7581
+			    province_id = 7582
+			    province_id = 7583
+			    province_id = 7584
+			    province_id = 7585
+			    province_id = 7586
+			    province_id = 7587
+			    province_id = 7588
+			    province_id = 7589
+			    province_id = 7590
+			    province_id = 7591
+			    province_id = 7592
+			    province_id = 7593
+			    province_id = 7594
+		        province_id = 7595
+			    province_id = 7596
+			    province_id = 7597
+			    province_id = 7598
+			    province_id = 7599
+			    province_id = 7600
+			    province_id = 7605
+			    province_id = 7663
+				province_id = 7670
+				province_id = 7673
+                province_id = 7674
+			    province_id = 8524
+			    province_id = 8533
+			    province_id = 8538
+			    province_id = 8539
+			    province_id = 8540
+				area = inner_austria_area
+				area = romandie_area
+				area = switzerland_area
+				area = liechtenstein_area
+				area = tirol_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 64
+			owns = 65
+			owns = 68
+			owns = 134
+			owns = 1868
+			owns = 1872
+			owns = 3051
+		    owns = 4707
+			owns = 4709
+			owns = 4710
+			owns = 4712
+			owns = 4760
+			owns = 4761
+            owns = 4762
+			owns = 6979
+			owns = 7566
+			owns = 7576
+			owns = 7577
+			owns = 7578
+			owns = 7579
+			owns = 7580
+			owns = 7581
+			owns = 7582
+			owns = 7583
+			owns = 7584
+			owns = 7585
+			owns = 7586
+			owns = 7587
+			owns = 7588
+			owns = 7589
+			owns = 7590
+			owns = 7591
+			owns = 7592
+			owns = 7593
+			owns = 7594
+		    owns = 7595
+			owns = 7596
+			owns = 7597
+			owns = 7598
+			owns = 7599
+			owns = 7600
+			owns = 7605
+			owns = 7663
+			owns = 7670
+			owns = 7673
+			owns = 7674
+			owns = 8524
+			owns = 8533
+			owns = 8538
+			owns = 8539
+			owns = 8540
+			inner_austria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			romandie_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			switzerland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			liechtenstein_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tirol_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_permanent_claim = 187
+			add_permanent_claim = 3069
+		    add_permanent_claim = 4769
+			add_permanent_claim = 7948
+		    add_permanent_claim = 7976
+		    add_permanent_claim = 7977
+			add_permanent_claim = 8455
+			add_permanent_claim = 8457
+			add_permanent_claim = 8488
+			add_permanent_claim = 8487
+			add_permanent_claim = 8500
+			add_permanent_claim = 8501
+			add_country_modifier = {
+				name = "roman_conquest_of_raetia_and_noricum"
+				duration = 7300
+			}
+			alsace_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			bar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			berry_touraine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			bourgogne_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			brittany_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			champagne_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			dauphine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			guyenne_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			ile_de_france_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			languedoc_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			limousin_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			loire_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lorraine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lower_brittany_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lower_normandy_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lyonnais_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			massif_central_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			normandy_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			orleans_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			picardy_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			poitou_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			provence_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			pyrenees_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			savoy_dauphine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_gascony_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_guyenne_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			west_burgundy_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			west_languedoc_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	recovery_of_gaul = {
+	    position = 13
+		icon = mission_recovery_gaul
+		required_missions = {
+			alpine_minerals
+		}
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 187
+			    province_id = 3069
+		        province_id = 4769
+			    province_id = 7948
+		        province_id = 7976
+		        province_id = 7977
+			    province_id = 8455
+			    province_id = 8457
+			    province_id = 8488
+			    province_id = 8487
+			    province_id = 8500
+			    province_id = 8501
+			    area = alsace_area
+				area = berry_touraine_area
+				area = bourgogne_area
+				area = brittany_area
+				area = champagne_area
+				area = dauphine_area
+				area = guyenne_area
+				area = ile_de_france_area
+				area = languedoc_area
+				area = limousin_area
+				area = loire_area
+				area = lorraine_area
+				area = lower_brittany_area
+				area = lower_normandy_area
+				area = lyonnais_area
+				area = massif_central_area
+				area = normandy_area
+				area = orleans_area
+				area = picardy_area
+				area = poitou_area
+				area = provence_area
+				area = pyrenees_area
+				area = savoy_dauphine_area
+				area = upper_gascony_area
+				area = upper_guyenne_area
+				area = west_burgundy_area
+				area = west_languedoc_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 187
+			owns = 3069
+		    owns = 4769
+			owns = 7948
+		    owns = 7976
+		    owns = 7977
+			owns = 8455
+			owns = 8457
+			owns = 8488
+			owns = 8487
+			owns = 8500
+			owns = 8501
+		    alsace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			berry_touraine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bourgogne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			brittany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			champagne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			dauphine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			guyenne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ile_de_france_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			languedoc_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+            limousin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			loire_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lorraine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_brittany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_normandy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lyonnais_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			massif_central_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			normandy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			orleans_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			picardy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+            poitou_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			provence_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pyrenees_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			savoy_dauphine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_gascony_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_guyenne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_burgundy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_languedoc_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_permanent_claim = 78
+			add_permanent_claim = 1761
+			add_permanent_claim = 4767
+			add_permanent_claim = 8467
+			add_permanent_claim = 8468
+			add_permanent_claim = 8470
+			add_permanent_claim = 8471
+			add_permanent_claim = 8472
+			add_permanent_claim = 8473
+			add_permanent_claim = 8474
+			add_permanent_claim = 8475
+			add_permanent_claim = 8476
+			add_permanent_claim = 8477
+			add_permanent_claim = 8478
+			add_permanent_claim = 8489
+			add_country_modifier = {
+				name = "roman_conquest_of_gaul"
+				duration = 7300
+			}
+			brabant_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			flanders_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lower_rhineland_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			luxembourg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			luxemburg_liege_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_rhine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			wallonia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_germania_inferior = {
+	    position = 14
+		icon = mission_into_germania_inferior
+		required_missions = {
+			recovery_of_gaul
+		}
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 78
+				province_id = 1761
+				province_id = 4767
+				province_id = 8467
+				province_id = 8468
+				province_id = 8470
+				province_id = 8471
+				province_id = 8472
+				province_id = 8473
+				province_id = 8474
+				province_id = 8475
+				province_id = 8476
+				province_id = 8477
+				province_id = 8478
+				province_id = 8489
+			    area = brabant_area
+				area = flanders_area
+				area = lower_rhineland_area
+				area = luxembourg_area
+				area = luxemburg_liege_area
+				area = north_rhine_area
+				area = wallonia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    owns = 78
+			owns = 1761
+			owns = 4767
+			owns = 8467
+			owns = 8468
+			owns = 8470
+			owns = 8471
+			owns = 8472
+			owns = 8473
+			owns = 8474
+			owns = 8475
+			owns = 8476
+			owns = 8477
+			owns = 8478
+			owns = 8489
+		    brabant_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			flanders_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_rhineland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			luxembourg_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			luxemburg_liege_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_rhine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			wallonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_germania_inferior"
+				duration = 7300
+			}
+			east_frisia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			frisia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			holland_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			zeeland_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_brabant_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_westphalia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			oldenburg_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			weser_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			westphalia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	recover_germania_superior = {
+	    position = 15
+		icon = mission_crossing_the_rhine
+		required_missions = {
+			recover_germania_inferior
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = east_frisia_area
+				area = frisia_area
+				area = holland_area
+				area = zeeland_area
+				area = north_brabant_area
+				area = north_westphalia_area
+				area = oldenburg_area
+				area = weser_area
+				area = westphalia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    east_frisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			frisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			holland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			zeeland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_brabant_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_westphalia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			oldenburg_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			weser_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			westphalia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_germania_superior"
+				duration = 7300
+			}
+			cornwall_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			deheubarth_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_anglia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_midlands_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			greater_london_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lancashire_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_england_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			powys_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			south_east_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			south_wales_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			wales_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			west_midlands_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			yorkshire_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	rule_over_britannia = {
+	    position = 16
+		icon = mission_invasion_britain
+		required_missions = {
+			recover_germania_superior
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = cornwall_area
+				area = deheubarth_area
+				area = east_anglia_area
+				area = east_midlands_area
+				area = greater_london_area
+				area = lancashire_area
+				area = northern_england_area
+				area = powys_area
+				area = south_east_area
+				area = south_wales_area
+				area = wales_area
+				area = west_midlands_area
+				area = yorkshire_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    cornwall_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			deheubarth_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_anglia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_midlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			greater_london_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lancashire_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_england_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			powys_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_east_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_wales_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			wales_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_midlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			yorkshire_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			grampians_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			highlands_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			kingdom_of_the_isles_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lowlands_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			scottish_marches_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			subarctic_islands_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	invasion_of_scotland = {
+	    position = 17
+		icon = mission_over_the_wall
+		required_missions = {
+			rule_over_britannia
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = grampians_area
+				area = highlands_area
+				area = kingdom_of_the_isles_area
+			    area = lowlands_area
+				area = scottish_marches_area
+				area = subarctic_islands_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    grampians_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			highlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kingdom_of_the_isles_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lowlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			scottish_marches_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			subarctic_islands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_britannia"
+				duration = 7300
+			}
+			connacht_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			leinster_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			munster_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			ulster_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	invasion_of_hibernia = {
+	    position = 18
+		icon = mission_luck_of_the_irish
+		required_missions = {
+			invasion_of_scotland
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = connacht_area
+				area = leinster_area
+				area = munster_area
+			    area = ulster_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    connacht_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			leinster_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			munster_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ulster_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_hibernia"
+				duration = 7300
+			}
+		}
+	}
+}
+
+
+byz_pp_maritime = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Purple Phoenix"
+	}
+	potential = {
+		tag = BYZ
+		has_dlc = "Purple Phoenix"
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_dlc = "King of Kings" }
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+
+	recover_east_islands = {
+		icon = mission_recover_cyprus
+
+		required_missions = {
+
+		}
+		provinces_to_highlight = {
+			area = cyprus_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			cyprus_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			corsica_sardinia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			sardinia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			baleares_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			#cagliari_area = {
+			#	limit = {
+			#		NOT = { is_permanent_claim = ROOT	}
+			#		NOT = { is_core = ROOT	}
+			#	}
+			#	add_permanent_claim = ROOT
+			#}
+		}
+	}
+	recover_west_islands = {
+		icon = mission_invade_island
+		required_missions = {
+			recover_east_islands
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = corsica_sardinia_area
+				area = sardinia_area
+				area = baleares_area
+				#area = cagliari_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			corsica_sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			baleares_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			#cagliari_area = {
+			#	type = all
+			#	country_or_non_sovereign_subject_holds = ROOT
+			#}
+		}
+		effect = {
+			tripolitania_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			djerba_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_tripoli = {
+		icon = mission_arabian_fort
+		required_missions = {
+			recover_west_islands
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = djerba_area
+				area = tripolitania_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    djerba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tripolitania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    barbary_coast_area = {
+				limit = {
+					NOT = { owned_by = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			kabylia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			tunisia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_tunis = {
+		icon = mission_recover_tunis
+		required_missions = {
+			recover_tripoli
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = barbary_coast_area
+				area = kabylia_area
+				area = ouled_nail_area
+				area = tunisia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    barbary_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kabylia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ouled_nail_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tunisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			algarve_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			lower_andalucia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			murcia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_morocco_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_andalucia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			341 = {
+				change_culture = karchidoniac
+				#change_religion = ROOT
+			}
+			5224 = {
+				change_culture = karchidoniac
+				#change_religion = ROOT
+			}
+			2455 = {
+				change_culture = karchidoniac
+				#change_religion = ROOT
+			}
+			5317 = {
+				change_culture = karchidoniac
+				#change_religion = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_spanish_coastline = {
+		icon = mission_the_hispanic_coast
+		required_missions = {
+			recover_tunis
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = algarve_area
+				area = lower_andalucia_area
+				area = murcia_area
+				area = northern_morocco_area
+				area = upper_andalucia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			algarve_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			murcia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_morocco_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			alentejo_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			aragon_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			asturias_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			baleares_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			basque_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			beieras_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			castille_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			catalonia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			extremadura_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			galicia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			leon_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			madrid_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			minho_duoro_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			new_castile_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			northern_andalusia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			segovia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			toledo_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			valencia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+    recover_the_rest_of_spain = {
+		icon = mission_into_hispania
+		required_missions = {
+			recover_spanish_coastline
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = alentejo_area
+				area = aragon_area
+				area = asturias_area
+				area = baleares_area
+				area = basque_area
+				area = beieras_area
+				area = castille_area
+				area = catalonia_area
+				area = extremadura_area
+				area = galicia_area
+				area = leon_area
+				area = madrid_area
+				area = minho_duoro_area
+				area = new_castile_area
+				area = northern_andalusia_area
+				area = segovia_area
+				area = toledo_area
+				area = valencia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			alentejo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			aragon_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			asturias_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			baleares_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			basque_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			beieras_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			castille_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			catalonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			extremadura_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			galicia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			leon_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			madrid_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			minho_duoro_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			new_castile_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_andalusia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			segovia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			toledo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			valencia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_hispania"
+				duration = 7300
+			}
+			alentejo_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			aragon_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			asturias_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			baleares_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			basque_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			beieras_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			castille_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			catalonia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			extremadura_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			galicia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			leon_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			madrid_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			minho_duoro_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			new_castile_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			northern_andalusia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			segovia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			toledo_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+			valencia_area = {
+				limit = { owned_by = ROOT }
+				add_province_modifier = {
+					name = "faster_integration"
+					duration = 5475
+				}
+			}
+		}
+	}
+}
+
+byz_pp_religion = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Purple Phoenix"
+	}
+	potential = {
+		tag = BYZ
+		has_dlc = "Purple Phoenix"
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_dlc = "King of Kings" }
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+
+	convert_asia_minor_pp = {
+		icon = mission_pf_cross
+		position = 2
+		required_missions = {
+			recover_the_coast_of_asia_minor
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = aydin_area
+				area = hudavendigar_area
+				area = karasi_area
+			}
+			OR = {
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				NOT = { religion = orthodox }
+			}
+		}
+		trigger = {
+			religion = orthodox
+			aydin_area = {
+				type = all
+				owned_by = ROOT
+				religion = orthodox
+			}
+			hudavendigar_area = {
+				type = all
+				owned_by = ROOT
+				religion = orthodox
+			}
+			karasi_area = {
+				type = all
+				owned_by = ROOT
+				religion = orthodox
+			}
+		}
+
+		effect = {
+			add_patriarch_authority = 0.1
+			aleppo_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			syria_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			tripoli_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+	recover_antioch = {
+		icon = mission_recover_antioch
+		position = 4
+		required_missions = {
+			convert_asia_minor_pp
+			recover_central_anatolia
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = aleppo_area
+				area = al_jazira_area
+				area = rakka_area
+				area = syria_area
+				area = tripoli_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			aleppo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			al_jazira_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			rakka_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			syria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tripoli_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_patriarch_authority = 0.1
+			palestine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			syrian_desert_area = {
+				add_claim = ROOT
+			}
+			trans_jordan_area = {
+				add_claim = ROOT
+			}
+			add_claim = 407
+			add_claim = 2309
+			add_claim = 2314
+			add_claim = 4292
+			3991 = {
+				change_culture = anatolian_greek
+				#change_religion = ROOT
+			}
+			2313 = {
+				change_culture = anatolian_greek
+				#change_religion = ROOT
+			}
+			3981 = {
+				change_culture = cypriot
+				#change_religion = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_jerusalem = {
+		icon = mission_recover_jerusalem
+		required_missions = {
+			recover_antioch
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = palestine_area
+				area = syrian_desert_area
+				province_id = 4270
+				province_id = 380
+				province_id = 381
+				province_id = 7452
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			palestine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4270 = { country_or_non_sovereign_subject_holds = ROOT }
+			380 = { country_or_non_sovereign_subject_holds = ROOT }
+			381 = { country_or_non_sovereign_subject_holds = ROOT }
+			7452 = { country_or_non_sovereign_subject_holds = ROOT }
+			syrian_desert_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_patriarch_authority = 0.1
+			delta_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			bahari_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			vostani_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_claim = 364
+			add_claim = 5158
+			add_claim = 2315
+			add_claim = 6547
+			add_claim = 6549
+			add_claim = 6526
+			add_claim = 6550
+			1854 = {
+				change_culture = cypriot
+				#change_religion = ROOT
+			}
+			5180 = {
+				change_culture = cypriot
+				#change_religion = ROOT
+			}
+			7446 = {
+				change_culture = cypriot
+				#change_religion = ROOT
+			}
+			1855 = {
+				change_culture = anatolian_greek
+				#change_religion = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_alexandria = {
+		icon = mission_recover_alexandria
+		provinces_to_highlight = {
+			OR = {
+				area = bahari_area
+				area = delta_area
+				area = vostani_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		required_missions = {
+			recover_jerusalem
+		}
+		trigger = {
+			bahari_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			delta_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			vostani_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_patriarch_authority = 0.1
+			said_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+			al_wahat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+			vostani_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+			cyrenaica_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_claim = ROOT }
+				}
+				add_claim = ROOT
+			}
+			362 = {
+				change_culture = egyptian_greek
+				#change_religion = ROOT
+			}
+			6525 = {
+				change_culture = egyptian_greek
+				#change_religion = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	the_pentarchy_pp = {
+		icon = mission_the_pentarchy
+		position = 10
+		required_missions = {
+			recover_rome_pp
+			recover_alexandria
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 118
+				province_id = 151
+				province_id = 358
+				province_id = 379
+				province_id = 2313
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			owns = 118 #Rome
+			owns = 151 #Constantinople
+			owns = 358 #Alexandria
+			owns = 379 #Jerusalem
+			owns = 2313 #Antioch
+		}
+		effect = {
+			add_patriarch_authority = 0.1
+			add_country_modifier = {
+				name = "healing_the_schism"
+				duration = -1
+			}
+			country_event = { id = catholic_flavor.3 }
+			358 = {
+				change_culture = egyptian_greek
+				change_religion = ROOT
+			}
+			363 = {
+				change_culture = egyptian_greek
+				change_religion = ROOT
+			}
+			6568 = {
+				change_culture = egyptian_greek
+				change_religion = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	convert_rome = { #New/From Events
+		icon = mission_convert_rome
+		position = 11
+		required_missions = {
+			the_pentarchy_pp
+		}
+		provinces_to_highlight = {
+			province_id = 118
+			OR = {
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				NOT = { religion = orthodox }
+			}
+		}
+		trigger = {
+			religion = orthodox
+			118 = {
+				religion = orthodox
+			}
+		}
+		effect = {
+			add_patriarch_authority = 0.2
+			add_country_modifier = {
+				name = "conversion_of_rome"
+				duration = 7300
+			}
+			hidden_effect = {
+				every_country = {
+					limit = { 
+						religion = catholic 
+						knows_country = BYZ
+					}
+					country_event = { id = flavor_byz.2 }
+				}
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+}
+
+byz_pp_east = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Purple Phoenix"
+	}
+	potential = {
+		tag = BYZ
+		has_dlc = "Purple Phoenix"
+		NOT = { map_setup = map_setup_random }
+		NOT = { has_dlc = "King of Kings" }
+		has_country_flag = use_paradox_missions
+	}
+	has_country_shield = yes
+
+	recover_west_anatolia = {
+		icon = mission_non-western_cavalry_raid
+		position = 2
+		required_missions = {
+			recover_the_coast_of_asia_minor
+		}
+		provinces_to_highlight = {
+			OR = {				
+				area = germiyan_area
+				area = karaman_area
+				area = lydia_area
+				area = pisidia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			germiyan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			karaman_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lydia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pisidia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			ankara_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			cataonia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			dulkadir_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			new_rum_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+	#Trebizond
+	recover_central_anatolia = { 
+		icon = mission_pf_soldier
+		required_missions = {
+			recover_west_anatolia
+		}
+		provinces_to_highlight = {
+			OR = {
+			    area = ankara_area
+				area = cataonia_area
+				area = dulkadir_area
+				area = new_rum_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			ankara_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			cataonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			dulkadir_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			new_rum_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			erzurum_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mardin_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_kurdistan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	reestablish_the_theme_system_pp = {
+		icon = mission_pf_map_table
+		position = 5
+		required_missions = {
+			recover_central_anatolia
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = erzurum_area
+				area = mardin_area
+				area = north_kurdistan_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			erzurum_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mardin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_kurdistan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			armenia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			imereti_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			samtskhe_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			shirvan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			hidden_effect = {
+				149 = { change_province_name = Adrianople rename_capital = Adrianople }
+				151 = { change_province_name = Constantinople rename_capital = Constantinople }
+				316 = { change_province_name = Optimatoi rename_capital = Nikomedeia }
+				317 = { change_province_name = Opsikion rename_capital = Prussa }
+				318 = { change_province_name = Smyrna rename_capital = Smyrna }
+				319 = { change_province_name = Mylasa rename_capital = Mougla }
+				322 = { change_province_name = Kotyaion rename_capital = Kotyaion }
+				323 = { change_province_name = Ikonion rename_capital = Iconion }
+				324 = { change_province_name = Laranda rename_capital = Laranda }
+				325 = { change_province_name = Paphlagonia rename_capital = Timonio }
+				326 = { change_province_name = Galatia rename_capital = Ancyra }
+				327 = { change_province_name = Cilicia rename_capital = Atana }
+				328 = { change_province_name = Sinope rename_capital = Sinop }
+				329 = { change_province_name = Sebasteia rename_capital = Sebastopolis }
+				330 = { change_province_name = Trebizond rename_capital = Trapezous }
+				331 = { change_province_name = Theodosiopolis rename_capital = Theodosiopolis }
+				1764 = { change_province_name = Mesambria rename_capital = Mesambria }
+				1846 = { change_province_name = Armeniakon rename_capital = Amasea }
+				1848 = { change_province_name = Baris rename_capital = Baris }
+				2296 = { change_province_name = Abydos rename_capital = Pigai }
+				2297 = { change_province_name = Thrakesion rename_capital = Magnesia }
+				2298 = { change_province_name = Attalia rename_capital = Attalia }
+				2299 = { change_province_name = Boukellarion rename_capital = Klaudiopol}
+				2300 = { change_province_name = Cappadocia rename_capital = Tavium }
+				2301 = { change_province_name = Charsianon rename_capital = Ceasarea }
+				2302 = { change_province_name = Seleucia rename_capital = Kermarage }
+				2304 = { change_province_name = Chaldia rename_capital = Amissos}
+				2305 = { change_province_name = Acilisene rename_capital = Acilisene }
+				2750 = { change_province_name = Philippopolis rename_capital = Philippopolis}
+				4307 = { change_province_name = Colonia rename_capital = Colonia }
+				4308 = { change_province_name = Laodicea rename_capital = Laodicea }
+				4309 = { change_province_name = Tralles rename_capital = Tralles }
+				4310 = { change_province_name = Tephrike rename_capital = Tephrike }
+				4311 = { change_province_name = Anatolikon rename_capital = Polydorion }
+				4312 = { change_province_name = Dorylaeum rename_capital = Dorylaeum }
+				4313 = { change_province_name = Gangra rename_capital = Gangra }
+				4314 = { change_province_name = Justinianopolis rename_capital = Justinianopolis }
+				4315 = { change_province_name = Evdoksia rename_capital = Evdoksia }
+				#Need to update this later for 10.0
+			}
+			custom_tooltip = reestablishing_themes_names_tooltip
+			if = {
+				limit = {
+					NOT = { has_global_flag = constantinople_restored }
+				}
+				151 = {
+					add_base_tax = 4
+					add_base_production = 4
+					add_base_manpower = 3
+				}
+				set_global_flag = constantinople_restored
+			}
+			add_country_modifier = {
+				name = "the_theme_system"
+				duration = -1
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+
+	recover_the_caucasus = {
+		icon = mission_recover_caucasus
+		required_missions = {
+			reestablish_the_theme_system_pp
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = armenia_area
+				area = imereti_area
+				area = samtskhe_area
+				area = shirvan_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			armenia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			imereti_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			samtskhe_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			shirvan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_permanent_claim = 286
+			add_country_modifier = {
+				name = "roman_conquest_of_caucasus"
+				duration = 7300
+			}
+			crimea_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			pryazovia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	recover_crimea = {
+		icon = mission_galleys_in_port
+		required_missions = {
+			recover_the_caucasus
+		}
+		provinces_to_highlight = {
+			OR = {
+			    province_id = 286
+				area = crimea_area
+				area = pryazovia_area
+			}
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+		    owns = 286
+			crimea_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pryazovia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+		    add_country_modifier = {
+				name = "roman_conquest_of_crimea"
+				duration = 7300
+			}
+			285 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 35
+					key = byzantine_kaffa
+				}
+			}
+		}
+		ai_weight = {
+			factor = 500	#Byzantium is basically Ottomans in its conquest behavior
+		}
+	}
+	
+}

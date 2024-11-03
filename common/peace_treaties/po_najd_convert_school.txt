@@ -1,0 +1,72 @@
+po_najd_convert_school = {
+	category = 6
+	power_projection = no
+	power_cost_base = 0
+	prestige_base = 0.286
+	ae_base = 0
+	warscore_cost = {
+		all_provinces = 0
+		no_provinces = 40.0
+		owner_keeps = 0.0
+		conquered = 0.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = -1
+	requires_demand_independence = yes
+	is_make_subject = no
+	requires_is_allowed = no
+
+	is_visible = {
+		has_dlc = "Cradle of Civilization"
+		religious_school = {
+			group = muslim
+			school = hanbali_school
+		}
+		OR = {
+			is_in_war = {
+				casus_belli = cb_najd_war_2
+				attacker_leader = ROOT
+			}
+			is_in_war = {
+				casus_belli = cb_najd_war
+				attacker_leader = ROOT
+			}
+		}
+		FROM = {
+			NOT = {
+				religious_school = {
+					group = muslim
+					school = hanbali_school
+				}
+			}
+			OR = {
+				is_in_war = {
+					casus_belli = cb_najd_war_2
+				}
+				is_in_war = {
+					casus_belli = cb_najd_war
+				}
+			}
+		}
+	}
+	is_allowed = {
+		always = yes
+	}
+	effect = {
+		FROM = {
+			country_event = { id = ME_Najd_Events.2 }
+		}
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = 100
+		}
+		limit = {
+			always = yes
+		}
+	}
+}

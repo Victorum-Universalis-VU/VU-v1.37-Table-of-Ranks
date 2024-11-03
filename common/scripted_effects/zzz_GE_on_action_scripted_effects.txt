@@ -1,0 +1,215 @@
+ge_on_bi_yearly_pulse_3_effect = {
+	GE_calculate_goods_produced_effect = yes
+}
+
+ge_on_main_war_won_effect = {
+	if = {
+		limit = {
+			has_government_mechanic = crusade_power_mechanic
+		}
+		if = {
+			limit = {
+				religion = catholic
+				FROM = {
+					is_crusade_target = yes
+				}
+			}
+			add_government_power = {
+				mechanic_type = crusade_power_mechanic
+				power_type = crusade_power
+				value = 35
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion_group = FROM }
+			}
+			add_government_power = {
+				mechanic_type = crusade_power_mechanic
+				power_type = crusade_power
+				value = 25
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion = FROM }
+			}
+			add_government_power = {
+				mechanic_type = crusade_power_mechanic
+				power_type = crusade_power
+				value = 20
+			}
+		}
+	}
+	if = {
+		limit = {
+			FROM = {
+				has_government_mechanic = crusade_power_mechanic
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					religion = catholic
+				}
+				is_crusade_target = yes
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = crusade_power_mechanic
+					power_type = crusade_power
+					value = -50
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion_group = FROM }
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = crusade_power_mechanic
+					power_type = crusade_power
+					value = -35
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion = FROM }
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = crusade_power_mechanic
+					power_type = crusade_power
+					value = -25
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_government_mechanic = imperial_grace_mechanic
+		}
+		add_government_power = {
+			mechanic_type = imperial_grace_mechanic
+			power_type = imperial_grace_power
+			value = 7.5
+		}
+	}
+}
+
+ge_on_force_conversion_effect = {
+	if = {
+		limit = {
+			war_with = FROM
+			OR = {
+				is_in_war = {
+					attacker_leader = ROOT
+					defender_leader = FROM
+				}
+				is_in_war = {
+					attacker_leader = FROM
+					defender_leader = ROOT
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_government_mechanic = crusade_power_mechanic
+			}
+			add_government_power = {
+				mechanic_type = crusade_power_mechanic
+				power_type = crusade_power
+				value = -25
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_government_mechanic = crusade_power_mechanic
+				}
+			}
+			FROM = {
+				add_government_power = {
+					mechanic_type = crusade_power_mechanic
+					power_type = crusade_power
+					value = 20
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			is_subject_of = FROM
+			FROM = {
+				has_government_mechanic = crusade_power_mechanic
+			}
+		}
+		FROM = {
+			add_government_power = {
+				mechanic_type = crusade_power_mechanic
+				power_type = crusade_power
+				value = 5
+			}
+		}
+	}
+}
+
+ge_on_adm_development_effect = {
+	owner = {
+		if = {
+			limit = {
+				has_government_mechanic = imperial_grace_mechanic
+			}
+			add_government_power = {
+				mechanic_type = imperial_grace_mechanic
+				power_type = imperial_grace_power
+				value = 0.5
+			}
+		}
+	}
+}
+
+ge_on_dip_development_effect = {
+	owner = {
+		if = {
+			limit = {
+				has_government_mechanic = imperial_grace_mechanic
+			}
+			add_government_power = {
+				mechanic_type = imperial_grace_mechanic
+				power_type = imperial_grace_power
+				value = 0.5
+			}
+		}
+	}
+}
+
+ge_on_mil_development_effect = {
+	owner = {
+		if = {
+			limit = {
+				has_government_mechanic = imperial_grace_mechanic
+			}
+			add_government_power = {
+				mechanic_type = imperial_grace_mechanic
+				power_type = imperial_grace_power
+				value = 0.5
+			}
+		}
+	}
+}
+
+ge_on_transfer_development_effect = {
+	if = {
+		limit = {
+			has_government_mechanic = imperial_grace_mechanic
+		}
+		add_government_power = {
+			mechanic_type = imperial_grace_mechanic
+			power_type = imperial_grace_power
+			value = 3
+		}
+	}
+}

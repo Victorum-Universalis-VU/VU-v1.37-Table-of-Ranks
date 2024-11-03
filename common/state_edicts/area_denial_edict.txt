@@ -1,0 +1,73 @@
+edict_area_denial_edict = {
+	potential = {
+		is_primitive = no
+	}
+	allow = {
+		always = yes
+	}
+	modifier = {
+		local_hostile_attrition = 5
+		local_hostile_movement_speed = -0.5
+	}
+	color = {
+		90
+		10
+		10
+	}
+	on_state_edict_enacted = {
+		every_province_in_state = {
+			add_devastation = 100
+			remove_loot = {
+				who = REB
+				amount = 1000
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 20
+		modifier = {
+			factor = 0
+			owner = {
+				OR = {
+					is_at_war = no
+					is_subject = yes
+					NOT = {
+						OR = {
+							tag = RUS
+							tag = MOS
+							tag = LIT
+						}
+					}
+					has_idea_group = offensive_ideas
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				war_exhaustion = 10
+			}
+		}
+		modifier = {
+			factor = 2
+			owner = {
+				has_idea_group = defensive_ideas
+			}
+		}
+		modifier = {
+			factor = 3
+			any_province_in_state = {
+				has_siege = yes
+				fort_level = 1
+			}
+		}
+		modifier = {
+			factor = 5
+			culture = russian
+		}
+		modifier = {
+			factor = 10
+			has_state_edict = edict_area_denial_edict
+		}
+	}
+}

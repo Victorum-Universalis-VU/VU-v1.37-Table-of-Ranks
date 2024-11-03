@@ -1,0 +1,45 @@
+country_decisions = {
+	the_fix = {
+		potential = {
+			ai = no
+			has_global_flag = paradox_or_mod_missions_events_flag
+			NOT = { is_year = 1445 }
+			NOT = { has_country_flag = me_or_vu_missions } 
+		}
+
+		allow = {
+			always = yes
+		}
+
+		effect = {
+			set_country_flag = me_or_vu_missions
+			custom_tooltip = the_fix_only_twice
+			country_event = { 
+   				id = paradox_or_mod_missions_events.3
+			}
+		}
+	}
+
+	#Gives ability to turn back to original missions
+	the_fix2 = {
+		potential = {
+			ai = no
+			has_global_flag = paradox_or_mod_missions_events_flag
+			NOT = { is_year = 1445 }
+			has_country_flag = me_or_vu_missions
+			NOT = { has_country_flag = me_or_vu_missions2 } 
+		}
+
+		allow = {
+			always = yes
+		}
+
+		effect = {
+			set_country_flag = me_or_vu_missions2
+			custom_tooltip = the_fix_only_once
+			country_event = { 
+   				id = paradox_or_mod_missions_events.3
+			}
+		}
+	}
+}
