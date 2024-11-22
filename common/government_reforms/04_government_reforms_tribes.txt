@@ -14,13 +14,14 @@ steppe_horde = {
 	icon = "horde_riding"
 	allow_normal_conversion = no
 	potential = {
-		OR = {
-			has_reform = steppe_horde
-			culture_group = altaic
-			culture_group = tartar
-			primary_culture = altaic_new 
-		}
 		has_reform = steppe_horde
+		#OR = {
+		#	has_reform = steppe_horde
+		#	culture_group = altaic
+		#	culture_group = tartar
+		#	culture_group = nakh_daghestani
+		#	primary_culture = altaic_new 
+		#}
 		NOT = { has_reform = great_mongol_state_reform }
 	}
 	legacy_equivalent = steppe_horde_legacy
@@ -327,12 +328,14 @@ stateless_society = {
 	valid_for_nation_designer = yes
 	lock_level_when_selected = yes
 	nation_designer_cost = 0
+	potential = {
+		government_rank = 4
+	}
 	modifiers = {
 		governing_capacity_modifier = -0.99
 		defensiveness = 0.75
 		land_morale = 0.15
 	}
-	fixed_rank = 4
 	ai = {
 		factor = 1
 		modifier = {
@@ -346,15 +349,54 @@ gond_kingdom = {
 	icon = "chieftain"
 	allow_normal_conversion = yes
 	potential = {
-		has_dlc = "Dharma"
-		technology_group = indian
-		primary_culture = gondi
+		government = tribal
+		religion = hinduism
+		government_rank = 6 
+		OR = {
+			primary_culture = garjati
+			primary_culture = gondi
+		}
+		has_reform = gond_kingdom
 	}
+	#fixed_rank = 6
 	valid_for_nation_designer = yes
 	nation_designer_cost = 0
 	nation_designer_trigger = {
-		technology_group = indian
-		primary_culture = gondi
+		government = tribal
+		religion = hinduism
+		OR = {
+			primary_culture = garjati
+			primary_culture = gondi
+		}
+		has_reform = gond_kingdom
+	}
+	legacy_equivalent = tribal_kingdom_legacy
+	modifiers = {
+		defensiveness = 0.2
+	}
+}
+
+jamdom_kingdom = {
+	icon = "chieftain"
+	allow_normal_conversion = yes
+	potential = {
+		government_rank = 6
+		OR = {
+			primary_culture = saurashtri
+			primary_culture = sindhi
+		}
+		has_reform = jamdom_kingdom
+	}
+	#fixed_rank = 6
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	nation_designer_trigger = {
+		government_rank = 6
+		OR = {
+			primary_culture = saurashtri
+			primary_culture = sindhi
+		}
+		has_reform = jamdom_kingdom
 	}
 	legacy_equivalent = tribal_kingdom_legacy
 	modifiers = {

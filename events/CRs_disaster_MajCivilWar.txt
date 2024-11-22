@@ -232,8 +232,11 @@ country_event = {
 		name = "maj_civil_war.6.a"
 		random_owned_province = {
 			limit = {
-			religion = hinduism
-			is_capital = no
+				OR = {
+					religion = hinduism
+					religion = surya_majapahit
+				}
+			    is_capital = no
 			}
 			add_core = BLM
 		    cede_province = BLM
@@ -242,13 +245,25 @@ country_event = {
 	option = {		#Bring them back into the fold!
 		name = "maj_civil_war.6.b" 
 		random_owned_province = {
-			limit = {
-				religion = hinduism
-                    }
-			spawn_rebels = {
-				type = 	nationalist_rebels
-				religion = hinduism
-				size = 2
+			if = {
+				limit = {
+			    	religion = hinduism
+                }
+			    spawn_rebels = {
+			    	type = nationalist_rebels
+			    	religion = hinduism
+			    	size = 2
+			    }
+			}
+			else_if = {
+				limit = {
+			    	religion = surya_majapahit
+                }
+			    spawn_rebels = {
+			    	type = nationalist_rebels
+			    	religion = surya_majapahit
+			    	size = 2
+			    }
 			}
 		}
 	}

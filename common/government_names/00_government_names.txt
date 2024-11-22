@@ -55,10 +55,9 @@ slovak_localisation = {
 
 	trigger = {
 		government = monarchy
-		has_reform = slovakian_monarchy_reform
-		OR = {
-			primary_culture = slovak
-			tag = SLO
+		AND = {
+		    primary_culture = slovak
+			has_reform = slovakian_monarchy_reform
 		}
 	}
 }
@@ -115,16 +114,21 @@ georgian = {
 
     trigger = {
 	    government = monarchy
-		has_reform = georgian_monarchy_reform
-		OR = {
-			primary_culture = georgian
-			primary_culture = georgian_new
+		AND = {
+			OR = {
+		    	primary_culture = georgian
+		    	primary_culture = georgian_new
+		    }
+			OR = {
+				has_reform = georgian_monarchy_reform
+				have_had_reform = georgian_monarchy_reform
+			}
 		}
 		NOT = {	tag = SME }
     }
 }
 
-dagestani_monarchy = { #
+dagestani_monarchy = {
     rank = {
 		6 = MATAVRO
 		7 = SAMTAVRO
@@ -175,7 +179,7 @@ dagestani_monarchy = { #
 	}
 
    trigger = {
-	    government = tribal
+		government = tribal
 		OR = {
 			primary_culture = chechen
 			primary_culture = tsez
@@ -183,21 +187,103 @@ dagestani_monarchy = { #
     }
 }
 
+armenian_monarchy = {
+    rank = {
+		6 = ARMENIAN_DUCHY
+		7 = ARMENIAN_PRINCIPALITY
+        8 = ARMENIAN_KINGDOM
+		9 = ARMENIAN_EMPIRE
+    }
+
+    ruler_male = {
+		6 = ARMENIAN_DUKE
+		7 = ARMENIAN_PRINCE
+        8 = ARMENIAN_KING
+		9 = ARMENIAN_EMPEROR 
+    }
+
+	ruler_female = {
+		6 = ARMENIAN_DUCHESS_fem
+		7 = ARMENIAN_PRINCESS_fem
+        8 = ARMENIAN_QUEEN_fem
+		9 = ARMENIAN_EMPRESS_fem
+    }
+
+	consort_male = {
+		6 = ARMENIAN_DUKE_CONSORT
+		7 = ARMENIAN_PRINCE_CONSORT
+        8 = ARMENIAN_KING_CONSORT
+        9 = ARMENIAN_EMPEROR_CONSORT
+	}
+	
+	consort_female = {
+		6 = ARMENIAN_DUCHESS_CONSORT_fem
+		7 = ARMENIAN_PRINCESS_CONSORT_fem
+        8 = ARMENIAN_QUEEN_CONSORT_fem
+        9 = ARMENIAN_EMPRESS_CONSORT_fem
+	}
+
+	heir_male = {
+		6 = ARMENIAN_HEIR
+		7 = ARMENIAN_HEIR
+		8 = ARMENIAN_CROWN_PRINCE
+		9 = ARMENIAN_CROWN_PRINCE
+	}
+
+	heir_female = {
+		6 = ARMENIAN_HEIRESS_fem
+		7 = ARMENIAN_HEIRESS_fem
+		8 = ARMENIAN_CROWN_PRINCESS_fem
+		9 = ARMENIAN_CROWN_PRINCESS_fem
+	}
+
+   trigger = {
+		government = monarchy
+		primary_culture = armenian
+		OR = {
+			has_reform = autocracy_reform
+			have_had_reform = autocracy_reform
+			has_reform = feudalism_reform
+			have_had_reform = feudalism_reform
+		}
+    }
+}
+
 stateless_society = {
 	rank = {
 		4 = STATELESS_SOCIETY
+		5 = STATELESS_SOCIETY
+		6 = STATELESS_SOCIETY
+		7 = STATELESS_SOCIETY
+		8 = STATELESS_SOCIETY
+		9 = STATELESS_SOCIETY
 	}
 
 	ruler_male = {
 		4 = TRIBAL_LEADER
+		5 = TRIBAL_LEADER
+		6 = TRIBAL_LEADER
+		7 = TRIBAL_LEADER
+		8 = TRIBAL_LEADER
+		9 = TRIBAL_LEADER
 	}
 
 	consort_female = {
 		4 = CONSORT_fem
+		5 = CONSORT_fem
+		6 = CONSORT_fem
+		7 = CONSORT_fem
+		8 = CONSORT_fem
+		9 = CONSORT_fem
 	}
 	
 	heir_male = {
 		4 = LORD
+		5 = LORD
+		6 = LORD
+		7 = LORD
+		8 = LORD
+		9 = LORD
 	}
 
 	trigger = {
@@ -205,30 +291,7 @@ stateless_society = {
 	}
 }
 
-kongo_tribal_kingdom = {
-	rank = {
-		6 = MWENEDOM
-	}
-	
-	ruler_male = {
-		6 = MWENE
-	}
-	
-	consort_female = {
-		6 = NTOTILA_CONSORT_fem
-	}
-	
-	heir_male = {
-		6 = MFUMU
-	}
-
-	trigger = {
-		tag = KON
-		government = tribal
-	}
-}
-
-kongo_monarchy_kingdom = {
+kongolese_monarchical_tribal_kingdom = {
 	rank = {
 		6 = MWENEDOM
 		7 = HIGH_MWENEDOM
@@ -259,7 +322,10 @@ kongo_monarchy_kingdom = {
 
 	trigger = {
 		tag = KON
-		government = monarchy
+		OR = {
+			government = monarchy
+			government = tribal
+		}
 	}
 }
 
@@ -289,7 +355,7 @@ islamic_caliphate = {
 	}
 }
 
-revolutionary_peasant_republic = {
+revolutionary_british_republic = {
 	rank = {
 		6 = REVOLUTIONARY_PEASANT_REPUBLIC
 		7 = REVOLUTIONARY_PEASANT_REPUBLIC
@@ -304,17 +370,20 @@ revolutionary_peasant_republic = {
 		9 = GRAND_CONSUL
 	}
 
-	heir_male = {
-		6 = LEGISLATOR
-		7 = LEGISLATOR
-		8 = LEGISLATOR
-		9 = LEGISLATOR
-	}
+	#heir_male = {
+	#	6 = LEGISLATOR
+	#	7 = LEGISLATOR
+	#	8 = LEGISLATOR
+	#	9 = LEGISLATOR
+	#}
 
 	trigger = {
 		culture_group = british
-		is_revolutionary_republic_trigger = yes
-		have_had_reform = peasants_republic
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -333,24 +402,24 @@ revolutionary_benelux_republic = {
 		9 = BENELUX_GRAND_PRESIDENT
 	}
 
+
+
 	trigger = {
-		#government = republic
-		AND = {
-	    	OR = {
-	    		primary_culture = ger_flemish
-	    		primary_culture = ger_dutch
-	    		primary_culture = ger_brabantian
-	    		primary_culture = ger_dutch_saxon
-	    		primary_culture = ger_zeelandic
-	    		primary_culture = ger_limburgish
-	    		primary_culture = ger_guelders
-	    		primary_culture = ger_frisian
-	    	}
-			OR = {
-				is_revolutionary_republic_trigger = yes
-				has_reform = peasants_republic
-			}
+	    OR = {
+	    	primary_culture = ger_flemish
+	    	primary_culture = ger_dutch
+	    	primary_culture = ger_brabantian
+	    	primary_culture = ger_dutch_saxon
+	    	primary_culture = ger_zeelandic
+	    	primary_culture = ger_limburgish
+	    	primary_culture = ger_guelders
+	    	primary_culture = ger_frisian
 	    }
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -377,16 +446,15 @@ revolutionary_catalan_republic = {
 	#}
 	
 	trigger = {
-		AND = {
-			OR = {
-				primary_culture = aragonese
-				primary_culture = catalan
-			}
-			OR = {
-				is_revolutionary_republic_trigger = yes
-				has_reform = peasants_republic
-			}
-	    }
+		OR = {
+			primary_culture = aragonese
+			primary_culture = catalan
+		}
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -413,13 +481,12 @@ revolutionary_spanish_republic = {
 	#}
 	
 	trigger = {
-		AND = {
-			culture_group = iberian
-			OR = {
-				is_revolutionary_republic_trigger = yes
-				has_reform = peasants_republic
-			}
-	    }
+		culture_group = iberian
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 		NOT = {
 			primary_culture = aragonese
 			primary_culture = catalan
@@ -452,16 +519,15 @@ revolutionary_portugal_republic = {
 	#}
 	
 	trigger = {
-		AND = {
-			OR = {
-				primary_culture = brazilian
-				primary_culture = portugese
-			}
-			OR = {
-				is_revolutionary_republic_trigger = yes
-				has_reform = peasants_republic
-			}
-	    }
+		OR = {
+			primary_culture = brazilian
+			primary_culture = portugese
+		}
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -488,7 +554,11 @@ revolutionary_swedish_republic = {
 	#}
 
 	trigger = {
-		is_revolutionary_republic_trigger = yes
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 		OR = {
 			tag = SWE
 			AND = {
@@ -523,7 +593,11 @@ revolutionary_danish_republic = {
 	#}
 
 	trigger = {
-		is_revolutionary_republic_trigger = yes
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 		OR = {
 			tag = DAN
 			tag = NOR
@@ -561,8 +635,12 @@ revolutionary_ottoman_republic = {
 	#}
 
 	trigger = {
-		is_revolutionary_republic_trigger = yes
-		tag = TUR
+		culture_group = turkish_g
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -589,13 +667,12 @@ revolutionary_german_republic = {
 	#}
 
 	trigger = {
-		AND = {
-			culture_group = germanic
-			OR = {
-				is_revolutionary_republic_trigger = yes
-				has_reform = peasants_republic
-			}
-	    }
+		culture_group = germanic
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -614,15 +691,37 @@ gov_revolutionary_republic = {
 		9 = GRAND_CONSUL
 	}
 
-	heir_male = {
-		6 = LEGISLATOR
-		7 = LEGISLATOR
-		8 = LEGISLATOR
-		9 = LEGISLATOR
-	}
+	#heir_male = {
+	#	6 = LEGISLATOR
+	#	7 = LEGISLATOR
+	#	8 = LEGISLATOR
+	#	9 = LEGISLATOR
+	#}
 
 	trigger = {
-		is_revolutionary_republic_trigger = yes
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
+		NOT = {			
+			primary_culture = aragonese			
+			primary_culture = brazilian
+			culture_group = british
+			primary_culture = catalan
+			culture_group = germanic
+			culture_group = iberian
+			primary_culture = polish
+			primary_culture = polish_new
+			primary_culture = portugese
+			culture_group = turkish_g
+			tag = DAN
+			tag = NOR
+			tag = SWE
+			tag = ICE
+			tag = FIN
+			tag = GOT
+		}
 	}
 }
 
@@ -646,7 +745,11 @@ gov_polish_republic = {
 			primary_culture = polish
 			primary_culture = polish_new
 		}
-		government = republic
+		OR = {
+			is_revolutionary_republic_trigger = yes
+			has_reform = peasants_republic
+			have_had_reform = peasants_republic
+		}
 	}
 }
 
@@ -692,12 +795,12 @@ gov_prussian_republic = {
 		9 = PRUSSIAN_FIELD_MARSHAL
 	}
 
-	heir_male = {
-		6 = ALLGEMEIN
-		7 = ALLGEMEIN
-		8 = ALLGEMEIN
-		9 = ALLGEMEIN
-	}
+	#heir_male = {
+	#	6 = ALLGEMEIN
+	#	7 = ALLGEMEIN
+	#	8 = ALLGEMEIN
+	#	9 = ALLGEMEIN
+	#}
 	
 	trigger = {
 		has_reform = prussian_republic_reform
@@ -1126,17 +1229,18 @@ khanate = {
 	}
 	
 	trigger = {
+		has_reform = steppe_horde
 		OR = {
 			tag = AST
-			tag = AVR
+			#tag = AVR
 			tag = BAL
 			tag = CHG
 			tag = CRI
 			tag = KAZ
 			tag = KHA
 			tag = KRC
-			tag = NOG
-			tag = OIR
+			#tag = NOG
+			#tag = OIR
 			tag = QAS
 		}
 	}
@@ -1189,6 +1293,47 @@ celestial_parliament = {
 }
 
 #Subject Specific
+pashalik_of_timbuktu = {
+	rank = {
+		5 = TMB_PASHALIK
+		6 = TMB_PASHALIK
+		7 = TMB_PASHALIK
+		8 = TMB_PASHALIK
+		9 = TMB_PASHALIK
+	}
+
+	ruler_male = {
+		5 = TMB_PASHA
+		6 = TMB_PASHA
+		7 = TMB_PASHA
+		8 = TMB_PASHA
+		9 = TMB_PASHA
+	}
+
+	consort_female = {
+		5 = TMB_HATUN_fem
+		6 = TMB_HATUN_fem
+		7 = TMB_HATUN_fem
+		8 = TMB_HATUN_fem
+		9 = TMB_HATUN_fem
+	}
+	
+	heir_male = {
+		5 = TMB_PASHAZADE
+		6 = TMB_PASHAZADE
+		7 = TMB_PASHAZADE
+		8 = TMB_PASHAZADE
+		9 = TMB_PASHAZADE
+	}
+
+	trigger = {
+		is_march = yes
+		government = tribal
+		tag = TMB
+		NOT = { is_revolutionary_republic_trigger = yes }
+	}
+}
+
 ottoman_marches = {
 	rank = {
 		5 = PASHALIK
@@ -1397,37 +1542,6 @@ palatine_electorate = {
 	}
 }
 
-#palatine_monarchy = {
-#	rank = {
-#		6 = LANDKREIS_PFALZ 
-#		7 = HOCHPFALZ
-#		8 = KONIGREICH_PFALZ
-#	}
-#
-#	ruler_male = {
-#		6 = PFALZGRAF
-#		7 = HOHER_PFALZGRAF
-#		8 = KONIGPFALZ
-#	}
-#
-#	consort_female = {
-#		6 = GER_PRINCESS_CONSORT_fem_1
-#		7 = GER_PRINCESS_CONSORT_fem_1
-#		8 = GER_PRINCESS_CONSORT_fem_1
-#	}
-#
-#	heir_male = {
-#		6 = GER_PRINCE_1
-#		7 = GER_PRINCE_1
-#		8 = GER_PRINCE_1
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		tag = PAL
-#	}
-#}
-
 bosnian_monarchy = {
 	rank = {
 		6 = VOJVODSTVO
@@ -1462,34 +1576,70 @@ holy_roman_electors_monarchy = {
 	rank = {
 		6 = GER_DUCHY_ELECTORATE
 		7 = GER_PRINCE_ELECTORATE
-		8 = GER_KINGDOM_ELECTORATE
+		#8 = GER_KINGDOM_ELECTORATE
 	}
 
 	ruler_male = {
 		6 = GER_DUKE_ELECTOR
 		7 = GER_PRINCE_ELECTOR
-		8 = GER_KING_ELECTOR
+		#8 = GER_KING_ELECTOR
 	}
 
 	consort_female = {
 		6 = GER_ELECTOR_CONSORT_fem
 		7 = GER_ELECTOR_CONSORT_fem
-		8 = GER_ELECTOR_CONSORT_fem
+		#8 = GER_ELECTOR_CONSORT_fem
 	}
 	
 	heir_male = {
 		6 = GER_PRINCE_1
 		7 = GER_PRINCE_1
-		8 = GER_PRINCE_1
+		#8 = GER_PRINCE_1
 	}
 
 	trigger = {
 		government = monarchy
 		is_elector = yes
 		is_emperor = no
-		NOT = { tag = HAB } #Archdukes
-		NOT = { tag = AUT } #VU - SF addition
-		NOT = { 
+		NOT = {
+			#tag = AUT #Archdukes
+			#tag = HAB #VU - SF addition
+			primary_culture = czech
+			primary_culture = moravian
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			primary_culture = schlesianBOH
+			primary_culture = sorbianBOH
+		} 
+	}
+}
+
+holy_roman_electors_monarchy = {
+	rank = {
+		8 = GER_KINGDOM_ELECTORATE
+		9 = GER_EMPEROR_ELECTORATE
+	}
+
+	ruler_male = {
+		8 = GER_KING_ELECTOR
+		9 = GER_EMPEROR_ELECTOR
+	}
+
+	consort_female = {
+		8 = GER_QUEEN_CONSORT_fem_1
+		9 = GER_EMPRESS_CONSORT_fem_1
+	}
+	
+	heir_male = {
+		8 = GER_PRINCE_1
+		9 = GER_CROWN_PRINCE_1
+	}
+
+	trigger = {
+		government = monarchy
+		is_elector = yes
+		is_emperor = yes
+		NOT = {
 			primary_culture = czech
 			primary_culture = moravian
 			primary_culture = czechBOH
@@ -1696,295 +1846,6 @@ islamic_syncretism_kingdoms = { #For countries in a node being converted to isla
 	}
 }
 
-#french_kingdom = {
-#	rank = {
-#		#1 = FRA_LORDSHIP_1
-#		#2 = FRA_BARONY_1
-#		#3 = FRA_VISCOUNTY_1
-#		#4 = FRA_COUNTY_1
-#		#5 = FRA_MARQUISATE_1
-#		6 = DUCHE
-#		7 = PRINCIPALITY_FR
-#		8 = ROYAUME
-#		9 = EMPIRE
-#	}
-#
-#	ruler_male = {
-#		#1 = FRA_LORD_1
-#		#2 = FRA_BARON_1
-#		#3 = FRA_VISCOUNTY_1
-#		#4 = FRA_COUNTY_1
-#		#5 = FRA_MARQUIS_1
-#		6 = DUC
-#		7 = PRINCIPALITY_FR
-#		8 = ROI
-#		9 = EMPEREUR
-#	}
-#
-#	ruler_female = {
-#		#1 = FRA_LADY_fem_1
-#		#2 = FRA_BARONESS_fem_1
-#		#3 = FRA_VISCOUNTESS_fem_1
-#		#4 = FRA_COUNTESS_fem_1
-#		#5 = FRA_MARQUISATE_1
-#		6 = DUCHESSE_fem
-#		7 = PRINCESSE_fem
-#		8 = REINE_fem
-#		9 = IMPERATRICE_fem
-#	}
-#
-#	consort_male = {
-#		#1 = FRA_LORD_CONSORT_1
-#		#2 = FRA_BARON_CONSORT_1
-#		#3 = FRA_VISCOUNT_CONSORT_1
-#		#4 = FRA_COUNT_CONSORT_1
-#		#5 = FRA_MARQUIS_CONSORT_1
-#		6 = DUCHE_EPOUSE
-#		7 = PRINCE_EPOUSE
-#		8 = ROI_EPOUSE
-#		9 = EMPEREUR_EPOUSE
-#	}
-#
-#	consort_female = {
-#		#1 = FRA_LADY_CONSORT_fem_1
-#		#2 = FRA_BARONESS_CONSORT_fem_1
-#		#3 = FRA_VISCOUNTESS_CONSORT_fem_1
-#		#4 = FRA_COUNTESS_CONSORT_fem_1
-#		#5 = FRA_MARCHIONESS_CONSORT_fem_1
-#		6 = DUCHESSE_EPOUSE_fem
-#		7 = PRINCESSE_EPOUSE_fem
-#		8 = REINE_EPOUSE_fem
-#		9 = IMPERATRICE_EPOUSE_fem
-#	}
-#	
-#	heir_male = {
-#		#1 = SEIGNEUR
-#		#2 = SEIGNEUR
-#		#3 = SEIGNEUR
-#		#4 = SEIGNEUR
-#		#5 = SEIGNEUR
-#		6 = SEIGNEUR
-#		7 = DAUPHIN
-#		8 = DAUPHIN
-#		9 = DAUPHIN
-#	}
-#	
-#	heir_female = {
-#		#1 = DAME_fem
-#		#2 = DAME_fem
-#		#3 = DAME_fem
-#		#4 = DAME_fem
-#		#5 = DAME_fem
-#		6 = DAME_fem
-#		7 = DAUPHINE_fem
-#		8 = DAUPHINE_fem
-#		9 = DAUPHINE_fem
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		NOT = { has_reform = revolutionary_empire_reform }
-#		OR = {
-#			tag = ANJ
-#			tag = AUV
-#			tag = FRA
-#			tag = BAR
-#			tag = BFR
-#			tag = BRI
-#			tag = FSE
-#			tag = NPF
-#			tag = OFR
-#			tag = ONG
-#			tag = PIC
-#			tag = PRO
-#		}
-#	}
-#}
-
-#castilian_kingdom = {
-#	rank = {
-#		6 = CAS_DUCHY_1
-#		7 = CAS_PRINCIPALITY_1
-#		8 = CAS_KINGDOM_1
-#		9 = CAS_IMPERIO_1
-#	}
-#
-#	ruler_male = {
-#		6 = CAS_DUKE_1
-#		7 = CAS_PRINCIPE_1
-#		8 = CAS_KING_1
-#		9 = CAS_EMPERADOR_1
-#	}
-#
-#	ruler_female = {
-#		6 = CAS_DUCHESS_fem_1
-#		7 = CAS_PRINCESA_fem_1
-#		8 = CAS_QUEEN_fem_1
-#		9 = CAS_EMPERATRIZ_fem_1
-#	}
-#
-#	consort_male = {
-#		6 = CAS_DUQUE_CONSORTE_1
-#		7 = CAS_PRINCIPE_CONSORTE_1
-#		8 = CAS_REINO_CONSORTE_1
-#		9 = CAS_EMPERADOR_CONSORTE_1
-#	}
-#
-#	consort_female = {
-#		6 = CAS_DUQUESA_CONSORTE_fem_1
-#		7 = CAS_PRINCESA_CONSORTE_fem_1
-#		8 = CAS_REINA_CONSORTE_fem_1
-#		9 = CAS_EMPERATRIZ_CONSORTE_fem_1
-#	}
-#	
-#	heir_male = {
-#		6 = CAS_LORD_1
-#		7 = CAS_PRINCIPE_1
-#		8 = CAS_PRINCIPE_HEREDERO_1
-#		9 = CAS_PRINCIPE_HEREDERO_1         #Crown Prince
-#	}
-#	
-#	heir_female = {
-#		6 = CAS_LADY_fem_1
-#		7 = CAS_PRINCESA_fem_1
-#		8 = CAS_PRINCESA_HEREDERA_fem_1
-#		9 = CAS_PRINCESA_HEREDERA_fem_1     #Crown Princess
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		OR = {
-#			tag = ASU
-#			tag = CAS
-#			tag = GAL
-#			tag = LON
-#		}
-#		NOT = { has_reform = revolutionary_empire_reform }
-#	}
-#}
-
-#portuguese_kingdom = {
-#	rank = {
-#		6 = POR_DUCHY_1
-#		7 = POR_PRINCIPALITY_1
-#		8 = POR_KINGDOM_1
-#		9 = POR_IMPERIO
-#	}
-#
-#	ruler_male = {
-#		6 = POR_DUKE_1
-#		7 = POR_PRINCE_1
-#		8 = POR_KING_1
-#		9 = POR_IMPERADOR
-#	}
-#
-#	ruler_female = {
-#		6 = POR_DUCHESS_fem_1
-#		7 = POR_PRINCESS_fem_1
-#		8 = POR_QUEEN_fem_1
-#		9 = POR_IMPERATRIZ_fem
-#	}
-#
-#	consort_male = {
-#		6 = POR_DUQUE_CONSORTE
-#		7 = POR_PRINCIPE_CONSORTE
-#		8 = POR_REINO_CONSORTE
-#		9 = POR_IMPERADOR_CONSORTE		
-#	}
-#
-#	consort_female = {
-#		6 = POR_DUQUESA_CONSORTE_fem
-#		7 = POR_PRINCESA_CONSORTE_fem
-#		8 = POR_REINA_CONSORTE_fem
-#		9 = POR_IMPERATRIZ_CONSORTE_fem		
-#	}
-#	
-#	heir_male = {
-#		6 = POR_PRINCE_1
-#		7 = POR_PRINCE_1
-#		8 = POR_PRINCIPE_HERDEIRO
-#		9 = POR_PRINCIPE_HERDEIRO         #Crown Prince
-#	}
-#	
-#	heir_female = {
-#		6 = POR_PRINCESS_fem_1
-#		7 = POR_PRINCESS_fem_1
-#		8 = POR_PRINCESA_HERDEIRA_fem
-#		9 = POR_PRINCESA_HERDEIRA_fem     #Crown Princess
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		OR = {
-#			tag = AGV
-#			tag = POR
-#		}
-#		NOT = { has_reform = revolutionary_empire_reform }
-#	}
-#}
-
-#aragonese_kingdom = {
-#	rank = {
-#		6 = ARA_DUCHY_1
-#		7 = ARA_PRINCIPALITY_1
-#		8 = ARA_KINGDOM_1
-#		9 = ARA_IMPERI
-#	}
-#
-#	ruler_male = {
-#		6 = ARA_DUKE_1
-#		7 = ARA_PRINCE_1
-#		8 = ARA_KING_1
-#		9 = ARA_EMPERADOR
-#	}
-#
-#	ruler_female = {
-#		6 = ARA_DUCHESS_fem_1
-#		7 = ARA_PRINCESS_fem_1
-#		8 = ARA_QUEEN_fem_1
-#		9 = ARA_EMPERADRIU_fem
-#	}
-#
-#	consort_male = {
-#		6 = ARA_DUQUE_CONSORT
-#		7 = ARA_PRINCEP_CONSORT
-#		8 = ARA_REINO_CONSORT
-#		9 = ARA_EMPERADOR_CONSORT
-#	}
-#
-#	consort_female = {
-#		6 = ARA_DUQUESSA_CONSORT_fem
-#		7 = ARA_PRINCESA_CONSORT_fem
-#		8 = ARA_REINA_CONSORT_fem
-#		9 = ARA_EMPERADRIU_CONSORT_fem
-#	}
-#	
-#	heir_male = {
-#		6 = ARA_PRINCE_1
-#		7 = ARA_PRINCE_1
-#		8 = ARA_PRINCEP_HEREU
-#		9 = ARA_PRINCEP_HEREU         #Crown Prince
-#	}
-#	
-#	heir_female = {
-#		6 = ARA_PRINCESS_fem_1
-#		7 = ARA_PRINCESS_fem_1
-#		8 = ARA_PRINCESA_HEREDERA_fem
-#		9 = ARA_PRINCESA_HEREDERA_fem     #Crown Princess
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		OR = {
-#			tag = ARA
-#			tag = CAT
-#			tag = MJO
-#			tag = VAL
-#		}
-#		NOT = { has_reform = revolutionary_empire_reform }
-#	}
-#}
-
 navarran_kingdom = {
 	rank = {
 		6 = NAV_DUKERRIA
@@ -2038,147 +1899,9 @@ navarran_kingdom = {
 	trigger = {
 		government = monarchy
 		tag = NAV
-		NOT = { has_reform = revolutionary_empire_reform }
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
-
-#bohemian_kingdom = {
-#	rank = {
-#		6 = BOH_VEVODSTVI
-#		7 = BOH_KNIZECTVI
-#		8 = BOH_KRALOVSTVI
-#		9 = BOH_CISARSTVI
-#	}
-#
-#	ruler_male = {
-#		6 = BOH_VEVODA
-#		7 = BOH_KNIZE
-#		8 = BOH_KRAL
-#		9 = BOH_CISAR
-#	}
-#
-#	ruler_female = {
-#		6 = BOH_VEVODKYNE_fem
-#		7 = BOH_KNEZNA_fem
-#		8 = BOH_KRALOVNA_fem
-#		9 = BOH_CISAROVNA_fem
-#	}
-#
-#	consort_male = {
-#		6 = BOH_VEVODA_CHOT
-#		7 = BOH_PRINCOVA_CHOT
-#		8 = BOH_PRINCOVA_CHOT
-#		9 = BOH_KRAL_CHOT
-#	}
-#
-#	consort_female = {
-#		6 = BOH_VEVODKYNE_CHOT_fem
-#		7 = BOH_PRINCEZNA_CHOT_fem
-#		8 = BOH_PRINCEZNA_CHOT_fem
-#		9 = BOH_KRALOVNA_CHOT_fem
-#	}
-#	
-#	heir_male = {
-#		6 = BOH_KNIZE
-#		7 = BOH_KNIZE
-#		8 = BOH_KORUNNI_PRINC
-#		9 = BOH_KORUNNI_PRINC         #Crown Prince
-#	}
-#	
-#	heir_female = {
-#		6 = BOH_KNEZNA_fem
-#		7 = BOH_KNEZNA_fem
-#		8 = BOH_KORUNNI_PRINCEZNA_fem
-#		9 = BOH_KORUNNI_PRINCEZNA_fem     #Crown Princess
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		tag = BOH
-#		NOT = { has_reform = revolutionary_empire_reform }
-#	}
-#}
-
-#italian_monarchy = {
-#	rank = {
-#		6 = ITA_DUCHY_1
-#		7 = ITA_PRINCIPALITY_1
-#		8 = ITA_KINGDOM_1
-#		9 = ITA_EMPIRE_1
-#	}
-#
-#	ruler_male = {
-#		6 = ITA_DUKE_1
-#		7 = ITA_PRINCE_1
-#		8 = ITA_KING_1
-#		9 = ITA_EMPEROR_1
-#	}
-#
-#	ruler_female = {
-#		6 = ITA_DUCHESS_fem_1
-#		7 = ITA_PRINCESS_fem_1
-#		8 = ITA_QUEEN_fem_1
-#		9 = ITA_EMPRESS_fem_1
-#	}
-#
-#	consort_male = {
-#		6 = ITA_DUKE_CONSORT_1
-#		7 = ITA_PRINCE_CONSORT_1
-#		8 = ITA_PRINCE_CONSORT_1
-#		9 = ITA_KING_CONSORT_1
-#	}
-#
-#	consort_female = {
-#		6 = ITA_DUCHESS_CONSORT_fem_1
-#		7 = ITA_PRINCESS_CONSORT_fem_1
-#		8 = ITA_PRINCESS_CONSORT_fem_1
-#		9 = ITA_QUEEN_CONSORT_fem_1
-#	}
-#	
-#	heir_male = {
-#		6 = ITA_LORD_1
-#		7 = ITA_PRINCE_1
-#		8 = ITA_CROWN_PRINCE_1
-#		9 = ITA_CROWN_PRINCE_1           #Crown Prince
-#	}
-#	
-#	heir_female = {
-#		6 = ITA_LADY_fem_1
-#		7 = ITA_PRINCESS_fem_1
-#		8 = ITA_CROWN_PRINCESS_fem_1
-#		9 = ITA_CROWN_PRINCESS_fem_1     #Crown Princess
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		OR = {
-#			tag = ATI
-#			tag = BOB
-#			tag = CEV
-#			tag = COR
-#			tag = CRR
-#			tag = CTN
-#			tag = FER
-#			tag = FMO
-#			tag = FNZ
-#			tag = FNL
-#			tag = MAN
-#			tag = MFA
-#			tag = MLO
-#			tag = MNC
-#			#tag = MNO
-#			tag = MOD
-#			tag = MSS
-#			tag = NAP
-#			tag = PIO
-#			tag = SAR
-#			tag = SAV
-#			tag = SIC
-#			tag = TND
-#		}
-#		NOT = { has_reform = revolutionary_empire_reform }
-#	}
-#}
 
 vyatkan_mixed_government = {
 	rank = {
@@ -2207,51 +1930,6 @@ vyatkan_mixed_government = {
 		tag = VYA
 	}
 }
-
-#dutch_monarchy = {
-#	rank = {
-#		1 = HOL_LORDSHIP_1
-#		2 = HOL_BARONY_1
-#		3 = HOL_DUCHY_1
-#		4 = HOL_COUNTY_1
-#		5 = HOL_MARQUISATE_1
-#		6 = HOL_DUCHY_1
-#		7 = HOL_PRINCIPALITY_1
-#		8 = HOL_KINGDOM_1
-#		9 = HOL_EMPIRE_1
-#	}
-#
-#	ruler_male = {
-#		1 = GRAND_PENSIONARY
-#		2 = GRAND_PENSIONARY
-#		3 = GRAND_PENSIONARY
-#		4 = GRAND_PENSIONARY
-#		5 = GRAND_PENSIONARY
-#		6 = HOL_DUKE_1
-#		7 = HOL_PRINCE_1
-#		8 = STADTHOLDER
-#		9 = GREAT_STADTHOLDER
-#	}
-#
-#	consort_female = {
-#		1 = CONSORT_fem
-#		2 = CONSORT_fem
-#		3 = CONSORT_fem
-#		4 = CONSORT_fem
-#		5 = CONSORT_fem
-#		6 = HOL_DUCHESS_CONSORT_fem_1
-#		7 = HOL_PRINCESS_CONSORT_fem_1
-#		8 = STADTHOLDERESS_CONSORT_fem
-#		9 = GREAT_STADTHOLDERESS_CONSORT_fem
-#	}
-#
-#	trigger = {
-#		government = monarchy
-#		has_reform = stadthalter_monarchy_reform
-#		NOT = { is_revolutionary_republic_trigger = yes }
-#		NOT = { has_reform = presidential_despot_reform }
-#	}
-#}
 
 avar_nutsals = {
 	rank = {
@@ -2501,7 +2179,7 @@ muslim_tribal = {
 	}
 }
 
-kathiawar_tribal_monarchy = { #Sammas of Sindh are also Jams
+jamdom_kingdom_monarchy = { #Sammas of Sindh are also Jams
 	rank = {
 		6 = JAMDOM
 		7 = HIGH_JAMDOM
@@ -2531,10 +2209,17 @@ kathiawar_tribal_monarchy = { #Sammas of Sindh are also Jams
 	}
 
 	trigger = {
-		government = monarchy
-		OR = {
-			tag = KAT
-			primary_culture = sindhi
+		government = tribal
+		religion = hinduism
+		AND = {
+			OR = {
+				primary_culture = saurashtri
+				primary_culture = sindhi
+		    }
+			OR ={
+				has_reform = jamdom_kingdom
+				have_had_reform = jamdom_kingdom
+			}
 		}
 	}
 }
@@ -2687,8 +2372,8 @@ cristopher_of_bavaria_monarchy = {
 	rank = {
 		6 = BAV_ARCHDUCHY
 		7 = BAV_ARCHDUCHY
-		8 = BAV_ARCHDUCHY
-		9 = BAV_ARCHDUCHY
+		8 = BAV_ARCHKINGDOM
+		9 = BAV_ARCHKINGDOM
 	}
 
 	ruler_male = {
@@ -2706,10 +2391,10 @@ cristopher_of_bavaria_monarchy = {
 	}
 
 	heir_male = {
-		6 = BAV_LORD
-		7 = BAV_LORD
-		8 = BAV_LORD
-		9 = BAV_LORD
+		6 = BAV_PRINCE
+		7 = BAV_PRINCE
+		8 = BAV_CROWN_PRINCE
+		9 = BAV_CROWN_PRINCE
 	}
 
 	trigger = {
@@ -2729,21 +2414,21 @@ cristopher_of_bavaria_monarchy = {
 hunyadi_regent_monarchy = {
 	rank = {
 		6 = HUN_DUCHY
-		7 = HUN_DUCHY
+		7 = HUN_GRAND_DUCHY
 		8 = HUN_KINGDOM
 		9 = HUN_EMPIRE
 	}
 
 	ruler_male = {
 		6 = HUN_DUKE
-		7 = HUN_DUKE
+		7 = HUN_GRAND_DUKE
 		8 = HUN_regent_male
 		9 = HUN_EMPEROR
 	}
 
 	consort_female = {
-		6 = HUN_CONSORT_fem
-		7 = HUN_CONSORT_fem
+		6 = HUN_DUCHESS_CONSORT_fem
+		7 = HUN_DUCHESS_CONSORT_fem
 		8 = HUN_QUEEN_CONSORT_fem
 		9 = HUN_EMPRESS_CONSORT_fem
 	}
@@ -2835,7 +2520,7 @@ turkish_monarchy = {
 		6 = SULTAN
 		7 = HIGH_SULTAN
 		8 = GREAT_SULTAN
-		9 = GRAND_SULTANATE
+		9 = GRAND_SULTAN
 	}
 
 	consort_female = {
@@ -3089,8 +2774,13 @@ empire_of_trebizond_monarchy = {
 	}
 }
 
-arakanese_monarchy = { #Buddhist state that used Muslim titles.
+buddhist_hindu_islamic_titles_monarchy = { #Buddhist state that used Muslim titles.
 	rank = {
+		1 = IMAMATE
+		2 = GRAND_MUFTATE_VU
+		3 = SHEIKHDOM
+		4 = SHARIFATE
+		5 = EMIRATE
 		6 = SULTANATE
 		7 = HIGH_SULTANATE
 		8 = GREAT_SULTANATE
@@ -3098,6 +2788,11 @@ arakanese_monarchy = { #Buddhist state that used Muslim titles.
 	}
 
 	ruler_male = {
+		1 = IMAM
+		2 = GRAND_MUFTI_VU
+		3 = SHEIKH
+		4 = SHARIF
+		5 = EMIR
 		6 = SULTAN
 		7 = HIGH_SULTAN
 		8 = GREAT_SULTAN
@@ -3105,6 +2800,11 @@ arakanese_monarchy = { #Buddhist state that used Muslim titles.
 	}
 
 	consort_female = {
+		1 = SAYIDA_CONSORT_fem
+		2 = SAYIDA_CONSORT_fem
+		3 = SAYIDA_CONSORT_fem
+		4 = SAYIDA_CONSORT_fem
+		5 = SAYIDA_CONSORT_fem
 		6 = SULTANA_CONSORT_fem
 		7 = HIGH_SULTANA_CONSORT_fem
 		8 = HIGH_SULTANA_CONSORT_fem
@@ -3112,15 +2812,36 @@ arakanese_monarchy = { #Buddhist state that used Muslim titles.
 	}
 
 	heir_male = {
-		6 = SHAHZADE
-		7 = SHAHZADE
-		8 = SHAHZADE
-		9 = SHAHZADE
+		1 = RABA
+		2 = RABA
+		3 = RABA
+		4 = RABA
+		5 = RABA
+		6 = SUNNI_PRINCE
+		7 = SUNNI_PRINCE
+		8 = SUNNI_CROWN_PRINCE
+		9 = SUNNI_CROWN_PRINCE
 	}
 
 	trigger = {
 		government = monarchy
-		tag = ARK
+		OR = {
+			religion = buddhism
+			religion = hinduism
+			religion = sunni
+		}
+		AND = {
+			OR = {
+		    	primary_culture = arakanese
+				primary_culture = bimanese
+				culture_group = malay
+				primary_culture = moluccan
+				primary_culture = timorese
+		    }
+		}
+		NOT = {
+			religion = surya_majapahit
+		}
 	}
 }
 
@@ -3161,20 +2882,35 @@ pangasinan_panarian = {
 
 filipino_rahanate = {
 	rank = {
+		1 = RAHANATE
+		2 = RAHANATE
+		3 = RAHANATE
+		4 = RAHANATE
+		5 = RAHANATE
 		6 = RAHANATE
-		7 = GREAT_RAHANATE
+		7 = HIGH_RAHANATE
 		8 = MAHARANATE
-		9 = GRAND_MAHARANATE
+		9 = PESHWAHANATE
 	}
 
 	ruler_male = {
+		1 = RAHA
+		2 = RAHA
+		3 = RAHA
+		4 = RAHA
+		5 = RAHA
 		6 = RAHA
-		7 = GREAT_RAHA
+		7 = HIGH_RAHA
 		8 = MAHARAHA
-		9 = GRAND_MAHARAHA
+		9 = PESHWARAHA
 	}
 
 	consort_female = {
+		1 = RANI_fem
+		2 = RANI_fem
+		3 = RANI_fem
+		4 = RANI_fem
+		5 = RANI_fem
 		6 = RANI_fem
 		7 = RANI_fem
 		8 = MAHARANI_fem
@@ -3182,6 +2918,11 @@ filipino_rahanate = {
 	}
 
 	heir_male = {
+		1 = SRI
+		2 = SRI
+		3 = SRI
+		4 = SRI
+		5 = SRI
 		6 = SRI
 		7 = SRI
 		8 = SRI
@@ -3189,13 +2930,25 @@ filipino_rahanate = {
 	}
 
 	trigger = {
-		government = monarchy
-		has_reform = rahanate_reform
+	    government = monarchy
+	    religion = hinduism
+	    AND = {
+	    	culture_group = filipino_i
+	    	OR = {
+	    		has_reform = rahanate_reform
+	    		have_had_reform = rahanate_reform
+	    	}
+	    }
 	}
 }
 
-filipino_datunate = {
+filipino_datunate = { #Mixture of Monarchy and Republic
 	rank = {
+		1 = BARANGAY
+		2 = BARANGAY
+		3 = BARANGAY
+		4 = BARANGAY
+		5 = BARANGAY
 		6 = BARANGAY
 		7 = HIGH_BARANGAY
 		8 = DATUNATE
@@ -3203,6 +2956,11 @@ filipino_datunate = {
 	}
 
 	ruler_male = {
+		1 = DATU
+		2 = DATU
+		3 = DATU
+		4 = DATU
+		5 = DATU
 		6 = DATU
 		7 = HIGH_DATU
 		8 = GREAT_DATU
@@ -3210,6 +2968,11 @@ filipino_datunate = {
 	}
 
 	consort_female = {
+		1 = DAYANG_CONSORT_fem
+		2 = DAYANG_CONSORT_fem
+		3 = DAYANG_CONSORT_fem
+		4 = DAYANG_CONSORT_fem
+		5 = DAYANG_CONSORT_fem
 		6 = DAYANG_CONSORT_fem
 		7 = DAYANG_CONSORT_fem
 		8 = DAYANG_CONSORT_fem
@@ -3217,6 +2980,11 @@ filipino_datunate = {
 	}
 
 	heir_male = {
+		1 = GAT
+		2 = GAT
+		3 = GAT
+		4 = GAT
+		5 = GAT
 		6 = GAT
 		7 = GAT
 		8 = GAT
@@ -3228,15 +2996,29 @@ filipino_datunate = {
 			government = monarchy
 			government = republic
 		}
-		has_reform = datunate_reform
+		AND = {
+			culture_group = filipino_i
+			OR = {
+				has_reform = datunate_reform
+				have_had_reform = datunate_reform
+				has_reform = oligarchy_reform
+				have_had_reform = oligarchy_reform
+				has_reform = plutocratic_reform
+				have_had_reform = plutocratic_reform
+			}
+		}
 		NOT = { tag = SUL }
 		NOT = { tag = MGD }
-		primary_culture = filipino
 	}
 }
 
 filipino_lakanate = {
 	rank = {
+		1 = LAKANATE
+		2 = LAKANATE
+		3 = LAKANATE
+		4 = LAKANATE
+		5 = LAKANATE
 		6 = LAKANATE
 		7 = HIGH_LAKANATE
 		8 = GREAT_LAKANATE
@@ -3244,6 +3026,11 @@ filipino_lakanate = {
 	}
 
 	ruler_male = {
+		1 = LAKAN
+		2 = LAKAN
+		3 = LAKAN
+		4 = LAKAN
+		5 = LAKAN
 		6 = LAKAN
 		7 = HIGH_LAKAN
 		8 = GREAT_LAKAN
@@ -3251,6 +3038,11 @@ filipino_lakanate = {
 	}
 
 	consort_female = {
+		1 = LAKAM_CONSORT_fem
+		2 = LAKAM_CONSORT_fem
+		3 = LAKAM_CONSORT_fem
+		4 = LAKAM_CONSORT_fem
+		5 = LAKAM_CONSORT_fem
 		6 = LAKAM_CONSORT_fem
 		7 = LAKAM_CONSORT_fem
 		8 = HIGH_LAKAM_CONSORT_fem
@@ -3258,6 +3050,11 @@ filipino_lakanate = {
 	}
 
 	heir_male = {
+		1 = GAT
+		2 = GAT
+		3 = GAT
+		4 = GAT
+		5 = GAT
 		6 = GAT
 		7 = GAT
 		8 = GAT
@@ -3266,7 +3063,13 @@ filipino_lakanate = {
 
 	trigger = {
 		government = monarchy
-		has_reform = lakanate_reform
+		AND = {
+			culture_group = filipino_i
+			OR = {
+				has_reform = lakanate_reform
+				have_had_reform = lakanate_reform
+			}
+		}
 	}
 }
 
@@ -3370,13 +3173,17 @@ egyptian_monarchy = {
 	}
 
 	trigger = {
-		OR = {
-			has_reform = enlightened_despotism
-			has_reform = letat_cest_moi_reform
-			has_reform = regional_representation_reform
-		}
-		primary_culture = al_misr_arabic #Egyptian
 		religion_group = muslim
+		AND = {
+			primary_culture = al_misr_arabic #Egyptian
+			OR = {
+		    	has_reform = enlightened_despotism
+		    	has_reform = letat_cest_moi_reform
+				have_had_reform = letat_cest_moi_reform
+		    	has_reform = regional_representation_reform
+				have_had_reform = regional_representation_reform
+		    }
+		}
 	}
 }
 
@@ -3613,11 +3420,51 @@ jurchen_monarchy = {
 	}
 
 	trigger = {
+		primary_culture = manchu
 		OR = {
 			has_reform = steppe_horde
+			have_had_reform = steppe_horde
 			has_reform = scythian_horde_reform
+			have_had_reform = scythian_horde_reform
 		}
-		primary_culture = manchu
+	}
+}
+
+korean_monarchy = {
+	rank = {
+		6 = KOR_DUCHY
+		7 = KOR_GRAND_DUCHY
+		8 = KOR_KINGDOM
+		9 = KOR_EMPIRE
+	}
+
+	ruler_male = {
+		6 = KOR_DUKE
+		7 = KOR_GRAND_DUKE
+		8 = KOR_KING
+		9 = KOR_EMPIRE
+	}
+
+	consort_female = {
+		6 = KOR_DUCHESS_CONSORT_fem
+		7 = KOR_PRINCESS_CONSORT_fem
+		8 = KOR_QUEEN_CONSORT_fem
+		9 = KOR_EMPRESS_CONSORT_fem
+	}
+	
+	heir_male = {
+		6 = KOR_PRINCE
+		7 = KOR_PRINCE
+		8 = KOR_CROWN_PRINCE
+		9 = KOR_CROWN_PRINCE
+	}
+
+	trigger = {
+		culture_group = korean_g
+		OR = {
+			has_reform = korean_monarchy
+			have_had_reform = korean_monarchy
+		}
 	}
 }
 
@@ -3677,122 +3524,88 @@ romanian_monarchy = {
     }
 }
 
-hyderabad_state_monarchy = {
+muslim_indian_monarchy = {
 	rank = {
-		6 = NAWABATE
-		7 = NAWABATE
-		8 = NIZAMATE
-		9 = PADISHAHATE
+		5 = NAWABATE
+		6 = SULTANATE
+		7 = NIZAMATE
+		8 = PADISHAHATE
+		9 = GRAND_PADISHAHATE
 	}
 
 	ruler_male = {
-		6 = NAWAB
-		7 = NAWAB
-		8 = NIZAM
-		9 = PADISHAH
+		5 = NAWAB
+		6 = SULTAN
+		7 = NIZAM
+		8 = PADISHAH
+		9 = GRAND_PADISHAH
 	}
 
 	consort_female = {
-		6 = NAWAB_BEGUM_CONSORT_fem
-		7 = NAWAB_BEGUM_CONSORT_fem
-		8 = NIZAM_BEGUM_CONSORT_fem
+		5 = NAWAB_BEGUM_CONSORT_fem
+		6 = HATUN_BEGUM_CONSORT_fem
+		7 = NIZAM_BEGUM_CONSORT_fem
+		8 = PADISHAH_BEGUM_CONSORT_fem
 		9 = PADISHAH_BEGUM_CONSORT_fem
 	}
 	
 	heir_male = {
-		6 = NAWABZADA
-		7 = NAWABZADA
-		8 = NIZAMZADA
+		5 = NAWABZADA
+		6 = MIRZA
+		7 = NIZAMZADA
+		8 = SHAHZADE
 		9 = SHAHZADE
 	}
 	
 	trigger = {
 		government = monarchy
-		tag = DEC
-	}
-}
-
-muslim_indian_monarchy = {
-	rank = {
-		6 = GHAZIATE
-		7 = HIGH_GHAZIATE
-		8 = GREAT_GHAZIATE
-		9 = GRAND_GHAZIATE
-	}
-
-	ruler_male = {
-		6 = GHAZI
-		7 = HIGH_GHAZI
-		8 = GREAT_GHAZI
-		9 = GRAND_GHAZI
-	}
-
-	consort_female = {
-		6 = HATUN_BEGUM_CONSORT_fem
-		7 = HATUN_BEGUM_CONSORT_fem
-		8 = HATUN_BEGUM_CONSORT_fem
-		9 = HATUN_BEGUM_CONSORT_fem
-	}
-	
-	heir_male = {
-		6 = MIRZA
-		7 = MIRZA
-		8 = MIRZA
-		9 = MIRZA
-	}
-	
-	trigger = {
-		government = monarchy
-		OR = {
-			culture_group = dravidian
-			culture_group = western_aryan
-			culture_group = hindusthani
-			culture_group = eastern_aryan
-			has_reform = indian_sultanate_reform
-		}
 		religion_group = muslim
-	}
-}
-
-bharat_monarchy = {
-	rank = {
-		9 = MAHARAJANATE
-	}
-
-	ruler_male = {
-		9 = CHHATRAPATI
-	}
-
-	consort_female = {
-		9 = MAHARANI_CONSORT_fem
-	}
-	
-	heir_male = {
-		9 = RAJKUMAR
-	}
-	
-	trigger = {
-		government = monarchy
-		tag = BHA
+		AND = {
+			OR = {
+		    	culture_group = dravidian
+		    	culture_group = western_aryan
+		    	culture_group = hindusthani
+		    	culture_group = eastern_aryan
+		    }
+			OR = {
+				has_reform = indian_sultanate_reform
+				have_had_reform = indian_sultanate_reform
+			}
+		}
 	}
 }
 
 hindu_rajput_monarchy = {
 	rank = {
-		6 = RANATE
-		7 = HIGH_RANATE
-		8 = MAHARANATE
-		9 = CHATRAPATINATE
+		1 = RAJPUT
+		2 = RAJPUT
+		3 = RAJPUT
+		4 = RAJPUT
+		5 = RAJPUT
+		6 = RAJPUT
+		7 = HIGH_RAJPUT
+		8 = MAHARAJPUT
+		9 = CHATRAJPUT
 	}
 
 	ruler_male = {
-		6 = RANA
-		7 = HIGH_RANA
-		8 = MAHARANA
-		9 = CHHATRAPATI
+		1 = RAJA
+		2 = RAJA
+		3 = RAJA
+		4 = RAJA
+		5 = RAJA
+		6 = RAJA
+		7 = HIGH_RAJA
+		8 = MAHARAJA
+		9 = CHATRAJA
 	}
 
 	consort_female = {
+		1 = RANI_CONSORT_fem
+		2 = RANI_CONSORT_fem
+		3 = RANI_CONSORT_fem
+		4 = RANI_CONSORT_fem
+		5 = RANI_CONSORT_fem
 		6 = RANI_CONSORT_fem
 		7 = HIGH_RANI_CONSORT_fem
 		8 = MAHARANI_CONSORT_fem
@@ -3800,6 +3613,11 @@ hindu_rajput_monarchy = {
 	}
 	
 	heir_male = {
+		1 = RAJKUMAR
+		2 = RAJKUMAR
+		3 = RAJKUMAR
+		4 = RAJKUMAR
+		5 = RAJKUMAR
 		6 = RAJKUMAR
 		7 = RAJKUMAR
 		8 = RAJKUMAR
@@ -3807,14 +3625,41 @@ hindu_rajput_monarchy = {
 	}
 	
 	trigger = {
-		government = monarchy
-		primary_culture = rajput
+		OR = {
+			government = monarchy
+			government = tribal
+		}
 		religion = hinduism
+		AND = {
+			OR = {
+		    	primary_culture = garjati
+		    	primary_culture = gondi
+		    	primary_culture = gujarati
+		    	primary_culture = jharkhandi
+		    	primary_culture = marathi
+		    	primary_culture = nepali
+		    	primary_culture = pahari
+		    	primary_culture = rajput
+		    	primary_culture = saurashtri
+		    	primary_culture = vindhyan
+		    }
+			OR = {
+				has_reform = rajput_kingdom
+				have_had_reform = rajput_kingdom
+				has_reform = tribal_kingdom
+				have_had_reform = tribal_kingdom
+			}
+		}
 	}
 }
 
 maratha_peshwas = {
 	rank = {
+		1 = RAJANATE
+		2 = RAJANATE
+		3 = RAJANATE
+		4 = RAJANATE
+		5 = RAJANATE
 		6 = RAJANATE
 		7 = HIGH_RAJANATE
 		8 = MAHARAJANATE
@@ -3822,6 +3667,11 @@ maratha_peshwas = {
 	}
 
 	ruler_male = {
+		1 = RAJA
+		2 = RAJA
+		3 = RAJA
+		4 = RAJA
+		5 = RAJA
 		6 = RAJA
 		7 = HIGH_RAJA
 		8 = MAHARAJA
@@ -3829,10 +3679,171 @@ maratha_peshwas = {
 	}
 
 	consort_female = {
+		1 = RANI_CONSORT_fem
+		2 = RANI_CONSORT_fem
+		3 = RANI_CONSORT_fem
+		4 = RANI_CONSORT_fem
+		5 = RANI_CONSORT_fem
 		6 = RANI_CONSORT_fem
 		7 = HIGH_RANI_CONSORT_fem
 		8 = MAHARANI_CONSORT_fem
 		9 = PESHWIN_CONSORT_fem
+	}
+	
+	heir_male = {
+		1 = RAJKUMAR
+		2 = RAJKUMAR
+		3 = RAJKUMAR
+		4 = RAJKUMAR
+		5 = RAJKUMAR
+		6 = RAJKUMAR
+		7 = RAJKUMAR
+		8 = RAJKUMAR
+		9 = RAJKUMAR
+	}
+	
+	trigger = {
+		government = monarchy
+		religion = hinduism
+		AND = {
+			OR = {
+				primary_culture = bihari
+				primary_culture = kochi
+				primary_culture = kannada
+				primary_culture = marathi
+				primary_culture = nepali
+				primary_culture = pahari
+			}
+			OR = {
+				has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
+		    	has_reform = clergy_in_administration_reform
+				have_had_reform = clergy_in_administration_reform
+				has_reform = feudalism_reform
+				have_had_reform = feudalism_reform
+				has_reform = gorkha_kingdom_reform
+				have_had_reform = gorkha_kingdom_reform
+		    	has_reform = of_noble_bearing_reform
+				have_had_reform = of_noble_bearing_reform
+		    	has_reform = meritocratic_focus_reform
+				have_had_reform = meritocratic_focus_reform
+		    }
+		}
+	}
+}
+
+zamorin_of_calcutta = {
+	rank = {
+		6 = ZAMORINATE
+		7 = HIGH_ZAMORINATE
+		8 = GREAT_ZAMORINATE
+		9 = GRAND_ZAMORINATE
+	}
+
+	ruler_male = {
+		6 = ZAMORIN
+		7 = HIGH_ZAMORIN
+		8 = GREAT_ZAMORIN
+		9 = GRAND_ZAMORIN
+	}
+
+	consort_female = {
+		6 = AMPATI_CONSORT_fem
+		7 = AMPATI_CONSORT_fem
+		8 = AMPATI_CONSORT_fem
+		9 = AMPATI_CONSORT_fem
+	}
+	
+	heir_male = {
+		6 = THIRUMULPAD
+		7 = THIRUMULPAD
+		8 = THIRUMULPAD
+		9 = THIRUMULPAD
+	}
+	
+	trigger = {
+		government = monarchy
+		religion = hinduism
+		AND = {
+			primary_culture = malayalam
+			OR = {
+				has_reform = zamorin_of_calcutta_reform
+				have_had_reform = zamorin_of_calcutta_reform
+			}
+		}
+	}
+}
+
+indian_fiefdom_reform = {
+	rank = {
+		4 = THOMDOM
+		5 = THOMDOM
+		6 = THOMDOM
+		7 = HIGH_THOMDOM
+		8 = GREAT_THOMDOM
+		9 = GRAND_THOMDOM
+	}
+
+	ruler_male = {
+		4 = THOMA
+		5 = THOMA
+		6 = THOMA
+		7 = HIGH_THOMA
+		8 = GREAT_THOMA
+		9 = GRAND_THOMA
+	}
+
+	consort_female = {
+		4 = HINDU_LADY_CONSORT_fem
+		5 = HINDU_LADY_CONSORT_fem
+		6 = HINDU_PRINCESS_CONSORT_fem
+		7 = HINDU_PRINCESS_CONSORT_fem
+		8 = HINDU_PRINCESS_CONSORT_fem
+		9 = HINDU_PRINCESS_CONSORT_fem
+	}
+	
+	heir_male = {
+		4 = BHAGAVAAN
+		5 = BHAGAVAAN
+		6 = BHAGAVAAN
+		7 = BHAGAVAAN
+		8 = BHAGAVAAN
+		9 = BHAGAVAAN
+	}
+	
+	trigger = {
+		government = monarchy
+		religion = nestorian
+		AND = {
+			primary_culture = malayalam
+			OR = {
+				has_reform = indian_fief_reform
+				have_had_reform = indian_fief_reform
+			}
+		}
+	}
+}
+
+aryachakravarti_dynasty_reform = {
+	rank = {
+		6 = ARYACHAKRAVARTINATE
+		7 = HIGH_ARYACHAKRAVARTINATE
+		8 = GREAT_ARYACHAKRAVARTINATE
+		9 = GRAND_ARYACHAKRAVARTINATE
+	}
+
+	ruler_male = {
+		6 = ARYACAKRAVARTIS
+		7 = HIGH_ARYACAKRAVARTIS
+		8 = GREAT_RYACAKRAVARTIS
+		9 = GRAND_ARYACAKRAVARTIS
+	}
+
+	consort_female = {
+		6 = RANI_CONSORT_fem
+		7 = RANI_CONSORT_fem
+		8 = MAHARANI_CONSORT_fem
+		9 = MAHARANI_CONSORT_fem
 	}
 	
 	heir_male = {
@@ -3843,30 +3854,37 @@ maratha_peshwas = {
 	}
 	
 	trigger = {
+		government = monarchy
 		OR = {
-			has_reform = administrative_monarchy
-			has_reform = clergy_in_administration_reform
-			has_reform = of_noble_bearing_reform
-			has_reform = meritocratic_focus_reform
+			religion = buddhism
+			religion = hinduism
 		}
-		primary_culture = marathi
-		religion = hinduism
+		AND = {
+			OR = {
+		    	primary_culture = tamil
+		    	primary_culture = sinhala
+		    }
+			OR = {
+				has_reform = aryachakravarti_reform
+				have_had_reform = aryachakravarti_reform
+			}
+		}
 	}
 }
 
-hindu_maratha_monarchy = {
+assamese = {
 	rank = {
-		6 = RAJANATE
-		7 = HIGH_RAJANATE
-		8 = MAHARAJANATE
-		9 = CHATRAPATINATE
+		6 = ASAM_RAJANATE
+		7 = ASAM_DEVARAJANATE
+		8 = ASAM_DEVARAJANATE
+		9 = ASAM_DEVARAJANATE
 	}
 
 	ruler_male = {
-		6 = RAJA
-		7 = HIGH_RAJA
-		8 = MAHARAJA
-		9 = CHHATRAPATI
+		6 = ASAM_RAJA
+		7 = ASAM_DEVARAJA
+		8 = ASAM_DEVARAJA
+		9 = ASAM_DEVARAJA
 	}
 
 	consort_female = {
@@ -3884,9 +3902,135 @@ hindu_maratha_monarchy = {
 	}
 	
 	trigger = {
-		government = monarchy
-		primary_culture = marathi
+		OR = {
+			government = monarchy
+			government = tribal
+		}
+		OR = {
+			religion = ahom
+			religion = hinduism
+		}
+		AND = {
+			OR = {
+				primary_culture = assamese
+				tag = KAC
+				tag = TPR
+			}
+			OR = {
+				has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
+				has_reform = tribal_kingdom
+				have_had_reform = tribal_kingdom
+			}
+		}
+	}
+}
+
+gond_monarchy_reform = {
+	rank = {
+		6 = RAJGONATE
+		7 = HIGH_RAJGONATE
+		8 = GREAT_RAJGONATE
+		9 = GRAND_RAJGONATE
+	}
+
+	ruler_male = {
+		6 = RAJGOND
+		7 = HIGH_RAJGOND
+		8 = GREAT_RAJGOND
+		9 = GRAND_RAJGOND
+	}
+
+	consort_female = {
+		6 = RANI_CONSORT_fem
+		7 = RANI_CONSORT_fem
+		8 = MAHARANI_CONSORT_fem
+		9 = MAHARANI_CONSORT_fem
+	}
+	
+	heir_male = {
+		6 = RAJKUMAR
+		7 = RAJKUMAR
+		8 = RAJKUMAR
+		9 = RAJKUMAR
+	}
+	
+	trigger = {
+		government = tribal
 		religion = hinduism
+		AND = {
+			OR = {
+				primary_culture = bengali
+		    	primary_culture = garjati
+				primary_culture = gondi
+				primary_culture = jharkhandi
+		    }
+			OR = {
+				has_reform = gond_kingdom
+				have_had_reform = gond_kingdom
+			}
+		}
+	}
+}
+
+burmese_monarchy_reform = {
+	rank = {
+		4 = BURMESE_COMMANDERY
+		5 = BURMESE_COMMANDERY
+		6 = BURMESE_DUCHY
+		7 = BURMESE_PRINCIPALITY
+		8 = BURMESE_KINGDOM
+		9 = BURMESE_EMPIRE
+	}
+
+	ruler_male = {
+		4 = BURMESE_COMMANDER
+		5 = BURMESE_COMMANDER
+		6 = BURMESE_DUKE
+		7 = BURMESE_PRINCE
+		8 = BURMESE_KING
+		9 = BURMESE_EMPEROR
+	}
+
+	consort_female = {
+		4 = BURMESE_LADY_CONSORT_fem
+		5 = BURMESE_LADY_CONSORT_fem
+		6 = BURMESE_DUCHESS_CONSORT_fem
+		7 = BURMESE_PRINCESS_CONSORT_fem
+		8 = BURMESE_QUEEN_CONSORT_fem
+		9 = BURMESE_EMPRESS_CONSORT_fem
+	}
+	
+	heir_male = {
+		4 = BURMESE_LORD
+		5 = BURMESE_LORD
+		6 = BURMESE_LORD
+		7 = BURMESE_PRINCE
+		8 = BURMESE_CROWN_PRINCE
+		9 = BURMESE_CROWN_PRINCE
+	}
+	
+	trigger = {
+		OR = {
+			government = tribal
+			government = monarchy
+		}
+		OR = {
+			religion = animism
+			religion = buddhism
+			religion = hinduism
+		}
+		AND = {
+			OR = {
+				primary_culture = burmese
+				primary_culture = chin
+		    	primary_culture = mon
+		    }
+			OR = {
+				has_reform = burmese_monarchy_reform
+				have_had_reform = burmese_monarchy_reform
+			}
+		}
 	}
 }
 
@@ -4283,81 +4427,66 @@ betsimisaraka_monarchy = {
 	}
 }
 
-shan_monarchy = {
+mong_monarchy = {
 	rank = {
-		6 = MONG
-		7 = HIGH_MONG
-		8 = GREAT_MONG
-		9 = GRAND_MONG
+		1 = MONG_LORDSHIP
+		2 = MONG_LORDSHIP
+		3 = MONG_LORDSHIP
+		4 = MONG_LORDSHIP
+		5 = MONG_LORDSHIP
+		6 = MONG_LORDSHIP
+		7 = MONG_PRINCIPALITY
+		8 = MONG_KINGDOM
+		9 = MONG_EMPIRE
 	}
 
 	ruler_male = {
-		6 = SAOPHA
-		7 = HIGH_SAOPHA
-		8 = GREAT_SAOPHA
-		9 = GRAND_SAOPHA
+		1 = MONG_LORD
+		2 = MONG_LORD
+		3 = MONG_LORD
+		4 = MONG_LORD
+		5 = MONG_LORD
+		6 = MONG_LORD
+		7 = MONG_PRINCE
+		8 = MONG_KING
+		9 = MONG_EMPEROR
 	}
 
 	consort_female = {
-		6 = PRINCESS_fem
-		7 = PRINCESS_fem
-		8 = QUEEN_fem
-		9 = EMPRESS_fem
+		1 = MONG_LADY_CONSORT_fem
+		2 = MONG_LADY_CONSORT_fem
+		3 = MONG_LADY_CONSORT_fem
+		4 = MONG_LADY_CONSORT_fem
+		5 = MONG_LADY_CONSORT_fem
+		6 = MONG_LADY_CONSORT_fem
+		7 = MONG_LADY_CONSORT_fem
+		8 = MONG_QUEEN_CONSORT_fem
+		9 = MONG_EMPRESS_CONSORT_fem
 	}
 
 	heir_male = {
-		6 = LORD
-		7 = LORD
-		8 = LORD
-		9 = LORD
+		1 = MONG_LORD
+		2 = MONG_LORD
+		3 = MONG_LORD
+		4 = MONG_LORD
+		5 = MONG_LORD
+		6 = MONG_LORD
+		7 = MONG_PRINCE
+		8 = MONG_CROWN_PRINCE
+		9 = MONG_CROWN_PRINCE
 	}
 
 	trigger = {
 		government = monarchy
-		primary_culture = shan
-	}
-}
-
-burman_monarchy = {
-	rank = {
-		4 = HKARINE
-		5 = AARAIAAHKYINN_SHISUU
-		6 = SAYYNGAALSAW
-		7 = KYAUNGGAOTE
-		8 = NINENGANTAW
-		9 = CHATRAPATINATE
-	}
-
-	ruler_male = {
-		4 = RAYTWAT_PAR
-		5 = SAHKAIN
-		6 = MAINNSARR
-		7 = MAINNSARR
-		8 = BHURAIN
-		9 = CHHATRAPATI
-	}
-
-	consort_female = {
-		4 = HKARINE
-		5 = AARAIAAHKYINN_SHISUU
-		6 = MAINNSAMEE_fem
-		7 = MAINNSAMEE_fem
-		8 = BHURAINM_fem
-		9 = EKARE_fem
-	}
-
-	heir_male = {
-		4 = SAHKAIN
-		5 = SAHKAIN
-		6 = MAINNSARR
-		7 = MAINNSARR
-		8 = MAINNSARR
-		9 = MAINNSARR
-	}
-
-	trigger = {
-		government = monarchy
-		culture_group = burman
+		AND = {
+			OR = {
+		    	primary_culture = khun
+		    	primary_culture = shan
+		    	primary_culture = tai
+		    }
+			has_reform = mandala_reform
+		}
+		NOT = { tag = MPH }
 	}
 }
 
@@ -4417,7 +4546,7 @@ croatian_monarchy = {
 			primary_culture = croatian
 			primary_culture = croatian_new
 		}
-		NOT = { has_reform = revolutionary_empire_reform }
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4473,15 +4602,19 @@ serbian_monarchy = {
 
 	trigger = {
 		government = monarchy
-		OR = {
-			has_reform = feudalism_reform
-			has_reform = autocracy_reform
-		}
-		OR = {
-			primary_culture = serbian
-			primary_culture = serbian_new
-		}
 		religion = orthodox
+		AND = {
+			OR = {
+		    	primary_culture = serbian
+		    	primary_culture = serbian_new
+		    }
+			OR = {
+		    	has_reform = feudalism_reform
+				have_had_reform = feudalism_reform
+		    	has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
+		    }
+		}
 	}
 }
 
@@ -4707,9 +4840,11 @@ ang_lordship_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = anglois_lordship
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4764,9 +4899,11 @@ ang_barony_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = anglois_barony
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4821,9 +4958,11 @@ ang_viscounty_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = anglois_viscounty
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4878,9 +5017,11 @@ ang_county_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = anglois_county
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4935,9 +5076,11 @@ ang_marquisate_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = anglois_marquisate
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -4992,9 +5135,11 @@ ang_duchy_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = anglois_duchy
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5049,9 +5194,11 @@ ang_principality_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = anglois_principality
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5113,9 +5260,11 @@ ang_kingdom_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = anglois_kingdom
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5160,12 +5309,13 @@ ara_lordship_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = aragonese_lordship
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5210,12 +5360,13 @@ ara_barony_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = aragonese_barony
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5260,12 +5411,13 @@ ara_viscounty_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = aragonese_viscounty
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5310,12 +5462,13 @@ ara_county_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = aragonese_county
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5360,12 +5513,13 @@ ara_marquisate_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = aragonese_marquisate
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5410,12 +5564,13 @@ ara_duchy_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = aragonese_duchy
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5460,12 +5615,13 @@ ara_principality_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = aragonese_principality
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5517,14 +5673,16 @@ ara_kingdom_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = crown_of_aragon
+				have_had_reform = crown_of_aragon
 				is_subject_of_type = aragonese_kingdom
 				is_subject_of_type = aragonese_crown_PU
 		    }
-			NOT = { 
-				tag = AOR
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			tag = AOR 
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -5566,10 +5724,11 @@ ost_lordship_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = austrian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5609,10 +5768,11 @@ ost_barony_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = austrian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5652,10 +5812,11 @@ ost_viscounty_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = austrian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5695,10 +5856,11 @@ ost_county_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = austrian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5738,10 +5900,11 @@ ost_marquisate_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = austrian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5781,11 +5944,13 @@ ost_duchy_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				has_reform = austrian_duchy_reform
+				have_had_reform = austrian_duchy_reform
 				is_subject_of_type = austrian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5825,11 +5990,13 @@ ost_principality_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				has_reform = austrian_archduchy_reform
+				have_had_reform = austrian_archduchy_reform
 				is_subject_of_type = austrian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5876,13 +6043,17 @@ ost_kingdom_reform = {
 			primary_culture = austrian
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = austria_hungary_reform
+				have_had_reform = austria_hungary_reform
 				has_reform = austrian_dual_monarchy
+				have_had_reform = austrian_dual_monarchy
 				has_reform = austrian_absolute_monarchy
+				have_had_reform = austrian_absolute_monarchy
 				is_subject_of_type = austrian_kingdom
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5923,9 +6094,11 @@ bal_lordship_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = baltic_lordship
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -5965,9 +6138,11 @@ bal_barony_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = baltic_barony
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6007,9 +6182,11 @@ bal_viscounty_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = baltic_viscounty
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6049,9 +6226,11 @@ bal_county_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = baltic_county
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6091,9 +6270,11 @@ bal_marquisate_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = baltic_marquisate
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6133,9 +6314,11 @@ bal_duchy_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = baltic_duchy
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6175,9 +6358,11 @@ bal_principality_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = baltic_principality
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6224,9 +6409,11 @@ bal_kingdom_reform = {
 			culture_group = baltic
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = baltic_kingdom
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6272,9 +6459,9 @@ bel_lordship_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = belgian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
 	}
 }
@@ -6320,10 +6507,11 @@ bel_barony_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = belgian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6368,10 +6556,11 @@ bel_viscounty_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = belgian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6416,10 +6605,11 @@ bel_county_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = belgian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6464,10 +6654,11 @@ bel_marquisate_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = belgian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6512,10 +6703,11 @@ bel_duchy_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = belgian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6560,10 +6752,11 @@ bel_principality_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = belgian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6615,12 +6808,14 @@ bel_kingdom_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = belgian_kingdom_reform
+				have_had_reform = belgian_kingdom_reform
 				is_subject_of_type = belgian_kingdom
 				is_subject_of_type = benelux_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6668,10 +6863,11 @@ boh_lordship_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = bohemian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6718,10 +6914,11 @@ boh_barony_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = bohemian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6768,10 +6965,11 @@ boh_viscounty_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = bohemian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6818,10 +7016,11 @@ boh_county_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = bohemian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6868,10 +7067,11 @@ boh_marquisate_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = bohemian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6920,10 +7120,11 @@ boh_duchy_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = bohemian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -6970,10 +7171,11 @@ boh_principality_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = bohemian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7027,12 +7229,14 @@ boh_kingdom_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = bohemian_elective_kingdom_reform
+				have_had_reform = bohemian_elective_kingdom_reform
 				is_subject_of_type = bohemian_kingdom
 				is_subject_of_type = bohemian_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7073,10 +7277,11 @@ bur_lordship_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = burgundian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7116,10 +7321,11 @@ bur_barony_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = burgundian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7159,10 +7365,11 @@ bur_viscounty_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = burgundian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7202,10 +7409,11 @@ bur_county_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = burgundian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7245,10 +7453,11 @@ bur_marquisate_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = burgundian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7288,11 +7497,13 @@ bur_duchy_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				has_reform = burgundian_state_reform
+				have_had_reform = burgundian_state_reform
 				is_subject_of_type = burgundian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7332,10 +7543,11 @@ bur_principality_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = burgundian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7382,11 +7594,12 @@ bur_kingdom_reform = {
 			primary_culture = burgundian
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = burgundian_kingdom
 				is_subject_of_type = burgundian_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7427,10 +7640,11 @@ byz_lordship_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = byzantine_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7470,10 +7684,11 @@ byz_barony_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = byzantine_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7513,10 +7728,11 @@ byz_viscounty_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = byzantine_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7556,10 +7772,11 @@ byz_county_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = byzantine_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7599,10 +7816,11 @@ byz_marquisate_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = byzantine_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7642,10 +7860,11 @@ byz_duchy_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = byzantine_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7685,10 +7904,11 @@ byz_principality_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = byzantine_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7735,11 +7955,12 @@ byz_kingdom_reform = {
 			primary_culture = greek
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = byzantine_kingdom
 				is_subject_of_type = byzantine_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7783,10 +8004,11 @@ cas_lordship_reform = {
 			}
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = castilian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7829,10 +8051,11 @@ cas_barony_reform = {
 			}
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = castilian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7875,10 +8098,11 @@ cas_viscounty_reform = {
 			}
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = castilian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7921,10 +8145,11 @@ cas_county_reform = {
 			}
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = castilian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -7967,10 +8192,11 @@ cas_marquisate_reform = {
 			}
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = castilian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8013,10 +8239,11 @@ cas_duchy_reform = {
 			}
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = castilian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8059,10 +8286,11 @@ cas_principality_reform = {
 			}
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = castilian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8112,12 +8340,14 @@ cas_kingdom_reform = {
 			}
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = kingdom_of_castile_and_leon
+				have_had_reform = kingdom_of_castile_and_leon
 		    	is_subject_of_type = castilian_kingdom
 				is_subject_of_type = spanish_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8158,10 +8388,11 @@ dan_lordship_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = danish_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8201,10 +8432,11 @@ dan_barony_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = danish_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8244,10 +8476,11 @@ dan_viscounty_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = danish_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8287,10 +8520,11 @@ dan_county_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = danish_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8330,10 +8564,11 @@ dan_marquisate_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = danish_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8373,10 +8608,11 @@ dan_duchy_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = danish_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8416,10 +8652,11 @@ dan_principality_reform = {
 			primary_culture = danish
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = danish_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -8473,17 +8710,20 @@ dan_kingdom_reform = {
 			    primary_culture = danish
 		    	OR = {
 		        	has_reform = eue_kingdom_reform
+					have_had_reform = eue_kingdom_reform
 		    		has_reform = kalmar_union
+					have_had_reform = kalmar_union
 		        	is_subject_of_type = danish_kingdom
 		    		is_subject_of_type = danish_crown_PU
 		        }
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
 #DUTCH
-hol_lordship_reform = {
+dutch_lordship_reform = {
 	rank = {
 		1 = HOL_LORDSHIP_1
 	}
@@ -8531,13 +8771,15 @@ hol_lordship_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = dutch_lordship
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_barony_reform = {
+dutch_barony_reform = {
 	rank = {
 		2 = HOL_BARONY_1
 	}
@@ -8585,13 +8827,15 @@ hol_barony_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = dutch_barony
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_viscounty_reform = {
+dutch_viscounty_reform = {
 	rank = {
 		3 = HOL_VISCOUNTY_1
 	}
@@ -8639,13 +8883,15 @@ hol_viscounty_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = dutch_viscounty
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_county_reform = {
+dutch_county_reform = {
 	rank = {
 		4 = HOL_COUNTY_1
 	}
@@ -8693,13 +8939,15 @@ hol_county_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = dutch_county
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_marquisate_reform = {
+dutch_marquisate_reform = {
 	rank = {
 		5 = HOL_MARQUISATE_1
 	}
@@ -8747,13 +8995,15 @@ hol_marquisate_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = dutch_marquisate
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_duchy_reform = {
+dutch_duchy_reform = {
 	rank = {
 		6 = HOL_DUCHY_1
 	}
@@ -8801,13 +9051,15 @@ hol_duchy_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = dutch_duchy
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_principality_reform = {
+dutch_principality_reform = {
 	rank = {
 		7 = HOL_PRINCIPALITY_1
 	}
@@ -8855,13 +9107,15 @@ hol_principality_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = dutch_principality
 		    }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
-hol_kingdom_reform = {
+dutch_kingdom_reform = {
 	rank = {
 		8 = HOL_KINGDOM_1
 		9 = HOL_EMPIRE_1
@@ -8916,14 +9170,20 @@ hol_kingdom_reform = {
 		    }
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = stadthalter_monarchy_reform
+				have_had_reform = stadthalter_monarchy_reform
 				has_reform = elective_monarchy_reform
+				have_had_reform = elective_monarchy_reform
 		    	is_subject_of_type = dutch_kingdom
 				is_subject_of_type = benelux_crown_PU
 		    }
 		}
-		NOT = { is_revolutionary_republic_trigger = yes }
-		NOT = { has_reform = presidential_despot_reform }
+		NOT = { 
+			is_revolutionary_republic_trigger = yes 
+			has_reform = presidential_despot_reform
+			have_had_reform = presidential_despot_reform
+		}
 	}
 }
 
@@ -8964,13 +9224,14 @@ eng_lordship_reform = { #English Lordship.
 			culture_group = british
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = english_lordship
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9011,13 +9272,14 @@ eng_barony_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = english_barony
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9058,13 +9320,14 @@ eng_viscounty_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = english_viscounty
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9105,13 +9368,14 @@ eng_earldom_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eng_earldom_reform
+				have_had_reform = eng_earldom_reform
 		    	is_subject_of_type = english_earldom
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9152,13 +9416,14 @@ eng_marquisate_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = english_marquisate
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9199,13 +9464,14 @@ eng_duchy_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = english_duchy
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9246,13 +9512,14 @@ eng_principality_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = english_principality
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-				has_reform = revolutionary_empire_reform 
-			}
+		}
+		NOT = { 
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes 
 		}
 	}
 }
@@ -9300,19 +9567,22 @@ eng_kingdom_reform = {
 			culture_group = british
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = english_monarchy
+				have_had_reform = english_monarchy
 				has_reform = british_monarchy
+				have_had_reform = british_monarchy
 				has_reform = absolute_british_monarchy
 		    	is_subject_of_type = english_kingdom
 				is_subject_of_type = english_crown_PU
 		    }
-			NOT = { 
-				primary_culture = scottish
-				primary_culture = cosmopolitan_french_UKS
-			}
 		}
-		NOT = { tag = CST }
-		NOT = { has_reform = revolutionary_empire_reform }
+		NOT = { 
+			tag = CST
+			primary_culture = scottish
+			primary_culture = cosmopolitan_french_UKS
+			is_revolutionary_republic_trigger = yes
+		}
 	}
 }
 
@@ -9356,25 +9626,27 @@ fra_lordship_reform = {
 			}
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = french_lordship
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9418,25 +9690,27 @@ fra_barony_reform = {
 			}
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = french_barony
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9480,25 +9754,27 @@ fra_viscounty_reform = {
 			}
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = french_viscounty
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9542,25 +9818,27 @@ fra_county_reform = {
 			}
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = french_county
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9604,25 +9882,27 @@ fra_marquisate_reform = {
 			}
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = french_marquisate
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9666,25 +9946,27 @@ fra_duchy_reform = {
 			}
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = french_duchy
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9728,25 +10010,27 @@ fra_principality_reform = {
 			}
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = french_principality
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9797,32 +10081,43 @@ fra_kingdom_reform = {
 			}
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = feudal_france_reform
+				have_had_reform = feudal_france_reform
 				has_reform = french_kingdom_reform
+				have_had_reform = french_kingdom_reform
 				has_reform = french_absolutism
+				have_had_reform = french_absolutism
 				has_reform = french_orleanist_restoration_reform
+				have_had_reform = french_orleanist_restoration_reform
 				has_reform = french_monarchic_restoration_reform
+				have_had_reform = french_monarchic_restoration_reform
 				has_reform = bourgeoisie_aristocracy_reform
+				have_had_reform = bourgeoisie_aristocracy_reform
 				has_reform = ancien_regime_reform
+				have_had_reform = ancien_regime_reform
+				has_reform = crusader_state_vu_reform
+				have_had_reform = crusader_state_vu_reform
 		    	is_subject_of_type = french_kingdom
 		    }
-			NOT = { 
-		    	primary_culture = cosmopolitan_french_UKS
-				primary_culture = gascon_UKS
-				primary_culture = normand_UKS
-				primary_culture = aquitaine_UKS
-				primary_culture = burgundian_UKS
-				primary_culture = occitain_UKS
-				primary_culture = arpitan_UKS
-				primary_culture = poitevin_UKS
-				primary_culture = angevin_UKS
-				primary_culture = lorraine_UKS
-				primary_culture = auvergnat_UKS
-				primary_culture = gallo_UKS
-				primary_culture = wallonian_UKS
-				primary_culture = breton_UKS
-				primary_culture = burgundian
-			}
+		}
+		NOT = { 
+			primary_culture = cosmopolitan_french_UKS
+			primary_culture = gascon_UKS
+			primary_culture = normand_UKS
+			primary_culture = aquitaine_UKS
+			primary_culture = burgundian_UKS
+			primary_culture = occitain_UKS
+			primary_culture = arpitan_UKS
+			primary_culture = poitevin_UKS
+			primary_culture = angevin_UKS
+			primary_culture = lorraine_UKS
+			primary_culture = auvergnat_UKS
+			primary_culture = gallo_UKS
+			primary_culture = wallonian_UKS
+			primary_culture = breton_UKS
+			primary_culture = burgundian
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9864,21 +10159,23 @@ ger_lordship_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = german_lordship
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9919,21 +10216,23 @@ ger_barony_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = german_barony
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -9974,21 +10273,23 @@ ger_viscounty_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = german_viscounty
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10029,21 +10330,23 @@ ger_county_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = german_county
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10084,8 +10387,23 @@ ger_marquisate_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = german_marquisate
 		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10126,22 +10444,25 @@ ger_duchy_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				has_reform = hessian_militarized_monarchy_reform
+				have_had_reform = hessian_militarized_monarchy_reform
 		    	is_subject_of_type = german_duchy
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10182,21 +10503,23 @@ ger_principality_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = german_principality
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10244,21 +10567,23 @@ ger_kingdom_reform = {
 			culture_group = germanic
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 		    	is_subject_of_type = german_kingdom
 		    }
-			NOT = {
-		    	primary_culture = ger_dutch               #Dutch
-                primary_culture = ger_brabantian          #Belgian
-                primary_culture = ger_dutch_saxon         #Dutch
-                primary_culture = ger_zeelandic           #Dutch
-                primary_culture = ger_limburgish          #Dutch
-                primary_culture = ger_guelders            #Dutch
-                primary_culture = ger_flemish             #Belgian
-		    	culture_group = low_franconian            #Low Countries
-		    	primary_culture = polishBOH               #Czech
-		    	primary_culture = schlesianBOH            #Czech
-		    	primary_culture = sorbianBOH              #Czech
-		    }
+		}
+		NOT = {
+			primary_culture = ger_dutch               #Dutch
+            primary_culture = ger_brabantian          #Belgian
+            primary_culture = ger_dutch_saxon         #Dutch
+            primary_culture = ger_zeelandic           #Dutch
+            primary_culture = ger_limburgish          #Dutch
+            primary_culture = ger_guelders            #Dutch
+            primary_culture = ger_flemish             #Belgian
+			culture_group = low_franconian            #Low Countries
+			primary_culture = polishBOH               #Czech
+			primary_culture = schlesianBOH            #Czech
+			primary_culture = sorbianBOH              #Czech
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -10300,10 +10625,11 @@ hun_lordship_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = hungarian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10343,10 +10669,11 @@ hun_barony_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = hungarian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10386,10 +10713,11 @@ hun_viscounty_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = hungarian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10429,10 +10757,11 @@ hun_county_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = hungarian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10472,10 +10801,11 @@ hun_marquisate_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = hungarian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10515,10 +10845,11 @@ hun_duchy_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = hungarian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10558,10 +10889,11 @@ hun_principality_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = hungarian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10608,11 +10940,13 @@ hun_kingdom_reform = {
 			culture_group = carpathian
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = apostolic_kingdom
+				have_had_reform = apostolic_kingdom
 		    	is_subject_of_type = hungarian_kingdom
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10653,10 +10987,11 @@ ita_lordship_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = italian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10696,10 +11031,11 @@ ita_barony_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = italian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10739,10 +11075,11 @@ ita_viscounty_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = italian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10782,10 +11119,11 @@ ita_county_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = italian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10825,10 +11163,11 @@ ita_marquisate_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = italian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10868,15 +11207,23 @@ ita_duchy_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				has_reform = savoia_reform
+				have_had_reform = savoia_reform
 				has_reform = house_of_este_reform
+				have_had_reform = house_of_este_reform
 				has_reform = house_of_gonzaga_reform
+				have_had_reform = house_of_gonzaga_reform
 				has_reform = palaiologos_montferrat_reform
+				have_had_reform = palaiologos_montferrat_reform
+				has_reform = crusader_state_vu_reform
+				have_had_reform = crusader_state_vu_reform
 				has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
 		    	is_subject_of_type = italian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10916,10 +11263,11 @@ ita_principality_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = italian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -10966,13 +11314,17 @@ ita_kingdom_reform = {
 			culture_group = latin
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = kingdom_of_sicily_reform
+				have_had_reform = kingdom_of_sicily_reform
 				has_reform = italian_monarchy_reform
+				have_had_reform = italian_monarchy_reform
 				has_reform = giudicati_sardi_reform
+				have_had_reform = giudicati_sardi_reform
 		    	is_subject_of_type = italian_kingdom
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11013,10 +11365,11 @@ nor_lordship_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = norwegian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11056,10 +11409,11 @@ nor_barony_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = norwegian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11099,10 +11453,11 @@ nor_viscounty_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = norwegian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11142,10 +11497,11 @@ nor_county_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = norwegian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11185,10 +11541,11 @@ nor_marquisate_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = norwegian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11228,10 +11585,11 @@ nor_duchy_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = norwegian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11271,10 +11629,11 @@ nor_principality_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = norwegian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11321,10 +11680,11 @@ nor_kingdom_reform = {
 			primary_culture = norwegian
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 		    	is_subject_of_type = norwegian_kingdom
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11365,13 +11725,14 @@ pol_lordship_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = polish_lordship
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11412,13 +11773,14 @@ pol_barony_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = polish_barony
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11459,13 +11821,14 @@ pol_viscounty_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = polish_viscounty
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11506,13 +11869,14 @@ pol_county_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = polish_county
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11553,13 +11917,14 @@ pol_marquisate_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = polish_marquisate
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11600,13 +11965,14 @@ pol_duchy_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = polish_duchy
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11647,13 +12013,14 @@ pol_principality_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = polish_principality
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11701,14 +12068,16 @@ pol_kingdom_reform = {
 			primary_culture = polish
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = polish_great_sejm
+				have_had_reform = polish_great_sejm
 		    	is_subject_of_type = polish_kingdom
 		    }
-			NOT = {
-		    	primary_culture = czechBOH
-		    	primary_culture = polishBOH
-				has_reform = revolutionary_empire_reform
-		    }
+		}
+		NOT = {
+			primary_culture = czechBOH
+			primary_culture = polishBOH
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -11750,10 +12119,11 @@ por_lordship_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = portuguese_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11793,10 +12163,11 @@ por_barony_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = portuguese_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11836,10 +12207,11 @@ por_viscounty_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = portuguese_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11879,10 +12251,11 @@ por_county_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = portuguese_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11922,10 +12295,11 @@ por_marquisate_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = portuguese_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -11965,10 +12339,11 @@ por_duchy_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = portuguese_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12008,10 +12383,11 @@ por_principality_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = portuguese_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12058,12 +12434,14 @@ por_kingdom_reform = {
             primary_culture = portugese #Someone from PDX mispelled this
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = portuguese_monarchy_reform
+				have_had_reform = portuguese_monarchy_reform
 				is_subject_of_type = portuguese_kingdom
 				is_subject_of_type = portuguese_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12104,10 +12482,11 @@ pru_lordship_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = prussian_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12147,10 +12526,11 @@ pru_barony_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = prussian_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12190,10 +12570,11 @@ pru_viscounty_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = prussian_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12233,10 +12614,11 @@ pru_county_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = prussian_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12276,10 +12658,11 @@ pru_marquisate_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = prussian_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12319,10 +12702,11 @@ pru_duchy_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = prussian_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12362,10 +12746,11 @@ pru_principality_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = prussian_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12412,10 +12797,11 @@ pru_kingdom_reform = {
             primary_culture = prussian
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = prussian_kingdom
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -12459,12 +12845,14 @@ rus_lordship_reform = {
 			}
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 				is_subject_of_type = russian_lordship
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12508,12 +12896,14 @@ rus_barony_reform = {
 			}
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 				is_subject_of_type = russian_barony
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12557,12 +12947,14 @@ rus_viscounty_reform = {
 			}
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 				is_subject_of_type = russian_viscounty
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12606,12 +12998,14 @@ rus_county_reform = {
 			}
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 				is_subject_of_type = russian_county
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12655,12 +13049,14 @@ rus_marquisate_reform = {
 			}
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 				is_subject_of_type = russian_marquisate
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12704,12 +13100,14 @@ rus_duchy_reform = {
 			}
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 				is_subject_of_type = russian_duchy
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12753,12 +13151,14 @@ rus_principality_reform = {
 			}
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 				is_subject_of_type = russian_principality
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12809,12 +13209,14 @@ rus_kingdom_reform = {
 			}
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				is_subject_of_type = russian_kingdom
 		    }
 		}
 		NOT = { 
 			primary_culture = finnish
 			primary_culture = sapmi
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -12856,10 +13258,11 @@ swe_lordship_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_lordship_reform
+				have_had_reform = eue_lordship_reform
 		    	is_subject_of_type = swedish_lordship
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -12899,10 +13302,11 @@ swe_barony_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_barony_reform
+				have_had_reform = eue_barony_reform
 		    	is_subject_of_type = swedish_barony
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -12942,10 +13346,11 @@ swe_viscounty_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_viscounty_reform
+				have_had_reform = eue_viscounty_reform
 		    	is_subject_of_type = swedish_viscounty
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -12985,10 +13390,11 @@ swe_county_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_county_reform
+				have_had_reform = eue_county_reform
 		    	is_subject_of_type = swedish_county
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -13028,10 +13434,11 @@ swe_marquisate_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_marquisate_reform
+				have_had_reform = eue_marquisate_reform
 		    	is_subject_of_type = swedish_marquisate
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -13071,10 +13478,11 @@ swe_duchy_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_duchy_reform
+				have_had_reform = eue_duchy_reform
 		    	is_subject_of_type = swedish_duchy
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -13114,10 +13522,11 @@ swe_principality_reform = {
            primary_culture = swedish
 			OR = {
 		    	has_reform = eue_principality_reform
+				have_had_reform = eue_principality_reform
 		    	is_subject_of_type = swedish_principality
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -13157,18 +13566,6 @@ swe_kingdom_reform = {
 		9 = SWE_CROWN_PRINCESS_fem_1
 	}
 	
-	#trigger = {
-	#	government = monarchy
-	#	OR = {
-	#		primary_culture = swedish
-	#	    overlord = {
-	#	    	primary_culture = swedish
-	#	    }
-	#	}
-	#	has_reform = eue_kingdom_reform
-	#	NOT = { has_reform = revolutionary_empire_reform }
-	#}
-
 	trigger = {
 		government = monarchy
 		religion_group = christian
@@ -13176,12 +13573,14 @@ swe_kingdom_reform = {
             primary_culture = swedish
 			OR = {
 		    	has_reform = eue_kingdom_reform
+				have_had_reform = eue_kingdom_reform
 				has_reform = office_of_lord_regent_reform
+				have_had_reform = office_of_lord_regent_reform
 		    	is_subject_of_type = swedish_kingdom
 				is_subject_of_type = swedish_crown_PU
 		    }
-			NOT = { has_reform = revolutionary_empire_reform }
 		}
+		NOT = { is_revolutionary_republic_trigger = yes	}
 	}
 }
 
@@ -13206,13 +13605,18 @@ hashemite_sharifate = {
 	trigger = {
 		government = theocracy
 		religion_group = muslim
-		has_reform = islamic_sharifate_reform
-		OR = {
-			tag = HED
-			tag = MDA
-			tag = MFL
+		AND = {
+			OR = {
+		    	tag = HED
+		    	tag = MDA
+		    	tag = MFL
+		    }
+			OR = {
+				has_reform = islamic_sharifate_reform
+				have_had_reform = islamic_sharifate_reform
+			}
 		}
-		NOT = { has_reform = revolutionary_empire_reform }
+		NOT = { is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -13278,7 +13682,7 @@ irish_peerage_monarchy = {
 			has_reform = irish_clann_reform
 			has_reform = tanistry_reform
 			has_reform = irish_highkingdom_reform
-			has_reform = revolutionary_empire_reform
+			is_revolutionary_republic_trigger = yes
 		}
 	}
 }
@@ -13361,9 +13765,14 @@ ashurist_issiakdom_monarchy = {
 
 	trigger = {
 		government = monarchy
-		primary_culture = assyrian
-		has_reform = issi_akdom_reform
-		NOT = {	has_reform = revolutionary_empire_reform }
+		AND = {
+			primary_culture = assyrian
+			OR = {
+				has_reform = issi_akdom_reform
+				have_had_reform = issi_akdom_reform
+			}
+		}
+		NOT = {	is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -13386,9 +13795,14 @@ babylonian_sardom_monarchy = {
 
 	trigger = {
 		government = monarchy
-		primary_culture = babylonian
-		has_reform = sardom_reform
-		NOT = {	has_reform = revolutionary_empire_reform }
+		AND = {
+			primary_culture = babylonian
+			OR = {
+				has_reform = sardom_reform
+				have_had_reform = sardom_reform
+			}
+		}
+		NOT = {	is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -13428,7 +13842,7 @@ russian_monarchy = {
 			has_reform = tsardom
 			has_reform = ruthenian_tsardom
 		}
-		NOT = {	has_reform = revolutionary_empire_reform }
+		NOT = {	is_revolutionary_republic_trigger = yes }
 	}
 }
 
@@ -13477,26 +13891,188 @@ russian_feudal_monarchy = {
 			primary_culture = bosnian_new
 			primary_culture = bulgarian_new 
 		}
-		NOT = {	has_reform = revolutionary_empire_reform }
+		NOT = {	is_revolutionary_republic_trigger = yes }
+	}
+}
+
+andean_autoratic_tribal_kingdom = {
+	rank = {
+		1 = SOUTH_AMERICAN_LORDSHIP
+		2 = SOUTH_AMERICAN_CHIEFDOM
+		3 = SOUTH_AMERICAN_CHIEFDOM
+		4 = SOUTH_AMERICAN_CHIEFDOM
+		5 = SOUTH_AMERICAN_CHIEFDOM
+		6 = SOUTH_AMERICAN_CHIEFDOM
+		7 = SOUTH_AMERICAN_HIGH_CHIEFDOM
+		8 = SOUTH_AMERICAN_TRIBAL_KINGDOM
+		9 = SOUTH_AMERICAN_TRIBAL_KINGDOM
+	}
+	
+	ruler_male = {
+		1 = SOUTH_AMERICAN_LORD
+		2 = SOUTH_AMERICAN_CHIEF
+		3 = SOUTH_AMERICAN_CHIEF
+		4 = SOUTH_AMERICAN_CHIEF
+		5 = SOUTH_AMERICAN_CHIEF
+		6 = SOUTH_AMERICAN_CHIEF
+		7 = SOUTH_AMERICAN_HIGH_CHIEF
+		8 = SOUTH_AMERICAN_TRIBAL_KING
+		9 = SOUTH_AMERICAN_TRIBAL_KING
+	}
+
+	consort_female = {
+		1 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		2 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		3 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		4 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		5 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		6 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		7 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		8 = SOUTH_AMERICAN_LADY_CONSORT_fem
+		9 = SOUTH_AMERICAN_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = SOUTH_AMERICAN_LORD
+		2 = SOUTH_AMERICAN_LORD
+		3 = SOUTH_AMERICAN_LORD
+		4 = SOUTH_AMERICAN_LORD
+		5 = SOUTH_AMERICAN_LORD
+		6 = SOUTH_AMERICAN_LORD
+		7 = SOUTH_AMERICAN_PRINCE
+		8 = SOUTH_AMERICAN_PRINCE
+		9 = SOUTH_AMERICAN_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		OR = {
+			religion = animism
+			religion = inti
+		}
+		AND = {
+			OR = {
+				culture_group = arawakan_g
+				culture_group = cariban_g
+				culture_group = chibchan
+				culture_group = je
+				culture_group = je_tupi
+				culture_group = mataco
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+				has_reform = native_martial_tradition_reform
+				have_had_reform = native_martial_tradition_reform
+				has_reform = native_settle_down_reform
+				have_had_reform = native_settle_down_reform
+			}
+		}
+		NOT = { 
+			primary_culture = cara 
+			primary_culture = east_taino
+			primary_culture = west_taino
+		}
+	}
+}
+
+carribean_natives = {
+	rank = {
+		1 = CARRIBEAN_CHIEFDOM
+		2 = CARRIBEAN_CHIEFDOM
+		3 = CARRIBEAN_CHIEFDOM
+		4 = CARRIBEAN_CHIEFDOM
+		5 = CARRIBEAN_CHIEFDOM
+		6 = CARRIBEAN_CHIEFDOM
+		7 = CARRIBEAN_HIGH_CHIEFDOM
+		8 = CARRIBEAN_HIGH_CHIEFDOM
+		9 = CARRIBEAN_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = CARRIBEAN_CHIEF
+		2 = CARRIBEAN_CHIEF
+		3 = CARRIBEAN_CHIEF
+		4 = CARRIBEAN_CHIEF
+		5 = CARRIBEAN_CHIEF
+		6 = CARRIBEAN_CHIEF
+		7 = CARRIBEAN_HIGH_CHIEF
+		8 = CARRIBEAN_HIGH_CHIEF
+		9 = CARRIBEAN_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = CARRIBEAN_LADY_CONSORT_fem
+		2 = CARRIBEAN_LADY_CONSORT_fem
+		3 = CARRIBEAN_LADY_CONSORT_fem
+		4 = CARRIBEAN_LADY_CONSORT_fem
+		5 = CARRIBEAN_LADY_CONSORT_fem
+		6 = CARRIBEAN_LADY_CONSORT_fem
+		7 = CARRIBEAN_LADY_CONSORT_fem
+		8 = CARRIBEAN_LADY_CONSORT_fem
+		9 = CARRIBEAN_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = CARRIBEAN_PRINCE
+		2 = CARRIBEAN_PRINCE
+		3 = CARRIBEAN_PRINCE
+		4 = CARRIBEAN_PRINCE
+		5 = CARRIBEAN_PRINCE
+		6 = CARRIBEAN_PRINCE
+		7 = CARRIBEAN_PRINCE
+		8 = CARRIBEAN_PRINCE
+		9 = CARRIBEAN_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = animism
+		AND = {
+			OR = {
+				primary_culture = east_taino
+				primary_culture = west_taino
+				culture_group = carribean
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
 	}
 }
 
 inti_monarchy = {
 	rank = {
-		6 = KURAKADOM
-		7 = HIGH_KURAKADOM
-		8 = APUDOM
+		1 = ANDEAN_LORDSHIP
+		2 = ANDEAN_CHIEFDOM
+		3 = ANDEAN_CHIEFDOM
+		4 = ANDEAN_CHIEFDOM
+		5 = ANDEAN_CHIEFDOM
+		6 = ANDEAN_DUCHY
+		7 = ANDEAN_PRINCIPALITY
+		8 = ANDEAN_KINGDOM
 		9 = SAPA_INKADOM
 	}
 
 	ruler_male = {
-		6 = KURAKA
-		7 = HIGH_KURAKA
-		8 = APU
+		1 = ANDEAN_LORD
+		2 = ANDEAN_CHIEF
+		3 = ANDEAN_CHIEF
+		4 = ANDEAN_CHIEF
+		5 = ANDEAN_CHIEF
+		6 = ANDEAN_DUKE
+		7 = ANDEAN_PRINCE
+		8 = ANDEAN_KING
 		9 = SAPA_INKA
 	}
 
 	consort_female = {
+		1 = ANDEAN_LADY_CONSORT_fem
+		2 = ANDEAN_LADY_CONSORT_fem
+		3 = ANDEAN_LADY_CONSORT_fem
+		4 = ANDEAN_LADY_CONSORT_fem
+		5 = ANDEAN_LADY_CONSORT_fem
 		6 = NUSTA_CONSORT_fem
 		7 = NUSTA_CONSORT_fem
 		8 = NUSTA_CONSORT_fem
@@ -13504,34 +14080,135 @@ inti_monarchy = {
 	}
 
 	heir_male = {
-		6 = LORD
-		7 = LORD
-		8 = LORD
-		9 = LORD
+		1 = ANDEAN_LORD
+		2 = ANDEAN_LORD
+		3 = ANDEAN_LORD
+		4 = ANDEAN_LORD
+		5 = ANDEAN_LORD
+		6 = ANDEAN_PRINCE
+		7 = ANDEAN_PRINCE
+		8 = ANDEAN_CROWN_PRINCE
+		9 = ANDEAN_CROWN_PRINCE
 	}
 
 	trigger = {
-		government = monarchy
+		OR = {
+			government = monarchy
+			government = tribal
+		}
 		religion = inti
+		AND = {
+			OR = {
+				primary_culture = cara
+				culture_group = andean_group
+				culture_group = maranon
+			}
+			OR = {
+				has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
+				has_reform = tribal_kingdom
+				have_had_reform = tribal_kingdom
+			}
+		}
+	}
+}
+
+andean_natives = {
+	rank = {
+		1 = ANDEAN_LORDSHIP
+		2 = ANDEAN_CHIEFDOM
+		3 = ANDEAN_CHIEFDOM
+		4 = ANDEAN_CHIEFDOM
+		5 = ANDEAN_CHIEFDOM
+		6 = ANDEAN_HIGH_CHIEFDOM
+		7 = ANDEAN_HIGH_CHIEFDOM
+		8 = ANDEAN_TRIBAL_KINGDOM
+		9 = ANDEAN_EMPIRE
+	}
+
+	ruler_male = {
+		1 = ANDEAN_LORD
+		2 = ANDEAN_CHIEF
+		3 = ANDEAN_CHIEF
+		4 = ANDEAN_CHIEF
+		5 = ANDEAN_CHIEF
+		6 = ANDEAN_HIGH_CHIEF
+		7 = ANDEAN_HIGH_CHIEF
+		8 = ANDEAN_TRIBAL_KING
+		9 = ANDEAN_EMPEROR
+	}
+
+	consort_female = {
+		1 = ANDEAN_LADY_CONSORT_fem
+		2 = ANDEAN_LADY_CONSORT_fem
+		3 = ANDEAN_LADY_CONSORT_fem
+		4 = ANDEAN_LADY_CONSORT_fem
+		5 = ANDEAN_LADY_CONSORT_fem
+		6 = NUSTA_CONSORT_fem
+		7 = NUSTA_CONSORT_fem
+		8 = NUSTA_CONSORT_fem
+		9 = NUSTA_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = ANDEAN_LORD
+		2 = ANDEAN_LORD
+		3 = ANDEAN_LORD
+		4 = ANDEAN_LORD
+		5 = ANDEAN_LORD
+		6 = ANDEAN_PRINCE
+		7 = ANDEAN_PRINCE
+		8 = ANDEAN_PRINCE
+		9 = ANDEAN_CROWN_PRINCE
+	}
+
+	trigger = {
+		government = native
+		religion = animism
+		AND = {
+			OR = {
+				culture_group = andean_group
+				culture_group = araucanian
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
 	}
 }
 
 mayan_monarchy = {
 	rank = {
-		6 = CAH
-		7 = HIGH_CAH
-		8 = KUCHKABAL
-		9 = GREAT_LEAGUE
+		1 = MAYAN_LORDSHIP
+		2 = MAYAN_CHIEFDOM
+		3 = MAYAN_CHIEFDOM
+		4 = MAYAN_CHIEFDOM
+		5 = MAYAN_CHIEFDOM
+		6 = MAYAN_DUCHY
+		7 = MAYAN_PRINCIPALITY
+		8 = MAYAN_KINGDOM
+		9 = MAYAN_LEAGUEDOM
 	}
 
 	ruler_male = {
-		6 = NACOM
-		7 = HIGH_NACOM
-		8 = HALACH_UINIK
-		9 = K_UHUL_AJAW
+		1 = MAYAN_LORD
+		2 = MAYAN_CHIEF
+		3 = MAYAN_CHIEF
+		4 = MAYAN_CHIEF
+		5 = MAYAN_CHIEF
+		6 = MAYAN_DUKE
+		7 = MAYAN_PRINCE
+		8 = MAYAN_KING
+		9 = MAYAN_LEAGUE
 	}
 
 	consort_female = {
+		1 = IX_CONSORT_fem
+		2 = IX_CONSORT_fem
+		3 = IX_CONSORT_fem
+		4 = IX_CONSORT_fem
+		5 = IX_CONSORT_fem
 		6 = IX_CONSORT_fem
 		7 = IX_WAK_CONSORT_fem
 		8 = IX_WAK_CONSORT_fem
@@ -13539,10 +14216,15 @@ mayan_monarchy = {
 	}
 
 	heir_male = {
-		6 = LORD
-		7 = LORD
-		8 = LORD
-		9 = LORD
+		1 = MAYAN_LORD
+		2 = MAYAN_LORD
+		3 = MAYAN_LORD
+		4 = MAYAN_LORD
+		5 = MAYAN_LORD
+		6 = MAYAN_PRINCE
+		7 = MAYAN_PRINCE
+		8 = MAYAN_CROWN_PRINCE
+		9 = MAYAN_CROWN_PRINCE
 	}
 
 	trigger = {
@@ -13551,25 +14233,47 @@ mayan_monarchy = {
 			government = tribal
 		}
 		religion = mesoamerican_religion
+		AND = {
+			culture_group = maya
+			OR = {
+				has_reform = tribal_despotism
+				have_had_reform = tribal_despotism
+			}
+		}
 	}
 }
 
 nahuatl_monarchy = {
 	rank = {
-		6 = ALTEPETL
-		7 = HIGH_ALTEPETL
-		8 = ALTEPETL_FEDERATION
-		9 = ALTEPETL_FEDERATION
+		1 = NAHUATL_LORDSHIP
+		2 = NAHUATL_CHIEFDOM
+		3 = NAHUATL_CHIEFDOM
+		4 = NAHUATL_CHIEFDOM
+		5 = NAHUATL_CHIEFDOM
+		6 = NAHUATL_DUCHY
+		7 = NAHUATL_PRINCIPALITY
+		8 = NAHUATL_KINGDOM
+		9 = NAHUATL_EMPIRE
 	}
 
 	ruler_male = {
-		6 = CUAUHTLAHTOANI
-		7 = HIGH_CUAUHTLAHTOANI
-		8 = TLATOANI
-		9 = HUEHUETLATOANI
+		1 = NAHUATL_LORD
+		2 = NAHUATL_CHIEF
+		3 = NAHUATL_CHIEF
+		4 = NAHUATL_CHIEF
+		5 = NAHUATL_CHIEF
+		6 = NAHUATL_DUKE
+		7 = NAHUATL_PRINCE
+		8 = NAHUATL_KING
+		9 = NAHUATL_EMPEROR
 	}
 
 	consort_female = {
+		1 = CIHUATLAHTOANI_CONSORT_fem
+		2 = CIHUATLAHTOANI_CONSORT_fem
+		3 = CIHUATLAHTOANI_CONSORT_fem
+		4 = CIHUATLAHTOANI_CONSORT_fem
+		5 = CIHUATLAHTOANI_CONSORT_fem
 		6 = CIHUATLAHTOANI_CONSORT_fem
 		7 = CIHUATLAHTOANI_CONSORT_fem
 		8 = CIHUATLAHTOANI_CONSORT_fem
@@ -13577,19 +14281,799 @@ nahuatl_monarchy = {
 	}
 
 	heir_male = {
-		6 = LORD
-		7 = LORD
-		8 = LORD
-		9 = LORD
+		1 = NAHUATL_LORD
+		2 = NAHUATL_LORD
+		3 = NAHUATL_LORD
+		4 = NAHUATL_LORD
+		5 = NAHUATL_LORD
+		6 = NAHUATL_PRINCE
+		7 = NAHUATL_PRINCE
+		8 = NAHUATL_CROWN_PRINCE
+		9 = NAHUATL_CROWN_PRINCE
 	}
 
 	trigger = {
 		OR = {
 			government = monarchy
+			government = native
 			government = tribal
-			has_reform = tribal_democracy_legacy
 		}
-		religion = nahuatl
+		OR = {
+			religion = animism
+			religion = nahuatl
+			religion = totemism
+		}
+		AND = {
+			OR = {
+				culture_group = aridoamerican
+				culture_group = central_american
+				culture_group = otomanguean
+				culture_group = southern_uto_aztecan
+			}
+			OR = {
+				has_reform = autocracy_reform
+				have_had_reform = autocracy_reform
+				has_reform = native_chiefdom_reform
+				have_had_reform = native_chiefdom_reform
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+				has_reform = tribal_kingdom
+				have_had_reform = tribal_kingdom
+			}
+		}
+	}
+}
+
+na_dene_natives = {
+	rank = {
+		1 = NA_DENE_CHIEFDOM
+		2 = NA_DENE_CHIEFDOM
+		3 = NA_DENE_CHIEFDOM
+		4 = NA_DENE_CHIEFDOM
+		5 = NA_DENE_CHIEFDOM
+		6 = NA_DENE_CHIEFDOM
+		7 = NA_DENE_HIGH_CHIEFDOM
+		8 = NA_DENE_HIGH_CHIEFDOM
+		9 = NA_DENE_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = NA_DENE_CHIEF
+		2 = NA_DENE_CHIEF
+		3 = NA_DENE_CHIEF
+		4 = NA_DENE_CHIEF
+		5 = NA_DENE_CHIEF
+		6 = NA_DENE_CHIEF
+		7 = NA_DENE_HIGH_CHIEF
+		8 = NA_DENE_HIGH_CHIEF
+		9 = NA_DENE_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = NA_DENE_LADY_CONSORT_fem
+		2 = NA_DENE_LADY_CONSORT_fem
+		3 = NA_DENE_LADY_CONSORT_fem
+		4 = NA_DENE_LADY_CONSORT_fem
+		5 = NA_DENE_LADY_CONSORT_fem
+		6 = NA_DENE_LADY_CONSORT_fem
+		7 = NA_DENE_LADY_CONSORT_fem
+		8 = NA_DENE_LADY_CONSORT_fem
+		9 = NA_DENE_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = NA_DENE_PRINCE
+		2 = NA_DENE_PRINCE
+		3 = NA_DENE_PRINCE
+		4 = NA_DENE_PRINCE
+		5 = NA_DENE_PRINCE
+		6 = NA_DENE_PRINCE
+		7 = NA_DENE_PRINCE
+		8 = NA_DENE_PRINCE
+		9 = NA_DENE_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			OR = {
+				culture_group = apachean
+				culture_group = na_dene
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+shoshone_natives = {
+	rank = {
+		1 = SHOSHONE_CHIEFDOM
+		2 = SHOSHONE_CHIEFDOM
+		3 = SHOSHONE_CHIEFDOM
+		4 = SHOSHONE_CHIEFDOM
+		5 = SHOSHONE_CHIEFDOM
+		6 = SHOSHONE_CHIEFDOM
+		7 = SHOSHONE_HIGH_CHIEFDOM
+		8 = SHOSHONE_HIGH_CHIEFDOM
+		9 = SHOSHONE_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = SHOSHONE_CHIEF
+		2 = SHOSHONE_CHIEF
+		3 = SHOSHONE_CHIEF
+		4 = SHOSHONE_CHIEF
+		5 = SHOSHONE_CHIEF
+		6 = SHOSHONE_CHIEF
+		7 = SHOSHONE_HIGH_CHIEF
+		8 = SHOSHONE_HIGH_CHIEF
+		9 = SHOSHONE_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = SHOSHONE_LADY_CONSORT_fem
+		2 = SHOSHONE_LADY_CONSORT_fem
+		3 = SHOSHONE_LADY_CONSORT_fem
+		4 = SHOSHONE_LADY_CONSORT_fem
+		5 = SHOSHONE_LADY_CONSORT_fem
+		6 = SHOSHONE_LADY_CONSORT_fem
+		7 = SHOSHONE_LADY_CONSORT_fem
+		8 = SHOSHONE_LADY_CONSORT_fem
+		9 = SHOSHONE_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = SHOSHONE_PRINCE
+		2 = SHOSHONE_PRINCE
+		3 = SHOSHONE_PRINCE
+		4 = SHOSHONE_PRINCE
+		5 = SHOSHONE_PRINCE
+		6 = SHOSHONE_PRINCE
+		7 = SHOSHONE_PRINCE
+		8 = SHOSHONE_PRINCE
+		9 = SHOSHONE_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = sonoran
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+penutian_natives = {
+	rank = {
+		1 = PENUTIAN_CHIEFDOM
+		2 = PENUTIAN_CHIEFDOM
+		3 = PENUTIAN_CHIEFDOM
+		4 = PENUTIAN_CHIEFDOM
+		5 = PENUTIAN_CHIEFDOM
+		6 = PENUTIAN_CHIEFDOM
+		7 = PENUTIAN_HIGH_CHIEFDOM
+		8 = PENUTIAN_HIGH_CHIEFDOM
+		9 = PENUTIAN_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = PENUTIAN_CHIEF
+		2 = PENUTIAN_CHIEF
+		3 = PENUTIAN_CHIEF
+		4 = PENUTIAN_CHIEF
+		5 = PENUTIAN_CHIEF
+		6 = PENUTIAN_CHIEF
+		7 = PENUTIAN_HIGH_CHIEF
+		8 = PENUTIAN_HIGH_CHIEF
+		9 = PENUTIAN_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = PENUTIAN_LADY_CONSORT_fem
+		2 = PENUTIAN_LADY_CONSORT_fem
+		3 = PENUTIAN_LADY_CONSORT_fem
+		4 = PENUTIAN_LADY_CONSORT_fem
+		5 = PENUTIAN_LADY_CONSORT_fem
+		6 = PENUTIAN_LADY_CONSORT_fem
+		7 = PENUTIAN_LADY_CONSORT_fem
+		8 = PENUTIAN_LADY_CONSORT_fem
+		9 = PENUTIAN_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = PENUTIAN_PRINCE
+		2 = PENUTIAN_PRINCE
+		3 = PENUTIAN_PRINCE
+		4 = PENUTIAN_PRINCE
+		5 = PENUTIAN_PRINCE
+		6 = PENUTIAN_PRINCE
+		7 = PENUTIAN_PRINCE
+		8 = PENUTIAN_PRINCE
+		9 = PENUTIAN_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			OR = {
+				culture_group = chumash_group
+				culture_group = hokan
+				culture_group = pacific_algonquian_group
+				culture_group = penutian
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+pawnee_natives = {
+	rank = {
+		1 = PAWNEE_CHIEFDOM
+		2 = PAWNEE_CHIEFDOM
+		3 = PAWNEE_CHIEFDOM
+		4 = PAWNEE_CHIEFDOM
+		5 = PAWNEE_CHIEFDOM
+		6 = PAWNEE_CHIEFDOM
+		7 = PAWNEE_HIGH_CHIEFDOM
+		8 = PAWNEE_HIGH_CHIEFDOM
+		9 = PAWNEE_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = PAWNEE_CHIEF
+		2 = PAWNEE_CHIEF
+		3 = PAWNEE_CHIEF
+		4 = PAWNEE_CHIEF
+		5 = PAWNEE_CHIEF
+		6 = PAWNEE_CHIEF
+		7 = PAWNEE_HIGH_CHIEF
+		8 = PAWNEE_HIGH_CHIEF
+		9 = PAWNEE_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = PAWNEE_LADY_CONSORT_fem
+		2 = PAWNEE_LADY_CONSORT_fem
+		3 = PAWNEE_LADY_CONSORT_fem
+		4 = PAWNEE_LADY_CONSORT_fem
+		5 = PAWNEE_LADY_CONSORT_fem
+		6 = PAWNEE_LADY_CONSORT_fem
+		7 = PAWNEE_LADY_CONSORT_fem
+		8 = PAWNEE_LADY_CONSORT_fem
+		9 = PAWNEE_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = PAWNEE_PRINCE
+		2 = PAWNEE_PRINCE
+		3 = PAWNEE_PRINCE
+		4 = PAWNEE_PRINCE
+		5 = PAWNEE_PRINCE
+		6 = PAWNEE_PRINCE
+		7 = PAWNEE_PRINCE
+		8 = PAWNEE_PRINCE
+		9 = PAWNEE_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = caddoan
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+sioux_natives = {
+	rank = {
+		1 = SIOUX_CHIEFDOM
+		2 = SIOUX_CHIEFDOM
+		3 = SIOUX_CHIEFDOM
+		4 = SIOUX_CHIEFDOM
+		5 = SIOUX_CHIEFDOM
+		6 = SIOUX_CHIEFDOM
+		7 = SIOUX_HIGH_CHIEFDOM
+		8 = SIOUX_HIGH_CHIEFDOM
+		9 = SIOUX_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = SIOUX_CHIEF
+		2 = SIOUX_CHIEF
+		3 = SIOUX_CHIEF
+		4 = SIOUX_CHIEF
+		5 = SIOUX_CHIEF
+		6 = SIOUX_CHIEF
+		7 = SIOUX_HIGH_CHIEF
+		8 = SIOUX_HIGH_CHIEF
+		9 = SIOUX_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = SIOUX_LADY_CONSORT_fem
+		2 = SIOUX_LADY_CONSORT_fem
+		3 = SIOUX_LADY_CONSORT_fem
+		4 = SIOUX_LADY_CONSORT_fem
+		5 = SIOUX_LADY_CONSORT_fem
+		6 = SIOUX_LADY_CONSORT_fem
+		7 = SIOUX_LADY_CONSORT_fem
+		8 = SIOUX_LADY_CONSORT_fem
+		9 = SIOUX_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = SIOUX_PRINCE
+		2 = SIOUX_PRINCE
+		3 = SIOUX_PRINCE
+		4 = SIOUX_PRINCE
+		5 = SIOUX_PRINCE
+		6 = SIOUX_PRINCE
+		7 = SIOUX_PRINCE
+		8 = SIOUX_PRINCE
+		9 = SIOUX_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			OR = {
+				culture_group = siouan
+				culture_group = plains_algonquian
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+muskogean_natives = {
+	rank = {
+		1 = MUSKOGEAN_CHIEFDOM
+		2 = MUSKOGEAN_CHIEFDOM
+		3 = MUSKOGEAN_CHIEFDOM
+		4 = MUSKOGEAN_CHIEFDOM
+		5 = MUSKOGEAN_CHIEFDOM
+		6 = MUSKOGEAN_CHIEFDOM
+		7 = MUSKOGEAN_HIGH_CHIEFDOM
+		8 = MUSKOGEAN_HIGH_CHIEFDOM
+		9 = MUSKOGEAN_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = MUSKOGEAN_CHIEF
+		2 = MUSKOGEAN_CHIEF
+		3 = MUSKOGEAN_CHIEF
+		4 = MUSKOGEAN_CHIEF
+		5 = MUSKOGEAN_CHIEF
+		6 = MUSKOGEAN_CHIEF
+		7 = MUSKOGEAN_HIGH_CHIEF
+		8 = MUSKOGEAN_HIGH_CHIEF
+		9 = MUSKOGEAN_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = MUSKOGEAN_LADY_CONSORT_fem
+		2 = MUSKOGEAN_LADY_CONSORT_fem
+		3 = MUSKOGEAN_LADY_CONSORT_fem
+		4 = MUSKOGEAN_LADY_CONSORT_fem
+		5 = MUSKOGEAN_LADY_CONSORT_fem
+		6 = MUSKOGEAN_LADY_CONSORT_fem
+		7 = MUSKOGEAN_LADY_CONSORT_fem
+		8 = MUSKOGEAN_LADY_CONSORT_fem
+		9 = MUSKOGEAN_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = MUSKOGEAN_PRINCE
+		2 = MUSKOGEAN_PRINCE
+		3 = MUSKOGEAN_PRINCE
+		4 = MUSKOGEAN_PRINCE
+		5 = MUSKOGEAN_PRINCE
+		6 = MUSKOGEAN_PRINCE
+		7 = MUSKOGEAN_PRINCE
+		8 = MUSKOGEAN_PRINCE
+		9 = MUSKOGEAN_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = muskogean
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+shawnee_natives = {
+	rank = {
+		1 = SHAWNEE_CHIEFDOM
+		2 = SHAWNEE_CHIEFDOM
+		3 = SHAWNEE_CHIEFDOM
+		4 = SHAWNEE_CHIEFDOM
+		5 = SHAWNEE_CHIEFDOM
+		6 = SHAWNEE_CHIEFDOM
+		7 = SHAWNEE_HIGH_CHIEFDOM
+		8 = SHAWNEE_HIGH_CHIEFDOM
+		9 = SHAWNEE_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = SHAWNEE_CHIEF
+		2 = SHAWNEE_CHIEF
+		3 = SHAWNEE_CHIEF
+		4 = SHAWNEE_CHIEF
+		5 = SHAWNEE_CHIEF
+		6 = SHAWNEE_CHIEF
+		7 = SHAWNEE_HIGH_CHIEF
+		8 = SHAWNEE_HIGH_CHIEF
+		9 = SHAWNEE_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = SHAWNEE_LADY_CONSORT_fem
+		2 = SHAWNEE_LADY_CONSORT_fem
+		3 = SHAWNEE_LADY_CONSORT_fem
+		4 = SHAWNEE_LADY_CONSORT_fem
+		5 = SHAWNEE_LADY_CONSORT_fem
+		6 = SHAWNEE_LADY_CONSORT_fem
+		7 = SHAWNEE_LADY_CONSORT_fem
+		8 = SHAWNEE_LADY_CONSORT_fem
+		9 = SHAWNEE_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = SHAWNEE_PRINCE
+		2 = SHAWNEE_PRINCE
+		3 = SHAWNEE_PRINCE
+		4 = SHAWNEE_PRINCE
+		5 = SHAWNEE_PRINCE
+		6 = SHAWNEE_PRINCE
+		7 = SHAWNEE_PRINCE
+		8 = SHAWNEE_PRINCE
+		9 = SHAWNEE_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			OR = {
+				culture_group = central_algonquian
+				culture_group = septrional_creoles
+			}
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+				has_reform = native_federation_reform
+				have_had_reform = native_federation_reform
+			}
+		}
+	}
+}
+
+iroquois_natives = {
+	rank = {
+		1 = IROQUOIS_CHIEFDOM
+		2 = IROQUOIS_CHIEFDOM
+		3 = IROQUOIS_CHIEFDOM
+		4 = IROQUOIS_CHIEFDOM
+		5 = IROQUOIS_CHIEFDOM
+		6 = IROQUOIS_CHIEFDOM
+		7 = IROQUOIS_HIGH_CHIEFDOM
+		8 = IROQUOIS_HIGH_CHIEFDOM
+		9 = IROQUOIS_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = IROQUOIS_CHIEF
+		2 = IROQUOIS_CHIEF
+		3 = IROQUOIS_CHIEF
+		4 = IROQUOIS_CHIEF
+		5 = IROQUOIS_CHIEF
+		6 = IROQUOIS_CHIEF
+		7 = IROQUOIS_HIGH_CHIEF
+		8 = IROQUOIS_HIGH_CHIEF
+		9 = IROQUOIS_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = IROQUOIS_LADY_CONSORT_fem
+		2 = IROQUOIS_LADY_CONSORT_fem
+		3 = IROQUOIS_LADY_CONSORT_fem
+		4 = IROQUOIS_LADY_CONSORT_fem
+		5 = IROQUOIS_LADY_CONSORT_fem
+		6 = IROQUOIS_LADY_CONSORT_fem
+		7 = IROQUOIS_LADY_CONSORT_fem
+		8 = IROQUOIS_LADY_CONSORT_fem
+		9 = IROQUOIS_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = IROQUOIS_PRINCE
+		2 = IROQUOIS_PRINCE
+		3 = IROQUOIS_PRINCE
+		4 = IROQUOIS_PRINCE
+		5 = IROQUOIS_PRINCE
+		6 = IROQUOIS_PRINCE
+		7 = IROQUOIS_PRINCE
+		8 = IROQUOIS_PRINCE
+		9 = IROQUOIS_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = iroquoian
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+				has_reform = native_federation_reform
+				have_had_reform = native_federation_reform
+				has_reform = native_martial_tradition_reform
+				have_had_reform = native_martial_tradition_reform
+				has_reform = native_settle_down_reform
+				have_had_reform = native_settle_down_reform
+			}
+		}
+		NOT = { 
+			primary_culture = huron 
+			primary_culture = laurentian
+			primary_culture = petun
+			primary_culture = tionontate  
+		}
+	}
+}
+
+abenaki_natives = {
+	rank = {
+		1 = ABENAKI_CHIEFDOM
+		2 = ABENAKI_CHIEFDOM
+		3 = ABENAKI_CHIEFDOM
+		4 = ABENAKI_CHIEFDOM
+		5 = ABENAKI_CHIEFDOM
+		6 = ABENAKI_CHIEFDOM
+		7 = ABENAKI_HIGH_CHIEFDOM
+		8 = ABENAKI_HIGH_CHIEFDOM
+		9 = ABENAKI_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = ABENAKI_CHIEF
+		2 = ABENAKI_CHIEF
+		3 = ABENAKI_CHIEF
+		4 = ABENAKI_CHIEF
+		5 = ABENAKI_CHIEF
+		6 = ABENAKI_CHIEF
+		7 = ABENAKI_HIGH_CHIEF
+		8 = ABENAKI_HIGH_CHIEF
+		9 = ABENAKI_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = ABENAKI_LADY_CONSORT_fem
+		2 = ABENAKI_LADY_CONSORT_fem
+		3 = ABENAKI_LADY_CONSORT_fem
+		4 = ABENAKI_LADY_CONSORT_fem
+		5 = ABENAKI_LADY_CONSORT_fem
+		6 = ABENAKI_LADY_CONSORT_fem
+		7 = ABENAKI_LADY_CONSORT_fem
+		8 = ABENAKI_LADY_CONSORT_fem
+		9 = ABENAKI_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = ABENAKI_PRINCE
+		2 = ABENAKI_PRINCE
+		3 = ABENAKI_PRINCE
+		4 = ABENAKI_PRINCE
+		5 = ABENAKI_PRINCE
+		6 = ABENAKI_PRINCE
+		7 = ABENAKI_PRINCE
+		8 = ABENAKI_PRINCE
+		9 = ABENAKI_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = eastern_algonquian
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
+	}
+}
+
+huron_natives = {
+	rank = {
+		1 = HURON_CHIEFDOM
+		2 = HURON_CHIEFDOM
+		3 = HURON_CHIEFDOM
+		4 = HURON_CHIEFDOM
+		5 = HURON_CHIEFDOM
+		6 = HURON_CHIEFDOM
+		7 = HURON_HIGH_CHIEFDOM
+		8 = HURON_HIGH_CHIEFDOM
+		9 = HURON_HIGH_CHIEFDOM
+	}
+	
+	ruler_male = {
+		1 = HURON_CHIEF
+		2 = HURON_CHIEF
+		3 = HURON_CHIEF
+		4 = HURON_CHIEF
+		5 = HURON_CHIEF
+		6 = HURON_CHIEF
+		7 = HURON_HIGH_CHIEF
+		8 = HURON_HIGH_CHIEF
+		9 = HURON_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = HURON_LADY_CONSORT_fem
+		2 = HURON_LADY_CONSORT_fem
+		3 = HURON_LADY_CONSORT_fem
+		4 = HURON_LADY_CONSORT_fem
+		5 = HURON_LADY_CONSORT_fem
+		6 = HURON_LADY_CONSORT_fem
+		7 = HURON_LADY_CONSORT_fem
+		8 = HURON_LADY_CONSORT_fem
+		9 = HURON_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = HURON_PRINCE
+		2 = HURON_PRINCE
+		3 = HURON_PRINCE
+		4 = HURON_PRINCE
+		5 = HURON_PRINCE
+		6 = HURON_PRINCE
+		7 = HURON_PRINCE
+		8 = HURON_PRINCE
+		9 = HURON_PRINCE
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			OR = { 
+		    	primary_culture = huron 
+		    	primary_culture = laurentian
+		    	primary_culture = petun
+		    	primary_culture = tionontate  
+		    }
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+				has_reform = native_chiefdom_reform
+				have_had_reform = native_chiefdom_reform
+			}
+		}
+	}
+}
+
+eskaleut_natives = {
+	rank = {
+		1 = ESKALEUT_ELDERDOM
+		2 = ESKALEUT_ELDERDOM
+		3 = ESKALEUT_ELDERDOM
+		4 = ESKALEUT_ELDERDOM
+		5 = ESKALEUT_ELDERDOM
+		6 = ESKALEUT_ELDERDOM
+		7 = ESKALEUT_HIGH_ELDERDOM
+		8 = ESKALEUT_HIGH_ELDERDOM
+		9 = ESKALEUT_HIGH_ELDERDOM
+	}
+	
+	ruler_male = {
+		1 = ESKALEUT_ELDER
+		2 = ESKALEUT_ELDER
+		3 = ESKALEUT_ELDER
+		4 = ESKALEUT_ELDER
+		5 = ESKALEUT_ELDER
+		6 = ESKALEUT_ELDER
+		7 = ESKALEUT_HIGH_ELDER
+		8 = ESKALEUT_HIGH_ELDER
+		9 = ESKALEUT_HIGH_ELDER
+	}
+
+	ruler_female = {
+		1 = ESKALEUT_ELDERESS_fem
+		2 = ESKALEUT_ELDERESS_fem
+		3 = ESKALEUT_ELDERESS_fem
+		4 = ESKALEUT_ELDERESS_fem
+		5 = ESKALEUT_ELDERESS_fem
+		6 = ESKALEUT_ELDERESS_fem
+		7 = ESKALEUT_HIGH_ELDERESS_fem
+		8 = ESKALEUT_HIGH_ELDERESS_fem
+		9 = ESKALEUT_HIGH_ELDERESS_fem
+	}
+
+	consort_male = {
+		1 = ESKALEUT_LORD_CONSORT
+		2 = ESKALEUT_LORD_CONSORT
+		3 = ESKALEUT_LORD_CONSORT
+		4 = ESKALEUT_LORD_CONSORT
+		5 = ESKALEUT_LORD_CONSORT
+		6 = ESKALEUT_LORD_CONSORT
+		7 = ESKALEUT_LORD_CONSORT
+		8 = ESKALEUT_LORD_CONSORT
+		9 = ESKALEUT_LORD_CONSORT
+	}
+
+	consort_female = {
+		1 = ESKALEUT_LADY_CONSORT_fem
+		2 = ESKALEUT_LADY_CONSORT_fem
+		3 = ESKALEUT_LADY_CONSORT_fem
+		4 = ESKALEUT_LADY_CONSORT_fem
+		5 = ESKALEUT_LADY_CONSORT_fem
+		6 = ESKALEUT_LADY_CONSORT_fem
+		7 = ESKALEUT_LADY_CONSORT_fem
+		8 = ESKALEUT_LADY_CONSORT_fem
+		9 = ESKALEUT_LADY_CONSORT_fem
+	}
+
+	heir_male = {
+		1 = ESKALEUT_CHILD
+		2 = ESKALEUT_CHILD
+		3 = ESKALEUT_CHILD
+		4 = ESKALEUT_CHILD
+		5 = ESKALEUT_CHILD
+		6 = ESKALEUT_CHILD
+		7 = ESKALEUT_CHILD
+		8 = ESKALEUT_CHILD
+		9 = ESKALEUT_CHILD
+	}
+
+	heir_female = {
+		1 = ESKALEUT_CHILD_fem
+		2 = ESKALEUT_CHILD_fem
+		3 = ESKALEUT_CHILD_fem
+		4 = ESKALEUT_CHILD_fem
+		5 = ESKALEUT_CHILD_fem
+		6 = ESKALEUT_CHILD_fem
+		7 = ESKALEUT_CHILD_fem
+		8 = ESKALEUT_CHILD_fem
+		9 = ESKALEUT_CHILD_fem
+	}
+	
+	trigger = {
+		government = native
+		religion = totemism
+		AND = {
+			culture_group = eskaleut
+			OR = {
+				has_reform = native_clan_council_reform
+				have_had_reform = native_clan_council_reform
+			}
+		}
 	}
 }
 
@@ -13648,8 +15132,13 @@ chinese_monarchy = {
 	}
 }
 
-hindu_monarchy = {
+hindu_nayankara_monarchy = {
 	rank = {
+		1 = NAYANKARA
+		2 = NAYANKARA
+		3 = NAYANKARA
+		4 = NAYANKARA
+		5 = NAYANKARA
 		6 = RANATE
 		7 = HIGH_RANATE
 		8 = MAHARANATE
@@ -13657,20 +15146,71 @@ hindu_monarchy = {
 	}
 
 	ruler_male = {
-		6 = RAJA
-		7 = HIGH_RAJA
-		8 = MAHARAJA
+		1 = SAAMAANY
+		2 = SAAMAANY
+		3 = SAAMAANY
+		4 = SAAMAANY
+		5 = SAAMAANY
+		6 = RANA
+		7 = HIGH_RANA
+		8 = MAHARANA
 		9 = CHHATRAPATI
 	}
 
+	ruler_female = {
+		1 = SAAMAANY
+		2 = SAAMAANY
+		3 = SAAMAANY
+		4 = SAAMAANY
+		5 = SAAMAANY
+		6 = RANA
+		7 = HIGH_RANA
+		8 = MAHARANA
+		9 = CHHATRAPATI
+	}
+
+	consort_male = {
+		1 = HINDU_LORD_CONSORT
+		2 = HINDU_LORD_CONSORT
+		3 = HINDU_LORD_CONSORT
+		4 = HINDU_LORD_CONSORT
+		5 = HINDU_LORD_CONSORT
+		6 = HINDU_PRINCE_CONSORT
+		7 = HINDU_PRINCE_CONSORT
+		8 = HINDU_PRINCE_CONSORT
+		9 = HINDU_PRINCE_CONSORT
+	}
+
 	consort_female = {
-		6 = RANI_CONSORT_fem
-		7 = RANI_CONSORT_fem
-		8 = MAHARANI_CONSORT_fem
-		9 = MAHARANI_CONSORT_fem
+		1 = HINDU_LADY_CONSORT_fem
+		2 = HINDU_LADY_CONSORT_fem
+		3 = HINDU_LADY_CONSORT_fem
+		4 = HINDU_LADY_CONSORT_fem
+		5 = HINDU_LADY_CONSORT_fem
+		6 = HINDU_PRINCESS_CONSORT_fem
+		7 = HINDU_PRINCESS_CONSORT_fem
+		8 = HINDU_PRINCESS_CONSORT_fem
+		9 = HINDU_PRINCESS_CONSORT_fem
 	}
 	
 	heir_male = {
+		1 = BHAGAVAAN
+		2 = BHAGAVAAN
+		3 = BHAGAVAAN
+		4 = BHAGAVAAN
+		5 = BHAGAVAAN
+		6 = RAJKUMAR
+		7 = RAJKUMAR
+		8 = RAJKUMAR
+		9 = RAJKUMAR
+	}
+
+	heir_female = {
+		1 = BHAGAVAAN
+		2 = BHAGAVAAN
+		3 = BHAGAVAAN
+		4 = BHAGAVAAN
+		5 = BHAGAVAAN
 		6 = RAJKUMAR
 		7 = RAJKUMAR
 		8 = RAJKUMAR
@@ -13679,12 +15219,40 @@ hindu_monarchy = {
 	
 	trigger = {
 		government = monarchy
-		religion = hinduism
+		OR = {
+			religion = hinduism
+			religion = surya_majapahit
+		}
+		AND = {
+			OR = {
+				culture_group = dravidian
+				primary_culture = javanese
+				primary_culture = oriya
+				primary_culture = sundanese
+			}
+			OR = {
+				has_reform = nayankara_reform
+				have_had_reform = nayankara_reform
+				has_reform = mandala_reform
+				have_had_reform = mandala_reform
+				has_reform = basic_reformed_mandala_reform
+				have_had_reform = basic_reformed_mandala_reform
+			}
+		}
+		NOT = { 
+			has_reform = aryachakravarti_reform
+			have_had_reform = aryachakravarti_reform
+		}
 	}
 }
 
 buddhist_monarchy = {
 	rank = {
+		1 = RGYALSRASDOM
+		2 = RGYALSRASDOM
+		3 = RGYALSRASDOM
+		4 = RGYALSRASDOM
+		5 = RGYALSRASDOM
 		6 = RGYALSRASDOM
 		7 = HIGH_RGYALSRASDOM
 		8 = RGYALPODOM
@@ -13692,6 +15260,11 @@ buddhist_monarchy = {
 	}
 
 	ruler_male = {
+		1 = RGYALSRAS
+		2 = RGYALSRAS
+		3 = RGYALSRAS
+		4 = RGYALSRAS
+		5 = RGYALSRAS
 		6 = RGYALSRAS
 		7 = HIGH_RGYALSRAS
 		8 = RGYALPO
@@ -13699,6 +15272,11 @@ buddhist_monarchy = {
 	}
 
 	consort_female = {
+		1 = SRASMO_BTSUN_fem
+		2 = SRASMO_BTSUN_fem
+		3 = SRASMO_BTSUN_fem
+		4 = SRASMO_BTSUN_fem
+		5 = SRASMO_BTSUN_fem
 		6 = SRASMO_BTSUN_fem
 		7 = SRASMO_BTSUN_fem
 		8 = SRASMO_BTSUN_fem
@@ -13706,6 +15284,11 @@ buddhist_monarchy = {
 	}
 
 	heir_male = {
+		1 = LORD
+		2 = LORD
+		3 = LORD
+		4 = LORD
+		5 = LORD
 		6 = LORD
 		7 = LORD
 		8 = LORD
@@ -13714,12 +15297,100 @@ buddhist_monarchy = {
 
 	trigger = {
 		government = monarchy
-		NOT = { government = tribal }
-		OR = {
-			religion = buddhism #Theravada
-			religion = vajrayana
-			religion = mahayana
+		AND = {
+			OR = {
+				primary_culture = nepali
+				primary_culture = tibetan
+				primary_culture = tibetan_new
+			}
+			OR = {
+				religion = bon
+		    	religion = buddhism #Theravada
+		    	religion = mahayana
+				religion = tantra
+				religion = vajrayana
+		    }
+			OR = {
+				has_reform = buddhist_nation_reform
+				have_had_reform = buddhist_nation_reform
+				has_reform = life_on_the_plateau_reform
+				have_had_reform = life_on_the_plateau_reform
+			}
 		}
+		NOT = { government = tribal }
+	}
+}
+
+buddhist_tribal = {
+	rank = {
+		1 = RGYALSRASDOM
+		2 = RGYALSRASDOM
+		3 = RGYALSRASDOM
+		4 = RGYALSRASDOM
+		5 = RGYALSRASDOM
+		6 = RGYALSRASDOM
+		7 = HIGH_RGYALSRASDOM
+		8 = RGYALPODOM
+		9 = RGYALKHAMSDOM
+	}
+
+	ruler_male = {
+		1 = RGYALSRAS
+		2 = RGYALSRAS
+		3 = RGYALSRAS
+		4 = RGYALSRAS
+		5 = RGYALSRAS
+		6 = RGYALSRAS
+		7 = HIGH_RGYALSRAS
+		8 = RGYALPO
+		9 = RGYALKHAMS
+	}
+
+	consort_female = {
+		1 = SRASMO_BTSUN_fem
+		2 = SRASMO_BTSUN_fem
+		3 = SRASMO_BTSUN_fem
+		4 = SRASMO_BTSUN_fem
+		5 = SRASMO_BTSUN_fem
+		6 = SRASMO_BTSUN_fem
+		7 = SRASMO_BTSUN_fem
+		8 = SRASMO_BTSUN_fem
+		9 = SRASMO_BTSUN_fem
+	}
+
+	heir_male = {
+		1 = LORD
+		2 = LORD
+		3 = LORD
+		4 = LORD
+		5 = LORD
+		6 = LORD
+		7 = LORD
+		8 = LORD
+		9 = LORD
+	}
+
+	trigger = {
+		government = tribal
+		AND = {
+			OR = {
+				primary_culture = nepali
+				primary_culture = tibetan
+				primary_culture = tibetan_new
+			}
+			OR = {
+				religion = bon
+		    	religion = buddhism #Theravada
+		    	religion = mahayana
+				religion = tantra
+				religion = vajrayana
+		    }
+			OR = {
+				has_reform = tribal_kingdom
+				have_had_reform = tribal_kingdom
+			}
+		}
+		NOT = { government = monarchy }
 	}
 }
 
@@ -13758,14 +15429,125 @@ muslim_monarchy = {
 	
 	trigger = {
 		government = monarchy
-		NOT = { 
+		religion_group = muslim
+		NOT = {
+			has_reform = timurid_amirate_reform 
 			has_reform = steppe_horde
 			has_reform = scythian_horde_reform
+			has_reform = feudal_theocracy
 		}
-		religion_group = muslim
-		NOT = { has_reform = feudal_theocracy }
 	}
 }
+
+malay_animist_monarchy = {
+	rank = {
+		1 = MALAY_CHIEFDOM
+		2 = MALAY_CHIEFDOM
+		3 = MALAY_CHIEFDOM
+		4 = MALAY_CHIEFDOM
+		5 = MALAY_CHIEFDOM
+		6 = MALAY_CHIEFDOM
+		7 = MALAY_HIGH_CHIEFDOM
+		8 = MALAY_HIGH_CHIEFDOM
+		9 = MALAY_HIGH_CHIEFDOM
+	}
+
+	ruler_male = {
+		1 = MALAY_CHIEF
+		2 = MALAY_CHIEF
+		3 = MALAY_CHIEF
+		4 = MALAY_CHIEF
+		5 = MALAY_CHIEF
+		6 = MALAY_CHIEF
+		7 = MALAY_HIGH_CHIEF
+		8 = MALAY_HIGH_CHIEF
+		9 = MALAY_HIGH_CHIEF
+	}
+
+	consort_female = {
+		1 = MALAY_LADY_CONSORT_fem
+		2 = MALAY_LADY_CONSORT_fem
+		3 = MALAY_LADY_CONSORT_fem
+		4 = MALAY_LADY_CONSORT_fem
+		5 = MALAY_LADY_CONSORT_fem
+		6 = MALAY_LADY_CONSORT_fem
+		7 = MALAY_PRINCESS_CONSORT_fem
+		8 = MALAY_PRINCESS_CONSORT_fem
+		9 = MALAY_PRINCESS_CONSORT_fem
+	}
+	
+	heir_male = {
+		1 = MALAY_LORD
+		2 = MALAY_LORD
+		3 = MALAY_LORD
+		4 = MALAY_LORD
+		5 = MALAY_LORD
+		6 = MALAY_LORD
+		7 = MALAY_PRINCE
+		8 = MALAY_CROWN_PRINCE
+		9 = MALAY_CROWN_PRINCE
+	}
+	
+	trigger = {
+		government = monarchy
+		religion = animism
+		AND = {
+			OR = {
+				primary_culture = bimanese
+				primary_culture = moluccan
+				primary_culture = nusa_tenggara
+				primary_culture = sulawesi
+			}
+			OR = {
+				has_reform = autocracy_reform
+				has_reform = plutocratic_reform 
+			}
+		}
+	}
+}
+
+mongolian_vassal = {
+	rank = {
+		6 = HORDE
+		7 = GREAT_HORDE
+		8 = KHANATE
+		9 = KHAGANATE
+	}
+
+	ruler_male = {
+		6 = BEILE
+		7 = GREAT_BEILE
+		8 = KHAN
+		9 = KHAGAN
+	}
+
+	consort_female = {
+		6 = GEGE_CONSORT_fem
+		7 = GEGE_CONSORT_fem
+		8 = KHANUM_CONSORT_fem
+		9 = KHANUM_CONSORT_fem
+	}
+	
+	heir_male = {
+		6 = KHANZADEH
+		7 = KHANZADEH
+		8 = KHANZADEH
+		9 = KHANZADEH
+	}
+	
+	trigger = {
+		has_reform = steppe_horde
+		OR = {
+			has_subject_of_type = mongolian_vassal
+			tag = GOL
+			tag = NOG
+			tag = OIR
+			tag = SHY
+		}
+	}
+}
+
+
 
 imperial_city = {
 	rank = {

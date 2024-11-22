@@ -11302,6 +11302,89 @@ italian_kingdom = {
 	subject_opinion_modifier = is_kingdom #Edited by Prussia
 }
 
+mongolian_vassal = {
+	copy_from = default
+	
+	# Graphics:
+    sprite = GFX_icon_mongolian_vassal
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_mongolian_vassal
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_mongolian_vassal
+
+	# Properties:
+	takes_diplo_slot = no
+	gets_help_with_rebels = no
+	separatists_become_subjects = yes
+	forms_trade_companies = no
+	can_concentrate_development = no
+	liberty_desire_development_ratio = 0.1
+	trust_on_start = 0
+	base_liberty_desire = 20.0
+	forcelimit_to_overlord = 0.00
+	military_focus = 1.2
+	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	can_be_annexed = yes
+	joins_overlords_wars = yes
+	can_use_claims = yes
+
+	relative_power_class = 1
+	should_quit_wars_on_activation = yes
+	is_march = yes
+	
+	# Subject Interactions
+	seize_court_resources = yes
+	request_extra_levies = yes
+	grant_administrative_autonomy = yes
+	#(disable)
+	scutage = yes
+	grant_core_claim = yes
+	grant_province = yes
+	place_relative_on_throne = yes
+	enforce_religion = yes
+	enforce_culture = no
+	seize_territory = no
+	#(enable)
+	contribute_to_capital = no
+	return_land = yes
+	conscript_general = yes
+	
+	# Modifiers
+	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+	restoration_cb = cb_disloyal_mongolian_vassal #Was cb_disloyal_eyalet
+
+	# Subject Interactions:
+
+	# Modifiers:
+	modifier_subject = clear # Use this to clear after copy_from.
+
+	modifier_subject = {
+		modifier = mongolian_vassal_bonus
+	}
+	modifier_subject = {
+		modifier = subject_tax_modifier
+		trigger = {
+			overlord = {
+				has_government_attribute = subject_tax_modifier_25
+			}
+		}
+	}
+	modifier_subject = {
+		modifier = same_religion_subject_bonus_mod
+		trigger = {
+			overlord = {
+				has_government_attribute = same_religion_subject_bonus
+				religion = PREV
+			}
+		}
+	}
+	modifier_overlord = {
+		modifier = mongolian_vassal_subject
+	}
+
+	overlord_opinion_modifier = is_mongolian_vassal
+	subject_opinion_modifier = is_mongolian_vassal
+}
+
 #NORWEGIAN SUBJECTS
 norwegian_lordship = { 
 	copy_from = default

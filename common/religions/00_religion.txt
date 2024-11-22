@@ -3427,6 +3427,7 @@ dharmic = {
 			nestorian
 			buddhism
 			sikhism
+			surya_majapahit
 		}
 		country = {
 			tolerance_heathen = 1
@@ -3462,11 +3463,55 @@ dharmic = {
 		heretic = { BHAKTI }
 	}
 
+	surya_majapahit = {
+		color = { 9 106 182 }
+		icon = 84
+		allowed_conversion = {
+			hinduism
+			nestorian
+			buddhism
+			sikhism
+		}
+		country = {
+			tolerance_heathen = 1
+			tolerance_own = 1
+			brahmins_hindu_influence_modifier = 0.2
+			legitimacy = 0.50
+			advisor_cost = -0.15
+			heir_chance = 0.5
+			advisor_pool = -1
+			global_unrest = 1
+		}		
+		country_as_secondary = {
+			tolerance_heretic = 1
+			tolerance_heathen = 2
+			legitimacy = 0.50
+			advisor_cost = -0.15
+			advisor_pool = -1
+			tolerance_own = -1
+		}
+		
+		personal_deity = yes
+		
+		on_convert = {
+			change_religion = surya_majapahit
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+		}
+		
+		heretic = { BHAKTI }
+	}
+
 	sikhism = {
 		color = { 76 118 132 }
 		icon = 15
 		allowed_conversion = {
 			hinduism
+			surya_majapahit
 			sunni
 			shiite
 		}
@@ -4091,7 +4136,8 @@ dharmic = {
 	#	allowed_conversion = {
 	#		manichaean
 	#		buddhism
-	#		hinduism
+	#       hinduism
+	#       surya_majapahit
 	#		sikhism
 	#		dravidian
 	#	}
@@ -4139,7 +4185,8 @@ dharmic = {
 	#		buddhism
 	#		sikhism
 	#		jain
-	#		hinduism
+	#       hinduism
+	#       surya_majapahit
 	#	}
 	#	country = {
 	#		tolerance_heathen = 2
@@ -5219,6 +5266,7 @@ pagan = {
 			orthodox
 			coptic
 			hinduism
+			surya_majapahit
 		}
 
 		holy_sites = { 377 379 382 411 6625 }
@@ -5494,6 +5542,7 @@ zoroastrian_group = {
 			orthodox
 			coptic
 			hinduism
+			surya_majapahit
 		}
 
 		holy_sites = { 421 4430 2223 441 2235 }
@@ -5542,6 +5591,7 @@ zoroastrian_group = {
 			orthodox
 			coptic
 			hinduism
+			surya_majapahit
 		}
 		holy_sites = { 379 411 2310 6625 6641 }
 		blessings = {
@@ -6254,6 +6304,51 @@ buddhist_group = {
 		harmonized_modifier = harmonized_mahayana
 		
 		heretic = { ZEN }
+		
+		uses_karma = yes
+	}
+
+	ahom = {
+		color = { 123 96 45 }
+		icon = 83
+		allowed_conversion = {
+			vajrayana
+			mahayana
+			sikhism
+		}
+		
+		country = {
+			prestige = 1
+			tolerance_heretic = 2
+			advisor_cost = -0.1
+			mercenary_cost = -0.20
+			years_of_nationalism = 5
+		}
+		
+		country_as_secondary = {
+			development_cost = -0.1
+			diplomats = 1
+			prestige = 1
+			tolerance_heretic = 2
+			tolerance_heathen = 1
+			advisor_cost = -0.1
+			mercenary_cost = -0.20
+			years_of_nationalism = 5
+		}
+		
+		on_convert = {
+			change_religion = ahom
+			add_prestige = -100
+			add_stability = -1
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+		}
+		
+		heretic = { ZEN }
+		
+		harmonized_modifier = harmonized_ahom
 		
 		uses_karma = yes
 	}

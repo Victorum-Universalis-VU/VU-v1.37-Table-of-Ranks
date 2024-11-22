@@ -37,6 +37,117 @@ feudalism_reform = {
 	}
 }
 
+administrative_reform = {
+	icon = "paper_with_seal"
+	allow_normal_conversion = yes
+	legacy_equivalent = administrative_monarchy
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		governing_capacity = 150
+		production_efficiency = 0.1
+		global_tax_modifier = 0.05
+		global_autonomy = -0.025
+	}
+	custom_attributes = {
+		buffed_strong_duchies = yes #+5% Loyalty
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}
+
+zamorin_of_calcutta_reform = {
+	icon = "zamorin_of_calcutta"
+	potential = {
+		government_rank = 6
+		has_reform = zamorin_of_calcutta_reform
+	}
+	allow_normal_conversion = yes
+	#legacy_equivalent = feudal_monarchy
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		vassal_income = 0.25
+		nobles_influence_modifier = 0.05
+		maratha_exclusive_influence_modifier = 0.05
+		rajput_exclusive_influence_modifier = 0.05
+	}
+	custom_attributes = {
+		buffed_strong_duchies = yes #+5% Loyalty
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}
+
+indian_fief_reform = {
+	icon = "thomdom"
+	potential = {
+		religion = nestorian
+		primary_culture = malayalam
+		#government_rank = 4
+		#NOT = {
+		#	government_rank = 5
+		#	government_rank = 6
+		#	government_rank = 7
+		#	government_rank = 8
+		#	government_rank = 9
+		#}
+	}
+	allow_normal_conversion = yes
+	#legacy_equivalent = feudal_monarchy
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	fixed_rank = 4
+	modifiers = {
+		vassal_income = 0.25
+		nobles_influence_modifier = 0.05
+		maratha_exclusive_influence_modifier = 0.05
+		rajput_exclusive_influence_modifier = 0.05
+	}
+	custom_attributes = {
+		buffed_strong_duchies = yes #+5% Loyalty
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}
+
+aryachakravarti_reform = {
+	icon = "aryacakravarti_dynasty"
+	potential = {
+		#government = monarchy
+		#religion = hinduism
+		#government_rank = 6
+		has_reform = aryachakravarti_reform
+		#AND = {
+		#	OR = {
+		#    	primary_culture = tamil
+		#    	primary_culture = sinhala
+		#	}
+		#	has_reform = aryachakravarti_reform
+		#}
+	}
+	fixed_rank = 6
+	allow_normal_conversion = yes
+	#legacy_equivalent = feudal_monarchy
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		vassal_income = 0.25
+		nobles_influence_modifier = 0.05
+		maratha_exclusive_influence_modifier = 0.05
+		rajput_exclusive_influence_modifier = 0.05
+	}
+	custom_attributes = {
+		buffed_strong_duchies = yes #+5% Loyalty
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}
+
 autocracy_reform = {
 	icon = "crown"
 	allow_normal_conversion = yes
@@ -175,20 +286,24 @@ huangdom_reform = {
 	allow_normal_conversion = yes
 	legacy_equivalent = despotic_monarchy
 	potential = {
-		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
-		}
+		has_reform = huangdom_reform
+		#culture_group = filipino_i
+		#OR = {
+		#	technology_group = indian
+		#	technology_group = muslim
+		#	technology_group = chinese
+		#	technology_group = east_african
+		#}
 	}
 	nation_designer_trigger = {
-		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
-		}
+		has_reform = huangdom_reform
+		#culture_group = filipino_i
+		#OR = {
+		#	technology_group = indian
+		#	technology_group = muslim
+		#	technology_group = chinese
+		#	technology_group = east_african
+		#}
 	}
 	queen = no
 	valid_for_nation_designer = yes
@@ -244,23 +359,26 @@ rahanate_reform = {
 	allow_normal_conversion = yes
 	legacy_equivalent = despotic_monarchy
 	potential = {
-		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+		religion = hinduism
+		AND = {
+			culture_group = filipino_i
+		    OR = {
+		    	has_reform = rahanate_reform
+		    	have_had_reform = rahanate_reform
+		    }
 		}
-		NOT = { 
-			culture_group = nakh_daghestani
-		}
+		NOT = { culture_group = nakh_daghestani	}
 	}
 	nation_designer_trigger = {
-		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+		religion = hinduism
+		AND = {
+			culture_group = filipino_i
+		    OR = {
+		    	has_reform = rahanate_reform
+		    	have_had_reform = rahanate_reform
+		    }
 		}
+		NOT = { culture_group = nakh_daghestani	}
 	}
 	queen = no
 	valid_for_nation_designer = yes
@@ -316,19 +434,25 @@ datunate_reform = {
 	allow_normal_conversion = yes
 	legacy_equivalent = despotic_monarchy
 	potential = {
+		culture_group = filipino_i
 		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+			has_reform = datunate_reform
+			have_had_reform = datunate_reform
+			has_reform = oligarchy_reform
+			have_had_reform = oligarchy_reform
+			has_reform = plutocratic_reform
+			have_had_reform = plutocratic_reform
 		}
 	}
 	nation_designer_trigger = {
+		culture_group = filipino_i
 		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+			has_reform = datunate_reform
+			have_had_reform = datunate_reform
+			has_reform = oligarchy_reform
+			have_had_reform = oligarchy_reform
+			has_reform = plutocratic_reform
+			have_had_reform = plutocratic_reform
 		}
 	}
 	queen = no
@@ -385,19 +509,17 @@ lakanate_reform = {
 	allow_normal_conversion = yes
 	legacy_equivalent = despotic_monarchy
 	potential = {
+		culture_group = filipino_i
 		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+			has_reform = lakanate_reform
+			have_had_reform = lakanate_reform
 		}
 	}
 	nation_designer_trigger = {
+		culture_group = filipino_i
 		OR = {
-			technology_group = indian
-			technology_group = muslim
-			technology_group = chinese
-			technology_group = east_african
+			has_reform = lakanate_reform
+			have_had_reform = lakanate_reform
 		}
 	}
 	valid_for_nation_designer = yes
@@ -2874,14 +2996,6 @@ bohemian_elective_kingdom_reform = {
 		custom_attributes = {
 			has_ruler_election = yes
 			has_improved_ruler_election = yes
-			has_bohemian_lordship = yes
-			has_bohemian_barony = yes
-			has_bohemian_viscounty = yes
-			has_bohemian_county = yes
-			has_bohemian_marquisate = yes
-			has_bohemian_duchy = yes
-			has_bohemian_principality = yes
-			has_bohemian_kingdom = yes
 		}
 	}
 	ai = {
@@ -4642,6 +4756,60 @@ mandala_reform = {
 	free_concentrate_development = yes
 }
 
+burmese_monarchy_reform = {
+	icon = "burmese_monarchy"
+	allow_normal_conversion = yes
+	potential = {
+		government_rank = 4
+		OR = {
+			has_reform = burmese_monarchy_reform
+			have_had_reform = burmese_monarchy_reform
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		government_rank = 4
+		OR = {
+			has_reform = burmese_monarchy_reform
+			have_had_reform = burmese_monarchy_reform
+		}
+	}
+	legacy_equivalent = despotic_monarchy
+	modifiers = {
+		vassal_income = 0.15
+		vassal_forcelimit_bonus = 1
+	}
+	free_concentrate_development = yes
+}
+
+thai_monarchy_reform = {
+	icon = "thai_monarchy"
+	allow_normal_conversion = yes
+	potential = {
+		government_rank = 4
+		OR = {
+			has_reform = thai_monarchy_reform
+			have_had_reform = thai_monarchy_reform
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		government_rank = 4
+		OR = {
+			has_reform = thai_monarchy_reform
+			have_had_reform = thai_monarchy_reform
+		}
+	}
+	legacy_equivalent = despotic_monarchy
+	modifiers = {
+		vassal_income = 0.15
+		vassal_forcelimit_bonus = 1
+	}
+	free_concentrate_development = yes
+}
+
 nayankara_reform = {
 	icon = "nayankara_system"
 	allow_normal_conversion = yes
@@ -4825,6 +4993,7 @@ korean_monarchy = {
 			has_hangeul_alphabet_decisions = yes
 			has_weaker_harem_events = yes
 			reinforce_the_gwangmu_reform = yes
+			yangban_scholars = yes
 			reinforce_the_gwangmu_reform_2 = yes
 		}
 	}
@@ -7765,7 +7934,10 @@ clergy_in_administration_reform = {
 			factor = 0.1
 			OR = {
 				AND = {
-					religion = hinduism
+					OR = { 
+			        	religion = hinduism
+			        	religion = surya_majapahit
+			        }
 					estate_influence = {
 						estate = estate_brahmins
 						influence = 90
@@ -8650,23 +8822,20 @@ the_social_contract_reform = {
 letat_cest_moi_reform = {
 	icon = "letat_cest_moi"
 	allow_normal_conversion = yes
+	potential = {
+		NOT = {
+			tag = MNG
+			tag = QNG
+			tag = YUA
+		}
+	}
 	modifiers = {
 		governing_capacity = 500  #No change in VU
-	}
-	custom_attributes = {
-		has_french_lordship = yes 
-		has_french_barony = yes 
-		has_french_viscounty = yes
-		has_french_county = yes
-		has_french_marquisate = yes
-		has_french_duchy = yes
-		has_french_principality = yes
-		has_french_kingdom = yes
 	}
 	ai = {
 		factor = 1.5
 		modifier = {
-			factor = 2
+			factor = 5
 			OR = {
 			    tag = FRA
 			    tag = BFR
@@ -8674,6 +8843,64 @@ letat_cest_moi_reform = {
 			    tag = NPF
 			    tag = OFR
 			}
+		}
+	}
+}
+
+dragon_throne_reform = {
+	icon = "dragon_throne"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = MNG
+			tag = QNG
+			tag = YUA
+		}
+	}
+	modifiers = {
+		governing_capacity = 500  #No change in VU
+	}
+	ai = {
+		factor = 1.5
+		modifier = {
+			factor = 5
+			OR = {
+		    	tag = MNG
+		    	tag = QNG
+		    	tag = YUA
+		    }
+		}
+	}
+}
+
+chrysanthemum_throne_reform = {
+	icon = "chrysanthemum_throne"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			religion = shinto
+			religion = state_shinto
+		}
+		AND = {
+			culture = japanese
+			OR = {
+		    	has_reform = chrysanthemum_throne_reform
+		    	have_had_reform = chrysanthemum_throne_reform
+		    }
+		}
+	}
+	modifiers = {
+		governing_capacity = 500  #No change in VU
+	}
+	ai = {
+		factor = 1.5
+		modifier = {
+			factor = 5
+			OR = {
+		    	tag = MNG
+		    	tag = QNG
+		    	tag = YUA
+		    }
 		}
 	}
 }
@@ -9553,6 +9780,7 @@ eue_lordship_reform = { #T1 - Lordship level
 		religion_group = christian
 		OR = {
 			has_reform = eue_lordship_reform
+			have_had_reform = eue_lordship_reform
 			is_subject_of_type = anglois_lordship
 			is_subject_of_type = aragonese_lordship
 			is_subject_of_type = austrian_lordship
@@ -9594,26 +9822,6 @@ eue_lordship_reform = { #T1 - Lordship level
 	nation_designer_trigger = {	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_lordship = yes
-		has_aragonese_lordship = yes
-		has_austrian_lordship = yes
-		has_belgian_lordship = yes
-		has_bohemian_lordship = yes
-		has_byzantine_lordship = yes
-		has_castilian_lordship = yes
-		has_danish_lordship = yes
-		has_dutch_lordship = yes
-		has_english_lordship = yes
-		has_french_lordship = yes
-		has_german_lordship = yes
-		has_hungarian_lordship = yes
-		has_italian_lordship = yes
-		has_norwegian_lordship = yes
-		has_polish_lordship = yes
-		has_portuguese_lordship = yes
-		has_prussian_lordship = yes
-		has_russian_lordship = yes
-		has_swedish_lordship = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.1
@@ -9633,6 +9841,7 @@ eue_barony_reform = { #T2 - Barony level
 		religion_group = christian
 		OR = {
 			has_reform = eue_barony_reform
+			have_had_reform = eue_barony_reform
 			is_subject_of_type = anglois_barony
 			is_subject_of_type = aragonese_barony
 			is_subject_of_type = austrian_barony
@@ -9674,26 +9883,6 @@ eue_barony_reform = { #T2 - Barony level
 	nation_designer_trigger = {	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_barony = yes
-		has_aragonese_barony = yes
-		has_austrian_barony = yes
-		has_belgian_barony = yes
-		has_bohemian_barony = yes
-		has_byzantine_barony = yes
-		has_castilian_barony = yes
-		has_danish_barony = yes
-		has_dutch_barony = yes
-		has_english_barony = yes
-		has_french_barony = yes
-		has_german_barony = yes
-		has_hungarian_barony = yes
-		has_italian_barony = yes
-		has_norwegian_barony = yes
-		has_polish_barony = yes
-		has_portuguese_barony = yes
-		has_prussian_barony = yes
-		has_russian_barony = yes
-		has_swedish_barony = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.1
@@ -9713,6 +9902,7 @@ eue_viscounty_reform = { #T3 - Viscounty level
 		religion_group = christian
 		OR = {
 			has_reform = eue_viscounty_reform
+			have_had_reform = eue_viscounty_reform
 			is_subject_of_type = anglois_viscounty
 			is_subject_of_type = aragonese_viscounty
 			is_subject_of_type = austrian_viscounty
@@ -9754,26 +9944,6 @@ eue_viscounty_reform = { #T3 - Viscounty level
 	nation_designer_trigger = {	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_viscounty = yes
-		has_aragonese_viscounty = yes
-		has_austrian_viscounty = yes
-		has_belgian_viscounty = yes
-		has_bohemian_viscounty = yes
-		has_byzantine_viscounty = yes
-		has_castilian_viscounty = yes
-		has_danish_viscounty = yes
-		has_dutch_viscounty = yes
-		has_english_viscounty = yes
-		has_french_viscounty = yes
-		has_german_viscounty = yes
-		has_hungarian_viscounty = yes
-		has_italian_viscounty = yes
-		has_norwegian_viscounty = yes
-		has_polish_viscounty = yes
-		has_portuguese_viscounty = yes
-		has_prussian_viscounty = yes
-		has_russian_viscounty = yes
-		has_swedish_viscounty = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.1
@@ -9793,6 +9963,7 @@ eue_county_reform = { #T4 - County level
 		religion_group = christian
 		OR = {
 			has_reform = eue_county_reform
+			have_had_reform = eue_county_reform
 			is_subject_of_type = aragonese_county
 			is_subject_of_type = austrian_county
 			is_subject_of_type = baltic_county
@@ -9832,26 +10003,6 @@ eue_county_reform = { #T4 - County level
 	nation_designer_trigger = {	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_county = yes
-		has_aragonese_county = yes
-		has_austrian_county = yes
-		has_belgian_county = yes
-		has_bohemian_county = yes
-		has_byzantine_county = yes
-		has_castilian_county = yes
-		has_danish_county = yes
-		has_dutch_county = yes
-		has_english_county = yes
-		has_french_county = yes
-		has_german_county = yes
-		has_hungarian_county = yes
-		has_italian_county = yes
-		has_norwegian_county = yes
-		has_polish_county = yes
-		has_portuguese_county = yes
-		has_prussian_county = yes
-		has_russian_county = yes
-		has_swedish_county = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.1
@@ -9877,6 +10028,7 @@ eng_earldom_reform = { #T4 - County Level
 		}
 		OR = {
 			has_reform = eng_earldom_reform
+			have_had_reform = eng_earldom_reform
 			is_subject_of_type = anglois_county
 			is_subject_of_type = english_earldom
 			is_subject_of_type = english_crown_PU
@@ -9925,6 +10077,7 @@ eue_marquisate_reform = { #T5 - Marquisate level
 		NOT = { religion = orthodox }
 		OR = {
 			has_reform = eue_marquisate_reform
+			have_had_reform = eue_marquisate_reform
 			is_subject_of_type = anglois_marquisate
 			is_subject_of_type = aragonese_marquisate
 			is_subject_of_type = austrian_marquisate
@@ -9961,26 +10114,6 @@ eue_marquisate_reform = { #T5 - Marquisate level
 	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_marquisate = yes
-		has_aragonese_marquisate = yes
-		has_austrian_marquisate = yes
-		has_belgian_marquisate = yes
-		has_bohemian_marquisate = yes
-		has_byzantine_marquisate = yes
-		has_castilian_marquisate = yes
-		has_danish_marquisate = yes
-		has_dutch_marquisate = yes
-		has_english_marquisate = yes
-		has_french_marquisate = yes
-		has_german_marquisate = yes
-		has_hungarian_marquisate = yes
-		has_italian_marquisate = yes
-		has_norwegian_marquisate = yes
-		has_polish_marquisate = yes
-		has_portuguese_marquisate = yes
-		has_prussian_marquisate = yes
-		has_russian_marquisate = yes
-		has_swedish_marquisate = yes
 	}
 	modifiers = {
 		defensiveness = 0.10
@@ -10000,6 +10133,7 @@ eue_duchy_reform = { #T6 - Duchy level
 		religion_group = christian
 		OR = {
 	    	has_reform = eue_duchy_reform
+			have_had_reform = eue_duchy_reform
 	    	is_subject_of_type = anglois_duchy
 		    is_subject_of_type = aragonese_duchy
 		    is_subject_of_type = austrian_duchy
@@ -10035,26 +10169,6 @@ eue_duchy_reform = { #T6 - Duchy level
 	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_duchy = yes
-		has_aragonese_duchy = yes
-		has_austrian_duchy = yes
-		has_belgian_duchy = yes
-		has_bohemian_duchy = yes
-		has_byzantine_duchy = yes
-		has_castilian_duchy = yes
-		has_danish_duchy = yes
-		has_dutch_duchy = yes
-		has_english_duchy = yes
-		has_french_duchy = yes
-		has_german_duchy = yes
-		has_hungarian_duchy = yes
-		has_italian_duchy = yes
-		has_norwegian_duchy = yes
-		has_polish_duchy = yes
-		has_portuguese_duchy = yes
-		has_prussian_duchy = yes
-		has_russian_duchy = yes
-		has_swedish_duchy = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.2
@@ -10077,6 +10191,7 @@ eue_principality_reform = { #T7 - Principality level
 		religion_group = christian
 		OR = {
 			has_reform = eue_principality_reform
+			have_had_reform = eue_principality_reform
 			is_subject_of_type = anglois_principality
 			is_subject_of_type = aragonese_principality
 			is_subject_of_type = austrian_principality
@@ -10112,26 +10227,6 @@ eue_principality_reform = { #T7 - Principality level
 	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_principality = yes
-		has_aragonese_principality = yes
-		has_austrian_principality = yes
-		has_belgian_principality = yes
-		has_bohemian_principality = yes
-		has_byzantine_principality = yes
-		has_castilian_principality = yes
-		has_danish_principality = yes
-		has_dutch_principality = yes
-		has_english_principality = yes
-		has_french_principality = yes
-		has_german_principality = yes
-		has_hungarian_principality = yes
-		has_italian_principality = yes
-		has_norwegian_principality = yes
-		has_polish_principality = yes
-		has_portuguese_principality = yes
-		has_prussian_principality = yes
-		has_russian_principality = yes
-		has_swedish_principality = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.2
@@ -10154,6 +10249,7 @@ eue_kingdom_reform = { #T8 - Kingdom level
 		religion_group = christian
 		OR = {
 			has_reform = eue_kingdom_reform
+			have_had_reform = eue_kingdom_reform
 			is_subject_of_type = anglois_kingdom
 			is_subject_of_type = aragonese_kingdom
 			is_subject_of_type = austrian_kingdom
@@ -10189,26 +10285,6 @@ eue_kingdom_reform = { #T8 - Kingdom level
 	}
 	custom_attributes = {
 		buffed_strong_duchies = yes #+5% Loyalty
-		has_anglois_kingdom = yes
-		has_aragonese_kingdom = yes
-		has_austrian_kingdom = yes
-		has_belgian_kingdom = yes
-		has_bohemian_kingdom = yes
-		has_byzantine_kingdom = yes
-		has_castilian_kingdom = yes
-		has_danish_kingdom = yes
-		has_dutch_kingdom = yes
-		has_english_kingdom = yes
-		has_french_kingdom = yes
-		has_german_kingdom = yes
-		has_hungarian_kingdom = yes
-		has_italian_kingdom = yes
-		has_norwegian_kingdom = yes
-		has_polish_kingdom = yes
-		has_portuguese_kingdom = yes
-		has_prussian_kingdom = yes
-		has_russian_kingdom = yes
-		has_swedish_kingdom = yes
 	}
 	modifiers = {
 		manpower_recovery_speed = 0.2
@@ -10232,6 +10308,7 @@ islamic_emirate_reform = { #T5 - Marquisate level
 		religion_group = muslim
 		OR = {
 			has_reform = islamic_emirate_reform
+			have_had_reform = islamic_emirate_reform
 			is_subject_of_type = islamic_emirate
 		}
 		NOT = { 
@@ -10246,9 +10323,6 @@ islamic_emirate_reform = { #T5 - Marquisate level
 		}
 	}
 	queen = no
-	custom_attributes = {
-		has_islamic_emirate = yes
-	}
 	modifiers = {
 		tolerance_heathen = 5
 		tolerance_own = 3
@@ -10270,6 +10344,7 @@ islamic_governate_reform = { #T5 - Marquisate level
 		religion_group = muslim
 		OR = {
 			has_reform = islamic_governate_reform
+			have_had_reform = islamic_governate_reform
 			is_subject_of_type = islamic_governate
 		}
 		NOT = { 
@@ -10284,9 +10359,6 @@ islamic_governate_reform = { #T5 - Marquisate level
 		}
 	}
 	queen = no
-	custom_attributes = {
-		has_islamic_governate = yes
-	}
 	modifiers = {
 		tolerance_heathen = 2
 		tolerance_own = 1
@@ -10308,6 +10380,7 @@ islamic_sultanate_reform = { #T6 - Duchy level
 		religion_group = muslim
 		OR = {
 			has_reform = islamic_sultanate_reform
+			have_had_reform = islamic_sultanate_reform
 			is_subject_of_type = islamic_sultanate
 		}
 		NOT = { 
@@ -10322,9 +10395,6 @@ islamic_sultanate_reform = { #T6 - Duchy level
 		}
 	}
 	queen = no
-	custom_attributes = {
-		has_islamic_sultanate = yes
-	}
 	modifiers = {
 		tolerance_heathen = 6
 		tolerance_own = 4
@@ -10346,6 +10416,7 @@ islamic_taifa_reform = { #T7 - Principality level
 		religion_group = muslim
 		OR = {
 			has_reform = islamic_taifa_reform
+			have_had_reform = islamic_taifa_reform
 			is_subject_of_type = islamic_taifa
 		}
 		NOT = { 
@@ -10360,9 +10431,6 @@ islamic_taifa_reform = { #T7 - Principality level
 		}
 	}
 	queen = no
-	custom_attributes = {
-		has_islamic_taifa = yes
-	}
 	modifiers = {
 		tolerance_heathen = 7
 		tolerance_own = 5
@@ -10384,6 +10452,7 @@ islamic_malikate_reform = { #T8 - Kingdom level
 		religion_group = muslim
 		OR = {
 			has_reform = islamic_malikate_reform
+			have_had_reform = islamic_malikate_reform
 			is_subject_of_type = islamic_malikate
 		}
 		NOT = { 
@@ -10398,9 +10467,6 @@ islamic_malikate_reform = { #T8 - Kingdom level
 		}
 	}
 	queen = no
-	custom_attributes = {
-		has_islamic_malikate = yes
-	}
 	modifiers = {
 		tolerance_heathen = 8
 		tolerance_own = 6

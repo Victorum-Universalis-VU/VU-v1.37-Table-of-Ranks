@@ -20,7 +20,10 @@ estate_brahmins = {
 						religion_group = muslim
 						NOT = { has_unlocked_estate = { estate = estate_dhimmi } }
 					}
-					religion = hinduism
+					OR = {
+						religion = hinduism
+						religion = surya_majapahit
+					}
 					has_unlocked_estate = { estate = estate_brahmins }
 				}
 				NOT = { has_government_attribute = is_pirate_republic_reform }
@@ -75,7 +78,10 @@ estate_brahmins = {
 		}
 		modifier = {
 			factor = 2
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = surya_majapahit
+			}
 		}
 		modifier = {
 			factor = 2
@@ -96,25 +102,48 @@ estate_brahmins = {
 	influence_modifier = {
 		desc = EST_VAL_HINDU_MAJORITY
 		trigger = {
-			NOT = { religion = hinduism }
-			dominant_religion = hinduism
+			NOT = { 
+				religion = hinduism
+				religion = surya_majapahit 
+			}
+			OR = {
+				dominant_religion = hinduism
+				dominant_religion = surya_majapahit
+			}
 		}	
 		influence = 10
 	}
 	influence_modifier = {
 		desc = EST_VAL_HINDU_PROVINCES
 		trigger = {
-			any_owned_province = { religion = hinduism }
-			NOT = { dominant_religion = hinduism }
-			NOT = { religion = hinduism }
+			any_owned_province = { 
+				OR = {
+					religion = hinduism
+					religion = surya_majapahit 
+				}
+			}
+			NOT = { 
+				dominant_religion = hinduism
+				dominant_religion = surya_majapahit
+			}
+			NOT = { 
+				religion = hinduism
+				religion = surya_majapahit  
+			}
 		}
 		influence = 5
 	}
 	influence_modifier = {
 		desc = EST_VAL_STATE_RELIGIOUS_MINORITY
 		trigger = {
-			religion = hinduism
-			NOT = { dominant_religion = hinduism }
+			NOT = { 
+				religion = hinduism
+				religion = surya_majapahit  
+			}
+			NOT = { 
+				dominant_religion = hinduism
+				dominant_religion = surya_majapahit
+			}
 		}	
 		influence = -15
 	}

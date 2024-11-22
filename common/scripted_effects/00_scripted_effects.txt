@@ -2217,6 +2217,7 @@ spawn_country_religious_rebels = {
 	owner = {
 		trigger_switch = {
 			on_trigger = religion
+			ahom = { PREV = { spawn_rebels = { type = ahom_rebels size = $size$ } } }
 			anglican = { PREV = { spawn_rebels = { type = anglican_rebels size = $size$ } } }
 			hussite = { PREV = { spawn_rebels = { type = hussite_rebels size = $size$ } } }
 			animism = { PREV = { spawn_rebels = { type = animism_rebels size = $size$ } } }
@@ -2225,6 +2226,7 @@ spawn_country_religious_rebels = {
 			confucianism = { PREV = { spawn_rebels = { type = confucianism_rebels size = $size$ } } }
 			coptic = { PREV = { spawn_rebels = { type = coptic_rebels size = $size$ } } }
 			hinduism = { PREV = { spawn_rebels = { type = hinduism_rebels size = $size$ } } }
+			surya_majapahit = { PREV = { spawn_rebels = { type = surya_majapahit_rebels size = $size$ } } }
 			ibadi = { PREV = { spawn_rebels = { type = ibadi_rebels size = $size$ } } }
 			inti = { PREV = { spawn_rebels = { type = inti_rebels size = $size$ } } }
 			jewish = { PREV = { spawn_rebels = { type = jewish_rebels size = $size$ } } }
@@ -2241,6 +2243,7 @@ spawn_country_religious_rebels = {
 			sikhism = { PREV = { spawn_rebels = { type = sikhism_rebels size = $size$ } } }
 			sunni = { PREV = { spawn_rebels = { type = sunni_rebels size = $size$ } } }
 			tengri_pagan_reformed = { PREV = { spawn_rebels = { type = tengri_pagan_reformed_rebels size = $size$ } } }
+			anito = { PREV = { spawn_rebels = { type = anito_rebels size = $size$ } } }
 			arctolatry = { PREV = { spawn_rebels = { type = arctolatry_rebels size = $size$ } } }
 			totemism = { PREV = { spawn_rebels = { type = totemism_rebels size = $size$ } } }
 			vajrayana = { PREV = { spawn_rebels = { type = vajrayana_rebels size = $size$ } } }
@@ -2254,6 +2257,7 @@ spawn_country_religious_rebels = {
 spawn_province_religious_rebels = {
 	trigger_switch = {
 		on_trigger = religion
+		ahom = { spawn_rebels = { type = ahom_rebels size = $size$ } }
 		anglican = { spawn_rebels = { type = anglican_rebels size = $size$ } }
 		hussite = { spawn_rebels = { type = hussite_rebels size = $size$ } }
 		animism = { spawn_rebels = { type = animism_rebels size = $size$ } }
@@ -2262,6 +2266,7 @@ spawn_province_religious_rebels = {
 		confucianism = { spawn_rebels = { type = confucianism_rebels size = $size$ } }
 		coptic = { spawn_rebels = { type = coptic_rebels size = $size$ } }
 		hinduism = { spawn_rebels = { type = hinduism_rebels size = $size$ } }
+		surya_majapahit = { spawn_rebels = { type = surya_majapahit_rebels size = $size$ } }
 		ibadi = { spawn_rebels = { type = ibadi_rebels size = $size$ } }
 		inti = { spawn_rebels = { type = inti_rebels size = $size$ } }
 		jewish = { spawn_rebels = { type = jewish_rebels size = $size$ } }
@@ -2278,6 +2283,7 @@ spawn_province_religious_rebels = {
 		sikhism = { spawn_rebels = { type = sikhism_rebels size = $size$ } }
 		sunni = { spawn_rebels = { type = sunni_rebels size = $size$ } }
 		tengri_pagan_reformed = { spawn_rebels = { type = tengri_pagan_reformed_rebels size = $size$ } }
+		anito = { spawn_rebels = { type = anito_rebels size = $size$ } }
 		arctolatry = { spawn_rebels = { type = arctolatry_rebels size = $size$ } }
 		totemism = { spawn_rebels = { type = totemism_rebels size = $size$ } }
 		vajrayana = { spawn_rebels = { type = vajrayana_rebels size = $size$ } }
@@ -2784,6 +2790,11 @@ clear_previous_primary_cults = {
 				remove_country_modifier = junior_islam_cult
 				remove_country_modifier = primary_islam_cult
 			}
+			has_ahom_cult_as_primary_cult = {
+				clr_country_flag = has_ahom_cult_as_primary_cult
+				remove_country_modifier = junior_ahom_cult
+				remove_country_modifier = primary_ahom_cult
+			}
 			has_buddhism_cult_as_primary_cult = {
 				clr_country_flag = has_buddhism_cult_as_primary_cult
 				remove_country_modifier = junior_buddhism_cult
@@ -2855,6 +2866,9 @@ clear_primary_cult_bonus = {
 			}
 			primary_islam_cult = {
 				remove_country_modifier = primary_islam_cult
+			}
+			primary_ahom_cult = {
+				remove_country_modifier = primary_ahom_cult
 			}
 			primary_buddhism_cult = {
 				remove_country_modifier = primary_buddhism_cult
@@ -4261,6 +4275,7 @@ add_humiliation_reward = {
 
 set_likely_rebels_flag = {
 	hidden_effect = {
+		if = { limit = { likely_rebels = ahom_rebels } 	                    set_province_flag = likely_spawns_ahom_rebels }
 		if = { limit = { likely_rebels = anglican_rebels } 					set_province_flag = likely_spawns_anglican_rebels }
 		if = { limit = { likely_rebels = animism_rebels } 					set_province_flag = likely_spawns_animism_rebels }
 		if = { limit = { likely_rebels = anti_tax_rebels } 					set_province_flag = likely_spawns_anti_tax_rebels }
@@ -4302,7 +4317,8 @@ set_likely_rebels_flag = {
 		if = { limit = { likely_rebels = sikhism_rebels } 					set_province_flag = likely_spawns_sikhism_rebels }
 		if = { limit = { likely_rebels = sunni_rebels } 					set_province_flag = likely_spawns_sunni_rebels }
 		if = { limit = { likely_rebels = tengri_pagan_reformed_rebels } 	set_province_flag = likely_spawns_tengri_pagan_reformed_rebels }
-		if = { limit = { likely_rebels = arctolatry_rebels } 				set_province_flag = likely_spawns_arctolatry_rebels }
+		if = { limit = { likely_rebels = anito_rebels }                     set_province_flag = likely_spawns_anito_rebels }
+		if = { limit = { likely_rebels = arctolatry_rebels }			    set_province_flag = likely_spawns_arctolatry_rebels }
 		if = { limit = { likely_rebels = totemism_rebels } 					set_province_flag = likely_spawns_totemism_rebels }
 		if = { limit = { likely_rebels = tribal_rebels } 					set_province_flag = likely_spawns_tribal_rebels }
 		if = { limit = { likely_rebels = vajrayana_rebels } 				set_province_flag = likely_spawns_vajrayana_rebels }
@@ -4314,6 +4330,7 @@ set_likely_rebels_flag = {
 spawn_likely_rebels = {
 	trigger_switch = {
 		on_trigger = has_province_flag
+		likely_spawns_ahom_rebels = {				    spawn_rebels = { type = ahom_rebels size = $size$ } }
 		likely_spawns_anglican_rebels = {				spawn_rebels = { type = anglican_rebels size = $size$ } }
 		likely_spawns_animism_rebels = {				spawn_rebels = { type = animism_rebels size = $size$ } }
 		likely_spawns_anti_tax_rebels = {				spawn_rebels = { type = anti_tax_rebels size = $size$ } }
@@ -4355,6 +4372,7 @@ spawn_likely_rebels = {
 		likely_spawns_sikhism_rebels = {				spawn_rebels = { type = sikhism_rebels size = $size$ } }
 		likely_spawns_sunni_rebels = {					spawn_rebels = { type = sunni_rebels size = $size$ } }
 		likely_spawns_tengri_pagan_reformed_rebels = {	spawn_rebels = { type = tengri_pagan_reformed_rebels size = $size$ } }
+		likely_spawns_anito_rebels = {				spawn_rebels = { type = anito_rebels size = $size$ } }
 		likely_spawns_arctolatry_rebels = {				spawn_rebels = { type = arctolatry_rebels size = $size$ } }
 		likely_spawns_totemism_rebels = {				spawn_rebels = { type = totemism_rebels size = $size$ } }
 		likely_spawns_tribal_rebels = {					spawn_rebels = { type = tribal_rebels size = $size$ } }
@@ -4362,6 +4380,7 @@ spawn_likely_rebels = {
 		likely_spawns_zoroastrian_rebels = {			spawn_rebels = { type = zoroastrian_rebels size = $size$ } }
 	}
 	hidden_effect = {
+		clr_province_flag = likely_spawns_ahom_rebels
 		clr_province_flag = likely_spawns_anglican_rebels
 		clr_province_flag = likely_spawns_animism_rebels
 		clr_province_flag = likely_spawns_anti_tax_rebels
@@ -4403,6 +4422,7 @@ spawn_likely_rebels = {
 		clr_province_flag = likely_spawns_sikhism_rebels
 		clr_province_flag = likely_spawns_sunni_rebels
 		clr_province_flag = likely_spawns_tengri_pagan_reformed_rebels
+		clr_province_flag = likely_spawns_anito_rebels
 		clr_province_flag = likely_spawns_arctolatry_rebels
 		clr_province_flag = likely_spawns_totemism_rebels
 		clr_province_flag = likely_spawns_tribal_rebels

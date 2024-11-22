@@ -865,6 +865,10 @@ country_decisions = {
 					religion = hinduism
 					any_owned_province = { religion_group = muslim }			
 				}
+				AND = {
+					religion = surya_majapahit
+					any_owned_province = { religion_group = muslim }			
+				}
 			}
 		}
 		allow = {
@@ -889,7 +893,10 @@ country_decisions = {
 	anti_muslim_edict = {
 		potential = {
 			NOT = { has_country_modifier = muslim_resistance }
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = surya_majapahit
+			}
 			NOT = { any_owned_province = { religion = sunni } }
 			any_neighbor_country = {
 				religion_group = muslim
@@ -916,7 +923,10 @@ country_decisions = {
 	acceptance_of_religious_sects = {
 		potential = {
 			NOT = { has_country_modifier = religious_sect_tolerance }
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = surya_majapahit
+			}
 		}
 		allow = {
 			is_defender_of_faith = no
@@ -942,7 +952,10 @@ country_decisions = {
 		potential = {
 			NOT = { has_country_modifier = the_haridasa_movement }	
 			NOT = { has_country_modifier = the_advaita_movement }
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = surya_majapahit
+			}
 		}
 		allow = {
 			stability = 1
@@ -972,7 +985,10 @@ country_decisions = {
 		potential = {
 			NOT = { has_country_modifier = the_advaita_movement }
 			NOT = { has_country_modifier = the_haridasa_movement }
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = surya_majapahit
+			}
 		}
 		allow = {
 			stability = 1
@@ -2008,7 +2024,7 @@ country_decisions = {
 			religion = shinto
 			OR = {
 				is_incident_active = incident_spread_of_christianity
-				has_country_flag = christians_present
+				#has_country_flag = christians_present #Hashed out since it isn't linked to anything - SF
 				has_ruler_flag = christian_tutors
 			}
 			NOT = {

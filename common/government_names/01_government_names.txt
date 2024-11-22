@@ -61,6 +61,7 @@ gov_steppe_horde = {
 			culture_group = tartar
 			primary_culture = altaic_new
 		}
+		NOT = { religion_group = muslim }
 	}
 }
 
@@ -588,7 +589,12 @@ gov_tribal_kingdom = {
 	
 	trigger = {
 		has_reform = tribal_kingdom
-		NOT = { tag = BAL }
+		NOT = { 
+			tag = BAL
+			has_reform = burmese_monarchy_reform
+			have_had_reform = burmese_monarchy_reform
+			culture_group = andean_group
+		}
 	}
 }
 
@@ -714,6 +720,9 @@ gov_tribal = { #
 			tag = EGI
 			tag = HAK 
 			tag = QAR
+			has_reform = burmese_monarchy_reform
+			have_had_reform = burmese_monarchy_reform
+			culture_group = andean_group 
 		}
 	}
 }
@@ -1090,6 +1099,25 @@ livonian_monastic_order = {
 	trigger = {
 		has_reform = monastic_order_reform
 		tag = LIV
+	}
+}
+
+knights_monastic_order = {
+	rank = {
+		5 = KNI_MONASTIC_ORDER
+	}
+
+	ruler_male = {
+		5 = KNI_GRAND_MASTER
+	}
+
+	heir_male = {
+		5 = KNI_COMMANDER
+	}
+
+	trigger = {
+		has_reform = monastic_order_reform
+		tag = KNI
 	}
 }
 

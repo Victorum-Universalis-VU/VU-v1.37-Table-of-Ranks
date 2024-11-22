@@ -217,6 +217,8 @@ country_event = {
 			is_subject_of_type = italian_principality
 			is_subject_of_type = italian_kingdom
 			#Norwegian Subjects
+			is_subject_of_type = mongolian_vassal
+			#Norwegian Subjects
 			is_subject_of_type = norwegian_lordship
 			is_subject_of_type = norwegian_barony
 			is_subject_of_type = norwegian_viscounty
@@ -2591,6 +2593,19 @@ country_event = {
 				overlord = {
 					create_subject = {
 						subject_type = norwegian_lordship
+						who = ROOT
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					overlord = {
+						has_government_attribute = has_mongolian_vassal
+					}
+				}
+				overlord = {
+					create_subject = {
+						subject_type = mongolian_vassal
 						who = ROOT
 					}
 				}
