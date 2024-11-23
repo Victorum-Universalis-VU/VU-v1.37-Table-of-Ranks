@@ -1637,8 +1637,10 @@ holy_roman_electors_monarchy = {
 
 	trigger = {
 		government = monarchy
-		is_elector = yes
-		is_emperor = yes
+		OR = {
+			is_elector = yes
+			is_emperor = yes
+		}
 		NOT = {
 			primary_culture = czech
 			primary_culture = moravian
@@ -5950,7 +5952,10 @@ ost_duchy_reform = {
 				is_subject_of_type = austrian_duchy
 		    }
 		}
-		NOT = { is_revolutionary_republic_trigger = yes }
+		NOT = { 
+			is_revolutionary_republic_trigger = yes
+			government_rank = 9
+		}
 	}
 }
 
@@ -5996,7 +6001,9 @@ ost_principality_reform = {
 				is_subject_of_type = austrian_principality
 		    }
 		}
-		NOT = { is_revolutionary_republic_trigger = yes }
+		NOT = { 
+			is_revolutionary_republic_trigger = yes 
+		}
 	}
 }
 
@@ -6051,6 +6058,7 @@ ost_kingdom_reform = {
 				has_reform = austrian_absolute_monarchy
 				have_had_reform = austrian_absolute_monarchy
 				is_subject_of_type = austrian_kingdom
+				is_emperor = yes
 		    }
 		}
 		NOT = { is_revolutionary_republic_trigger = yes }
