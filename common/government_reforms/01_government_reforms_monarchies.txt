@@ -1831,18 +1831,99 @@ restoration_reform = {
 	}
 }
 
+angevin_monarchy = {
+    icon = "queen"
+    allow_normal_conversion = no
+    potential = {
+        government_rank = 8
+		OR = {
+			tag = ENG
+			was_tag = ENG
+			tag = UKS
+			was_tag = UKS
+		}
+        NOT = {
+            tag = ENG
+            tag = GBR
+            tag = UNK
+            tag = UKS
+        }
+    }
+    lock_level_when_selected = yes
+    valid_for_nation_designer = yes
+    nation_designer_cost = 40
+    nation_designer_trigger = {
+        has_dlc = "Domination"
+    }
+    modifiers = {
+        governing_capacity = 100
+        num_accepted_cultures = 2
+        max_absolutism = 10
+        prestige = 1
+        max_possible_parliament_seats = 15
+    }
+    effect = {
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_seat_in_parliament = yes
+                }
+                set_seat_in_parliament = no
+            }
+        }
+    }
+    conditional = {
+        allow = {
+            has_dlc = "Common Sense"
+            NOT = { has_dlc = "Domination" }
+        }
+        has_parliament = yes
+        custom_attributes = {
+            english_parliament = yes
+            has_anglois_lordship = yes
+            has_anglois_barony = yes
+            has_anglois_county = yes
+            has_anglois_viscounty = yes
+            has_anglois_marquisate = yes
+            has_anglois_duchy = yes
+            has_anglois_principality = yes
+            has_anglois_kingdom = yes
+        }
+    }
+    conditional = {
+        allow = {
+            has_dlc = "Domination"
+        }
+        has_parliament = yes
+        custom_attributes = {
+            english_parliament = yes
+            has_anglois_lordship = yes
+            has_anglois_barony = yes
+            has_anglois_county = yes
+            has_anglois_viscounty = yes
+            has_anglois_marquisate = yes
+            has_anglois_duchy = yes
+            has_anglois_principality = yes
+            has_anglois_kingdom = yes
+        }
+    }
+    ai = {
+        factor = 100
+    }
+}
+
 english_monarchy = { #
 	icon = "english_monarchy"
 	allow_normal_conversion = no
 	potential = {
 		government_rank = 8
 		OR = {
-			have_had_reform = english_monarchy
 			tag = ENG
 			was_tag = ENG
 		}
 		NOT = { 
 			tag = GBR
+			tag = UKS
 			tag = UNK 
 		}
 	}
@@ -1871,6 +1952,18 @@ english_monarchy = { #
 			NOT = { has_dlc = "Domination" }
 		}
 		has_parliament = yes
+		custom_attributes = {
+            english_parliament = yes
+            can_force_issue_through = yes
+            has_english_lordship = yes
+            has_english_barony = yes
+            has_english_earldom = yes
+            has_english_viscounty = yes
+            has_english_marquisate = yes
+            has_english_duchy = yes
+            has_english_principality = yes
+            has_english_kingdom = yes
+        }
 	}
 	conditional = {
 		allow = {
@@ -1897,10 +1990,15 @@ british_monarchy = {
 	allow_normal_conversion = no
 	potential = {
 		government_rank = 8
-		OR = {
-			has_reform = british_monarchy
-			have_had_reform = british_monarchy
+        OR = {
 			tag = GBR
+			was_tag = GBR
+			tag = UNK
+			was_tag = UNK
+		}
+		NOT = {	
+			tag = ENG
+			tag = UKS 
 		}
 	}
 	lock_level_when_selected = yes
@@ -1924,6 +2022,18 @@ british_monarchy = {
 			NOT = { has_dlc = "Domination" }
 		}
 		has_parliament = yes
+		custom_attributes = {
+            english_parliament = yes
+            can_force_issue_through = yes
+            has_english_lordship = yes
+            has_english_barony = yes
+            has_english_earldom = yes
+            has_english_viscounty = yes
+            has_english_marquisate = yes
+            has_english_duchy = yes
+            has_english_principality = yes
+            has_english_kingdom = yes
+        }
 	}
 	conditional = {
 		allow = {
@@ -1947,76 +2057,21 @@ british_monarchy = {
 	}
 }
 
-angevin_monarchy = {
-	icon = "queen"
-	allow_normal_conversion = no
-	potential = {
-		OR = {
-			has_reform = angevin_monarchy
-			have_had_reform = angevin_monarchy
-		}
-	}
-	lock_level_when_selected = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 40
-	nation_designer_trigger = {
-		has_dlc = "Domination"
-	}
-	modifiers = {
-		governing_capacity = 100
-		num_accepted_cultures = 2
-		max_absolutism = 10
-		prestige = 1
-		max_possible_parliament_seats = 15
-	}
-	effect = {
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_seat_in_parliament = yes
-				}
-				set_seat_in_parliament = no
-			}
-		}
-	}
-
-	conditional = {
-		allow = {
-			has_dlc = "Common Sense"
-			NOT = { has_dlc = "Domination" }
-		}
-		has_parliament = yes
-	}
-	conditional = {
-		allow = {
-			has_dlc = "Domination"
-		}
-		has_parliament = yes
-		custom_attributes = {
-			english_parliament = yes
-			has_anglois_lordship = yes
-			has_anglois_barony = yes
-			has_anglois_county = yes
-			has_anglois_viscounty = yes
-			has_anglois_marquisate = yes
-			has_anglois_duchy = yes
-			has_anglois_principality = yes
-			has_anglois_kingdom = yes
-		}
-	}
-	ai = {
-		factor = 100
-	}
-}
-
 absolute_british_monarchy = {
 	icon = "british_absolutism"
 	allow_normal_conversion = no
 	potential = {
 		government_rank = 8
-		OR = {
-			has_reform = absolute_british_monarchy
-			have_had_reform = absolute_british_monarchy
+		AND = {
+			absolutism = 55
+			OR = {
+                tag = GBR
+                tag = UNK
+            }
+		}
+		NOT = {
+			tag = ENG
+			tag = UKS
 		}
 	}
 	lock_level_when_selected = yes
@@ -2032,13 +2087,24 @@ absolute_british_monarchy = {
 		can_revoke_parliament_seats = yes
 		num_of_parliament_issues = -2
 	}
-
 	conditional = {
 		allow = {
 			has_dlc = "Common Sense"
 			NOT = { has_dlc = "Domination" }
 		}
 		has_parliament = yes
+		custom_attributes = {
+            english_parliament = yes
+            can_force_issue_through = yes
+            has_english_lordship = yes
+            has_english_barony = yes
+            has_english_earldom = yes
+            has_english_viscounty = yes
+            has_english_marquisate = yes
+            has_english_duchy = yes
+            has_english_principality = yes
+            has_english_kingdom = yes
+        }
 	}
 	conditional = {
 		allow = {
@@ -5414,6 +5480,7 @@ polish_elective_monarchy = {
 			has_polish_duchy = yes
 			has_polish_principality = yes
 			has_polish_kingdom = yes
+			has_polish_crown_PU = yes
 		}
 	}
 
@@ -5468,6 +5535,7 @@ polish_autocratic_monarchy = {
 		has_polish_duchy = yes
 		has_polish_principality = yes
 		has_polish_kingdom = yes
+		has_polish_crown_PU = yes
 	}
 }
 
