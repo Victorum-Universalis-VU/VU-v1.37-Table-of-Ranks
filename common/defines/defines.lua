@@ -287,8 +287,8 @@ NDiplomacy = {
 	PO_END_RIVALRY_PRESTIGE = 20,
 
 	PEACE_COST_PRIMITIVE_NERF = 0.5,				-- war score cost multiplier vs primitives
-	PEACE_COST_DEMAND_PROVINCE = 0.1,				-- Decreased this to 0.4 from 0.5 Demand a province (scales by province wealth, also used for annex) --halved by Don
-	PEACE_COST_CONCEDE_PROVINCE = 0.1,				-- Demand colonial area province concession. --hlaved by Don
+	PEACE_COST_DEMAND_PROVINCE = 0.2,				-- Decreased this to 0.4 from 0.5 Demand a province (scales by province wealth, also used for annex) --halved by Don
+	PEACE_COST_CONCEDE_PROVINCE = 0.2,				-- Demand colonial area province concession. --hlaved by Don
 	PEACE_COST_BECOME_VASSAL = 0.2,					-- Vassalize a country (scales by province wealth)
 	PEACE_COST_PILLAGE_CAPITAL = 10,				-- Pillage a capital state's dev (scales by province wealth) -- VU increase cost to 10 from 1 to discourage pillaging
 	PEACE_COST_RETURN_CORE = 0.2,					-- Return a core (scales by province wealth)
@@ -362,8 +362,8 @@ NDiplomacy = {
 	ELECTIVE_VICTORY_PRESTIGE = 25,					-- Prestige for getting a heir from your country onto the throne of an elective nation
 	ELECTIVE_VICTORY_LEGITIMACY = 10,				-- Legitimacy for getting a heir from your country onto the throne of an elective nation
 
-	INTEGRATE_UNION_MIN_YEARS = 25,					-- Number of years before a union can be integrated -halved by don and prussia
-	INTEGRATE_VASSAL_MIN_YEARS = 5,				-- Number of years before a vassal can be integrated -halved by don and prussia
+	INTEGRATE_UNION_MIN_YEARS = 25,					-- Number of years before a union can be integrated halved by don from 50 to 25 on Prussia's advice
+	INTEGRATE_VASSAL_MIN_YEARS = 5,				    -- Number of years before a vassal can be integrated -halved by don and prussia
 
 	MONTHS_BEFORE_TOTAL_OCCUPATION = 12,			-- Before this many months have passed in the war, you cannot gain 100% warscore by just occupying the warleader -lowered from 24, because why? -don
 
@@ -725,7 +725,7 @@ NCountry = {
 	NAT_FOCUS_DECREASE = -1,							-- power taken away from non national focus power
 	NAT_FOCUS_INCREASE = 2,							-- extra power given to national focus power
 	NAT_FOCUS_YEARS = 10,							-- years before you can change focus again
-	NAT_FOCUS_YEARS_RANK = 5,						-- how many years are removed from nat focus cooldown per gov rank above 1
+	NAT_FOCUS_YEARS_RANK = 0,						-- how many years are removed from nat focus cooldown per gov rank above 1 - Set to zero by SF and confirmed by Yeti
 	POWER_MAX = 2500,								-- how much power can be stored at maximum. Set this to 2.5k due to the edumacation mechanic and because of the increase in required power points for certain tasks that Rob has increased the cost of - Darth Modus (minimum value, will increase with missing techs, etc.)
 	DISMANTLE_HRE_PRESTIGE = 100,					-- Prestige gain on dismantling HRE
 	CROWN_LANDS_ALERT_THRESHOLD = 30,

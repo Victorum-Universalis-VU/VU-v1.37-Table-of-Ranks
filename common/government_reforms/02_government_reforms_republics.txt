@@ -1698,11 +1698,58 @@ federal_republic = {
 	duration = 4
 }
 
-confederate_republic = {
-	icon = "confederacy"
+#confederate_republic = {
+#    icon = "confederacy"
+#    allow_normal_conversion = yes
+#    potential = {
+#        NOT = {
+#			tag = CSA
+#			has_reform = confederate_states_republic
+#			have_had_reform = confederate_states_republic
+#		}
+#        government_rank = 6
+#    }
+#    trigger = {
+#        is_not_blocked_by_estate_privilege = { estate = estate_nobles }
+#    }
+#    valid_for_nation_designer = yes
+#    nation_designer_cost = 15
+#    nation_designer_trigger = {}
+#    modifiers = {
+#        diplomatic_reputation = 1
+#        global_spy_defence = 0.1
+#        max_absolutism = -30
+#    }
+#    queen = no
+#    custom_attributes = {
+#        enables_plutocratic_idea_group = yes
+#        enables_aristocratic_idea_group = no
+#        disables_estate_nobles = yes
+#    }
+#    conditional = {
+#        allow = {
+#            OR = {
+#                has_dlc = "Common Sense"
+#                has_dlc = "Domination"
+#            }
+#        }
+#        has_parliament = yes
+#        custom_attributes = {
+#            blocked_call_diet = yes
+#        }
+#    }
+#    duration = 4
+#}
+
+confederate_states_republic = {
+	icon = "confederate_states"
 	allow_normal_conversion = yes
 	potential = {
-		government_rank = 6
+		tag = CSA
+		OR = {
+			has_reform = confederate_states_republic
+			have_had_reform = confederate_states_republic
+		}
 	}
 	trigger = {
 		is_not_blocked_by_estate_privilege = { estate = estate_nobles }

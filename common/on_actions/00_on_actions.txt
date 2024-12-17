@@ -9725,8 +9725,18 @@ on_raid_coast = {
 	}
 	if = {
 		limit = {
-			has_mission = dan_raid_the_north_sea
-			NOT = { mission_completed = dan_raid_the_north_sea } 
+			OR = {
+				has_mission = dan_raid_the_north_sea
+				#ME Mission, to remove when we finish cleaning the ME Stuff
+				has_mission = BRBR_christians_fear_us
+				has_mission = BRBR_begin_the_raids
+			}
+			OR = {
+				NOT = { mission_completed = dan_raid_the_north_sea }
+				#ME Mission, to remove when we finish cleaning the ME Stuff
+				NOT = { mission_completed = BRBR_christians_fear_us }
+				NOT = { mission_completed = BRBR_begin_the_raids }
+			}
 		}
 		change_variable = {
 			which = num_of_raided_coasts

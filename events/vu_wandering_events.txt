@@ -4,513 +4,927 @@ namespace = vu_wandering_musicians
 namespace = vu_wandering_artists
 #Put Subject Types in 00_on_actions
 country_event = {
-	id = vu_wandering_wenches.1
-	title = "vu_wandering_wenches_title"
-	picture = "vu_wandering_wenches_eventPicture"
-	desc = "vu_wandering_wenches_desc"
-	mean_time_to_happen = {
-		months = 20
-	}
-	trigger = {
-		NOT = {
-			AND = {
-				exists = STE
-				has_country_flag = denied_the_wenches
-			}
-		}
-		OR = {
-			owns = 1858
-			any_owned_province = {
-				has_province_modifier = vu_wandering_wenches_of_stettin
-			}
-		}
-	}
-	immediate = {
-	}
-	option = {
-		#they can go!
-		name = vu_wandering_wenches.1a
-		custom_tooltip = vu_wandering_wenches.1a.tt
-		add_prestige = -10
-		add_legitimacy = 10
-		add_treasury = 1
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_wenches_of_stettin
-				}
-				remove_province_modifier = vu_wandering_wenches_of_stettin
-			}
-			random_province = {
-				limit = {
-					continent = europe
-					religion_group = christian
-					NOT = {
-						OR = {
-							religion = reformed
-							religion = mormon
-							religion = orthodox
-							religion = miaphysite
-							religion = marcionite
-							religion = coptic
-							religion = cathar
-							religion = waldensian
-							religion = nestorian
-							religion = bogomilist_new
-							religion = monothelite
-						}
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_wenches_of_stettin
-					duration = -1
-				}
-			}
-			set_country_flag = denied_the_wenches
-		}
-		ai_chance = {
-			factor = 1
-		}
-	}
-	option = {
-		#they can stay
-		name = vu_wandering_wenches.1b
-		custom_tooltip = vu_wandering_wenches.1b.tt
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = {
-						has_country_flag = denied_the_wenches
-					}
-					owns = 1858
-				}
-				1858 = {
-					add_building_construction = {
-						building = cinema
-						speed = 0.25
-						cost = 0
-					}
-				}
-			}
-			else = {
-				add_prestige = 10
-				add_legitimacy = -10
-				every_owned_province = {
-					limit = {
-						has_province_modifier = vu_wandering_wenches_of_stettin
-					}
-					add_building_construction = {
-						building = cinema
-						speed = 0.75
-						cost = 0.75
-					}
-				}
-			}
-		}
-		set_country_flag = denied_the_wenches
-		ai_chance = {
-			factor = 0
-		}
-	}
+    id = vu_wandering_wenches.1
+    title = "vu_wandering_wenches_title"
+    picture = "vu_wandering_wenches_eventPicture"
+    desc = "vu_wandering_wenches_desc"
+    mean_time_to_happen = {
+        months = 20
+    }
+    trigger = {
+        OR = {
+            any_owned_province = {
+                has_province_modifier = vu_wandering_wenches_of_stettin
+            }
+            AND = {
+                NOT = {
+                    STE = {
+                        owns = 1858
+                    }
+                }
+                owns = 1858
+                1858 = {
+                    owned_by = ROOT
+                    NOT = {
+                        has_province_flag = vu_ste_spawned_wenches
+                    }
+                }
+            }
+        }
+    }
+    immediate = {
+        if = {
+            limit = {
+                1858 = {
+                    owned_by = ROOT
+                    NOT = {
+                        has_province_flag = vu_ste_spawned_wenches
+                    }
+                }
+            }
+            1858 = {
+                set_province_flag = vu_ste_spawned_wenches
+            }
+        }
+    }
+    option = {
+        #they can go!
+        name = vu_wandering_wenches.1a
+        custom_tooltip = vu_wandering_wenches.1a.tt
+        add_prestige = -10
+        add_legitimacy = 10
+        add_treasury = 10
+        hidden_effect = {
+            set_country_flag = denied_the_wenches
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_wenches_of_stettin
+            }
+            random_province = {
+                limit = {
+                    continent = europe
+                    religion_group = christian
+                    owner = {
+                        religion_group = christian
+                        NOT = {
+                            has_country_flag = denied_the_wenches
+                        }
+                    }
+                    NOT = {
+                        OR = {
+                            religion = reformed
+                            religion = mormon
+                            religion = orthodox
+                            religion = miaphysite
+                            religion = marcionite
+                            religion = coptic
+                            religion = cathar
+                            religion = waldensian
+                            religion = nestorian
+                            religion = bogomilist_new
+                            religion = monothelite
+                        }
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_wenches_of_stettin
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #they can stay
+        name = vu_wandering_wenches.1b
+        custom_tooltip = vu_wandering_wenches.1b.tt
+        add_prestige = 10
+        add_legitimacy = -10
+        add_treasury = -10
+        if = {
+            limit = {
+                owns = 1858
+            }
+            1858 = {
+                add_building_construction = {
+                    building = cinema
+                    speed = 0.25
+                    cost = 0
+                }
+            }
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_wenches_of_stettin
+            }
+        }
+        else = {
+            every_owned_province = {
+                limit = {
+                    has_province_modifier = vu_wandering_wenches_of_stettin
+                }
+                add_building_construction = {
+                    building = cinema
+                    speed = 0.50
+                    cost = 0.25
+                }
+            }
+
+        }
+
+        hidden_effect = {
+            set_country_flag = denied_the_wenches
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_wenches_of_stettin
+            }
+        }
+
+        ai_chance = {
+            factor = 0
+        }
+    }
 }
 
 country_event = {
-	id = vu_wandering_gamblers.1
-	title = "vu_wandering_gamblers_title"
-	picture = "vu_wandering_gamblers_eventPicture"
-	desc = "vu_wandering_gamblers_desc"
-	mean_time_to_happen = {
-		months = 20
-	}
-	trigger = {
-		any_owned_province = {
-			has_province_modifier = vu_wandering_gamblers
-		}
-	}
-	immediate = {
-	}
-	option = {
-		#Force them to move out!
-		name = vu_wandering_gamblers.1a
-		custom_tooltip = vu_wandering_gamblers.1a.tt
-		add_treasury = -50
-		add_dip_power = -25
-		set_country_flag = deny_the_gamblers
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_gamblers
-				}
-				remove_province_modifier = vu_wandering_gamblers
-			}
-			random_province = {
-				limit = {
-					continent = europe
-					is_capital = yes
-					owner = {
-						NOT = {
-							has_country_flag = deny_the_gamblers
-						}
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_gamblers
-					duration = -1
-				}
-			}
-		}
-		ai_chance = {
-			factor = 1
-		}
-	}
-	option = {
-		#Destroy them once for all!
-		name = vu_wandering_gamblers.1b
-		custom_tooltip = vu_wandering_gamblers.1b.tt
-		set_country_flag = deny_the_gamblers
-		add_mil_power = -15
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_gamblers
-				}
-				remove_province_modifier = vu_wandering_gamblers
-				spawn_rebels = {
-					size = 0.75
-					type = noble_rebels
-				}
-			}
-		}
-		ai_chance = {
-			factor = 0
-		}
-	}
+    id = vu_wandering_gamblers.1
+    title = "vu_wandering_gamblers_title"
+    picture = "vu_wandering_gamblers_eventPicture"
+    desc = "vu_wandering_gamblers_desc"
+    mean_time_to_happen = {
+        months = 20
+    }
+    trigger = {
+        any_owned_province = {
+            has_province_modifier = vu_wandering_gamblers
+        }
+    }
+    immediate = {
+    }
+    option = {
+        #Force them to move out!
+        name = vu_wandering_gamblers.1a
+        custom_tooltip = vu_wandering_gamblers.1a.tt
+        add_treasury = -50
+        add_dip_power = -25
+        set_country_flag = deny_the_gamblers
+        hidden_effect = {
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_gamblers
+            }
+            random_province = {
+                limit = {
+                    continent = europe
+                    is_capital = yes
+                    owner = {
+                        is_subject = no
+                        NOT = {
+                            has_country_flag = deny_the_gamblers
+                        }
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_gamblers
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #Destroy them once for all!
+        name = vu_wandering_gamblers.1b
+        custom_tooltip = vu_wandering_gamblers.1b.tt
+        set_country_flag = deny_the_gamblers
+        add_mil_power = -15
+        every_owned_province = {
+            limit = {
+                has_province_modifier = vu_wandering_gamblers
+            }
+            remove_province_modifier = vu_wandering_gamblers
+            spawn_rebels = {
+                size = 0.25
+                type = noble_rebels
+            }
+        }
+        hidden_effect = {
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_gamblers
+            }
+        }
+        ai_chance = {
+            factor = 0
+        }
+    }
+    option = {
+        #Actually, I'm very fond of play
+        name = vu_wandering_gamblers.1c
+        custom_tooltip = vu_wandering_gamblers.1c.tt
+        country_event = {
+            id = vu_wandering_gamblers.2
+        }
+        ai_chance = {
+            factor = 0
+        }
+    }
 }
 
 country_event = {
-	id = vu_wandering_musicians.1
-	title = "vu_wandering_musicians_title"
-	picture = "vu_wandering_musicians_eventPicture"
-	desc = "vu_wandering_musicians_desc"
-	mean_time_to_happen = {
-		months = 20
-	}
-	trigger = {
-		OR = {
-			AND = {
-				NOT = {
-					has_country_flag = deny_the_musicians
-				}
-				owns = 112
-			}
-			any_owned_province = {
-				has_province_modifier = vu_wandering_musicians
-			}
-		}
-	}
-	immediate = {
-	}
-	option = {
-		#Thank you for your stay!
-		name = vu_wandering_musicians.1a
-		custom_tooltip = vu_wandering_musicians.1a.tt
-		add_treasury = -50
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_musicians
-				}
-				remove_province_modifier = vu_wandering_musicians
-			}
-			random_province = {
-				limit = {
-					continent = europe
-					is_capital = yes
-					owner = {
-						NOT = {
-							has_country_flag = deny_the_musicians
-						}
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_musicians
-					duration = -1
-				}
-			}
-		}
-		ai_chance = {
-			factor = 0
-		}
-	}
-	option = {
-		#Go away and never come back again!
-		name = vu_wandering_musicians.1b
-		custom_tooltip = vu_wandering_musicians.1b.tt
-		add_prestige = -1
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_musicians
-				}
-				remove_province_modifier = vu_wandering_musicians
-			}
-			random_province = {
-				limit = {
-					continent = europe
-					is_capital = yes
-					owner = {
-						NOT = {
-							has_country_flag = deny_the_musicians
-						}
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_musicians
-					duration = -1
-				}
-			}
-		}
-		set_country_flag = deny_the_musicians
-		ai_chance = {
-			factor = 1
-		}
-	}
-	option = {
-		#Force them to stay
-		name = vu_wandering_musicians.1c
-		custom_tooltip = vu_wandering_musicians.1c.tt
-		add_mil_power = -15
-		add_prestige = -15
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_musicians
-				}
-				remove_province_modifier = vu_wandering_musicians
-				add_building_construction = {
-					building = theatrics
-					speed = 0.5
-					cost = 0
-				}
-				spawn_rebels = {
-					size = 0.5
-					type = anti_tax_rebels
-				}
-			}
-		}
-		set_country_flag = deny_the_musicians
-		ai_chance = {
-			factor = 0
-		}
-	}
-	option = {
-		#Bribe them to stay
-		name = vu_wandering_musicians.1d
-		custom_tooltip = vu_wandering_musicians.1d.tt
-		add_corruption = 1
-		add_dip_power = -15
-		add_years_of_income = -0.5
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_musicians
-				}
-				add_building_construction = {
-					building = theatrics
-					speed = 0.5
-					cost = 1
-				}
-			}
-		}
-		set_country_flag = deny_the_musicians
-		ai_chance = {
-			factor = 0
-		}
-	}
+    id = vu_wandering_gamblers.2
+    title = "vu_wandering_gamblers.2_title"
+    picture = "vu_wandering_gamblers_eventPicture"
+    desc = "vu_wandering_gamblers.2_desc"
+    is_triggered_only = yes
+    #The great game 1
+    option = {
+        #I play Spades
+        name = vu_wandering_gamblers.2a
+        custom_tooltip = vu_wandering_gamblers.2a.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.3
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Hearts
+        name = vu_wandering_gamblers.2b
+        custom_tooltip = vu_wandering_gamblers.2b.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.3
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Diamonds
+        name = vu_wandering_gamblers.2c
+        custom_tooltip = vu_wandering_gamblers.2c.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.3
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Clubs
+        name = vu_wandering_gamblers.2d
+        custom_tooltip = vu_wandering_gamblers.2d.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.3
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 country_event = {
-	id = vu_wandering_artists.1
-	title = "vu_wandering_artists_1_title"
-	picture = "vu_wandering_artists_eventPicture"
-	desc = "vu_wandering_artists_1_desc"
-	mean_time_to_happen = {
-		months = 60
-		modifier = {
-			factor = 1000
-			treasury = 1000
-		}
-		modifier = {
-			factor = 0.5
-			is_in_deficit = yes
-		}
-		modifier = {
-			factor = 0.25
-			num_of_loans = 1
-		}
-		modifier = {
-			factor = 0
-			is_bankrupt = yes
-		}
-	}
-	trigger = {
-		OR = {
-			AND = {
-				NOT = {
-					OR = {
-						has_country_flag = deny_the_artists
-						has_country_flag = dont_spawn_the_artists
-					}
-				}
-				owns = 112
-			}
-			any_owned_province = {
-				has_province_modifier = vu_wandering_artists
-			}
-		}
-	}
-	immediate = {
-	}
-	option = {
-		#Let them leave
-		name = vu_wandering_artists.1a
-		custom_tooltip = vu_wandering_artists.1a.tt
-		add_prestige = -15
-		add_splendor = -15
-		add_dip_power = -50
-		add_treasury = -50
-		every_owned_province = {
-			limit = {
-				has_province_modifier = vu_wandering_artists
-			}
-			remove_province_modifier = vu_wandering_artists
-		}
-		hidden_effect = {
-			set_country_flag = dont_spawn_the_artists
-			random_province = {
-				limit = {
-					continent = europe
-					owner = {
-						NOT = {
-							has_country_flag = deny_the_artists
-						}
-						prestige = 1
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_artists
-					duration = -1
-				}
-			}
-		}
-		ai_chance = {
-			factor = 0
-		}
-	}
-	option = {
-		#Go away and never come back again!
-		name = vu_wandering_artists.1b
-		custom_tooltip = vu_wandering_artists.1b.tt
-		add_prestige = -1
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_artists
-				}
-				remove_province_modifier = vu_wandering_artists
-			}
-			random_province = {
-				limit = {
-					continent = europe
-					owner = {
-						NOT = {
-							has_country_flag = deny_the_artists
-						}
-						prestige = 1
-					}
-				}
-				add_province_modifier = {
-					name = vu_wandering_artists
-					duration = -1
-				}
-			}
-		}
-		set_country_flag = deny_the_artists
-		ai_chance = {
-			factor = 1
-		}
-	}
-	option = {
-		#Force them to stay
-		name = vu_wandering_artists.1c
-		custom_tooltip = vu_wandering_artists.1c.tt
-		add_prestige = -20
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_artists
-				}
-				remove_province_modifier = vu_wandering_artists
-				change_trade_goods = marble_sculpture
-				spawn_rebels = {
-					size = 0.5
-					type = anti_tax_rebels
-				}
-			}
-		}
-		set_country_flag = deny_the_artists
-		ai_chance = {
-			factor = 0
-		}
-	}
+    id = vu_wandering_gamblers.3
+    title = "vu_wandering_gamblers.2_title"
+    picture = "vu_wandering_gamblers_eventPicture"
+    desc = "vu_wandering_gamblers.2_desc"
+    is_triggered_only = yes
+    #great game 2
+    #The great game 1
+    option = {
+        #I play Spades
+        name = vu_wandering_gamblers.2a
+        custom_tooltip = vu_wandering_gamblers.2a.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.2
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Hearts
+        name = vu_wandering_gamblers.2b
+        custom_tooltip = vu_wandering_gamblers.2b.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.2
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Diamonds
+        name = vu_wandering_gamblers.2c
+        custom_tooltip = vu_wandering_gamblers.2c.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.2
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        #I play Clubs
+        name = vu_wandering_gamblers.2d
+        custom_tooltip = vu_wandering_gamblers.2d.tt
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    #the game keeps going
+                    country_event = {
+                        id = vu_wandering_gamblers.2
+                    }
+                }
+                20 = {
+                    #lost the game
+                    country_event = {
+                        id = vu_wandering_gamblers.5
+                    }
+                }
+                5 = {
+                    #won the game
+                    country_event = {
+                        id = vu_wandering_gamblers.4
+                    }
+                }
+            }
+        }
+
+    }
+}
+country_event = {
+    id = vu_wandering_gamblers.4
+    title = "vu_wandering_gamblers.4_title"
+    picture = "vu_wandering_gamblers_eventPicture"
+    desc = "vu_wandering_gamblers.4_desc"
+    is_triggered_only = yes
+    #won the great game
+    #oh, lord, I am poor gambler, I can only give so much...
+    option = {
+        #Pay me whatever you have and leave
+        name = vu_wandering_gamblers.4a
+        custom_tooltip = vu_wandering_gamblers.4a.tt
+        add_years_of_income = 0.5
+        hidden_effect = {
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_gamblers
+            }
+            random_province = {
+                limit = {
+                    continent = europe
+                    is_capital = yes
+                    owner = {
+                        is_subject = no
+                        NOT = {
+                            has_country_flag = deny_the_gamblers
+                        }
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_gamblers
+                    duration = -1
+                }
+            }
+        }
+    }
+    option = {
+        #Have him executed
+        name = vu_wandering_gamblers.4b
+        custom_tooltip = vu_wandering_gamblers.4b.tt
+        every_owned_province = {
+            remove_province_modifier = vu_wandering_gamblers
+        }
+    }
+    option = {
+        #Seek satisfaction
+        name = vu_wandering_gamblers.4c
+        custom_tooltip = vu_wandering_gamblers.4c.tt
+        random_list = {
+            50 = {
+                kill_ruler = yes
+            }
+            50 = {
+                every_owned_province = {
+                    remove_province_modifier = vu_wandering_gamblers
+                }
+                add_years_of_income = 1.5
+            }
+        }
+    }
 }
 
 country_event = {
-	id = vu_wandering_artists.2
-	title = "vu_wandering_artists_2_title"
-	picture = "vu_wandering_artists_eventPicture"
-	desc = "vu_wandering_artists_2_desc"
-	trigger = {
-		artist = 1
-		any_owned_province = {
-			has_province_modifier = vu_wandering_artists
-		}
-	}
-	immediate = {
-	}
-	option = {
-		#Fire the advisor
-		name = vu_wandering_artists.2a
-		custom_tooltip = vu_wandering_artists.2a.tt
-		remove_advisor = artist
-	}
-	option = {
-		name = vu_wandering_artists.2b
-		custom_tooltip = vu_wandering_artists.2b.tt
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					has_province_modifier = vu_wandering_artists
-				}
-				remove_province_modifier = vu_wandering_artists
-			}
-			hidden_effect = {
-				random_province = {
-					limit = {
-						continent = europe
-						owner = {
-							NOT = {
-								has_country_flag = deny_the_artists
-							}
-						}
-					}
-					add_province_modifier = {
-						name = vu_wandering_artists
-						duration = -1
-					}
-				}
-			}
-		}
-		set_country_flag = deny_the_artists
-	}
+    id = vu_wandering_gamblers.5
+    title = "vu_wandering_gamblers.5_title"
+    picture = "vu_wandering_gamblers_eventPicture"
+    desc = "vu_wandering_gamblers.5_desc"
+    is_triggered_only = yes
+    #lost the great game
+    option = {
+        #Gambler seeks satisfaction
+        name = vu_wandering_gamblers.5a
+        custom_tooltip = vu_wandering_gamblers.5a.tt
+        random_list = {
+            50 = {
+                kill_ruler = yes
+                add_treasury = -155
+            }
+            50 = {
+                every_owned_province = {
+                    remove_province_modifier = vu_wandering_gamblers
+                }
+            }
+        }
+    }
+    option = {
+        #Gamblers seeks satisfaction
+        name = vu_wandering_gamblers.5b
+        custom_tooltip = vu_wandering_gamblers.5b.tt
+        add_treasury = -155
+        every_owned_province = {
+            remove_province_modifier = vu_wandering_gamblers
+        }
+    }
+    option = {
+        #Have him arrested
+        name = vu_wandering_gamblers.5c
+        custom_tooltip = vu_wandering_gamblers.5c.tt
+        add_prestige = -25
+        add_mil_power = -50
+        add_dip_power = -50
+        every_owned_province = {
+            limit = {
+                has_province_modifier = vu_wandering_gamblers
+            }
+            spawn_rebels = {
+                size = 0.5
+                type = noble_rebels
+            }
+            remove_province_modifier = vu_wandering_gamblers
+        }
+    }
+}
+
+country_event = {
+    id = vu_wandering_musicians.1
+    title = "vu_wandering_musicians_title"
+    picture = "vu_wandering_musicians_eventPicture"
+    desc = "vu_wandering_musicians_desc"
+    mean_time_to_happen = {
+        months = 20
+    }
+    trigger = {
+        AND = {
+            any_owned_province = {
+                has_province_modifier = vu_wandering_musicians
+            }
+            NOT = {
+                has_country_flag = deny_the_musicians
+            }
+        }
+    }
+    immediate = {
+    }
+    option = {
+        #Thank you for your stay!
+        name = vu_wandering_musicians.1a
+        custom_tooltip = vu_wandering_musicians.1a.tt
+        add_treasury = -50
+        hidden_effect = {
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_musicians
+            }
+            random_province = {
+                limit = {
+                    continent = europe
+                    is_capital = yes
+                    owner = {
+                        NOT = {
+                            has_country_flag = deny_the_musicians
+                        }
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_musicians
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #Go away and never come back again!
+        name = vu_wandering_musicians.1b
+        custom_tooltip = vu_wandering_musicians.1b.tt
+        add_prestige = -1
+        hidden_effect = {
+            set_country_flag = deny_the_musicians
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_musicians
+            }
+            random_province = {
+                limit = {
+                    continent = europe
+                    is_capital = yes
+                    owner = {
+                        NOT = {
+                            has_country_flag = deny_the_musicians
+                        }
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_musicians
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #Force them to stay
+        name = vu_wandering_musicians.1c
+        custom_tooltip = vu_wandering_musicians.1c.tt
+        add_mil_power = -25
+        add_prestige = -5
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_province_modifier = vu_wandering_musicians
+                }
+                remove_province_modifier = vu_wandering_musicians
+                add_building_construction = {
+                    building = theatrics
+                    speed = 0.5
+                    cost = 0
+                }
+                spawn_rebels = {
+                    size = 0.5
+                    type = anti_tax_rebels
+                }
+            }
+        }
+        set_country_flag = deny_the_musicians
+        ai_chance = {
+            factor = 0
+        }
+    }
+    option = {
+        #Bribe them to stay
+        name = vu_wandering_musicians.1d
+        custom_tooltip = vu_wandering_musicians.1d.tt
+        add_corruption = 1
+        add_dip_power = -25
+        add_years_of_income = -0.5
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_province_modifier = vu_wandering_musicians
+                }
+                add_building_construction = {
+                    building = theatrics
+                    speed = 0.5
+                    cost = 1
+                }
+            }
+        }
+        set_country_flag = deny_the_musicians
+        ai_chance = {
+            factor = 0
+        }
+    }
+}
+
+country_event = {
+    id = vu_wandering_artists.1
+    title = "vu_wandering_artists_1_title"
+    picture = "vu_wandering_artists_eventPicture"
+    desc = "vu_wandering_artists_1_desc"
+    mean_time_to_happen = {
+        months = 60
+        modifier = {
+            factor = 1000
+            treasury = 1000
+        }
+        modifier = {
+            factor = 0.5
+            is_in_deficit = yes
+        }
+        modifier = {
+            factor = 0.25
+            num_of_loans = 1
+        }
+        modifier = {
+            factor = 0
+            is_bankrupt = yes
+        }
+    }
+    trigger = {
+        AND = {
+            NOT = {
+                has_country_flag = deny_the_artists
+            }
+            any_owned_province = {
+                has_province_modifier = vu_wandering_artists
+            }
+        }
+    }
+    immediate = {
+    }
+    option = {
+        #Let them leave
+        name = vu_wandering_artists.1a
+        custom_tooltip = vu_wandering_artists.1a.tt
+        add_prestige = -10
+        add_treasury = -50
+        every_owned_province = {
+            remove_province_modifier = vu_wandering_artists
+        }
+        hidden_effect = {
+            random_province = {
+                limit = {
+                    continent = europe
+                    owner = {
+                        NOT = {
+                            has_country_flag = deny_the_artists
+                        }
+                        prestige = 1
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_artists
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #Go away and never come back again!
+        name = vu_wandering_artists.1b
+        custom_tooltip = vu_wandering_artists.1b.tt
+        add_prestige = -15
+        add_splendor = -25
+        add_dip_power = -50
+        every_owned_province = {
+            remove_province_modifier = vu_wandering_artists
+        }
+        hidden_effect = {
+            set_country_flag = deny_the_artists
+
+            random_province = {
+                limit = {
+                    continent = europe
+                    owner = {
+                        NOT = {
+                            has_country_flag = deny_the_artists
+                        }
+                        prestige = 1
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_artists
+                    duration = -1
+                }
+            }
+        }
+        ai_chance = {
+            factor = 1
+        }
+    }
+    option = {
+        #Force them to stay
+        name = vu_wandering_artists.1c
+        custom_tooltip = vu_wandering_artists.1c.tt
+        add_prestige = -10
+        add_legitimacy = -10
+        add_mil_power = -15
+        every_owned_province = {
+            limit = {
+                has_province_modifier = vu_wandering_artists
+            }
+            remove_province_modifier = vu_wandering_artists
+            change_trade_goods = marble_sculpture
+            spawn_rebels = {
+                size = 1
+                type = anti_tax_rebels
+            }
+        }
+        hidden_effect = {
+            set_country_flag = deny_the_artists
+        }
+        ai_chance = {
+            factor = 0
+        }
+    }
+    option = {
+        #I would like to make one last order before you leave...
+        name = vu_wandering_artists.1d
+        custom_tooltip = vu_wandering_artists.1d.tt
+        add_years_of_income = -0.5
+        add_dip_power = -15
+        add_prestige = 10
+        add_splendor = 15
+        trigger = {
+            NOT = {
+                has_global_flag = vu_wandering_artists_sculpture
+            }
+        }
+        hidden_effect = {
+            set_global_flag = vu_wandering_artists_sculpture
+            random_province = {
+                limit = {
+                    continent = europe
+                    owner = {
+                        NOT = {
+                            has_country_flag = deny_the_artists
+                        }
+                        prestige = 1
+                    }
+                }
+                add_province_modifier = {
+                    name = vu_wandering_artists
+                    duration = -1
+                }
+            }
+        }
+        every_owned_province = {
+            limit = {
+                has_province_modifier = vu_wandering_artists
+            }
+            remove_province_modifier = vu_wandering_artists
+            change_trade_goods = marble_sculpture
+        }
+    }
+}
+
+country_event = {
+    id = vu_wandering_artists.2
+    title = "vu_wandering_artists_2_title"
+    picture = "vu_wandering_artists_eventPicture"
+    desc = "vu_wandering_artists_2_desc"
+    trigger = {
+        artist = 1
+        any_owned_province = {
+            has_province_modifier = vu_wandering_artists
+        }
+    }
+    immediate = {
+    }
+    option = {
+        #Fire the advisor
+        name = vu_wandering_artists.2a
+        custom_tooltip = vu_wandering_artists.2a.tt
+        remove_advisor = artist
+    }
+    option = {
+        name = vu_wandering_artists.2b
+        custom_tooltip = vu_wandering_artists.2b.tt
+        hidden_effect = {
+            set_country_flag = deny_the_artists
+            every_owned_province = {
+                remove_province_modifier = vu_wandering_artists
+            }
+            hidden_effect = {
+                random_province = {
+                    limit = {
+                        continent = europe
+                        owner = {
+                            NOT = {
+                                has_country_flag = deny_the_artists
+                            }
+                        }
+                    }
+                    add_province_modifier = {
+                        name = vu_wandering_artists
+                        duration = -1
+                    }
+                }
+            }
+        }
+    }
 }

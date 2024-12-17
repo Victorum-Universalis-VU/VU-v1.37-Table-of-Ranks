@@ -27,15 +27,13 @@ off = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = copper
-								value = 0.4
-							}
-							check_variable = {
-								which = tin
-								value = 0.3
-							}
+						check_variable = {
+							which = copper
+							value = 0.4
+						}
+						check_variable = {
+							which = tin
+							value = 0.3
 						}
 					}
 				}
@@ -101,11 +99,9 @@ off_2 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = iron
-								value = 1
-							}
+						check_variable = {
+							which = iron
+							value = 1
 						}
 					}
 				}
@@ -162,11 +158,9 @@ off_3 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = lead
-								value = 1
-							}
+						check_variable = {
+							which = lead
+							value = 1
 						}
 					}
 				}
@@ -224,15 +218,13 @@ off_4 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = zinc
-								value = 0.3
-							}
-							check_variable = {
-								which = copper
-								value = 0.4
-							}
+						check_variable = {
+							which = zinc
+							value = 0.3
+						}
+						check_variable = {
+							which = copper
+							value = 0.4
 						}
 					}
 				}
@@ -298,11 +290,9 @@ off_5 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = glass
-								value = 0.6
-							}
+						check_variable = {
+							which = glass
+							value = 0.6
 						}
 					}
 				}
@@ -360,11 +350,9 @@ off_6 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = tobacco
-								value = 0.6
-							}
+						check_variable = {
+							which = tobacco
+							value = 0.6
 						}
 					}
 				}
@@ -422,11 +410,9 @@ off_7 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = cocoa
-								value = 0.6
-							}
+						check_variable = {
+							which = cocoa
+							value = 0.6
 						}
 					}
 				}
@@ -484,11 +470,9 @@ off_8 = {
 			if = {
 				limit = {
 					FROM = {
-						AND = {
-							check_variable = {
-								which = grain
-								value = 0.6
-							}
+						check_variable = {
+							which = grain
+							value = 0.6
 						}
 					}
 				}
@@ -543,11 +527,9 @@ import_from_subjects = {
 	time = 0
 	potential = {
 		FROM = {
-			AND = {
-				is_subject = no
-				is_colonial_nation = no
-				is_client_nation = no
-			}
+			is_subject = no
+			is_colonial_nation = no
+			is_client_nation = no
 		}
 	}
 	build_trigger = {
@@ -696,11 +678,9 @@ stop_import_from_subjects = {
 	time = 0
 	potential = {
 		FROM = {
-			AND = {
-				is_subject = no
-				is_colonial_nation = no
-				is_client_nation = no
-			}
+			is_subject = no
+			is_colonial_nation = no
+			is_client_nation = no
 		}
 	}
 	build_trigger = {
@@ -842,17 +822,11 @@ cannon_foundry = {
 	cost = 1000
 	time = 12
 	build_trigger = {
-		AND = {
-			#development = 10	
-			NOT = {
-				trade_goods = copper
-			}
-			NOT = {
-				trade_goods = tin
-			}
-			NOT = {
-				has_province_flag = has_latent_good
-			}
+		#development = 10	
+		NOT = {
+			trade_goods = copper
+			trade_goods = tin
+			has_province_flag = has_latent_good
 		}
 		FROM = {
 			mil_tech = 24
@@ -870,13 +844,11 @@ cannon_foundry = {
 			}
 		}
 		ROOT = {
-			AND = {
-				development = 10
-				NOT = {
-					trade_goods = copper
-					trade_goods = tin
-					has_province_flag = has_latent_good
-				}
+			development = 10
+			NOT = {
+				trade_goods = copper
+				trade_goods = tin
+				has_province_flag = has_latent_good
 			}
 		}
 		NOT = {
@@ -991,11 +963,10 @@ metalworking_workshop = {
 	cost = 1000
 	time = 12
 	build_trigger = {
-		AND = {
-			NOT = {
-				trade_goods = iron
-				has_province_flag = has_latent_good
-			}
+		NOT = {
+			trade_goods = iron
+			has_province_flag = has_latent_good
+			has_global_flag = No_Metalworking
 		}
 		FROM = {
 			mil_tech = 33
@@ -1007,9 +978,6 @@ metalworking_workshop = {
 				which = iron
 				value = 1
 			}
-		}
-		NOT = {
-			has_global_flag = No_Metalworking
 		}
 	}
 	on_built = {
@@ -1104,11 +1072,10 @@ munition_factory = {
 	cost = 1000
 	time = 12
 	build_trigger = {
-		AND = {
-			NOT = {
-				trade_goods = lead
-				has_province_flag = has_latent_good
-			}
+		NOT = {
+			trade_goods = lead
+			has_province_flag = has_latent_good
+			has_global_flag = No_Munitions
 		}
 		FROM = {
 			mil_tech = 32
@@ -1120,9 +1087,6 @@ munition_factory = {
 				which = lead
 				value = 1
 			}
-		}
-		NOT = {
-			has_global_flag = No_Munitions
 		}
 	}
 	on_built = {
@@ -1682,14 +1646,10 @@ steam_engine_manu = {
 				value = 0.4
 			}
 		}
-		AND = {
-			NOT = {
-				trade_goods = zinc
-				trade_goods = copper
-				has_province_flag = has_latent_good
-			}
-		}
 		NOT = {
+			trade_goods = zinc
+			trade_goods = copper
+			has_province_flag = has_latent_good
 			has_global_flag = No_Steam_engine
 		}
 	}
@@ -1798,43 +1758,41 @@ mine = {
 	cost = 500
 	time = 12
 	build_trigger = {
-		AND = {
-			ROOT = {
-				NOT = {
-					has_province_flag = has_latent_good
-				}
-				NOT = {
-					has_province_flag = has_mine
-				}
-				NOT = {
-					trade_goods = copper
-				}
-				NOT = {
-					trade_goods = tin
-				}
-				NOT = {
-					trade_goods = zinc
-				}
-				NOT = {
-					trade_goods = iron
-				}
-				NOT = {
-					trade_goods = lead
-				}
-				OR = {
-					has_terrain = mountain
-					has_terrain = hills
-					has_terrain = highlands
-					has_terrain = cold_mountains
-					has_terrain = tropical_highlands_terrain
-					has_terrain = desert_ranges
-					has_terrain = dry_highlands
-				}
-				#NOT = { has_province_modifier = mine_fail }
+		ROOT = {
+			NOT = {
+				has_province_flag = has_latent_good
 			}
-			FROM = {
-				dip_power = 100
+			NOT = {
+				has_province_flag = has_mine
 			}
+			NOT = {
+				trade_goods = copper
+			}
+			NOT = {
+				trade_goods = tin
+			}
+			NOT = {
+				trade_goods = zinc
+			}
+			NOT = {
+				trade_goods = iron
+			}
+			NOT = {
+				trade_goods = lead
+			}
+			OR = {
+				has_terrain = mountain
+				has_terrain = hills
+				has_terrain = highlands
+				has_terrain = cold_mountains
+				has_terrain = tropical_highlands_terrain
+				has_terrain = desert_ranges
+				has_terrain = dry_highlands
+			}
+			#NOT = { has_province_modifier = mine_fail }
+		}
+		FROM = {
+			dip_power = 100
 		}
 		#NOT = { has_global_flag = No_Mine }
 	}
@@ -1878,13 +1836,9 @@ spectacle_factory = {
 				#value = 0.6 #VU - This is a TGE value
 			}
 		}
-		AND = {
-			NOT = {
-				trade_goods = glass
-				has_province_flag = has_latent_good
-			}
-		}
 		NOT = {
+			trade_goods = glass
+			has_province_flag = has_latent_good
 			has_global_flag = No_Optics
 		}
 	}
@@ -1988,13 +1942,9 @@ cigars_factory = {
 				value = 0.6
 			}
 		}
-		AND = {
-			NOT = {
-				trade_goods = tobacco
-				has_province_flag = has_latent_good
-			}
-		}
 		NOT = {
+			trade_goods = tobacco
+			has_province_flag = has_latent_good
 			has_global_flag = No_Cigars
 		}
 	}
@@ -2098,13 +2048,9 @@ chocolate_factory = {
 				value = 0.6
 			}
 		}
-		AND = {
-			NOT = {
-				trade_goods = cocoa
-				has_province_flag = has_latent_good
-			}
-		}
 		NOT = {
+			trade_goods = cocoa
+			has_province_flag = has_latent_good
 			has_global_flag = No_Chocolate
 		}
 	}

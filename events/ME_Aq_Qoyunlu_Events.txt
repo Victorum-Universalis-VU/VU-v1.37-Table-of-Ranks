@@ -1,604 +1,604 @@
 namespace = ME_Aq_Qoyunlu_Events
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.1 #Uzun Hasan seizes the throne
-	title = ME_Aq_Qoyunlu_Events.1.t
-	desc = ME_Aq_Qoyunlu_Events.1.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.1 #Uzun Hasan seizes the throne
+    title = ME_Aq_Qoyunlu_Events.1.t
+    desc = ME_Aq_Qoyunlu_Events.1.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	fire_only_once = yes
-	
-	trigger = {
-		tag = AKK
-		has_global_flag = death_of_shah_rukh
-	}
-	
-	major = yes
-	major_trigger = {
-		OR = {
-			capital_scope = {
-				region = mashriq_region
-				region = arabia_region
-				region = persia_region
-				region = egypt_region
-				region = anatolia_region
-				region = balkan_region
-				region = khorasan_region
-				region = caucasia_region
-			}
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 12
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.1.a
-		
-		ai_chance = { factor = 100 }
-		
-		if ={ #Uzun Hasan shouldn't die if he already is the ruler.
-			limit = {
-				NOT = { has_ruler = "Uzun Hasan" }
-			}
-			kill_ruler = yes
-		}	
-		if = {
-			limit = {
-				ai = no
-			}
-			add_ruler_modifier = {
-				name = AKK_rise_of_uzun_hasan
-				duration = -1
-			}
-		}
-		else = {
-			add_ruler_modifier = {
-				name = AKK_rise_of_uzun_hasan_ai
-				duration = -1
-			}
-			capital_scope = {
-				infantry = ROOT
-				infantry = ROOT
-				infantry = ROOT
-				infantry = ROOT
-				infantry = ROOT
-			}
-			define_ruler_to_general = {
-				fire = 4	
-				shock = 5	
-				manuever = 5	
-				siege = 0
-			}
-		}
-		
-		hidden_effect = {
-			set_ai_personality = {
-				personality = ai_militarist
-				locked = yes
-			}
-		}
-	}
+    fire_only_once = yes
+
+    trigger = {
+        tag = AKK
+        has_global_flag = death_of_shah_rukh
+    }
+
+    major = yes
+    major_trigger = {
+        capital_scope = {
+            OR = {
+                region = mashriq_region
+                region = arabia_region
+                region = persia_region
+                region = egypt_region
+                region = anatolia_region
+                region = balkan_region
+                region = khorasan_region
+                region = caucasia_region
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+        months = 12
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.1.a
+
+        ai_chance = { factor = 100 }
+
+        if ={ #Uzun Hasan shouldn't die if he already is the ruler.
+            limit = {
+                NOT = { has_ruler = "Uzun Hasan" }
+            }
+            kill_ruler = yes
+        }
+        if = {
+            limit = {
+                ai = no
+            }
+            add_ruler_modifier = {
+                name = AKK_rise_of_uzun_hasan
+                duration = -1
+            }
+        }
+        else = {
+            add_ruler_modifier = {
+                name = AKK_rise_of_uzun_hasan_ai
+                duration = -1
+            }
+            capital_scope = {
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+            }
+            define_ruler_to_general = {
+                fire = 4
+                shock = 5
+                manuever = 5
+                siege = 0
+            }
+        }
+
+        hidden_effect = {
+            set_ai_personality = {
+                personality = ai_militarist
+                locked = yes
+            }
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.2 #Uzun Hasan seizes the throne
-	title = ME_Aq_Qoyunlu_Events.2.t
-	desc = ME_Aq_Qoyunlu_Events.2.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.2 #Uzun Hasan seizes the throne
+    title = ME_Aq_Qoyunlu_Events.2.t
+    desc = ME_Aq_Qoyunlu_Events.2.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	major = yes
-	major_trigger = {
-		OR = {
-			capital_scope = {
-				region = mashriq_region
-				region = arabia_region
-				region = persia_region
-				region = egypt_region
-				region = anatolia_region
-				region = balkan_region
-				region = khorasan_region
-				region = caucasia_region
-			}
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.2.a
-		
-		ai_chance = { factor = 100 }
-		
-		add_country_modifier = {
-			name = AKK_defeated_the_last_remnant
-			duration = 5475
-		}
-	
-		if = {
-			limit = {
-				has_dlc = "Cradle of Civilization"
-			}
-			add_government_power = {
-				mechanic_type = tribal_federation_mechanic
-				power_type = tribal_allegiance
-				value = 15
-			}
-			custom_tooltip = " "
-		}
-		
-		add_prestige_or_monarch_power = { amount = 10 }
-	}
+    is_triggered_only = yes
+    major = yes
+    major_trigger = {
+        capital_scope = {
+            OR = {
+                region = mashriq_region
+                region = arabia_region
+                region = persia_region
+                region = egypt_region
+                region = anatolia_region
+                region = balkan_region
+                region = khorasan_region
+                region = caucasia_region
+            }
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.2.a
+
+        ai_chance = { factor = 100 }
+
+        add_country_modifier = {
+            name = AKK_defeated_the_last_remnant
+            duration = 5475
+        }
+
+        if = {
+            limit = {
+                has_dlc = "Cradle of Civilization"
+            }
+            add_government_power = {
+                mechanic_type = tribal_federation_mechanic
+                power_type = tribal_allegiance
+                value = 15
+            }
+            custom_tooltip = " "
+        }
+
+        add_prestige_or_monarch_power = { amount = 10 }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.4 #advance into syria
-	title = ME_Aq_Qoyunlu_Events.4.t
-	desc = ME_Aq_Qoyunlu_Events.4.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.4 #advance into syria
+    title = ME_Aq_Qoyunlu_Events.4.t
+    desc = ME_Aq_Qoyunlu_Events.4.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	major = yes
-	major_trigger = {
-		war_with = ROOT
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.4.a
-		
-		ai_chance = { factor = 75 }
-		
-		add_yearly_manpower = 1
-		
-		custom_tooltip = AKK_reduced_pwsc_of_syria
-		tooltip = {
-			add_province_modifier = {
-				name = AKK_pwsc_syria
-				duration = 5475
-			}
-		}
-		hidden_effect = {
-			syria_area = {
-				limit = {
-					owner = {
-						war_with = ROOT
-					}
-				}
-				add_province_modifier = {
-					name = AKK_pwsc_syria
-					duration = 5475
-				}
-			}
-			syrian_desert_area = {
-				limit = {
-					owner = {
-						war_with = ROOT
-					}
-				}
-				add_province_modifier = {
-					name = AKK_pwsc_syria
-					duration = 5475
-				}
-			}
-			aleppo_area = {
-				limit = {
-					owner = {
-						war_with = ROOT
-					}
-				}
-				add_province_modifier = {
-					name = AKK_pwsc_syria
-					duration = 5475
-				}
-			}
-		}
-	}
+    is_triggered_only = yes
+    major = yes
+    major_trigger = {
+        war_with = ROOT
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.4.a
+
+        ai_chance = { factor = 75 }
+
+        add_yearly_manpower = 1
+
+        custom_tooltip = AKK_reduced_pwsc_of_syria
+        tooltip = {
+            add_province_modifier = {
+                name = AKK_pwsc_syria
+                duration = 5475
+            }
+        }
+        hidden_effect = {
+            syria_area = {
+                limit = {
+                    owner = {
+                        war_with = ROOT
+                    }
+                }
+                add_province_modifier = {
+                    name = AKK_pwsc_syria
+                    duration = 5475
+                }
+            }
+            syrian_desert_area = {
+                limit = {
+                    owner = {
+                        war_with = ROOT
+                    }
+                }
+                add_province_modifier = {
+                    name = AKK_pwsc_syria
+                    duration = 5475
+                }
+            }
+            aleppo_area = {
+                limit = {
+                    owner = {
+                        war_with = ROOT
+                    }
+                }
+                add_province_modifier = {
+                    name = AKK_pwsc_syria
+                    duration = 5475
+                }
+            }
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.5 #Capture of Tabriz
-	title = ME_Aq_Qoyunlu_Events.5.t
-	desc = ME_Aq_Qoyunlu_Events.5.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.5 #Capture of Tabriz
+    title = ME_Aq_Qoyunlu_Events.5.t
+    desc = ME_Aq_Qoyunlu_Events.5.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	major = yes
-	major_trigger = {
-		OR = {
-			capital_scope = {
-				region = mashriq_region
-				region = arabia_region
-				region = persia_region
-				region = egypt_region
-				region = anatolia_region
-				region = balkan_region
-				region = khorasan_region
-				region = caucasia_region
-			}
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.5.a
-		
-		ai_chance = { factor = 75 }
-		
-		416 = {
-			move_capital_effect = yes
-			add_core = ROOT
-			change_culture = ROOT
-			change_religion = ROOT
-		}
-		
-		custom_tooltip = " "
-		
-		add_country_modifier = {
-			name = AKK_persianate_empire
-			duration = 7300
-		}
-		
-		add_prestige_or_monarch_power = { amount = 30 }
-		
-		custom_tooltip = " "
-		
-		add_dip_power = 150
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.5.b
-		
-		ai_chance = { factor = 25 }
-		
-		add_country_modifier = {
-			name = AKK_stayed_in_diyarbakir
-			duration = 9125
-		}
-	}
+    is_triggered_only = yes
+    major = yes
+    major_trigger = {
+        capital_scope = {
+            OR = {
+                region = mashriq_region
+                region = arabia_region
+                region = persia_region
+                region = egypt_region
+                region = anatolia_region
+                region = balkan_region
+                region = khorasan_region
+                region = caucasia_region
+            }
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.5.a
+
+        ai_chance = { factor = 75 }
+
+        416 = {
+            move_capital_effect = yes
+            add_core = ROOT
+            change_culture = ROOT
+            change_religion = ROOT
+        }
+
+        custom_tooltip = " "
+
+        add_country_modifier = {
+            name = AKK_persianate_empire
+            duration = 7300
+        }
+
+        add_prestige_or_monarch_power = { amount = 30 }
+
+        custom_tooltip = " "
+
+        add_dip_power = 150
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.5.b
+
+        ai_chance = { factor = 25 }
+
+        add_country_modifier = {
+            name = AKK_stayed_in_diyarbakir
+            duration = 9125
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.6
-	title = ME_Aq_Qoyunlu_Events.6.t
-	desc = ME_Aq_Qoyunlu_Events.6.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.6
+    title = ME_Aq_Qoyunlu_Events.6.t
+    desc = ME_Aq_Qoyunlu_Events.6.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.6.a
-		
-		ai_chance = { factor = 50 }
-		
-		change_government_reform_progress = 100
-		
-		add_country_modifier = {
-			name = AKK_new_administration
-			duration = 9125
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.6.b
-		
-		ai_chance = { factor = 50 }
-		
-		add_country_modifier = {
-			name = AKK_tribal_loyalty
-			duration = 9125
-		}
-		
-		add_estate_loyalty = {
-			estate = estate_turkic_tribes
-			loyalty = 20
-		}
-		
-		add_mil_power = 100
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.6.a
+
+        ai_chance = { factor = 50 }
+
+        change_government_reform_progress = 100
+
+        add_country_modifier = {
+            name = AKK_new_administration
+            duration = 9125
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.6.b
+
+        ai_chance = { factor = 50 }
+
+        add_country_modifier = {
+            name = AKK_tribal_loyalty
+            duration = 9125
+        }
+
+        add_estate_loyalty = {
+            estate = estate_turkic_tribes
+            loyalty = 20
+        }
+
+        add_mil_power = 100
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.7
-	title = ME_Aq_Qoyunlu_Events.7.t
-	desc = ME_Aq_Qoyunlu_Events.7.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.7
+    title = ME_Aq_Qoyunlu_Events.7.t
+    desc = ME_Aq_Qoyunlu_Events.7.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.7.a
-		
-		ai_chance = { factor = 50 }
-		
-		add_accepted_culture_or_dip_power = { culture = pontic_greek }
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.7.b
-		
-		ai_chance = { factor = 50 }
-		
-		330 = {
-			change_culture = ROOT
-			change_religion = ROOT
-			add_base_manpower = 2
-			add_province_modifier = {
-				name = AKK_pontic_minority
-				duration = -1
-			}
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.7.a
+
+        ai_chance = { factor = 50 }
+
+        add_accepted_culture_or_dip_power = { culture = pontic_greek }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.7.b
+
+        ai_chance = { factor = 50 }
+
+        330 = {
+            change_culture = ROOT
+            change_religion = ROOT
+            add_base_manpower = 2
+            add_province_modifier = {
+                name = AKK_pontic_minority
+                duration = -1
+            }
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.8
-	title = ME_Aq_Qoyunlu_Events.8.t
-	desc = ME_Aq_Qoyunlu_Events.8.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.8
+    title = ME_Aq_Qoyunlu_Events.8.t
+    desc = ME_Aq_Qoyunlu_Events.8.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.8.a
-		
-		ai_chance = { factor = 50 }
-		
-		define_general = {
-			shock = 4
-			fire = 1
-			manuever = 4
-			siege = 3
-			name = "Sufi Khalil Beg Mawsilu"
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.8.b
-		
-		ai_chance = { factor = 50 }
-		
-		define_advisor = {
-			type = commandant
-			name = "Sufi Khalil Beg Mawsilu"
-			skill = 2
-			cost_multiplier = 0.33
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.8.a
+
+        ai_chance = { factor = 50 }
+
+        define_general = {
+            shock = 4
+            fire = 1
+            manuever = 4
+            siege = 3
+            name = "Sufi Khalil Beg Mawsilu"
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.8.b
+
+        ai_chance = { factor = 50 }
+
+        define_advisor = {
+            type = commandant
+            name = "Sufi Khalil Beg Mawsilu"
+            skill = 2
+            cost_multiplier = 0.33
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.9
-	title = ME_Aq_Qoyunlu_Events.9.t
-	desc = ME_Aq_Qoyunlu_Events.9.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.9
+    title = ME_Aq_Qoyunlu_Events.9.t
+    desc = ME_Aq_Qoyunlu_Events.9.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.9.a
-		
-		ai_chance = { factor = 50 }
-		
-		tabriz_area = {
-			limit = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			add_permanent_province_modifier = {
-				name = AKK_local_qadi
-				duration = 14600
-			}
-		}
-		
-		custom_tooltip = " "
-		
-		define_advisor = {
-			type = theologian
-			skill = 2
-			culture = persian
-			religion = ROOT
-			cost_multiplier = 0.33
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.9.b
-		
-		ai_chance = { factor = 50 }
-		
-		tabriz_area = {
-			limit = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			add_permanent_province_modifier = {
-				name = AKK_local_qadi
-				duration = 14600
-			}
-		}
-		
-		custom_tooltip = " "
-		
-		416 = {
-			if = {
-				limit = {
-					country_or_non_sovereign_subject_holds = ROOT
-				}
-				add_base_tax = 3
-				add_base_production = 3
-				add_base_manpower = 2
-			}
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.9.a
+
+        ai_chance = { factor = 50 }
+
+        tabriz_area = {
+            limit = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            add_permanent_province_modifier = {
+                name = AKK_local_qadi
+                duration = 14600
+            }
+        }
+
+        custom_tooltip = " "
+
+        define_advisor = {
+            type = theologian
+            skill = 2
+            culture = persian
+            religion = ROOT
+            cost_multiplier = 0.33
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.9.b
+
+        ai_chance = { factor = 50 }
+
+        tabriz_area = {
+            limit = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            add_permanent_province_modifier = {
+                name = AKK_local_qadi
+                duration = 14600
+            }
+        }
+
+        custom_tooltip = " "
+
+        416 = {
+            if = {
+                limit = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                add_base_tax = 3
+                add_base_production = 3
+                add_base_manpower = 2
+            }
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.10
-	title = ME_Aq_Qoyunlu_Events.10.t
-	desc = ME_Aq_Qoyunlu_Events.10.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.10
+    title = ME_Aq_Qoyunlu_Events.10.t
+    desc = ME_Aq_Qoyunlu_Events.10.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.10.a
-		
-		ai_chance = { factor = 50 }
-		
-		add_power_projection = {
-			type = QAR_perma_persia_pp
-			amount = 10 
-		}
-		
-		custom_tooltip = MAM_permanent_PP
-		
-		custom_tooltip = " "
-		
-		set_government_rank = 9
-		
-		custom_tooltip = " "
-		
-		custom_tooltip = AKK_modifier_upgrade_last
-		hidden_effect = {
-			remove_country_modifier = AKK_seizing_qara_qoyunlu_north_2
-			remove_country_modifier = AKK_seizing_qara_qoyunlu_lands_2
-			add_country_modifier = {
-				name = AKK_seizing_qara_qoyunlu
-				duration = -1
-			}
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.10.a
+
+        ai_chance = { factor = 50 }
+
+        add_power_projection = {
+            type = QAR_perma_persia_pp
+            amount = 10
+        }
+
+        custom_tooltip = MAM_permanent_PP
+
+        custom_tooltip = " "
+
+        set_government_rank = 9
+
+        custom_tooltip = " "
+
+        custom_tooltip = AKK_modifier_upgrade_last
+        hidden_effect = {
+            remove_country_modifier = AKK_seizing_qara_qoyunlu_north_2
+            remove_country_modifier = AKK_seizing_qara_qoyunlu_lands_2
+            add_country_modifier = {
+                name = AKK_seizing_qara_qoyunlu
+                duration = -1
+            }
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.11 #for Qara Qoyunlu, first instance of Abu Bakr Tihrani
-	title = ME_Aq_Qoyunlu_Events.11.t
-	desc = ME_Aq_Qoyunlu_Events.11.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.11 #for Qara Qoyunlu, first instance of Abu Bakr Tihrani
+    title = ME_Aq_Qoyunlu_Events.11.t
+    desc = ME_Aq_Qoyunlu_Events.11.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.11.a
-		
-		ai_chance = { factor = 50 }
-		
-		define_advisor = {
-			type = researcher
-			name = "Abu Bakr Tihrani"
-			skill = 2
-			culture = persian
-			religion = sunni
-			cost_multiplier = 0.5
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.11.a
+
+        ai_chance = { factor = 50 }
+
+        define_advisor = {
+            type = researcher
+            name = "Abu Bakr Tihrani"
+            skill = 2
+            culture = persian
+            religion = sunni
+            cost_multiplier = 0.5
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.12
-	#for Aq Qoyunlu, second instance of Abu Bakr Tihrani (yes, there can be two technically, but there is no effect to ensure only one lives at the same time)
-	title = ME_Aq_Qoyunlu_Events.12.t
-	desc = ME_Aq_Qoyunlu_Events.12.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.12
+    #for Aq Qoyunlu, second instance of Abu Bakr Tihrani (yes, there can be two technically, but there is no effect to ensure only one lives at the same time)
+    title = ME_Aq_Qoyunlu_Events.12.t
+    desc = ME_Aq_Qoyunlu_Events.12.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	is_triggered_only = yes 
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.12.a
-		
-		ai_chance = { factor = 50 }
-		
-		define_advisor = {
-			type = researcher
-			name = "Abu Bakr Tihrani"
-			skill = 2
-			culture = persian
-			religion = sunni
-			cost_multiplier = 0.5
-		}
-	}
+    is_triggered_only = yes
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.12.a
+
+        ai_chance = { factor = 50 }
+
+        define_advisor = {
+            type = researcher
+            name = "Abu Bakr Tihrani"
+            skill = 2
+            culture = persian
+            religion = sunni
+            cost_multiplier = 0.5
+        }
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.13
-	title = ME_Aq_Qoyunlu_Events.13.t
-	desc = ME_Aq_Qoyunlu_Events.13.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.13
+    title = ME_Aq_Qoyunlu_Events.13.t
+    desc = ME_Aq_Qoyunlu_Events.13.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	mean_time_to_happen = {
-		months = 120
-	}
-	
-	fire_only_once = yes
-	
-	trigger = {
-		OR = {
-			AND = {
-				is_year = 1487 #when Fazlallah met Ya'qub of Aq Qoyunlu
-				owns = 2218 #Shiraz, his birthplace
-			}
-			has_country_flag = Fazlallah_Mission_Reward
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.13.a
-		
-		ai_chance = { factor = 50 }
-		
-		define_advisor = {
-			type = researcher
-			name = "Fazlallah Khunji Isfahani"
-			skill = 2
-			culture = persian
-			religion = sunni
-			cost_multiplier = 0.75
-		}
-		
-		add_dip_power = 100 
-	}
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    fire_only_once = yes
+
+    trigger = {
+        OR = {
+            AND = {
+                is_year = 1487 #when Fazlallah met Ya'qub of Aq Qoyunlu
+                owns = 2218 #Shiraz, his birthplace
+            }
+            has_country_flag = Fazlallah_Mission_Reward
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.13.a
+
+        ai_chance = { factor = 50 }
+
+        define_advisor = {
+            type = researcher
+            name = "Fazlallah Khunji Isfahani"
+            skill = 2
+            culture = persian
+            religion = sunni
+            cost_multiplier = 0.75
+        }
+
+        add_dip_power = 100
+    }
 }
 
 country_event = {
-	id = ME_Aq_Qoyunlu_Events.14
-	title = ME_Aq_Qoyunlu_Events.14.t
-	desc = ME_Aq_Qoyunlu_Events.14.d
-	picture = COUNTRY_COLLAPSE_eventPicture
+    id = ME_Aq_Qoyunlu_Events.14
+    title = ME_Aq_Qoyunlu_Events.14.t
+    desc = ME_Aq_Qoyunlu_Events.14.d
+    picture = COUNTRY_COLLAPSE_eventPicture
 
-	mean_time_to_happen = {
-		months = 120
-	}
-	
-	fire_only_once = yes
-	
-	trigger = {
-		is_year = 1465
-		owns = 4296
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.14.a
-		
-		ai_chance = { factor = 50 }
-		
-		define_advisor = {
-			type = researcher
-			name = "Hosam al-Din Ali Bitlisi"
-			skill = 2
-			culture = kurdish
-			religion = sunni
-			cost_multiplier = 0.5
-		}
-		
-		4296 = {
-			add_unrest = -5
-		}
-	}
-	
-	option = {
-		name = ME_Aq_Qoyunlu_Events.14.b
-		
-		ai_chance = { factor = 50 }
-		
-		add_stability_or_adm_power = yes
-	}
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    fire_only_once = yes
+
+    trigger = {
+        is_year = 1465
+        owns = 4296
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.14.a
+
+        ai_chance = { factor = 50 }
+
+        define_advisor = {
+            type = researcher
+            name = "Hosam al-Din Ali Bitlisi"
+            skill = 2
+            culture = kurdish
+            religion = sunni
+            cost_multiplier = 0.5
+        }
+
+        4296 = {
+            add_unrest = -5
+        }
+    }
+
+    option = {
+        name = ME_Aq_Qoyunlu_Events.14.b
+
+        ai_chance = { factor = 50 }
+
+        add_stability_or_adm_power = yes
+    }
 }
 
 # so. missing stuff for the courtiers of AQ:

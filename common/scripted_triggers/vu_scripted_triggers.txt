@@ -1,54 +1,266 @@
 #VU addition for 1.36.2.* by San Felipe
 #country_has_both_paradox_and_golden_bull_missions = {}
 
-has_production_building_trigger = { #There are 2 of those, should remove one
-	OR = {
-		has_building = workshop
-		has_building = counting_house
-		has_building = steam_engine_manu
-		custom_trigger_tooltip = {
-			tooltip = silver_tooltip
-			OR = {
-				trade_goods = silver
-				trade_goods = gold
-			}
-		}
-	}
-}
+#VU building triggers - Altan
 
-has_manufactory_trigger = { #Province Scope
-	custom_trigger_tooltip = { #There are 2 of those, should remove one
-		tooltip = has_manufactory_trigger_tooltip
-		OR = {
-			has_building = wharf
-			has_building = weapons
-			has_building = textile
-			has_building = tradecompany
-			has_building = farm_estate
-			has_building = mills
-			has_building = furnace
-			has_building = plantations
-			has_building = ramparts
-			has_building = soldier_households
-			has_building = impressment_offices
-			has_building = state_house
-			trade_goods = silver
-			trade_goods = gold
-		}
-	}
+has_production_building_trigger = {
+    OR = {
+        custom_trigger_tooltip = {
+            tooltip = has_production_building_trigger_tt
+            OR = {
+                has_building = workshop
+                has_building = counting_house
+                has_building = factory #VU addition
+            }
+        }
+        custom_trigger_tooltip = {
+            tooltip = silver_tooltip
+            OR = {
+                trade_goods = silver
+                trade_goods = gold
+            }
+        }
+    }
+
 }
 
 has_education_building_trigger = {
-	OR = {
-		has_building = library
-		has_building = school
-	}
+    OR = {
+        has_building = library
+        has_building = school
+    }
 }
 
 has_transportation_trigger = {
-	OR = {
-		has_building = road_system #VU addition
-		has_building = canal_system #VU addition
-		has_building = railway_system #VU addition
-	}
+    OR = {
+        has_building = road_system #VU addition
+        has_building = canal_system #VU addition
+        has_building = railway_system #VU addition
+    }
+}
+
+#VU subject triggers - Altan
+
+is_lordship_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_vassal
+        is_subject_of_type = anglois_lordship
+        is_subject_of_type = aragonese_lordship
+        is_subject_of_type = austrian_lordship
+        is_subject_of_type = baltic_lordship
+        is_subject_of_type = belgian_lordship
+        is_subject_of_type = bohemian_lordship
+        is_subject_of_type = burgundian_lordship
+        is_subject_of_type = byzantine_lordship
+        is_subject_of_type = castilian_lordship
+        is_subject_of_type = danish_lordship
+        is_subject_of_type = dutch_lordship
+        is_subject_of_type = english_lordship
+        is_subject_of_type = french_lordship
+        is_subject_of_type = german_lordship
+        is_subject_of_type = hungarian_lordship
+        is_subject_of_type = italian_lordship
+        is_subject_of_type = norwegian_lordship
+        is_subject_of_type = polish_lordship
+        is_subject_of_type = portuguese_lordship
+        is_subject_of_type = prussian_lordship
+        is_subject_of_type = russian_lordship
+        is_subject_of_type = swedish_lordship
+    }
+}
+
+is_barony_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_barony_vassal
+        is_subject_of_type = anglois_barony
+        is_subject_of_type = aragonese_barony
+        is_subject_of_type = austrian_barony
+        is_subject_of_type = baltic_barony
+        is_subject_of_type = belgian_barony
+        is_subject_of_type = bohemian_barony
+        is_subject_of_type = burgundian_barony
+        is_subject_of_type = byzantine_barony
+        is_subject_of_type = castilian_barony
+        is_subject_of_type = danish_barony
+        is_subject_of_type = dutch_barony
+        is_subject_of_type = english_barony
+        is_subject_of_type = french_barony
+        is_subject_of_type = german_barony
+        is_subject_of_type = hungarian_barony
+        is_subject_of_type = italian_barony
+        is_subject_of_type = norwegian_barony
+        is_subject_of_type = polish_barony
+        is_subject_of_type = portuguese_barony
+        is_subject_of_type = prussian_barony
+        is_subject_of_type = russian_barony
+        is_subject_of_type = swedish_barony
+    }
+}
+
+is_viscounty_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_viscounty_vassal
+        is_subject_of_type = anglois_viscounty
+        is_subject_of_type = aragonese_viscounty
+        is_subject_of_type = austrian_viscounty
+        is_subject_of_type = baltic_viscounty
+        is_subject_of_type = belgian_viscounty
+        is_subject_of_type = bohemian_viscounty
+        is_subject_of_type = burgundian_viscounty
+        is_subject_of_type = byzantine_viscounty
+        is_subject_of_type = castilian_viscounty
+        is_subject_of_type = danish_viscounty
+        is_subject_of_type = dutch_viscounty
+        is_subject_of_type = english_viscounty
+        is_subject_of_type = french_viscounty
+        is_subject_of_type = german_viscounty
+        is_subject_of_type = hungarian_viscounty
+        is_subject_of_type = italian_viscounty
+        is_subject_of_type = norwegian_viscounty
+        is_subject_of_type = polish_viscounty
+        is_subject_of_type = portuguese_viscounty
+        is_subject_of_type = prussian_viscounty
+        is_subject_of_type = russian_viscounty
+        is_subject_of_type = swedish_viscounty
+    }
+}
+
+is_county_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_county_vassal
+        is_subject_of_type = anglois_county
+        is_subject_of_type = aragonese_county
+        is_subject_of_type = austrian_county
+        is_subject_of_type = baltic_county
+        is_subject_of_type = belgian_county
+        is_subject_of_type = bohemian_county
+        is_subject_of_type = burgundian_county
+        is_subject_of_type = byzantine_county
+        is_subject_of_type = castilian_county
+        is_subject_of_type = danish_county
+        is_subject_of_type = dutch_county
+        #is_subject_of_type = english_county #england doesn't have counties, it has earldoms (thanks Modus) -Don
+        is_subject_of_type = english_earldom
+        is_subject_of_type = french_county
+        is_subject_of_type = german_county
+        is_subject_of_type = hungarian_county
+        is_subject_of_type = italian_county
+        is_subject_of_type = norwegian_county
+        is_subject_of_type = polish_county
+        is_subject_of_type = portuguese_county
+        is_subject_of_type = prussian_county
+        is_subject_of_type = russian_county
+        is_subject_of_type = swedish_county
+    }
+}
+
+is_marquisate_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_marquisate_vassal
+        is_subject_of_type = anglois_marquisate
+        is_subject_of_type = aragonese_marquisate
+        is_subject_of_type = austrian_marquisate
+        is_subject_of_type = baltic_marquisate
+        is_subject_of_type = belgian_marquisate
+        is_subject_of_type = bohemian_marquisate
+        is_subject_of_type = burgundian_marquisate
+        is_subject_of_type = byzantine_marquisate
+        is_subject_of_type = castilian_marquisate
+        is_subject_of_type = danish_marquisate
+        is_subject_of_type = dutch_marquisate
+        is_subject_of_type = english_marquisate
+        is_subject_of_type = french_marquisate
+        is_subject_of_type = german_marquisate
+        is_subject_of_type = hungarian_marquisate
+        is_subject_of_type = italian_marquisate
+        is_subject_of_type = norwegian_marquisate
+        is_subject_of_type = polish_marquisate
+        is_subject_of_type = portuguese_marquisate
+        is_subject_of_type = prussian_marquisate
+        is_subject_of_type = russian_marquisate
+        is_subject_of_type = swedish_marquisate
+    }
+}
+
+is_duchy_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_duchy_vassal
+        is_subject_of_type = anglois_duchy
+        is_subject_of_type = aragonese_duchy
+        is_subject_of_type = austrian_duchy
+        is_subject_of_type = baltic_duchy
+        is_subject_of_type = belgian_duchy
+        is_subject_of_type = bohemian_duchy
+        is_subject_of_type = burgundian_duchy
+        is_subject_of_type = byzantine_duchy
+        is_subject_of_type = castilian_duchy
+        is_subject_of_type = danish_duchy
+        is_subject_of_type = dutch_duchy
+        is_subject_of_type = english_duchy
+        is_subject_of_type = french_duchy
+        is_subject_of_type = german_duchy
+        is_subject_of_type = hungarian_duchy
+        is_subject_of_type = italian_duchy
+        is_subject_of_type = norwegian_duchy
+        is_subject_of_type = polish_duchy
+        is_subject_of_type = portuguese_duchy
+        is_subject_of_type = prussian_duchy
+        is_subject_of_type = russian_duchy
+        is_subject_of_type = swedish_duchy
+    }
+}
+
+is_principality_subject_type = {
+    OR = {
+        is_subject_of_type = daimyo_principality_vassal
+        is_subject_of_type = anglois_principality
+        is_subject_of_type = aragonese_principality
+        is_subject_of_type = austrian_principality
+        is_subject_of_type = baltic_principality
+        is_subject_of_type = belgian_principality
+        is_subject_of_type = bohemian_principality
+        is_subject_of_type = burgundian_principality
+        is_subject_of_type = byzantine_principality
+        is_subject_of_type = castilian_principality
+        is_subject_of_type = danish_principality
+        is_subject_of_type = dutch_principality
+        is_subject_of_type = english_principality
+        is_subject_of_type = french_principality
+        is_subject_of_type = german_principality
+        is_subject_of_type = hungarian_principality
+        is_subject_of_type = italian_principality
+        is_subject_of_type = norwegian_principality
+        is_subject_of_type = polish_principality
+        is_subject_of_type = portuguese_principality
+        is_subject_of_type = prussian_principality
+        is_subject_of_type = russian_principality
+        is_subject_of_type = swedish_principality
+    }
+}
+
+is_kingdom_subject_type = {
+    OR = {
+        is_subject_of_type = anglois_kingdom
+        is_subject_of_type = aragonese_kingdom
+        is_subject_of_type = austrian_kingdom
+        is_subject_of_type = baltic_kingdom
+        is_subject_of_type = belgian_kingdom
+        is_subject_of_type = bohemian_kingdom
+        is_subject_of_type = burgundian_kingdom
+        is_subject_of_type = byzantine_kingdom
+        is_subject_of_type = castilian_kingdom
+        is_subject_of_type = danish_kingdom
+        is_subject_of_type = dutch_kingdom
+        is_subject_of_type = english_kingdom
+        is_subject_of_type = french_kingdom
+        is_subject_of_type = german_kingdom
+        is_subject_of_type = hungarian_kingdom
+        is_subject_of_type = italian_kingdom
+        is_subject_of_type = norwegian_kingdom
+        is_subject_of_type = polish_kingdom
+        is_subject_of_type = portuguese_kingdom
+        is_subject_of_type = prussian_kingdom
+        is_subject_of_type = russian_kingdom
+        is_subject_of_type = swedish_kingdom
+    }
 }

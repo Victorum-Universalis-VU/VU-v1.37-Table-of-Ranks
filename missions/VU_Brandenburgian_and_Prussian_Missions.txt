@@ -1329,12 +1329,13 @@ BRA_missions_4 = {
 		required_missions = { BRA_concluding_the_transition }
 		position = 7
 		provinces_to_highlight = {
-			province_id = 2969
-			OR = {
-				NOT = { owned_by = ROOT }
-				AND = {
-					NOT = { has_building = university }
-					NOT = { num_of_times_improved = 13 }
+			2969 = {
+				OR = {
+					NOT = { owned_by = ROOT }
+					OR = {
+						has_education_building_trigger = no
+						NOT = { num_of_times_improved = 13 }
+					}
 				}
 			}
 		}
@@ -1342,7 +1343,7 @@ BRA_missions_4 = {
 			2969 = {
 				owned_by = ROOT
 				OR = {
-					has_building = university
+					has_education_building_trigger = yes
 					num_of_times_improved = 13
 				}
 			}
