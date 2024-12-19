@@ -39,9 +39,10 @@ has_transportation_trigger = {
     }
 }
 
-#VU subject triggers - Altan
+#VU subject triggers - Altan, appended by Don with some modifications + new ones
 
 is_lordship_subject_type = {
+    #check if the subject is any type of lordship
     OR = {
         is_subject_of_type = daimyo_vassal
         is_subject_of_type = anglois_lordship
@@ -70,6 +71,7 @@ is_lordship_subject_type = {
 }
 
 is_barony_subject_type = {
+    #check if the subject is any type of barony
     OR = {
         is_subject_of_type = daimyo_barony_vassal
         is_subject_of_type = anglois_barony
@@ -98,6 +100,7 @@ is_barony_subject_type = {
 }
 
 is_viscounty_subject_type = {
+    #check if the subject is any type of viscounty
     OR = {
         is_subject_of_type = daimyo_viscounty_vassal
         is_subject_of_type = anglois_viscounty
@@ -126,6 +129,7 @@ is_viscounty_subject_type = {
 }
 
 is_county_subject_type = {
+    #check if the subject is any type of county
     OR = {
         is_subject_of_type = daimyo_county_vassal
         is_subject_of_type = anglois_county
@@ -155,6 +159,7 @@ is_county_subject_type = {
 }
 
 is_marquisate_subject_type = {
+    #check if the subject is any type of marqiosate
     OR = {
         is_subject_of_type = daimyo_marquisate_vassal
         is_subject_of_type = anglois_marquisate
@@ -183,6 +188,7 @@ is_marquisate_subject_type = {
 }
 
 is_duchy_subject_type = {
+    #check if the subject is any type of duchy
     OR = {
         is_subject_of_type = daimyo_duchy_vassal
         is_subject_of_type = anglois_duchy
@@ -211,6 +217,7 @@ is_duchy_subject_type = {
 }
 
 is_principality_subject_type = {
+    #check if the subject is any type of principality
     OR = {
         is_subject_of_type = daimyo_principality_vassal
         is_subject_of_type = anglois_principality
@@ -239,6 +246,7 @@ is_principality_subject_type = {
 }
 
 is_kingdom_subject_type = {
+    #check if the subject is any type of kingdom
     OR = {
         is_subject_of_type = anglois_kingdom
         is_subject_of_type = aragonese_kingdom
@@ -262,5 +270,55 @@ is_kingdom_subject_type = {
         is_subject_of_type = prussian_kingdom
         is_subject_of_type = russian_kingdom
         is_subject_of_type = swedish_kingdom
+    }
+}
+
+ToR_subject_limit_reached = {
+    calc_true_if = {
+        all_subject_country = {
+            is_ToR_subject_type = yes
+        }
+        amount = 15 #change this to change the limit of the
+    }
+}
+
+is_ToR_subject_type = {
+    OR = {
+        is_lordship_subject_type = yes
+        is_barony_subject_type = yes
+        is_viscounty_subject_type = yes
+        is_county_subject_type = yes
+        is_marquisate_subject_type = yes
+        is_duchy_subject_type = yes
+        is_principality_subject_type = yes
+        is_kingdom_subject_type = yes
+    }
+}
+
+has_vu_ToR_subjects = {
+    #check if the overlord has any type of the VU ToR subjects
+    OR = {
+        has_government_attribute = has_anglois_subjects
+        has_government_attribute = has_aragonese_subjects
+        has_government_attribute = has_austrian_subjects
+        has_government_attribute = has_baltic_subjects
+        has_government_attribute = has_burgundian_subjects
+        has_government_attribute = has_bohemian_subjects
+        has_government_attribute = has_byzantine_subjects
+        has_government_attribute = has_castilian_subjects
+        has_government_attribute = has_danish_subjects
+        has_government_attribute = has_daimyo_subjects
+        has_government_attribute = has_dutch_subjects
+        has_government_attribute = has_english_subjects
+        has_government_attribute = has_french_subjects
+        has_government_attribute = has_german_subjects
+        has_government_attribute = has_hungarian_subjects
+        has_government_attribute = has_italian_subjects
+        has_government_attribute = has_norwegian_subject
+        has_government_attribute = has_polish_subjects
+        has_government_attribute = has_portuguese_subjects
+        has_government_attribute = has_prussian_subjects
+        has_government_attribute = has_russian_subjects
+        has_government_attribute = has_swedish_subjects
     }
 }

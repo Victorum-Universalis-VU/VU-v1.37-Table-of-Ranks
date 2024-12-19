@@ -1246,11 +1246,13 @@ country_event = {
 
 #Don Brom events
 #Lusatian situation event tree
-# BOH            flavor_boh.22  -Incident start       
-#              /       |       \
-# flavor_boh.23  flavor_boh.24 flavor_boh.25
-#
-#
+#BOH    flavor_boh.22 -BOH start of event tree,
+#BRA    flavor_boh.23 -BOH offers alliance for lower lusatia
+#BRA    flavor_boh.24 -BOH concedes Cottobus
+#BRA    flavor_boh.25 -BOH denies inheritance
+#BOH    flavor_boh.26 -BRA declines the alliance
+#BOH    flavor_boh.27 -BRA demmands all of lower lusatia
+#BOH    flavor_boh.28 -BRA offers cottobus in return for alliance
 ###############
 #             #
 #   Bohemia   #
@@ -1262,6 +1264,7 @@ country_event = {
     desc = flavor_boh.22.d
     picture = HRE_eventPicture
     fire_only_once = yes
+    major = yes
     mean_time_to_happen = {
         months = 20
     }
@@ -1375,13 +1378,17 @@ country_event = {
     desc = flavor_boh.23.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #bohemia offers Lusatia for an alliance
     option = {
         name = flavor_boh.23.a
-        custom_tooltip = flavor_boh.23.a.tt
         #We accept your offer
         add_historical_friend = BOH
         force_remove_rival = BOH
+        add_trust = {
+            who = BOH
+            value = 25
+        }
         create_marriage = BOH
         create_alliance = BOH
         add_prestige = 15
@@ -1394,6 +1401,10 @@ country_event = {
             add_country_modifier = {
                 name = improved_dip_reputation
                 duration = 3650
+            }
+            add_trust = {
+                who = BRA
+                value = 25
             }
             add_prestige = 15
             add_legitimacy = 15
@@ -1468,9 +1479,11 @@ country_event = {
     desc = flavor_boh.24.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #BOH conceeds Cottobus
     option = {
         #take just cottobus
+        name = flavor_boh.24.a
         1763 = {
             cede_province = BRA
             add_core = BRA
@@ -1479,19 +1492,24 @@ country_event = {
             factor = 1
         }
     }
+
     option = {
-        #demmand more! (not-friends)
+        #refuse the inheritance (alliance offer)
+        name = flavor_boh.24.b
+        custom_tooltip = flavor_boh.24.b.tt
         BOH = {
             country_event = {
-                id = flavor_boh.27
+                id = flavor_boh.28
             }
         }
     }
     option = {
-        #refuse the inheritance (alliance offer)
+        #demmand more! (not-friends)
+        name = flavor_boh.24.c
+        custom_tooltip = flavor_boh.24.c.tt
         BOH = {
             country_event = {
-                id = flavor_boh.28
+                id = flavor_boh.27
             }
         }
     }
@@ -1508,15 +1526,15 @@ country_event = {
     desc = flavor_boh.25.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #BOH denies inheritance
     option = {
         #How dare they deny our rights? This means war! Call our allies, we must defend our rights!
         name = flavor_boh.25.a
-        custom_tooltip = flavor_boh.25.a.tt
         BOH = {
             declare_war = BRA
         }
-        STY = {
+        emperor = {
             join_all_defensive_wars_of = BRA
         }
         AUT = {
@@ -1536,7 +1554,6 @@ country_event = {
     option = {
         #We must accept this...
         name = flavor_boh.25.b
-        custom_tooltip = flavor_boh.25.b.tt
         add_prestige = -15
         add_legitimacy = -15
     }
@@ -1552,6 +1569,7 @@ country_event = {
     desc = flavor_boh.26.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #Brandenburg rejects the alliance!
     option = {
         #We must accept this... give them their inheritance...
@@ -1585,6 +1603,7 @@ country_event = {
     desc = flavor_boh.27.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #Brandenburgian demands
     option = {
         #How dare they? This can only mean one thing... WAR!
@@ -1641,6 +1660,7 @@ country_event = {
     desc = flavor_boh.28.d
     picture = HRE_eventPicture
     is_triggered_only = yes
+    major = yes
     #Brandenburg offers us alliance in return for Cottobus
     option = {
         #We accept your offer
@@ -1673,6 +1693,6 @@ country_event = {
         }
         ai_chance = {
             factor = 1
-        } 
+        }
     }
 }

@@ -667,7 +667,7 @@ NCountry = {
 	POLICY_COST = 1,								-- Monthly cost per policy
 	BASE_POSSIBLE_POLICIES = 4,						-- How many policies in a category a nation can have as a base
 	BASE_FREE_POLICIES = 2,							-- How many policies in a category a nation get for free
-	SEIZE_COURT_RESOURCES_SUBJECT_LOSS_MULTIPLIER = 0.5, --when seizing court resources through interaction, how much does the subject lose as a proportion of what the overlord gains
+	SEIZE_COURT_RESOURCES_SUBJECT_LOSS_MULTIPLIER = 1, --when seizing court resources through interaction, how much does the subject lose as a proportion of what the overlord gains
 	MONTHS_OF_MANPOWER_FOR_SEIZE_COURT_RESOURCES = 12,
 	REQUEST_EXTRA_LEVIES_SUBJECT_LOSS_MULTIPLIER = 0.5, --when requesting extra levies through interaction, how much does the subject lose as a proportion of what the overlord gains
 	MONTHS_OF_MANPOWER_FOR_REQUEST_EXTRA_LEVIES = 12,
@@ -926,8 +926,8 @@ NCountry = {
 	REQUEST_EXTRA_LEVIES_MAX_LIBERTY_DESIRE = 25,
 	REQUEST_EXTRA_LEVIES_COOLDOWN_MONTHS = 60,
 
-	SEIZE_COURT_RESOURCES_MAX_LIBERTY_DESIRE = 25,
-	SEIZE_COURT_RESOURCES_COOLDOWN_MONTHS = 60,
+	SEIZE_COURT_RESOURCES_MAX_LIBERTY_DESIRE = 35,
+	SEIZE_COURT_RESOURCES_COOLDOWN_MONTHS = 180,
 
 	MIN_LIBERTY_DESIRE = 0,							-- Min total (effective) liberty desire
 	MAX_LIBERTY_DESIRE = 100,						-- Max total (effective) liberty desire
