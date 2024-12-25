@@ -1,5 +1,11 @@
-# For specific combinations of culture, religion and other such triggers
-# Will pick the first valid one it finds in list
+#Updated for VU 1.37.* by SF
+#Contributors:
+#Altan
+#DonBrom
+#San Felipe
+#Prussia
+#For specific combinations of culture, religion and other such triggers
+#Will pick the first valid one it finds in list
 
 #Heir and consort titles are generally kept simple for clarity unless there is something special in particular that can be used.
 
@@ -4577,21 +4583,21 @@ croatian_monarchy = {
 serbian_monarchy = {
     rank = {
         6 = VOJVODSTVO
-        7 = KNEZEVINA
+        7 = SRPSKA_DESPOTOVINA
         8 = KRALJEVSTVO
         9 = IMPERIJA
     }
 
     ruler_male = {
         6 = VOIVODE
-        7 = PRINC
+        7 = DESPOT
         8 = KRALJ
         9 = CARU
     }
 
     ruler_female = {
         6 = VOJVODKINJA_fem
-        7 = PRINCEZA_fem
+        7 = DESPOTISSA_fem
         8 = KRALJICA_fem
         9 = CARICA_fem
     }
@@ -4626,17 +4632,14 @@ serbian_monarchy = {
 
     trigger = {
         government = monarchy
-        religion = orthodox
         AND = {
             OR = {
-                primary_culture = serbian
-                primary_culture = serbian_new
+                primary_culture = serbian      #south_slavic
+                primary_culture = serbian_new  #slavic
             }
             OR = {
-                has_reform = feudalism_reform
-                have_had_reform = feudalism_reform
-                has_reform = autocracy_reform
-                have_had_reform = autocracy_reform
+                has_reform = despotate_of_serbia_reform
+                have_had_reform = despotate_of_serbia_reform
             }
         }
     }
@@ -4808,7 +4811,10 @@ south_slavic_monarchy = {
     trigger = {
         government = monarchy
         culture_group = south_slavic
-        NOT = { tag = CLI }
+        NOT = { 
+            tag = CLI
+            tag = SER 
+        }
     }
 }
 
@@ -7147,6 +7153,7 @@ boh_duchy_reform = {
                 primary_culture = schlesian
                 primary_culture = schlesianBOH
                 primary_culture = sorbianBOH
+                primary_culture = sorbian
                 primary_culture = silesian_german
             }
             OR = {

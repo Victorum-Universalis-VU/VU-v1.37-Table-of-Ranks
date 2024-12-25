@@ -1,3 +1,9 @@
+#Updated for VU 1.37.* by SF
+#Contributors:
+#Altan
+#DonBrom
+#San Felipe
+#Prussia
 
 #NOTE!!! Only actual Reforms go in here, not Legacy. Legacy go into 00_government_reforms.txt
 monarchy_mechanic = {
@@ -572,189 +578,189 @@ lakanate_reform = {
 
 #Austrian Gov Evolution
 austrian_duchy_reform = { #T6 - What AUT starts off with on advice of Prussia. - SF
-	icon = "austrian_duchy_reform"
-	allow_normal_conversion = yes
-	#legacy_equivalent = austrian_archduchy_legacy
-	valid_for_nation_designer = yes
-	fixed_rank = 6
-	potential = {
-		tag = AUT
-		has_reform = austrian_duchy_reform
-	}
-	nation_designer_cost = 0
-	modifiers = {
-		liberty_desire_from_subject_development = -0.15
-		nobles_influence_modifier = 0.025
-	}
-	custom_attributes = {
-		buffed_strong_duchies = yes #+5% Loyalty
-		has_austrian_subjects = yes
-	}
-	effect = {
-		set_government_rank = 6
-	}
-	ai = {
-		factor = 101
-	}
+    icon = "austrian_duchy_reform"
+    allow_normal_conversion = yes
+    #legacy_equivalent = austrian_archduchy_legacy
+    valid_for_nation_designer = yes
+    fixed_rank = 6
+    potential = {
+        tag = AUT
+        has_reform = austrian_duchy_reform
+    }
+    nation_designer_cost = 0
+    modifiers = {
+        liberty_desire_from_subject_development = -0.15
+        nobles_influence_modifier = 0.025
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        has_austrian_subjects = yes
+    }
+    effect = {
+        set_government_rank = 6
+    }
+    ai = {
+        factor = 101
+    }
 }
 
 austrian_archduchy_reform = { #T7 - Grand Duchy of Austria - Prussia
-	icon = "austrian_archduchy_reform"
-	allow_normal_conversion = yes
-	#legacy_equivalent = austrian_archduchy_legacy
-	valid_for_nation_designer = yes
-	#fixed_rank = 7
-	potential = {
-		tag = HAB
-		have_had_reform = austrian_duchy_reform
-		is_part_of_hre = yes #Added on suggestion of Prussia. - SF
-	}
-	nation_designer_cost = 0
-	modifiers = {
-		liberty_desire_from_subject_development = -0.30
-		nobles_influence_modifier = 0.05
-	}
-	custom_attributes = {
-		buffed_strong_duchies = yes #+5% Loyalty
-		has_austrian_subjects = yes
-	}
-	government_abilities = {
-		habsburg_glory
-	}
-	effect = {
-		change_dip = 1
-		set_government_rank = 7
-	}
-	removed_effect = {
-		change_dip = -1
-		set_government_rank = 6
-	}
-	ai = {
-		factor = 101
-	}
+    icon = "austrian_archduchy_reform"
+    allow_normal_conversion = yes
+    #legacy_equivalent = austrian_archduchy_legacy
+    valid_for_nation_designer = yes
+    #fixed_rank = 7
+    potential = {
+        tag = HAB
+        have_had_reform = austrian_duchy_reform
+        is_part_of_hre = yes #Added on suggestion of Prussia. - SF
+    }
+    nation_designer_cost = 0
+    modifiers = {
+        liberty_desire_from_subject_development = -0.30
+        nobles_influence_modifier = 0.05
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        has_austrian_subjects = yes
+    }
+    government_abilities = {
+        habsburg_glory
+    }
+    effect = {
+        change_dip = 1
+        set_government_rank = 7
+    }
+    removed_effect = {
+        change_dip = -1
+        set_government_rank = 6
+    }
+    ai = {
+        factor = 101
+    }
 }
 
 austrian_dual_monarchy = { #For the Union of Austria Hungary/Equivalent with previous ME habsburg_monarchy_reform. Also, put this reform in the AUH country tag. - SF
-	icon = "austrian_dual_monarchy_reform"
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 100
-	#fixed_rank = 8
-	potential = { #added via script
-	    OR = {
-			tag = HAB
-			tag = AUH
-	    }
-		have_had_reform = austrian_archduchy_reform
-	    is_part_of_hre = yes #Added on suggestion of Prussia. - SF
-	}
-	trigger = {
-		OR = {
-			AND = {
-				OR = {
-					senior_union_with = BOH
-					owns = 266
-				}
-				OR = {
-					senior_union_with = HUN
-					owns = 153
-				}
-			}
-			tag = AUH
-			has_reform = austrian_dual_monarchy
-		}
-	}
-	nation_designer_trigger = {
-		OR = {
-			has_dlc = "Emperor"
-			has_dlc = "Winds of Change"
-		}
-	}
-	modifiers = {
-		num_accepted_cultures = 2
-		global_unrest = -2
-		monarch_diplomatic_power = 2
-		promote_culture_cost = -0.33
-		tolerance_own = 1
-		mil_advisor_cost = -0.15
-		governing_capacity = 100
-	}
-	custom_attributes = {
-		enables_religious_domination = yes #+1 tolerance of the true faith in catholic subjects
-		has_austrian_subjects = yes
-	}
-	government_abilities = {
-		habsburg_glory #Added in VU v1.37 by SF
-	}
-	effect = {
-		change_dip = 2
-		set_government_rank = 8
-	}
-	removed_effect = {
-		change_dip = -2
-		set_government_rank = 7
-	}
-	ai = {
-		factor = 101
-	}
+    icon = "austrian_dual_monarchy_reform"
+    allow_normal_conversion = yes
+    valid_for_nation_designer = yes
+    nation_designer_cost = 100
+    #fixed_rank = 8
+    potential = { #added via script
+        OR = {
+            tag = HAB
+            tag = AUH
+        }
+        have_had_reform = austrian_archduchy_reform
+        is_part_of_hre = yes #Added on suggestion of Prussia. - SF
+    }
+    trigger = {
+        OR = {
+            AND = {
+                OR = {
+                    senior_union_with = BOH
+                    owns = 266
+                }
+                OR = {
+                    senior_union_with = HUN
+                    owns = 153
+                }
+            }
+            tag = AUH
+            has_reform = austrian_dual_monarchy
+        }
+    }
+    nation_designer_trigger = {
+        OR = {
+            has_dlc = "Emperor"
+            has_dlc = "Winds of Change"
+        }
+    }
+    modifiers = {
+        num_accepted_cultures = 2
+        global_unrest = -2
+        monarch_diplomatic_power = 2
+        promote_culture_cost = -0.33
+        tolerance_own = 1
+        mil_advisor_cost = -0.15
+        governing_capacity = 100
+    }
+    custom_attributes = {
+        enables_religious_domination = yes #+1 tolerance of the true faith in catholic subjects
+        has_austrian_subjects = yes
+    }
+    government_abilities = {
+        habsburg_glory #Added in VU v1.37 by SF
+    }
+    effect = {
+        change_dip = 2
+        set_government_rank = 8
+    }
+    removed_effect = {
+        change_dip = -2
+        set_government_rank = 7
+    }
+    ai = {
+        factor = 101
+    }
 }
 
 austrian_absolute_monarchy = { #For the Austrian Empire/Equivalent with previous ME austrian_empire_reform. Also, put this reform in the AUH country tag -SF
-	icon = "austrian_empire"
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 100
-	#fixed_rank = 9
-	potential = {
-		OR = {
-			tag = AUH
-			tag = AUE
-	    }
-		have_had_reform = austrian_dual_monarchy
-	    is_part_of_hre = no #Added on suggestion of Prussia. - SF
-	}
-	trigger = {
-		OR = {
-			AND = {
-				absolutism = 50
-				owns = 266
-				owns = 153
-				total_development = 500
-			}
-			has_reform = austrian_dual_monarchy
-		}
-	}
-	nation_designer_trigger = {
-		has_dlc = "Winds of Change"
-	}
-	modifiers = {
-		num_accepted_cultures = 3
-		culture_conversion_cost = -0.25
-		culture_conversion_time = -0.2
-		monarch_diplomatic_power = 2
-		harsh_treatment_cost = -0.15
-		monarch_diplomatic_power = 1
-		governing_capacity = 150
-	}
-	custom_attributes = {
-		enables_germanization = yes
-		increase_nobles_loyalty_per_culture_conversion = yes
-		has_austrian_subjects = yes
-	}
-	government_abilities = {
-		habsburg_glory #Added in VU v1.37 by SF
-	}
-	effect = {
-		change_dip = 3
-		set_government_rank = 9
-	}
-	removed_effect = {
-		change_dip = -3
-		set_government_rank = 8
-	}
-	ai = {
-		factor = 102
-	}
+    icon = "austrian_empire"
+    allow_normal_conversion = yes
+    valid_for_nation_designer = yes
+    nation_designer_cost = 100
+    #fixed_rank = 9
+    potential = {
+        OR = {
+            tag = AUH
+            tag = AUE
+        }
+        have_had_reform = austrian_dual_monarchy
+        is_part_of_hre = no #Added on suggestion of Prussia. - SF
+    }
+    trigger = {
+        OR = {
+            AND = {
+                absolutism = 50
+                owns = 266
+                owns = 153
+                total_development = 500
+            }
+            has_reform = austrian_dual_monarchy
+        }
+    }
+    nation_designer_trigger = {
+        has_dlc = "Winds of Change"
+    }
+    modifiers = {
+        num_accepted_cultures = 3
+        culture_conversion_cost = -0.25
+        culture_conversion_time = -0.2
+        monarch_diplomatic_power = 2
+        harsh_treatment_cost = -0.15
+        monarch_diplomatic_power = 1
+        governing_capacity = 150
+    }
+    custom_attributes = {
+        enables_germanization = yes
+        increase_nobles_loyalty_per_culture_conversion = yes
+        has_austrian_subjects = yes
+    }
+    government_abilities = {
+        habsburg_glory #Added in VU v1.37 by SF
+    }
+    effect = {
+        change_dip = 3
+        set_government_rank = 9
+    }
+    removed_effect = {
+        change_dip = -3
+        set_government_rank = 8
+    }
+    ai = {
+        factor = 102
+    }
 }
 
 grand_duchy_reform = {
@@ -911,6 +917,7 @@ daimyo = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -946,6 +953,7 @@ daimyo_barony_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -981,6 +989,7 @@ daimyo_viscounty_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -1016,6 +1025,7 @@ daimyo_county_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -1051,6 +1061,7 @@ daimyo_marquisate_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -1086,6 +1097,7 @@ daimyo_duchy_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -1121,6 +1133,7 @@ daimyo_principality_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
+        has_daimyo_subjects = yes
     }
 }
 
@@ -1151,7 +1164,7 @@ feudal_france_reform = {
         has_appanages = yes
         need_crownland_to_annex = yes
         nobility_loyalty_hit_on_integration = yes
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 
@@ -1363,7 +1376,7 @@ absolutist_france_reform = {
     custom_attributes = {
         centralize_state_development = yes
         buffed_strong_duchies = yes #+5% Loyalty
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 
@@ -1610,10 +1623,10 @@ kalmar_union = {
     }
     trigger = {
         any_subject_country = {
-			OR = {
-				is_subject_of_type = danish_crown_PU
-				is_subject_of_type = personal_union
-			}
+            OR = {
+                is_subject_of_type = danish_crown_PU
+                is_subject_of_type = personal_union
+            }
             capital_scope = { region = scandinavia_region }
         }
     }
@@ -1666,7 +1679,7 @@ danish_archkingdom = {
     }
     custom_attributes = {
         personal_union_war_contribution = yes
-        has_danish_kingdom = yes
+        has_danish_subjects = yes
     }
     ai = {
         factor = 1
@@ -3967,8 +3980,8 @@ issi_akdom_reform = {
     allow_normal_conversion = yes
     potential = {
         religion = ashurist
-        TAG = ASR
-        NOT = { TAG = ASY }
+        tag = ASR
+        NOT = { tag = ASY }
         OR = {
             AND = {
                 tag = ASR
@@ -4018,7 +4031,7 @@ sardom_reform = {
     allow_normal_conversion = yes
     potential = {
         religion = cult_of_marduk
-        TAG = BAB
+        tag = BAB
         OR = {
             AND = {
                 tag = BAB
@@ -9133,39 +9146,39 @@ absolute_shogunate_reform = {
 }
 
 japanese_divine_empire = {
-	icon = "japanese_divine_empire"
-	allow_normal_conversion = no
-	lock_level_when_selected = yes
-	potential = {
-		OR = {
-			AND = {
-				is_playing_custom_nation = yes
-				has_reform = japanese_divine_empire
-			}
-			has_country_flag = JPE_gov_flag
-			have_had_reform = japanese_divine_empire
-			mission_completed = jap_restoration
-		}
-		NOT = { has_reform = absolute_shogunate_reform }
-	}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 100
-	nation_designer_trigger = {
-		capital_scope = { region = japan_region }
-	}
-	fixed_rank = 9
-	maintain_dynasty = yes
-	modifiers = {
-		all_estate_possible_privileges = 1
-		no_stability_loss_on_monarch_death = yes
-		all_estate_loyalty_equilibrium = 0.1
-		tolerance_own = 3
-		amount_of_samurai = 10
-		allowed_samurai_fraction = 0.1
-		country_military_power = 1
-		country_diplomatic_power = 1
- 		country_admin_power = 1
-	}
+    icon = "japanese_divine_empire"
+    allow_normal_conversion = no
+    lock_level_when_selected = yes
+    potential = {
+        OR = {
+            AND = {
+                is_playing_custom_nation = yes
+                has_reform = japanese_divine_empire
+            }
+            has_country_flag = JPE_gov_flag
+            have_had_reform = japanese_divine_empire
+            mission_completed = jap_restoration
+        }
+        NOT = { has_reform = absolute_shogunate_reform }
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 100
+    nation_designer_trigger = {
+        capital_scope = { region = japan_region }
+    }
+    fixed_rank = 9
+    maintain_dynasty = yes
+    modifiers = {
+        all_estate_possible_privileges = 1
+        no_stability_loss_on_monarch_death = yes
+        all_estate_loyalty_equilibrium = 0.1
+        tolerance_own = 3
+        amount_of_samurai = 10
+        allowed_samurai_fraction = 0.1
+        country_military_power = 1
+        country_diplomatic_power = 1
+        country_admin_power = 1
+    }
 }
 
 land_christian_sun_reform = {
@@ -9612,49 +9625,7 @@ eue_lordship_reform = { #T1 - Lordship level
     allow_normal_conversion = no
     fixed_rank = 1
     potential = {
-        religion_group = christian
-        OR = {
-            has_reform = eue_lordship_reform
-            have_had_reform = eue_lordship_reform
-            is_subject_of_type = anglois_lordship
-            is_subject_of_type = aragonese_lordship
-            is_subject_of_type = austrian_lordship
-            is_subject_of_type = baltic_lordship
-            is_subject_of_type = belgian_lordship
-            is_subject_of_type = bohemian_lordship
-            is_subject_of_type = byzantine_lordship
-            is_subject_of_type = castilian_lordship
-            is_subject_of_type = danish_lordship
-            is_subject_of_type = dutch_lordship
-            is_subject_of_type = english_lordship
-            is_subject_of_type = french_lordship
-            is_subject_of_type = german_lordship
-            is_subject_of_type = hungarian_lordship
-            is_subject_of_type = italian_lordship
-            is_subject_of_type = norwegian_lordship
-            is_subject_of_type = polish_lordship
-            is_subject_of_type = portuguese_lordship
-            is_subject_of_type = prussian_lordship
-            is_subject_of_type = russian_lordship
-            is_subject_of_type = swedish_lordship
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 1
-                NOT = {
-                    government_rank = 2
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
-        }
+        is_barony_subject_type = yes
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_lordship_legacy
@@ -9678,49 +9649,7 @@ eue_barony_reform = { #T2 - Barony level
     allow_normal_conversion = no
     fixed_rank = 2
     potential = {
-        religion_group = christian
-        OR = {
-            has_reform = eue_barony_reform
-            have_had_reform = eue_barony_reform
-            is_subject_of_type = anglois_barony
-            is_subject_of_type = aragonese_barony
-            is_subject_of_type = austrian_barony
-            is_subject_of_type = baltic_barony
-            is_subject_of_type = belgian_barony
-            is_subject_of_type = bohemian_barony
-            is_subject_of_type = byzantine_barony
-            is_subject_of_type = castilian_barony
-            is_subject_of_type = danish_barony
-            is_subject_of_type = dutch_barony
-            is_subject_of_type = english_barony
-            is_subject_of_type = french_barony
-            is_subject_of_type = german_barony
-            is_subject_of_type = hungarian_barony
-            is_subject_of_type = italian_barony
-            is_subject_of_type = norwegian_barony
-            is_subject_of_type = polish_barony
-            is_subject_of_type = portuguese_barony
-            is_subject_of_type = prussian_barony
-            is_subject_of_type = russian_barony
-            is_subject_of_type = swedish_barony
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 2
-                NOT = {
-                    government_rank = 3
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
-        }
+        is_barony_subject_type = yes
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_barony_legacy
@@ -9746,50 +9675,7 @@ eue_viscounty_reform = { #T3 - Viscounty level
     allow_normal_conversion = no
     fixed_rank = 3
     potential = {
-        religion_group = christian
-        OR = {
-            is_part_of_hre = yes
-            has_reform = eue_viscounty_reform
-            have_had_reform = eue_viscounty_reform
-            is_subject_of_type = anglois_viscounty
-            is_subject_of_type = aragonese_viscounty
-            is_subject_of_type = austrian_viscounty
-            is_subject_of_type = baltic_viscounty
-            is_subject_of_type = belgian_viscounty
-            is_subject_of_type = bohemian_viscounty
-            is_subject_of_type = byzantine_viscounty
-            is_subject_of_type = castilian_viscounty
-            is_subject_of_type = danish_viscounty
-            is_subject_of_type = dutch_viscounty
-            is_subject_of_type = english_viscounty
-            is_subject_of_type = french_viscounty
-            is_subject_of_type = german_viscounty
-            is_subject_of_type = hungarian_viscounty
-            is_subject_of_type = italian_viscounty
-            is_subject_of_type = norwegian_viscounty
-            is_subject_of_type = polish_viscounty
-            is_subject_of_type = portuguese_viscounty
-            is_subject_of_type = prussian_viscounty
-            is_subject_of_type = russian_viscounty
-            is_subject_of_type = swedish_viscounty
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 3
-                NOT = {
-                    government_rank = 4
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
-        }
+        is_viscounty_subject_type = yes
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_viscounty_legacy
@@ -9813,47 +9699,11 @@ eue_county_reform = { #T4 - County level
     allow_normal_conversion = no
     fixed_rank = 4
     potential = {
-        religion_group = christian
-        OR = {
-            is_part_of_hre = yes
-            has_reform = eue_county_reform
-            have_had_reform = eue_county_reform
-            is_subject_of_type = aragonese_county
-            is_subject_of_type = austrian_county
-            is_subject_of_type = baltic_county
-            is_subject_of_type = belgian_county
-            is_subject_of_type = bohemian_county
-            is_subject_of_type = byzantine_county
-            is_subject_of_type = castilian_county
-            is_subject_of_type = danish_county
-            is_subject_of_type = dutch_county
-            is_subject_of_type = portuguese_county
-            is_subject_of_type = french_county
-            is_subject_of_type = german_county
-            is_subject_of_type = hungarian_county
-            is_subject_of_type = italian_county
-            is_subject_of_type = norwegian_county
-            is_subject_of_type = polish_county
-            is_subject_of_type = prussian_county
-            is_subject_of_type = russian_county
-            is_subject_of_type = swedish_county
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 4
-                NOT = {
-                    government_rank = 5
-                }
-            }
-        }
+        is_county_subject_type = yes
         NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
+            is_subject_of_type = anglois_county
+            is_subject_of_type = english_earldom
+            is_subject_of_type = english_crown_PU
         }
     }
     lock_level_when_selected = yes
@@ -9878,29 +9728,10 @@ eng_earldom_reform = { #T4 - County Level
     allow_normal_conversion = no
     fixed_rank = 4
     potential = {
-        culture_group = british
-        capital_scope = {
-            OR = {
-                region = british_isles_region
-                region = france_region
-            }
-        }
         OR = {
-            has_reform = eng_earldom_reform
-            have_had_reform = eng_earldom_reform
             is_subject_of_type = anglois_county
             is_subject_of_type = english_earldom
             is_subject_of_type = english_crown_PU
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
         }
     }
     lock_level_when_selected = yes
@@ -9910,7 +9741,7 @@ eng_earldom_reform = { #T4 - County Level
     #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
-        has_english_earldom = yes
+        has_english_subjects = yes
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
@@ -9930,52 +9761,7 @@ eue_marquisate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        religion_group = christian
-        NOT = { religion = orthodox }
-        OR = {
-            is_part_of_hre = yes
-            has_reform = eue_marquisate_reform
-            have_had_reform = eue_marquisate_reform
-            is_subject_of_type = anglois_marquisate
-            is_subject_of_type = aragonese_marquisate
-            is_subject_of_type = austrian_marquisate
-            is_subject_of_type = baltic_marquisate
-            is_subject_of_type = belgian_marquisate
-            is_subject_of_type = bohemian_marquisate
-            is_subject_of_type = byzantine_marquisate
-            is_subject_of_type = castilian_marquisate
-            is_subject_of_type = danish_marquisate
-            is_subject_of_type = dutch_marquisate
-            is_subject_of_type = english_marquisate
-            is_subject_of_type = french_marquisate
-            is_subject_of_type = german_marquisate
-            is_subject_of_type = hungarian_marquisate
-            is_subject_of_type = italian_marquisate
-            is_subject_of_type = norwegian_marquisate
-            is_subject_of_type = polish_marquisate
-            is_subject_of_type = portuguese_marquisate
-            is_subject_of_type = prussian_marquisate
-            is_subject_of_type = russian_marquisate
-            is_subject_of_type = swedish_marquisate
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 5
-                NOT = {
-                    government_rank = 6
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
-        }
-        NOT = { has_reform = revolutionary_empire_reform }
+        is_marquisate_subject_type = yes
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -9995,50 +9781,7 @@ eue_duchy_reform = { #T6 - Duchy level
     fixed_rank = 6
     maintain_dynasty = yes
     potential = {
-        religion_group = christian
-        OR = {
-            is_part_of_hre = yes
-            has_reform = eue_duchy_reform
-            have_had_reform = eue_duchy_reform
-            is_subject_of_type = anglois_duchy
-            is_subject_of_type = aragonese_duchy
-            is_subject_of_type = austrian_duchy
-            is_subject_of_type = baltic_duchy
-            is_subject_of_type = belgian_duchy
-            is_subject_of_type = bohemian_duchy
-            is_subject_of_type = byzantine_duchy
-            is_subject_of_type = castilian_duchy
-            is_subject_of_type = danish_duchy
-            is_subject_of_type = dutch_duchy
-            is_subject_of_type = english_duchy
-            is_subject_of_type = french_duchy
-            is_subject_of_type = german_duchy
-            is_subject_of_type = hungarian_duchy
-            is_subject_of_type = italian_duchy
-            is_subject_of_type = norwegian_duchy
-            is_subject_of_type = polish_duchy
-            is_subject_of_type = portuguese_duchy
-            is_subject_of_type = prussian_duchy
-            is_subject_of_type = russian_duchy
-            is_subject_of_type = swedish_duchy
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 6
-                NOT = {
-                    government_rank = 7
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_principality_reform
-            has_reform = eue_kingdom_reform
-        }
+        is_duchy_subject_type = yes
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10059,49 +9802,7 @@ eue_principality_reform = { #T7 - Principality level
     fixed_rank = 7
     maintain_dynasty = yes
     potential = {
-        religion_group = christian
-        OR = {
-            has_reform = eue_principality_reform
-            have_had_reform = eue_principality_reform
-            is_subject_of_type = anglois_principality
-            is_subject_of_type = aragonese_principality
-            is_subject_of_type = austrian_principality
-            is_subject_of_type = baltic_principality
-            is_subject_of_type = belgian_principality
-            is_subject_of_type = bohemian_principality
-            is_subject_of_type = byzantine_principality
-            is_subject_of_type = castilian_principality
-            is_subject_of_type = danish_principality
-            is_subject_of_type = dutch_principality
-            is_subject_of_type = english_principality
-            is_subject_of_type = french_principality
-            is_subject_of_type = german_principality
-            is_subject_of_type = hungarian_principality
-            is_subject_of_type = italian_principality
-            is_subject_of_type = norwegian_principality
-            is_subject_of_type = polish_principality
-            is_subject_of_type = portuguese_principality
-            is_subject_of_type = prussian_principality
-            is_subject_of_type = russian_principality
-            is_subject_of_type = swedish_principality
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 7
-                NOT = {
-                    government_rank = 8
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_kingdom_reform
-        }
+        is_principality_subject_type = yes
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10122,49 +9823,7 @@ eue_kingdom_reform = { #T8 - Kingdom level
     fixed_rank = 8
     maintain_dynasty = yes
     potential = {
-        religion_group = christian
-        OR = {
-            has_reform = eue_kingdom_reform
-            have_had_reform = eue_kingdom_reform
-            is_subject_of_type = anglois_kingdom
-            is_subject_of_type = aragonese_kingdom
-            is_subject_of_type = austrian_kingdom
-            is_subject_of_type = baltic_kingdom
-            is_subject_of_type = belgian_kingdom
-            is_subject_of_type = bohemian_kingdom
-            is_subject_of_type = byzantine_kingdom
-            is_subject_of_type = castilian_kingdom
-            is_subject_of_type = danish_kingdom
-            is_subject_of_type = dutch_kingdom
-            is_subject_of_type = english_kingdom
-            is_subject_of_type = french_kingdom
-            is_subject_of_type = german_kingdom
-            is_subject_of_type = hungarian_kingdom
-            is_subject_of_type = italian_kingdom
-            is_subject_of_type = norwegian_kingdom
-            is_subject_of_type = polish_kingdom
-            is_subject_of_type = portuguese_kingdom
-            is_subject_of_type = prussian_kingdom
-            is_subject_of_type = russian_kingdom
-            is_subject_of_type = swedish_kingdom
-            AND = {
-                is_part_of_hre = yes
-                government_rank = 8
-                NOT = {
-                    government_rank = 9
-                }
-            }
-        }
-        NOT = {
-            has_reform = eue_lordship_reform
-            has_reform = eue_barony_reform
-            has_reform = eue_viscounty_reform
-            has_reform = eue_county_reform
-            has_reform = eng_earldom_reform
-            has_reform = eue_marquisate_reform
-            has_reform = eue_duchy_reform
-            has_reform = eue_principality_reform
-        }
+        is_kingdom_subject_type = yes
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10186,31 +9845,7 @@ islamic_emirate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        OR = {
-            religion = sunni
-            religion = druze_new
-        }
-        OR = {
-            has_reform = islamic_emirate_reform
-            have_had_reform = islamic_emirate_reform
-            is_subject_of_type = islamic_emirate
-            AND = {
-                government_rank = 5
-                NOT = {
-                    government_rank = 6
-                }
-            }
-        }
-        NOT = {
-            #has_reform = islamic_imamate_reform
-            #has_reform = islamic_grand_muftate_reform
-            #has_reform = islamic_sheikdom_reform
-            #has_reform = islamic_sharifate_reform
-            has_reform = islamic_governate_reform
-            has_reform = islamic_sultanate_reform
-            has_reform = islamic_taifa_reform
-            has_reform = islamic_malikate_reform
-        }
+        is_subject_of_type = islamic_emirate
     }
     queen = no
     modifiers = {
@@ -10231,31 +9866,7 @@ islamic_governate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        OR = {
-            religion = shiite
-            religion = ibadi
-        }
-        OR = {
-            has_reform = islamic_governate_reform
-            have_had_reform = islamic_governate_reform
-            is_subject_of_type = islamic_governate
-            AND = {
-                government_rank = 5
-                NOT = {
-                    government_rank = 6
-                }
-            }
-        }
-        NOT = {
-            #has_reform = islamic_imamate_reform
-            #has_reform = islamic_grand_muftate_reform
-            #has_reform = islamic_sheikdom_reform
-            #has_reform = islamic_sharifate_reform
-            has_reform = islamic_emirate_reform
-            has_reform = islamic_sultanate_reform
-            has_reform = islamic_taifa_reform
-            has_reform = islamic_malikate_reform
-        }
+        is_subject_of_type = islamic_governate
     }
     queen = no
     modifiers = {
@@ -10276,22 +9887,7 @@ islamic_sultanate_reform = { #T6 - Duchy level
     fixed_rank = 6
     maintain_dynasty = yes
     potential = {
-        religion_group = muslim
-        OR = {
-            has_reform = islamic_sultanate_reform
-            have_had_reform = islamic_sultanate_reform
-            is_subject_of_type = islamic_sultanate
-        }
-        NOT = {
-            #has_reform = islamic_imamate_reform
-            #has_reform = islamic_grand_muftate_reform
-            #has_reform = islamic_sheikdom_reform
-            #has_reform = islamic_sharifate_reform
-            has_reform = islamic_emirate_reform
-            has_reform = islamic_governate_reform
-            has_reform = islamic_taifa_reform
-            has_reform = islamic_malikate_reform
-        }
+        is_subject_of_type = islamic_sultanate
     }
     queen = no
     modifiers = {
@@ -10312,22 +9908,7 @@ islamic_taifa_reform = { #T7 - Principality level
     fixed_rank = 7
     maintain_dynasty = yes
     potential = {
-        religion_group = muslim
-        OR = {
-            has_reform = islamic_taifa_reform
-            have_had_reform = islamic_taifa_reform
-            is_subject_of_type = islamic_taifa
-        }
-        NOT = {
-            #has_reform = islamic_imamate_reform
-            #has_reform = islamic_grand_muftate_reform
-            #has_reform = islamic_sheikdom_reform
-            #has_reform = islamic_sharifate_reform
-            has_reform = islamic_emirate_reform
-            has_reform = islamic_governate_reform
-            has_reform = islamic_sultanate_reform
-            has_reform = islamic_malikate_reform
-        }
+        is_subject_of_type = islamic_taifa
     }
     queen = no
     modifiers = {
@@ -10348,22 +9929,7 @@ islamic_malikate_reform = { #T8 - Kingdom level
     fixed_rank = 8
     maintain_dynasty = yes
     potential = {
-        religion_group = muslim
-        OR = {
-            has_reform = islamic_malikate_reform
-            have_had_reform = islamic_malikate_reform
-            is_subject_of_type = islamic_malikate
-        }
-        NOT = {
-            #has_reform = islamic_imamate_reform
-            #has_reform = islamic_grand_muftate_reform
-            #has_reform = islamic_sheikdom_reform
-            #has_reform = islamic_sharifate_reform
-            has_reform = islamic_emirate_reform
-            has_reform = islamic_governate_reform
-            has_reform = islamic_sultanate_reform
-            has_reform = islamic_taifa_reform
-        }
+        is_subject_of_type = islamic_malikate
     }
     queen = no
     modifiers = {
@@ -10657,7 +10223,7 @@ french_kingdom_reform = {
 
     custom_attributes = {
         blocked_call_diet = yes
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 
@@ -10726,7 +10292,7 @@ first_french_empire_reform = { #revolutionary_empire_reform
 
     custom_attributes = {
         locked_government_type = yes
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 
@@ -10770,7 +10336,7 @@ french_monarchic_restoration_reform = { #revolutionary_empire_reform
     }
     custom_attributes = {
         locked_government_type = yes
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 
@@ -10814,7 +10380,7 @@ french_orleanist_restoration_reform = { #revolutionary_empire_reform
     }
     custom_attributes = {
         locked_government_type = yes
-        has_french_kingdom = yes
+        has_french_subjects = yes
     }
 }
 

@@ -1,5 +1,9 @@
-#VU addition for 1.36.2.* by San Felipe
+#Updated for VU 1.37.* by San Felipe
 #country_has_both_paradox_and_golden_bull_missions = {}
+#Contributors:
+#Altan
+#DonBrom
+#San Felipe
 
 #VU building triggers - Altan
 
@@ -44,7 +48,6 @@ has_transportation_trigger = {
 is_lordship_subject_type = {
     #check if the subject is any type of lordship
     OR = {
-        is_subject_of_type = daimyo_vassal
         is_subject_of_type = anglois_lordship
         is_subject_of_type = aragonese_lordship
         is_subject_of_type = austrian_lordship
@@ -54,6 +57,7 @@ is_lordship_subject_type = {
         is_subject_of_type = burgundian_lordship
         is_subject_of_type = byzantine_lordship
         is_subject_of_type = castilian_lordship
+        is_subject_of_type = daimyo_vassal
         is_subject_of_type = danish_lordship
         is_subject_of_type = dutch_lordship
         is_subject_of_type = english_lordship
@@ -73,7 +77,6 @@ is_lordship_subject_type = {
 is_barony_subject_type = {
     #check if the subject is any type of barony
     OR = {
-        is_subject_of_type = daimyo_barony_vassal
         is_subject_of_type = anglois_barony
         is_subject_of_type = aragonese_barony
         is_subject_of_type = austrian_barony
@@ -83,6 +86,7 @@ is_barony_subject_type = {
         is_subject_of_type = burgundian_barony
         is_subject_of_type = byzantine_barony
         is_subject_of_type = castilian_barony
+        is_subject_of_type = daimyo_barony_vassal
         is_subject_of_type = danish_barony
         is_subject_of_type = dutch_barony
         is_subject_of_type = english_barony
@@ -102,7 +106,6 @@ is_barony_subject_type = {
 is_viscounty_subject_type = {
     #check if the subject is any type of viscounty
     OR = {
-        is_subject_of_type = daimyo_viscounty_vassal
         is_subject_of_type = anglois_viscounty
         is_subject_of_type = aragonese_viscounty
         is_subject_of_type = austrian_viscounty
@@ -112,6 +115,7 @@ is_viscounty_subject_type = {
         is_subject_of_type = burgundian_viscounty
         is_subject_of_type = byzantine_viscounty
         is_subject_of_type = castilian_viscounty
+        is_subject_of_type = daimyo_viscounty_vassal
         is_subject_of_type = danish_viscounty
         is_subject_of_type = dutch_viscounty
         is_subject_of_type = english_viscounty
@@ -131,7 +135,6 @@ is_viscounty_subject_type = {
 is_county_subject_type = {
     #check if the subject is any type of county
     OR = {
-        is_subject_of_type = daimyo_county_vassal
         is_subject_of_type = anglois_county
         is_subject_of_type = aragonese_county
         is_subject_of_type = austrian_county
@@ -141,6 +144,7 @@ is_county_subject_type = {
         is_subject_of_type = burgundian_county
         is_subject_of_type = byzantine_county
         is_subject_of_type = castilian_county
+        is_subject_of_type = daimyo_county_vassal
         is_subject_of_type = danish_county
         is_subject_of_type = dutch_county
         #is_subject_of_type = english_county #england doesn't have counties, it has earldoms (thanks Modus) -Don
@@ -161,7 +165,6 @@ is_county_subject_type = {
 is_marquisate_subject_type = {
     #check if the subject is any type of marqiosate
     OR = {
-        is_subject_of_type = daimyo_marquisate_vassal
         is_subject_of_type = anglois_marquisate
         is_subject_of_type = aragonese_marquisate
         is_subject_of_type = austrian_marquisate
@@ -171,6 +174,7 @@ is_marquisate_subject_type = {
         is_subject_of_type = burgundian_marquisate
         is_subject_of_type = byzantine_marquisate
         is_subject_of_type = castilian_marquisate
+        is_subject_of_type = daimyo_marquisate_vassal
         is_subject_of_type = danish_marquisate
         is_subject_of_type = dutch_marquisate
         is_subject_of_type = english_marquisate
@@ -190,7 +194,6 @@ is_marquisate_subject_type = {
 is_duchy_subject_type = {
     #check if the subject is any type of duchy
     OR = {
-        is_subject_of_type = daimyo_duchy_vassal
         is_subject_of_type = anglois_duchy
         is_subject_of_type = aragonese_duchy
         is_subject_of_type = austrian_duchy
@@ -200,6 +203,7 @@ is_duchy_subject_type = {
         is_subject_of_type = burgundian_duchy
         is_subject_of_type = byzantine_duchy
         is_subject_of_type = castilian_duchy
+        is_subject_of_type = daimyo_duchy_vassal
         is_subject_of_type = danish_duchy
         is_subject_of_type = dutch_duchy
         is_subject_of_type = english_duchy
@@ -219,7 +223,6 @@ is_duchy_subject_type = {
 is_principality_subject_type = {
     #check if the subject is any type of principality
     OR = {
-        is_subject_of_type = daimyo_principality_vassal
         is_subject_of_type = anglois_principality
         is_subject_of_type = aragonese_principality
         is_subject_of_type = austrian_principality
@@ -229,6 +232,7 @@ is_principality_subject_type = {
         is_subject_of_type = burgundian_principality
         is_subject_of_type = byzantine_principality
         is_subject_of_type = castilian_principality
+        is_subject_of_type = daimyo_principality_vassal
         is_subject_of_type = danish_principality
         is_subject_of_type = dutch_principality
         is_subject_of_type = english_principality
@@ -282,6 +286,25 @@ ToR_subject_limit_reached = {
     }
 }
 
+ToR_Muslim_subject_limit_reached = {
+    calc_true_if = {
+        all_subject_country = {
+            OR = {
+                is_subject_of_type = islamic_imamate
+                is_subject_of_type = islamic_grand_muftate
+                is_subject_of_type = islamic_sheikdom
+                is_subject_of_type = islamic_sharifate
+                is_subject_of_type = islamic_governate
+                is_subject_of_type = islamic_emirate
+                is_subject_of_type = islamic_sultanate
+                is_subject_of_type = islamic_taifa
+                is_subject_of_type = islamic_malikate
+            }
+        }
+        amount = 15 #change this to change the limit of the
+    }
+}
+
 is_ToR_subject_type = {
     OR = {
         is_lordship_subject_type = yes
@@ -314,7 +337,7 @@ has_vu_ToR_subjects = {
         has_government_attribute = has_german_subjects
         has_government_attribute = has_hungarian_subjects
         has_government_attribute = has_italian_subjects
-        has_government_attribute = has_norwegian_subject
+        has_government_attribute = has_norwegian_subjects
         has_government_attribute = has_polish_subjects
         has_government_attribute = has_portuguese_subjects
         has_government_attribute = has_prussian_subjects

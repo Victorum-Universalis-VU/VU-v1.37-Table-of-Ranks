@@ -1317,21 +1317,11 @@ country_event = {
             }
         }
         ai_chance = {
-            factor = 1
+            factor = 0.5
             modifier = {
-                factor = 0.5
-                OR = {
-                    alliance_with = BRA
-                    marriage_with = BRA
-                }
-            }
-            modifier = {
-                factor = 0.5
-                OR = {
-                    is_rival = BRA
-                    BRA = {
-                        is_rival = BOH
-                    }
+                factor = 2
+                BRA = {
+                    ai = yes
                 }
             }
         }
@@ -1348,14 +1338,14 @@ country_event = {
         ai_chance = {
             factor = 1
             modifier = {
-                factor = 0.5
-                NOT = {
+                factor = 0
+                OR = {
                     alliance_with = BRA
                     marriage_with = BRA
                 }
             }
             modifier = {
-                factor = 0
+                factor = 0.5
                 NOT = {
                     is_rival = BRA
                     BRA = {
@@ -1433,15 +1423,6 @@ country_event = {
         }
         ai_chance = {
             factor = 1
-            modifier = {
-                factor = 0
-                OR = {
-                    is_rival = BOH
-                    BOH = {
-                        is_rival = BRA
-                    }
-                }
-            }
         }
     }
     option = {
@@ -1454,16 +1435,7 @@ country_event = {
             }
         }
         ai_chance = {
-            factor = 1
-            modifier = {
-                factor = 0
-                NOT = {
-                    is_rival = BOH
-                    BOH = {
-                        is_rival = BRA
-                    }
-                }
-            }
+            factor = 0
         }
     }
 }
@@ -1502,6 +1474,9 @@ country_event = {
                 id = flavor_boh.28
             }
         }
+        ai_chance = {
+            factor = 0.25
+        }
     }
     option = {
         #demmand more! (not-friends)
@@ -1511,6 +1486,9 @@ country_event = {
             country_event = {
                 id = flavor_boh.27
             }
+        }
+        ai_chance = {
+            factor = 0
         }
     }
 }
@@ -1550,12 +1528,18 @@ country_event = {
                 }
             }
         }
+        ai_chance = {
+            factor = 1
+        }
     }
     option = {
         #We must accept this...
         name = flavor_boh.25.b
         add_prestige = -15
         add_legitimacy = -15
+        ai_chance = {
+            factor = 0
+        }
     }
 }
 ###############
@@ -1580,6 +1564,9 @@ country_event = {
                 id = flavor_boh.24
             }
         }
+        ai_chance = {
+            factor = 1
+        }
     }
     option = {
         #How dare they decline our offer? The'll get noting now!
@@ -1589,6 +1576,9 @@ country_event = {
             country_event = {
                 id = flavor_boh.25
             }
+        }
+        ai_chance = {
+            factor = 0
         }
     }
 }
@@ -1621,6 +1611,9 @@ country_event = {
         HUN = {
             join_all_offensive_wars_of = BRA
         }
+        ai_chance = {
+            factor = 1
+        }
     }
     option = {
         #We have no other option but to concede it all, we don't stand a chance
@@ -1647,6 +1640,9 @@ country_event = {
             cede_province = BRA
             add_core = BRA
         }
+        ai_chance = {
+            factor = 0
+        }
     }
 }
 ###############
@@ -1664,6 +1660,8 @@ country_event = {
     #Brandenburg offers us alliance in return for Cottobus
     option = {
         #We accept your offer
+        name = flavor_boh.28.a
+        custom_tooltip = flavor_boh.28.a.tt
         add_historical_friend = BRA
         force_remove_rival = BRA
         create_marriage = BRA
@@ -1684,15 +1682,20 @@ country_event = {
             add_historical_friend = BOH
             force_remove_rival = BOH
         }
+        ai_chance = {
+            factor = 1
+        }
     }
     option = {
         #No, thanks, just keep it
+        name = flavor_boh.28.b
+        custom_tooltip = flavor_boh.28.b.tt
         1763 = {
             cede_province = BRA
             add_core = BRA
         }
         ai_chance = {
-            factor = 1
+            factor = 0
         }
     }
 }

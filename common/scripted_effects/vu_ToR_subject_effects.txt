@@ -1,4 +1,7 @@
-#Stuff re-done by Don for ToR release
+#VU additions by DonBrom for VU ToR 1.37.* release
+#Contributors:
+#DonBrom
+#San Felipe
 ##############################################################
 vu_create_ToR_lordship = {
     if = {
@@ -24,7 +27,7 @@ vu_create_ToR_lordship = {
     else_if = {
         limit = { 
             has_government_attribute = has_austrian_subjects
-    }
+        }
         create_subject = {
             subject_type = austrian_lordship
             subject = FROM
@@ -34,7 +37,7 @@ vu_create_ToR_lordship = {
     else_if = {
         limit = {
             has_government_attribute = has_baltic_subjects 
-    }
+        }
         create_subject = {
             subject_type = baltic_lordship
             subject = FROM
@@ -42,7 +45,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_burgundian_subjects }
+        limit = {
+            has_government_attribute = has_burgundian_subjects 
+        }
         create_subject = {
             subject_type = burgundian_lordship
             subject = FROM
@@ -50,7 +55,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_bohemian_subjects }
+        limit = {
+            has_government_attribute = has_bohemian_subjects 
+        }
         create_subject = {
             subject_type = bohemian_lordship
             subject = FROM
@@ -58,7 +65,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_byzantine_subjects}
+        limit = {
+            has_government_attribute = has_byzantine_subjects
+        }
         create_subject = {
             subject_type = byzantine_lordship
             subject = FROM
@@ -66,7 +75,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_castilian_subjects }
+        limit = {
+            has_government_attribute = has_castilian_subjects 
+        }
         create_subject = {
             subject_type = castilian_lordship
             subject = FROM
@@ -74,7 +85,19 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_danish_subjects}
+        limit = { 
+            has_government_attribute = has_daimyo_subjects 
+        }
+        create_subject = {
+            subject_type = daimyo_vassal
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+    }
+    else_if = {
+        limit = {
+            has_government_attribute = has_danish_subjects
+        }
         create_subject = {
             subject_type = danish_lordship
             subject = FROM
@@ -82,7 +105,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_dutch_subjects}
+        limit = {
+            has_government_attribute = has_dutch_subjects
+        }
         create_subject = {
             subject_type = dutch_lordship
             subject = FROM
@@ -90,7 +115,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_english_subjects}
+        limit = {
+            has_government_attribute = has_english_subjects
+        }
         create_subject = {
             subject_type = english_lordship
             subject = FROM
@@ -98,7 +125,9 @@ vu_create_ToR_lordship = {
         }
     }
     else_if = {
-        limit = {has_government_attribute = has_french_subjects}
+        limit = {
+            has_government_attribute = has_french_subjects
+        }
         create_subject = {
             subject_type = french_lordship
             subject = FROM
@@ -137,7 +166,7 @@ vu_create_ToR_lordship = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_lordship
@@ -280,20 +309,20 @@ vu_create_ToR_barony = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_barony
+            subject_type = daimyo_barony_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_barony_vassal
+            subject_type = danish_barony
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -360,7 +389,7 @@ vu_create_ToR_barony = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_barony
@@ -503,20 +532,20 @@ vu_create_ToR_viscounty = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_viscounty
+            subject_type = daimyo_viscounty_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_viscounty_vassal
+            subject_type = danish_viscounty
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -583,7 +612,7 @@ vu_create_ToR_viscounty = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_viscounty
@@ -726,20 +755,20 @@ vu_create_ToR_county = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_county
+            subject_type = daimyo_county_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_county_vassal
+            subject_type = danish_county
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -806,7 +835,7 @@ vu_create_ToR_county = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_county
@@ -949,20 +978,20 @@ vu_create_ToR_marquisate = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_marquisate
+            subject_type = daimyo_marquisate_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_marquisate_vassal
+            subject_type = danish_marquisate
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -1029,7 +1058,7 @@ vu_create_ToR_marquisate = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_marquisate
@@ -1172,20 +1201,20 @@ vu_create_ToR_duchy = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_duchy
+            subject_type = daimyo_duchy_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_duchy_vassal
+            subject_type = danish_duchy
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -1252,7 +1281,7 @@ vu_create_ToR_duchy = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_duchy
@@ -1395,20 +1424,20 @@ vu_create_ToR_principality = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_danish_subjects
+            has_government_attribute = has_daimyo_subjects
         }
         create_subject = {
-            subject_type = danish_principality
+            subject_type = daimyo_principality_vassal
             subject = FROM
             keep_liberty_desire = yes
         }
     }
     else_if = {
         limit = {
-            has_government_attribute = has_japanese_subjects
+            has_government_attribute = has_danish_subjects
         }
         create_subject = {
-            subject_type = daimyo_principality_vassal
+            subject_type = danish_principality
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -1475,7 +1504,7 @@ vu_create_ToR_principality = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_principality
@@ -1616,6 +1645,7 @@ vu_create_ToR_kingdom = {
             keep_liberty_desire = yes
         }
     }
+    #There is no VU equivalent for this concering the Japanese subjects because Shogun reform already exists and once you bring back the emperor, the next highest rank is Principality. 
     else_if = {
         limit = {
             has_government_attribute = has_danish_subjects
@@ -1688,7 +1718,7 @@ vu_create_ToR_kingdom = {
     }
     else_if = {
         limit = {
-            has_government_attribute = has_norwegian_subject
+            has_government_attribute = has_norwegian_subjects
         }
         create_subject = {
             subject_type = norwegian_kingdom
