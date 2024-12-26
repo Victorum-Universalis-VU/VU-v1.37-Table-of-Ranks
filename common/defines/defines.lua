@@ -127,7 +127,7 @@ NDiplomacy = {
 	MAX_PEACE_TREATY_COST = 200,					-- in diplo power
 	
 	DESIRED_NUM_OF_ELECTORS = 7,
-	MAX_FREE_CITIES = 50,							-- from 15 to 50 -don
+	MAX_FREE_CITIES = 25,							-- from 15 to 25 -don
 	MIN_NUM_ELECTORS_FOR_REMOVE_ELECTORATE = 2,		-- Limit is inclusive.
 	HRE_PRINCE_AUTHORITY_THRESHOLD = 35,			-- Threshold below which you lose IA, and above which you gain it
 	IMPERIAL_AUTHORITY_FROM_PRINCES = 0.075,			-- Scales to threshold
