@@ -4359,12 +4359,12 @@ SON_ideas = {
 
 BRI_ideas = {
 	start = {
-		navy_tradition = 1
-		trade_steering = 0.10
+		land_forcelimit_modifier = 0.15
+		naval_forcelimit_modifier = 0.15
 	}
 	
 	bonus = {
-		naval_forcelimit_modifier = 0.25
+		army_tradition = 1
 	}
 	
 	trigger = {
@@ -4394,6 +4394,7 @@ BRI_ideas = {
 	}
 	league_of_the_public_weal = {
 		diplomatic_reputation = 1
+		land_morale = 0.15
 	}
 	catholicon = {
 		prestige = 1
@@ -5485,8 +5486,8 @@ KBO_ideas = {
 
 FEO_ideas = {
 	start = {
-		global_trade_power = 0.1
-		army_tradition_decay = -0.01
+		land_morale = 0.15
+		army_tradition = 1
 	}
 
 	bonus = {
@@ -5499,25 +5500,28 @@ FEO_ideas = {
 	free = yes		#will be added at load.
 
 	principate_guard = {
-		merc_maintenance_modifier = -0.15
+		merc_maintenance_modifier = -0.25
 	}
 	komnin_paleolog_gavras = {
-		heir_chance = 0.5		
+		heir_chance = 0.5
+		legitimacy = 1		
 	}
 	aristocracy_in_moskovia = {
 		diplomatic_reputation = 1
 	}
 	avlita_port = {
 		trade_efficiency = 0.1
+		global_trade_power = 0.1
 	}
 	mangup_kalamita = {
 		defensiveness = 0.25
 	}
 	turms = {
-		global_tax_modifier = 0.1
+		global_tax_modifier = 0.2
 	}
 	cave_monasteries = {
 		tolerance_own = 1
+		global_missionary_strength = 0.02
 	}
 }
 
@@ -7163,11 +7167,12 @@ ARM_ideas = {
 WLS_ideas = {
 	start = {
 		hostile_attrition = 1
-		land_morale = 0.1
+		land_morale = 0.15
 	}
 
 	bonus = {
-		land_forcelimit_modifier = 0.25
+		land_forcelimit_modifier = 0.20
+		fire_damage = 0.15
 	}
 	
 	trigger = {
@@ -7193,8 +7198,10 @@ WLS_ideas = {
 	}
 	economic_revival = {
 		production_efficiency = 0.1
+		global_trade_goods_size_modifier = 0.1
 	}
 	prifysgolion_cymru = {
+		technology_cost = -0.05
 		idea_cost = -0.1
 	}
 	welsh_church = {
@@ -14299,7 +14306,7 @@ irish_ideas = {
 	    OR = {
 			tag = IRE
 			AND = { #VU
-				primary_culture = irish
+				primary_culture = celtic_irish_culture
 				NOT = {
 					OR = {
 						tag = CEL
@@ -14460,8 +14467,8 @@ CRN_ideas = {
 # Manx ideas
 KOI_ideas = {
 	start = {
-		global_sailors_modifier = 0.2
-		global_ship_cost = -0.1
+		naval_morale = 0.15
+		global_ship_cost = -0.15
 	}
 	
 	bonus = {
@@ -14477,13 +14484,15 @@ KOI_ideas = {
 		diplomats = 1
 	}
 	mann_kings = {
-		core_creation = -0.10
+		land_morale = 0.15
 	}
 	mann_tynwald = {
 		advisor_pool = 1
+		advisor_cost = -0.15
 	}
 	mann_and_the_isles = {
-		naval_morale = 0.15
+		navy_tradition = 1
+		global_sailors_modifier = 0.15
 	}
 	mann_act_of_settlement = {
 		global_unrest = -1
@@ -14492,7 +14501,8 @@ KOI_ideas = {
 		global_heretic_missionary_strength = 0.02
 	}
 	mann_act_of_revestment = {
-		diplomatic_annexation_cost = -0.15
+		core_creation = -0.20
+		ignore_coring_distance = yes
 	}
 }
 
@@ -16142,8 +16152,7 @@ OIR_ideas = {
 		global_manpower_modifier = 0.25
 	}
 	glory_of_conquest = { #also used in Horde ideas, KHA_ideas and CHG_ideas
-		may_establish_frontier = yes
-		auto_explore_adjacent_to_colony = yes
+
 	}
 }
 
@@ -16185,8 +16194,7 @@ KHA_ideas = {
 		movement_speed = 0.1
 	}
 	MNG_kheshig = {
-		may_establish_frontier = yes
-		auto_explore_adjacent_to_colony = yes
+		cavalry_shock = 0.5
 	}
 }
 
@@ -16212,8 +16220,6 @@ CHG_ideas = {
 	CHG_border_wars = {
 		land_morale = 0.05
 		manpower_recovery_speed = 0.15
-		may_establish_frontier = yes
-		auto_explore_adjacent_to_colony = yes
 	}
 	sons_of_chagatai = {
 		diplomatic_annexation_cost = -0.15
@@ -16228,6 +16234,7 @@ CHG_ideas = {
 		diplomats = 1
 	}
 	glory_of_conquest = {
+		cavalry_shock = 0.5
 		#global_manpower_modifier = 0.25 (effect taken in OIR idea)
 	}
 }

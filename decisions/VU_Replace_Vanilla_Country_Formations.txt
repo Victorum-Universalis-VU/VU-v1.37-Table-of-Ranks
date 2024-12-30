@@ -792,7 +792,7 @@ country_decisions = {
 			NOT = { tag = UNK }
 			OR = {
 				tag = ENG
-				tag = SCO
+				#tag = SCO
 				AND = {
 					culture_group = british
 					num_of_cities = 25			#At least 1/2 of Britain's 49 provinces to see, if not ENG or SCO
@@ -1496,7 +1496,7 @@ country_decisions = {
 			OR = { 
 				culture_group = french
 				primary_culture = basque
-				primary_culture = breton
+				primary_culture = celtic_breton_culture
 			}
 		}
 		provinces_to_highlight = {
@@ -2132,7 +2132,7 @@ country_decisions = {
 			NOT = { tag = ANI }
 			NOT = { tag = TNA }
 			OR = {
-				primary_culture = irish
+				primary_culture = celtic_irish_culture
 				AND = {
 					culture_group = gaelic
 					any_owned_province = { region = ireland_region }
@@ -4493,7 +4493,8 @@ country_decisions = {
 			OR = {
 				primary_culture = scottish
 				primary_culture = gallgaidheil
-				primary_culture = highland_scottish
+				primary_culture = celtic_lowland_scottish
+				primary_culture = celtic_highland_scottish_culture
 			}	#One of the Scottish cultures
 			any_owned_province = {
 				OR = {
@@ -4524,11 +4525,23 @@ country_decisions = {
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
 			if = {
-				limit = { primary_culture = scottish }
+				limit = { 
+					OR = {
+						primary_culture = scottish
+						primary_culture = celtic_lowland_scottish
+						primary_culture = celtic_highland_scottish_culture
+					}
+				}
 				owns_core_province = 248			#Lothian
 			}
 			if = {
-				limit = { NOT = { primary_culture = scottish } }
+				limit = { 
+					NOT = { 
+						primary_culture = scottish
+						primary_culture = celtic_lowland_scottish
+						primary_culture = celtic_highland_scottish_culture
+					} 
+				}
 				owns_core_province = 250			#Fife
 			}
 			num_of_owned_provinces_with = {

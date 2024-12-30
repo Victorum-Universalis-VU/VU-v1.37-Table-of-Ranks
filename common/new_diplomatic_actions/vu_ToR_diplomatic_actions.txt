@@ -1,0 +1,1046 @@
+#Same dip actions, just fixed up to not be 42 THOUSAND lines long...
+#########################################################################################
+#   vu_promote_vassal_to_lordship                                                       #
+#########################################################################################
+vu_promote_vassal_to_lordship = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        #has_vu_ToR_subjects = yes
+        has_government_attribute = vu_has_ToR_subjects
+        ToR_subject_limit_reached = no
+        government_rank = 2
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        vu_create_ToR_lordship = yes
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_barony                                                         #
+#########################################################################################
+vu_promote_vassal_to_barony = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        has_government_attribute = vu_has_ToR_subjects
+        ToR_subject_limit_reached = no
+        government_rank = 3
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        #Limited that the vassal has less than 50 liberty desire
+        if = {
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        vu_create_ToR_barony = yes
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_viscounty                                                      #
+#########################################################################################
+vu_promote_vassal_to_viscounty = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        has_government_attribute = vu_has_ToR_subjects
+        ToR_subject_limit_reached = no
+        government_rank = 4
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        #Limited that the vassal has less than 50 liberty desire
+        if = {
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        vu_create_ToR_viscounty = yes
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_marquisate                                                     #
+#########################################################################################
+vu_promote_vassal_to_marquisate = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        has_government_attribute = vu_has_ToR_subjects
+        ToR_subject_limit_reached = no
+        government_rank = 6
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        #Limited that the vassal has less than 50 liberty desire
+        if = {
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        vu_create_ToR_marquisate = yes
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_rein_subject_in                                                                  #
+#########################################################################################
+vu_rein_subject_in = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        has_government_attribute = vu_has_ToR_subjects
+        if = {
+            limit = {
+                FROM = {
+                    government_rank = 1
+                    NOT = {
+                        government_rank = 2
+                    }
+                }
+            }
+            government_rank = 2
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 2
+                    NOT = {
+                        government_rank = 3
+                    }
+                }
+            }
+            government_rank = 3
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 3
+                    NOT = {
+                        government_rank = 4
+                    }
+                }
+            }
+            government_rank = 4
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 4
+                    NOT = {
+                        government_rank = 5
+                    }
+                }
+            }
+            government_rank = 5
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 5
+                    NOT = {
+                        government_rank = 6
+                    }
+                }
+            }
+            government_rank = 6
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 6
+                    NOT = {
+                        government_rank = 7
+                    }
+                }
+            }
+            government_rank = 7
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 7
+                    NOT = {
+                        government_rank = 8
+                    }
+                }
+            }
+            government_rank = 8
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 8
+                    NOT = {
+                        government_rank = 9
+                    }
+                }
+            }
+            government_rank = 9
+        }
+        FROM = {
+            #only works of subjects yours
+            is_subject_of = ROOT
+            #checks for your subject being any type of a ToR subject
+            is_ToR_subject_type = yes
+        }
+    }
+
+    is_allowed = {
+        FROM = {
+            #cannot be disloyal
+            NOT = {
+                liberty_desire = 50
+            }
+            #going descendingly to avoid having to have two checks since government_rank = x is anything above x
+            if = {
+                limit = {
+                    government_rank = 8
+                }
+                total_development = 100
+            }
+            else_if = {
+                limit = {
+                    government_rank = 7
+                }
+                total_development = 75
+            }
+            else_if = {
+                limit = {
+                    government_rank = 6
+                }
+                total_development = 50
+            }
+            else_if = {
+                limit = {
+                    government_rank = 5
+                }
+                total_development = 40
+            }
+            else_if = {
+                limit = {
+                    government_rank = 4
+                }
+                total_development = 30
+            }
+            else_if = {
+                limit = {
+                    government_rank = 3
+                }
+                total_development = 25
+            }
+            else_if = {
+                limit = {
+                    government_rank = 2
+                }
+                total_development = 15
+            }
+            else_if = {
+                limit = {
+                    government_rank = 1
+                }
+                total_development = 10
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    government_rank = 7
+                }
+            }
+            vu_create_ToR_kingdom = yes
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 6
+                }
+            }
+            vu_create_ToR_principality = yes
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 5
+                }
+            }
+            vu_create_ToR_duchy = yes
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 4
+                }
+            }
+            vu_create_ToR_marquisate = yes
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 3
+                }
+            }
+            vu_create_ToR_county = yes
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 2
+                }
+            }
+            vu_create_ToR_viscounty = yes
+        }
+        else  = {
+            vu_create_ToR_barony = yes
+        }
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+
+###################################################################################################
+###################################################################################################
+####                        MUSLIM SUBJECTS BEYOND THIS POINT                                  ####
+###################################################################################################
+###################################################################################################
+
+
+#########################################################################################
+#   vu_promote_vassal_to_imamate                                                       #
+#########################################################################################
+vu_promote_vassal_to_imamate = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        religion_group = muslim
+        ToR_Muslim_subject_limit_reached = no
+        government_rank = 2
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        create_subject = {
+            subject_type = islamic_imamate
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            #adding the gov reform for the apropriate rank...
+            #might make it a scripted effect if we make more unique ones
+            add_government_reform = islamic_imamate_reform
+            change_religion = ROOT
+            #Adding this in preparation for the optional colouring in
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_grand_muftate                                                  #
+#########################################################################################
+vu_promote_vassal_to_grand_muftate = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        religion_group = muslim
+        ToR_Muslim_subject_limit_reached = no
+        government_rank = 3
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        create_subject = {
+            subject_type = islamic_grand_muftate
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            #adding the gov reform for the apropriate rank...
+            #might make it a scripted effect if we make more unique ones
+            add_government_reform = islamic_grand_muftate_reform
+            change_religion = ROOT
+            #Adding this in preparation for the optional colouring in
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_sheikdom                                                       #
+#########################################################################################
+vu_promote_vassal_to_sheikdom = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        religion_group = muslim
+        ToR_Muslim_subject_limit_reached = no
+        government_rank = 4
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        create_subject = {
+            subject_type = islamic_sheikdom
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            #adding the gov reform for the apropriate rank...
+            #might make it a scripted effect if we make more unique ones
+            add_government_reform = islamic_sheikdom_reform
+            change_religion = ROOT
+            #Adding this in preparation for the optional colouring in
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_promote_vassal_to_emirate                                                        #
+#########################################################################################
+vu_promote_vassal_to_emirate = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        religion_group = muslim
+        ToR_Muslim_subject_limit_reached = no
+        government_rank = 6
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = vassal
+            government = monarchy
+        }
+    }
+
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        if = {
+            limit = {
+                OR = {
+                    tag = MUG
+                    tag = TIM
+                    tag = YUA
+                    religion = ibadi
+                }
+            }
+            create_subject = {
+                subject_type = islamic_governate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_governate_reform
+            }
+        }
+        else = {
+            create_subject = {
+                subject_type = islamic_emirate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_emirate_reform
+            }
+        }
+
+        FROM = {
+            change_religion = ROOT
+            set_dynasty = ROOT
+            #Adding this in preparation for the optional colouring in
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+
+#########################################################################################
+#   vu_rein_muslim_subject_in                                                           #
+#########################################################################################
+vu_rein_muslim_subject_in = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        religion_group = muslim
+        if = {
+            limit = {
+                FROM = {
+                    government_rank = 1
+                    NOT = {
+                        government_rank = 2
+                    }
+                }
+            }
+            government_rank = 2
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 2
+                    NOT = {
+                        government_rank = 3
+                    }
+                }
+            }
+            government_rank = 3
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 3
+                    NOT = {
+                        government_rank = 4
+                    }
+                }
+            }
+            government_rank = 4
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 4
+                    NOT = {
+                        government_rank = 5
+                    }
+                }
+            }
+            government_rank = 5
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 5
+                    NOT = {
+                        government_rank = 6
+                    }
+                }
+            }
+            government_rank = 6
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 6
+                    NOT = {
+                        government_rank = 7
+                    }
+                }
+            }
+            government_rank = 7
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 7
+                    NOT = {
+                        government_rank = 8
+                    }
+                }
+            }
+            government_rank = 8
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 8
+                    NOT = {
+                        government_rank = 9
+                    }
+                }
+            }
+            government_rank = 9
+        }
+        FROM = {
+            #only works of subjects yours
+            is_subject_of = ROOT
+            #checks for your subject being any type of a ToR subject
+            is_ToR_subject_type = yes
+        }
+    }
+
+    is_allowed = {
+        FROM = {
+            #cannot be disloyal
+            NOT = {
+                liberty_desire = 50
+            }
+            #going descendingly to avoid having to have two checks since government_rank = x is anything above x
+            if = {
+                limit = {
+                    government_rank = 8
+                }
+                total_development = 100
+            }
+            else_if = {
+                limit = {
+                    government_rank = 7
+                }
+                total_development = 75
+            }
+            else_if = {
+                limit = {
+                    government_rank = 6
+                }
+                total_development = 50
+            }
+            else_if = {
+                limit = {
+                    government_rank = 5
+                }
+                total_development = 40
+            }
+            else_if = {
+                limit = {
+                    government_rank = 4
+                }
+                total_development = 30
+            }
+            else_if = {
+                limit = {
+                    government_rank = 3
+                }
+                total_development = 25
+            }
+            else_if = {
+                limit = {
+                    government_rank = 2
+                }
+                total_development = 15
+            }
+            else_if = {
+                limit = {
+                    government_rank = 1
+                }
+                total_development = 10
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    government_rank = 7
+                }
+            }
+            create_subject = {
+                subject_type = islamic_malikate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_malikate_reform
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 6
+                }
+            }
+            create_subject = {
+                subject_type = islamic_taifa
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_taifa_reform
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 5
+                }
+            }
+            create_subject = {
+                subject_type = islamic_sultanate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_sultanate_reform
+            }
+        }
+        else_if = {
+            limit = {
+                OR = {
+                    tag = MUG
+                    tag = TIM
+                    tag = YUA
+                    religion = ibadi
+                }
+                FROM = {
+                    government_rank = 4
+                }
+            }
+            create_subject = {
+                subject_type = islamic_governate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_governate_reform
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 4
+                }
+            }
+            create_subject = {
+                subject_type = islamic_emirate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_emirate_reform
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 3
+                }
+            }
+            create_subject = {
+                subject_type = islamic_sharifate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_sharifate_reform
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    government_rank = 2
+                }
+            }
+            create_subject = {
+                subject_type = islamic_sheikdom
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_sheikdom_reform
+            }
+        }
+        else  = {
+            create_subject = {
+                subject_type = islamic_grand_muftate
+                subject = FROM
+                keep_liberty_desire = yes
+            }
+            FROM = {
+                add_government_reform = islamic_grand_muftate_reform
+            }
+        }
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+#########################################################################################
+#   vu_convert_personal_union	                                                        #
+#########################################################################################
+vu_convert_personal_union = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = promote_vassal_to_anglois_lordship_alert_tooltip
+
+    is_visible = {
+        #Checks if the overlord has access to the appropriate subject types
+        has_government_attribute = vu_has_ToR_crowns
+        FROM = {
+            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            is_subject_of = ROOT
+            is_subject_of_type = personal_union
+        }
+    }
+
+    is_allowed = {
+        FROM = {
+            NOT = {
+                liberty_desire = 50
+            }
+        }
+    }
+
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        vu_create_ToR_crown = yes
+        FROM = {
+            vu_subject_colouring = yes
+        }
+    }
+
+    ai_will_do = {
+        always = no	#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}

@@ -277,12 +277,48 @@ is_kingdom_subject_type = {
     }
 }
 
+is_crown_subject_type = {
+    OR = {
+        is_subject_of_type = aragonese_crown_PU
+        is_subject_of_type = austrian_crown_PU
+        is_subject_of_type = benelux_crown_PU
+        is_subject_of_type = bohemian_crown_PU
+        is_subject_of_type = burgundian_crown_PU
+        is_subject_of_type = byzantine_crown_PU
+        is_subject_of_type = danish_crown_PU
+        is_subject_of_type = english_crown_PU
+        is_subject_of_type = french_crown_PU
+        is_subject_of_type = german_crown_PU
+        is_subject_of_type = hungarian_crown_PU
+        is_subject_of_type = italian_crown_PU
+        is_subject_of_type = polish_crown_PU
+        is_subject_of_type = portuguese_crown_PU
+        is_subject_of_type = russian_crown_PU
+        is_subject_of_type = spanish_crown_PU
+        is_subject_of_type = swedish_crown_PU
+    }
+}
+
 ToR_subject_limit_reached = {
     calc_true_if = {
         all_subject_country = {
             is_ToR_subject_type = yes
         }
         amount = 15 #change this to change the limit of the
+    }
+}
+
+is_muslim_subject_type = {
+    OR = {
+        is_subject_of_type = islamic_imamate
+        is_subject_of_type = islamic_grand_muftate
+        is_subject_of_type = islamic_sheikdom
+        is_subject_of_type = islamic_sharifate
+        is_subject_of_type = islamic_governate
+        is_subject_of_type = islamic_emirate
+        is_subject_of_type = islamic_sultanate
+        is_subject_of_type = islamic_taifa
+        is_subject_of_type = islamic_malikate
     }
 }
 
@@ -315,33 +351,13 @@ is_ToR_subject_type = {
         is_duchy_subject_type = yes
         is_principality_subject_type = yes
         is_kingdom_subject_type = yes
+        is_muslim_subject_type = yes
+        is_crown_subject_type = yes
     }
 }
 
-has_vu_ToR_subjects = {
-    #check if the overlord has any type of the VU ToR subjects
-    OR = {
-        has_government_attribute = has_anglois_subjects
-        has_government_attribute = has_aragonese_subjects
-        has_government_attribute = has_austrian_subjects
-        has_government_attribute = has_baltic_subjects
-        has_government_attribute = has_burgundian_subjects
-        has_government_attribute = has_bohemian_subjects
-        has_government_attribute = has_byzantine_subjects
-        has_government_attribute = has_castilian_subjects
-        has_government_attribute = has_danish_subjects
-        has_government_attribute = has_daimyo_subjects
-        has_government_attribute = has_dutch_subjects
-        has_government_attribute = has_english_subjects
-        has_government_attribute = has_french_subjects
-        has_government_attribute = has_german_subjects
-        has_government_attribute = has_hungarian_subjects
-        has_government_attribute = has_italian_subjects
-        has_government_attribute = has_norwegian_subjects
-        has_government_attribute = has_polish_subjects
-        has_government_attribute = has_portuguese_subjects
-        has_government_attribute = has_prussian_subjects
-        has_government_attribute = has_russian_subjects
-        has_government_attribute = has_swedish_subjects
+is_colourable_subject_type = {
+    NOT = {
+        is_subject_of_type = tributary_state
     }
 }

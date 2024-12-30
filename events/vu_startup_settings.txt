@@ -4,33 +4,97 @@ namespace = VU_SET_Events
 #################################
 
 country_event = {
-	id = VU_SET_Events.01
-	title = VU_SET_Events.01.t
-	desc = VU_SET_Events.01.d
-	picture = COURT_eventPicture
-	
-	fire_only_once = yes
-	
-	trigger = {
-		has_game_started = yes
-		ROOT = { 
-			ai = no 
-		}
-	}
+    id = VU_SET_Events.01
+    title = VU_SET_Events.01.t
+    desc = VU_SET_Events.01.d
+    picture = COURT_eventPicture
 
-	option = {
-		#Reccommended Mode, doesn't do shit, just leaves the game as is and exits the settings
-		name = VU_SET_Events.01.a
-		add_prestige = 1
-	}
+    fire_only_once = yes
 
-	option = {
-		#Performance Mode, yeets a lot of extra tags. Turns off some mechanics (TBD)
-		name = VU_SET_Events.01.b
-		remove_extra_tags = yes
-	}
+    trigger = {
+        has_game_started = yes
+        ROOT = {
+            ai = no
+        }
+    }
 
-	option = {
-		name = VU_SET_Events.01.c
-	}
+    immediate = {
+        vu_discover_the_world = yes #effect
+        vu_colour_all_countries = yes
+    }
+
+    option = {
+        #Reccommended Mode, doesn't do shit, just leaves the game as is and exits the settings
+        name = VU_SET_Events.01.a
+        add_prestige = 1
+    }
+
+    option = {
+        #Performance Mode, yeets a lot of extra tags. Turns off some mechanics (TBD)
+        name = VU_SET_Events.01.b
+        remove_extra_tags = yes
+        turn_off_subject_colouring = yes
+    }
+
+    option = {
+        name = VU_SET_Events.01.c
+        country_event = {
+            id = VU_SET_Events.02
+        }
+    }
+}
+
+country_event = {
+    id = VU_SET_Events.02
+    title = VU_SET_Events.02.t
+    desc = VU_SET_Events.02.d
+    picture = COURT_eventPicture
+
+    is_triggered_only = yes
+
+    option = {
+        #Specific Performance options
+        name = VU_SET_Events.02.a
+    }
+
+    option = {
+        #Specific Gameplay options
+        name = VU_SET_Events.02.b
+        country_event = {
+            id = VU_SET_Events.03
+        }
+    }
+
+    option = {
+        #Close options
+        name = VU_SET_Events.02.c
+        add_treasury = 1
+    }
+}
+
+country_event = {
+    id = VU_SET_Events.03
+    title = VU_SET_Events.03.t
+    desc = VU_SET_Events.03.d
+    picture = COURT_eventPicture
+
+    is_triggered_only = yes
+
+    option = {
+        #Turn off Subjects colouring in
+        name = VU_SET_Events.03.a
+        turn_off_subject_colouring = yes
+    }
+
+    #option = {
+    #	#Specific Gameplay options
+    #	name = VU_SET_Events.03.b
+    #
+    #}
+
+    after = {
+        country_event = {
+            id = VU_SET_Events.02
+        }
+    }
 }

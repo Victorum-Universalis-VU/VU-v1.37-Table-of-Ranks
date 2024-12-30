@@ -1,1734 +1,2762 @@
+turn_off_subject_colouring = {
+    set_global_flag = vu_uncoloured_subjects_global
+    every_country = {
+        restore_country_color = yes
+    }
+}
+
+vu_colouring_on_action = {
+    every_country = {
+        limit = {
+            NOT = {
+                AND = {
+                    is_colourable_subject_type = yes
+                    is_subject = yes
+                }
+                has_country_flag = has_overriden_color_flag
+            }
+        }
+        restore_country_color = yes
+    }
+}
+
+vu_subject_colouring = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    overlord = {
+                        has_country_flag = vu_uncoloured_subjects_overlord
+                    }
+                    has_country_flag = vu_uncoloured_subjects_subject
+                }
+                is_colourable_subject_type = yes
+            }
+            change_country_color = {
+                country = overlord
+            }
+            every_subject_country = {
+                limit = {
+                    NOT = {
+                        overlord = {
+                            has_country_flag = vu_uncoloured_subjects_overlord
+                        }
+                        has_country_flag = vu_uncoloured_subjects_subject
+                    }
+                    is_colourable_subject_type = yes
+                }
+                change_country_color = {
+                    country = overlord
+                }
+            }
+        }
+    }
+}
+
+vu_colour_all_countries = {
+    hidden_effect = {
+        every_country = {
+            if = {
+                limit = {
+                    is_subject = yes
+                    is_colourable_subject_type = yes
+                    NOT = {
+                        overlord = {
+                            has_country_flag = vu_uncoloured_subjects_overlord
+                        }
+                        has_country_flag = vu_uncoloured_subjects_subject
+                    }
+                }
+                change_country_color = {
+                    country = overlord
+                }
+                every_subject_country = {
+                    limit = {
+                        NOT = {
+                            overlord = {
+                                has_country_flag = vu_uncoloured_subjects_overlord
+                            }
+                            has_country_flag = vu_uncoloured_subjects_subject
+                        }
+                    }
+                    change_country_color = {
+                        country = overlord
+                    }
+                }
+            }
+        }
+    }
+}
+
+auto_activate_TGE = {
+    hidden_effect = {
+        1 = {
+            province_event = { id = New_TradeGood_Events.3 }
+        }
+        if = {	#Replaces some fruit in England with Cider
+            limit = {
+                NOT = { has_global_flag = No_Cider }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 4130
+                            province_id = 7420
+                            province_id = 8124
+                            province_id = 8129
+                            province_id = 3145
+                        }
+                    }
+                    change_trade_goods = cider
+
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Cider
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Cider_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Palm_oil }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 7365
+                            province_id = 2253
+                            province_id = 2266
+                            province_id = 1150
+                            province_id = 7373
+                            province_id = 7369
+                            province_id = 2292
+                            province_id = 6541
+                        }
+                    }
+
+                    change_trade_goods = palm_oil
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Palm_oil
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Palm_oil_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Cloves }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 5440
+                            province_id = 4795
+                            province_id = 649
+                        }
+                    }
+
+                    change_trade_goods = cloves
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Cloves
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Cloves_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Nutmeg }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 7182
+                            province_id = 650
+                            province_id = 8612
+                            province_id = 652
+                            province_id = 5439
+                            province_id = 2688
+                        }
+                    }
+                    change_trade_goods = nutmeg
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Nutmeg
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Nutmeg_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Metalworking }
+            }
+            hidden_effect = {
+                every_province = {
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Metalworking
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Metalworking_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Exotic_animals }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 4021
+                            province_id = 4025
+                            province_id = 4619
+                            province_id = 2641
+                            province_id = 4818
+                            province_id = 626
+                        }
+                    }
+                    change_trade_goods = exotic_animals
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Exotic_animals
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Exotic_animals_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Vanilla }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 2648
+                            province_id = 848
+                            province_id = 4023
+                            province_id = 631
+                            province_id = 1193
+                            province_id = 4024
+                            province_id = 8557
+                            province_id = 642
+                            province_id = 624
+                        }
+                    }
+                    change_trade_goods = vanilla
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Vanilla
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Vanilla_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Munitions }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = munitions
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Munitions
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Munitions_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Woodworking }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = woodworking
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Woodworking
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Woodworking_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Canned_Goods }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = canned_goods
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Canned_Goods #was GOODS_Marcin_Woodworking
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Canned_Goods_NO #was GOODS_Marcin_Woodworking_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Sweet_Confectioneries }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = sweet_confectioneries
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Sweet_Confectioneries #was GOODS_Marcin_Woodworking
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Sweet_Confectioneries_NO #was GOODS_Marcin_Woodworking_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Tar }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 9
+                            province_id = 7804
+                            province_id = 7865
+                            province_id = 1955
+                            province_id = 7802
+                            province_id = 4114
+                            province_id = 32
+                            province_id = 4258
+                            province_id = 7877
+                            province_id = 7868
+                            province_id = 7851
+                        }
+                    }
+                    change_trade_goods = tar
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Tar
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Tar_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Leather }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = leather
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Leather
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Leather_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Jewellery }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                    change_trade_goods = jewellery
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Jewellery
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Jewellery_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Maple_syrup }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = maple_syrup
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Maple_syrup
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Maple_syrup_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Potato }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 807
+                            province_id = 2831
+                        }
+                    }
+
+                    change_trade_goods = potato
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Potato
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Potato_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Steam_engine }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = steam_engine
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Steam_engine
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Steam_engine_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Optics }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = optics
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Optics
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Optics_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Brass }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = brass
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Brass
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Brass_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Cannon }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = cannon
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Cannon
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Cannon_NO
+        }
+        if= {
+            limit = {
+                NOT = { has_global_flag = No_Mine }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+
+                        }
+                    }
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Mine
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Mine_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Tomato }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 4575
+                            province_id = 4642
+                        }
+                    }
+
+                    change_trade_goods = tomato
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Tomato
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Tomato_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Champagne }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 186
+                            province_id = 4390
+                            province_id = 7958
+                            province_id = 192
+                            province_id = 8089
+                            province_id = 197
+                            province_id = 109
+                            province_id = 2981
+                            #province_id = 134 #Vienna
+                        }
+                    }
+
+                    change_trade_goods = champagne_bottle
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Champagne_Bottle
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Champagne_Bottle_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Llama }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 2943
+                            province_id = 817
+                            province_id = 814
+                            province_id = 811
+                            province_id = 804
+                            province_id = 2942
+                            province_id = 2838
+                            province_id = 794
+                            province_id = 2837
+                            province_id = 2824
+                        }
+                    }
+                    change_trade_goods = llama
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Llama
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Llama_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Indigo }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            province_id = 243
+                            province_id = 1760
+                            province_id = 63
+                            province_id = 205
+                            province_id = 4111
+                            province_id = 7994
+                            province_id = 7589
+                            province_id = 7517
+                            province_id = 4695
+                            province_id = 7907
+                            province_id = 60
+                            province_id = 4439
+                            #province_id = 8839 #Sphinx addition
+                            province_id = 525
+                            province_id = 4465
+                            province_id = 2063
+                            province_id = 516
+                            province_id = 521
+                            province_id = 2047
+                            province_id = 526
+                            province_id = 7320
+                            province_id = 7509
+                            province_id = 7512
+                            province_id = 5218
+                            province_id = 3629
+                            province_id = 3627
+                        }
+                    }
+                    if = {
+                        limit = { continent = europe }
+                        add_permanent_province_modifier = {
+                            name = woad_type
+                            duration = -1
+                            desc = woad_type_tooltip
+                        }
+                    }
+                    change_trade_goods = indigo
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Indigo
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Indigo_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Uniforms }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = uniforms
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Uniforms
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Uniforms_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Marble_sculpture }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = marble_sculpture
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Marble_sculpture
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Marble_sculpture_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Cigars }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = cigars
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Cigars
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Cigars_NO
+        }
+        if = {
+            limit = {
+                NOT = { has_global_flag = No_Chocolate }
+            }
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                        }
+                    }
+                    change_trade_goods = chocolate
+                }
+            }
+            custom_tooltip = GOODS_Marcin_Chocolate
+        }
+        else = {
+            custom_tooltip = GOODS_Marcin_Chocolate_NO
+        }
+        hidden_effect = {
+            220 = { change_trade_goods = silk }
+            2386 = { change_trade_goods = sugar }
+            203 = { change_trade_goods = silk }
+            116 = { change_trade_goods = silk }
+            101 = { change_trade_goods = silk }
+            4729 = { change_trade_goods = silk }
+            4559 = { change_trade_goods = dyes }
+            163 = { change_trade_goods = dyes }
+            2983 = { change_trade_goods = paper }
+        }
+        1 = {
+            province_event = { id = prices_marcin.13 days = 365 }
+        }
+        set_global_flag = tradegood_marcin
+    }
+}
+
 remove_extra_tags = {
     remove_extra_HRE_tags = yes
     remove_extra_western_tags = yes
+    remove_extra_italian_tags = yes
 }
 
 remove_extra_HRE_tags = {
     set_global_flag = vu_startup_small_HRE
     #Bohemia
-    BOH = {
-        if = {
-            limit = {
-                MVA = {
-                    ai = yes
+    hidden_effect = {
+        BOH = {
+            if = {
+                limit = {
+                    MVA = {
+                        ai = yes
+                    }
                 }
-            }
-            inherit = MVA
-        }
-        if = {
-            limit = {
-                SOR = {
-                    ai = yes
-                }
-            }
-            inherit = SOR
-        }
-    }
-    GLG = {
-        if = {
-            limit = {
-                LEG = {
-                    ai = yes
+                inherit = MVA
+            }
+            if = {
+                limit = {
+                    SOR = {
+                        ai = yes
+                    }
                 }
+                inherit = SOR
+            }
+        }
+        GLG = {
+            if = {
+                limit = {
+                    LEG = {
+                        ai = yes
+                    }
+                }
+                inherit = LEG
             }
-            inherit = LEG
-        }
-        if = {
-            limit = {
-                JAW = {
-                    ai = yes
+            if = {
+                limit = {
+                    JAW = {
+                        ai = yes
+                    }
                 }
+                inherit = JAW
             }
-            inherit = JAW
-        }
-        if = {
-            limit = {
-                OLE = {
-                    ai = yes
+            if = {
+                limit = {
+                    OLE = {
+                        ai = yes
+                    }
                 }
+                inherit = OLE
             }
-            inherit = OLE
-        }
-        if = {
-            limit = {
-                NAM = {
-                    ai = yes
+            if = {
+                limit = {
+                    NAM = {
+                        ai = yes
+                    }
                 }
+                inherit = NAM
             }
-            inherit = NAM
-        }
-        if = {
-            limit = {
-                BEG = {
-                    ai = yes
+            if = {
+                limit = {
+                    BEG = {
+                        ai = yes
+                    }
                 }
+                inherit = BEG
             }
-            inherit = BEG
         }
-    }
-    RAC = {
-        if = {
-            limit = {
-                TRO = {
-                    ai = yes
+        RAC = {
+            if = {
+                limit = {
+                    TRO = {
+                        ai = yes
+                    }
                 }
+                inherit = TRO
             }
-            inherit = TRO
-        }
-        if = {
-            limit = {
-                NIE = {
-                    ai = yes
+            if = {
+                limit = {
+                    NIE = {
+                        ai = yes
+                    }
                 }
+                inherit = NIE
             }
-            inherit = NIE
-        }
-        if = {
-            limit = {
-                OPL = {
-                    ai = yes
+            if = {
+                limit = {
+                    OPL = {
+                        ai = yes
+                    }
                 }
+                inherit = OPL
             }
-            inherit = OPL
-        }
-        if = {
-            limit = {
-                TES = {
-                    ai = yes
+            if = {
+                limit = {
+                    TES = {
+                        ai = yes
+                    }
                 }
+                inherit = TES
             }
-            inherit = TES
-        }
-        if = {
-            limit = {
-                ASC = {
-                    ai = yes
+            if = {
+                limit = {
+                    ASC = {
+                        ai = yes
+                    }
                 }
+                inherit = ASC
             }
-            inherit = ASC
         }
-    }
-    #Austria
-    AUT = {
-        if = {
-            limit = {
-                SH1 = {
-                    ai = yes
+        #Austria
+        AUT = {
+            if = {
+                limit = {
+                    SH1 = {
+                        ai = yes
+                    }
                 }
+                inherit = SH1
             }
-            inherit = SH1
-        }
-        if = {
-            limit = {
-                PSS = {
-                    ai = yes
+            if = {
+                limit = {
+                    PSS = {
+                        ai = yes
+                    }
                 }
+                inherit = PSS
             }
-            inherit = PSS
-        }
-        if = {
-            limit = {
-                BSN = {
-                    ai = yes
+            if = {
+                limit = {
+                    BSN = {
+                        ai = yes
+                    }
                 }
+                inherit = BSN
             }
-            inherit = BSN
         }
-    }
-    STY = {
-        if = {
-            limit = {
-                CR1 = {
-                    ai = yes
+        STY = {
+            if = {
+                limit = {
+                    CR1 = {
+                        ai = yes
+                    }
                 }
+                inherit = CR1
             }
-            inherit = CR1
-        }
-        if = {
-            limit = {
-                CNL = {
-                    ai = yes
+            if = {
+                limit = {
+                    CNL = {
+                        ai = yes
+                    }
                 }
+                inherit = CNL
             }
-            inherit = CNL
-        }
-        if = {
-            limit = {
-                GRZ = {
-                    ai = yes
+            if = {
+                limit = {
+                    GRZ = {
+                        ai = yes
+                    }
                 }
+                inherit = GRZ
             }
-            inherit = GRZ
-        }
-        if = {
-            limit = {
-                TST = {
-                    ai = yes
+            if = {
+                limit = {
+                    TST = {
+                        ai = yes
+                    }
                 }
+                inherit = TST
             }
-            inherit = TST
         }
-    }
-    CLI = {
-        if = {
-            limit = {
-                RIJ = {
-                    ai = yes
+        CLI = {
+            if = {
+                limit = {
+                    RIJ = {
+                        ai = yes
+                    }
                 }
+                inherit = RIJ
             }
-            inherit = RIJ
         }
-    }
-    #Low Coutries
-    PIC = {
-        if = {
-            limit = {
-                SPO = {
-                    ai = yes
+        #Low Coutries
+        PIC = {
+            if = {
+                limit = {
+                    SPO = {
+                        ai = yes
+                    }
                 }
+                inherit = SPO
             }
-            inherit = SPO
-        }
-        if = {
-            limit = {
-                ATS = {
-                    ai = yes
+            if = {
+                limit = {
+                    ATS = {
+                        ai = yes
+                    }
                 }
+                inherit = ATS
             }
-            inherit = ATS
         }
-    }
-    UTR = {
-        if = {
-            limit = {
-                AHS = {
-                    ai = yes
+        UTR = {
+            if = {
+                limit = {
+                    AHS = {
+                        ai = yes
+                    }
                 }
+                inherit = AHS
             }
-            inherit = AHS
         }
-    }
-    FRI = {
-        if = {
-            limit = {
-                GRN = {
-                    ai = yes
+        FRI = {
+            if = {
+                limit = {
+                    GRN = {
+                        ai = yes
+                    }
                 }
+                inherit = GRN
             }
-            inherit = GRN
         }
-    }
-    HOL = {
-        if = {
-            limit = {
-                ZEE = {
-                    ai = yes
+        HOL = {
+            if = {
+                limit = {
+                    ZEE = {
+                        ai = yes
+                    }
                 }
+                inherit = ZEE
             }
-            inherit = ZEE
         }
-    }
-    LIE = {
-        if = {
-            limit = {
-                STV = {
-                    ai = yes
+        LIE = {
+            if = {
+                limit = {
+                    STV = {
+                        ai = yes
+                    }
                 }
+                inherit = STV
             }
-            inherit = STV
         }
-    }
-    FLA = {
-        if = {
-            limit = {
-                TOA = {
-                    ai = yes
+        FLA = {
+            if = {
+                limit = {
+                    TOA = {
+                        ai = yes
+                    }
                 }
+                inherit = TOA
             }
-            inherit = TOA
         }
-    }
-    #Germany
-    GEL = {
-        if = {
-            limit = {
-                LBG = {
-                    ai = yes
+        #Germany
+        GEL = {
+            if = {
+                limit = {
+                    LBG = {
+                        ai = yes
+                    }
                 }
+                inherit = LBG
             }
-            inherit = LBG
         }
-    }
-    EFR = {
-        if = {
-            limit = {
-                OLD = {
-                    ai = yes
+        EFR = {
+            if = {
+                limit = {
+                    OLD = {
+                        ai = yes
+                    }
                 }
+                inherit = OLD
             }
-            inherit = OLD
         }
-    }
-    SHL = {
-        if = {
-            limit = {
-                PNN = {
-                    ai = yes
+        SHL = {
+            if = {
+                limit = {
+                    PNN = {
+                        ai = yes
+                    }
                 }
+                inherit = PNN
             }
-            inherit = PNN
-        }
-        if = {
-            limit = {
-                DTT = {
-                    ai = yes
+            if = {
+                limit = {
+                    DTT = {
+                        ai = yes
+                    }
                 }
+                inherit = DTT
             }
-            inherit = DTT
         }
-    }
-    HSA = {
-        if = {
-            limit = {
-                BLK = {
-                    ai = yes
+        HSA = {
+            if = {
+                limit = {
+                    BLK = {
+                        ai = yes
+                    }
                 }
+                inherit = BLK
             }
-            inherit = BLK
         }
-    }
-    HAM = {
-        if = {
-            limit = {
-                LAU = {
-                    ai = yes
+        HAM = {
+            if = {
+                limit = {
+                    LAU = {
+                        ai = yes
+                    }
                 }
+                inherit = LAU
             }
-            inherit = LAU
         }
-    }
-    MKL = {
-        if = {
-            limit = {
-                RAT = {
-                    ai = yes
+        MKL = {
+            if = {
+                limit = {
+                    RAT = {
+                        ai = yes
+                    }
                 }
+                inherit = RAT
             }
-            inherit = RAT
-        }
-        if = {
-            limit = {
-                BSW = {
-                    ai = yes
+            if = {
+                limit = {
+                    BSW = {
+                        ai = yes
+                    }
                 }
+                inherit = BSW
             }
-            inherit = BSW
-        }
-        if = {
-            limit = {
-                STR = {
-                    ai = yes
+            if = {
+                limit = {
+                    STR = {
+                        ai = yes
+                    }
                 }
+                inherit = STR
             }
-            inherit = STR
         }
-    }
-    BRA = {
-        if = {
-            limit = {
-                HVL = {
-                    ai = yes
+        BRA = {
+            if = {
+                limit = {
+                    HVL = {
+                        ai = yes
+                    }
                 }
+                inherit = HVL
             }
-            inherit = HVL
-        }
-        if = {
-            limit = {
-                RUP = {
-                    ai = yes
+            if = {
+                limit = {
+                    RUP = {
+                        ai = yes
+                    }
                 }
+                inherit = RUP
             }
-            inherit = RUP
         }
-    }
-    STP = {
-        if = {
-            limit = {
-                KMI = {
-                    ai = yes
+        STP = {
+            if = {
+                limit = {
+                    KMI = {
+                        ai = yes
+                    }
                 }
+                inherit = KMI
             }
-            inherit = KMI
         }
-    }
-    WOL = {
-        if = {
-            limit = {
-                RUG = {
-                    ai = yes
+        WOL = {
+            if = {
+                limit = {
+                    RUG = {
+                        ai = yes
+                    }
                 }
+                inherit = RUG
             }
-            inherit = RUG
         }
-    }
-    ANH = {
-        if = {
-            limit = {
-                BSB = {
-                    ai = yes
+        ANH = {
+            if = {
+                limit = {
+                    BSB = {
+                        ai = yes
+                    }
                 }
+                inherit = BSB
             }
-            inherit = BSB
-        }
-        if = {
-            limit = {
-                WIN = {
-                    ai = yes
+            if = {
+                limit = {
+                    WIN = {
+                        ai = yes
+                    }
                 }
+                inherit = WIN
             }
-            inherit = WIN
-        }
-        if = {
-            limit = {
-                MNF = {
-                    ai = yes
+            if = {
+                limit = {
+                    MNF = {
+                        ai = yes
+                    }
                 }
+                inherit = MNF
             }
-            inherit = MNF
         }
-    }
-    MUN = {
-        if = {
-            limit = {
-                DPZ = {
-                    ai = yes
+        MUN = {
+            if = {
+                limit = {
+                    DPZ = {
+                        ai = yes
+                    }
                 }
+                inherit = DPZ
             }
-            inherit = DPZ
         }
-    }
-    VGT = {
-        if = {
-            limit = {
-                STO = {
-                    ai = yes
+        VGT = {
+            if = {
+                limit = {
+                    STO = {
+                        ai = yes
+                    }
                 }
+                inherit = STO
             }
-            inherit = STO
-        }
-        if = {
-            limit = {
-                SWZ = {
-                    ai = yes
+            if = {
+                limit = {
+                    SWZ = {
+                        ai = yes
+                    }
                 }
+                inherit = SWZ
             }
-            inherit = SWZ
         }
-    }
-    TCK = {
-        if = {
-            limit = {
-                OSN = {
-                    ai = yes
+        TCK = {
+            if = {
+                limit = {
+                    OSN = {
+                        ai = yes
+                    }
                 }
+                inherit = OSN
             }
-            inherit = OSN
-        }
-        if = {
-            limit = {
-                SCH = {
-                    ai = yes
+            if = {
+                limit = {
+                    SCH = {
+                        ai = yes
+                    }
                 }
+                inherit = SCH
             }
-            inherit = SCH
         }
-    }
-    BRG = {
-        if = {
-            limit = {
-                LPP = {
-                    ai = yes
+        BRG = {
+            if = {
+                limit = {
+                    LPP = {
+                        ai = yes
+                    }
                 }
+                inherit = LPP
             }
-            inherit = LPP
-        }
-        if = {
-            limit = {
-                MND = {
-                    ai = yes
+            if = {
+                limit = {
+                    MND = {
+                        ai = yes
+                    }
                 }
+                inherit = MND
             }
-            inherit = MND
-        }
-        if = {
-            limit = {
-                BCH = {
-                    ai = yes
+            if = {
+                limit = {
+                    BCH = {
+                        ai = yes
+                    }
                 }
+                inherit = BCH
             }
-            inherit = BCH
         }
-    }
-    BRU = {
-        if = {
-            limit = {
-                COP = {
-                    ai = yes
+        BRU = {
+            if = {
+                limit = {
+                    COP = {
+                        ai = yes
+                    }
                 }
+                inherit = COP
             }
-            inherit = COP
-        }
-        if = {
-            limit = {
-                HSH = {
-                    ai = yes
+            if = {
+                limit = {
+                    HSH = {
+                        ai = yes
+                    }
                 }
+                inherit = HSH
             }
-            inherit = HSH
-        }
-        if = {
-            limit = {
-                EVS = {
-                    ai = yes
+            if = {
+                limit = {
+                    EVS = {
+                        ai = yes
+                    }
                 }
+                inherit = EVS
             }
-            inherit = EVS
-        }
-        if = {
-            limit = {
-                BHS = {
-                    ai = yes
+            if = {
+                limit = {
+                    BHS = {
+                        ai = yes
+                    }
                 }
+                inherit = BHS
             }
-            inherit = BHS
-        }
-        if = {
-            limit = {
-                ZGM = {
-                    ai = yes
+            if = {
+                limit = {
+                    ZGM = {
+                        ai = yes
+                    }
                 }
+                inherit = ZGM
             }
-            inherit = ZGM
-        }
-        if = {
-            limit = {
-                SHF = {
-                    ai = yes
+            if = {
+                limit = {
+                    SHF = {
+                        ai = yes
+                    }
                 }
+                inherit = SHF
             }
-            inherit = SHF
         }
-    }
-    FLD = {
-        if = {
-            limit = {
-                HRF = {
-                    ai = yes
+        FLD = {
+            if = {
+                limit = {
+                    HRF = {
+                        ai = yes
+                    }
                 }
+                inherit = HRF
             }
-            inherit = HRF
         }
-    }
-    HES = {
-        if = {
-            limit = {
-                WLD = {
-                    ai = yes
+        HES = {
+            if = {
+                limit = {
+                    WLD = {
+                        ai = yes
+                    }
                 }
+                inherit = WLD
             }
-            inherit = WLD
         }
-    }
-    KOL = {
-        if = {
-            limit = {
-                WIE = {
-                    ai = yes
+        KOL = {
+            if = {
+                limit = {
+                    WIE = {
+                        ai = yes
+                    }
                 }
+                inherit = WIE
             }
-            inherit = WIE
-        }
-        if = {
-            limit = {
-                PAD = {
-                    ai = yes
+            if = {
+                limit = {
+                    PAD = {
+                        ai = yes
+                    }
                 }
+                inherit = PAD
             }
-            inherit = PAD
         }
-    }
-    NSA = {
-        if = {
-            limit = {
-                SAY = {
-                    ai = yes
+        NSA = {
+            if = {
+                limit = {
+                    SAY = {
+                        ai = yes
+                    }
                 }
+                inherit = SAY
             }
-            inherit = SAY
         }
-    }
-    FKS = {
-        if = {
-            limit = {
-                KTZ = {
-                    ai = yes
+        FKS = {
+            if = {
+                limit = {
+                    KTZ = {
+                        ai = yes
+                    }
                 }
+                inherit = KTZ
             }
-            inherit = KTZ
         }
-    }
-    PAL = {
-        if = {
-            limit = {
-                ERB = {
-                    ai = yes
+        PAL = {
+            if = {
+                limit = {
+                    ERB = {
+                        ai = yes
+                    }
                 }
+                inherit = ERB
             }
-            inherit = ERB
-        }
-        if = {
-            limit = {
-                SPY = {
-                    ai = yes
+            if = {
+                limit = {
+                    SPY = {
+                        ai = yes
+                    }
                 }
+                inherit = SPY
             }
-            inherit = SPY
-        }
-        if = {
-            limit = {
-                HOM = {
-                    ai = yes
+            if = {
+                limit = {
+                    HOM = {
+                        ai = yes
+                    }
                 }
-            }
-            inherit = HOM
-        }if = {
-            limit = {
-                LIN = {
-                    ai = yes
+                inherit = HOM
+            }if = {
+                limit = {
+                    LIN = {
+                        ai = yes
+                    }
                 }
+                inherit = LIN
             }
-            inherit = LIN
         }
-    }
-    LWN = {
-        if = {
-            limit = {
-                LMP = {
-                    ai = yes
+        LWN = {
+            if = {
+                limit = {
+                    LMP = {
+                        ai = yes
+                    }
                 }
+                inherit = LMP
             }
-            inherit = LMP
         }
-    }
-    MAI = {
-        if = {
-            limit = {
-                DRM = {
-                    ai = yes
+        MAI = {
+            if = {
+                limit = {
+                    DRM = {
+                        ai = yes
+                    }
                 }
+                inherit = DRM
             }
-            inherit = DRM
         }
-    }
-    ANS = {
-        if = {
-            limit = {
-                TRU = {
-                    ai = yes
+        ANS = {
+            if = {
+                limit = {
+                    TRU = {
+                        ai = yes
+                    }
                 }
+                inherit = TRU
             }
-            inherit = TRU
-        }
-        if = {
-            limit = {
-                LEU = {
-                    ai = yes
+            if = {
+                limit = {
+                    LEU = {
+                        ai = yes
+                    }
                 }
+                inherit = LEU
             }
-            inherit = LEU
-        }
-        if = {
-            limit = {
-                BET = {
-                    ai = yes
+            if = {
+                limit = {
+                    BET = {
+                        ai = yes
+                    }
                 }
+                inherit = BET
             }
-            inherit = BET
         }
-    }
-    KMB ={
-        if = {
-            limit = {
-                WDS = {
-                    ai = yes
+        KMB ={
+            if = {
+                limit = {
+                    WDS = {
+                        ai = yes
+                    }
                 }
+                inherit = WDS
             }
-            inherit = WDS
         }
-    }
-    OET ={
-        if = {
-            limit = {
-                ELW = {
-                    ai = yes
+        OET ={
+            if = {
+                limit = {
+                    ELW = {
+                        ai = yes
+                    }
                 }
+                inherit = ELW
             }
-            inherit = ELW
-        }
-        if = {
-            limit = {
-                HLF = {
-                    ai = yes
+            if = {
+                limit = {
+                    HLF = {
+                        ai = yes
+                    }
                 }
+                inherit = HLF
             }
-            inherit = HLF
         }
-    }
-    HOH = {
-        if = {
-            limit = {
-                NEL = {
-                    ai = yes
+        HOH = {
+            if = {
+                limit = {
+                    NEL = {
+                        ai = yes
+                    }
                 }
+                inherit = NEL
             }
-            inherit = NEL
-        }
-        if = {
-            limit = {
-                WER = {
-                    ai = yes
+            if = {
+                limit = {
+                    WER = {
+                        ai = yes
+                    }
                 }
+                inherit = WER
             }
-            inherit = WER
         }
-    }
-    FUR = {
-        if = {
-            limit = {
-                HHB = {
-                    ai = yes
+        FUR = {
+            if = {
+                limit = {
+                    HHB = {
+                        ai = yes
+                    }
                 }
+                inherit = HHB
             }
-            inherit = HHB
         }
-    }
-    AUG = {
-        if = {
-            limit = {
-                MBZ = {
-                    ai = yes
+        AUG = {
+            if = {
+                limit = {
+                    MBZ = {
+                        ai = yes
+                    }
                 }
+                inherit = MBZ
             }
-            inherit = MBZ
-        }
-        if = {
-            limit = {
-                WLB = {
-                    ai = yes
+            if = {
+                limit = {
+                    WLB = {
+                        ai = yes
+                    }
                 }
+                inherit = WLB
             }
-            inherit = WLB
         }
-    }
-    KMP = {
-        if = {
-            limit = {
-                MGB = {
-                    ai = yes
+        KMP = {
+            if = {
+                limit = {
+                    MGB = {
+                        ai = yes
+                    }
                 }
+                inherit = MGB
             }
-            inherit = MGB
-        }
-        if = {
-            limit = {
-                KRH = {
-                    ai = yes
+            if = {
+                limit = {
+                    KRH = {
+                        ai = yes
+                    }
                 }
+                inherit = KRH
             }
-            inherit = KRH
         }
-    }
-    LBV = {
-        if = {
-            limit = {
-                FRG = {
-                    ai = yes
+        LBV = {
+            if = {
+                limit = {
+                    FRG = {
+                        ai = yes
+                    }
                 }
+                inherit = FRG
             }
-            inherit = FRG
         }
-    }
-    REG = {
-        if = {
-            limit = {
-                PBR = {
-                    ai = yes
+        REG = {
+            if = {
+                limit = {
+                    PBR = {
+                        ai = yes
+                    }
                 }
+                inherit = PBR
             }
-            inherit = PBR
         }
-    }
-    TRI = {
-        if = {
-            limit = {
-                SPN = {
-                    ai = yes
+        TRI = {
+            if = {
+                limit = {
+                    SPN = {
+                        ai = yes
+                    }
                 }
+                inherit = SPN
             }
-            inherit = SPN
-        }
-        if = {
-            limit = {
-                RHE = {
-                    ai = yes
+            if = {
+                limit = {
+                    RHE = {
+                        ai = yes
+                    }
                 }
+                inherit = RHE
             }
-            inherit = RHE
         }
-    }
-    SAA = {
-        if = {
-            limit = {
-                VEL = {
-                    ai = yes
+        SAA = {
+            if = {
+                limit = {
+                    VEL = {
+                        ai = yes
+                    }
                 }
+                inherit = VEL
             }
-            inherit = VEL
-        }
-        if = {
-            limit = {
-                ZWE = {
-                    ai = yes
+            if = {
+                limit = {
+                    ZWE = {
+                        ai = yes
+                    }
                 }
+                inherit = ZWE
             }
-            inherit = ZWE
         }
-    }
-    MTZ = {
-        if = {
-            limit = {
-                LIC = {
-                    ai = yes
+        MTZ = {
+            if = {
+                limit = {
+                    LIC = {
+                        ai = yes
+                    }
                 }
+                inherit = LIC
             }
-            inherit = LIC
-        }
-        if = {
-            limit = {
-                HAG = {
-                    ai = yes
+            if = {
+                limit = {
+                    HAG = {
+                        ai = yes
+                    }
                 }
+                inherit = HAG
             }
-            inherit = HAG
         }
-    }
-    ALS = {
-        if = {
-            limit = {
-                BMN = {
-                    ai = yes
+        ALS = {
+            if = {
+                limit = {
+                    BMN = {
+                        ai = yes
+                    }
                 }
+                inherit = BMN
             }
-            inherit = BMN
-        }
-        if = {
-            limit = {
-                FEN = {
-                    ai = yes
+            if = {
+                limit = {
+                    FEN = {
+                        ai = yes
+                    }
                 }
+                inherit = FEN
             }
-            inherit = FEN
-        }
-        if = {
-            limit = {
-                RPL = {
-                    ai = yes
+            if = {
+                limit = {
+                    RPL = {
+                        ai = yes
+                    }
                 }
+                inherit = RPL
             }
-            inherit = RPL
-        }
-        if = {
-            limit = {
-                MLH = {
-                    ai = yes
+            if = {
+                limit = {
+                    MLH = {
+                        ai = yes
+                    }
                 }
+                inherit = MLH
             }
-            inherit = MLH
         }
-    }
-    WUR = {
-        if = {
-            limit = {
-                BAD = {
-                    ai = yes
+        WUR = {
+            if = {
+                limit = {
+                    BAD = {
+                        ai = yes
+                    }
                 }
+                inherit = BAD
             }
-            inherit = BAD
         }
-    }
-    BAM = {
-        if = {
-            limit = {
-                HEN = {
-                    ai = yes
+        BAM = {
+            if = {
+                limit = {
+                    HEN = {
+                        ai = yes
+                    }
                 }
+                inherit = HEN
             }
-            inherit = HEN
         }
-    }
-    WBG = {
-        if = {
-            limit = {
-                BBH = {
-                    ai = yes
+        WBG = {
+            if = {
+                limit = {
+                    BBH = {
+                        ai = yes
+                    }
                 }
+                inherit = BBH
             }
-            inherit = BBH
-        }
-        if = {
-            limit = {
-                WRT = {
-                    ai = yes
+            if = {
+                limit = {
+                    WRT = {
+                        ai = yes
+                    }
                 }
+                inherit = WRT
             }
-            inherit = WRT
-        }
-        if = {
-            limit = {
-                CTL = {
-                    ai = yes
+            if = {
+                limit = {
+                    CTL = {
+                        ai = yes
+                    }
                 }
+                inherit = CTL
             }
-            inherit = CTL
         }
-    }
-    TIR = {
-        if = {
-            limit = {
-                TNT = {
-                    ai = yes
+        TIR = {
+            if = {
+                limit = {
+                    TNT = {
+                        ai = yes
+                    }
                 }
+                inherit = TNT
             }
-            inherit = TNT
         }
-    }
-    #Switzerland
-    KNZ = {
-        if = {
-            limit = {
-                TGA = {
-                    ai = yes
+        #Switzerland
+        KNZ = {
+            if = {
+                limit = {
+                    TGA = {
+                        ai = yes
+                    }
                 }
+                inherit = TGA
             }
-            inherit = TGA
         }
-    }
-    SWI = {
-        if = {
-            limit = {
-                ZUR = {
-                    ai = yes
+        SWI = {
+            if = {
+                limit = {
+                    ZUR = {
+                        ai = yes
+                    }
                 }
+                inherit = ZUR
             }
-            inherit = ZUR
-        }
-        if = {
-            limit = {
-                ARU = {
-                    ai = yes
+            if = {
+                limit = {
+                    ARU = {
+                        ai = yes
+                    }
                 }
+                inherit = ARU
             }
-            inherit = ARU
-        }
-        if = {
-            limit = {
-                BSL = {
-                    ai = yes
+            if = {
+                limit = {
+                    BSL = {
+                        ai = yes
+                    }
                 }
+                inherit = BSL
             }
-            inherit = BSL
-        }
-        if = {
-            limit = {
-                VUD = {
-                    ai = yes
+            if = {
+                limit = {
+                    VUD = {
+                        ai = yes
+                    }
                 }
+                inherit = VUD
             }
-            inherit = VUD
-        }
-        if = {
-            limit = {
-                FRB = {
-                    ai = yes
+            if = {
+                limit = {
+                    FRB = {
+                        ai = yes
+                    }
                 }
+                inherit = FRB
             }
-            inherit = FRB
-        }
-        if = {
-            limit = {
-                BFB = {
-                    ai = yes
+            if = {
+                limit = {
+                    BFB = {
+                        ai = yes
+                    }
                 }
+                inherit = BFB
             }
-            inherit = BFB
-        }
-        if = {
-            limit = {
-                TCN = {
-                    ai = yes
+            if = {
+                limit = {
+                    TCN = {
+                        ai = yes
+                    }
                 }
-            }
-            inherit = TCN
-        }if = {
-            limit = {
-                ZDN = {
-                    ai = yes
+                inherit = TCN
+            }if = {
+                limit = {
+                    ZDN = {
+                        ai = yes
+                    }
                 }
-            }
-            inherit = ZDN
-        }if = {
-            limit = {
-                BRN = {
-                    ai = yes
+                inherit = ZDN
+            }if = {
+                limit = {
+                    BRN = {
+                        ai = yes
+                    }
                 }
+                inherit = BRN
             }
-            inherit = BRN
         }
-    }
-    TTL = {
-        if = {
-            limit = {
-                LTS = {
-                    ai = yes
+        TTL = {
+            if = {
+                limit = {
+                    LTS = {
+                        ai = yes
+                    }
                 }
+                inherit = LTS
             }
-            inherit = LTS
         }
-    }
-    #Outer German sphere
-    TEU = {
-        if = {
-            limit = {
-                PMS = {
-                    ai = yes
+        #Outer German sphere
+        TEU = {
+            if = {
+                limit = {
+                    PMS = {
+                        ai = yes
+                    }
                 }
+                inherit = PMS
             }
-            inherit = PMS
-        }
-        if = {
-            limit = {
-                KLL = {
-                    ai = yes
+            if = {
+                limit = {
+                    KLL = {
+                        ai = yes
+                    }
                 }
+                inherit = KLL
             }
-            inherit = KLL
-        }
-        if = {
-            limit = {
-                WRM = {
-                    ai = yes
+            if = {
+                limit = {
+                    WRM = {
+                        ai = yes
+                    }
                 }
+                inherit = WRM
             }
-            inherit = WRM
-        }
-        if = {
-            limit = {
-                SGA = {
-                    ai = yes
+            if = {
+                limit = {
+                    SGA = {
+                        ai = yes
+                    }
                 }
+                inherit = SGA
             }
-            inherit = SGA
         }
-    }
-    LIV = {
-        if = {
-            limit = {
-                OSL = {
-                    ai = yes
+        LIV = {
+            if = {
+                limit = {
+                    OSL = {
+                        ai = yes
+                    }
                 }
+                inherit = OSL
             }
-            inherit = OSL
-        }
-        if = {
-            limit = {
-                DRP = {
-                    ai = yes
+            if = {
+                limit = {
+                    DRP = {
+                        ai = yes
+                    }
                 }
+                inherit = DRP
             }
-            inherit = DRP
-        }
-        if = {
-            limit = {
-                RIG = {
-                    ai = yes
+            if = {
+                limit = {
+                    RIG = {
+                        ai = yes
+                    }
                 }
+                inherit = RIG
             }
-            inherit = RIG
-        }
-        if = {
-            limit = {
-                KUR = {
-                    ai = yes
+            if = {
+                limit = {
+                    KUR = {
+                        ai = yes
+                    }
                 }
+                inherit = KUR
             }
-            inherit = KUR
         }
     }
 }
 
 remove_extra_western_tags = {
     #Ireland
-    DMS = {
-        if = {
-            limit = {
-                MCM = {
-                    ai = yes
+    hidden_effect = {
+        DMS = {
+            if = {
+                limit = {
+                    MCM = {
+                        ai = yes
+                    }
                 }
+                inherit = MCM
             }
-            inherit = MCM
+            if = {
+                limit = {
+                    THO = {
+                        ai = yes
+                    }
+                }
+                inherit = THO
+            }
         }
-        if = {
-            limit = {
-                THO = {
-                    ai = yes
+        KID = {
+            if = {
+                limit = {
+                    FLY = {
+                        ai = yes
+                    }
                 }
+                inherit = FLY
             }
-            inherit = THO
+            if = {
+                limit = {
+                    ORD = {
+                        ai = yes
+                    }
+                }
+                inherit = ORD
+            }
+            if = {
+                limit = {
+                    LGN = {
+                        ai = yes
+                    }
+                }
+                inherit = LGN
+            }
+        }
+        ECO = {
+            if = {
+                limit = {
+                    GLW = {
+                        ai = yes
+                    }
+                }
+                inherit = GLW
+            }
+            if = {
+                limit = {
+                    MYO = {
+                        ai = yes
+                    }
+                }
+                inherit = MYO
+            }
+            if = {
+                limit = {
+                    WCO = {
+                        ai = yes
+                    }
+                }
+                inherit = WCO
+            }
+        }
+        SLN = {
+            if = {
+                limit = {
+                    BIF = {
+                        ai = yes
+                    }
+                }
+                inherit = BIF
+            }
+            if = {
+                limit = {
+                    FGH = {
+                        ai = yes
+                    }
+                }
+                inherit = FGH
+            }
+            if = {
+                limit = {
+                    MGH = {
+                        ai = yes
+                    }
+                }
+                inherit = MGH
+            }
+        }
+        TYR = {
+            if = {
+                limit = {
+                    TRY = {
+                        ai = yes
+                    }
+                }
+                inherit = TRY
+            }
+            if = {
+                limit = {
+                    CLN = {
+                        ai = yes
+                    }
+                }
+                inherit = CLN
+            }
+            if = {
+                limit = {
+                    ANR = {
+                        ai = yes
+                    }
+                }
+                inherit = ANR
+            }
+            if = {
+                limit = {
+                    IVE = {
+                        ai = yes
+                    }
+                }
+                inherit = IVE
+            }
+        }
+        #England
+        SCO = {
+            if = {
+                limit = {
+                    DUG = {
+                        ai = yes
+                    }
+                }
+                inherit = DUG
+            }
+            if = {
+                limit = {
+                    RLL = {
+                        ai = yes
+                    }
+                }
+                inherit = RLL
+            }
+            if = {
+                limit = {
+                    GOR = {
+                        ai = yes
+                    }
+                }
+                inherit = GOR
+            }
+            if = {
+                limit = {
+                    SNC = {
+                        ai = yes
+                    }
+                }
+                inherit = SNC
+            }
+            if = {
+                limit = {
+                    CM1 = {
+                        ai = yes
+                    }
+                }
+                inherit = CM1
+            }
+        }
+        MDD = {
+            if = {
+                limit = {
+                    MCD = {
+                        ai = yes
+                    }
+                }
+                inherit = MCD
+            }
+            if = {
+                limit = {
+                    CBE = {
+                        ai = yes
+                    }
+                }
+                inherit = CBE
+            }
+            if = {
+                limit = {
+                    MCN = {
+                        ai = yes
+                    }
+                }
+                inherit = MCN
+            }
+        }
+        ENG = {
+            if = {
+                limit = {
+                    WRK = {
+                        ai = yes
+                    }
+                }
+                inherit = WRK
+            }
+            if = {
+                limit = {
+                    DUR = {
+                        ai = yes
+                    }
+                }
+                inherit = DUR
+            }
+            if = {
+                limit = {
+                    GLR = {
+                        ai = yes
+                    }
+                }
+                inherit = GLR
+            }
+            if = {
+                limit = {
+                    RT1 = {
+                        ai = yes
+                    }
+                }
+                inherit = RT1
+            }
+            if = {
+                limit = {
+                    NOL = {
+                        ai = yes
+                    }
+                }
+                inherit = NOL
+            }
+            if = {
+                limit = {
+                    RCH = {
+                        ai = yes
+                    }
+                }
+                inherit = RCH
+            }
+            if = {
+                limit = {
+                    LNN = {
+                        ai = yes
+                    }
+                }
+                inherit = LNN
+            }
+            if = {
+                limit = {
+                    YRK = {
+                        ai = yes
+                    }
+                }
+                inherit = YRK
+            }
+            if = {
+                limit = {
+                    KOI = {
+                        ai = yes
+                    }
+                }
+                inherit = KOI
+            }
+            if = {
+                limit = {
+                    BCK = {
+                        ai = yes
+                    }
+                }
+                inherit = BCK
+            }
+            if = {
+                limit = {
+                    OXF = {
+                        ai = yes
+                    }
+                }
+                inherit = OXF
+            }
+            if = {
+                limit = {
+                    BED = {
+                        ai = yes
+                    }
+                }
+                inherit = BED
+            }
+            if = {
+                limit = {
+                    NFL = {
+                        ai = yes
+                    }
+                }
+                inherit = NFL
+            }
+            if = {
+                limit = {
+                    ARC = {
+                        ai = yes
+                    }
+                }
+                inherit = ARC
+            }
+            if = {
+                limit = {
+                    SM1 = {
+                        ai = yes
+                    }
+                }
+                inherit = SM1
+            }
+            if = {
+                limit = {
+                    EXE = {
+                        ai = yes
+                    }
+                }
+                inherit = EXE
+            }
+            if = {
+                limit = {
+                    JER = {
+                        ai = yes
+                    }
+                }
+                inherit = JER
+            }
+        }
+        WLS = {
+            if = {
+                limit = {
+                    WMC = {
+                        ai = yes
+                    }
+                }
+                inherit = WMC
+            }
+            if = {
+                limit = {
+                    CST = {
+                        ai = yes
+                    }
+                }
+                inherit = CST
+            }
+        }
+        #Fance
+        PRO = {
+            if = {
+                limit = {
+                    ANJ = {
+                        ai = yes
+                    }
+                }
+                inherit = ANJ
+            }
+            if = {
+                limit = {
+                    CMB = {
+                        ai = yes
+                    }
+                }
+                inherit = CMB
+            }
+        }
+        LOR = {
+            if = {
+                limit = {
+                    BAR = {
+                        ai = yes
+                    }
+                }
+                inherit = BAR
+            }
+        }
+        AMG = {
+            if = {
+                limit = {
+                    CMG = {
+                        ai = yes
+                    }
+                }
+                inherit = CMG
+            }
+            if = {
+                limit = {
+                    FOI = {
+                        ai = yes
+                    }
+                }
+                inherit = FOI
+            }
+        }
+        ORL = {
+            if = {
+                limit = {
+                    RHM = {
+                        ai = yes
+                    }
+                }
+                inherit = RHM
+            }
+            if = {
+                limit = {
+                    RET = {
+                        ai = yes
+                    }
+                }
+                inherit = RET
+            }
+            if = {
+                limit = {
+                    LGR = {
+                        ai = yes
+                    }
+                }
+                inherit = LGR
+            }
+        }
+        BOU = {
+            if = {
+                limit = {
+                    AUV = {
+                        ai = yes
+                    }
+                }
+                inherit = AUV
+            }
+        }
+        MNE = {
+            if = {
+                limit = {
+                    ALE = {
+                        ai = yes
+                    }
+                }
+                inherit = ALE
+            }
+        }
+        BUR = {
+            if = {
+                limit = {
+                    NEV = {
+                        ai = yes
+                    }
+                }
+                inherit = NEV
+            }
+            if = {
+                limit = {
+                    BSA = {
+                        ai = yes
+                    }
+                }
+                inherit = BSA
+            }
+            if = {
+                limit = {
+                    LXL = {
+                        ai = yes
+                    }
+                }
+                inherit = LXL
+            }
+        }
+        PAP = {
+            if = {
+                limit = {
+                    AVI = {
+                        ai = yes
+                    }
+                }
+                inherit = AVI
+            }
+            if = {
+                limit = {
+                    ONG = {
+                        ai = yes
+                    }
+                }
+                inherit = ONG
+            }
+        }
+        #Iberia
+        POR = {
+            if = {
+                limit = {
+                    BZA = {
+                        ai = yes
+                    }
+                }
+                inherit = BZA
+            }
+            if = {
+                limit = {
+                    BJA = {
+                        ai = yes
+                    }
+                }
+                inherit = BJA
+            }
+            if = {
+                limit = {
+                    CIM = {
+                        ai = yes
+                    }
+                }
+                inherit = CIM
+            }
+            if = {
+                limit = {
+                    AGV = {
+                        ai = yes
+                    }
+                }
+                inherit = AGV
+            }
+        }
+        LON = {
+            if = {
+                limit = {
+                    ASU = {
+                        ai = yes
+                    }
+                }
+                inherit = ASU
+            }
+            if = {
+                limit = {
+                    GAL = {
+                        ai = yes
+                    }
+                }
+                inherit = GAL
+            }
+        }
+        CAS = {
+            if = {
+                limit = {
+                    BDH = {
+                        ai = yes
+                    }
+                }
+                inherit = BDH
+            }
+            if = {
+                limit = {
+                    LBC = {
+                        ai = yes
+                    }
+                }
+                inherit = LBC
+            }
+            if = {
+                limit = {
+                    GUP = {
+                        ai = yes
+                    }
+                }
+                inherit = GUP
+            }
+            if = {
+                limit = {
+                    ALV = {
+                        ai = yes
+                    }
+                }
+                inherit = ALV
+            }
+            if = {
+                limit = {
+                    MLN = {
+                        ai = yes
+                    }
+                }
+                inherit = MLN
+            }
+            if = {
+                limit = {
+                    TLD = {
+                        ai = yes
+                    }
+                }
+                inherit = TLD
+            }
+            if = {
+                limit = {
+                    MUR = {
+                        ai = yes
+                    }
+                }
+                inherit = MUR
+            }
+            if = {
+                limit = {
+                    JAE = {
+                        ai = yes
+                    }
+                }
+                inherit = JAE
+            }
+            if = {
+                limit = {
+                    CDB = {
+                        ai = yes
+                    }
+                }
+                inherit = CDB
+            }
+            if = {
+                limit = {
+                    SVL = {
+                        ai = yes
+                    }
+                }
+                inherit = SVL
+            }
+        }
+        ARA = {
+            if = {
+                limit = {
+                    VAL = {
+                        ai = yes
+                    }
+                }
+                inherit = VAL
+            }
+            if = {
+                limit = {
+                    CAT = {
+                        ai = yes
+                    }
+                }
+                inherit = CAT
+            }
+            if = {
+                limit = {
+                    MJO = {
+                        ai = yes
+                    }
+                }
+                inherit = MJO
+            }
         }
     }
-    KID = {
-        if = {
-            limit = {
-                FLY = {
-                    ai = yes
+}
+remove_extra_italian_tags = {
+    hidden_effect = {
+        SAV = {
+            if = {
+                limit = {
+                    GNV = {
+                        ai = yes
+                    }
+                }
+                inherit = GNV
+            }
+            if = {
+                limit = {
+                    MFA = {
+                        ai = yes
+                    }
                 }
+                inherit = MFA
             }
-            inherit = FLY
-        }
-        if = {
-            limit = {
-                ORD = {
-                    ai = yes
-                }
-            }
-            inherit = ORD
-        }
-        if = {
-            limit = {
-                LGN = {
-                    ai = yes
-                }
-            }
-            inherit = LGN
-        }
-    }
-    ECO = {
-        if = {
-            limit = {
-                GLW = {
-                    ai = yes
-                }
-            }
-            inherit = GLW
-        }
-        if = {
-            limit = {
-                MYO = {
-                    ai = yes
-                }
-            }
-            inherit = MYO
-        }
-        if = {
-            limit = {
-                WCO = {
-                    ai = yes
-                }
-            }
-            inherit = WCO
-        }
-    }
-    SLN = {
-        if = {
-            limit = {
-                BIF = {
-                    ai = yes
-                }
-            }
-            inherit = BIF
-        }
-        if = {
-            limit = {
-                FGH = {
-                    ai = yes
-                }
-            }
-            inherit = FGH
-        }
-        if = {
-            limit = {
-                MGH = {
-                    ai = yes
-                }
-            }
-            inherit = MGH
-        }
-    }
-    TYR = {
-        if = {
-            limit = {
-                TRY = {
-                    ai = yes
-                }
-            }
-            inherit = TRY
-        }
-        if = {
-            limit = {
-                CLN = {
-                    ai = yes
-                }
-            }
-            inherit = CLN
-        }
-        if = {
-            limit = {
-                ANR = {
-                    ai = yes
-                }
-            }
-            inherit = ANR
-        }
-        if = {
-            limit = {
-                IVE = {
-                    ai = yes
-                }
-            }
-            inherit = IVE
-        }
-    }
-    #England
-    SCO = {
-        if = {
-            limit = {
-                DUG = {
-                    ai = yes
-                }
-            }
-            inherit = DUG
-        }
-        if = {
-            limit = {
-                RLL = {
-                    ai = yes
-                }
-            }
-            inherit = RLL
-        }
-        if = {
-            limit = {
-                GOR = {
-                    ai = yes
-                }
-            }
-            inherit = GOR
-        }
-        if = {
-            limit = {
-                SNC = {
-                    ai = yes
-                }
-            }
-            inherit = SNC
-        }
-        if = {
-            limit = {
-                CM1 = {
-                    ai = yes
-                }
-            }
-            inherit = CM1
-        }
-    }
-    MCN = {
-        if = {
-            limit = {
-                MCD = {
-                    ai = yes
-                }
-            }
-            inherit = MCD
-        }
-        if = {
-            limit = {
-                CBE = {
-                    ai = yes
-                }
-            }
-            inherit = CBE
-        }
-        if = {
-            limit = {
-                MDD= {
-                    ai = yes
-                }
-            }
-            inherit = MDD
-        }
-    }
-    ENG = {
-        if = {
-            limit = {
-                WRK = {
-                    ai = yes
-                }
-            }
-            inherit = WRK
-        }
-        if = {
-            limit = {
-                DUR = {
-                    ai = yes
-                }
-            }
-            inherit = DUR
-        }
-        if = {
-            limit = {
-                GLR = {
-                    ai = yes
-                }
-            }
-            inherit = GLR
-        }
-        if = {
-            limit = {
-                RT1 = {
-                    ai = yes
-                }
-            }
-            inherit = RT1
-        }
-        if = {
-            limit = {
-                NOL = {
-                    ai = yes
-                }
-            }
-            inherit = NOL
-        }
-        if = {
-            limit = {
-                RCH = {
-                    ai = yes
-                }
-            }
-            inherit = RCH
-        }
-        if = {
-            limit = {
-                LNN = {
-                    ai = yes
-                }
-            }
-            inherit = LNN
-        }
-        if = {
-            limit = {
-                YRK = {
-                    ai = yes
-                }
-            }
-            inherit = YRK
-        }
-        if = {
-            limit = {
-                KOI = {
-                    ai = yes
-                }
-            }
-            inherit = KOI
-        }
-        if = {
-            limit = {
-                BCK = {
-                    ai = yes
-                }
-            }
-            inherit = BCK
-        }
-        if = {
-            limit = {
-                OXF = {
-                    ai = yes
-                }
-            }
-            inherit = OXF
-        }
-        if = {
-            limit = {
-                BED = {
-                    ai = yes
-                }
-            }
-            inherit = BED
-        }
-        if = {
-            limit = {
-                NFL = {
-                    ai = yes
-                }
-            }
-            inherit = NFL
-        }
-        if = {
-            limit = {
-                ARC = {
-                    ai = yes
-                }
-            }
-            inherit = ARC
-        }
-        if = {
-            limit = {
-                SM1 = {
-                    ai = yes
-                }
-            }
-            inherit = SM1
-        }
-        if = {
-            limit = {
-                EXE = {
-                    ai = yes
-                }
-            }
-            inherit = EXE
-        }
-        if = {
-            limit = {
-                JER = {
-                    ai = yes
-                }
-            }
-            inherit = JER
-        }
-    }
-    WLS = {
-        if = {
-            limit = {
-                WMC = {
-                    ai = yes
+            if = {
+                limit = {
+                    SZO = {
+                        ai = yes
+                    }
                 }
+                inherit = SZO
             }
-            inherit = WMC
-        }
-        if = {
-            limit = {
-                CST = {
-                    ai = yes
-                }
-            }
-            inherit = CST
-        }
-    }
-    #Fance
-    PRO = {
-        if = {
-            limit = {
-                ANJ = {
-                    ai = yes
-                }
-            }
-            inherit = ANJ
-        }
-        if = {
-            limit = {
-                CMB = {
-                    ai = yes
-                }
-            }
-            inherit = CMB
-        }
-    }
-    LOR = {
-        if = {
-            limit = {
-                BAR = {
-                    ai = yes
-                }
-            }
-            inherit = BAR
-        }
-    }
-    AMG = {
-        if = {
-            limit = {
-                CMG = {
-                    ai = yes
-                }
-            }
-            inherit = CMG
-        }
-        if = {
-            limit = {
-                FOI = {
-                    ai = yes
-                }
-            }
-            inherit = FOI
-        }
-    }
-    ORL = {
-        if = {
-            limit = {
-                RHM = {
-                    ai = yes
+            if = {
+                limit = {
+                    TND = {
+                        ai = yes
+                    }
                 }
+                inherit = TND
             }
-            inherit = RHM
         }
-        if = {
-            limit = {
-                RET = {
-                    ai = yes
+        MLO = {
+            if = {
+                limit = {
+                    MNO = {
+                        ai = yes
+                    }
                 }
+                inherit = MNO
             }
-            inherit = RET
-        }
-        if = {
-            limit = {
-                LGR = {
-                    ai = yes
-                }
-            }
-            inherit = LGR
-        }
-    }
-    BOU = {
-        if = {
-            limit = {
-                AUV = {
-                    ai = yes
+            if = {
+                limit = {
+                    ATI = {
+                        ai = yes
+                    }
                 }
+                inherit = ATI
             }
-            inherit = AUV
-        }
-    }
-    MNE = {
-        if = {
-            limit = {
-                ALE = {
-                    ai = yes
+            if = {
+                limit = {
+                    ASD = {
+                        ai = yes
+                    }
                 }
+                inherit = ASD
             }
-            inherit = ALE
-        }
-    }
-    BUR = {
-        if = {
-            limit = {
-                NEV = {
-                    ai = yes
+            if = {
+                limit = {
+                    BOB = {
+                        ai = yes
+                    }
                 }
+                inherit = BOB
             }
-            inherit = NEV
         }
-        if = {
-            limit = {
-                BSA = {
-                    ai = yes
+        GEN = {
+            if = {
+                limit = {
+                    FNL = {
+                        ai = yes
+                    }
                 }
+                inherit = FNL
             }
-            inherit = BSA
-        }
-        if = {
-            limit = {
-                LXL = {
-                    ai = yes
+            if = {
+                limit = {
+                    CEV = {
+                        ai = yes
+                    }
                 }
+                inherit = CEV
             }
-            inherit = LXL
-        }
-    }
-    PAP = {
-        if = {
-            limit = {
-                AVI = {
-                    ai = yes
+            if = {
+                limit = {
+                    COR = {
+                        ai = yes
+                    }
                 }
+                inherit = COR
             }
-            inherit = AVI
-        }
-        if = {
-            limit = {
-                ONG = {
-                    ai = yes
+            if = {
+                limit = {
+                    MNC = {
+                        ai = yes
+                    }
                 }
+                inherit = MNC
             }
-            inherit = ONG
         }
-    }
-    #Iberia
-    POR = {
-        if = {
-            limit = {
-                BZA = {
-                    ai = yes
+        VEN = {
+            if = {
+                limit = {
+                    AQU = {
+                        ai = yes
+                    }
                 }
+                inherit = AQU
             }
-            inherit = BZA
         }
-        if = {
-            limit = {
-                BJA = {
-                    ai = yes
+        FER = {
+            if = {
+                limit = {
+                    MOD = {
+                        ai = yes
+                    }
                 }
+                inherit = MOD
             }
-            inherit = BJA
-        }
-        if = {
-            limit = {
-                CIM = {
-                    ai = yes
+            if = {
+                limit = {
+                    BLG = {
+                        ai = yes
+                    }
                 }
+                inherit = BLG
             }
-            inherit = CIM
         }
-        if = {
-            limit = {
-                AGV = {
-                    ai = yes
+        LUC = {
+            if = {
+                limit = {
+                    MSS = {
+                        ai = yes
+                    }
                 }
+                inherit = MSS
             }
-            inherit = AGV
         }
-    }
-    LON = {
-        if = {
-            limit = {
-                ASU = {
-                    ai = yes
+        MAN = {
+            if = {
+                limit = {
+                    CRR = {
+                        ai = yes
+                    }
                 }
+                inherit = CRR
             }
-            inherit = ASU
         }
-        if = {
-            limit = {
-                GAL = {
-                    ai = yes
+        LAN = {
+            if = {
+                limit = {
+                    VLR = {
+                        ai = yes
+                    }
                 }
+                inherit = VLR
             }
-            inherit = GAL
-        }
-    }
-    CAS = {
-        if = {
-            limit = {
-                BDH = {
-                    ai = yes
+            if = {
+                limit = {
+                    ARE = {
+                        ai = yes
+                    }
                 }
+                inherit = ARE
             }
-            inherit = BDH
-        }
-        if = {
-            limit = {
-                LBC = {
-                    ai = yes
+            if = {
+                limit = {
+                    CTN = {
+                        ai = yes
+                    }
                 }
+                inherit = CTN
             }
-            inherit = LBC
         }
-        if = {
-            limit = {
-                GUP = {
-                    ai = yes
+        SIE = {
+            if = {
+                limit = {
+                    PIO = {
+                        ai = yes
+                    }
                 }
+                inherit = PIO
             }
-            inherit = GUP
         }
-        if = {
-            limit = {
-                ALV = {
-                    ai = yes
+        PAP = {
+            if = {
+                limit = {
+                    ORV = {
+                        ai = yes
+                    }
                 }
+                inherit = ORV
             }
-            inherit = ALV
-        }
-        if = {
-            limit = {
-                MLN = {
-                    ai = yes
+            if = {
+                limit = {
+                    PGA = {
+                        ai = yes
+                    }
                 }
+                inherit = PGA
             }
-            inherit = MLN
-        }
-        if = {
-            limit = {
-                TLD = {
-                    ai = yes
+            if = {
+                limit = {
+                    CMR = {
+                        ai = yes
+                    }
                 }
+                inherit = CMR
             }
-            inherit = TLD
-        }
-        if = {
-            limit = {
-                MUR = {
-                    ai = yes
+            if = {
+                limit = {
+                    FMO = {
+                        ai = yes
+                    }
                 }
+                inherit = FMO
             }
-            inherit = MUR
-        }
-        if = {
-            limit = {
-                JAE = {
-                    ai = yes
+            if = {
+                limit = {
+                    ANC = {
+                        ai = yes
+                    }
                 }
+                inherit = ANC
             }
-            inherit = JAE
-        }
-        if = {
-            limit = {
-                CDB = {
-                    ai = yes
+            if = {
+                limit = {
+                    MTS = {
+                        ai = yes
+                    }
                 }
+                inherit = MTS
             }
-            inherit = CDB
-        }
-        if = {
-            limit = {
-                SVL = {
-                    ai = yes
+            if = {
+                limit = {
+                    FRL = {
+                        ai = yes
+                    }
                 }
+                inherit = FRL
             }
-            inherit = SVL
-        }
-    }
-    ARA = {
-        if = {
-            limit = {
-                VAL = {
-                    ai = yes
+            if = {
+                limit = {
+                    FNZ = {
+                        ai = yes
+                    }
                 }
+                inherit = FNZ
             }
-            inherit = VAL
         }
-        if = {
-            limit = {
-                CAT = {
-                    ai = yes
+        NAP = {
+            if = {
+                limit = {
+                    SIC = {
+                        ai = yes
+                    }
                 }
+                inherit = SIC
             }
-            inherit = CAT
         }
-        if = {
-            limit = {
-                MJO = {
-                    ai = yes
+        ARA = {
+            if = {
+                limit = {
+                    SAR = {
+                        ai = yes
+                    }
                 }
+                inherit = SAR
             }
-            inherit = MJO
         }
     }
 }

@@ -37,7 +37,7 @@ feudalism_reform = {
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
-        #has_generic_subjects = yes
+        vu_has_ToR_subjects = yes #New VU 1.37.* Don Stuff
     }
     ai = {
         factor = 0.5 #generic
@@ -595,7 +595,8 @@ austrian_duchy_reform = { #T6 - What AUT starts off with on advice of Prussia. -
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
-        has_austrian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     effect = {
         set_government_rank = 6
@@ -623,7 +624,8 @@ austrian_archduchy_reform = { #T7 - Grand Duchy of Austria - Prussia
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
-        has_austrian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     government_abilities = {
         habsburg_glory
@@ -688,7 +690,8 @@ austrian_dual_monarchy = { #For the Union of Austria Hungary/Equivalent with pre
     }
     custom_attributes = {
         enables_religious_domination = yes #+1 tolerance of the true faith in catholic subjects
-        has_austrian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     government_abilities = {
         habsburg_glory #Added in VU v1.37 by SF
@@ -746,7 +749,8 @@ austrian_absolute_monarchy = { #For the Austrian Empire/Equivalent with previous
     custom_attributes = {
         enables_germanization = yes
         increase_nobles_loyalty_per_culture_conversion = yes
-        has_austrian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     government_abilities = {
         habsburg_glory #Added in VU v1.37 by SF
@@ -918,7 +922,7 @@ daimyo = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -954,7 +958,7 @@ daimyo_barony_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -990,7 +994,7 @@ daimyo_viscounty_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -1026,7 +1030,7 @@ daimyo_county_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -1062,7 +1066,7 @@ daimyo_marquisate_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -1098,7 +1102,7 @@ daimyo_duchy_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -1134,7 +1138,7 @@ daimyo_principality_reform = {
     }
     custom_attributes = {
         locked_government_type = yes
-        has_daimyo_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -1165,7 +1169,8 @@ feudal_france_reform = {
         has_appanages = yes
         need_crownland_to_annex = yes
         nobility_loyalty_hit_on_integration = yes
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -1269,9 +1274,13 @@ lowland_clan_reform = {
     icon = "lowland_clan_reform"
     allow_normal_conversion = no
     potential = {
-        is_subject_of_type = scottish_clan #Was appanage
+        OR = {
+            is_subject_of_type = scottish_clan #Was appanage
+            has_reform = lowland_clan_reform
+            have_had_reform = lowland_clan_reform
+        }
     }
-    replacement_on_independence_war = feudalism_reform
+    #replacement_on_independence_war = feudalism_reform
     #fixed_rank = 6
     maintain_dynasty = yes
     valid_for_nation_designer = no
@@ -1292,9 +1301,13 @@ highland_clan_reform = {
     icon = "lowland_clan_reform"
     allow_normal_conversion = no
     potential = {
-        is_subject_of_type = scottish_clan #Was appanage
+        OR = {
+            is_subject_of_type = scottish_clan #Was appanage
+            has_reform = highland_clan_reform
+            have_had_reform = highland_clan_reform
+        }
     }
-    replacement_on_independence_war = feudalism_reform
+    #replacement_on_independence_war = feudalism_reform
     #fixed_rank = 6
     maintain_dynasty = yes
     valid_for_nation_designer = no
@@ -1377,7 +1390,8 @@ absolutist_france_reform = {
     custom_attributes = {
         centralize_state_development = yes
         buffed_strong_duchies = yes #+5% Loyalty
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -1654,7 +1668,8 @@ kalmar_union = {
         kalmar_union_succession = yes
         cannot_integrate_personal_unions = yes
         cannot_abandon_personal_unions = yes
-        has_danish_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -1680,7 +1695,8 @@ danish_archkingdom = {
     }
     custom_attributes = {
         personal_union_war_contribution = yes
-        has_danish_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -1890,7 +1906,7 @@ angevin_monarchy = {
         has_parliament = yes
         custom_attributes = {
             english_parliament = yes
-            has_anglois_subjects = yes
+            vu_has_ToR_subjects = yes
         }
     }
     conditional = {
@@ -1900,7 +1916,7 @@ angevin_monarchy = {
         has_parliament = yes
         custom_attributes = {
             english_parliament = yes
-            has_anglois_subjects = yes
+            vu_has_ToR_subjects = yes
         }
     }
     ai = {
@@ -1951,7 +1967,8 @@ english_monarchy = { #
         custom_attributes = {
             english_parliament = yes
             can_force_issue_through = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
     conditional = {
@@ -1961,7 +1978,8 @@ english_monarchy = { #
         has_parliament = yes
         custom_attributes = {
             english_parliament = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
             #has_unify_british_isles_cb = yes
         }
     }
@@ -2007,7 +2025,8 @@ british_monarchy = {
         custom_attributes = {
             english_parliament = yes
             can_force_issue_through = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
     conditional = {
@@ -2017,7 +2036,8 @@ british_monarchy = {
         has_parliament = yes
         custom_attributes = {
             english_parliament = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
     ai = {
@@ -2064,7 +2084,8 @@ absolute_british_monarchy = {
         custom_attributes = {
             english_parliament = yes
             can_force_issue_through = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
     conditional = {
@@ -2075,7 +2096,8 @@ absolute_british_monarchy = {
         custom_attributes = {
             english_parliament = yes
             can_force_issue_through = yes
-            has_english_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 }
@@ -2123,6 +2145,7 @@ ottoman_government = {
         has_janissaries = yes
         has_harem = yes
         custom_attributes = {
+            has_tributaries = yes
             has_harem_events = yes
             enables_estate_janissaries = yes
             has_eyalets = yes
@@ -2187,7 +2210,8 @@ byzantine_autocracy_reform = {
         custom_attributes = {
             civil_war_on_every_new_ruler = yes
             enables_pronoias = yes
-            has_byzantine_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 }
@@ -2225,7 +2249,8 @@ reformed_byzantine_monarchy_reform = {
         allow = { has_dlc = "King of Kings" }
         custom_attributes = {
             enables_pronoias = yes
-            has_byzantine_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 }
@@ -2340,10 +2365,10 @@ tanistry_reform = {
     icon = "tanistry"
     allow_normal_conversion = yes
     potential = {
-        primary_culture = irish
+        primary_culture = celtic_irish_culture
     }
     nation_designer_trigger = {
-        primary_culture = irish
+        primary_culture = celtic_irish_culture
     }
     valid_for_nation_designer = yes
     nation_designer_cost = 5
@@ -2376,10 +2401,10 @@ irish_highkingdom_reform = {
         }
     }
     trigger = {
-        primary_culture = irish
+        primary_culture = celtic_irish_culture
     }
     nation_designer_trigger = {
-        primary_culture = irish
+        primary_culture = celtic_irish_culture
     }
     valid_for_nation_designer = yes
     nation_designer_cost = 15
@@ -2416,13 +2441,13 @@ irish_highkingdom_reform = {
 #	potential = {
 #		OR = {
 #			primary_culture = scottish
-#			primary_culture = highland_scottish
+#			primary_culture = celtic_highland_scottish_culture
 #		}
 #	}
 #	nation_designer_trigger = {
 #		OR = {
 #			primary_culture = scottish
-#			primary_culture = highland_scottish
+#			primary_culture = celtic_highland_scottish_culture
 #		}
 #	}
 #	valid_for_nation_designer = yes
@@ -2586,8 +2611,8 @@ timurid_amirate_reform = {
     }
 }
 
-league_of_lezhe_reform = {
-    icon = "giga_chad"
+league_of_lezhe_reform = { #More like league of Skanderbro's mates
+    icon = "skanderbro"
     allow_normal_conversion = yes
     #fixed_rank = 6
     potential = {
@@ -2598,16 +2623,94 @@ league_of_lezhe_reform = {
     }
     valid_for_nation_designer = yes
     nation_designer_cost = 30
+    maintain_dynasty = yes
     modifiers = {
-        morale_damage = 0.1
-        hostile_attrition = 1
-        defensiveness = 0.25
+        morale_damage = 0.1               #It's Skanderbro, need I say any more?
+        hostile_attrition = 3             #Literally harassed and ambushed the Turkish army as it entered Albania, before they were even able to engage Skanderbro in battle.
+        defensiveness = 0.50              #Albania was literally one heavily forested mountain.
+        shock_damage = 0.1                #Again, Albanian ambush tactics.
+        infantry_fire = 0.5               #Skanderbro was well known for employing Czech battle (murder) wagons. :)
+        global_missionary_strength = 0.01 #Albania's effect on Skanderbro was so strong that he re-converted back to Christianity
+    }
+    custom_attributes = {
+        winning_battles_increases_legitimacy = yes
+        #vu_has_ToR_subjects = yes #Lezhe_League_Member
+    }
+    ai = {
+        factor = 1
+    }
+}
+
+kingdom_of_bosnia_reform = { #Banate Subject Type
+    icon = "kingdom_of_bosnia"
+    allow_normal_conversion = yes
+    #fixed_rank = 6
+    potential = {
+        OR = {
+            primary_culture = bosnian
+            primary_culture = bosnian_new
+        }
+    }
+    nation_designer_trigger = {
+        OR = {
+            primary_culture = bosnian
+            primary_culture = bosnian_new
+        }
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 30
+    modifiers = {
+        backrow_artillery_damage = 0.5             #Jackie Chan gif
+        artillery_fire = 1                         #Awkward emoji
+        artillery_power = 0.5                      #Capt Picard facepalm emoji
+        fire_damage = 0.1
+        defensiveness = 0.2                        #Guns of Turban + guns of Bosnia
     }
     custom_attributes = {
         winning_battles_increases_legitimacy = yes
     }
     ai = {
         factor = 1
+    }
+}
+
+romanian_principality = { #Voivodeship Subject Type
+    icon = "romanian_principality"
+    allow_normal_conversion = no
+    valid_for_nation_designer = yes
+    potential = {
+        primary_culture = romanian
+        NOT = { tag = RMN }
+    }
+    fixed_rank = 7
+    maintain_dynasty = yes
+    nation_designer_cost = 0
+    modifiers = {
+        nobles_influence_modifier = -0.1
+        morale_damage = 0.1                        #Dracula lives here.
+        hostile_attrition = 2
+        defensiveness = 0.15
+        manpower_in_culture_group_provinces = 0.15
+        army_tradition = 0.5
+    }
+}
+
+romanian_united_principality = {
+    icon = "romanian_united_principality"
+    allow_normal_conversion = no
+    valid_for_nation_designer = yes
+    potential = {
+        tag = RMN
+    }
+    fixed_rank = 8
+    nation_designer_cost = 25
+    modifiers = {
+        development_cost = -0.2
+        centralize_state_cost = -0.1
+        expand_infrastructure_cost_modifier = -0.25
+        liberty_desire_from_subject_development = -0.50
+        manpower_in_culture_group_provinces = 0.20
+        governing_cost = 0.66
     }
 }
 
@@ -2880,7 +2983,8 @@ portuguese_monarchy_reform = {
     }
     custom_attributes = {
         #New Stuff
-        has_portuguese_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -2912,7 +3016,8 @@ holy_imperial_monarchy_reform = {
     custom_attributes = {
         seizing_land_loyalty = yes
         seizing_land_no_rebels = yes
-        has_german_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -2939,7 +3044,8 @@ burgundian_state_reform = {
         years_to_integrate_personal_union = -5
     }
     custom_attributes = {
-        has_burgundian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -2978,7 +3084,8 @@ bohemian_elective_kingdom_reform = {
         }
     }
     custom_attributes = {
-        has_bohemian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     ai = {
         factor = 1
@@ -3033,7 +3140,8 @@ stadthalter_monarchy_reform = {
         enables_plutocratic_idea_group = yes
         enables_aristocratic_idea_group = no
         has_dutch_election = yes
-        has_dutch_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     conditional = {
         allow = {
@@ -3681,6 +3789,33 @@ al_andalusia_government = {
     }
 }
 
+margrave_of_brandenburg = {
+    icon = "margrave_of_brandenburg"
+    allow_normal_conversion = yes
+    potential = {
+        #has_dlc = "Don plays Brandenburg all the time and he's proud of that"
+        OR = {
+            tag = BRA
+            have_had_reform = margrave_of_brandenburg
+        }
+        NOT = { has_reform = prussian_monarchy }
+    }
+    trigger = {
+    }
+    modifiers = {
+        diplomatic_reputation = 1
+        diplomatic_upkeep = 2
+        land_maintenance_modifier = -0.1
+        build_cost = -0.1
+        nobles_influence_modifier = -0.05
+        burghers_loyalty_modifier = 0.05
+    }
+    custom_attributes = {
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
+    }
+}
+
 prussian_monarchy = {
     icon = "prussian_monarchy"
     allow_normal_conversion = yes
@@ -3723,7 +3858,8 @@ prussian_monarchy = {
     }
 
     custom_attributes = {
-        has_prussian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 
     conditional = {
@@ -3833,7 +3969,8 @@ prussian_monarchy_base = {
     }
 
     custom_attributes = {
-        has_prussian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -3882,7 +4019,8 @@ principality = {
         }
         custom_attributes = {
             weaker_russian_ability = yes
-            has_russian_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 }
@@ -3935,7 +4073,8 @@ tsardom = {
     }
 
     custom_attributes = {
-        has_russian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 
     modifiers = {
@@ -4158,7 +4297,8 @@ russian_empire_reform = {
         governing_capacity = 2000
     }
     custom_attributes = {
-        has_russian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     conditional = {
         allow = { has_dlc = "Third Rome" }
@@ -5301,7 +5441,8 @@ polish_great_sejm = {
         }
         has_parliament = yes
         custom_attributes = {
-            has_polish_subjects = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 }
@@ -5338,8 +5479,8 @@ polish_elective_monarchy = {
         custom_attributes = {
             has_polish_election = yes
             locked_government_type = yes
-            has_polish_subjects = yes
-            has_polish_crown_PU = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
 
@@ -5386,8 +5527,8 @@ polish_autocratic_monarchy = {
         reform_progress_growth = 0.1
     }
     custom_attributes = {
-        has_polish_subjects = yes
-        has_polish_crown_PU = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -5413,7 +5554,8 @@ lithuanian_grand_kingdom = {
         governing_capacity = 250
     }
     custom_attributes = {
-        has_baltic_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -5443,7 +5585,8 @@ lithuanian_grand_empire = {
         governing_capacity = 300
     }
     custom_attributes = {
-        has_baltic_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -6161,7 +6304,7 @@ norwegian_parliamentary_monarchy = {
     }
 
     custom_attributes = {
-        has_norwegian_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -6202,7 +6345,7 @@ merchant_aristocracy_reform = {
 
     modifiers = {
         max_absolutism = -10
-        global_trade_goods_size_modifier = 0.05
+        global_trade_goods_size_modifier = 0.1
     }
 
     conditional = {
@@ -6211,6 +6354,8 @@ merchant_aristocracy_reform = {
         }
         custom_attributes = {
             enables_recruit_foreign_generals = yes
+            vu_has_ToR_subjects = yes
+            vu_has_ToR_crowns = yes
         }
     }
     conditional = {
@@ -7096,7 +7241,8 @@ house_of_lords_reform = {
     }
 
     custom_attributes = {
-        has_english_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 
     ai = {
@@ -8519,7 +8665,8 @@ catalan_cortes_reform = {
         primary_culture = catalan
     }
     custom_attributes = {
-        has_aragonese_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     modifiers = {
         all_estate_loyalty_equilibrium = 0.1
@@ -9267,7 +9414,8 @@ system_of_councils_reform = {
     }
 
     custom_attributes = {
-        has_castilian_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
     modifiers = {
         allow_free_estate_privilege_revocation = yes
@@ -9305,7 +9453,7 @@ courts_of_navarra = {
 
     custom_attributes = {
         #New Stuff
-        has_aragonese_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -9386,6 +9534,8 @@ gothic_monarchy_reform = {
 
     custom_attributes = {
         enables_recruit_foreign_generals = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 
     modifiers = {
@@ -9459,17 +9609,23 @@ irish_clann_reform = { #T1
     icon = "chieftain"
     allow_normal_conversion = no
     potential = {
-        culture_group = gaelic
-        has_reform = irish_clann_reform
+        culture_group = unified_celtic_group
+        OR = {
+            has_reform = irish_clann_reform
+            have_had_reform = irish_clann_reform
+        }
         capital_scope = { region = ireland_region }
         #NOT = { government_rank = 8 }
-        NOT = { has_reform = provincial_kingdom_reform }
-        NOT = { has_reform = welsh_duchy_reform }
+        NOT = {
+            has_reform = provincial_kingdom_reform
+            has_reform = welsh_duchy_reform
+        }
     }
-    lock_level_when_selected = yes
+    fixed_rank = 1
+    maintain_dynasty = yes
     valid_for_nation_designer = yes
     nation_designer_cost = -10
-    nation_designer_trigger = { culture_group = gaelic }
+    nation_designer_trigger = { culture_group = unified_celtic_group }
     fixed_rank = 1
     modifiers = {
         stability_cost_modifier = -0.1
@@ -9504,7 +9660,7 @@ welsh_lordship_reform = { #T1
     icon = "castle"
     allow_normal_conversion = no
     potential = {
-        primary_culture = welsh
+        primary_culture = celtic_welsh_culture
         #NOT = { culture_group = south_slavic }
         capital_scope = { region = british_isles_region }
         NOT = { has_reform = welsh_duchy_reform }
@@ -9513,7 +9669,7 @@ welsh_lordship_reform = { #T1
     valid_for_nation_designer = yes
     nation_designer_cost = 20
     nation_designer_trigger = {
-        primary_culture = welsh
+        primary_culture = celtic_welsh_culture
         #NOT = { culture_group = south_slavic }
         capital_scope = { region = british_isles_region }
     }
@@ -9532,7 +9688,7 @@ welsh_duchy_reform = { #T2
     valid_for_nation_designer = no
     fixed_rank = 6
     potential = {
-        primary_culture = welsh
+        primary_culture = celtic_welsh_culture
         #NOT = { culture_group = south_slavic }
         capital_scope = { region = british_isles_region }
         NOT = { has_reform = welsh_monarchy_reform }
@@ -9549,7 +9705,7 @@ welsh_monarchy_reform = { #T3
     icon = "english_monarchy"
     allow_normal_conversion = no
     potential = {
-        primary_culture = welsh
+        primary_culture = celtic_welsh_culture
         capital_scope = { region = british_isles_region }
         has_reform = welsh_monarchy_reform
     }
@@ -9573,16 +9729,19 @@ norman_lordship_reform = { #T1
     icon = "castle"
     allow_normal_conversion = no
     potential = {
-        NOT = { culture_group = gaelic }
+        NOT = {
+            culture_group = unified_celtic_group
+            has_reform = norman_duchy_reform
+        }
         capital_scope = { region = ireland_region }
-        NOT = { has_reform = norman_duchy_reform }
     }
     lock_level_when_selected = yes
     #legacy_equivalent = norman_lordship_legacy
     valid_for_nation_designer = yes
+    maintain_dynasty = yes
     nation_designer_cost = 20
     nation_designer_trigger = {
-        NOT = { culture_group = gaelic }
+        NOT = { culture_group = unified_celtic_group }
         capital_scope = { region = ireland_region }
     }
     fixed_rank = 1
@@ -9618,22 +9777,47 @@ eue_lordship_reform = { #T1 - Lordship level
     icon = "eue_lordship_reform"
     allow_normal_conversion = no
     fixed_rank = 1
+    maintain_dynasty = yes
     potential = {
-        is_barony_subject_type = yes
+        is_lordship_subject_type = yes
     }
     lock_level_when_selected = yes
-    #legacy_equivalent = eue_lordship_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 20
-    #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
         land_morale = 0.05
-        liberty_desire = 0.1
-        vassal_income = 0.25
+        cavalry_power = 0.15
+        nobles_influence_modifier = 0.05
+    }
+}
+
+unlocked_eue_lordship_reform = { #T1 - Lordship level
+    icon = "eue_lordship_reform"
+    potential = {
+        NOT = {
+            is_lordship_subject_type = yes
+            government_rank = 2
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 20
+    nation_designer_trigger = {	}
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        cavalry_power = 0.15
+        vassal_income = 0.05
         nobles_influence_modifier = 0.05
     }
 }
@@ -9642,25 +9826,54 @@ eue_barony_reform = { #T2 - Barony level
     icon = "eue_barony_reform" #Was english_lordship_reform
     allow_normal_conversion = no
     fixed_rank = 2
+    maintain_dynasty = yes
     potential = {
         is_barony_subject_type = yes
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_barony_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 20
-    #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
-        manpower_recovery_speed = 0.1
-        infantry_power = 0.1
         land_morale = 0.05
-        liberty_desire = 0.1
-        vassal_income = 0.25
+        defensiveness = 0.1
+        prestige_decay = -0.01
         nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
+    }
+}
+
+unlocked_eue_barony_reform = { #T2 - Barony level
+    icon = "eue_barony_reform"
+    potential = {
+        NOT = {
+            is_barony_subject_type = yes
+            government_rank = 3
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 2
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 20
+    nation_designer_trigger = {	}
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        defensiveness = 0.1
+        prestige_decay = -0.01
+        vassal_income = 0.1
+        nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
     }
 }
 
@@ -9668,23 +9881,55 @@ eue_viscounty_reform = { #T3 - Viscounty level
     icon = "eue_viscounty_reform"
     allow_normal_conversion = no
     fixed_rank = 3
+    maintain_dynasty = yes
     potential = {
         is_viscounty_subject_type = yes
     }
     lock_level_when_selected = yes
-    #legacy_equivalent = eue_viscounty_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 20
-    #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
         land_morale = 0.05
-        liberty_desire = 0.1
-        vassal_income = 0.25
+        trade_efficiency = 0.10
+        burghers_loyalty_modifier = 0.05
+        burghers_influence_modifier = 0.05
         nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
+    }
+}
+
+unlocked_eue_viscounty_reform = { #T3 - Viscounty level
+    icon = "eue_viscounty_reform"
+    potential = {
+        NOT = {
+            is_viscounty_subject_type = yes
+            government_rank = 4
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 3
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 20
+    nation_designer_trigger = {	}
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        trade_efficiency = 0.10
+        burghers_loyalty_modifier = 0.05
+        burghers_influence_modifier = 0.05
+        vassal_income = 0.15
+        nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
     }
 }
 
@@ -9692,6 +9937,7 @@ eue_county_reform = { #T4 - County level
     icon = "eue_county_reform"
     allow_normal_conversion = no
     fixed_rank = 4
+    maintain_dynasty = yes
     potential = {
         is_county_subject_type = yes
         NOT = {
@@ -9701,19 +9947,60 @@ eue_county_reform = { #T4 - County level
         }
     }
     lock_level_when_selected = yes
-    #legacy_equivalent = eue_county_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 20
-    #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
     }
     modifiers = {
         land_morale = 0.05
-        liberty_desire = 0.1
-        vassal_income = 0.25
+        global_tax_modifier = 0.1
+        power_projection_from_insults = 0.25
+        siege_ability = 0.1
         nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
+    }
+}
+
+unlocked_eue_county_reform = { #T4 - County level
+    icon = "eue_county_reform"
+    potential = {
+        NOT = {
+            is_county_subject_type = yes
+            government_rank = 5
+            culture_group = british
+            primary_culture = anglois
+            primary_culture = celtic_lowland_scottish
+            primary_culture = celtic_highland_scottish_culture
+            primary_culture = celtic_irish_culture
+            primary_culture = celtic_welsh_culture
+            primary_culture = manx
+            primary_culture = gallgaidheil
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 4
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 20
+    nation_designer_trigger = {	}
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        global_tax_modifier = 0.1
+        power_projection_from_insults = 0.25
+        siege_ability = 0.1
+        vassal_income = 0.2
+        nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
     }
 }
 
@@ -9721,6 +10008,7 @@ eng_earldom_reform = { #T4 - County Level
     icon = "eng_earldom_reform"
     allow_normal_conversion = no
     fixed_rank = 4
+    maintain_dynasty = yes
     potential = {
         OR = {
             is_subject_of_type = anglois_county
@@ -9729,28 +10017,68 @@ eng_earldom_reform = { #T4 - County Level
         }
     }
     lock_level_when_selected = yes
-    #legacy_equivalent = eng_earldom_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 20
-    #maintain_dynasty = yes
     nation_designer_trigger = {	}
     custom_attributes = {
-        has_english_subjects = yes
+        vu_has_ToR_subjects = yes
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
-        land_morale = 0.05
-        liberty_desire = 0.1
-        vassal_income = 0.25
+        land_morale = 0.1
+        available_province_loot = 0.25
+        loot_amount = 0.10
+        power_projection_from_insults = 0.25
         nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
+    }
+}
+
+unlocked_eng_earldom_reform = { #T4 - County Level
+    icon = "eng_earldom_reform"
+    potential = {
+        OR = {
+            culture_group = british
+            primary_culture = anglois
+            primary_culture = celtic_lowland_scottish
+            primary_culture = celtic_highland_scottish_culture
+            primary_culture = celtic_irish_culture
+            primary_culture = celtic_welsh_culture
+            primary_culture = manx
+            primary_culture = gallgaidheil
+        }
+        NOT = {
+            is_county_subject_type = yes
+            government_rank = 5
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 4
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 20
+    nation_designer_trigger = {	}
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.1
+        available_province_loot = 0.25
+        loot_amount = 0.10
+        power_projection_from_insults = 0.25
+        vassal_income = 0.2
+        nobles_influence_modifier = 0.05
+        nobles_loyalty_modifier = 0.05
     }
 }
 
 eue_marquisate_reform = { #T5 - Marquisate level
     icon = "eue_marquisate_reform"
     allow_normal_conversion = yes
-    #legacy_equivalent = eue_marquisate_legacy
-    valid_for_nation_designer = yes
+    valid_for_nation_designer = no
     nation_designer_cost = 10
     fixed_rank = 5
     maintain_dynasty = yes
@@ -9761,16 +10089,50 @@ eue_marquisate_reform = { #T5 - Marquisate level
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
-        defensiveness = 0.10
-        land_morale = 0.1
-        nobles_influence_modifier = 0.10
+        defensiveness = 0.1
+        land_morale = 0.1   
+        army_tradition_decay = -0.01
+        legitimacy = 0.25
+        interest = 1
+        nobles_influence_modifier = 0.075
+        nobles_loyalty_modifier = 0.075
+    }
+}
+
+unlocked_eue_marquisate_reform = { #T5 - Marquisate level
+    icon = "eue_marquisate_reform"
+    valid_for_nation_designer = yes
+    nation_designer_cost = 10
+    potential = {
+        NOT = {
+            is_marquisate_subject_type = yes
+            government_rank = 6
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 5
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        defensiveness = 0.1
+        land_morale = 0.1   
+        army_tradition_decay = -0.01
+        legitimacy = 0.25
+        interest = 1
+        vassal_income = 0.25
+        nobles_influence_modifier = 0.075
+        nobles_loyalty_modifier = 0.075
     }
 }
 
 eue_duchy_reform = { #T6 - Duchy level
     icon = "eue_duchy_reform"
     allow_normal_conversion = no
-    #legacy_equivalent = eue_duchy_legacy
     valid_for_nation_designer = no
     fixed_rank = 6
     maintain_dynasty = yes
@@ -9781,10 +10143,39 @@ eue_duchy_reform = { #T6 - Duchy level
         buffed_strong_duchies = yes #+5% Loyalty
     }
     modifiers = {
-        land_morale = 0.05
-        liberty_desire = 0.15
-        vassal_income = 0.25
-        nobles_influence_modifier = 0.1
+        land_morale = 0.1 
+        legitimacy = 0.5
+        general_cost = -0.25
+        nobles_influence_modifier = 0.075
+        nobles_loyalty_modifier = 0.075
+    }
+}
+
+unlocked_eue_duchy_reform = { #T6 - Duchy level
+    icon = "eue_duchy_reform"
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_duchy_subject_type = yes
+            government_rank = 7
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 6
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.1 
+        legitimacy = 0.5
+        general_cost = -0.25
+        vassal_income = 0.3
+        nobles_influence_modifier = 0.075
+        nobles_loyalty_modifier = 0.075
     }
 }
 
@@ -9803,9 +10194,40 @@ eue_principality_reform = { #T7 - Principality level
     }
     modifiers = {
         land_morale = 0.05
-        liberty_desire = 0.15
-        vassal_income = 0.25
+        diplomatic_reputation = 1
+        monthly_splendor = 1
         nobles_influence_modifier = 0.1
+        nobles_loyalty_modifier = 0.1
+    }
+}
+
+unlocked_eue_principality_reform = { #T7 - Principality level
+    icon = "eue_principality_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = eue_principality_legacy
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_principality_subject_type = yes
+            government_rank = 8
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 7
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        diplomatic_reputation = 1
+        monthly_splendor = 1
+        vassal_income = 0.35
+        nobles_influence_modifier = 0.1
+        nobles_loyalty_modifier = 0.1
     }
 }
 
@@ -9824,9 +10246,67 @@ eue_kingdom_reform = { #T8 - Kingdom level
     }
     modifiers = {
         land_morale = 0.05
-        liberty_desire = 0.15
-        vassal_income = 0.25
+        monthly_splendor = 1
+        tolerance_own = 1
         nobles_influence_modifier = 0.1
+        nobles_loyalty_modifier = 0.125  
+    }
+}
+
+unlocked_eue_kingdom_reform = { #T8 - Kingdom level
+    icon = "eue_kingdom_reform"
+    allow_normal_conversion = no
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_kingdom_subject_type = yes
+            government_rank = 9
+        }
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 8
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        diplomatic_upkeep = 1
+        monthly_splendor = 1
+        tolerance_own = 1
+        vassal_income = 0.35
+        nobles_influence_modifier = 0.1
+        nobles_loyalty_modifier = 0.125  
+    }
+}
+
+unlocked_eue_empire_reform = { #T9 - Empire level
+    icon = "eue_empire_reform"
+    valid_for_nation_designer = yes
+    nation_designer_cost = 100
+    potential = {
+        capital_scope = {
+            superregion = europe_superregion
+        }
+        government_rank = 9
+    }
+    custom_attributes = {
+        buffed_strong_duchies = yes #+5% Loyalty
+        vu_has_ToR_crowns = yes
+        vu_has_ToR_subjects = yes
+    }
+    modifiers = {
+        land_morale = 0.05
+        diplomatic_upkeep = 1
+        prestige = 0.5
+        legitimacy = 1
+        monthly_splendor = 1
+        vassal_income = 0.35
+        nobles_influence_modifier = 0.1
+        nobles_loyalty_modifier = 0.125  
     }
 }
 
@@ -9852,6 +10332,29 @@ islamic_emirate_reform = { #T5 - Marquisate level
     }
 }
 
+unlocked_islamic_emirate_reform = { #T5 - Marquisate level
+    icon = "islamic_emirate_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = islamic_emirate_legacy
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_subject_of_type = islamic_emirate
+            government_rank = 6
+        }
+        government_rank = 5
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 5
+        tolerance_own = 3
+        warscore_cost_vs_other_religion = -0.20
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
 islamic_governate_reform = { #T5 - Marquisate level
     icon = "islamic_governate_reform"
     allow_normal_conversion = no
@@ -9861,6 +10364,28 @@ islamic_governate_reform = { #T5 - Marquisate level
     maintain_dynasty = yes
     potential = {
         is_subject_of_type = islamic_governate
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 2
+        tolerance_own = 1
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
+unlocked_islamic_governate_reform = { #T5 - Marquisate level
+    icon = "islamic_governate_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = islamic_governate_legacy
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_subject_of_type = islamic_governate
+            government_rank = 6
+        }
+        government_rank = 5
     }
     queen = no
     modifiers = {
@@ -9894,6 +10419,30 @@ islamic_sultanate_reform = { #T6 - Duchy level
     }
 }
 
+unlocked_islamic_sultanate_reform = { #T6 - Duchy level
+    icon = "islamic_sultanate_reform"
+    allow_normal_conversion = yes
+    #legacy_equivalent = islamic_sultanate_legacy
+    valid_for_nation_designer = yes
+    nation_designer_cost = 10
+    potential = {
+        NOT = {
+            is_subject_of_type = islamic_sultanate
+            government_rank = 7
+        }
+        government_rank = 6
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 6
+        tolerance_own = 4
+        warscore_cost_vs_other_religion = -0.25
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
 islamic_taifa_reform = { #T7 - Principality level
     icon = "islamic_taifa_reform"
     allow_normal_conversion = no
@@ -9915,6 +10464,29 @@ islamic_taifa_reform = { #T7 - Principality level
     }
 }
 
+unlocked_islamic_taifa_reform = { #T7 - Principality level
+    icon = "islamic_taifa_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = islamic_malikate_legacy
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_subject_of_type = islamic_taifa
+            government_rank = 8
+        }
+        government_rank = 7
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 7
+        tolerance_own = 5
+        warscore_cost_vs_other_religion = -0.30
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
 islamic_malikate_reform = { #T8 - Kingdom level
     icon = "islamic_malikate_reform"
     allow_normal_conversion = no
@@ -9924,6 +10496,48 @@ islamic_malikate_reform = { #T8 - Kingdom level
     maintain_dynasty = yes
     potential = {
         is_subject_of_type = islamic_malikate
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 8
+        tolerance_own = 6
+        warscore_cost_vs_other_religion = -0.35
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
+unlocked_islamic_malikate_reform = { #T8 - Kingdom level
+    icon = "islamic_malikate_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = islamic_malikate_legacy
+    valid_for_nation_designer = no
+    potential = {
+        NOT = {
+            is_subject_of_type = islamic_malikate
+            government_rank = 9
+        }
+        government_rank = 8
+    }
+    queen = no
+    modifiers = {
+        tolerance_heathen = 8
+        tolerance_own = 6
+        warscore_cost_vs_other_religion = -0.35
+    }
+    government_abilities = {
+        iqta_mechanic
+    }
+}
+
+unlocked_islamic_sublimating_khalifa_reform = { #T8 - Kingdom level
+    icon = "islamic_sublimating_khalifa_reform"
+    allow_normal_conversion = no
+    #legacy_equivalent = islamic_malikate_legacy
+    valid_for_nation_designer = no
+    potential = {
+        government_rank = 9
     }
     queen = no
     modifiers = {
@@ -10073,7 +10687,7 @@ welsh_principality = {
         NOT = { religion = orthodox }
         religion_group = christian
         OR = {
-            primary_culture = welsh
+            primary_culture = celtic_welsh_culture
             AND = {
                 have_had_reform = welsh_principality
             }
@@ -10086,9 +10700,7 @@ welsh_principality = {
         NOT = { has_reform = revolutionary_empire_reform }
         NOT = { religion = orthodox }
         religion_group = christian
-        OR = {
-            primary_culture = welsh
-        }
+        primary_culture = celtic_welsh_culture
     }
     modifiers = {
         global_unrest = -1
@@ -10103,7 +10715,9 @@ western_principality = {
     potential = {
         NOT = { has_reform = revolutionary_empire_reform }
         NOT = { religion = orthodox }
-        NOT = { primary_culture = welsh }
+        NOT = {
+            primary_culture = celtic_welsh_culture
+        }
         religion_group = christian
         OR = {
             culture_group = brythonic
@@ -10217,7 +10831,8 @@ french_kingdom_reform = {
 
     custom_attributes = {
         blocked_call_diet = yes
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -10286,7 +10901,8 @@ first_french_empire_reform = { #revolutionary_empire_reform
 
     custom_attributes = {
         locked_government_type = yes
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -10330,7 +10946,8 @@ french_monarchic_restoration_reform = { #revolutionary_empire_reform
     }
     custom_attributes = {
         locked_government_type = yes
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -10374,7 +10991,8 @@ french_orleanist_restoration_reform = { #revolutionary_empire_reform
     }
     custom_attributes = {
         locked_government_type = yes
-        has_french_subjects = yes
+        vu_has_ToR_subjects = yes
+        vu_has_ToR_crowns = yes
     }
 }
 
@@ -10687,7 +11305,7 @@ anglois_dual_monarchy = {
     }
 
     custom_attributes = {
-        has_anglois_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -10698,6 +11316,8 @@ scottish_monarchy = {
     potential = {
         OR = {
             primary_culture = scottish
+            primary_culture = celtic_lowland_scottish
+            primary_culture = celtic_highland_scottish_culture
             have_had_reform = scottish_monarchy
         }
     }
@@ -10753,7 +11373,7 @@ greek_lordship_reform = { #T1
         max_absolutism = 10
     }
     custom_attributes = {
-        has_byzantine_subjects = yes
+        vu_has_ToR_subjects = yes
     }
 }
 
@@ -10794,48 +11414,11 @@ greek_roman_governors_reform = { #T3
         max_absolutism = 10
     }
     custom_attributes = {
-        has_byzantine_subjects = yes
+        vu_has_ToR_subjects = yes
     }
     conditional = {
         allow = { has_dlc = "Common Sense" }
         has_parliament = yes
-    }
-}
-
-romanian_principality = {
-    icon = "romanian_principality"
-    allow_normal_conversion = no
-    valid_for_nation_designer = yes
-    potential = {
-        primary_culture = romanian
-        NOT = { tag = RMN }
-    }
-    fixed_rank = 7
-    nation_designer_cost = 0
-    modifiers = {
-        nobles_influence_modifier = 0.05
-        improve_relation_modifier = 0.2
-        manpower_in_culture_group_provinces = 0.1
-        governing_cost = 0.33
-    }
-}
-
-romanian_united_principality = {
-    icon = "romanian_united_principality"
-    allow_normal_conversion = no
-    valid_for_nation_designer = yes
-    potential = {
-        tag = RMN
-    }
-    fixed_rank = 8
-    nation_designer_cost = 25
-    modifiers = {
-        development_cost = -0.2
-        centralize_state_cost = -0.1
-        expand_infrastructure_cost_modifier = -0.25
-        liberty_desire_from_subject_development = -0.50
-        manpower_in_culture_group_provinces = 0.20
-        governing_cost = 0.66
     }
 }
 

@@ -127,7 +127,7 @@ NDiplomacy = {
 	MAX_PEACE_TREATY_COST = 200,					-- in diplo power
 	
 	DESIRED_NUM_OF_ELECTORS = 7,
-	MAX_FREE_CITIES = 25,							-- from 15 to 25 -don
+	MAX_FREE_CITIES = 25,							-- from 15 to 50 -don but brought back down to 25
 	MIN_NUM_ELECTORS_FOR_REMOVE_ELECTORATE = 2,		-- Limit is inclusive.
 	HRE_PRINCE_AUTHORITY_THRESHOLD = 35,			-- Threshold below which you lose IA, and above which you gain it
 	IMPERIAL_AUTHORITY_FROM_PRINCES = 0.075,			-- Scales to threshold
@@ -153,7 +153,7 @@ NDiplomacy = {
 	EXCOMMUNICATE_ACTION_MONTHS = 12, 				-- Excommunication "cooldown" (months)
 	CRUSADE_TIMEOUT_YEARS = 10, 					-- Crusade timeout (years)
 	WE_IMPACT_ON_ANNEX_INTEGRATE = -0.05,			-- multiplied with current WE
-	TRUCE_YEARS = 2.5, 								-- _DDEF_TRUCE_YEARS_; Years of Truce --lowered by don, modus and prussia
+	TRUCE_YEARS = 5, 								-- _DDEF_TRUCE_YEARS_; Years of Truce --lowered by don, modus and prussia
 	SCALED_TRUCE_YEARS = 10,						-- Additional years of truce based on % of warscore taken in war (100% warscore = full scaled truce years)
 	REQUEST_HEIR_TRUCE = 5,
 	REQUEST_HEIR_AE = 20,

@@ -1,0 +1,165 @@
+#By Don
+country_decisions = {
+    vu_toggle_subject_colours_subject = {
+        #Toggle between having same colour subjects and not
+        potential = {
+            ai = no
+            is_subject = yes
+            is_colourable_subject_type = yes
+            NOT = {
+                has_global_flag = vu_uncoloured_subjects_global
+            }
+        }
+        color = { 50 50 250 }
+        allow = {
+        }
+        effect = {
+            overlord = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_country_flag = vu_uncoloured_subjects_overlord
+                        }
+                    }
+                    set_country_flag = vu_uncoloured_subjects_overlord
+                    every_subject_country = {
+                        limit = {
+                            is_colourable_subject_type = yes
+                        }
+                        restore_country_color = yes
+                        every_subject_country = {
+                            limit = {
+                                is_colourable_subject_type = yes
+                            }
+                            restore_country_color = yes
+                        }
+                    }
+                }
+                else = {
+                    clr_country_flag = vu_uncoloured_subjects_overlord
+                    every_subject_country = {
+                        limit = {
+                            is_colourable_subject_type = yes
+                        }
+                        change_country_color = {
+                            country = overlord
+                        }
+                        every_subject_country = {
+                            limit = {
+                                is_colourable_subject_type = yes
+                            }
+                            change_country_color = {
+                                country = overlord
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        ai_importance = 0
+    }
+    vu_toggle_subject_colours_overlord = {
+        #Toggle between having same colour subjects and not
+        potential = {
+            ai = no
+            any_subject_country = {
+                is_colourable_subject_type = yes
+            }
+            NOT = {
+                has_global_flag = vu_uncoloured_subjects_global
+            }
+        }
+        color = { 250 50 50 }
+        allow = {
+        }
+        effect = {
+            restore_country_color = yes
+            if = {
+                limit = {
+                    NOT = {
+                        has_country_flag = vu_uncoloured_subjects_overlord
+                    }
+                }
+                set_country_flag = vu_uncoloured_subjects_overlord
+                every_subject_country = {
+                    limit = {
+                        is_colourable_subject_type = yes
+                    }
+                    restore_country_color = yes
+                    every_subject_country = {
+                        limit = {
+                            is_colourable_subject_type = yes
+                        }
+                        restore_country_color = yes
+                    }
+                }
+            }
+            else = {
+                clr_country_flag = vu_uncoloured_subjects_overlord
+                every_subject_country = {
+                    limit = {
+                        is_colourable_subject_type = yes
+                    }
+                    change_country_color = {
+                        country = overlord
+                    }
+                    every_subject_country = {
+                        limit = {
+                            is_colourable_subject_type = yes
+                        }
+                        change_country_color = {
+                            country = overlord
+                        }
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 0
+        }
+        ai_importance = 0
+    }
+    vu_FEO_GTFO = {
+        #Toggle between having same colour subjects and not
+        potential = {
+            tag = FEO
+            is_subject = yes
+        }
+        color = { 250 50 50 }
+        allow = {
+            any_war_enemy_country = {
+                tag = TUR
+            }
+        }
+        effect = {
+            grant_independence = yes
+            add_treasury = 100
+            add_sailors = 500
+            add_prestige = -35
+            capital_scope = {
+                add_building = fort_15th
+            }
+            add_country_modifier = {
+                name = vu_improved_naval_forcelimit
+                duration = 5475
+            }
+            add_country_modifier = {
+                name = vu_improved_land_forcelimit
+                duration = 5475
+            }
+            hidden_effect = {
+                every_enemy_country = {
+                    white_peace = ROOT
+                }
+                white_peace = TUR
+            }
+        }
+        ai_will_do = {
+            factor = 1
+        }
+        ai_importance = 1
+    }
+}
