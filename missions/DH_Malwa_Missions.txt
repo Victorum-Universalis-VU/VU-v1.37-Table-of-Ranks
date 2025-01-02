@@ -591,10 +591,13 @@ mlw_slot_5 = {
 		required_missions = { mlw_architecture_mission }
 		provinces_to_highlight = {
 			owned_by = ROOT
-			NOT = { has_building = university }
+			NOT = { has_education_building_trigger = yes }
 		}
 		trigger = {
-			university = 5
+			num_of_owned_provinces_with = {
+				value = 5
+				has_education_building_trigger = yes
+			}
 			natural_scientist = 3
 		}
 		effect = {
