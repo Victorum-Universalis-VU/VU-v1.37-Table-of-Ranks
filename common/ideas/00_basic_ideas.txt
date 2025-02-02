@@ -742,15 +742,13 @@ infrastructure_ideas = {
         build_time = -0.15
     }
     develop_state_buildings = {
-        state_governing_cost_increase = -10
-        governing_capacity = 250
+        center_of_trade_upgrade_cost = -0.15
     }
     ore_smelting = {
         gold_depletion_chance_modifier = -0.15
         monthly_gold_inflation_modifier = -0.15
     }
     urban_planning = {
-        development_cost = -0.15
         great_project_upgrade_cost = -0.15
         great_project_upgrade_time = -0.25
     }
@@ -1681,6 +1679,120 @@ state_affairs_ideas = {
     }
 }
 
+agricultural_ideas = {
+    category = ADM
+    bonus = {
+        rural_goods_produced_modifier = 0.25
+        innovativeness_gain = 0.1
+    }
+    state_food_centers = {
+        global_unrest = -2
+    }
+    terraced_farming = {
+        global_supply_limit_modifier = 0.5
+    }
+    grain_subsidies = {
+        development_cost = -0.1
+    }
+    tanning_leather = {
+        global_regiment_cost = -0.1
+        global_regiment_recruit_speed = -0.1
+    }
+    agricultural_revolution = {
+        land_attrition = -0.1
+        naval_attrition = -0.1
+    }
+    local_food_quotas = {
+        manpower_recovery_speed = 0.15
+        reinforce_cost_modifier = -0.1
+    }
+    feed_the_royal_court = {
+        monarch_lifespan = 0.15
+    }
+    #modus_will_do = {
+    #   factor = 10,000
+    #}
+    ai_will_do = {
+        factor = 1
+        #modifier = {
+        #    factor = 0.75
+        #    NOT = {
+        #        crown_land_share = 40
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0.75
+        #    NOT = {
+        #        estate_influence = {
+        #            estate = all
+        #            influence = 50
+        #        }
+        #    }
+        #}
+        #modifier ={
+        #    factor = 0.5
+        #    NOT = {
+        #        estate_influence = {
+        #            estate = all
+        #            influence = 25
+        #        }
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0.9
+        #    NOT = {
+        #        stability = 1
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0.8
+        #    NOT = {
+        #        #historical countries
+        #        tag = FRA
+        #        tag = PLC
+        #        tag = HAB
+        #        tag = MNG
+        #        tag = JAP
+        #        tag = TUR
+        #        #cultures
+        #        culture_group = french
+        #        culture_group = japanese_g
+        #        culture = austrian
+        #        culture = polish
+        #        is_part_of_hre = yes
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0.25
+        #    OR = {
+        #        tag = BRA
+        #        tag = HES
+        #        tag = ENG
+        #        tag = DAN
+        #        culture_group = scandinavian
+        #        culture_group = british
+        #        uses_devotion = yes
+        #        uses_republican_tradition = yes
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0
+        #    NOT = {
+        #        total_development = 25
+        #    }
+        #}
+        #modifier = {
+        #    factor = 0.6
+        #    NOT = {
+        #        has_idea_group = influence_ideas
+        #        has_idea_group = nationalism_ideas
+        #        has_idea_group = defensive_ideas
+        #        has_idea_group = logistics_ideas
+        #    }
+        #}
+    }
+}
+
 ###########################################
 ## Vanilla Ideas; Reworked Doge's by Don ##
 ###########################################
@@ -2440,6 +2552,84 @@ nationalism_ideas = {
     nation_states = {
         diplomatic_upkeep = 1
         num_accepted_cultures = -1
+    }
+    ai_will_do = {
+        factor = 1
+        #modifier = {
+        #    factor = 0
+        #    has_idea_group = humanist_ideas
+        #}
+    }
+}
+
+holy_roman_empire_ideas = {
+    category = DIP
+    trigger = {
+        capital_scope = {
+            superregion = europe_superregion
+        }
+    }
+    bonus = {
+        imperial_authority = 0.1
+    }
+    ally_the_electors = {
+        diplomatic_upkeep = 2
+    }
+    sway_the_electors = {
+        reasons_to_elect = 15
+    }
+    imperial_diplomacy = {
+        diplomats = 1
+    }
+    influence_imperial_courts = {
+        diplomatic_reputation = 1
+    }
+    dominate_the_electorate = {
+        legitimate_subject_elector = 25
+    }
+    crowns_of_the_empire = {
+        years_to_integrate_personal_union = -10
+        chance_to_inherit = 0.1
+    }
+    the_imperial_ban = {
+        manpower_against_imperial_enemies = 0.2
+    }
+    ai_will_do = {
+        factor = 1
+        #modifier = {
+        #    factor = 0
+        #    has_idea_group = humanist_ideas
+        #}
+    }
+}
+
+fishing_ideas = {
+    category = DIP
+    trigger = {
+    }
+    bonus = {
+        navy_tradition_decay = -0.01
+    }
+    first_catch = {
+        plantage_goods_produced_modifier = 0.1
+    }
+    sustainable_fisheries = {
+        ship_trade_power_modifier = 0.1
+    }
+    oceanic_excursions = {
+        navy_tradition = 0.5
+    }
+    safe_havens = {
+       naval_attrition = -0.1
+    }
+    staple_ports = {
+        global_own_trade_power = 0.1
+    }
+    river_cruises = {
+        sailors_recovery_speed = 0.2
+    }
+    ocean_whaling_excursions = {
+        leader_naval_manuever = 1
     }
     ai_will_do = {
         factor = 1

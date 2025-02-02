@@ -211,6 +211,10 @@ italian_marquisate = {}
 italian_duchy = {}
 italian_principality = {}
 italian_kingdom = {}
+#LITHUANIAN SUBJECTS
+lithuanian_lordship_march = {}
+lithuanian_duchy = {}
+lithuanian_principality = {}
 #NORWEGIAN SUBJECTS
 norwegian_lordship = {}
 norwegian_barony = {}
@@ -268,8 +272,10 @@ swedish_duchy = {}
 swedish_principality = {}
 swedish_kingdom = {}
 #CROWN PUs by SF #
+anglois_crown_PU = {}
 aragonese_crown_PU = {}
 austrian_crown_PU = {}
+baltic_crown_PU = {}
 benelux_crown_PU = {}
 bohemian_crown_PU = {}
 burgundian_crown_PU = {}
@@ -280,8 +286,10 @@ french_crown_PU = {}
 german_crown_PU ={}
 hungarian_crown_PU = {}
 italian_crown_PU = {}
+norwegian_crown_PU = {}
 polish_crown_PU = {}
 portuguese_crown_PU ={}
+prussian_crown_PU = {}
 russian_crown_PU = {}
 spanish_crown_PU = {}
 swedish_crown_PU = {}
@@ -303,6 +311,15 @@ islamic_taifa = {}
 islamic_malikate = {}
 #OTTOMAN BEYS
 turkish_tributary_beylik_vassal = {}
+#SLAVIC SUBJECTS
+lezhe_league_member = {}
+bosnian_banat_kingdom = {}
+slavic_vojvodina = {}
+#REPUBLIC SUBJECTS
+feudal_republic = {}
+merchantlist_republic = {}
+venetian_republic = {}
+genoese_commercial_republic = {}
 
 default = {
 	# Graphics:
@@ -1169,7 +1186,7 @@ lezhe_league_member = {
     base_liberty_desire = 20.0
     forcelimit_to_overlord = 0.00
     military_focus = 1.2
-    pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+    pays_overlord = 1
     joins_overlords_wars = yes
     can_use_claims = yes
 
@@ -1222,7 +1239,7 @@ bosnian_banat_kingdom = {
     diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_bosnian_banat_kingdom
     diplomacy_subject_sprite = GFX_icon_diplomacy_am_bosnian_banat_kingdom
 
-    # Properties: #Edited by Prussia & Don
+    # Properties:
     has_power_projection = no
     takes_diplo_slot = yes
     gets_help_with_rebels = yes
@@ -1241,7 +1258,7 @@ bosnian_banat_kingdom = {
     relative_power_class = 1
     should_quit_wars_on_activation = yes
 
-    #Subject Interactions #Edited by Prussia & Don
+    #Subject Interactions
     seize_court_resources = yes
     request_extra_levies = yes
     grant_administrative_autonomy = yes
@@ -1287,7 +1304,7 @@ slavic_vojvodina = {
     diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_slavic_vojvodina
     diplomacy_subject_sprite = GFX_icon_diplomacy_am_slavic_vojvodina
 
-    # Properties: #Edited by Prussia & Don
+    # Properties:
     has_power_projection = yes
     takes_diplo_slot = yes
     gets_help_with_rebels = yes
@@ -1307,7 +1324,7 @@ slavic_vojvodina = {
     relative_power_class = 1             #1 is individual 2 is combined
     should_quit_wars_on_activation = yes
 
-    #Subject Interactions #Edited by Prussia & Don
+    #Subject Interactions
     seize_court_resources = no
     request_extra_levies = yes
     grant_administrative_autonomy = yes
@@ -1366,7 +1383,7 @@ anglois_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -1407,7 +1424,7 @@ anglois_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -1418,11 +1435,11 @@ anglois_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 anglois_barony = { 
@@ -1445,7 +1462,7 @@ anglois_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -1486,7 +1503,7 @@ anglois_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -1497,11 +1514,11 @@ anglois_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 anglois_viscounty = {
@@ -1525,7 +1542,7 @@ anglois_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -1605,7 +1622,7 @@ anglois_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -1683,7 +1700,7 @@ anglois_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -1766,7 +1783,7 @@ anglois_duchy = { #
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
     can_be_annexed = no
 	joins_overlords_wars = yes
@@ -1850,7 +1867,7 @@ anglois_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -1919,9 +1936,9 @@ anglois_kingdom = {
 	copy_from = anglois_principality
 	
 	# Graphics:
-    sprite = GFX_icon_anglois_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_anglois_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_anglois_aristocracy #Edited by Prussia
+    sprite = GFX_icon_anglois_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_anglois_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_anglois_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -1933,7 +1950,7 @@ anglois_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -1971,7 +1988,7 @@ anglois_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -1991,11 +2008,11 @@ anglois_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #ARAGONESE SUBJECTS
@@ -2019,7 +2036,7 @@ aragonese_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2060,7 +2077,7 @@ aragonese_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2071,11 +2088,11 @@ aragonese_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 aragonese_barony = { 
@@ -2098,7 +2115,7 @@ aragonese_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2139,7 +2156,7 @@ aragonese_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2150,11 +2167,11 @@ aragonese_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 aragonese_viscounty = {
@@ -2178,7 +2195,7 @@ aragonese_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2258,7 +2275,7 @@ aragonese_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2299,7 +2316,7 @@ aragonese_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2310,7 +2327,7 @@ aragonese_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -2336,7 +2353,7 @@ aragonese_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -2419,7 +2436,7 @@ aragonese_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -2503,7 +2520,7 @@ aragonese_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -2572,9 +2589,9 @@ aragonese_kingdom = {
 	copy_from = aragonese_principality
 	
 	# Graphics:
-    sprite = GFX_icon_aragonese_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_aragonese_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_aragonese_aristocracy #Edited by Prussia
+    sprite = GFX_icon_aragonese_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_aragonese_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_aragonese_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -2586,7 +2603,7 @@ aragonese_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia 
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -2624,7 +2641,7 @@ aragonese_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2644,11 +2661,11 @@ aragonese_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #AUSTRIAN SUBJECTS
@@ -2672,7 +2689,7 @@ austrian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2713,7 +2730,7 @@ austrian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2724,11 +2741,11 @@ austrian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 austrian_barony = { 
@@ -2751,7 +2768,7 @@ austrian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2792,7 +2809,7 @@ austrian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2803,11 +2820,11 @@ austrian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 austrian_viscounty = {
@@ -2831,7 +2848,7 @@ austrian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2911,7 +2928,7 @@ austrian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -2952,7 +2969,7 @@ austrian_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -2963,7 +2980,7 @@ austrian_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -2989,7 +3006,7 @@ austrian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -3072,7 +3089,7 @@ austrian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3156,7 +3173,7 @@ austrian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3225,9 +3242,9 @@ austrian_kingdom = {
 	copy_from = austrian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_austrian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_austrian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_austrian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_austrian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_austrian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_austrian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -3239,7 +3256,7 @@ austrian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3277,7 +3294,7 @@ austrian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -3297,11 +3314,11 @@ austrian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #BALTIC SUBJECTS
@@ -3325,7 +3342,7 @@ baltic_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -3366,7 +3383,7 @@ baltic_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -3377,11 +3394,11 @@ baltic_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 baltic_barony = { 
@@ -3404,7 +3421,7 @@ baltic_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -3445,7 +3462,7 @@ baltic_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -3456,11 +3473,11 @@ baltic_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 baltic_viscounty = {
@@ -3485,7 +3502,7 @@ baltic_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -3566,7 +3583,7 @@ baltic_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -3607,7 +3624,7 @@ baltic_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -3618,7 +3635,7 @@ baltic_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -3644,7 +3661,7 @@ baltic_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -3727,7 +3744,7 @@ baltic_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3811,7 +3828,7 @@ baltic_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3880,9 +3897,9 @@ baltic_kingdom = {
 	copy_from = baltic_principality
 
 	# Graphics:
-    sprite = GFX_icon_baltic_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_baltic_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_baltic_aristocracy #Edited by Prussia
+    sprite = GFX_icon_baltic_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_baltic_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_baltic_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -3894,7 +3911,7 @@ baltic_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -3932,7 +3949,7 @@ baltic_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -3952,11 +3969,11 @@ baltic_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #BELGIAN SUBJECTS
@@ -3980,7 +3997,7 @@ belgian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4021,7 +4038,7 @@ belgian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4032,11 +4049,11 @@ belgian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 belgian_barony = { 
@@ -4059,7 +4076,7 @@ belgian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4100,7 +4117,7 @@ belgian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4111,11 +4128,11 @@ belgian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 belgian_viscounty = {
@@ -4140,7 +4157,7 @@ belgian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4221,7 +4238,7 @@ belgian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4262,7 +4279,7 @@ belgian_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4273,7 +4290,7 @@ belgian_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -4299,7 +4316,7 @@ belgian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -4382,7 +4399,7 @@ belgian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -4466,7 +4483,7 @@ belgian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -4535,9 +4552,9 @@ belgian_kingdom = {
 	copy_from = belgian_principality
 
 	# Graphics:
-    sprite = GFX_icon_belgian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_belgian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_belgian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_belgian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_belgian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_belgian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -4549,7 +4566,7 @@ belgian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -4587,7 +4604,7 @@ belgian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4607,11 +4624,11 @@ belgian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #BOHEMIAN SUBJECTS
@@ -4635,7 +4652,7 @@ bohemian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4676,7 +4693,7 @@ bohemian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4687,11 +4704,11 @@ bohemian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 bohemian_barony = { 
@@ -4714,7 +4731,7 @@ bohemian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4755,7 +4772,7 @@ bohemian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4766,11 +4783,11 @@ bohemian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 bohemian_viscounty = {
@@ -4794,7 +4811,7 @@ bohemian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4874,7 +4891,7 @@ bohemian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -4915,7 +4932,7 @@ bohemian_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -4926,7 +4943,7 @@ bohemian_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -4952,7 +4969,7 @@ bohemian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -5035,7 +5052,7 @@ bohemian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5119,7 +5136,7 @@ bohemian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5188,9 +5205,9 @@ bohemian_kingdom = {
 	copy_from = bohemian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_bohemian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_bohemian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_bohemian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_bohemian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_bohemian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_bohemian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -5202,7 +5219,7 @@ bohemian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5240,7 +5257,7 @@ bohemian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5260,11 +5277,11 @@ bohemian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #BURGUNDIAN SUBJECTS
@@ -5288,7 +5305,7 @@ burgundian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -5329,7 +5346,7 @@ burgundian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5340,11 +5357,11 @@ burgundian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 burgundian_barony = { 
@@ -5367,7 +5384,7 @@ burgundian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -5408,7 +5425,7 @@ burgundian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5419,11 +5436,11 @@ burgundian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 burgundian_viscounty = {
@@ -5447,7 +5464,7 @@ burgundian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -5527,7 +5544,7 @@ burgundian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -5568,7 +5585,7 @@ burgundian_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5579,7 +5596,7 @@ burgundian_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -5605,7 +5622,7 @@ burgundian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -5688,7 +5705,7 @@ burgundian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5772,7 +5789,7 @@ burgundian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5841,9 +5858,9 @@ burgundian_kingdom = {
 	copy_from = burgundian_principality
 
 	# Graphics:
-    sprite = GFX_icon_burgundian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_burgundian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_burgundian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_burgundian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_burgundian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_burgundian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -5855,7 +5872,7 @@ burgundian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -5893,7 +5910,7 @@ burgundian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5913,11 +5930,11 @@ burgundian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #BYZANTINE SUBJECTS
@@ -5941,7 +5958,7 @@ byzantine_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -5982,7 +5999,7 @@ byzantine_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -5993,11 +6010,11 @@ byzantine_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 byzantine_barony = { 
@@ -6020,7 +6037,7 @@ byzantine_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6061,7 +6078,7 @@ byzantine_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -6072,11 +6089,11 @@ byzantine_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 byzantine_viscounty = {
@@ -6100,7 +6117,7 @@ byzantine_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6180,7 +6197,7 @@ byzantine_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6221,7 +6238,7 @@ byzantine_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -6232,7 +6249,7 @@ byzantine_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -6258,7 +6275,7 @@ byzantine_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -6341,7 +6358,7 @@ byzantine_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -6425,7 +6442,7 @@ byzantine_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -6494,9 +6511,9 @@ byzantine_kingdom = {
 	copy_from = byzantine_principality
 	
 	# Graphics:
-    sprite = GFX_icon_byzantine_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_byzantine_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_byzantine_aristocracy #Edited by Prussia
+    sprite = GFX_icon_byzantine_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_byzantine_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_byzantine_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -6508,7 +6525,7 @@ byzantine_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -6546,7 +6563,7 @@ byzantine_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -6566,11 +6583,11 @@ byzantine_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #CASTILIAN SUBJECTS
@@ -6594,7 +6611,7 @@ castilian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6635,7 +6652,7 @@ castilian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -6646,7 +6663,7 @@ castilian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord
+		modifier = lordship_overlord
 	}
 
 	overlord_opinion_modifier = is_lordship
@@ -6673,7 +6690,7 @@ castilian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6753,7 +6770,7 @@ castilian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6833,7 +6850,7 @@ castilian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -6874,7 +6891,7 @@ castilian_county = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject
+		modifier = county_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -6885,7 +6902,7 @@ castilian_county = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord
+		modifier = county_overlord
 	}
 
 	overlord_opinion_modifier = is_county
@@ -6911,7 +6928,7 @@ castilian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -6994,7 +7011,7 @@ castilian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7078,7 +7095,7 @@ castilian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7147,9 +7164,9 @@ castilian_kingdom = {
 	copy_from = castilian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_castilian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_castilian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_castilian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_castilian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_castilian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_castilian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -7161,7 +7178,7 @@ castilian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7199,7 +7216,7 @@ castilian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -7219,11 +7236,11 @@ castilian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #DANISH SUBJECTS
@@ -7247,7 +7264,7 @@ danish_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -7288,7 +7305,7 @@ danish_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -7299,11 +7316,11 @@ danish_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 danish_barony = { 
@@ -7326,7 +7343,7 @@ danish_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -7367,7 +7384,7 @@ danish_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -7378,11 +7395,11 @@ danish_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 danish_viscounty = {
@@ -7406,7 +7423,7 @@ danish_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -7486,7 +7503,7 @@ danish_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -7564,7 +7581,7 @@ danish_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -7647,7 +7664,7 @@ danish_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7731,7 +7748,7 @@ danish_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7800,9 +7817,9 @@ danish_kingdom = {
 	copy_from = danish_principality
 	
 	# Graphics:
-    sprite = GFX_icon_danish_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_danish_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_danish_aristocracy #Edited by Prussia
+    sprite = GFX_icon_danish_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_danish_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_danish_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -7814,7 +7831,7 @@ danish_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -7852,7 +7869,7 @@ danish_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -7872,11 +7889,11 @@ danish_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #DUTCH SUBJECTS
@@ -7900,7 +7917,7 @@ dutch_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -7941,7 +7958,7 @@ dutch_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -7952,11 +7969,11 @@ dutch_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 dutch_barony = { 
@@ -7979,7 +7996,7 @@ dutch_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8020,7 +8037,7 @@ dutch_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8031,11 +8048,11 @@ dutch_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 dutch_viscounty = {
@@ -8059,7 +8076,7 @@ dutch_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8139,7 +8156,7 @@ dutch_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8217,7 +8234,7 @@ dutch_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -8300,7 +8317,7 @@ dutch_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -8384,7 +8401,7 @@ dutch_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -8453,9 +8470,9 @@ dutch_kingdom = {
 	copy_from = dutch_principality
 	
 	# Graphics:
-    sprite = GFX_icon_dutch_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_dutch_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_dutch_aristocracy #Edited by Prussia
+    sprite = GFX_icon_dutch_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_dutch_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_dutch_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -8467,7 +8484,7 @@ dutch_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -8505,7 +8522,7 @@ dutch_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8525,11 +8542,11 @@ dutch_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #ENGLISH SUBJECTS
@@ -8553,7 +8570,7 @@ english_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8594,7 +8611,7 @@ english_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = lordship_subject #baronial_subject
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8605,7 +8622,7 @@ english_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = lordship_overlord #baronial_subject
+		modifier = lordship_overlord
 	}
 
 	overlord_opinion_modifier = is_lordship
@@ -8632,7 +8649,7 @@ english_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8711,7 +8728,7 @@ english_viscounty = {
 	base_liberty_desire = 3.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.75 #Edited by Prussia
+	pays_overlord = 0.75
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8752,7 +8769,7 @@ english_viscounty = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = viscounty_subject #Edited by Prussia
+		modifier = viscounty_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8763,11 +8780,11 @@ english_viscounty = {
 		}
 	}
 	modifier_overlord = {
-		modifier = viscounty_overlord #Edited by Prussia
+		modifier = viscounty_overlord
 	}
 
-	overlord_opinion_modifier = is_viscounty #Edited by Prussia
-	subject_opinion_modifier = is_viscounty #Edited by Prussia
+	overlord_opinion_modifier = is_viscounty
+	subject_opinion_modifier = is_viscounty
 }
 
 english_earldom = {
@@ -8790,7 +8807,7 @@ english_earldom = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.75 #Edited by Prussia
+	pays_overlord = 0.75
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -8831,7 +8848,7 @@ english_earldom = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = earldom_subject #Edited by Prussia
+		modifier = earldom_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8842,11 +8859,11 @@ english_earldom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = earldom_overlord #Edited by Prussia
+		modifier = earldom_overlord
 	}
 
-	overlord_opinion_modifier = is_earldom #Edited by Prussia
-	subject_opinion_modifier = is_earldom #Edited by Prussia
+	overlord_opinion_modifier = is_earldom
+	subject_opinion_modifier = is_earldom
 }
 
 english_marquisate = {
@@ -8868,7 +8885,7 @@ english_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.35 #Edited by Prussia
+	pays_overlord = 0.35
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -8905,7 +8922,7 @@ english_marquisate = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = marquisate_bonus #Edited by Prussia
+		modifier = marquisate_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -8925,11 +8942,11 @@ english_marquisate = {
 		}
 	}
 	modifier_overlord = {
-		modifier = marquisate_subject #Edited by Prussia
+		modifier = marquisate_subject
 	}
 
-	overlord_opinion_modifier = is_marquisate #Edited by Prussia
-	subject_opinion_modifier = is_marquisate #Edited by Prussia
+	overlord_opinion_modifier = is_marquisate
+	subject_opinion_modifier = is_marquisate
 }
 
 english_duchy = {
@@ -8951,7 +8968,7 @@ english_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia 
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9035,7 +9052,7 @@ english_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9118,7 +9135,7 @@ english_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9156,7 +9173,7 @@ english_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9176,11 +9193,11 @@ english_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #FRENCH SUBJECTS
@@ -9204,7 +9221,7 @@ french_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9245,7 +9262,7 @@ french_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = lordship_subject #baronial_subject
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9256,7 +9273,7 @@ french_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = lordship_overlord #baronial_subject
+		modifier = lordship_overlord
 	}
 
 	overlord_opinion_modifier = is_lordship
@@ -9283,7 +9300,7 @@ french_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9324,7 +9341,7 @@ french_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9335,11 +9352,11 @@ french_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 french_viscounty = {
@@ -9363,7 +9380,7 @@ french_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9443,7 +9460,7 @@ french_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9521,7 +9538,7 @@ french_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -9604,7 +9621,7 @@ french_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9688,7 +9705,7 @@ french_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9757,9 +9774,9 @@ french_kingdom = {
 	copy_from = french_principality
 	
 	# Graphics:
-    sprite = GFX_icon_french_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_french_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_french_aristocracy #Edited by Prussia
+    sprite = GFX_icon_french_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_french_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_french_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -9771,7 +9788,7 @@ french_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -9809,7 +9826,7 @@ french_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9829,11 +9846,11 @@ french_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #GERMAN SUBJECTS
@@ -9857,7 +9874,7 @@ german_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9898,7 +9915,7 @@ german_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9909,11 +9926,11 @@ german_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 german_barony = { 
@@ -9936,7 +9953,7 @@ german_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -9977,7 +9994,7 @@ german_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -9988,11 +10005,11 @@ german_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 german_viscounty = {
@@ -10016,7 +10033,7 @@ german_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10096,7 +10113,7 @@ german_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10174,7 +10191,7 @@ german_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -10257,7 +10274,7 @@ german_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -10341,7 +10358,7 @@ german_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -10424,7 +10441,7 @@ german_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -10462,7 +10479,7 @@ german_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -10482,11 +10499,11 @@ german_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #HUNGARIAN SUBJECTS
@@ -10510,7 +10527,7 @@ hungarian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10551,7 +10568,7 @@ hungarian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -10562,11 +10579,11 @@ hungarian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 hungarian_barony = { 
@@ -10589,7 +10606,7 @@ hungarian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10630,7 +10647,7 @@ hungarian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -10641,11 +10658,11 @@ hungarian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 hungarian_viscounty = {
@@ -10669,7 +10686,7 @@ hungarian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10749,7 +10766,7 @@ hungarian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -10827,7 +10844,7 @@ hungarian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -10910,7 +10927,7 @@ hungarian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -10994,7 +11011,7 @@ hungarian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -11063,9 +11080,9 @@ hungarian_kingdom = {
 	copy_from = hungarian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_hungarian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hungarian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_hungarian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_hungarian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hungarian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_hungarian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -11077,7 +11094,7 @@ hungarian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -11115,7 +11132,7 @@ hungarian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -11135,11 +11152,11 @@ hungarian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #ITALIAN SUBJECTS
@@ -11163,7 +11180,7 @@ italian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -11204,7 +11221,7 @@ italian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -11215,11 +11232,11 @@ italian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 italian_barony = { 
@@ -11242,7 +11259,7 @@ italian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -11283,7 +11300,7 @@ italian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -11294,11 +11311,11 @@ italian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 italian_viscounty = {
@@ -11322,7 +11339,7 @@ italian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -11402,7 +11419,7 @@ italian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -11480,7 +11497,7 @@ italian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -11563,7 +11580,7 @@ italian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -11647,7 +11664,7 @@ italian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -11716,9 +11733,9 @@ italian_kingdom = {
 	copy_from = italian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_italian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_italian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_italian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_italian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_italian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_italian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -11730,7 +11747,7 @@ italian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -11768,7 +11785,7 @@ italian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -11788,13 +11805,266 @@ italian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
+#LITHUANIAN SUBJECTS
+lithuanian_lordship_march = {
+	copy_from = march
+
+    # Graphics:
+    sprite = GFX_icon_lithuanian_lordship_march
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_lithuanian_aristocracy
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_lithuanian_aristocracy
+
+    # Properties:
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.15
+    trust_on_start = 0
+    base_liberty_desire = 25.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_annexed = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+    is_march = yes
+
+    # Subject Interactions
+    seize_court_resources = no
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = yes
+    enforce_religion = yes
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_marquisate #Was cb_disloyal_eyalet
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = marquisate_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = marquisate_subject
+    }
+
+    overlord_opinion_modifier = is_marquisate
+    subject_opinion_modifier = is_marquisate
+}
+
+lithuanian_duchy = {
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_lithuanian_duchy
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_lithuanian_aristocracy
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_lithuanian_aristocracy
+
+    # Properties:
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.1
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = yes
+    enforce_religion = yes
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear
+
+    restoration_cb = cb_disloyal_duchy #Was cb_disloyal_eyalet
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = duchy_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = duchy_historic_naval_subject
+    }
+
+    overlord_opinion_modifier = is_duchy
+    subject_opinion_modifier = is_duchy
+}
+
+lithuanian_principality = {
+    copy_from = lithuanian_duchy
+
+    # Graphics:
+    sprite = GFX_icon_lithuanian_principality
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_lithuanian_aristocracy
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_lithuanian_aristocracy
+
+    # Properties:
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.1
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = yes
+    enforce_religion = yes
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Was cb_disloyal_eyalet
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+#MONGOLIAN VASSAL
 mongolian_vassal = {
 	copy_from = default
 	
@@ -11814,7 +12084,7 @@ mongolian_vassal = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -11899,7 +12169,7 @@ norwegian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -11940,7 +12210,7 @@ norwegian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -11951,11 +12221,11 @@ norwegian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 norwegian_barony = { 
@@ -11978,7 +12248,7 @@ norwegian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12019,7 +12289,7 @@ norwegian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -12030,11 +12300,11 @@ norwegian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 norwegian_viscounty = {
@@ -12058,7 +12328,7 @@ norwegian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12138,7 +12408,7 @@ norwegian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12216,7 +12486,7 @@ norwegian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -12299,7 +12569,7 @@ norwegian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -12383,7 +12653,7 @@ norwegian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -12452,9 +12722,9 @@ norwegian_kingdom = {
 	copy_from = norwegian_principality
 	
 	# Graphics:
-    sprite = GFX_icon_norwegian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_norwegian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_norwegian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_norwegian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_norwegian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_norwegian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -12466,7 +12736,7 @@ norwegian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -12504,7 +12774,7 @@ norwegian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -12524,11 +12794,11 @@ norwegian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #POLISH SUBJECTS
@@ -12552,7 +12822,7 @@ polish_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12593,7 +12863,7 @@ polish_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -12604,11 +12874,11 @@ polish_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 polish_barony = { 
@@ -12631,7 +12901,7 @@ polish_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12672,7 +12942,7 @@ polish_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -12683,11 +12953,11 @@ polish_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 polish_viscounty = {
@@ -12711,7 +12981,7 @@ polish_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12791,7 +13061,7 @@ polish_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -12869,7 +13139,7 @@ polish_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -12952,7 +13222,7 @@ polish_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13036,7 +13306,7 @@ polish_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13105,9 +13375,9 @@ polish_kingdom = {
 	copy_from = polish_principality
 	
 	# Graphics:
-    sprite = GFX_icon_polish_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_polish_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_polish_aristocracy #Edited by Prussia
+    sprite = GFX_icon_polish_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_polish_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_polish_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -13119,7 +13389,7 @@ polish_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13157,7 +13427,7 @@ polish_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13177,11 +13447,11 @@ polish_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #PORTUGUESE SUBJECTS
@@ -13205,7 +13475,7 @@ portuguese_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13246,7 +13516,7 @@ portuguese_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13257,11 +13527,11 @@ portuguese_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 portuguese_barony = { 
@@ -13284,7 +13554,7 @@ portuguese_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13325,7 +13595,7 @@ portuguese_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13336,11 +13606,11 @@ portuguese_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 portuguese_viscounty = {
@@ -13364,7 +13634,7 @@ portuguese_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13444,7 +13714,7 @@ portuguese_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13522,7 +13792,7 @@ portuguese_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -13605,7 +13875,7 @@ portuguese_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13689,7 +13959,7 @@ portuguese_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13758,9 +14028,9 @@ portuguese_kingdom = {
 	copy_from = portuguese_principality
 	
 	# Graphics:
-    sprite = GFX_icon_portuguese_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_portuguese_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_portuguese_aristocracy #Edited by Prussia
+    sprite = GFX_icon_portuguese_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_portuguese_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_portuguese_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -13772,7 +14042,7 @@ portuguese_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -13810,7 +14080,7 @@ portuguese_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13830,11 +14100,11 @@ portuguese_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #PRUSSIAN SUBJECTS
@@ -13858,7 +14128,7 @@ prussian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13899,7 +14169,7 @@ prussian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13910,11 +14180,11 @@ prussian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 prussian_barony = { 
@@ -13937,7 +14207,7 @@ prussian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -13978,7 +14248,7 @@ prussian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -13989,11 +14259,11 @@ prussian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 prussian_viscounty = {
@@ -14017,7 +14287,7 @@ prussian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14097,7 +14367,7 @@ prussian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14175,7 +14445,7 @@ prussian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -14258,7 +14528,7 @@ prussian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -14342,7 +14612,7 @@ prussian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -14425,7 +14695,7 @@ prussian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -14463,7 +14733,7 @@ prussian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -14483,11 +14753,11 @@ prussian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #RUSSIAN SUBJECTS
@@ -14511,7 +14781,7 @@ russian_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14552,7 +14822,7 @@ russian_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -14563,11 +14833,11 @@ russian_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 russian_barony = { 
@@ -14590,7 +14860,7 @@ russian_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14631,7 +14901,7 @@ russian_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -14642,11 +14912,11 @@ russian_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 russian_viscounty = {
@@ -14670,7 +14940,7 @@ russian_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14750,7 +15020,7 @@ russian_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -14828,7 +15098,7 @@ russian_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -14911,7 +15181,7 @@ russian_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -14995,7 +15265,7 @@ russian_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -15064,9 +15334,9 @@ russian_kingdom = {
 	copy_from = russian_principality
 
 	# Graphics:
-    sprite = GFX_icon_russian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_russian_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_russian_aristocracy #Edited by Prussia
+    sprite = GFX_icon_russian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_russian_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_russian_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -15078,7 +15348,7 @@ russian_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -15116,7 +15386,7 @@ russian_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -15136,11 +15406,11 @@ russian_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 #SCOTTISH SUBJECTS
@@ -15240,7 +15510,7 @@ swedish_lordship = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -15281,7 +15551,7 @@ swedish_lordship = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = lordship_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -15292,11 +15562,11 @@ swedish_lordship = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = lordship_overlord
 	}
 
-	overlord_opinion_modifier = is_lordship #Edited by Prussia
-	subject_opinion_modifier = is_lordship #Edited by Prussia
+	overlord_opinion_modifier = is_lordship
+	subject_opinion_modifier = is_lordship
 }
 
 swedish_barony = { 
@@ -15319,7 +15589,7 @@ swedish_barony = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -15360,7 +15630,7 @@ swedish_barony = {
 	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
 	modifier_subject = clear #Ditto
 	modifier_subject = {
-		modifier = baronial_subject #Edited by Prussia
+		modifier = baronial_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -15371,11 +15641,11 @@ swedish_barony = {
 		}
 	}
 	modifier_overlord = {
-		modifier = baronial_overlord #Edited by Prussia
+		modifier = baronial_overlord
 	}
 
-	overlord_opinion_modifier = is_barony #Edited by Prussia
-	subject_opinion_modifier = is_barony #Edited by Prussia
+	overlord_opinion_modifier = is_barony
+	subject_opinion_modifier = is_barony
 }
 
 swedish_viscounty = {
@@ -15399,7 +15669,7 @@ swedish_viscounty = {
 	base_liberty_desire = 30.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -15479,7 +15749,7 @@ swedish_county = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.5 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.5
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -15557,7 +15827,7 @@ swedish_marquisate = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -15640,7 +15910,7 @@ swedish_duchy = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia 
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -15723,7 +15993,7 @@ swedish_principality = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia 
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -15791,9 +16061,9 @@ swedish_kingdom = {
 	copy_from = swedish_principality
 	
 	# Graphics:
-    sprite = GFX_icon_prussian_kingdom #Edited by Prussia
-	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_swedish_aristocracy #Edited by Prussia
-	diplomacy_subject_sprite = GFX_icon_diplomacy_am_swedish_aristocracy #Edited by Prussia
+    sprite = GFX_icon_prussian_kingdom
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_swedish_aristocracy
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_swedish_aristocracy
 
 	# Properties:
 	takes_diplo_slot = no
@@ -15805,7 +16075,7 @@ swedish_kingdom = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia 
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -15842,7 +16112,7 @@ swedish_kingdom = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = kingdom_bonus #Edited by Prussia
+		modifier = kingdom_bonus
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -15862,11 +16132,11 @@ swedish_kingdom = {
 		}
 	}
 	modifier_overlord = {
-		modifier = kingdom_subject #Edited by Prussia
+		modifier = kingdom_subject
 	}
 
-	overlord_opinion_modifier = is_kingdom #Edited by Prussia
-	subject_opinion_modifier = is_kingdom #Edited by Prussia
+	overlord_opinion_modifier = is_kingdom
+	subject_opinion_modifier = is_kingdom
 }
 
 
@@ -15936,6 +16206,64 @@ personal_union = {
 }
 
 #CROWN PUs by SF #
+anglois_crown_PU = {
+    copy_from = personal_union
+
+    # Graphics:
+    sprite = GFX_court_anglois_union
+    diplomacy_overlord_sprite = GFX_anglois_diplomacy_leadunions
+    diplomacy_subject_sprite = GFX_anglois_diplomacy_inunion
+
+    # Properties:
+    has_overlords_ruler = yes
+    can_be_integrated = yes
+    overlord_can_attack = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    can_have_subjects_of_other_types = yes
+    can_union_break = no
+    takes_diplo_slot = no
+    transfer_subjects_when_made = yes
+    can_concentrate_development = no
+    extend_trading_range = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    liberty_desire_negative_prestige = 1.0
+    military_focus = 0.66
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_restore_personal_union
+
+    # Subject Interactions:
+    placate_rulers = no
+    enforce_culture = yes
+    siphon_income = yes
+    support_loyalists = yes
+
+    # Modifiers:
+    modifier_overlord = {
+        modifier = anglois_crown_pu_bonus
+    }
+    modifier_overlord = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = anglois_crown_pu_bonus
+    }
+    modifier_subject = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = anglois_crown_pu_subject
+    }
+
+    overlord_opinion_modifier = in_union
+    subject_opinion_modifier = in_union
+}
+
 aragonese_crown_PU = {
 	copy_from = personal_union
 
@@ -16050,6 +16378,64 @@ austrian_crown_PU = {
 
 	overlord_opinion_modifier = in_union
 	subject_opinion_modifier = in_union
+}
+
+baltic_crown_PU = {
+    copy_from = personal_union
+
+    # Graphics:
+    sprite = GFX_court_baltic_union
+    diplomacy_overlord_sprite = GFX_baltic_diplomacy_leadunions
+    diplomacy_subject_sprite = GFX_baltic_diplomacy_inunion
+
+    # Properties:
+    has_overlords_ruler = yes
+    can_be_integrated = yes
+    overlord_can_attack = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    can_have_subjects_of_other_types = yes
+    can_union_break = no
+    takes_diplo_slot = no
+    transfer_subjects_when_made = yes
+    can_concentrate_development = no
+    extend_trading_range = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    liberty_desire_negative_prestige = 1.0
+    military_focus = 0.66
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_restore_personal_union
+
+    # Subject Interactions:
+    placate_rulers = no
+    enforce_culture = yes
+    siphon_income = yes
+    support_loyalists = yes
+
+    # Modifiers:
+    modifier_overlord = {
+        modifier = baltic_crown_pu_bonus
+    }
+    modifier_overlord = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = baltic_crown_pu_bonus
+    }
+    modifier_subject = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = baltic_crown_pu_subject
+    }
+
+    overlord_opinion_modifier = in_union
+    subject_opinion_modifier = in_union
 }
 
 benelux_crown_PU = {
@@ -16643,6 +17029,64 @@ italian_crown_PU = {
 	subject_opinion_modifier = in_union
 }
 
+norwegian_crown_PU = {
+    copy_from = personal_union
+
+    # Graphics:
+    sprite = GFX_court_norwegian_union
+    diplomacy_overlord_sprite = GFX_norwegian_diplomacy_leadunions
+    diplomacy_subject_sprite = GFX_norwegian_diplomacy_inunion
+
+    # Properties:
+    has_overlords_ruler = yes
+    can_be_integrated = yes
+    overlord_can_attack = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    can_have_subjects_of_other_types = yes
+    can_union_break = no
+    takes_diplo_slot = no
+    transfer_subjects_when_made = yes
+    can_concentrate_development = no
+    extend_trading_range = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    liberty_desire_negative_prestige = 1.0
+    military_focus = 0.66
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_restore_personal_union
+
+    # Subject Interactions:
+    placate_rulers = no
+    enforce_culture = yes
+    siphon_income = yes
+    support_loyalists = yes
+
+    # Modifiers:
+    modifier_overlord = {
+        modifier = norwegian_crown_pu_bonus
+    }
+    modifier_overlord = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = norwegian_crown_pu_bonus
+    }
+    modifier_subject = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = norwegian_crown_pu_subject
+    }
+
+    overlord_opinion_modifier = in_union
+    subject_opinion_modifier = in_union
+}
+
 polish_crown_PU = {
 	copy_from = personal_union
 
@@ -16757,6 +17201,64 @@ portuguese_crown_PU = {
 
 	overlord_opinion_modifier = in_union
 	subject_opinion_modifier = in_union
+}
+
+prussian_crown_PU = {
+    copy_from = personal_union
+
+    # Graphics:
+    sprite = GFX_court_prussian_union
+    diplomacy_overlord_sprite = GFX_prussian_diplomacy_leadunions
+    diplomacy_subject_sprite = GFX_prussian_diplomacy_inunion
+
+    # Properties:
+    has_overlords_ruler = yes
+    can_be_integrated = yes
+    overlord_can_attack = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    can_have_subjects_of_other_types = yes
+    can_union_break = no
+    takes_diplo_slot = no
+    transfer_subjects_when_made = yes
+    can_concentrate_development = no
+    extend_trading_range = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    liberty_desire_negative_prestige = 1.0
+    military_focus = 0.66
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_restore_personal_union
+
+    # Subject Interactions:
+    placate_rulers = no
+    enforce_culture = yes
+    siphon_income = yes
+    support_loyalists = yes
+
+    # Modifiers:
+    modifier_overlord = {
+        modifier = prussian_crown_pu_bonus
+    }
+    modifier_overlord = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = prussian_crown_pu_bonus
+    }
+    modifier_subject = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = prussian_crown_pu_subject
+    }
+
+    overlord_opinion_modifier = in_union
+    subject_opinion_modifier = in_union
 }
 
 russian_crown_PU = {
@@ -17440,6 +17942,522 @@ turkish_tributary_beylik_vassal = {
     modifier_overlord = {
         modifier = turkish_tributary_beylik_vassal_overlord_modifier #Was hordes_tributary_state_tribute
     }
+}
+
+feudal_republic = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_feudal_republic
+    diplomacy_overlord_sprite = GFX_diplomacy_feudal_republic_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_feudal_republic_amvassal
+
+    # Properties:
+    transfer_trade_if_merchant_republic = yes
+    can_be_annexed = yes
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    forms_trade_companies = no
+
+    liberty_desire_development_ratio = 0.25
+    liberty_desire_same_dynasty = -5.0
+    pays_overlord = 1.0
+    forcelimit_to_overlord = 0.1
+
+    relative_power_class = 2
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_feudal_republic #Was cb_disloyal_vassal
+
+    # Subject Interactions:
+    scutage = yes
+    place_relative_on_throne = yes
+    sacrifice_ruler = yes
+    sacrifice_heir = yes
+    divert_trade = yes
+	embargo_rivals = yes
+    seize_territory = yes
+
+    # Modifiers:
+    modifier_subject = {
+        modifier = feudal_republic_subject #Was vassal_nation
+    }
+    modifier_overlord = {
+        modifier = feudal_republic_overlord #Was vassal_subject
+    }
+    modifier_overlord = {
+        modifier = pirate_subject
+        trigger = {
+            has_government_attribute = is_pirate_republic_reform
+            overlord = {
+                has_government_attribute = pirate_vassal_bonus
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = GER_extra_prov_trade_power
+        trigger = {
+            overlord = {
+                has_estate_privilege = estate_burghers_GER_customs_union
+            }
+        }
+    }
+
+    overlord_opinion_modifier = is_feudal_republic #Was is_vassal
+    subject_opinion_modifier = is_feudal_republic #Was is_vassal
+}
+
+merchantlist_republic = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_merchantlist_republic
+    diplomacy_overlord_sprite = GFX_diplomacy_merchantlist_republic_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_merchantlist_republic_amvassal
+
+    # Triggers:
+    is_potential_overlord = {
+        is_subject = no
+        OR = {
+            AND = {
+                culture_group = latin
+                has_government_attribute = is_merchant_republic
+            }
+            # Custom Rule
+            has_government_attribute = can_create_merchantlist_republic_rule
+        }
+    }
+
+    # Properties:
+    transfer_trade_power = yes
+    takes_diplo_slot = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    extend_trading_range = yes
+    can_be_annexed = no
+
+    max_government_rank = 6
+    cities_required_for_bonuses = 0
+    trust_on_start = 35
+
+    base_liberty_desire = -10
+    liberty_desire_development_ratio = 0.15
+    liberty_desire_same_dynasty = -5.0
+    liberty_desire_revolution = 0
+    pays_overlord = 0.25
+    forcelimit_to_overlord = 0.05
+
+    relative_power_class = 6
+    diplomacy_view_class = 1
+
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+    }
+    can_rival = {
+    }
+    can_ally = {
+        same_overlord = merchantlist_republic
+    }
+    can_marry = {
+        same_overlord = vassal
+        same_overlord = feudal_republic
+        same_overlord = merchantlist_republic
+        same_overlord = venetian_republic
+		same_overlord = genoese_commercial_republic
+    }
+
+    # Subject Interactions:
+    # (continuous)
+    scutage = yes
+    # (immediate)
+    seize_territory = yes
+    contribute_to_capital = yes
+
+    # Modifiers:
+    modifier_subject = clear
+    modifier_subject = {
+        modifier = merchantlist_republic_nation
+    }
+    modifier_subject = {
+        modifier = merchantlist_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = MERCHANTLIST_REPUBLIC_IS_MERCHANT_REPUBLIC_TT
+                has_government_attribute = is_merchant_republic
+            }
+        }
+        modifier = merchantlist_republic_merchant_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            capital_scope = {
+                custom_trigger_tooltip = {
+                    tooltip = MERCHANTLIST_REPUBLIC_HOME_NODE_HAS_MERCHANT_FROM_OVERLORD_TT
+                    has_merchant = FROM
+                }
+            }
+        }
+        modifier = merchantlist_republic_overlord_trading_modifier
+    }
+    modifier_subject = {
+        modifier = merchantlist_republic_seized_merchant_fleets_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = MERCHANTLIST_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = merchantlist_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = merchantlist_republic_overlord_modifier
+    }
+    modifier_overlord = {
+        trigger = {
+            capital_scope = {
+                OR = {
+                    trade_share = {
+                        country = ROOT
+                        share = 50
+                    }
+                    custom_trigger_tooltip = {
+                        tooltip = MERCHANTLIST_REPUBLIC_HOME_NODE_OVERLORD_HAS_75_TRADE_POWER_TT
+                        trade_share = {
+                            country = FROM
+                            share = 75
+                        }
+                    }
+                }
+            }
+        }
+        modifier = merchantlist_republic_merchant_overlord_modifier
+    }
+    modifier_overlord = {
+        modifier = merchantlist_republic_seized_merchant_fleets_overlord_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = MERCHANTLIST_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = merchantlist_republic_seize_merchant_fleets
+            }
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    overlord_opinion_modifier = is_merchantlist_republic
+    subject_opinion_modifier = is_merchantlist_republic
+}
+
+#New VU 1.37.* Venetian Republic by SF
+venetian_republic = {
+    copy_from = default
+    # Graphics:
+    sprite = GFX_icon_venetian_republic
+    diplomacy_overlord_sprite = GFX_diplomacy_venetian_republic_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_venetian_republic_amvassal
+
+	# Triggers:
+    is_potential_overlord = {
+        is_subject = no
+        OR = {
+            AND = {
+                OR = {
+                    tag = VEN
+                    #culture_group = latin
+                }
+                has_government_attribute = is_merchant_republic
+            }
+            # Custom Rule
+            has_government_attribute = can_impose_venetian_republic_rules
+        }
+    }
+
+    # Properties:
+    transfer_trade_power = yes
+    takes_diplo_slot = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    extend_trading_range = yes
+    can_be_annexed = no
+
+    max_government_rank = 6
+    cities_required_for_bonuses = 0
+    trust_on_start = 35
+
+    base_liberty_desire = -10
+    liberty_desire_development_ratio = 0.15
+    liberty_desire_same_dynasty = -5.0
+    liberty_desire_revolution = 0
+    pays_overlord = 0.25
+    forcelimit_to_overlord = 0.05
+
+    relative_power_class = 6
+    diplomacy_view_class = 1
+
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+    }
+    can_rival = {
+    }
+    can_ally = {
+        same_overlord = venetian_republic
+    }
+    can_marry = {
+        same_overlord = vassal
+		same_overlord = feudal_republic
+		same_overlord = merchantlist_republic
+        same_overlord = venetian_republic
+    }
+
+    # Subject Interactions:
+    # (continuous)
+    scutage = yes
+    # (immediate)
+    seize_territory = yes
+    contribute_to_capital = yes
+
+	# Modifiers:
+    modifier_subject = clear
+    modifier_subject = {
+        modifier = venetian_republic_nation
+    }
+    modifier_subject = {
+        modifier = venetian_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = VENETIAN_REPUBLIC_IS_MERCHANT_REPUBLIC_TT
+                has_government_attribute = is_merchant_republic
+            }
+        }
+        modifier = venetian_republic_merchant_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            capital_scope = {
+                custom_trigger_tooltip = {
+                    tooltip = VENETIAN_REPUBLIC_HOME_NODE_HAS_MERCHANT_FROM_OVERLORD_TT
+                    has_merchant = FROM
+                }
+            }
+        }
+        modifier = venetian_republic_overlord_trading_modifier
+    }
+    modifier_subject = {
+        modifier = venetian_republic_seized_merchant_fleets_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = VENETIAN_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = venetian_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = venetian_republic_overlord_modifier
+    }
+    modifier_overlord = {
+        trigger = {
+            capital_scope = {
+                OR = {
+                    trade_share = {
+                        country = ROOT
+                        share = 50
+                    }
+                    custom_trigger_tooltip = {
+                        tooltip = VENETIAN_REPUBLIC_HOME_NODE_OVERLORD_HAS_75_TRADE_POWER_TT
+                        trade_share = {
+                            country = FROM
+                            share = 75
+                        }
+                    }
+                }
+            }
+        }
+        modifier = venetian_republic_merchant_overlord_modifier
+    }
+    modifier_overlord = {
+        modifier = venetian_republic_seized_merchant_fleets_overlord_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = VENETIAN_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = venetian_republic_seize_merchant_fleets
+            }
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    overlord_opinion_modifier = is_venetian_republic
+    subject_opinion_modifier = is_venetian_republic
+}
+
+#New VU 1.37.* Genoese Republic by SF & Prussia
+genoese_commercial_republic = {
+    copy_from = default
+    # Graphics:
+    sprite = GFX_icon_genoese_commercial_republic
+    diplomacy_overlord_sprite = GFX_diplomacy_genoese_commercial_republic_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_genoese_commercial_republic_amvassal
+
+    # Triggers:
+    is_potential_overlord = {
+        is_subject = no
+        OR = {
+            AND = {
+                OR = {
+                    tag = GEN
+                    #culture_group = latin
+                }
+                has_government_attribute = is_merchant_republic
+            }
+            # Custom Rule
+            has_government_attribute = can_impose_genoese_commercial_republic_rules
+        }
+    }
+
+    # Properties:
+    transfer_trade_power = yes
+    takes_diplo_slot = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    extend_trading_range = yes
+    can_be_annexed = no
+
+    max_government_rank = 6
+    cities_required_for_bonuses = 0
+    trust_on_start = 35
+
+    base_liberty_desire = -10
+    liberty_desire_development_ratio = 0.15
+    liberty_desire_same_dynasty = -5.0
+    liberty_desire_revolution = 0
+    pays_overlord = 0.25
+    forcelimit_to_overlord = 0.05
+
+    relative_power_class = 6
+    diplomacy_view_class = 1
+
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+    }
+    can_rival = {
+    }
+    can_ally = {
+        same_overlord = genoese_commercial_republic
+    }
+    can_marry = {
+        same_overlord = vassal
+        same_overlord = feudal_republic
+        same_overlord = merchantlist_republic
+        same_overlord = genoese_commercial_republic
+    }
+
+    # Subject Interactions:
+    # (continuous)
+    scutage = yes
+    # (immediate)
+    seize_territory = yes
+    contribute_to_capital = yes
+
+    # Modifiers:
+    modifier_subject = clear
+    modifier_subject = {
+        modifier = genoese_commercial_republic_nation
+    }
+    modifier_subject = {
+        modifier = genoese_commercial_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = GENOESE_COMMERCIAL_REPUBLIC_IS_MERCHANT_REPUBLIC_TT
+                has_government_attribute = is_merchant_republic
+            }
+        }
+        modifier = genoese_commercial_republic_merchant_republic_modifier
+    }
+    modifier_subject = {
+        trigger = {
+            capital_scope = {
+                custom_trigger_tooltip = {
+                    tooltip = GENOESE_COMMERCIAL_REPUBLIC_HOME_NODE_HAS_MERCHANT_FROM_OVERLORD_TT
+                    has_merchant = FROM
+                }
+            }
+        }
+        modifier = genoese_commercial_republic_overlord_trading_modifier
+    }
+    modifier_subject = {
+        modifier = genoese_commercial_republic_seized_merchant_fleets_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = GENOESE_COMMERCIAL_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = genoese_commercial_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = genoese_commercial_republic_overlord_modifier
+    }
+    modifier_overlord = {
+        trigger = {
+            capital_scope = {
+                OR = {
+                    trade_share = {
+                        country = ROOT
+                        share = 50
+                    }
+                    custom_trigger_tooltip = {
+                        tooltip = GENOESE_COMMERCIAL_REPUBLIC_HOME_NODE_OVERLORD_HAS_75_TRADE_POWER_TT
+                        trade_share = {
+                            country = FROM
+                            share = 75
+                        }
+                    }
+                }
+            }
+        }
+        modifier = genoese_commercial_republic_merchant_overlord_modifier
+    }
+    modifier_overlord = {
+        modifier = genoese_commercial_republic_seized_merchant_fleets_overlord_modifier
+        trigger = {
+            custom_trigger_tooltip = {
+                tooltip = GENOESE_COMMERCIAL_REPUBLIC_HAS_SEIZE_MERCHANT_FLEETS_TT
+                has_country_flag = genoese_commercial_republic_seize_merchant_fleets
+            }
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    overlord_opinion_modifier = is_genoese_commercial_republic
+    subject_opinion_modifier = is_genoese_commercial_republic
 }
 
 eyalet = {
@@ -18370,7 +19388,7 @@ european_abbacy = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.35 #Edited by Prussia
+	pays_overlord = 0.35
 	max_government_rank = 2
 
 	relative_power_class = 1
@@ -18404,7 +19422,7 @@ european_abbacy = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = european_abbacy_subject #Edited by Prussia
+		modifier = european_abbacy_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -18451,7 +19469,7 @@ european_bishopric = {
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.35 #Edited by Prussia
+	pays_overlord = 0.35
 	max_government_rank = 4
 
 	relative_power_class = 1
@@ -18485,7 +19503,7 @@ european_bishopric = {
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = european_bishopric_subject #Edited by Prussia
+		modifier = european_bishopric_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -18532,7 +19550,7 @@ european_archbishopric = { #Added by Prussia
 	base_liberty_desire = 25.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.35 #Edited by Prussia
+	pays_overlord = 0.35
 	max_government_rank = 7
 
 	relative_power_class = 1
@@ -18566,7 +19584,7 @@ european_archbishopric = { #Added by Prussia
 	modifier_subject = clear # Use this to clear after copy_from.
 
 	modifier_subject = {
-		modifier = european_archbishopric_subject #Edited by Prussia
+		modifier = european_archbishopric_subject
 	}
 	modifier_subject = {
 		modifier = subject_tax_modifier
@@ -18614,7 +19632,7 @@ islamic_imamate = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -18693,7 +19711,7 @@ islamic_grand_muftate = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 
 	relative_power_class = 1
 	should_quit_wars_on_activation = yes
@@ -18770,7 +19788,7 @@ islamic_sheikdom = {
 	base_liberty_desire = 35.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 1 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 1
 	joins_overlords_wars = yes
 	can_use_claims = yes
 
@@ -18928,7 +19946,7 @@ islamic_emirate = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -19011,7 +20029,7 @@ islamic_governate = {
 	base_liberty_desire = 20.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia for VU v1.37. - SF
+	pays_overlord = 0.25
 	can_be_annexed = yes
 	joins_overlords_wars = yes
 	can_use_claims = yes
@@ -19093,7 +20111,7 @@ islamic_sultanate = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -19175,7 +20193,7 @@ islamic_taifa = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes
@@ -19257,7 +20275,7 @@ islamic_malikate = {
 	base_liberty_desire = 15.0
 	forcelimit_to_overlord = 0.00
 	military_focus = 1.2
-	pays_overlord = 0.25 #Edited by Prussia
+	pays_overlord = 0.25
 	can_be_integrated = yes #Changed from can_be_annexed = yes - SF & Prussia
 	can_be_annexed = no
 	joins_overlords_wars = yes

@@ -76,8 +76,15 @@ sco_rb_adm_missions = {
 	sco_education_acts = {
 		icon = mission_rb_the_education_acts
 		required_missions = { sco_religious_unity }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { has_education_building_trigger = yes }
+		}
 		trigger = {
-			university = 3
+			num_of_owned_provinces_with = {
+				has_education_building_trigger = yes
+				value = 5
+			}
 		}
 		effect = {
 			add_country_modifier = {

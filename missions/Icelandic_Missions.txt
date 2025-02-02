@@ -275,12 +275,16 @@ ICE_missions_5 = {
 			OR = {
 				NOT = { owned_by = ROOT }
 				NOT = { has_building = cathedral }
+				NOT = { has_building = grand_cathedral }
 			}
 		}
 		trigger = {
 			370 = {
 				owned_by = ROOT
-				has_building = cathedral
+				OR = {
+					has_building = cathedral
+					has_building = grand_cathedral
+				}
 			}
 		}
 		effect = {
@@ -379,10 +383,10 @@ iceland_missions_1 = {
 				base_production = 3
 				base_manpower = 3
 				OR = {
-					has_building = fort_15th
-					has_building = workshop
-					has_building = dock
-					has_building = shipyard
+					has_fort_building_trigger = yes
+					has_production_building_trigger = yes
+					has_dock_building_trigger = yes
+					has_shipyard_building_trigger = yes
 					fort_level = 1
 				}
 				culture_group = scandinavian
@@ -397,7 +401,7 @@ iceland_missions_1 = {
 					}
 				}
 				981 = {
-					add_building = fort_15th
+					add_or_upgrade_fort_building = yes
 				}
 			}
 			981 = {
@@ -879,19 +883,10 @@ iceland_missions_4 = {
 				development = 10
 				NOT = { unrest = 0 }
 				NOT = { num_free_building_slots = 2 }
-				OR = {
-					has_building = marketplace
-					has_building = trade_depot
-				}
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
-				OR = {
-					has_building = temple
-					has_building = cathedral
-				}
-				has_building = road_system
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				has_tax_building_trigger = yes
+				has_transportation_trigger = yes
 			}
 		}
 		
@@ -921,20 +916,10 @@ iceland_missions_4 = {
 				development = 20
 				NOT = { unrest = 0 }
 				fort_level = 2
-				OR = {
-					has_building = shipyard
-					has_building = grand_shipyard
-				}
-				OR = {
-					has_building = barracks
-					has_building = training_fields
-				}
-				OR = {
-					has_building = fort_15th
-					has_building = fort_16th
-					has_building = fort_17th
-				}
-				has_building = road_system
+				has_shipyard_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_fort_building_trigger = yes
+				has_transportation_trigger = yes
 			}
 		}
 		
@@ -948,13 +933,11 @@ iceland_missions_4 = {
 				limit = {
 					370 = { 
 						num_free_building_slots = 1 
-						NOT = { has_building = naval_base }
-						NOT = { has_building = naval_arsenal }
-						NOT = { has_building = coastal_artillery }
+						NOT = { has_coast_defense_building_trigger = yes }
 					}
 				}
 				370 = {
-					add_building = naval_base
+					add_or_upgrade_naval_defense_building = yes
 				}
 			}
 			370 = {
@@ -992,18 +975,12 @@ iceland_missions_5 = {
 			371 = {
 				base_production = 5
 				development = 10
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 			}
 			6128 = {
 				base_production = 5
 				development = 10
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 			}
 			production_leader = {
 				trade_goods = sulfur
@@ -1037,8 +1014,8 @@ iceland_missions_5 = {
 				area = iceland_area
 			}
 			grown_by_development = 30
-			6127 = { has_building = road_system }
-			3115 = { has_building = road_system }
+			6127 = { has_transportation_trigger = yes }
+			3115 = { has_transportation_trigger = yes }
 		}
 		
 		effect = {
@@ -1071,11 +1048,8 @@ iceland_missions_5 = {
 			num_of_owned_provinces_with = {
 				value = 6
 				area = iceland_area
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
-				has_building = road_system
+				has_production_building_trigger = yes
+				has_transportation_trigger = yes
 				development = 8
 			}
 			num_of_owned_provinces_with = {

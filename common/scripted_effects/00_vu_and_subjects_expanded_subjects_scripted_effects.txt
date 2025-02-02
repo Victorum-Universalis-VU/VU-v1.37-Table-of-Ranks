@@ -113,6 +113,33 @@ display_info_for_subject_type = {
 					}
 					capital_scope = { trade_range = ROOT }
 				}
+				#New VU 1.37.* Generic Merchantlist Republic by SF
+				else_if = {
+                    limit = {
+                        variable_arithmetic_trigger = {
+                            export_to_variable = {
+                                which = subject_$type$_selected
+                                value = 1
+                            }
+                            check_variable = {
+                                which = subject_puppet_merchantlist_republic_selected
+                                value = 1
+                            }
+                        }
+                    }
+                    capital_scope = {
+                        trade_range = ROOT
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = merchantlist_republic
+                                }
+                            }
+                        }
+                    }
+                }
+				#New VU 1.37.* Venetian Republic by SF
 				else_if = {
 					limit = {
 						variable_arithmetic_trigger = {
@@ -120,7 +147,10 @@ display_info_for_subject_type = {
 								which = subject_$type$_selected
 								value = 1
 							}
-							check_variable = { which = subject_puppet_stato_da_mar_vassal_selected value = 1 }
+							check_variable = { 
+								which = subject_puppet_venetian_republic_selected
+								value = 1 
+							}
 						}
 					}
 					capital_scope = {
@@ -129,12 +159,38 @@ display_info_for_subject_type = {
 							any_trade_node_member_country = {
 								is_subject_of_type_with_overlord = {
 									who = ROOT
-									type = stato_da_mar_vassal
+									type = venetian_republic
 								}
 							}
 						}
 					}
 				}
+				#New VU 1.37.* Genoese Republic by SF & Prussia
+				else_if = {
+                    limit = {
+                        variable_arithmetic_trigger = {
+                            export_to_variable = {
+                                which = subject_$type$_selected
+                                value = 1
+                            }
+                            check_variable = {
+                                which = subject_puppet_genoese_commercial_republic_selected
+                                value = 1
+                            }
+                        }
+                    }
+                    capital_scope = {
+                        trade_range = ROOT
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = genoese_commercial_republic
+                                }
+                            }
+                        }
+                    }
+                }
 			}
 		}
 		custom_tooltip = display_information_for_subject_tt_conditions_subject

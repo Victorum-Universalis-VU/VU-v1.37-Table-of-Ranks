@@ -2597,7 +2597,6 @@ timurid_amirate_reform = {
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_aristocratic_idea_group = no
-        has_islamic_subjects = yes
         claim_states = yes
     }
     conditional = {
@@ -3217,7 +3216,7 @@ janissary_autocracy_reform = {
 
 admiralty_regime_reform = { #VU 1.37 addition - SF
     icon = "admiralty_reform"
-    allow_normal_conversion = yes
+    allow_normal_conversion = no
     potential = {
         has_dlc = "Domination"
         OR = {
@@ -3247,7 +3246,7 @@ admiralty_regime_reform = { #VU 1.37 addition - SF
             has_reform = supreme_admiral_reform
         }
     }
-    fixed_rank = 1
+    fixed_rank = 4
     queen = no
     valid_for_nation_designer = yes
     nation_designer_trigger = {
@@ -3295,7 +3294,7 @@ admiralty_regime_reform = { #VU 1.37 addition - SF
 
 high_admiral_reform = { #Was admiralty_regime_reform but changed in VU v1.37 addition - SF
     icon = "admiralty_reform"
-    allow_normal_conversion = yes
+    allow_normal_conversion = no
     potential = {
         has_dlc = "Domination"
         OR = {
@@ -3325,7 +3324,7 @@ high_admiral_reform = { #Was admiralty_regime_reform but changed in VU v1.37 add
             has_reform = supreme_admiral_reform
         }
     }
-    fixed_rank = 2
+    fixed_rank = 6
     queen = no
     valid_for_nation_designer = yes
     nation_designer_trigger = {
@@ -3373,7 +3372,7 @@ high_admiral_reform = { #Was admiralty_regime_reform but changed in VU v1.37 add
 
 supreme_admiral_reform = { #VU 1.37 addition - SF
     icon = "admiralty_reform"
-    allow_normal_conversion = yes
+    allow_normal_conversion = no
     potential = {
         has_dlc = "Domination"
         OR = {
@@ -3403,7 +3402,7 @@ supreme_admiral_reform = { #VU 1.37 addition - SF
             has_reform = high_admiral_reform
         }
     }
-    fixed_rank = 3
+    fixed_rank = 8
     queen = no
     valid_for_nation_designer = yes
     nation_designer_trigger = {
@@ -4429,14 +4428,6 @@ mughal_government = {
         governing_capacity = 3000 #No change in VU but was 150 GE
     }
     custom_attributes = {
-        has_islamic_imamate = yes
-        has_islamic_grand_muftate = yes
-        has_islamic_sheikdom = yes
-        has_islamic_sharifate_reform = yes
-        has_islamic_governate = yes
-        has_islamic_sultanate = yes
-        has_islamic_taifa = yes
-        has_islamic_malikate = yes
     }
     assimilation_cultures = {
         altaic = {
@@ -9940,11 +9931,6 @@ eue_county_reform = { #T4 - County level
     maintain_dynasty = yes
     potential = {
         is_county_subject_type = yes
-        NOT = {
-            is_subject_of_type = anglois_county
-            is_subject_of_type = english_earldom
-            is_subject_of_type = english_crown_PU
-        }
     }
     lock_level_when_selected = yes
     valid_for_nation_designer = no
@@ -9971,14 +9957,6 @@ unlocked_eue_county_reform = { #T4 - County level
         NOT = {
             is_county_subject_type = yes
             government_rank = 5
-            culture_group = british
-            primary_culture = anglois
-            primary_culture = celtic_lowland_scottish
-            primary_culture = celtic_highland_scottish_culture
-            primary_culture = celtic_irish_culture
-            primary_culture = celtic_welsh_culture
-            primary_culture = manx
-            primary_culture = gallgaidheil
         }
         capital_scope = {
             superregion = europe_superregion
@@ -10010,11 +9988,7 @@ eng_earldom_reform = { #T4 - County Level
     fixed_rank = 4
     maintain_dynasty = yes
     potential = {
-        OR = {
-            is_subject_of_type = anglois_county
-            is_subject_of_type = english_earldom
-            is_subject_of_type = english_crown_PU
-        }
+        is_earldom_subject_type = yes
     }
     lock_level_when_selected = yes
     valid_for_nation_designer = no
@@ -10037,18 +10011,8 @@ eng_earldom_reform = { #T4 - County Level
 unlocked_eng_earldom_reform = { #T4 - County Level
     icon = "eng_earldom_reform"
     potential = {
-        OR = {
-            culture_group = british
-            primary_culture = anglois
-            primary_culture = celtic_lowland_scottish
-            primary_culture = celtic_highland_scottish_culture
-            primary_culture = celtic_irish_culture
-            primary_culture = celtic_welsh_culture
-            primary_culture = manx
-            primary_culture = gallgaidheil
-        }
         NOT = {
-            is_county_subject_type = yes
+            is_earldom_subject_type = yes
             government_rank = 5
         }
         capital_scope = {
@@ -10104,6 +10068,7 @@ unlocked_eue_marquisate_reform = { #T5 - Marquisate level
     valid_for_nation_designer = yes
     nation_designer_cost = 10
     potential = {
+        has_reform = unlocked_eue_marquisate_reform
         NOT = {
             is_marquisate_subject_type = yes
             government_rank = 6
@@ -10338,6 +10303,7 @@ unlocked_islamic_emirate_reform = { #T5 - Marquisate level
     #legacy_equivalent = islamic_emirate_legacy
     valid_for_nation_designer = no
     potential = {
+        religion = sunni
         NOT = {
             is_subject_of_type = islamic_emirate
             government_rank = 6
@@ -10381,6 +10347,10 @@ unlocked_islamic_governate_reform = { #T5 - Marquisate level
     #legacy_equivalent = islamic_governate_legacy
     valid_for_nation_designer = no
     potential = {
+        OR = {
+            religion = shiite
+            religion = ibadi
+        }
         NOT = {
             is_subject_of_type = islamic_governate
             government_rank = 6
@@ -10426,6 +10396,7 @@ unlocked_islamic_sultanate_reform = { #T6 - Duchy level
     valid_for_nation_designer = yes
     nation_designer_cost = 10
     potential = {
+        religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_sultanate
             government_rank = 7
@@ -10470,6 +10441,7 @@ unlocked_islamic_taifa_reform = { #T7 - Principality level
     #legacy_equivalent = islamic_malikate_legacy
     valid_for_nation_designer = no
     potential = {
+        religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_taifa
             government_rank = 8
@@ -10514,6 +10486,7 @@ unlocked_islamic_malikate_reform = { #T8 - Kingdom level
     #legacy_equivalent = islamic_malikate_legacy
     valid_for_nation_designer = no
     potential = {
+        religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_malikate
             government_rank = 9
@@ -10537,6 +10510,7 @@ unlocked_islamic_sublimating_khalifa_reform = { #T8 - Kingdom level
     #legacy_equivalent = islamic_malikate_legacy
     valid_for_nation_designer = no
     potential = {
+        religion_group = muslim
         government_rank = 9
     }
     queen = no

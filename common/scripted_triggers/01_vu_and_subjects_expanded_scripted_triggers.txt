@@ -907,20 +907,6 @@ is_possible_subject_of_subject_type_annexable_colony = {
 			colonial_region = colonial_fiji
 			colonial_region = colonial_polynesia
 			colonial_region = colonial_cape
-			#VU - Hashed this out as it has nothing to do with our mod. By San Felipe
-			# Extended Timeline:
-			#AND = {
-			#	has_global_flag = extended_timeline_mod
-			#	OR = {
-			#		colonial_region = colonial_papua
-			#		colonial_region = colonial_solomons
-			#		colonial_region = colonial_vanuatu
-			#		colonial_region = colonial_new_caledonia
-			#		colonial_region = colonial_fiji
-			#		colonial_region = colonial_polynesia
-			#		colonial_region = colonial_cape
-			#	}
-			#}
 		}
 	}
 }
@@ -961,9 +947,10 @@ is_possible_subject_of_subject_type_religious_march = {
 	primitives = no
 }
 
-is_possible_subject_of_subject_type_stato_da_mar_vassal = {
+#New VU 1.37.* Generic Merchantlist Republic by SF
+is_possible_subject_of_subject_type_merchantlist_republic = {
 	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = stato_da_mar_vassal }
+	NOT = { is_subject_of_type = merchantlist_republic }
 	num_of_ports = 1
 	OR = {
 		is_subject = no
@@ -987,6 +974,64 @@ is_possible_subject_of_subject_type_stato_da_mar_vassal = {
 	# Capital not in same region has to be checked additionally
 	# No such subject in the same trade node has to be checked additionally
 	# Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+#New VU 1.37.* Venetian Republic by SF
+is_possible_subject_of_subject_type_venetian_republic = {
+    # PREVs in THIS scope refer to possible overlord
+    NOT = { is_subject_of_type = venetian_republic }
+    num_of_ports = 1
+    OR = {
+        is_subject = no
+        AND = {
+            is_subject_of = PREV
+            is_vassal_or_similar_subject = yes
+            NOT = {
+                is_subject_of_type = daimyo_vassal
+                is_subject_of_type = daimyo_barony_vassal
+                is_subject_of_type = daimyo_viscounty_vassal
+                is_subject_of_type = daimyo_county_vassal
+                is_subject_of_type = daimyo_marquisate_vassal
+                is_subject_of_type = daimyo_duchy_vassal
+                is_subject_of_type = daimyo_principality_vassal
+            }
+        }
+    }
+    capital_scope = {
+        is_node_in_trade_company_region = yes
+    }
+    # Capital not in same region has to be checked additionally
+    # No such subject in the same trade node has to be checked additionally
+    # Capital in Trade Range of possible Overlord has to be checked additionally
+}
+
+#New VU 1.37.* Genoese Republic by SF & Prussia
+is_possible_subject_of_subject_type_genoese_commercial_republic = {
+    # PREVs in THIS scope refer to possible overlord
+    NOT = { is_subject_of_type = genoese_commercial_republic }
+    num_of_ports = 1
+    OR = {
+        is_subject = no
+        AND = {
+            is_subject_of = PREV
+            is_vassal_or_similar_subject = yes
+            NOT = {
+                is_subject_of_type = daimyo_vassal
+                is_subject_of_type = daimyo_barony_vassal
+                is_subject_of_type = daimyo_viscounty_vassal
+                is_subject_of_type = daimyo_county_vassal
+                is_subject_of_type = daimyo_marquisate_vassal
+                is_subject_of_type = daimyo_duchy_vassal
+                is_subject_of_type = daimyo_principality_vassal
+            }
+        }
+    }
+    capital_scope = {
+        is_node_in_trade_company_region = yes
+    }
+    # Capital not in same region has to be checked additionally
+    # No such subject in the same trade node has to be checked additionally
+    # Capital in Trade Range of possible Overlord has to be checked additionally
 }
 
 is_possible_subject_of_subject_type_medieval_vassal = {
@@ -1033,7 +1078,9 @@ is_similar_vassal_subject = {
 		is_subject_of_type = iqta_vassal
 		is_subject_of_type = administrative_region
 		is_subject_of_type = palatinate_vassal
-		is_subject_of_type = stato_da_mar_vassal
+		is_subject_of_type = merchantlist_republic
+		is_subject_of_type = venetian_republic
+		is_subject_of_type = genoese_commercial_republic
 	}
 }
 
@@ -1164,7 +1211,9 @@ is_subject_type_that_can_be_annexed = {
 		is_subject_of_type = iqta_vassal
 		is_subject_of_type = palatinate_vassal
 		is_subject_of_type = annexable_colony
-		is_subject_of_type = stato_da_mar_vassal
+		is_subject_of_type = merchantlist_republic
+		is_subject_of_type = venetian_republic
+		is_subject_of_type = genoese_commercial_republic
 	}
 }
 

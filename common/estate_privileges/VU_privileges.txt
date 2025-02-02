@@ -4926,548 +4926,548 @@ estate_cultural_minorities_recruit_grenzens = {
 }
 
 #estate_berbers_privileges
-estate_berbers_recruit_general = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = 0
-	influence = 0.05
-	loyalty = 0.1
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	on_granted = {
-		if = {
-			limit = {
-				has_country_flag = GHB_upgrade_general_priv
-			}
-			create_general_with_pips = {
-				tradition = 50
-				add_shock = 3
-			}
-		}
-		else = {
-			create_general = { tradition = 50 }
-		}
-	}
-	benefits = { free_leader_pool = 1 }
-	penalties = {
-		nobles_loyalty_modifier = -0.1
-		dhimmi_loyalty_modifier = -0.05
-	}
-	
-	cooldown_years = 20
- 	on_cooldown_expires = { 
-		country_event = { id = estate_berbers_events.1 }
-	}	
-	
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_invite_berbers_to_court = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -5
-	influence = 0.1
-	loyalty = 0
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-
-	benefits = { advisor_cost = -0.1 }	
-	
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-
-estate_berbers_development_cost = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -10
-	influence = 0.00
-	loyalty = 0.1
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-		any_owned_province = {
-			OR = {
-				culture_group = berber_group
-				has_province_modifier = MOR_berber_dev_cost
-			}
-		}
-	}
-	
-	on_invalid = {
-		every_owned_province = {
-			remove_province_modifier = MOR_berber_dev_cost
-		}
-	}
-	on_revoked = {
-		every_owned_province = {
-			remove_province_modifier = MOR_berber_dev_cost
-		}
-	}
-
-	cooldown_years = 5
-	on_cooldown_expires = { country_event = { id = estate_berbers_events.4 } }
-	
-	on_granted = {
-		custom_tooltip = estate_berbers_every_berber_province
-		tooltip = { 
-			add_province_modifier = {
-				name = MOR_berber_dev_cost
-				duration = -1
-			}
-		}
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					OR = {
-						culture_group = berber_group
-						has_province_modifier = estate_berbers_settlement
-					}
-				}
-				add_province_modifier = {
-					name = MOR_berber_dev_cost
-					duration = -1
-				}
-			}
-		}
-	}
-	
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_hintata_mor_autonomy = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = 0
-	influence = 0.1
-	loyalty = 0.1
-	is_valid = {
-		has_estate_privilege = estate_berbers_hintata_mor_autonomy
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	cooldown_years = 15
-	on_granted = {
-		2469 = {
-			add_base_tax = 2
-			add_base_production = 2
-			add_base_manpower = 1
-			add_province_modifier = {
-				name = MOR_hintata_autonomy
-				duration = -1
-			}
-		}
-		344 = {
-			add_base_tax = 2
-			add_base_production = 2
-			add_base_manpower = 1
-			add_province_modifier = {
-				name = MOR_hintata_autonomy
-				duration = -1
-			}
-		}
-		345 = {
-			add_base_tax = 2
-			add_base_production = 2
-			add_base_manpower = 1
-			add_province_modifier = {
-				name = MOR_hintata_autonomy
-				duration = -1
-			}
-		}
-		2470 = {
-			add_base_tax = 2
-			add_base_production = 2
-			add_base_manpower = 1
-			add_province_modifier = {
-				name = MOR_hintata_autonomy
-				duration = -1
-			}
-		}
-	}
-	
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_cavalry = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -5
-	influence = 0.1
-	loyalty = 0.05
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	benefits = {
-		cavalry_power = 0.1
-		cav_to_inf_ratio = 0.25
-	}
-	conditional_modifier = {
-		trigger = {
-			has_country_flag = GHB_upgrade_cavalry_priv
-		}
-		modifier = {
-			cavalry_shock = 0.25
-			cav_to_inf_ratio = 0.25
-		}
-	}
-	
-	penalties = {
-		
-	}
-	
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_seize_land = {
-	icon = privilege_grant_autonomy
-	land_share = -5
-	max_absolutism = 0
-	influence = -0.1
-	loyalty = -0.1
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-		any_owned_province = { 
-			culture_group = berber_group
-			any_neighbor_province = {
-				NOT = { culture_group = berber_group }
-				has_owner_accepted_culture = yes
-			}
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	cooldown_years = 15
-	on_cooldown_expires = {
-		remove_estate_privilege = estate_berbers_seize_land 
-	}
-	
-	on_granted = {
-		custom_tooltip = MOR_random_berber_province_will_be_converted
-		hidden_effect = {
-			random_owned_province = {
-				limit = {
-					culture_group = berber_group
-					any_neighbor_province = {
-						NOT = { culture_group = berber_group }
-						has_owner_accepted_culture = yes
-					}
-				}
-				random_neighbor_province = {
-					limit = {
-						NOT = { culture_group = berber_group }
-						has_owner_accepted_culture = yes
-					}
-					PREV = {
-						change_culture = PREV
-					}
-				}
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_recruit_berbers = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = 0
-	influence = 0.1
-	loyalty = -0.05
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-		any_owned_province = { 
-			OR = {
-				culture_group = berber_group
-				has_province_modifier = MOR_berber_dev_cost
-			}
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	
-	cooldown_years = 10
-	on_cooldown_expires = { 
-		country_event = { id = estate_berbers_events.3 }
-	}	
-	on_granted = {
-		if = {
-			limit = {
-				has_country_flag = TUN_buff_berber_priv
-			}
-			add_army_tradition_or_mil_power = { amount = 5 }
-			
-			custom_tooltip = " "
-		}
-		if = {
-			limit = {
-				NOT = { has_country_flag = GRA_empower_the_berber_privilege_flag }
-			}
-			custom_tooltip = MOR_get_manpower_for_every_province_with_berber_culture
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						OR = {
-							culture_group = berber_group
-							has_province_modifier = estate_berbers_settlement
-						}
-					}
-					ROOT = {
-						add_manpower = 0.4
-					}
-				}
-			}
-		}
-		else = {
-			custom_tooltip = MOR_get_manpower_for_every_province_with_berber_culture_empowered
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						OR = {
-							culture_group = berber_group
-							has_province_modifier = estate_berbers_settlement
-						}
-					}
-					ROOT = {
-						add_manpower = 0.8
-					}
-				}
-			}
-		}
-		
-		
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_promote_berbers = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -5
-	influence = 0.05
-	loyalty = 0.1
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	penalties = {
-		nobles_loyalty_modifier = -0.05
-	}
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	
-	on_granted = {
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_political_concessions = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -5
-	influence = 0.05
-	loyalty = 0.15
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	conditional_modifier = {
-		trigger = {
-			culture_group = berber_group
-		}
-		modifier = {
-			legitimacy = -0.5
-		}
-	}
-	
-	conditional_modifier = {
-		trigger = {
-			NOT = { culture_group = berber_group }
-		}
-		modifier = {
-			legitimacy = -1
-		}
-	}
-	
-	on_granted = {
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_berber_settlements_gra_adu = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = -5
-	influence = 0.1
-	loyalty = 0.05
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-		OR = {
-			tag = GRA
-			tag = ADU
-			was_tag = ADU
-			was_tag = GRA
-			primary_culture = andalucian
-		}
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	penalties = {
-	}
-	on_granted = {
-		custom_tooltip = GRA_berber_settlements
-		tooltip = {
-			add_province_modifier = {
-				name = estate_berbers_settlement
-				duration = -1
-			}
-		}
-		custom_tooltip = GRA_berber_settlements_count_as_berber
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
-
-estate_berbers_MZB_berber_converts = {
-	icon = privilege_grant_autonomy
-	land_share = 0
-	max_absolutism = 0
-	influence = 0.1
-	loyalty = 0.05
-	is_valid = {
-		NOT = { estate_berbers_privileges_invalid = yes }
-		has_country_flag = MZB_unlock_the_berber_privilege_flag
-	}
-	can_select = {
-		NOT = {
-			estate_berbers_privileges_allow = yes
-		}
-		religion = ibadi
-	}
-	
-	on_invalid = {
-		
-	}
-	on_revoked = {
-		
-	}
-	benefits = {
-		religious_unity = 0.1
-		global_heretic_missionary_strength = 0.005
-	}
-	penalties = {
-	}
-	ai_will_do = {
-		factor = 1
-	}
-}
+#estate_berbers_recruit_general = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = 0
+#	influence = 0.05
+#	loyalty = 0.1
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	on_granted = {
+#		if = {
+#			limit = {
+#				has_country_flag = GHB_upgrade_general_priv
+#			}
+#			create_general_with_pips = {
+#				tradition = 50
+#				add_shock = 3
+#			}
+#		}
+#		else = {
+#			create_general = { tradition = 50 }
+#		}
+#	}
+#	benefits = { free_leader_pool = 1 }
+#	penalties = {
+#		nobles_loyalty_modifier = -0.1
+#		dhimmi_loyalty_modifier = -0.05
+#	}
+#	
+#	cooldown_years = 20
+# 	on_cooldown_expires = { 
+#		country_event = { id = estate_berbers_events.1 }
+#	}	
+#	
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_invite_berbers_to_court = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -5
+#	influence = 0.1
+#	loyalty = 0
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#
+#	benefits = { advisor_cost = -0.1 }	
+#	
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#
+#estate_berbers_development_cost = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -10
+#	influence = 0.00
+#	loyalty = 0.1
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#		any_owned_province = {
+#			OR = {
+#				culture_group = berber_group
+#				has_province_modifier = MOR_berber_dev_cost
+#			}
+#		}
+#	}
+#	
+#	on_invalid = {
+#		every_owned_province = {
+#			remove_province_modifier = MOR_berber_dev_cost
+#		}
+#	}
+#	on_revoked = {
+#		every_owned_province = {
+#			remove_province_modifier = MOR_berber_dev_cost
+#		}
+#	}
+#
+#	cooldown_years = 5
+#	on_cooldown_expires = { country_event = { id = estate_berbers_events.4 } }
+#	
+#	on_granted = {
+#		custom_tooltip = estate_berbers_every_berber_province
+#		tooltip = { 
+#			add_province_modifier = {
+#				name = MOR_berber_dev_cost
+#				duration = -1
+#			}
+#		}
+#		hidden_effect = {
+#			every_owned_province = {
+#				limit = {
+#					OR = {
+#						culture_group = berber_group
+#						has_province_modifier = estate_berbers_settlement
+#					}
+#				}
+#				add_province_modifier = {
+#					name = MOR_berber_dev_cost
+#					duration = -1
+#				}
+#			}
+#		}
+#	}
+#	
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_hintata_mor_autonomy = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = 0
+#	influence = 0.1
+#	loyalty = 0.1
+#	is_valid = {
+#		has_estate_privilege = estate_berbers_hintata_mor_autonomy
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	cooldown_years = 15
+#	on_granted = {
+#		2469 = {
+#			add_base_tax = 2
+#			add_base_production = 2
+#			add_base_manpower = 1
+#			add_province_modifier = {
+#				name = MOR_hintata_autonomy
+#				duration = -1
+#			}
+#		}
+#		344 = {
+#			add_base_tax = 2
+#			add_base_production = 2
+#			add_base_manpower = 1
+#			add_province_modifier = {
+#				name = MOR_hintata_autonomy
+#				duration = -1
+#			}
+#		}
+#		345 = {
+#			add_base_tax = 2
+#			add_base_production = 2
+#			add_base_manpower = 1
+#			add_province_modifier = {
+#				name = MOR_hintata_autonomy
+#				duration = -1
+#			}
+#		}
+#		2470 = {
+#			add_base_tax = 2
+#			add_base_production = 2
+#			add_base_manpower = 1
+#			add_province_modifier = {
+#				name = MOR_hintata_autonomy
+#				duration = -1
+#			}
+#		}
+#	}
+#	
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_cavalry = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -5
+#	influence = 0.1
+#	loyalty = 0.05
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	benefits = {
+#		cavalry_power = 0.1
+#		cav_to_inf_ratio = 0.25
+#	}
+#	conditional_modifier = {
+#		trigger = {
+#			has_country_flag = GHB_upgrade_cavalry_priv
+#		}
+#		modifier = {
+#			cavalry_shock = 0.25
+#			cav_to_inf_ratio = 0.25
+#		}
+#	}
+#	
+#	penalties = {
+#		
+#	}
+#	
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_seize_land = {
+#	icon = privilege_grant_autonomy
+#	land_share = -5
+#	max_absolutism = 0
+#	influence = -0.1
+#	loyalty = -0.1
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#		any_owned_province = { 
+#			culture_group = berber_group
+#			any_neighbor_province = {
+#				NOT = { culture_group = berber_group }
+#				has_owner_accepted_culture = yes
+#			}
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	cooldown_years = 15
+#	on_cooldown_expires = {
+#		remove_estate_privilege = estate_berbers_seize_land 
+#	}
+#	
+#	on_granted = {
+#		custom_tooltip = MOR_random_berber_province_will_be_converted
+#		hidden_effect = {
+#			random_owned_province = {
+#				limit = {
+#					culture_group = berber_group
+#					any_neighbor_province = {
+#						NOT = { culture_group = berber_group }
+#						has_owner_accepted_culture = yes
+#					}
+#				}
+#				random_neighbor_province = {
+#					limit = {
+#						NOT = { culture_group = berber_group }
+#						has_owner_accepted_culture = yes
+#					}
+#					PREV = {
+#						change_culture = PREV
+#					}
+#				}
+#			}
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_recruit_berbers = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = 0
+#	influence = 0.1
+#	loyalty = -0.05
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#		any_owned_province = { 
+#			OR = {
+#				culture_group = berber_group
+#				has_province_modifier = MOR_berber_dev_cost
+#			}
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	
+#	cooldown_years = 10
+#	on_cooldown_expires = { 
+#		country_event = { id = estate_berbers_events.3 }
+#	}	
+#	on_granted = {
+#		if = {
+#			limit = {
+#				has_country_flag = TUN_buff_berber_priv
+#			}
+#			add_army_tradition_or_mil_power = { amount = 5 }
+#			
+#			custom_tooltip = " "
+#		}
+#		if = {
+#			limit = {
+#				NOT = { has_country_flag = GRA_empower_the_berber_privilege_flag }
+#			}
+#			custom_tooltip = MOR_get_manpower_for_every_province_with_berber_culture
+#			hidden_effect = {
+#				every_owned_province = {
+#					limit = {
+#						OR = {
+#							culture_group = berber_group
+#							has_province_modifier = estate_berbers_settlement
+#						}
+#					}
+#					ROOT = {
+#						add_manpower = 0.4
+#					}
+#				}
+#			}
+#		}
+#		else = {
+#			custom_tooltip = MOR_get_manpower_for_every_province_with_berber_culture_empowered
+#			hidden_effect = {
+#				every_owned_province = {
+#					limit = {
+#						OR = {
+#							culture_group = berber_group
+#							has_province_modifier = estate_berbers_settlement
+#						}
+#					}
+#					ROOT = {
+#						add_manpower = 0.8
+#					}
+#				}
+#			}
+#		}
+#		
+#		
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_promote_berbers = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -5
+#	influence = 0.05
+#	loyalty = 0.1
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	penalties = {
+#		nobles_loyalty_modifier = -0.05
+#	}
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	
+#	on_granted = {
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_political_concessions = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -5
+#	influence = 0.05
+#	loyalty = 0.15
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	conditional_modifier = {
+#		trigger = {
+#			culture_group = berber_group
+#		}
+#		modifier = {
+#			legitimacy = -0.5
+#		}
+#	}
+#	
+#	conditional_modifier = {
+#		trigger = {
+#			NOT = { culture_group = berber_group }
+#		}
+#		modifier = {
+#			legitimacy = -1
+#		}
+#	}
+#	
+#	on_granted = {
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_berber_settlements_gra_adu = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = -5
+#	influence = 0.1
+#	loyalty = 0.05
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#		OR = {
+#			tag = GRA
+#			tag = ADU
+#			was_tag = ADU
+#			was_tag = GRA
+#			primary_culture = andalucian
+#		}
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	penalties = {
+#	}
+#	on_granted = {
+#		custom_tooltip = GRA_berber_settlements
+#		tooltip = {
+#			add_province_modifier = {
+#				name = estate_berbers_settlement
+#				duration = -1
+#			}
+#		}
+#		custom_tooltip = GRA_berber_settlements_count_as_berber
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
+#
+#estate_berbers_MZB_berber_converts = {
+#	icon = privilege_grant_autonomy
+#	land_share = 0
+#	max_absolutism = 0
+#	influence = 0.1
+#	loyalty = 0.05
+#	is_valid = {
+#		NOT = { estate_berbers_privileges_invalid = yes }
+#		has_country_flag = MZB_unlock_the_berber_privilege_flag
+#	}
+#	can_select = {
+#		NOT = {
+#			estate_berbers_privileges_allow = yes
+#		}
+#		religion = ibadi
+#	}
+#	
+#	on_invalid = {
+#		
+#	}
+#	on_revoked = {
+#		
+#	}
+#	benefits = {
+#		religious_unity = 0.1
+#		global_heretic_missionary_strength = 0.005
+#	}
+#	penalties = {
+#	}
+#	ai_will_do = {
+#		factor = 1
+#	}
+#}
 
 #02_vu_polish_magnates_priviliges
 estate_magnates_land_rights = {
@@ -5976,7 +5976,10 @@ estate_nobles_very_strong_duchies = {
 			        is_subject_of_type = papal_subject_vu
 			        is_subject_of_type = papal_sanctuary_subject
 			        #Voivodeship
-			        is_subject_of_type = voivodeship
+					is_subject_of_type = bosnian_banat_kingdom
+					is_subject_of_type = lezhe_league_member
+					is_subject_of_type = slavic_vojvodina
+					is_subject_of_type = voivodeship
 			        #Vassals
 			        is_subject_of_type = vassal
 			    	is_subject_of_type = client_vassal
@@ -5988,25 +5991,29 @@ estate_nobles_very_strong_duchies = {
 			        #Scottish Clans
 			        is_subject_of_type = scottish_clan
 			        #Personal Unions
-			        is_subject_of_type = aragonese_crown_PU
-			        is_subject_of_type = austrian_crown_PU
-			        is_subject_of_type = benelux_crown_PU
-			        is_subject_of_type = bohemian_crown_PU
-			        is_subject_of_type = burgundian_crown_PU
-			        is_subject_of_type = byzantine_crown_PU
-			        is_subject_of_type = danish_crown_PU
-			        is_subject_of_type = english_crown_PU
-			        is_subject_of_type = french_crown_PU
-			        is_subject_of_type = german_crown_PU
-			        is_subject_of_type = hungarian_crown_PU
-					is_subject_of_type = italian_crown_PU
-			        is_subject_of_type = polish_crown_PU
-			        is_subject_of_type = portuguese_crown_PU
-					is_subject_of_type = russian_crown_PU
-			        is_subject_of_type = spanish_crown_PU
-			        is_subject_of_type = swedish_crown_PU
-			        is_subject_of_type = personal_union
-			    	is_subject_of_type = integrated_personal_union
+                    is_subject_of_type = anglois_crown_PU
+                    is_subject_of_type = aragonese_crown_PU
+                    is_subject_of_type = austrian_crown_PU
+                    is_subject_of_type = baltic_crown_PU
+                    is_subject_of_type = benelux_crown_PU
+                    is_subject_of_type = bohemian_crown_PU
+                    is_subject_of_type = burgundian_crown_PU
+                    is_subject_of_type = byzantine_crown_PU
+                    is_subject_of_type = danish_crown_PU
+                    is_subject_of_type = english_crown_PU
+                    is_subject_of_type = french_crown_PU
+                    is_subject_of_type = german_crown_PU
+                    is_subject_of_type = hungarian_crown_PU
+                    is_subject_of_type = italian_crown_PU
+                    is_subject_of_type = norwegian_crown_PU
+                    is_subject_of_type = polish_crown_PU
+                    is_subject_of_type = portuguese_crown_PU
+                    is_subject_of_type = prussian_crown_PU
+                    is_subject_of_type = russian_crown_PU
+                    is_subject_of_type = spanish_crown_PU
+                    is_subject_of_type = swedish_crown_PU
+                    is_subject_of_type = personal_union
+                    is_subject_of_type = integrated_personal_union
 			        #Swiss Cantons
 			        is_subject_of_type = canton
 			        is_subject_of_type = autonomous_canton
@@ -6015,17 +6022,19 @@ estate_nobles_very_strong_duchies = {
 			        is_subject_of_type = european_bishopric
 			        is_subject_of_type = european_archbishopric
 			        #Islamic Subjects
-			        is_subject_of_type = islamic_imamate			#Equivalent to Lordship  
-			        is_subject_of_type = islamic_grand_muftate			#Equivalent to barony
-			        is_subject_of_type = islamic_sheikdom			#Equivalent to viscounty
-			        is_subject_of_type = islamic_sharifate			#Equivalent to county
-			        is_subject_of_type = islamic_emirate			#Equivalent to marquisate
-			        is_subject_of_type = islamic_governate			#Equivalent to marquisate
-			        is_subject_of_type = islamic_sultanate			#Equivalent to duchy
-			        is_subject_of_type = islamic_taifa			#Equivalent to principality
-			        is_subject_of_type = islamic_malikate			#Equivalent to kingdom
+                    is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
+                    is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
+                    is_subject_of_type = islamic_sheikdom			       #Equivalent to viscounty
+                    is_subject_of_type = islamic_sharifate			       #Equivalent to county
+                    is_subject_of_type = islamic_emirate			       #Equivalent to marquisate
+                    is_subject_of_type = islamic_governate			       #Equivalent to marquisate
+                    is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
+                    is_subject_of_type = islamic_taifa			           #Equivalent to principality
+                    is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
 					#Mongolian Subjects
-					is_subject_of_type = mongolian_vassal
+                    is_subject_of_type = mongolian_vassal
+                    #Turkish Beylik Subjects
+                    is_subject_of_type = turkish_tributary_beylik_vassal
 			    }
 			}
 			amount = 3
@@ -6063,7 +6072,10 @@ estate_nobles_very_strong_duchies = {
 			                is_subject_of_type = papal_subject_vu
 			                is_subject_of_type = papal_sanctuary_subject
 			                #Voivodeship
-			                is_subject_of_type = voivodeship
+                            is_subject_of_type = bosnian_banat_kingdom
+                            is_subject_of_type = lezhe_league_member
+                            is_subject_of_type = slavic_vojvodina
+                            is_subject_of_type = voivodeship
 			                #Vassals
 			                is_subject_of_type = vassal
 			            	is_subject_of_type = client_vassal
@@ -6075,25 +6087,29 @@ estate_nobles_very_strong_duchies = {
 			                #Scottish Clans
 			                is_subject_of_type = scottish_clan
 			                #Personal Unions
-			                is_subject_of_type = aragonese_crown_PU
-			                is_subject_of_type = austrian_crown_PU
-			                is_subject_of_type = benelux_crown_PU
-			                is_subject_of_type = bohemian_crown_PU
-			                is_subject_of_type = burgundian_crown_PU
-			                is_subject_of_type = byzantine_crown_PU
-			                is_subject_of_type = danish_crown_PU
-			                is_subject_of_type = english_crown_PU
-			                is_subject_of_type = french_crown_PU
-			                is_subject_of_type = german_crown_PU
-			                is_subject_of_type = hungarian_crown_PU
-							is_subject_of_type = italian_crown_PU
-			                is_subject_of_type = polish_crown_PU
-			                is_subject_of_type = portuguese_crown_PU
-							is_subject_of_type = russian_crown_PU
-			                is_subject_of_type = spanish_crown_PU
-			                is_subject_of_type = swedish_crown_PU
-			                is_subject_of_type = personal_union
-			            	is_subject_of_type = integrated_personal_union
+                            is_subject_of_type = anglois_crown_PU
+                            is_subject_of_type = aragonese_crown_PU
+                            is_subject_of_type = austrian_crown_PU
+                            is_subject_of_type = baltic_crown_PU
+                            is_subject_of_type = benelux_crown_PU
+                            is_subject_of_type = bohemian_crown_PU
+                            is_subject_of_type = burgundian_crown_PU
+                            is_subject_of_type = byzantine_crown_PU
+                            is_subject_of_type = danish_crown_PU
+                            is_subject_of_type = english_crown_PU
+                            is_subject_of_type = french_crown_PU
+                            is_subject_of_type = german_crown_PU
+                            is_subject_of_type = hungarian_crown_PU
+                            is_subject_of_type = italian_crown_PU
+                            is_subject_of_type = norwegian_crown_PU
+                            is_subject_of_type = polish_crown_PU
+                            is_subject_of_type = portuguese_crown_PU
+                            is_subject_of_type = prussian_crown_PU
+                            is_subject_of_type = russian_crown_PU
+                            is_subject_of_type = spanish_crown_PU
+                            is_subject_of_type = swedish_crown_PU
+                            is_subject_of_type = personal_union
+                            is_subject_of_type = integrated_personal_union
 			                #Swiss Cantons
 			                is_subject_of_type = canton
 			                is_subject_of_type = autonomous_canton
@@ -6102,17 +6118,19 @@ estate_nobles_very_strong_duchies = {
 			                is_subject_of_type = european_bishopric
 			                is_subject_of_type = european_archbishopric
 			                #Islamic Subjects
-			                is_subject_of_type = islamic_imamate			#Equivalent to Lordship  
-			                is_subject_of_type = islamic_grand_muftate			#Equivalent to barony
-			                is_subject_of_type = islamic_sheikdom			#Equivalent to viscounty
-			                is_subject_of_type = islamic_sharifate			#Equivalent to county
-			                is_subject_of_type = islamic_emirate			#Equivalent to marquisate
-			                is_subject_of_type = islamic_governate			#Equivalent to marquisate
-			                is_subject_of_type = islamic_sultanate			#Equivalent to duchy
-			                is_subject_of_type = islamic_taifa			#Equivalent to principality
-			                is_subject_of_type = islamic_malikate			#Equivalent to kingdom
+                            is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
+                            is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
+                            is_subject_of_type = islamic_sheikdom			       #Equivalent to viscounty
+                            is_subject_of_type = islamic_sharifate			       #Equivalent to county
+                            is_subject_of_type = islamic_emirate			       #Equivalent to marquisate
+                            is_subject_of_type = islamic_governate			       #Equivalent to marquisate
+                            is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
+                            is_subject_of_type = islamic_taifa			           #Equivalent to principality
+                            is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
 							#Mongolian Subjects
 							is_subject_of_type = mongolian_vassal
+							#Turkish Beylik Subjects
+							is_subject_of_type = turkish_tributary_beylik_vassal
 			            }
 					}
 				amount = 4
@@ -6164,7 +6182,10 @@ estate_nobles_extremely_strong_duchies = {
 			        is_subject_of_type = papal_subject_vu
 			        is_subject_of_type = papal_sanctuary_subject
 			        #Voivodeship
-			        is_subject_of_type = voivodeship
+                    is_subject_of_type = bosnian_banat_kingdom
+                    is_subject_of_type = lezhe_league_member
+                    is_subject_of_type = slavic_vojvodina
+                    is_subject_of_type = voivodeship
 			        #Vassals
 			        is_subject_of_type = vassal
 			    	is_subject_of_type = client_vassal
@@ -6176,25 +6197,29 @@ estate_nobles_extremely_strong_duchies = {
 			        #Scottish Clans
 			        is_subject_of_type = scottish_clan
 			        #Personal Unions
-			        is_subject_of_type = aragonese_crown_PU
-			        is_subject_of_type = austrian_crown_PU
-			        is_subject_of_type = benelux_crown_PU
-			        is_subject_of_type = bohemian_crown_PU
-			        is_subject_of_type = burgundian_crown_PU
-			        is_subject_of_type = byzantine_crown_PU
-			        is_subject_of_type = danish_crown_PU
-			        is_subject_of_type = english_crown_PU
-			        is_subject_of_type = french_crown_PU
-			        is_subject_of_type = german_crown_PU
-			        is_subject_of_type = hungarian_crown_PU
-					is_subject_of_type = italian_crown_PU
-			        is_subject_of_type = polish_crown_PU
-			        is_subject_of_type = portuguese_crown_PU
-					is_subject_of_type = russian_crown_PU
-			        is_subject_of_type = spanish_crown_PU
-			        is_subject_of_type = swedish_crown_PU
-			        is_subject_of_type = personal_union
-			    	is_subject_of_type = integrated_personal_union
+                    is_subject_of_type = anglois_crown_PU
+                    is_subject_of_type = aragonese_crown_PU
+                    is_subject_of_type = austrian_crown_PU
+                    is_subject_of_type = baltic_crown_PU
+                    is_subject_of_type = benelux_crown_PU
+                    is_subject_of_type = bohemian_crown_PU
+                    is_subject_of_type = burgundian_crown_PU
+                    is_subject_of_type = byzantine_crown_PU
+                    is_subject_of_type = danish_crown_PU
+                    is_subject_of_type = english_crown_PU
+                    is_subject_of_type = french_crown_PU
+                    is_subject_of_type = german_crown_PU
+                    is_subject_of_type = hungarian_crown_PU
+                    is_subject_of_type = italian_crown_PU
+                    is_subject_of_type = norwegian_crown_PU
+                    is_subject_of_type = polish_crown_PU
+                    is_subject_of_type = portuguese_crown_PU
+                    is_subject_of_type = prussian_crown_PU
+                    is_subject_of_type = russian_crown_PU
+                    is_subject_of_type = spanish_crown_PU
+                    is_subject_of_type = swedish_crown_PU
+                    is_subject_of_type = personal_union
+                    is_subject_of_type = integrated_personal_union
 			        #Swiss Cantons
 			        is_subject_of_type = canton
 			        is_subject_of_type = autonomous_canton
@@ -6203,17 +6228,19 @@ estate_nobles_extremely_strong_duchies = {
 			        is_subject_of_type = european_bishopric
 			        is_subject_of_type = european_archbishopric
 			        #Islamic Subjects
-			        is_subject_of_type = islamic_imamate			#Equivalent to Lordship  
-			        is_subject_of_type = islamic_grand_muftate			#Equivalent to barony
-			        is_subject_of_type = islamic_sheikdom			#Equivalent to viscounty
-			        is_subject_of_type = islamic_sharifate			#Equivalent to county
-			        is_subject_of_type = islamic_emirate			#Equivalent to marquisate
-			        is_subject_of_type = islamic_governate			#Equivalent to marquisate
-			        is_subject_of_type = islamic_sultanate			#Equivalent to duchy
-			        is_subject_of_type = islamic_taifa			#Equivalent to principality
-			        is_subject_of_type = islamic_malikate			#Equivalent to kingdom
+                    is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
+                    is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
+                    is_subject_of_type = islamic_sheikdom			       #Equivalent to viscounty
+                    is_subject_of_type = islamic_sharifate			       #Equivalent to county
+                    is_subject_of_type = islamic_emirate			       #Equivalent to marquisate
+                    is_subject_of_type = islamic_governate			       #Equivalent to marquisate
+                    is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
+                    is_subject_of_type = islamic_taifa			           #Equivalent to principality
+                    is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
 					#Mongolian Subjects
 					is_subject_of_type = mongolian_vassal
+					#Turkish Beylik Subjects
+					is_subject_of_type = turkish_tributary_beylik_vassal
 			    }
 			}
 		}
@@ -6247,7 +6274,10 @@ estate_nobles_extremely_strong_duchies = {
 			                is_subject_of_type = papal_subject_vu
 			                is_subject_of_type = papal_sanctuary_subject
 			                #Voivodeship
-			                is_subject_of_type = voivodeship
+                            is_subject_of_type = bosnian_banat_kingdom
+                            is_subject_of_type = lezhe_league_member
+                            is_subject_of_type = slavic_vojvodina
+                            is_subject_of_type = voivodeship
 			                #Vassals
 			                is_subject_of_type = vassal
 			            	is_subject_of_type = client_vassal
@@ -6259,25 +6289,29 @@ estate_nobles_extremely_strong_duchies = {
 			                #Scottish Clans
 			                is_subject_of_type = scottish_clan
 			                #Personal Unions
-			                is_subject_of_type = aragonese_crown_PU
-			                is_subject_of_type = austrian_crown_PU
-			                is_subject_of_type = benelux_crown_PU
-			                is_subject_of_type = bohemian_crown_PU
-			                is_subject_of_type = burgundian_crown_PU
-			                is_subject_of_type = byzantine_crown_PU
-			                is_subject_of_type = danish_crown_PU
-			                is_subject_of_type = english_crown_PU
-			                is_subject_of_type = french_crown_PU
-			                is_subject_of_type = german_crown_PU
-			                is_subject_of_type = hungarian_crown_PU
-							is_subject_of_type = italian_crown_PU
-			                is_subject_of_type = polish_crown_PU
-			                is_subject_of_type = portuguese_crown_PU
-							is_subject_of_type = russian_crown_PU
-			                is_subject_of_type = spanish_crown_PU
-			                is_subject_of_type = swedish_crown_PU
-			                is_subject_of_type = personal_union
-			            	is_subject_of_type = integrated_personal_union
+                            is_subject_of_type = anglois_crown_PU
+                            is_subject_of_type = aragonese_crown_PU
+                            is_subject_of_type = austrian_crown_PU
+                            is_subject_of_type = baltic_crown_PU
+                            is_subject_of_type = benelux_crown_PU
+                            is_subject_of_type = bohemian_crown_PU
+                            is_subject_of_type = burgundian_crown_PU
+                            is_subject_of_type = byzantine_crown_PU
+                            is_subject_of_type = danish_crown_PU
+                            is_subject_of_type = english_crown_PU
+                            is_subject_of_type = french_crown_PU
+                            is_subject_of_type = german_crown_PU
+                            is_subject_of_type = hungarian_crown_PU
+                            is_subject_of_type = italian_crown_PU
+                            is_subject_of_type = norwegian_crown_PU
+                            is_subject_of_type = polish_crown_PU
+                            is_subject_of_type = portuguese_crown_PU
+                            is_subject_of_type = prussian_crown_PU
+                            is_subject_of_type = russian_crown_PU
+                            is_subject_of_type = spanish_crown_PU
+                            is_subject_of_type = swedish_crown_PU
+                            is_subject_of_type = personal_union
+                            is_subject_of_type = integrated_personal_union
 			                #Swiss Cantons
 			                is_subject_of_type = canton
 			                is_subject_of_type = autonomous_canton
@@ -6286,17 +6320,19 @@ estate_nobles_extremely_strong_duchies = {
 			                is_subject_of_type = european_bishopric
 			                is_subject_of_type = european_archbishopric
 			                #Islamic Subjects
-			                is_subject_of_type = islamic_imamate			#Equivalent to Lordship  
-			                is_subject_of_type = islamic_grand_muftate			#Equivalent to barony
-			                is_subject_of_type = islamic_sheikdom			#Equivalent to viscounty
-			                is_subject_of_type = islamic_sharifate			#Equivalent to county
-			                is_subject_of_type = islamic_emirate			#Equivalent to marquisate
-			                is_subject_of_type = islamic_governate			#Equivalent to marquisate
-			                is_subject_of_type = islamic_sultanate			#Equivalent to duchy
-			                is_subject_of_type = islamic_taifa			#Equivalent to principality
-			                is_subject_of_type = islamic_malikate			#Equivalent to kingdom
+			                is_subject_of_type = islamic_imamate			       #Equivalent to Lordship  
+			                is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
+			                is_subject_of_type = islamic_sheikdom			       #Equivalent to viscounty
+			                is_subject_of_type = islamic_sharifate			       #Equivalent to county
+			                is_subject_of_type = islamic_emirate			       #Equivalent to marquisate
+			                is_subject_of_type = islamic_governate			       #Equivalent to marquisate
+			                is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
+			                is_subject_of_type = islamic_taifa			           #Equivalent to principality
+			                is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
 							#Mongolian Subjects
 							is_subject_of_type = mongolian_vassal
+							#Turkish Beylik Subjects
+							is_subject_of_type = turkish_tributary_beylik_vassal
 			            }
 					}
 				}

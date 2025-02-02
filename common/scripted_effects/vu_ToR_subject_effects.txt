@@ -306,6 +306,22 @@ vu_create_ToR_lordship = {
     else_if = {
         limit = {
             OR = {
+                tag = LIT
+                primary_culture = lithuanian
+            }
+        }
+        create_subject = {
+            subject_type = lithuanian_lordship_march
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            add_government_reform = eue_lordship_reform
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
                 tag = NOR
                 primary_culture = norwegian
             }
@@ -1538,26 +1554,6 @@ vu_create_ToR_county = {
     else_if = {
         limit = {
             OR = {
-                tag = ENG
-                tag = GBR
-                AND = {
-                    NOT = {
-                        primary_culture = scottish
-                    }
-                    culture_group = british
-                }
-            }
-        }
-        create_subject = {
-            subject_type = english_earldom
-            subject = FROM
-            keep_liberty_desire = yes
-        }
-        add_government_reform = eng_earldom_reform
-    }
-    else_if = {
-        limit = {
-            OR = {
                 tag = FRA
                 AND = {
                     culture_group = french
@@ -1778,6 +1774,29 @@ vu_create_ToR_county = {
     #       add_government_reform = eue_county_reform
     #    }
     #}
+}
+##############################################################
+vu_create_ToR_earldom = {
+    if = {
+        limit = {
+            OR = {
+                tag = ENG
+                tag = GBR
+                AND = {
+                    NOT = {
+                        primary_culture = scottish
+                    }
+                    culture_group = british
+                }
+            }
+        }
+        create_subject = {
+            subject_type = english_earldom
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        add_government_reform = eng_earldom_reform
+    }
 }
 ##############################################################
 vu_create_ToR_marquisate = {
@@ -2529,6 +2548,22 @@ vu_create_ToR_duchy = {
     else_if = {
         limit = {
             OR = {
+                tag = LIT
+                primary_culture = lithuanian
+            }
+        }
+        create_subject = {
+            subject_type = lithuanian_duchy
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            add_government_reform = eue_duchy_reform
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
                 tag = NOR
                 primary_culture = norwegian
             }
@@ -2965,6 +3000,22 @@ vu_create_ToR_principality = {
         }
         create_subject = {
             subject_type = italian_principality
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+        FROM = {
+            add_government_reform = eue_principality_reform
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
+                primary_culture = lithuanian
+                tag = LIT
+            }
+        }
+        create_subject = {
+            subject_type = lithuanian_principality
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -3552,6 +3603,22 @@ vu_create_ToR_crown = {
     if = {
         limit = {
             OR = {
+                tag = UKS
+                primary_culture = english
+                primary_culture = gascon
+                primary_culture = normand
+                primary_culture = cosmopolitan_french
+            }
+        }
+        create_subject = {
+            subject_type = anglois_crown_PU
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
                 tag = ARA
                 primary_culture = aragonese
                 primary_culture = catalan
@@ -3574,6 +3641,22 @@ vu_create_ToR_crown = {
         }
         create_subject = {
             subject_type = austrian_crown_PU
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
+                tag = FIN
+                primary_culture = baltic_german
+                primary_culture = estonian
+                primary_culture = finnish
+                primary_culture = latvian
+            }
+        }
+        create_subject = {
+            subject_type = baltic_crown_PU
             subject = FROM
             keep_liberty_desire = yes
         }
@@ -3738,6 +3821,19 @@ vu_create_ToR_crown = {
     }
     else_if = {
         limit = {
+            OR = {
+                tag = NOR
+                primary_culture = norwegian
+            }
+        }
+        create_subject = {
+            subject_type = norwegian_crown_PU
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+    }
+    else_if = {
+        limit = {
             tag = POL
             tag = PLC
             AND = {
@@ -3766,6 +3862,19 @@ vu_create_ToR_crown = {
         }
         create_subject = {
             subject_type = portuguese_crown_PU
+            subject = FROM
+            keep_liberty_desire = yes
+        }
+    }
+    else_if = {
+        limit = {
+            OR = {
+                tag = PRU
+                primary_culture = prussian
+            }
+        }
+        create_subject = {
+            subject_type = prussian_crown_PU
             subject = FROM
             keep_liberty_desire = yes
         }

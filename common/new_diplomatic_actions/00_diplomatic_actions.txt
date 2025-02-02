@@ -3294,7 +3294,7 @@ call_pu_subject = {
 	is_visible = {
 		FROM = {
 			is_subject_of = ROOT
-			is_subject_of_type = ME_Austrian_personal_union
+			is_subject_of_type = austrian_crown_PU
 		}
 		is_at_war = yes
 		OR = {
@@ -3324,7 +3324,7 @@ call_pu_subject = {
 		hidden_trigger = {
 			FROM = {
 				is_subject_of = ROOT
-				is_subject_of_type = ME_Austrian_personal_union
+				is_subject_of_type = austrian_crown_PU
 			}
 			is_at_war = yes
 			OR = {
@@ -3357,7 +3357,7 @@ call_pu_subject = {
 			limit = {
 				FROM = {
 					is_subject_of = ROOT
-					is_subject_of_type = ME_Austrian_personal_union
+					is_subject_of_type = austrian_crown_PU
 				}
 				is_at_war = yes
 				OR = {
@@ -4941,192 +4941,192 @@ french_hre_subject_independence_action = {
 }
 
 #malaya_diplomatic_actions
-#ME_tributary_state_interaction = {
-#	category = influenc
-#	alert_index = 6
-#	alert_tooltip = ME_tributary_state_interaction_toolti
-#	require_acceptance = ye
-#	is_visible = {
-#		has_country_flag = MSA_tributary_interaction_enabled
-#		FROM = {
-#			is_subject_of = ROOT
-#			is_subject_of_type = vassal
-#		}
-#	}
-#
-#	is_allowed = {
-#		FROM = {
-#			years_in_vassalage_under = {
-#				who = ROOT
-#				years = 30
-#			}
-#		}
-#		is_at_war = no
-#		dip_power = 100
-#		FROM = { is_at_war = no }
-#	}
-#
-#	on_accept = {
-#		if = {
-#			limit = {
-#				has_country_flag = MSA_tributary_interaction_enabled
-#				FROM = {
-#					is_subject_of = ROOT
-#					is_subject_of_type = vassal
-#					years_in_vassalage_under = {
-#						who = ROOT
-#						years = 30
-#					}
-#					NOT = { liberty_desire = 5 }
-#				}
-#			}
-#			FROM = {
-#				create_subject = {
-#					subject = ROOT
-#					subject_type = tributary_state
-#				}
-#			}
-#			add_dip_power = -100
-#		}
-#	}
-#
-#	on_decline = {
-#		if = {
-#			limit = {
-#				FROM = {
-#					is_subject = no
-#					can_create_subject_type = {
-#						subject = ROOT
-#						subject_type = agricultural_march
-#					}
-#				}
-#				is_at_war = no
-#				FROM = { is_at_war = no }
-#			}
-#			FROM = {
-#				clr_country_flag = declined_become_agricultural_march_@ROOT
-#				set_country_flag = declined_become_agricultural_march_@ROOT
-#			}
-#			add_opinion = {
-#				who = FROM
-#				modifier = declined_ask_to_become_agricultural_march
-#			}
-#		}
-#	}
-#
-#	ai_acceptance = {
-#		add_entry = {
-#			name = OPINION
-#			export_to_variable = {
-#				which = ai_value
-#				value = opinion
-#				who = FROM
-#				with = ROOT
-#			}
-#			divide_variable = { which = ai_value value = 4 }
-#		}
-#		add_entry = {
-#			name = MODIFIER_DIPLO_SKILL
-#			export_to_variable = {
-#				which = ai_value
-#				value = modifier:diplomatic_reputation
-#			}
-#			multiply_variable = { which = ai_value value = 5 }
-#		}
-#		add_entry = {
-#			name = ROOT_IS_VASSAL_FOR_AT_LEAST_10_YEARS
-#			limit = {
-#				years_in_vassalage_under = {
-#					who = FROM
-#					years = 10
-#					all_subject_country = yes
-#				}
-#			}
-#			export_to_variable = {
-#				which = ai_value
-#				value = 1000
-#			}
-#			multiply_variable = { which = ai_value value = -1 }
-#		}
-#		add_entry = {
-#			name = ROOT_IS_NOT_A_NEIGHBOR_OF_FROMS_RIVALS
-#			limit = {
-#				NOT = {
-#					any_neighbor_country = {
-#						OR = {
-#							is_rival = FROM
-#							is_enemy = FROM
-#						}
-#					}
-#				}
-#			}
-#			export_to_variable = {
-#				which = ai_value
-#				value = 1000
-#			}
-#			multiply_variable = { which = ai_value value = -1 }
-#		}
-#		add_entry = {
-#			name = ROOT_HAS_MORE_THAN_25_PERCENT_OF_OVERLORD_DEVELOPMENT
-#			limit = {
-#				development_of_overlord_fraction = 0.25
-#			}
-#			export_to_variable = {
-#				which = ai_value
-#				value = 1000
-#			}
-#			multiply_variable = { which = ai_value value = -1 }
-#		}
-#		add_entry = {
-#			name = ROOT_HAS_TOO_FEW_PRODUCTION_INCOME
-#			limit = {
-#				OR = {
-#					NOT = { monthly_income = 20 }
-#					NOT = { production_income_percentage = 0.35 }
-#				}
-#			}
-#			export_to_variable = {
-#				which = ai_value
-#				value = 1000
-#			}
-#			multiply_variable = { which = ai_value value = -1 }
-#		}
-#		add_entry = {
-#			name = ROOT_HAS_TOO_FEW_MAX_MANPOWER
-#			limit = {
-#				NOT = { max_manpower = 20 }
-#			}
-#			export_to_variable = {
-#				which = ai_value
-#				value = 1000
-#			}
-#			multiply_variable = { which = ai_value value = -1 }
-#		}
-#	}
-#
-#	ai_will_do = {
-#		NOT = { liberty_desire = 50 }
-#		NOT = { is_different_march_subject = yes }
-#		army_size = 20
-#		OR = {
-#			is_subject_of_type = march
-#			FROM = { ai = no }
-#		}
-#		production_income_percentage = 0.2
-#		any_neighbor_country = {
-#			OR = {
-#				is_rival = FROM
-#				is_enemy = FROM
-#			}
-#		}
-#		FROM = {
-#			OR = {
-#				NOT = { has_country_flag = declined_become_agricultural_march_@ROOT }
-#				had_country_flag = { flag = declined_become_agricultural_march_@ROOT days = 1825 }
-#			}
-#		}
-#	}
-#}
+ME_tributary_state_interaction = {
+	category = influenc
+	alert_index = 6
+	alert_tooltip = ME_tributary_state_interaction_toolti
+	require_acceptance = yes
+	is_visible = {
+		has_country_flag = MSA_tributary_interaction_enabled
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = vassal
+		}
+	}
+
+	is_allowed = {
+		FROM = {
+			years_in_vassalage_under = {
+				who = ROOT
+				years = 30
+			}
+		}
+		is_at_war = no
+		dip_power = 100
+		FROM = { is_at_war = no }
+	}
+
+	on_accept = {
+		if = {
+			limit = {
+				has_country_flag = MSA_tributary_interaction_enabled
+				FROM = {
+					is_subject_of = ROOT
+					is_subject_of_type = vassal
+					years_in_vassalage_under = {
+						who = ROOT
+						years = 30
+					}
+					NOT = { liberty_desire = 5 }
+				}
+			}
+			FROM = {
+				create_subject = {
+					subject = ROOT
+					subject_type = tributary_state
+				}
+			}
+			add_dip_power = -100
+		}
+	}
+
+	on_decline = {
+		if = {
+			limit = {
+				FROM = {
+					is_subject = no
+					can_create_subject_type = {
+						subject = ROOT
+						subject_type = agricultural_march
+					}
+				}
+				is_at_war = no
+				FROM = { is_at_war = no }
+			}
+			FROM = {
+				clr_country_flag = declined_become_agricultural_march_@ROOT
+				set_country_flag = declined_become_agricultural_march_@ROOT
+			}
+			add_opinion = {
+				who = FROM
+				modifier = declined_ask_to_become_agricultural_march
+			}
+		}
+	}
+
+	ai_acceptance = {
+		add_entry = {
+			name = OPINION
+			export_to_variable = {
+				which = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			divide_variable = { which = ai_value value = 4 }
+		}
+		add_entry = {
+			name = MODIFIER_DIPLO_SKILL
+			export_to_variable = {
+				which = ai_value
+				value = modifier:diplomatic_reputation
+			}
+			multiply_variable = { which = ai_value value = 5 }
+		}
+		add_entry = {
+			name = ROOT_IS_VASSAL_FOR_AT_LEAST_10_YEARS
+			limit = {
+				years_in_vassalage_under = {
+					who = FROM
+					years = 10
+					all_subject_country = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+			multiply_variable = { which = ai_value value = -1 }
+		}
+		add_entry = {
+			name = ROOT_IS_NOT_A_NEIGHBOR_OF_FROMS_RIVALS
+			limit = {
+				NOT = {
+					any_neighbor_country = {
+						OR = {
+							is_rival = FROM
+							is_enemy = FROM
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+			multiply_variable = { which = ai_value value = -1 }
+		}
+		add_entry = {
+			name = ROOT_HAS_MORE_THAN_25_PERCENT_OF_OVERLORD_DEVELOPMENT
+			limit = {
+				development_of_overlord_fraction = 0.25
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+			multiply_variable = { which = ai_value value = -1 }
+		}
+		add_entry = {
+			name = ROOT_HAS_TOO_FEW_PRODUCTION_INCOME
+			limit = {
+				OR = {
+					NOT = { monthly_income = 20 }
+					NOT = { production_income_percentage = 0.35 }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+			multiply_variable = { which = ai_value value = -1 }
+		}
+		add_entry = {
+			name = ROOT_HAS_TOO_FEW_MAX_MANPOWER
+			limit = {
+				NOT = { max_manpower = 20 }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+			multiply_variable = { which = ai_value value = -1 }
+		}
+	}
+
+	ai_will_do = {
+		NOT = { liberty_desire = 50 }
+		NOT = { is_different_march_subject = yes }
+		army_size = 20
+		OR = {
+			is_subject_of_type = march
+			FROM = { ai = no }
+		}
+		production_income_percentage = 0.2
+		any_neighbor_country = {
+			OR = {
+				is_rival = FROM
+				is_enemy = FROM
+			}
+		}
+		FROM = {
+			OR = {
+				NOT = { has_country_flag = declined_become_agricultural_march_@ROOT }
+				had_country_flag = { flag = declined_become_agricultural_march_@ROOT days = 1825 }
+			}
+		}
+	}
+}
 
 #mamluks_diplomatic_actions
 mamluks_purchase_new_mamluks = {
@@ -42705,19 +42705,20 @@ cancel_sister_republic = {
 	}
 }
 
-#subjects_expanded_diplomatic_actions_stato_da_mar_vassal
-establish_stato_da_mar_vassal = {
+#subjects_expanded_diplomatic_actions_merchantlist_republic
+#New VU 1.37.* Generic Merchantlist Republic by SF
+establish_merchantlist_republic = {
 	category = influence
 
 	alert_index = 6
-	alert_tooltip = establish_stato_da_mar_vassal_alert_tooltip
+	alert_tooltip = establish_merchantlist_republic_alert_tooltip
 
 	require_acceptance = yes
 
 	is_visible = {
 		can_create_subject_type = {
 			subject = FROM
-			subject_type = stato_da_mar_vassal
+			subject_type = merchantlist_republic
 		}
 		FROM = {
 			OR = {
@@ -42729,7 +42730,7 @@ establish_stato_da_mar_vassal = {
 					any_trade_node_member_country = {
 						is_subject_of_type_with_overlord = {
 							who = ROOT
-							type = stato_da_mar_vassal
+							type = merchantlist_republic
 						}
 					}
 				}
@@ -42756,7 +42757,7 @@ establish_stato_da_mar_vassal = {
 						any_trade_node_member_country = {
 							is_subject_of_type_with_overlord = {
 								who = ROOT
-								type = stato_da_mar_vassal
+								type = merchantlist_republic
 							}
 						}
 					}
@@ -42772,7 +42773,7 @@ establish_stato_da_mar_vassal = {
 		}
 		can_create_subject_type = {
 			subject = FROM
-			subject_type = stato_da_mar_vassal
+			subject_type = merchantlist_republic
 		}
 		FROM = {
 			capital_scope = { trade_range = ROOT }
@@ -42807,7 +42808,7 @@ establish_stato_da_mar_vassal = {
 							any_trade_node_member_country = {
 								is_subject_of_type_with_overlord = {
 									who = ROOT
-									type = stato_da_mar_vassal
+									type = merchantlist_republic
 								}
 							}
 						}
@@ -42822,7 +42823,7 @@ establish_stato_da_mar_vassal = {
 				}
 				can_create_subject_type = {
 					subject = FROM
-					subject_type = stato_da_mar_vassal
+					subject_type = merchantlist_republic
 				}
 				FROM = {
 					capital_scope = { trade_range = ROOT }
@@ -42845,7 +42846,7 @@ establish_stato_da_mar_vassal = {
 			}
 			create_subject = {
 				subject = FROM
-				subject_type = stato_da_mar_vassal
+				subject_type = merchantlist_republic
 			}
 			add_truce_with = FROM
 		}
@@ -42864,7 +42865,7 @@ establish_stato_da_mar_vassal = {
 							any_trade_node_member_country = {
 								is_subject_of_type_with_overlord = {
 									who = ROOT
-									type = stato_da_mar_vassal
+									type = merchantlist_republic
 								}
 							}
 						}
@@ -42879,7 +42880,7 @@ establish_stato_da_mar_vassal = {
 				}
 				can_create_subject_type = {
 					subject = FROM
-					subject_type = stato_da_mar_vassal
+					subject_type = merchantlist_republic
 				}
 				FROM = {
 					capital_scope = { trade_range = ROOT }
@@ -42901,12 +42902,12 @@ establish_stato_da_mar_vassal = {
 				}
 			}
 			FROM = {
-				clr_country_flag = declined_establish_stato_da_mar_vassal_@ROOT
-				set_country_flag = declined_establish_stato_da_mar_vassal_@ROOT
+				clr_country_flag = declined_establish_merchantlist_republic_@ROOT
+				set_country_flag = declined_establish_merchantlist_republic_@ROOT
 			}
 			add_opinion = {
 				who = FROM
-				modifier = declined_establish_stato_da_mar_vassal_opinion
+				modifier = declined_establish_merchantlist_republic_opinion
 			}
 		}
 	}
@@ -43492,14 +43493,15 @@ establish_stato_da_mar_vassal = {
 	}
 
 	ai_will_do = {
-		OR = {
+		culture_group = latin
+		NOT = {
 			tag = VEN
-			primary_culture = venetian
+			tag = GEN
 		}
 		FROM = {
 			OR = {
-				NOT = { has_country_flag = declined_establish_stato_da_mar_vassal_@ROOT }
-				had_country_flag = { flag = declined_establish_stato_da_mar_vassal_@ROOT days = 1825 }
+				NOT = { has_country_flag = declined_establish_merchantlist_republic_@ROOT }
+				had_country_flag = { flag = declined_establish_merchantlist_republic_@ROOT days = 1825 }
 			}
 			NOT = { is_subject_of = ROOT }
 			capital_scope = {
@@ -43522,11 +43524,11 @@ establish_stato_da_mar_vassal = {
 	}
 }
 
-ask_to_become_stato_da_mar_vassal = {
+ask_to_become_merchantlist_republic = {
 	category = influence
 
 	alert_index = 6
-	alert_tooltip = ask_to_become_stato_da_mar_vassal_alert_tooltip
+	alert_tooltip = ask_to_become_merchantlist_republic_alert_tooltip
 
 	require_acceptance = yes
 
@@ -43534,7 +43536,7 @@ ask_to_become_stato_da_mar_vassal = {
 		FROM = {
 			can_create_subject_type = {
 				subject = ROOT
-				subject_type = stato_da_mar_vassal
+				subject_type = merchantlist_republic
 			}
 		}
 		OR = {
@@ -43546,7 +43548,7 @@ ask_to_become_stato_da_mar_vassal = {
 				any_trade_node_member_country = {
 					is_subject_of_type_with_overlord = {
 						who = FROM
-						type = stato_da_mar_vassal
+						type = merchantlist_republic
 					}
 				}
 			}
@@ -43571,7 +43573,7 @@ ask_to_become_stato_da_mar_vassal = {
 					any_trade_node_member_country = {
 						is_subject_of_type_with_overlord = {
 							who = FROM
-							type = stato_da_mar_vassal
+							type = merchantlist_republic
 						}
 					}
 				}
@@ -43587,7 +43589,7 @@ ask_to_become_stato_da_mar_vassal = {
 		FROM = {
 			can_create_subject_type = {
 				subject = ROOT
-				subject_type = stato_da_mar_vassal
+				subject_type = merchantlist_republic
 			}
 		}
 		capital_scope = { trade_range = FROM }
@@ -43614,7 +43616,7 @@ ask_to_become_stato_da_mar_vassal = {
 						any_trade_node_member_country = {
 							is_subject_of_type_with_overlord = {
 								who = FROM
-								type = stato_da_mar_vassal
+								type = merchantlist_republic
 							}
 						}
 					}
@@ -43629,7 +43631,7 @@ ask_to_become_stato_da_mar_vassal = {
 				FROM = {
 					can_create_subject_type = {
 						subject = ROOT
-						subject_type = stato_da_mar_vassal
+						subject_type = merchantlist_republic
 					}
 				}
 				capital_scope = { trade_range = FROM }
@@ -43646,7 +43648,7 @@ ask_to_become_stato_da_mar_vassal = {
 			FROM = {
 				create_subject = {
 					subject = ROOT
-					subject_type = stato_da_mar_vassal
+					subject_type = merchantlist_republic
 				}
 				add_truce_with = ROOT
 			}
@@ -43665,7 +43667,7 @@ ask_to_become_stato_da_mar_vassal = {
 						any_trade_node_member_country = {
 							is_subject_of_type_with_overlord = {
 								who = FROM
-								type = stato_da_mar_vassal
+								type = merchantlist_republic
 							}
 						}
 					}
@@ -43680,7 +43682,7 @@ ask_to_become_stato_da_mar_vassal = {
 				FROM = {
 					can_create_subject_type = {
 						subject = ROOT
-						subject_type = stato_da_mar_vassal
+						subject_type = merchantlist_republic
 					}
 				}
 				capital_scope = { trade_range = FROM }
@@ -43694,11 +43696,11 @@ ask_to_become_stato_da_mar_vassal = {
 					NOT = { liberty_desire = 50 }
 				}
 			}
-			clr_country_flag = declined_establish_stato_da_mar_vassal_@FROM
-			set_country_flag = declined_establish_stato_da_mar_vassal_@FROM
+			clr_country_flag = declined_establish_merchantlist_republic_@FROM
+			set_country_flag = declined_establish_merchantlist_republic_@FROM
 			add_opinion = {
 				who = FROM
-				modifier = declined_ask_to_become_stato_da_mar_vassal
+				modifier = declined_ask_to_become_merchantlist_republic
 			}
 		}
 	}
@@ -43857,14 +43859,15 @@ ask_to_become_stato_da_mar_vassal = {
 				NOT = {
 					AND = {
 						FROM = {
-							OR = {
+							culture_group = latin
+							NOT = {
 								tag = VEN
-								primary_culture = venetian
+								tag = GEN
 							}
 						}
 						OR = {
-							NOT = { has_country_flag = declined_establish_stato_da_mar_vassal_@FROM }
-							had_country_flag = { flag = declined_establish_stato_da_mar_vassal_@FROM days = 1825 }
+							NOT = { has_country_flag = declined_establish_merchantlist_republic_@FROM }
+							had_country_flag = { flag = declined_establish_merchantlist_republic_@FROM days = 1825 }
 						}
 						NOT = { is_subject_of = FROM }
 						capital_scope = {
@@ -43960,7 +43963,7 @@ ask_to_become_stato_da_mar_vassal = {
 	}
 }
 
-enable_stato_da_mar_vassal_seize_merchant_fleets = {
+enable_merchantlist_republic_seize_merchant_fleets = {
 	category = influence
 
 	require_acceptance = no
@@ -43968,8 +43971,8 @@ enable_stato_da_mar_vassal_seize_merchant_fleets = {
 	is_visible = {
 		FROM = {
 			is_subject_of = ROOT
-			is_subject_of_type = stato_da_mar_vassal
-			NOT = { has_country_flag = stato_da_mar_vassal_seize_merchant_fleets }
+			is_subject_of_type = merchantlist_republic
+			NOT = { has_country_flag = merchantlist_republic_seize_merchant_fleets }
 		}
 	}
 
@@ -43977,8 +43980,8 @@ enable_stato_da_mar_vassal_seize_merchant_fleets = {
 		hidden_trigger = {
 			FROM = {
 				is_subject_of = ROOT
-				is_subject_of_type = stato_da_mar_vassal
-				NOT = { has_country_flag = stato_da_mar_vassal_seize_merchant_fleets }
+				is_subject_of_type = merchantlist_republic
+				NOT = { has_country_flag = merchantlist_republic_seize_merchant_fleets }
 			}
 		}
 		FROM = {
@@ -43991,15 +43994,15 @@ enable_stato_da_mar_vassal_seize_merchant_fleets = {
 			limit = {
 				FROM = {
 					is_subject_of = ROOT
-					is_subject_of_type = stato_da_mar_vassal
-					NOT = { has_country_flag = stato_da_mar_vassal_seize_merchant_fleets }
+					is_subject_of_type = merchantlist_republic
+					NOT = { has_country_flag = merchantlist_republic_seize_merchant_fleets }
 				}
 				FROM = {
 					NOT = { liberty_desire = 50 }
 				}
 			}
 			FROM = {
-				set_country_flag = stato_da_mar_vassal_seize_merchant_fleets
+				set_country_flag = merchantlist_republic_seize_merchant_fleets
 			}
 		}
 	}
@@ -44011,7 +44014,1359 @@ enable_stato_da_mar_vassal_seize_merchant_fleets = {
 	}
 }
 
-disable_stato_da_mar_vassal_seize_merchant_fleets = {
+disable_merchantlist_republic_seize_merchant_fleets = {
+    category = influence
+
+    require_acceptance = no
+
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = merchantlist_republic
+            has_country_flag = merchantlist_republic_seize_merchant_fleets
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                is_subject_of = ROOT
+                is_subject_of_type = merchantlist_republic
+                has_country_flag = merchantlist_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = merchantlist_republic
+                    has_country_flag = merchantlist_republic_seize_merchant_fleets
+                }
+            }
+            FROM = {
+                clr_country_flag = merchantlist_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    ai_will_do = {
+        FROM = {
+            liberty_desire = 55
+        }
+    }
+}
+
+#New VU 1.37.* Venetian & Genoese Republics by SF 
+#Venice
+establish_venetian_republic = {
+    category = influence
+
+    alert_index = 6
+    alert_tooltip = establish_venetian_republic_alert_tooltip
+
+    require_acceptance = yes
+
+    is_visible = {
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = venetian_republic
+        }
+        FROM = {
+            OR = {
+                is_subject_of = ROOT
+                NOT = { num_of_cities = 2 }
+            }
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = ROOT
+                            type = venetian_republic
+                        }
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = ROOT
+                                type = venetian_republic
+                            }
+                        }
+                    }
+                }
+            }
+            capital_scope = {
+                FROM = {
+                    capital_scope = {
+                        NOT = { region = PREV_PREV }
+                    }
+                }
+            }
+        }
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = venetian_republic
+        }
+        FROM = {
+            capital_scope = { trade_range = ROOT }
+        }
+        NOT = { truce_with = FROM }
+        is_at_war = no
+        FROM = {
+            is_at_war = no
+        }
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                }
+            }
+            FROM = {
+                NOT = { liberty_desire = 50 }
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    OR = {
+                        is_subject_of = ROOT
+                        NOT = { num_of_cities = 2 }
+                    }
+                    capital_scope = {
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = venetian_republic
+                                }
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                can_create_subject_type = {
+                    subject = FROM
+                    subject_type = venetian_republic
+                }
+                FROM = {
+                    capital_scope = { trade_range = ROOT }
+                }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = {
+                    is_at_war = no
+                }
+                if = {
+                    limit = {
+                        FROM = {
+                            is_subject_of = ROOT
+                        }
+                    }
+                    FROM = {
+                        NOT = { liberty_desire = 50 }
+                    }
+                }
+            }
+            create_subject = {
+                subject = FROM
+                subject_type = venetian_republic
+            }
+            add_truce_with = FROM
+        }
+    }
+
+    on_decline = {
+        if = {
+            limit = {
+                FROM = {
+                    OR = {
+                        is_subject_of = ROOT
+                        NOT = { num_of_cities = 2 }
+                    }
+                    capital_scope = {
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = venetian_republic
+                                }
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                can_create_subject_type = {
+                    subject = FROM
+                    subject_type = venetian_republic
+                }
+                FROM = {
+                    capital_scope = { trade_range = ROOT }
+                }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = {
+                    is_at_war = no
+                }
+                if = {
+                    limit = {
+                        FROM = {
+                            is_subject_of = ROOT
+                        }
+                    }
+                    FROM = {
+                        NOT = { liberty_desire = 50 }
+                    }
+                }
+            }
+            FROM = {
+                clr_country_flag = declined_establish_venetian_republic_@ROOT
+                set_country_flag = declined_establish_venetian_republic_@ROOT
+            }
+            add_opinion = {
+                who = FROM
+                modifier = declined_establish_venetian_republic_opinion
+            }
+        }
+    }
+
+    ai_acceptance = {
+        add_entry = {
+            name = FROM_IS_VASSAL_OF_ROOT
+            limit = {
+                overlord_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+        }
+        add_entry = {
+            name = FROM_LIBERTY_DESIRE_TOO_HIGH
+            limit = {
+                overlord_of = FROM
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_allied }
+                        ai_attitude = { who = ROOT attitude = attitude_friendly }
+                        ai_attitude = { who = ROOT attitude = attitude_threatened }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    ai_attitude = { who = ROOT attitude = attitude_neutral }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 20
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_hostile }
+                        ai_attitude = { who = ROOT attitude = attitude_outraged }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_DIPLO_SKILL
+            export_to_variable = {
+                which = ai_value
+                value = modifier:diplomatic_reputation
+            }
+            multiply_variable = { which = ai_value value = 3 }
+        }
+        add_entry = {
+            name = ROOT_FROM_NOT_SAME_RELIGION
+            limit = {
+                NOT = { religion = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_HRE_MEMBER
+            limit = {
+                NOT = { overlord_of = FROM }
+                is_part_of_hre = no
+                FROM = {
+                    is_part_of_hre = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_HRE_ELECTOR
+            limit = {
+                FROM = {
+                    is_elector = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_EMPEROR
+            limit = {
+                FROM = {
+                    is_emperor = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_SUBJECTS
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    num_of_subjects = 1
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_OWNS_FROM_CORE_PROVINCES
+            limit = {
+                any_owned_province = {
+                    is_core = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = BORDER_DISTANCE
+            limit = {
+                NOT = { overlord_of = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = border_distance
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = -4 }
+        }
+        add_entry = {
+            name = ROOT_FROM_ARE_ALLIED
+            limit = {
+                alliance_with = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = OPINION
+            export_to_variable = {
+                which = ai_value
+                value = opinion
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = FROM_ROOT_ARE_RIVALS
+            limit = {
+                OR = {
+                    is_rival = FROM
+                    is_enemy = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            divide_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_IMPERIAL_CITY
+            limit = {
+                FROM = {
+                    has_reform = free_city
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_ACCEPT_VASSALIZATION_REASONS
+            export_to_variable = {
+                which = ai_value
+                value = modifier:accept_vassalization_reasons
+            }
+        }
+        add_entry = {
+            name = FROM_IS_MERCHANT_REPUBLIC
+            limit = {
+                FROM = {
+                    has_reform = merchants_reform
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_HIGH_TRADE_POWER_IN_THEIR_HOME_NODE
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    capital_scope = {
+                        trade_share = {
+                            country = PREV
+                            share = 30
+                        }
+                        NOT = {
+                            trade_share = {
+                                country = PREV
+                                share = 50
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_HIGH_TRADE_POWER_IN_THEIR_HOME_NODE
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    capital_scope = {
+                        trade_share = {
+                            country = PREV
+                            share = 50
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_DEVELOPMENT
+            limit = {
+                NOT = { overlord_of = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trigger_value:total_development
+                who = FROM
+            }
+            #subtract_variable = { which = ai_value value = 1 }
+            multiply_variable = { which = ai_value value = -1.5 }
+        }
+        add_entry = {
+            name = FROM_DEVELOPMENT
+            limit = {
+                overlord_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trigger_value:total_development
+                who = FROM
+            }
+            #subtract_variable = { which = ai_value value = 1 }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    any_ally = {
+                        NOT = { tag = ROOT }
+                        army_size = 20
+                    }
+                    NOT = {
+                        calc_true_if = {
+                            all_ally = {
+                                NOT = { tag = ROOT }
+                                army_size = 20
+                            }
+                            amount = 2
+                        }
+                    }
+                    NOT = {
+                        any_ally = {
+                            NOT = { tag = ROOT }
+                            OR = {
+                                army_size = 100
+                                military_strength = { who = ROOT value = 2 }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    calc_true_if = {
+                        all_ally = {
+                            NOT = { tag = ROOT }
+                            army_size = 20
+                        }
+                        amount = 2
+                    }
+                    NOT = {
+                        any_ally = {
+                            NOT = { tag = ROOT }
+                            OR = {
+                                army_size = 100
+                                military_strength = { who = ROOT value = 2 }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    any_ally = {
+                        NOT = { tag = ROOT }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                any_country = {
+                    NOT = { tag = ROOT }
+                    FROM = {
+                        guaranteed_by = PREV
+                    }
+                    army_size = 20
+                }
+                NOT = {
+                    calc_true_if = {
+                        all_country = {
+                            NOT = { tag = ROOT }
+                            FROM = {
+                                guaranteed_by = PREV
+                            }
+                            army_size = 20
+                        }
+                        amount = 2
+                    }
+                }
+                NOT = {
+                    any_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                calc_true_if = {
+                    all_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        army_size = 20
+                    }
+                    amount = 2
+                }
+                NOT = {
+                    any_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                any_country = {
+                    NOT = { tag = ROOT }
+                    FROM = {
+                        guaranteed_by = PREV
+                    }
+                    OR = {
+                        army_size = 100
+                        military_strength = { who = ROOT value = 2 }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_KINGDOM_RANK
+            limit = {
+                FROM = {
+                    government_rank = 8
+                    NOT = { government_rank = 9 }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_EMPIRE_RANK
+            limit = {
+                FROM = {
+                    government_rank = 9
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    trust = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trust
+                who = FROM
+                with = ROOT
+            }
+            subtract_variable = { which = ai_value value = 50 }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    trust = {
+                        who = ROOT
+                        value = 30
+                    }
+                    NOT = {
+                        trust = {
+                            who = ROOT
+                            value = 50
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trust
+                who = FROM
+                with = ROOT
+            }
+            subtract_variable = { which = ai_value value = 50 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    NOT = {
+                        trust = {
+                            who = ROOT
+                            value = 30
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+    }
+
+    ai_will_do = {
+        OR = {
+            tag = VEN
+            primary_culture = venetian
+        }
+        FROM = {
+            OR = {
+                NOT = { has_country_flag = declined_establish_venetian_republic_@ROOT }
+                had_country_flag = { flag = declined_establish_venetian_republic_@ROOT days = 1825 }
+            }
+            NOT = { is_subject_of = ROOT }
+            capital_scope = {
+                has_merchant = ROOT
+                OR = {
+                    continent = europe
+                    continent = africa
+                    continent = asia
+                }
+            }
+            NOT = {
+                any_owned_province = {
+                    OR = {
+                        is_core = ROOT
+                        is_permanent_claim = ROOT
+                    }
+                }
+            }
+        }
+    }
+}
+
+ask_to_become_venetian_republic = {
+    category = influence
+
+    alert_index = 6
+    alert_tooltip = ask_to_become_venetian_republic_alert_tooltip
+
+    require_acceptance = yes
+
+    is_visible = {
+        FROM = {
+            can_create_subject_type = {
+                subject = ROOT
+                subject_type = venetian_republic
+            }
+        }
+        OR = {
+            is_subject_of = FROM
+            NOT = { num_of_cities = 2 }
+        }
+        capital_scope = {
+            NOT = {
+                any_trade_node_member_country = {
+                    is_subject_of_type_with_overlord = {
+                        who = FROM
+                        type = venetian_republic
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            OR = {
+                is_subject_of = FROM
+                NOT = { num_of_cities = 2 }
+            }
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = FROM
+                            type = venetian_republic
+                        }
+                    }
+                }
+            }
+            capital_scope = {
+                FROM = {
+                    capital_scope = {
+                        NOT = { region = PREV_PREV }
+                    }
+                }
+            }
+        }
+        FROM = {
+            can_create_subject_type = {
+                subject = ROOT
+                subject_type = venetian_republic
+            }
+        }
+        capital_scope = { trade_range = FROM }
+        NOT = { truce_with = FROM }
+        is_at_war = no
+        FROM = { is_at_war = no }
+        if = {
+            limit = {
+                is_subject_of = FROM
+            }
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                OR = {
+                    is_subject_of = FROM
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = FROM
+                                type = venetian_republic
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                FROM = {
+                    can_create_subject_type = {
+                        subject = ROOT
+                        subject_type = venetian_republic
+                    }
+                }
+                capital_scope = { trade_range = FROM }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = { is_at_war = no }
+                if = {
+                    limit = {
+                        is_subject_of = FROM
+                    }
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            FROM = {
+                create_subject = {
+                    subject = ROOT
+                    subject_type = venetian_republic
+                }
+                add_truce_with = ROOT
+            }
+        }
+    }
+
+    on_decline = {
+        if = {
+            limit = {
+                OR = {
+                    is_subject_of = FROM
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = FROM
+                                type = venetian_republic
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                FROM = {
+                    can_create_subject_type = {
+                        subject = ROOT
+                        subject_type = venetian_republic
+                    }
+                }
+                capital_scope = { trade_range = FROM }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = { is_at_war = no }
+                if = {
+                    limit = {
+                        is_subject_of = FROM
+                    }
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            clr_country_flag = declined_establish_venetian_republic_@FROM
+            set_country_flag = declined_establish_venetian_republic_@FROM
+            add_opinion = {
+                who = FROM
+                modifier = declined_ask_to_become_venetian_republic
+            }
+        }
+    }
+
+    ai_acceptance = {
+        add_entry = {
+            name = ROOT_IS_VASSAL_OF_FROM
+            limit = {
+                is_subject_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_LIBERTY_DESIRE_TOO_HIGH
+            limit = {
+                is_subject_of = FROM
+                liberty_desire = 50
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_allied }
+                        ai_attitude = { who = ROOT attitude = attitude_friendly }
+                        ai_attitude = { who = ROOT attitude = attitude_threatened }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    ai_attitude = { who = ROOT attitude = attitude_neutral }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 20
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_hostile }
+                        ai_attitude = { who = ROOT attitude = attitude_outraged }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_DIPLO_SKILL
+            export_to_variable = {
+                which = ai_value
+                value = modifier:diplomatic_reputation
+            }
+            multiply_variable = { which = ai_value value = 3 }
+        }
+        add_entry = {
+            name = ROOT_FROM_NOT_SAME_RELIGION
+            limit = {
+                NOT = { religion = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_OWNS_FROM_CORE_PROVINCES
+            limit = {
+                any_owned_province = {
+                    is_core = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = BORDER_DISTANCE
+            export_to_variable = {
+                which = ai_value
+                value = border_distance
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = -4 }
+        }
+        add_entry = {
+            name = ROOT_FROM_ARE_ALLIED
+            limit = {
+                alliance_with = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = OPINION
+            export_to_variable = {
+                which = ai_value
+                value = opinion
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = FROM_ROOT_ARE_RIVALS
+            limit = {
+                OR = {
+                    is_rival = FROM
+                    is_enemy = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            divide_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = STRATEGIC_VALUE
+            limit = {
+                NOT = {
+                    AND = {
+                        FROM = {
+                            OR = {
+                                tag = VEN
+                                primary_culture = venetian
+                            }
+                        }
+                        OR = {
+                            NOT = { has_country_flag = declined_establish_venetian_republic_@FROM }
+                            had_country_flag = { flag = declined_establish_venetian_republic_@FROM days = 1825 }
+                        }
+                        NOT = { is_subject_of = FROM }
+                        capital_scope = {
+                            has_merchant = FROM
+                            OR = {
+                                continent = europe
+                                continent = africa
+                                continent = asia
+                            }
+                        }
+                        NOT = {
+                            any_owned_province = {
+                                OR = {
+                                    is_core = FROM
+                                    is_permanent_claim = FROM
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_IS_MERCHANT_REPUBLIC
+            limit = {
+                has_reform = merchants_reform
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+    }
+
+    ai_will_do = {
+        is_subject = no
+        NOT = { total_development = 50 }
+        NOT = { government_rank = 8 }
+        alliance_with = FROM
+        religion = FROM
+        OR = {
+            is_part_of_hre = no
+            FROM = {
+                is_part_of_hre = yes
+            }
+        }
+        is_elector = no
+        is_emperor = no
+        NOT = { num_of_subjects = 1 }
+        NOT = { has_reform = free_city }
+        capital_scope = {
+            NOT = {
+                trade_share = {
+                    country = PREV
+                    share = 30
+                }
+            }
+        }
+        FROM = {
+            NOT = {
+                any_owned_province = {
+                    is_core = ROOT
+                }
+            }
+        }
+        NOT = {
+            any_ally = {
+                NOT = { tag = FROM }
+                OR = {
+                    army_size = 50
+                    military_strength = { who = FROM value = 1.5 }
+                }
+            }
+        }
+        NOT = {
+            any_country = {
+                NOT = { tag = FROM }
+                ROOT = {
+                    guaranteed_by = PREV
+                }
+                OR = {
+                    army_size = 50
+                    military_strength = { who = FROM value = 1.5 }
+                }
+            }
+        }
+    }
+}
+
+enable_venetian_republic_seize_merchant_fleets = {
+    category = influence
+
+    require_acceptance = no
+
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = venetian_republic
+            NOT = { has_country_flag = venetian_republic_seize_merchant_fleets }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                is_subject_of = ROOT
+                is_subject_of_type = venetian_republic
+                NOT = { has_country_flag = venetian_republic_seize_merchant_fleets }
+            }
+        }
+        FROM = {
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = venetian_republic
+                    NOT = { has_country_flag = venetian_republic_seize_merchant_fleets }
+                }
+                FROM = {
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            FROM = {
+                set_country_flag = venetian_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    ai_will_do = {
+        FROM = {
+            NOT = { liberty_desire = 35 }
+        }
+    }
+}
+
+disable_venetian_republic_seize_merchant_fleets = {
 	category = influence
 
 	require_acceptance = no
@@ -44019,8 +45374,8 @@ disable_stato_da_mar_vassal_seize_merchant_fleets = {
 	is_visible = {
 		FROM = {
 			is_subject_of = ROOT
-			is_subject_of_type = stato_da_mar_vassal
-			has_country_flag = stato_da_mar_vassal_seize_merchant_fleets
+			is_subject_of_type = venetian_republic
+			has_country_flag = venetian_republic_seize_merchant_fleets
 		}
 	}
 
@@ -44028,8 +45383,8 @@ disable_stato_da_mar_vassal_seize_merchant_fleets = {
 		hidden_trigger = {
 			FROM = {
 				is_subject_of = ROOT
-				is_subject_of_type = stato_da_mar_vassal
-				has_country_flag = stato_da_mar_vassal_seize_merchant_fleets
+				is_subject_of_type = venetian_republic
+				has_country_flag = venetian_republic_seize_merchant_fleets
 			}
 		}
 	}
@@ -44039,12 +45394,12 @@ disable_stato_da_mar_vassal_seize_merchant_fleets = {
 			limit = {
 				FROM = {
 					is_subject_of = ROOT
-					is_subject_of_type = stato_da_mar_vassal
-					has_country_flag = stato_da_mar_vassal_seize_merchant_fleets
+					is_subject_of_type = venetian_republic
+					has_country_flag = venetian_republic_seize_merchant_fleets
 				}
 			}
 			FROM = {
-				clr_country_flag = stato_da_mar_vassal_seize_merchant_fleets
+				clr_country_flag = venetian_republic_seize_merchant_fleets
 			}
 		}
 	}
@@ -44054,6 +45409,1357 @@ disable_stato_da_mar_vassal_seize_merchant_fleets = {
 			liberty_desire = 55
 		}
 	}
+}
+
+#Genoa
+establish_genoese_commercial_republic = {
+    category = influence
+
+    alert_index = 6
+    alert_tooltip = establish_genoese_commercial_republic_alert_tooltip
+
+    require_acceptance = yes
+
+    is_visible = {
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = genoese_commercial_republic
+        }
+        FROM = {
+            OR = {
+                is_subject_of = ROOT
+                NOT = { num_of_cities = 2 }
+            }
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = ROOT
+                            type = genoese_commercial_republic
+                        }
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = ROOT
+                                type = genoese_commercial_republic
+                            }
+                        }
+                    }
+                }
+            }
+            capital_scope = {
+                FROM = {
+                    capital_scope = {
+                        NOT = { region = PREV_PREV }
+                    }
+                }
+            }
+        }
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = genoese_commercial_republic
+        }
+        FROM = {
+            capital_scope = { trade_range = ROOT }
+        }
+        NOT = { truce_with = FROM }
+        is_at_war = no
+        FROM = {
+            is_at_war = no
+        }
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                }
+            }
+            FROM = {
+                NOT = { liberty_desire = 50 }
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    OR = {
+                        is_subject_of = ROOT
+                        NOT = { num_of_cities = 2 }
+                    }
+                    capital_scope = {
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = genoese_commercial_republic
+                                }
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                can_create_subject_type = {
+                    subject = FROM
+                    subject_type = genoese_commercial_republic
+                }
+                FROM = {
+                    capital_scope = { trade_range = ROOT }
+                }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = {
+                    is_at_war = no
+                }
+                if = {
+                    limit = {
+                        FROM = {
+                            is_subject_of = ROOT
+                        }
+                    }
+                    FROM = {
+                        NOT = { liberty_desire = 50 }
+                    }
+                }
+            }
+            create_subject = {
+                subject = FROM
+                subject_type = genoese_commercial_republic
+            }
+            add_truce_with = FROM
+        }
+    }
+
+    on_decline = {
+        if = {
+            limit = {
+                FROM = {
+                    OR = {
+                        is_subject_of = ROOT
+                        NOT = { num_of_cities = 2 }
+                    }
+                    capital_scope = {
+                        NOT = {
+                            any_trade_node_member_country = {
+                                is_subject_of_type_with_overlord = {
+                                    who = ROOT
+                                    type = genoese_commercial_republic
+                                }
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                can_create_subject_type = {
+                    subject = FROM
+                    subject_type = genoese_commercial_republic
+                }
+                FROM = {
+                    capital_scope = { trade_range = ROOT }
+                }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = {
+                    is_at_war = no
+                }
+                if = {
+                    limit = {
+                        FROM = {
+                            is_subject_of = ROOT
+                        }
+                    }
+                    FROM = {
+                        NOT = { liberty_desire = 50 }
+                    }
+                }
+            }
+            FROM = {
+                clr_country_flag = declined_establish_genoese_commercial_republic_@ROOT
+                set_country_flag = declined_establish_genoese_commercial_republic_@ROOT
+            }
+            add_opinion = {
+                who = FROM
+                modifier = declined_establish_genoese_commercial_republic_opinion
+            }
+        }
+    }
+
+    ai_acceptance = {
+        add_entry = {
+            name = FROM_IS_VASSAL_OF_ROOT
+            limit = {
+                overlord_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+        }
+        add_entry = {
+            name = FROM_LIBERTY_DESIRE_TOO_HIGH
+            limit = {
+                overlord_of = FROM
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_allied }
+                        ai_attitude = { who = ROOT attitude = attitude_friendly }
+                        ai_attitude = { who = ROOT attitude = attitude_threatened }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    ai_attitude = { who = ROOT attitude = attitude_neutral }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 20
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_hostile }
+                        ai_attitude = { who = ROOT attitude = attitude_outraged }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_DIPLO_SKILL
+            export_to_variable = {
+                which = ai_value
+                value = modifier:diplomatic_reputation
+            }
+            multiply_variable = { which = ai_value value = 3 }
+        }
+        add_entry = {
+            name = ROOT_FROM_NOT_SAME_RELIGION
+            limit = {
+                NOT = { religion = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_HRE_MEMBER
+            limit = {
+                NOT = { overlord_of = FROM }
+                is_part_of_hre = no
+                FROM = {
+                    is_part_of_hre = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_HRE_ELECTOR
+            limit = {
+                FROM = {
+                    is_elector = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_EMPEROR
+            limit = {
+                FROM = {
+                    is_emperor = yes
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_SUBJECTS
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    num_of_subjects = 1
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_OWNS_FROM_CORE_PROVINCES
+            limit = {
+                any_owned_province = {
+                    is_core = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = BORDER_DISTANCE
+            limit = {
+                NOT = { overlord_of = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = border_distance
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = -4 }
+        }
+        add_entry = {
+            name = ROOT_FROM_ARE_ALLIED
+            limit = {
+                alliance_with = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = OPINION
+            export_to_variable = {
+                which = ai_value
+                value = opinion
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = FROM_ROOT_ARE_RIVALS
+            limit = {
+                OR = {
+                    is_rival = FROM
+                    is_enemy = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            divide_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_IMPERIAL_CITY
+            limit = {
+                FROM = {
+                    has_reform = free_city
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_ACCEPT_VASSALIZATION_REASONS
+            export_to_variable = {
+                which = ai_value
+                value = modifier:accept_vassalization_reasons
+            }
+        }
+        add_entry = {
+            name = FROM_IS_MERCHANT_REPUBLIC
+            limit = {
+                FROM = {
+                    has_reform = merchants_reform
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_HIGH_TRADE_POWER_IN_THEIR_HOME_NODE
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    capital_scope = {
+                        trade_share = {
+                            country = PREV
+                            share = 30
+                        }
+                        NOT = {
+                            trade_share = {
+                                country = PREV
+                                share = 50
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_HIGH_TRADE_POWER_IN_THEIR_HOME_NODE
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    capital_scope = {
+                        trade_share = {
+                            country = PREV
+                            share = 50
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_DEVELOPMENT
+            limit = {
+                NOT = { overlord_of = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trigger_value:total_development
+                who = FROM
+            }
+            #subtract_variable = { which = ai_value value = 1 }
+            multiply_variable = { which = ai_value value = -1.5 }
+        }
+        add_entry = {
+            name = FROM_DEVELOPMENT
+            limit = {
+                overlord_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trigger_value:total_development
+                who = FROM
+            }
+            #subtract_variable = { which = ai_value value = 1 }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    any_ally = {
+                        NOT = { tag = ROOT }
+                        army_size = 20
+                    }
+                    NOT = {
+                        calc_true_if = {
+                            all_ally = {
+                                NOT = { tag = ROOT }
+                                army_size = 20
+                            }
+                            amount = 2
+                        }
+                    }
+                    NOT = {
+                        any_ally = {
+                            NOT = { tag = ROOT }
+                            OR = {
+                                army_size = 100
+                                military_strength = { who = ROOT value = 2 }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    calc_true_if = {
+                        all_ally = {
+                            NOT = { tag = ROOT }
+                            army_size = 20
+                        }
+                        amount = 2
+                    }
+                    NOT = {
+                        any_ally = {
+                            NOT = { tag = ROOT }
+                            OR = {
+                                army_size = 100
+                                military_strength = { who = ROOT value = 2 }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_ALLIES
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    any_ally = {
+                        NOT = { tag = ROOT }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                any_country = {
+                    NOT = { tag = ROOT }
+                    FROM = {
+                        guaranteed_by = PREV
+                    }
+                    army_size = 20
+                }
+                NOT = {
+                    calc_true_if = {
+                        all_country = {
+                            NOT = { tag = ROOT }
+                            FROM = {
+                                guaranteed_by = PREV
+                            }
+                            army_size = 20
+                        }
+                        amount = 2
+                    }
+                }
+                NOT = {
+                    any_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                calc_true_if = {
+                    all_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        army_size = 20
+                    }
+                    amount = 2
+                }
+                NOT = {
+                    any_country = {
+                        NOT = { tag = ROOT }
+                        FROM = {
+                            guaranteed_by = PREV
+                        }
+                        OR = {
+                            army_size = 100
+                            military_strength = { who = ROOT value = 2 }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_HAS_STRONG_GUARANTEES
+            limit = {
+                NOT = { overlord_of = FROM }
+                any_country = {
+                    NOT = { tag = ROOT }
+                    FROM = {
+                        guaranteed_by = PREV
+                    }
+                    OR = {
+                        army_size = 100
+                        military_strength = { who = ROOT value = 2 }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_KINGDOM_RANK
+            limit = {
+                FROM = {
+                    government_rank = 8
+                    NOT = { government_rank = 9 }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_IS_EMPIRE_RANK
+            limit = {
+                FROM = {
+                    government_rank = 9
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 25
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    trust = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trust
+                who = FROM
+                with = ROOT
+            }
+            subtract_variable = { which = ai_value value = 50 }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    trust = {
+                        who = ROOT
+                        value = 30
+                    }
+                    NOT = {
+                        trust = {
+                            who = ROOT
+                            value = 50
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = trust
+                who = FROM
+                with = ROOT
+            }
+            subtract_variable = { which = ai_value value = 50 }
+        }
+        add_entry = {
+            name = TRUST
+            limit = {
+                FROM = {
+                    NOT = {
+                        trust = {
+                            who = ROOT
+                            value = 30
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+    }
+
+    ai_will_do = {
+        OR = {
+            tag = GEN
+            primary_culture = ligurian
+        }
+        FROM = {
+            OR = {
+                NOT = { has_country_flag = declined_establish_genoese_commercial_republic_@ROOT }
+                had_country_flag = { flag = declined_establish_genoese_commercial_republic_@ROOT days = 1825 }
+            }
+            NOT = { is_subject_of = ROOT }
+            capital_scope = {
+                has_merchant = ROOT
+                OR = {
+                    continent = europe
+                    continent = africa
+                    continent = asia
+                }
+            }
+            NOT = {
+                any_owned_province = {
+                    OR = {
+                        is_core = ROOT
+                        is_permanent_claim = ROOT
+                    }
+                }
+            }
+        }
+    }
+}
+
+ask_to_become_genoese_commercial_republic = {
+    category = influence
+
+    alert_index = 6
+    alert_tooltip = ask_to_become_genoese_commercial_republic_alert_tooltip
+
+    require_acceptance = yes
+
+    is_visible = {
+        FROM = {
+            can_create_subject_type = {
+                subject = ROOT
+                subject_type = genoese_commercial_republic
+            }
+        }
+        OR = {
+            is_subject_of = FROM
+            NOT = { num_of_cities = 2 }
+        }
+        capital_scope = {
+            NOT = {
+                any_trade_node_member_country = {
+                    is_subject_of_type_with_overlord = {
+                        who = FROM
+                        type = genoese_commercial_republic
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            OR = {
+                is_subject_of = FROM
+                NOT = { num_of_cities = 2 }
+            }
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = FROM
+                            type = genoese_commercial_republic
+                        }
+                    }
+                }
+            }
+            capital_scope = {
+                FROM = {
+                    capital_scope = {
+                        NOT = { region = PREV_PREV }
+                    }
+                }
+            }
+        }
+        FROM = {
+            can_create_subject_type = {
+                subject = ROOT
+                subject_type = genoese_commercial_republic
+            }
+        }
+        capital_scope = { trade_range = FROM }
+        NOT = { truce_with = FROM }
+        is_at_war = no
+        FROM = { is_at_war = no }
+        if = {
+            limit = {
+                is_subject_of = FROM
+            }
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                OR = {
+                    is_subject_of = FROM
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = FROM
+                                type = genoese_commercial_republic
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                FROM = {
+                    can_create_subject_type = {
+                        subject = ROOT
+                        subject_type = genoese_commercial_republic
+                    }
+                }
+                capital_scope = { trade_range = FROM }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = { is_at_war = no }
+                if = {
+                    limit = {
+                        is_subject_of = FROM
+                    }
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            FROM = {
+                create_subject = {
+                    subject = ROOT
+                    subject_type = genoese_commercial_republic
+                }
+                add_truce_with = ROOT
+            }
+        }
+    }
+
+    on_decline = {
+        if = {
+            limit = {
+                OR = {
+                    is_subject_of = FROM
+                    NOT = { num_of_cities = 2 }
+                }
+                capital_scope = {
+                    NOT = {
+                        any_trade_node_member_country = {
+                            is_subject_of_type_with_overlord = {
+                                who = FROM
+                                type = genoese_commercial_republic
+                            }
+                        }
+                    }
+                }
+                capital_scope = {
+                    FROM = {
+                        capital_scope = {
+                            NOT = { region = PREV_PREV }
+                        }
+                    }
+                }
+                FROM = {
+                    can_create_subject_type = {
+                        subject = ROOT
+                        subject_type = genoese_commercial_republic
+                    }
+                }
+                capital_scope = { trade_range = FROM }
+                NOT = { truce_with = FROM }
+                is_at_war = no
+                FROM = { is_at_war = no }
+                if = {
+                    limit = {
+                        is_subject_of = FROM
+                    }
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            clr_country_flag = declined_establish_genoese_commercial_republic_@FROM
+            set_country_flag = declined_establish_genoese_commercial_republic_@FROM
+            add_opinion = {
+                who = FROM
+                modifier = declined_ask_to_become_genoese_commercial_republic
+            }
+        }
+    }
+
+    ai_acceptance = {
+        add_entry = {
+            name = ROOT_IS_VASSAL_OF_FROM
+            limit = {
+                is_subject_of = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 15
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_LIBERTY_DESIRE_TOO_HIGH
+            limit = {
+                is_subject_of = FROM
+                liberty_desire = 50
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_allied }
+                        ai_attitude = { who = ROOT attitude = attitude_friendly }
+                        ai_attitude = { who = ROOT attitude = attitude_threatened }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    ai_attitude = { who = ROOT attitude = attitude_neutral }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 20
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = FROM_ATTITUDE_TOWARDS_ROOT
+            limit = {
+                NOT = { overlord_of = FROM }
+                FROM = {
+                    OR = {
+                        ai_attitude = { who = ROOT attitude = attitude_hostile }
+                        ai_attitude = { who = ROOT attitude = attitude_outraged }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = MODIFIER_DIPLO_SKILL
+            export_to_variable = {
+                which = ai_value
+                value = modifier:diplomatic_reputation
+            }
+            multiply_variable = { which = ai_value value = 3 }
+        }
+        add_entry = {
+            name = ROOT_FROM_NOT_SAME_RELIGION
+            limit = {
+                NOT = { religion = FROM }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 50
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_OWNS_FROM_CORE_PROVINCES
+            limit = {
+                any_owned_province = {
+                    is_core = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = BORDER_DISTANCE
+            export_to_variable = {
+                which = ai_value
+                value = border_distance
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = -4 }
+        }
+        add_entry = {
+            name = ROOT_FROM_ARE_ALLIED
+            limit = {
+                alliance_with = FROM
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 10
+            }
+        }
+        add_entry = {
+            name = OPINION
+            export_to_variable = {
+                which = ai_value
+                value = opinion
+                who = FROM
+                with = ROOT
+            }
+            divide_variable = { which = ai_value value = 5 }
+        }
+        add_entry = {
+            name = FROM_ROOT_ARE_RIVALS
+            limit = {
+                OR = {
+                    is_rival = FROM
+                    is_enemy = FROM
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            divide_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = STRATEGIC_VALUE
+            limit = {
+                NOT = {
+                    AND = {
+                        FROM = {
+                            OR = {
+                                tag = GEN
+                                primary_culture = ligurian
+                            }
+                        }
+                        OR = {
+                            NOT = { has_country_flag = declined_establish_genoese_commercial_republic_@FROM }
+                            had_country_flag = { flag = declined_establish_genoese_commercial_republic_@FROM days = 1825 }
+                        }
+                        NOT = { is_subject_of = FROM }
+                        capital_scope = {
+                            has_merchant = FROM
+                            OR = {
+                                continent = europe
+                                continent = africa
+                                continent = asia
+                            }
+                        }
+                        NOT = {
+                            any_owned_province = {
+                                OR = {
+                                    is_core = FROM
+                                    is_permanent_claim = FROM
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 1000
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+        add_entry = {
+            name = ROOT_IS_MERCHANT_REPUBLIC
+            limit = {
+                has_reform = merchants_reform
+            }
+            export_to_variable = {
+                which = ai_value
+                value = 30
+            }
+            multiply_variable = { which = ai_value value = -1 }
+        }
+    }
+
+    ai_will_do = {
+        is_subject = no
+        NOT = { total_development = 50 }
+        NOT = { government_rank = 8 }
+        alliance_with = FROM
+        religion = FROM
+        OR = {
+            is_part_of_hre = no
+            FROM = {
+                is_part_of_hre = yes
+            }
+        }
+        is_elector = no
+        is_emperor = no
+        NOT = { num_of_subjects = 1 }
+        NOT = { has_reform = free_city }
+        capital_scope = {
+            NOT = {
+                trade_share = {
+                    country = PREV
+                    share = 30
+                }
+            }
+        }
+        FROM = {
+            NOT = {
+                any_owned_province = {
+                    is_core = ROOT
+                }
+            }
+        }
+        NOT = {
+            any_ally = {
+                NOT = { tag = FROM }
+                OR = {
+                    army_size = 50
+                    military_strength = { who = FROM value = 1.5 }
+                }
+            }
+        }
+        NOT = {
+            any_country = {
+                NOT = { tag = FROM }
+                ROOT = {
+                    guaranteed_by = PREV
+                }
+                OR = {
+                    army_size = 50
+                    military_strength = { who = FROM value = 1.5 }
+                }
+            }
+        }
+    }
+}
+
+enable_genoese_commercial_republic_seize_merchant_fleets = {
+    category = influence
+
+    require_acceptance = no
+
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = genoese_commercial_republic
+            NOT = { has_country_flag = genoese_commercial_republic_seize_merchant_fleets }
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                is_subject_of = ROOT
+                is_subject_of_type = genoese_commercial_republic
+                NOT = { has_country_flag = genoese_commercial_republic_seize_merchant_fleets }
+            }
+        }
+        FROM = {
+            NOT = { liberty_desire = 50 }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = genoese_commercial_republic
+                    NOT = { has_country_flag = genoese_commercial_republic_seize_merchant_fleets }
+                }
+                FROM = {
+                    NOT = { liberty_desire = 50 }
+                }
+            }
+            FROM = {
+                set_country_flag = genoese_commercial_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    ai_will_do = {
+        FROM = {
+            NOT = { liberty_desire = 35 }
+        }
+    }
+}
+
+disable_genoese_commercial_republic_seize_merchant_fleets = {
+    category = influence
+
+    require_acceptance = no
+
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = genoese_commercial_republic
+            has_country_flag = genoese_commercial_republic_seize_merchant_fleets
+        }
+    }
+
+    is_allowed = {
+        hidden_trigger = {
+            FROM = {
+                is_subject_of = ROOT
+                is_subject_of_type = genoese_commercial_republic
+                has_country_flag = genoese_commercial_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = genoese_commercial_republic
+                    has_country_flag = genoese_commercial_republic_seize_merchant_fleets
+                }
+            }
+            FROM = {
+                clr_country_flag = genoese_commercial_republic_seize_merchant_fleets
+            }
+        }
+    }
+
+    ai_will_do = {
+        FROM = {
+            liberty_desire = 55
+        }
+    }
 }
 
 #subjects_expanded_diplomatic_actions_trade_outpost

@@ -1401,7 +1401,7 @@ france_missions_3 = {
 			}
 			if = {
 				limit = {
-					NOT = { has_country_flag = french_hre_subject_enabled }
+					#NOT = { has_country_flag = french_hre_subject_enabled }
 					NOT = { has_country_flag = fra_francia_formed }
 				}
 				country_event = { id = ME_France_Events.70 }
@@ -2647,11 +2647,7 @@ france_missions_4 = {
 				owned_by = ROOT
 				base_production = 8
 				has_transportation_trigger = yes
-				OR = {
-					has_production_building_trigger = yes
-					trade_goods = gold
-					trade_goods = silver
-				}
+				has_production_building_trigger = yes
 			}
 			190 = {
 				owned_by = ROOT
@@ -2721,32 +2717,8 @@ france_missions_4 = {
 			custom_tooltip = fra_lyon_improvements_tt
 			hidden_effect = {
 				203 = {
-					if = {
-						limit = {
-							has_building = workshop
-							NOT = { has_building = counting_house }
-						}
-						remove_building = workshop
-						add_building = counting_house
-					}
-					else = { add_building = workshop }
-					if = {
-						limit = {
-							has_building = trade_depot
-							NOT = { has_building = stock_exchange }
-						}
-						remove_building = trade_depot
-						add_building = stock_exchange
-					}
-					else_if = {
-						limit = {
-							has_building = marketplace
-							NOT = { has_building = trade_depot }
-						}
-						remove_building = marketplace
-						add_building = trade_depot
-					}
-					else = { add_building = marketplace }
+					add_or_upgrade_production_building = yes
+					add_or_upgrade_trade_building = yes
 					add_center_of_trade_level = 1
 				}
 			}

@@ -1,3 +1,4 @@
+#Original by Doc Robert, replaced by ones made by Don
 namespace = VU_SET_Events
 #################################
 # Quick setup					#
@@ -7,7 +8,7 @@ country_event = {
     id = VU_SET_Events.01
     title = VU_SET_Events.01.t
     desc = VU_SET_Events.01.d
-    picture = COURT_eventPicture
+    picture = FEAST_eventPicture
 
     fire_only_once = yes
 
@@ -21,6 +22,9 @@ country_event = {
     immediate = {
         vu_discover_the_world = yes #effect
         vu_colour_all_countries = yes
+        enable_hard_to_colonise = yes
+        spawn_troops_on_startup = yes #spawn the historical amounts of troops for countries
+        crownland_share_on_startup = yes #set the crownland share
     }
 
     option = {
@@ -34,6 +38,7 @@ country_event = {
         name = VU_SET_Events.01.b
         remove_extra_tags = yes
         turn_off_subject_colouring = yes
+        set_country_flag = vu_no_historical_colonization
     }
 
     option = {
@@ -48,13 +53,16 @@ country_event = {
     id = VU_SET_Events.02
     title = VU_SET_Events.02.t
     desc = VU_SET_Events.02.d
-    picture = COURT_eventPicture
+    picture = INVENTION_eventPicture
 
     is_triggered_only = yes
 
     option = {
         #Specific Performance options
         name = VU_SET_Events.02.a
+        country_event = {
+            id = VU_SET_Events.04
+        }
     }
 
     option = {
@@ -66,9 +74,44 @@ country_event = {
     }
 
     option = {
-        #Close options
+        #Apply and close options
         name = VU_SET_Events.02.c
         add_treasury = 1
+        if = {
+            limit = {
+                has_country_flag = vu_startup_disable_subject_colouring
+            }
+            turn_off_subject_colouring = yes
+            clr_country_flag = vu_startup_disable_subject_colouring
+        }
+        if = {
+            limit = {
+                has_country_flag = vu_startup_disable_hard_to_colonise
+            }
+            enable_hard_to_colonise = yes
+            clr_country_flag = vu_startup_disable_hard_to_colonise
+        }
+        if = {
+            limit = { 
+                has_country_flag = vu_startup_simplify_HRE
+            }
+            remove_extra_HRE_tags = yes
+            clr_country_flag = vu_startup_simplify_HRE
+        }
+        if = {
+            limit = { 
+                has_country_flag = vu_startup_simplify_western_europe
+            }
+            remove_extra_western_tags = yes
+            clr_country_flag = vu_startup_simplify_western_europe
+        }
+        if = {
+            limit = { 
+                has_country_flag = vu_startup_simplify_italy
+            }
+            remove_extra_italian_tags = yes
+            clr_country_flag = vu_startup_simplify_italy
+        }
     }
 }
 
@@ -76,21 +119,178 @@ country_event = {
     id = VU_SET_Events.03
     title = VU_SET_Events.03.t
     desc = VU_SET_Events.03.d
-    picture = COURT_eventPicture
+    picture = ARTWORK_eventPicture
 
     is_triggered_only = yes
 
     option = {
-        #Turn off Subjects colouring in
-        name = VU_SET_Events.03.a
-        turn_off_subject_colouring = yes
+        #Turn OFF Subjects colouring in
+        name = VU_SET_Events.03.ay
+        trigger = {
+            NOT = {
+                has_country_flag = vu_startup_disable_subject_colouring
+            }
+        }
+        hidden_effect = {
+            set_country_flag = vu_startup_disable_subject_colouring
+        }
     }
 
-    #option = {
-    #	#Specific Gameplay options
-    #	name = VU_SET_Events.03.b
-    #
-    #}
+    option = {
+        #Turn ON Subjects colouring in
+        name = VU_SET_Events.03.an
+        trigger = {
+            has_country_flag = vu_startup_disable_subject_colouring
+        }
+        hidden_effect = {
+            clr_country_flag = vu_startup_disable_subject_colouring
+        }
+    }
+
+    option = {
+        #Turn OFF Hard to Colonise
+        name = VU_SET_Events.03.by
+        trigger = {
+            NOT = {
+                has_country_flag = vu_startup_disable_hard_to_colonise
+            }
+        }
+        hidden_effect = {
+            set_country_flag = vu_startup_disable_hard_to_colonise
+        }
+    }
+
+    option = {
+        #Turn ON Hard to Colonise
+        name = VU_SET_Events.03.bn
+        trigger = {
+            has_country_flag = vu_startup_disable_hard_to_colonise
+        }
+        hidden_effect = {
+            clr_country_flag = vu_startup_disable_hard_to_colonise
+        }
+    }
+
+    option = {
+        #Turn OFF Historical Colonisation
+        name = VU_SET_Events.03.cy
+        trigger = {
+            NOT = {
+                has_global_flag = vu_no_historical_colonization
+            }
+        }
+        hidden_effect = {
+            set_global_flag = vu_no_historical_colonization
+        }
+    }
+
+    option = {
+        #Turn ON Historical Colonisation
+        name = VU_SET_Events.03.cn
+        trigger = {
+            has_global_flag = vu_no_historical_colonization
+        }
+        hidden_effect = {
+            clr_global_flag = vu_no_historical_colonization
+        }
+    }
+
+    option = {
+        #Return back
+        name = VU_SET_Events.03.q
+    }
+
+    after = {
+        country_event = {
+            id = VU_SET_Events.02
+        }
+    }
+}
+
+country_event = {
+    id = VU_SET_Events.04
+    title = VU_SET_Events.04.t
+    desc = VU_SET_Events.04.d
+    picture = DIPLOMACY_eventPicture
+
+    is_triggered_only = yes
+
+    option = {
+        #Simplify HRE NO
+        name = VU_SET_Events.04.ay
+        trigger = {
+            NOT = {
+                has_country_flag = vu_startup_simplify_HRE
+            }
+        }
+        hidden_effect = {
+            set_country_flag = vu_startup_simplify_HRE
+        }
+    }
+
+    option = {
+        #Simplify HRE YES
+        name = VU_SET_Events.04.an
+        trigger = {
+            has_country_flag = vu_startup_simplify_HRE
+        }
+        hidden_effect = {
+            clr_country_flag = vu_startup_simplify_HRE
+        }
+    }
+
+    option = {
+        #Simplify Western Europe NO
+        name = VU_SET_Events.04.by
+        trigger = {
+            NOT = {
+                has_country_flag = vu_startup_simplify_western_europe
+            }
+        }
+        hidden_effect = {
+            set_country_flag = vu_startup_simplify_western_europe
+        }
+    }
+
+    option = {
+        #Simplify Western Europe YES
+        name = VU_SET_Events.04.bn
+        trigger = {
+            has_country_flag = vu_startup_simplify_western_europe
+        }
+        hidden_effect = {
+            clr_country_flag = vu_startup_simplify_western_europe
+        }
+    }
+
+    option = {
+        #Simplify Italy NO
+        name = VU_SET_Events.04.cy
+        trigger = {
+            NOT = {
+                has_country_flag = vu_startup_simplify_italy
+            }
+        }
+        hidden_effect = {
+            set_country_flag = vu_startup_simplify_italy
+        }
+    }
+
+    option = {
+        #Simplify Italy YES
+        name = VU_SET_Events.04.cn
+        trigger = {
+            has_country_flag = vu_startup_simplify_italy
+        }
+        hidden_effect = {
+            clr_country_flag = vu_startup_simplify_italy
+        }
+    }
+
+    option = {
+        #Return back
+        name = VU_SET_Events.04.q
+    }
 
     after = {
         country_event = {

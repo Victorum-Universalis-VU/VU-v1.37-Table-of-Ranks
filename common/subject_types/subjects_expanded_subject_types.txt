@@ -7,7 +7,6 @@
 # 3 = revolution_subject
 # 4 = persian_satrapy
 # 5 = trade_outpost
-# 6 = stato_da_mar_vassal
 ##############################
 
 ##############################
@@ -53,7 +52,6 @@ defensive_march = { }
 annexable_colony = { }
 agricultural_march = { }
 religious_march = { }
-stato_da_mar_vassal = { }
 medieval_vassal = { }
 
 # Subjects
@@ -2360,7 +2358,7 @@ brother_kingdom = {
 	# Properties:
 	overlord_can_attack = no
 	can_have_subjects_of_other_types = yes
-	overlord_protects_external = yes
+	overlord_protects_external = no
 	gets_help_with_rebels = yes
 	allows_taking_land_without_independence = yes
 	can_concentrate_development = no
@@ -4074,152 +4072,6 @@ religious_march = {
 
 	overlord_opinion_modifier = is_religious_march
 	subject_opinion_modifier = is_religious_march
-}
-
-stato_da_mar_vassal = {
-	copy_from = default
-	count = vassal
-
-	# Graphics:
-	sprite = GFX_icon_stato_da_mar_vassal
-	diplomacy_overlord_sprite = GFX_diplomacy_leadstato_da_mar_vassal
-	diplomacy_subject_sprite = GFX_diplomacy_amstato_da_mar_vassal
-
-	# Triggers:
-	is_potential_overlord = {
-		is_subject = no
-		OR = {
-			AND = {
-				OR = {
-					tag = VEN
-					culture_group = latin
-				}
-				has_government_attribute = is_merchant_republic
-			}
-			# Custom Rule
-			has_government_attribute = can_create_stato_da_mar_vassal_rule
-		}
-	}
-
-	# Properties:
-	transfer_trade_power = yes
-	can_be_annexed = yes
-	takes_diplo_slot = no
-	has_power_projection = no
-	gets_help_with_rebels = yes
-	extend_trading_range = yes
-	can_be_annexed = no
-	
-	max_government_rank = 6
-	cities_required_for_bonuses = 0
-	trust_on_start = 35
-
-	base_liberty_desire = -10
-	liberty_desire_development_ratio = 0.15
-	liberty_desire_same_dynasty = -5.0
-	liberty_desire_revolution = 0
-	pays_overlord = 0.25
-	forcelimit_to_overlord = 0.05
-
-	relative_power_class = 6
-	diplomacy_view_class = 1
-
-	should_quit_wars_on_activation = yes
-
-	can_fight = {
-	}
-	can_rival = {
-	}
-	can_ally = {
-		same_overlord = stato_da_mar_vassal
-	}
-	can_marry = {
-		same_overlord = vassal
-		same_overlord = stato_da_mar_vassal
-	}
-
-	# Subject Interactions:
-	# (continuous)
-	scutage = yes
-	# (immediate)
-	seize_territory = yes
-	contribute_to_capital = yes
-
-	# Modifiers:
-	modifier_subject = clear
-	modifier_subject = {
-		modifier = subject_nation
-	}
-	modifier_subject = {
-		modifier = stato_da_mar_vassal_modifier
-	}
-	modifier_subject = {
-		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = STATO_DA_MAR_VASSAL_IS_MERCHANT_REPUBLIC_TT
-				has_government_attribute = is_merchant_republic
-			}
-		}
-		modifier = stato_da_mar_vassal_merchant_republic_modifier
-	}
-	modifier_subject = {
-		trigger = {
-			capital_scope = {
-				custom_trigger_tooltip = {
-					tooltip = STATO_DA_MAR_VASSAL_HOME_NODE_HAS_MERCHANT_FROM_OVERLORD_TT
-					has_merchant = FROM
-				}
-			}
-		}
-		modifier = stato_da_mar_vassal_overlord_trading_modifier
-	}
-	modifier_subject = {
-		modifier = stato_da_mar_vassal_seized_merchant_fleets_modifier
-		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = STATO_DA_MAR_VASSAL_HAS_SEIZE_MERCHANT_FLEETS_TT
-				has_country_flag = stato_da_mar_vassal_seize_merchant_fleets
-			}
-		}
-	}
-
-	modifier_overlord = clear
-	modifier_overlord = {
-		modifier = stato_da_mar_vassal_overlord_modifier
-	}
-	modifier_overlord = {
-		trigger = {
-			capital_scope = {
-				OR = {
-					trade_share = {
-						country = ROOT
-						share = 50
-					}
-					custom_trigger_tooltip = {
-						tooltip = STATO_DA_MAR_VASSAL_HOME_NODE_OVERLORD_HAS_75_TRADE_POWER_TT
-						trade_share = {
-							country = FROM
-							share = 75
-						}
-					}
-				}
-			}
-		}
-		modifier = stato_da_mar_vassal_merchant_overlord_modifier
-	}
-	modifier_overlord = {
-		modifier = stato_da_mar_vassal_seized_merchant_fleets_overlord_modifier
-		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = STATO_DA_MAR_VASSAL_HAS_SEIZE_MERCHANT_FLEETS_TT
-				has_country_flag = stato_da_mar_vassal_seize_merchant_fleets
-			}
-			NOT = { liberty_desire = 50 }
-		}
-	}
-
-	overlord_opinion_modifier = is_stato_da_mar_vassal
-	subject_opinion_modifier = is_stato_da_mar_vassal
 }
 
 medieval_vassal = {

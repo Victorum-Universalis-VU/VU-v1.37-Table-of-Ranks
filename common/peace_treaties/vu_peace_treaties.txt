@@ -146,3 +146,310 @@ make_autonomous_canton = {
 	}
 }
 
+#New VU 1.37.* Generic Merchantlist Republic by SF
+make_merchantlist_republic = {
+    # The following strings need localization:
+    #		"make_merchantlist_republic_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+    #		"CB_ALLOWED_make_merchantlist_republic" (uses plain localization) ("Enforced Dumbness")
+    #		"PEACE_make_merchantlist_republic" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+    # Values default to 0 or "no" unless otherwise stated
+
+    category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+    power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+    power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+    prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+    ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+    warscore_cost = {
+        # Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+        all_provinces = 0.0 # All the giver's provinces
+        no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+        owner_keeps = 0.8 # The provinces that are not of any of the types below
+        conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+        returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+        released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+        cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+        concede_colonial_region = 0.0 # Ditto
+    }
+    warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+    requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+    is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+    requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+    is_visible = { # Defaults to equivalent of "always = yes"
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = merchantlist_republic
+        }
+        FROM = {
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = ROOT
+                            type = merchantlist_republic
+                        }
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+        NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+    }
+    is_allowed = { # Defaults to equivalent of "always = yes"
+        FROM = {
+            capital_scope = { trade_range = ROOT }
+        }
+    }
+    effect = { # Defaults to empty effect (which makes error log entry but is safe)
+        reverse_add_opinion = {
+            who = FROM
+            modifier = merchantlist_republic_forced
+        }
+        create_subject = {
+            subject = FROM
+            subject_type = merchantlist_republic
+        }
+    }
+    ai_weight = { # Defaults to always evaluate to 0
+        export_to_variable = {
+            variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+            value = 1
+        }
+        limit = {
+            OR = {
+                tag = VEN
+                primary_culture = venetian
+            }
+            FROM = {
+                capital_scope = {
+                    has_merchant = ROOT
+                    OR = {
+                        continent = europe
+                        continent = africa
+                        continent = asia
+                    }
+                }
+                NOT = {
+                    any_owned_province = {
+                        OR = {
+                            is_core = ROOT
+                            is_permanent_claim = ROOT
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+make_venetian_republic = {
+    # The following strings need localization:
+    #		"make_venetian_republic_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+    #		"CB_ALLOWED_make_venetian_republic" (uses plain localization) ("Enforced Dumbness")
+    #		"PEACE_make_venetian_republic" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+    # Values default to 0 or "no" unless otherwise stated
+
+    category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+    power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+    power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+    prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+    ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+    warscore_cost = {
+        # Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+        all_provinces = 0.0 # All the giver's provinces
+        no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+        owner_keeps = 0.8 # The provinces that are not of any of the types below
+        conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+        returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+        released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+        cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+        concede_colonial_region = 0.0 # Ditto
+    }
+    warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+    requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+    is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+    requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+    is_visible = { # Defaults to equivalent of "always = yes"
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = venetian_republic
+        }
+        FROM = {
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = ROOT
+                            type = venetian_republic
+                        }
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+        NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+    }
+    is_allowed = { # Defaults to equivalent of "always = yes"
+        FROM = {
+            capital_scope = { trade_range = ROOT }
+        }
+    }
+    effect = { # Defaults to empty effect (which makes error log entry but is safe)
+        reverse_add_opinion = {
+            who = FROM
+            modifier = venetian_republic_forced
+        }
+        create_subject = {
+            subject = FROM
+            subject_type = venetian_republic
+        }
+    }
+    ai_weight = { # Defaults to always evaluate to 0
+        export_to_variable = {
+            variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+            value = 1
+        }
+        limit = {
+            OR = {
+                tag = VEN
+                primary_culture = venetian
+            }
+            FROM = {
+                capital_scope = {
+                    has_merchant = ROOT
+                    OR = {
+                        continent = europe
+                        continent = africa
+                        continent = asia
+                    }
+                }
+                NOT = {
+                    any_owned_province = {
+                        OR = {
+                            is_core = ROOT
+                            is_permanent_claim = ROOT
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+make_genoese_commercial_republic = {
+    # The following strings need localization:
+    #		"make_genoese_commercial_republic_desc" (uses text processing, supporting bracket notation) ("[FROM.GetName] becomes a [THIS.GetName] Dummy")
+    #		"CB_ALLOWED_make_genoese_commercial_republic" (uses plain localization) ("Enforced Dumbness")
+    #		"PEACE_make_genoese_commercial_republic" (uses plain localization, but with support for $TAKER$, $TAKERS$, $GIVER$ and $GIVERS$) ("Become $TAKERS$ Dummy")
+
+    # Values default to 0 or "no" unless otherwise stated
+
+    category = 6 # Any number between 0 and 6. Represents the tab under which it will be listed. 6 corresponds to "treaties". This value currently defaults to 6.
+    power_projection = vassalized_rival # "power_projection" will only be applied if giver is your rival.
+    power_cost_base = 0.71 # Base factor for diplomatic power cost when treaty is not allowed by casus belli. Scales with war score cost.
+    prestige_base = 0.18 # Base factor for prestige gain and loss. Scales with war score cost.
+    ae_base = 0.36 # Base factor for aggressive expansion. Scales with war score cost.
+    warscore_cost = {
+        # Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+        all_provinces = 0.0 # All the giver's provinces
+        no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+        owner_keeps = 0.8 # The provinces that are not of any of the types below
+        conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+        returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+        released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+        cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+        concede_colonial_region = 0.0 # Ditto
+    }
+    warscore_cap = -1 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+    requires_demand_independence = yes # Whether this can be demanded by the former subject in an independence war without also demanding independence.
+    is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+    requires_is_allowed = no # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+
+    is_visible = { # Defaults to equivalent of "always = yes"
+        can_create_subject_type = {
+            subject = FROM
+            subject_type = genoese_commercial_republic
+        }
+        FROM = {
+            capital_scope = {
+                NOT = {
+                    any_trade_node_member_country = {
+                        is_subject_of_type_with_overlord = {
+                            who = ROOT
+                            type = genoese_commercial_republic
+                        }
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            FROM = {
+                capital_scope = {
+                    NOT = { region = PREV_PREV }
+                }
+            }
+        }
+        NOT = { is_in_war_with_cb_that_disallows_taking_subjects = yes }
+    }
+    is_allowed = { # Defaults to equivalent of "always = yes"
+        FROM = {
+            capital_scope = { trade_range = ROOT }
+        }
+    }
+    effect = { # Defaults to empty effect (which makes error log entry but is safe)
+        reverse_add_opinion = {
+            who = FROM
+            modifier = genoese_commercial_republic_forced
+        }
+        create_subject = {
+            subject = FROM
+            subject_type = genoese_commercial_republic
+        }
+    }
+    ai_weight = { # Defaults to always evaluate to 0
+        export_to_variable = {
+            variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+            value = 1
+        }
+        limit = {
+            OR = {
+                tag = GEN
+                primary_culture = ligurian
+            }
+            FROM = {
+                capital_scope = {
+                    has_merchant = ROOT
+                    OR = {
+                        continent = europe
+                        continent = africa
+                        continent = asia
+                    }
+                }
+                NOT = {
+                    any_owned_province = {
+                        OR = {
+                            is_core = ROOT
+                            is_permanent_claim = ROOT
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
