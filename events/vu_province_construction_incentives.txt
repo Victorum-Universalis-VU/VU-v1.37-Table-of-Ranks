@@ -1,47 +1,119 @@
 namespace = vu_province_construction_incentives
 
 #New VU 1.37.* event where well dries out - Suggested by Lukas, further suggestions by Prussia, written by SF
-#province_event = {
-#    id = vu_province_construction_incentives.1
-#    title = "vu_province_construction_incentives.1.t"
-#    desc = "vu_province_construction_incentives.1.d"
-#    picture = WELL_DRYING_OUT_eventPicture
-#
-#    trigger = {
-#        has_building = well
-#        owner = {
-#            ai = no
-#            stability = -2
-#        }
-#    }
-#
-#    mean_time_to_happen = {
-#        months = 300
-#    }
-#
-#    option = { #Well drying out (increases local cost of buildings)
-#        name = vu_province_construction_incentives.1.a
-#        add_province_modifier = {
-#            name = well_drying_up
-#            duration = 120
-#        }
-#    }
-#    option = { #Bore a deeper hole
-#        name = vu_province_construction_incentives.1.b
-#        add_province_modifier = {
-#            name = dig_deeper
-#            duration = 180
-#        }
-#        owner = {
-#            add_treasury = -50
-#        }
-#    }
-#    option = { #Abandon the area and look elsewhere
-#        name = vu_province_construction_incentives.1.c
-#        remove_building = well
-#        add_province_modifier = {
-#            name = abandon_the_area_and_look_elsewhere
-#            duration = 90 #Duration is in days
-#        }
-#    }
-#}
+country_event = {
+    id = vu_province_construction_incentives.1
+    title = "vu_province_construction_incentives.1.t"
+    desc = "vu_province_construction_incentives.1.d"
+    picture = WELL_DRYING_OUT_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+        #Will NOT fire for AI
+        ai = no
+        #Has to have a well (Obviously Ronald Weasley)
+        any_owned_province = {
+            has_building = well
+            #A mix of requirements so it can fire
+            OR = {
+                #Terrain consideration (Dryer areas are more suceptible to drought)
+                has_terrain = coastal_desert
+                has_terrain = dry_highlands
+                has_terrain = dry_river
+                has_terrain = dry_river
+                has_terrain = desert
+                has_terrain = desert_ranges
+                has_climate = arid
+                #Owner consideration (this is a bit of a fallback in case you don't have any provinces of the dry terrain)
+                #True if <-1 stability
+                owner = {
+                    NOT = {
+                        stability = -1
+                    }
+                }
+                #True if <0 stability & running a deficit
+                owner = {
+                    NOT = {
+                        stability = 0
+                    }
+                    is_in_deficit = yes
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                has_building = well
+                #A mix of requirements so it can fire
+                OR = {
+                    #Terrain consideration (Dryer areas are more suceptible to drought)
+                    has_terrain = coastal_desert
+                    has_terrain = dry_highlands
+                    has_terrain = dry_river
+                    has_terrain = dry_river
+                    has_terrain = desert
+                    has_terrain = desert_ranges
+                    has_climate = arid
+                    #Owner consideration (this is a bit of a fallback in case you don't have any provinces of the dry terrain)
+                    #True if <-1 stability
+                    owner = {
+                        NOT = {
+                            stability = -1
+                        }
+                    }
+                    #True if <0 stability & running a deficit
+                    owner = {
+                        NOT = {
+                            stability = 0
+                        }
+                        is_in_deficit = yes
+                    }
+                }
+            }
+            save_event_target_as = vu_dried_up_well
+        }
+    }
+
+    option = { #Well drying out (increases local cost of buildings)
+        name = vu_province_construction_incentives.1.a
+        event_target:vu_dried_up_well = {
+            remove_building = well
+            add_province_modifier = {
+                name = vu_well_drying_up
+                duration = 1825
+            }
+        }
+    }
+    option = { #Bore a deeper hole
+        name = vu_province_construction_incentives.1.b
+        event_target:vu_dried_up_well = {
+            add_province_modifier = {
+                name = vu_dig_deeper
+                duration = 1825
+            }
+
+        }
+        add_treasury = -50
+    }
+    option = { #Abandon the area and look elsewhere
+        name = vu_province_construction_incentives.1.c
+        event_target:vu_dried_up_well = {
+            remove_building = well
+            add_province_modifier = {
+                name = vu_abandon_the_area_and_look_elsewhere
+                duration = 1825 #Duration is in days
+            }
+            random_area_province = {
+                add_building = well
+                add_province_modifier = {
+                    name = vu_dig_deeper
+                    duration = 1825
+                }
+            }
+        }
+        add_treasury = -75
+    }
+}
