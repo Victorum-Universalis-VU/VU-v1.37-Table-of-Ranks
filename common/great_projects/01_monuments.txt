@@ -9116,7 +9116,7 @@ kiev_pechersk_lavra = {
         #what modifiers are added to the country when we have this project here on this tier
         country_modifiers = {
             global_missionary_strength = 0.02
-            tolerance_own = 32
+            tolerance_own = 3
             yearly_patriarch_authority = 0.02
             tolerance_heathen = 3
         }
@@ -13674,7 +13674,7 @@ etchimiadzin_cathedral = {
     build_trigger = {
         OR = {
             province_is_or_accepts_religion = { religion = coptic }
-            province_is_or_accepts_religion = { religion = bogomolist_new }
+            province_is_or_accepts_religion = { religion = bogomilist_new }
             province_is_or_accepts_religion = { religion = orthodox }
             province_is_or_accepts_religion = { religion = miaphysite }
             province_is_or_accepts_religion = { religion = nestorian }
@@ -13690,7 +13690,7 @@ etchimiadzin_cathedral = {
     can_use_modifiers_trigger = {
         OR = {
             province_is_or_accepts_religion = { religion = coptic }
-            province_is_or_accepts_religion = { religion = bogomolist_new }
+            province_is_or_accepts_religion = { religion = bogomilist_new }
             province_is_or_accepts_religion = { religion = orthodox }
             province_is_or_accepts_religion = { religion = miaphysite }
             province_is_or_accepts_religion = { religion = nestorian }
@@ -13700,7 +13700,7 @@ etchimiadzin_cathedral = {
     can_upgrade_trigger = {
         OR = {
             province_is_or_accepts_religion = { religion = coptic }
-            province_is_or_accepts_religion = { religion = bogomolist_new }
+            province_is_or_accepts_religion = { religion = bogomilist_new }
             province_is_or_accepts_religion = { religion = orthodox }
             province_is_or_accepts_religion = { religion = miaphysite }
             province_is_or_accepts_religion = { religion = nestorian }
@@ -17415,8 +17415,10 @@ white_house = {
     type = monument
 
     build_trigger = {
-        is_year = 1800
-        vu_post_colonial_usa_cities_trigger = yes
+        OR = {
+            is_year = 1800
+            vu_post_colonial_usa_cities_trigger = yes
+        }
     }
 
     on_built = {
@@ -17429,8 +17431,10 @@ white_house = {
         vu_post_colonial_usa_cities_trigger = yes
     }
     can_upgrade_trigger = {
-        is_year = 1812
-        vu_post_colonial_usa_cities_trigger = yes
+        OR = {
+            is_year = 1812
+            vu_post_colonial_usa_cities_trigger = yes
+        }
     }
 
     keep_trigger = {

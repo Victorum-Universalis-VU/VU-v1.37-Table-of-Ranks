@@ -916,6 +916,7 @@ republican_dictatorship = {
 				}
 				has_reform = administrative_republic
 				has_reform = constitutional_republic
+				has_reform = US_constitutional_republic
 			}
 		}
 		modifier = {
@@ -2257,9 +2258,8 @@ colonial_government_legacy = {
 	}
 }
 
-
-american_republic_legacy = {
-	# government mechanics flags go here
+#VU addition for v1.37 ToR by SF
+continental_congress_legacy = {
 	icon = "constitution"
 	legacy_government = yes
 	duration = 4
@@ -2269,18 +2269,17 @@ american_republic_legacy = {
 	royal_marriage = no
 	valid_for_new_country = no
 	allow_convert = no
-	valid_for_nation_designer = yes
-	nation_designer_cost = 15
-	nation_designer_trigger = {
-		has_dlc = "American Dream"
-	}
 
 	republic = yes
+	
 	modifiers = {
-		war_exhaustion = -0.02
+		diplomatic_upkeep = 1               #Ben Franklin's trip to Europe
+		war_exhaustion = -0.02              #Give me liberty or Give me death
+		global_trade_goods_size = 0.1       #Tobbaco & Cotton exports
 		stability_cost_modifier = -0.1
-		global_autonomy = -0.15
-		max_absolutism = -30
+		war_taxes_cost_modifier = -1        #US Revolutionary War
+		interest = -0.15                    #Dutch Loans
+		inflation_reduction = 0.1           #Help combat effects of Dutch loans
 	}
 
 	conditional = {
@@ -2294,45 +2293,6 @@ american_republic_legacy = {
 		factor = 5
 	}
 }
-
-federal_republic_legacy = {
-	# government mechanics flags go here
-	icon = "parliament"
-	legacy_government = yes
-	duration = 4
-	allow_normal_conversion = no
-
-	republican_name = yes
-	royal_marriage = no
-
-	valid_for_new_country = no
-	allow_convert = no
-	valid_for_nation_designer = yes
-	nation_designer_cost = 15
-	nation_designer_trigger = {
-		has_dlc = "American Dream"
-	}
-
-	republic = yes
-	modifiers = {
-		diplomatic_reputation = 1
-		global_spy_defence = 0.10
-		global_autonomy = -0.15
-		max_absolutism = -30
-	}
-
-	conditional = {
-		allow = {
-			has_dlc = "Common Sense"
-		}
-		has_parliament = yes
-	}
-
-	ai = {
-		factor = 5
-	}
-}
-
 
 peasants_republic_legacy = {
 	# government mechanics flags go here

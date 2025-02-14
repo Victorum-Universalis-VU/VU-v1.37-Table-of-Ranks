@@ -1,0 +1,393 @@
+#New historical dynasties event for VU 1.37 ToR by Prussia
+
+#####################################
+####    ENGLAND/GREAT BRITAIN    ####
+#####################################
+
+#Used this as template flavor_eng.9237
+
+# The Rise of the Stuarts
+
+namespace = vu_historical_dynasty_events
+
+country_event = {
+    id = vu_historical_dynasty_events.1
+    title = vu_historical_dynasty_events.1.t
+    desc = vu_historical_dynasty_events.1.d
+    picture = vu_james_I_stuart_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        OR = {
+            tag = ENG
+            tag = GBR
+        }
+        is_year = 1603
+        dynasty = Tudor
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.1.a  # The House of Tudor shall endure! We do not need some foreign king!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.1.b  # The Stuarts shall bind England and Scotland together forever!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "James #0"
+            dynasty = "Stuart"
+            culture = scottish
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 37
+        }
+        if = {
+            limit = {
+                exists = SCO
+                SCO = {
+                    is_subject = no
+                }
+            }
+            create_union = SCO
+        }
+    }
+}
+
+# The Rise of the Hannovers
+country_event = {
+    id = vu_historical_dynasty_events.2
+    title = vu_historical_dynasty_events.2.t
+    desc = vu_historical_dynasty_events.2.d
+    picture = vu_george_I_hannover_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        is_year = 1714
+        OR = {
+            tag = ENG
+            tag = GBR
+        }
+        OR = {
+            dynasty = Tudor
+            dynasty = Stuart
+        }
+        OR = {
+            religion = anglican
+            religion = protestant
+        }
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.2.a  # We shall remain ruled by a British monarch, not some foreigner welp!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.2.b  # The Hannovers shall bring us stability and freedom from tyrannical rule!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "George #0"
+            dynasty = "von Hannover"
+            culture = lower_saxon
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 54
+        }
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.2.c  # The Hannovers shall bring us stability and freedom from tyrannical rule!
+        ai_chance = { factor = 0 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "George #0"
+            dynasty = "Windsor"
+            culture = english
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 54
+        }
+    }
+}
+
+
+######################
+####    FRANCE    ####
+######################
+
+# The Rise of the Bourbons (France)
+country_event = {
+    id = vu_historical_dynasty_events.3
+    title = vu_historical_dynasty_events.3.t
+    desc = vu_historical_dynasty_events.3.d
+    picture = vu_henri_IV_bourbon_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        tag = FRA
+        is_year = 1589
+        dynasty = "de Valois"
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.3.a  # The House of Valois shall endure!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.3.b  # The Valois are floundering, new leadership is needed!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "Henri #0"
+            dynasty = "de Bourbon"
+            culture = cosmopolitan_french
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 36
+        }
+        if = {
+            limit = {
+                exists = NAV
+                NAV = {
+                    is_subject = no
+                }
+            }
+            create_union = NAV
+        }
+    }
+}
+
+# The Rise of the Bonapartes
+country_event = {
+    id = vu_historical_dynasty_events.4
+    title = vu_historical_dynasty_events.4.t
+    desc = vu_historical_dynasty_events.4.d
+    picture = vu_napoleon_I_bonaparte_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        tag = FRA
+        is_year = 1804
+        OR = {
+            dynasty = "de Valois"
+            dynasty = "de Bourbon"
+        }
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.4.a  # The supremacy of the Ancien Regime must be assured!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.4.b  # A new powerful charistmatic leader is needed!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "Napoleon #0"
+            dynasty = "Bonaparte"
+            culture = corsican_culture
+            adm = 4
+            dip = 3
+            mil = 6
+            age = 35
+        }
+    }
+}
+
+# The Rise of the d'Orleans
+country_event = {
+    id = vu_historical_dynasty_events.5
+    title = vu_historical_dynasty_events.5.t
+    desc = vu_historical_dynasty_events.5.d
+    picture = vu_louis_I_philippe_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        tag = FRA
+        is_year = 1840
+        OR = {
+            dynasty = "de Valois"
+            dynasty = "de Bourbon"
+            dynasty = Bonaparte
+        }
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.5.a  # The current dynasty must remain!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.5.b  # Long live the July Monarchy!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "Louis Philippe #0"
+            dynasty = "d'Orleans"
+            culture = cosmopolitan_french
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 35
+        }
+    }
+}
+
+
+#####################
+####    SPAIN    ####
+#####################
+
+# The Rise of the Spanish Habsburgs
+country_event = {
+    id = vu_historical_dynasty_events.6
+    title = vu_historical_dynasty_events.6.t
+    desc = vu_historical_dynasty_events.6.d
+    picture = vu_charles_V_habsburg_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        OR = {
+            tag = CAS
+            tag = ARA
+            tag = SPA
+        }
+        is_year = 1589
+        dynasty = "de Trastámara"
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.6.a  # The House of Trastámara must stay! We will not be ruled by an outsider!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.6.b  # The Trastámara are finished, let a new dynasty rise!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "Carlos #0"
+            dynasty = "von Habsburg"
+            culture = castillian
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 36
+        }
+    }
+}
+
+# The Rise of the Bourbons (Spain)
+country_event = {
+    id = vu_historical_dynasty_events.7
+    title = vu_historical_dynasty_events.7.t
+    desc = vu_historical_dynasty_events.7.d
+    picture = vu_felipe_V_bourbon_eventPicture
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        months = 120
+    }
+
+    trigger = {
+        OR = {
+            tag = CAS
+            tag = ARA
+            tag = SPA
+        }
+        is_year = 1589
+        OR = {
+            dynasty = "de Trastámara"
+            dynasty = "von Habsburg"
+        }
+        is_lesser_in_union = no
+        has_heir = no
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.7.a  # The House of Trastámara must stay! We will not be ruled by an outsider!
+        ai_chance = { factor = 50 }
+        add_prestige = 10
+    }
+
+    option = {
+        name = vu_historical_dynasty_events.7.b  # The Trastámara are finished, let a new dynasty rise!
+        ai_chance = { factor = 50 }
+        add_stability_or_adm_power = yes
+        define_heir = {
+            claim = 100
+            name = "Felipe #0"
+            dynasty = "de Bourbon"
+            culture = castillian
+            adm = 4
+            dip = 4
+            mil = 4
+            age = 36
+        }
+    }
+}

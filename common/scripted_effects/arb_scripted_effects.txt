@@ -92,7 +92,7 @@ ARB_reward_iraq = {
 		duration = 10950
 	}
 	
-	ME_technology_split_120_power = yes #will be done later ;)
+	VU_technology_split_120_power = yes #will be done later ;)
 }
 
 ARB_reward_egypt = {
@@ -507,16 +507,16 @@ YEM_madrasah_effect = {
 }
 
 YEM_eliminate_pretenders_effect = {
-	ME_give_claims = { area = ifat_area }
-	ME_give_claims = { area = aussa_area }
-	ME_give_claims = { area = mecca_area }
-	ME_give_claims = { area = medina_area }
-	ME_give_claims = { area = dhofar_area }
-	ME_give_claims = { area = oman_area }
-	ME_give_claims = { area = mascat_area }
-	ME_give_claims = { area = asir_area }
-	ME_give_claims = { area = hadramut_area }
-	ME_give_claims = { area = mahra_area }
+	VU_give_claims = { area = ifat_area }
+	VU_give_claims = { area = aussa_area }
+	VU_give_claims = { area = VUcca_area }
+	VU_give_claims = { area = VUdina_area }
+	VU_give_claims = { area = dhofar_area }
+	VU_give_claims = { area = oman_area }
+	VU_give_claims = { area = mascat_area }
+	VU_give_claims = { area = asir_area }
+	VU_give_claims = { area = hadramut_area }
+	VU_give_claims = { area = mahra_area }
 	
 	custom_tooltip = " "
 	
@@ -609,164 +609,142 @@ YEM_20_clr_flags = {
 	clr_country_flag = YEM_cocoa_flag
 }
 
-ME_overlord_effect = {
-	if = {
-		limit = {
-			is_subject = yes
-		}
-		custom_tooltip = HED_overlord_tt
-		tooltip = {
-			overlord = {
-				$effect$
-			}
-		}
-		hidden_effect = { 
-			overlord = {
-				$effect$
-			}
-		}
-	}
-}
+#CRDB_enable_mission_tree = {
+#	custom_tooltip = CRDB_this_gets_special_missions
+#	override_country_name = CRDB
+#	
+#	clr_country_flag = use_paradox_missions
+#	set_country_flag = CRDB_mission_enabled
+#	set_country_flag = use_missions_expanded_missions_instead_of_paradox
+#	swap_non_generic_missions = yes 
+#	
+#	ROOT = { 
+#		vassalize = PREV 
+#	}
+#	
+#	hidden_effect = {
+#	}
+#}
 
-CRDB_enable_mission_tree = {
-	custom_tooltip = CRDB_this_gets_special_missions
-	override_country_name = CRDB
-	
-	clr_country_flag = use_paradox_missions
-	set_country_flag = CRDB_mission_enabled
-	set_country_flag = use_missions_expanded_missions_instead_of_paradox
-	swap_non_generic_missions = yes 
-	
-	ROOT = { 
-		vassalize = PREV 
-	}
-	
-	hidden_effect = {
-	}
-}
+#GRA_add_war_modifier = {
+#	add_country_modifier = {
+#		name = $name$
+#		duration = -1
+#		desc = GRA_until_the_end_of_the_incident
+#	}
+#}
 
-ARB_give_casus_belli_on_nomads = {
-}
+#TUN_leo_africanus_spawn = {
+#	ME_TUN_$type$_advisor = { cost_multiplier = $discount$ }
+#}
 
-GRA_add_war_modifier = {
-	add_country_modifier = {
-		name = $name$
-		duration = -1
-		desc = GRA_until_the_end_of_the_incident
-	}
-}
+#ME_TUN_muslim_advisor = {
+#	define_advisor = {
+#		type = diplomat
+#		name = "Al-Hasan ibn Muhammad al-Wazzan"
+#		skill = 3
+#		culture = andalucian 
+#		religion = sunni
+#		cost_multiplier = $cost_multiplier$
+#	}
+#}
 
-TUN_leo_africanus_spawn = {
-	ME_TUN_$type$_advisor = { cost_multiplier = $discount$ }
-}
+#ME_TUN_christian_advisor = {
+#	define_advisor = {
+#		type = diplomat
+#		name = "Leo Africanus"
+#		skill = 3
+#		culture = andalucian 
+#		religion = catholic
+#		cost_multiplier = $cost_multiplier$
+#	}
+#}
 
-ME_TUN_muslim_advisor = {
-	define_advisor = {
-		type = diplomat
-		name = "Al-Hasan ibn Muhammad al-Wazzan"
-		skill = 3
-		culture = andalucian 
-		religion = sunni
-		cost_multiplier = $cost_multiplier$
-	}
-}
+#RUM_event_112_potential = {
+#	if = {
+#		limit = {
+#			NOT = { has_dlc = "Mandate of Heaven" }
+#		}
+#		RUM_112_find_provinces = { target = 1 }
+#		if = {
+#			limit = { has_country_flag = RUM_1_province }
+#			RUM_112_find_provinces = { target = 2 }
+#			if = {
+#				limit = { has_country_flag = RUM_2_province }
+#				RUM_112_find_provinces = { target = 3 }
+#				if = {
+#					limit = { has_country_flag = RUM_3_province }
+#					RUM_112_find_provinces = { target = 4 }
+#					if = {
+#						limit = { has_country_flag = RUM_4_province }
+#						RUM_112_find_provinces = { target = 5 }
+#					}
+#				}
+#			}
+#		}
+#	}
+#	else = {
+#		RUM_112_find_provinces = { target = 1 }
+#		if = {
+#			limit = { has_country_flag = RUM_1_province }
+#			RUM_112_find_provinces = { target = 2 }
+#			if = {
+#				limit = { has_country_flag = RUM_2_province }
+#				RUM_112_find_provinces = { target = 3 }
+#			}
+#		}
+#		#if = {
+#			#limit = { has_country_flag = RUM_3_province }
+#			RUM_112_find_provinces_state_edict = { target = 4 }
+#			if = {
+#				limit = { has_country_flag = RUM_4_province }
+#				RUM_112_find_provinces_state_edict = { target = 5 }
+#			}
+#		#}
+#	}
+#}
 
-ME_TUN_christian_advisor = {
-	define_advisor = {
-		type = diplomat
-		name = "Leo Africanus"
-		skill = 3
-		culture = andalucian 
-		religion = catholic
-		cost_multiplier = $cost_multiplier$
-	}
-}
+#RUM_112_find_provinces = {
+#	random_owned_province = {
+#		limit = {
+#			NOT = { has_province_flag = RUM_flag_already_set }
+#			OR = {
+#				trade_goods = cloth
+#				trade_goods = wool
+#			}
+#			region = anatolia_region
+#			NOT = { has_state_edict = edict_advancement_effort }
+#		}
+#		save_event_target_as = Rum_target_$target$
+#		set_province_flag = RUM_flag_already_set
+#		ROOT = { set_country_flag = RUM_$target$_province }
+#	}
+#}
 
-RUM_event_112_potential = {
-	if = {
-		limit = {
-			NOT = { has_dlc = "Mandate of Heaven" }
-		}
-		RUM_112_find_provinces = { target = 1 }
-		if = {
-			limit = { has_country_flag = RUM_1_province }
-			RUM_112_find_provinces = { target = 2 }
-			if = {
-				limit = { has_country_flag = RUM_2_province }
-				RUM_112_find_provinces = { target = 3 }
-				if = {
-					limit = { has_country_flag = RUM_3_province }
-					RUM_112_find_provinces = { target = 4 }
-					if = {
-						limit = { has_country_flag = RUM_4_province }
-						RUM_112_find_provinces = { target = 5 }
-					}
-				}
-			}
-		}
-	}
-	else = {
-		RUM_112_find_provinces = { target = 1 }
-		if = {
-			limit = { has_country_flag = RUM_1_province }
-			RUM_112_find_provinces = { target = 2 }
-			if = {
-				limit = { has_country_flag = RUM_2_province }
-				RUM_112_find_provinces = { target = 3 }
-			}
-		}
-		#if = {
-			#limit = { has_country_flag = RUM_3_province }
-			RUM_112_find_provinces_state_edict = { target = 4 }
-			if = {
-				limit = { has_country_flag = RUM_4_province }
-				RUM_112_find_provinces_state_edict = { target = 5 }
-			}
-		#}
-	}
-}
+#RUM_112_find_provinces_state_edict = {
+#	random_owned_province = {
+#		limit = {
+#			NOT = { has_province_flag = RUM_flag_already_set }
+#			OR = {
+#				trade_goods = cloth
+#				trade_goods = wool
+#			}
+#			region = anatolia_region
+#			has_state_edict = edict_advancement_effort
+#		}
+#		save_event_target_as = Rum_target_$target$
+#		set_province_flag = RUM_flag_already_set
+#		ROOT = { set_country_flag = RUM_$target$_province }
+#	}
+#}
 
-RUM_112_find_provinces = {
-	random_owned_province = {
-		limit = {
-			NOT = { has_province_flag = RUM_flag_already_set }
-			OR = {
-				trade_goods = cloth
-				trade_goods = wool
-			}
-			region = anatolia_region
-			NOT = { has_state_edict = edict_advancement_effort }
-		}
-		save_event_target_as = Rum_target_$target$
-		set_province_flag = RUM_flag_already_set
-		ROOT = { set_country_flag = RUM_$target$_province }
-	}
-}
-
-RUM_112_find_provinces_state_edict = {
-	random_owned_province = {
-		limit = {
-			NOT = { has_province_flag = RUM_flag_already_set }
-			OR = {
-				trade_goods = cloth
-				trade_goods = wool
-			}
-			region = anatolia_region
-			has_state_edict = edict_advancement_effort
-		}
-		save_event_target_as = Rum_target_$target$
-		set_province_flag = RUM_flag_already_set
-		ROOT = { set_country_flag = RUM_$target$_province }
-	}
-}
-
-RUM_112_clr_flags = {
-	every_owned_province = {
-		clr_province_flag = RUM_flag_already_set
-	}
-	clr_country_flag = RUM_1_province
-	clr_country_flag = RUM_2_province
-	clr_country_flag = RUM_3_province
-	clr_country_flag = RUM_4_province
-	clr_country_flag = RUM_5_province
-}
+#RUM_112_clr_flags = {
+#	every_owned_province = {
+#		clr_province_flag = RUM_flag_already_set
+#	}
+#	clr_country_flag = RUM_1_province
+#	clr_country_flag = RUM_2_province
+#	clr_country_flag = RUM_3_province
+#	clr_country_flag = RUM_4_province
+#	clr_country_flag = RUM_5_province
+#}

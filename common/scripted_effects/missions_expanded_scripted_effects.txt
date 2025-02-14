@@ -2107,7 +2107,7 @@ set_defender_of_the_faith_effect = {
 	}
 }
 
-ME_give_province_claims = {
+VU_give_province_claims = {
 	$id$ = {
 		if = {
 			limit = {
@@ -2119,7 +2119,7 @@ ME_give_province_claims = {
 	}
 }
 
-ME_give_area_claims = {
+VU_give_area_claims = {
 	$group$ = {
 		limit = {
 			NOT = { is_core = $tag$ }
@@ -2129,23 +2129,23 @@ ME_give_area_claims = {
 	}
 }
 
-ME_give_claims = {
+VU_give_claims = {
 	[[province]
-		ME_give_province_claims = { id = $province$ tag = ROOT }
+		VU_give_province_claims = { id = $province$ tag = ROOT }
 	]
 	[[id]
-		ME_give_province_claims = { id = $id$ tag = ROOT }
+		VU_give_province_claims = { id = $id$ tag = ROOT }
 	]
 	[[area]
-		ME_give_area_claims = { group = $area$ tag = ROOT }
+		VU_give_area_claims = { group = $area$ tag = ROOT }
 	]
 	[[region]
-		ME_give_area_claims = { group = $region$ tag = ROOT }
+		VU_give_area_claims = { group = $region$ tag = ROOT }
 	]
 
 }
 
-ME_add_years_of_trade_income = {
+VU_add_years_of_trade_income = {
 	[[years] add_years_of_trade_income = { years = $years$ custom_tooltip = ME_add_$years$_years_of_trade_income } ]
 	[[value] add_years_of_trade_income = { years = $value$ custom_tooltip = ME_add_$value$_years_of_trade_income } ]
 	[[amount] add_years_of_trade_income = { years = $amount$ custom_tooltip = ME_add_$amount$_years_of_trade_income } ]
@@ -2163,8 +2163,8 @@ add_positive_or_negative_piety = {
 	}
 }
 
-ME_technology_split_120_power = { #placeholder, I will put the implementation here later!
-	custom_tooltip = "ME_split_120_MP"
+VU_technology_split_120_power = { #placeholder, I will put the implementation here later!
+	custom_tooltip = "VU_split_120_MP"
 	hidden_effect = {
 		export_to_variable = {
 			which = MSA_our_adm_tech
@@ -2501,7 +2501,7 @@ ME_add_or_reset_golden_age = { # extremely powerful, use sparingly!
 	}
 	else = {
 		add_country_modifier = {
-			name = ME_mini_golden_age
+			name = vu_mini_golden_age
 			duration = 18250
 		}
 	}

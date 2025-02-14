@@ -242,7 +242,6 @@ physician = {
     }
     chance = {
         factor = 1
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.75
             NOT = {
@@ -287,7 +286,6 @@ physician = {
                 }
             }
         }
-        #un-hash after Idea group update
         modifier = {
             factor = 0.75
             NOT = {
@@ -377,7 +375,6 @@ propagandist = {
                 }
             }
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.5
             NOT = {
@@ -407,7 +404,6 @@ propagandist = {
                 has_idea_group = spy_ideas
             }
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.5
             NOT = {
@@ -492,7 +488,6 @@ assimilator = {
         }
         modifier = {
             factor = 0.75
-
             owner = {
                 overextension_percentage = 0.2
             }
@@ -957,7 +952,7 @@ loyalist = {
             }
         }
         modifier = {
-            factor = 0.5
+            factor = 0.75
             NOT = {
                 owner = {
                     num_of_powerful_estates = 3
@@ -1000,6 +995,7 @@ state_overseer = {
         }
         modifier = {
             state_maintenance_modifier = -0.1
+            state_governing_cost_increase = -1
         }
     }
     # Republican Tradition
@@ -1112,7 +1108,7 @@ philosopher = {
             always = yes
         }
         modifier = {
-            idea_cost = -0.025
+            idea_cost = -0.05
             prestige_decay = -0.005
         }
     }
@@ -1477,7 +1473,7 @@ artist = {
         }
         modifier = {
             monthly_splendor = 0.5
-            prestige = 0.1
+            prestige = 0.25
         }
     }
     # Republican Tradition
@@ -1690,6 +1686,7 @@ jester = {
         }
         modifier = {
             monthly_splendor = 1
+            prestige = 0.5
         }
     }
     # Republican Tradition
@@ -1802,6 +1799,7 @@ treasurer = {
         }
         modifier = {
             interest = -0.15
+            tax_income = 12
         }
     }
     # Republican Tradition
@@ -1902,6 +1900,7 @@ master_of_mint = {
             always = yes
         }
         modifier = {
+            inflation_reduction = 0.05
             gold_depletion_chance_modifier = -0.15
         }
     }
@@ -2019,7 +2018,7 @@ master_of_mint = {
 civil_engineer = {
     monarch_power = ADM
     # Primary Modifier
-    build_cost = -0.15
+    build_cost = -0.10
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
@@ -2027,7 +2026,7 @@ civil_engineer = {
         }
         modifier = {
             build_time = -0.1
-            build_cost = -0.025
+            movement_speed = 0.05
         }
     }
     # Republican Tradition
@@ -2658,23 +2657,15 @@ culture_minister = {
         factor = 1
         modifier = {
             factor = 0
-            OR = {
-                NOT = {
-                    is_institution_enabled = nationalism_institution
-                }
-                NOT = {
-                    owner = {
-                        OR = {
-                            has_idea_group = religious_ideas
-                            has_idea_group = nationalism_ideas #un-hash after Idea groups update
-                        }
+            owner = {
+                OR = {
+                    NOT = {
+                        is_institution_enabled = nationalism_institution
+                        has_idea_group = religious_ideas
+                        has_idea_group = nationalism_ideas
                     }
-                }
-                owner = {
-                    OR = {
-                        has_idea_group = humanist_ideas
-                        has_idea_group = society_ideas #un-hash after Idea groups update
-                    }
+                    has_idea_group = humanist_ideas
+                    has_idea_group = society_ideas
                 }
             }
         }
@@ -2825,7 +2816,7 @@ statesman = {
 spymaster = {
     monarch_power = DIP
     # Primary Modifier
-    spy_offence = 0.2
+    spy_offence = 0.25
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
@@ -2909,15 +2900,15 @@ spymaster = {
 diplomat = {
     monarch_power = DIP
     # Primary Modifier
-    improve_relation_modifier = 0.2
+    improve_relation_modifier = 0.25
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            monthly_favor_modifier = 0.1
-            rival_change_cost = -0.1
+            monthly_favor_modifier = 0.15
+            envoy_travel_time = -0.15
         }
     }
     # Republican Tradition
@@ -3004,7 +2995,7 @@ diplomat = {
             }
         }
         modifier = {
-            factor =0.75
+            factor = 0.75
             NOT = {
                 has_idea_group = diplomatic_ideas
             }
@@ -3024,7 +3015,7 @@ negotiator = {
         }
         modifier = {
             diplomatic_upkeep = 1
-            envoy_travel_time = -0.1
+            diplomatic_annexation_cost = -0.05
         }
     }
     # Republican Tradition
@@ -3263,6 +3254,7 @@ naval_reformer = {
         }
         modifier = {
             navy_tradition = 0.25
+            dip_tech_cost_modifier = -0.02
         }
     }
     # Republican Tradition
@@ -3326,20 +3318,20 @@ naval_reformer = {
         modifier = {
             factor = 0.5
             owner = {
-                navy_tradition = 0.15
+                navy_tradition = 15
             }
         }
         modifier = {
             factor = 0.75
             owner = {
-                navy_tradition = 0.5
+                navy_tradition = 5
             }
         }
         modifier = {
             factor = 0.5
             NOT = {
                 owner = {
-                    navy_tradition = 0.8
+                    navy_tradition = 8
                 }
             }
         }
@@ -3348,23 +3340,25 @@ naval_reformer = {
         factor = 1
         modifier = {
             factor = 0
-            num_of_owned_provinces_with = {
-                value = 10
-                has_port = yes
+            NOT = {
+                num_of_owned_provinces_with = {
+                    value = 10
+                    has_port = yes
+                }
             }
         }
         modifier = {
             factor = 0.6
-            navy_tradition = 0.15
+            navy_tradition = 15
         }
         modifier = {
             factor = 0.8
-            navy_tradition = 0.5
+            navy_tradition = 50
         }
         modifier = {
             factor = 0.5
             NOT = {
-                navy_tradition = 0.8
+                navy_tradition = 80
             }
         }
     }
@@ -3439,20 +3433,11 @@ marauder_captain = {
             has_port = no
         }
         modifier = {
-            factor = 0
-            owner = {
-                NOT = {
-                    num_of_total_ports = 1
+            factor = 0.25
+            NOT = {
+                owner = {
+                    has_privateers = no
                 }
-            }
-        }
-        modifier = {
-            factor = 0.15
-            owner = {
-                NOT = {
-                    has_reform = pirate_republic_reform
-                }
-                has_privateers = no
             }
         }
         modifier = {
@@ -3460,14 +3445,6 @@ marauder_captain = {
             NOT = {
                 owner = {
                     has_reform = pirate_republic_reform
-                }
-            }
-        }
-        modifier = {
-            factor = 0.75
-            NOT = {
-                owner = {
-                    has_privateers = yes
                 }
             }
         }
@@ -3495,14 +3472,15 @@ marauder_captain = {
 mariner = {
     monarch_power = DIP
     # Primary Modifier
-    ship_durability = 0.1
+    sea_repair = yes
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            naval_maintenance_modifier = -0.1
+            naval_maintenance_modifier = -0.05
+            ship_durability = 0.05
         }
     }
     # Republican Tradition
@@ -3556,12 +3534,10 @@ mariner = {
         factor = 1
         modifier = {
             factor = 0
-            NOT = {
-                owner = {
-                    OR = {
-                        num_of_ports = 1
-                        dip_tech = 24
-                    }
+            owner = {
+                NOT = {
+                    num_of_ports = 1
+                    dip_tech = 24
                 }
             }
         }
@@ -3611,6 +3587,7 @@ navarch = {
         }
         modifier = {
             global_ship_cost = -0.1
+            hull_size_modifier = 0.05
         }
     }
     # Republican Tradition
@@ -3664,13 +3641,21 @@ navarch = {
         factor = 1
         modifier = {
             factor = 0
-            OR = {
-                has_port = no
+            has_port = no
+        }
+        modifier = {
+            factor = 0.5
+            NOT = {
                 owner = {
-                    NOT = {
-                        num_of_total_ports = 1
-                    }
+                    has_idea_group = naval_ideas
                 }
+            }
+        }
+        modifier = {
+            factor = 0.5
+            NOT = {
+                has_building = shipyard
+                has_building = grand_shipyard
             }
         }
     }
@@ -3708,6 +3693,7 @@ trader = {
         }
         modifier = {
             trade_efficiency = 0.05
+            placed_merchant_power_modifier = 0.01
         }
     }
     # Republican Tradition
@@ -3809,15 +3795,15 @@ trader = {
 marketeer = {
     monarch_power = DIP
     # Primary Modifier
-    global_trade_power = 0.1
+    global_trade_power = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            center_of_trade_upgrade_cost = -0.075
-            global_ship_trade_power = 0.05
+            center_of_trade_upgrade_cost = -0.05
+            caravan_power = 0.05
         }
     }
     # Republican Tradition
@@ -3988,7 +3974,7 @@ mercantile_influencer = {
             owner = {
                 NOT = {
                     has_idea_group = trade_ideas
-                    has_idea_group = industry_ideas #un-hash after Idea groups update
+                    has_idea_group = industry_ideas
                 }
             }
         }
@@ -3996,6 +3982,12 @@ mercantile_influencer = {
             factor = 0.75
             NOT = {
                 province_has_center_of_trade_of_level = 1
+            }
+        }
+        modifier = {
+            factor = 0.75
+            NOT = {
+                province_has_center_of_trade_of_level = 2
             }
         }
         modifier = {
@@ -4043,7 +4035,7 @@ colonial_governor = {
         }
         modifier = {
             reduced_liberty_desire_on_other_continent = 5
-            global_tariffs = 0.025
+            global_tariffs = 0.05
         }
     }
     # Republican Tradition
@@ -4135,7 +4127,6 @@ colonial_governor = {
                 has_idea_group = expansion_ideas
             }
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.5
             NOT = {
@@ -4149,14 +4140,15 @@ colonial_governor = {
 pioneer = {
     monarch_power = DIP
     # Primary Modifier
-    colonist_placement_chance = 0.05
+    auto_explore_adjacent_to_colony = yes
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            auto_explore_adjacent_to_colony = yes
+            native_uprising_chance = -0.1
+            colonist_placement_chance = 0.05
         }
     }
     # Republican Tradition
@@ -4268,7 +4260,7 @@ pioneer = {
 navigator = {
     monarch_power = DIP
     # Primary Modifier
-    range = 0.2
+    range = 0.25
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
@@ -4276,7 +4268,7 @@ navigator = {
         }
         modifier = {
             naval_attrition = -0.1
-            range = 0.025
+            range = 0.05
         }
     }
     # Republican Tradition
@@ -4386,15 +4378,15 @@ navigator = {
 army_reformer = {
     monarch_power = MIL
     # Primary Modifier
-    land_morale = 0.1
+    land_morale = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            mil_tech_cost_modifier = -0.015
-            army_tradition = 0.25
+            mil_tech_cost_modifier = -0.02
+            army_tradition = 0.15
         }
     }
     # Republican Tradition
@@ -4492,7 +4484,7 @@ army_reformer = {
 drill_instructor = {
     monarch_power = MIL
     # Primary Modifier
-    drill_gain_modifier = 0.33
+    drill_gain_modifier = 0.30
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
@@ -4500,7 +4492,7 @@ drill_instructor = {
         }
         modifier = {
             drill_decay_modifier = -0.15
-            yearly_army_professionalism = 0.01
+            yearly_army_professionalism = 0.005
         }
     }
     # Republican Tradition
@@ -4558,9 +4550,8 @@ drill_instructor = {
                 has_dlc = "Cradle of Civilization"
             }
         }
-        #un-hash after Idea group update
         modifier = {
-            factor = 0.65
+            factor = 0.75
             owner = {
                 NOT= {
                     has_idea_group = standing_army
@@ -4579,9 +4570,8 @@ drill_instructor = {
     }
     ai_will_do = {
         factor = 1
-        #un-hash after Idea group update
         modifier = {
-            factor = 0.65
+            factor = 0.5
             NOT = {
                 has_idea_group = standing_army
             }
@@ -4614,7 +4604,8 @@ commander = {
             always = yes
         }
         modifier = {
-            morale_damage_received = -0.02
+            morale_damage_received = -0.025
+            army_tradition = 0.1
         }
     }
     # Republican Tradition
@@ -4669,10 +4660,19 @@ commander = {
     chance = {
         factor = 1
         modifier = {
-            factor = 0.5
+            factor = 0.75
             NOT = {
                 has_building = barracks
                 has_building = training_fields
+            }
+        }
+        modifier = {
+            factor = 0.5
+            owner ={
+                NOT = {
+                    has_idea_group = general_staff_ideas
+                    has_idea_group = quality_ideas
+                }
             }
         }
     }
@@ -4705,6 +4705,7 @@ commandant = {
         }
         modifier = {
             shock_damage_received = -0.025
+            land_morale_constant = 0.05
         }
     }
     # Republican Tradition
@@ -4757,10 +4758,18 @@ commandant = {
     chance = {
         factor = 1
         modifier = {
-            factor = 0.15
+            factor = 0.25
             NOT = {
                 owner = {
                     army_professionalism = 0.1
+                }
+            }
+        }
+        modifier = {
+            factor = 0.5
+            NOT = {
+                owner = {
+                    has_idea_group = standing_army
                 }
             }
         }
@@ -4799,7 +4808,6 @@ commandant = {
                 infantry_fraction = 0.8
             }
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.65
             NOT = {
@@ -4880,10 +4888,9 @@ vu_noble_man = {
         modifier = {
             factor = 0
             owner = {
-                OR = {
+                NOT = {
                     has_estate = estate_nobles
                     has_estate = estate_rajput
-                    #add any other noble estates here that I forgot
                 }
             }
         }
@@ -4978,7 +4985,8 @@ cavalier = {
             always = yes
         }
         modifier = {
-            cavalry_cost = -0.1
+            cavalry_cost = -0.05
+            cavalry_flanking = 0.05
         }
     }
     # Republican Tradition
@@ -5047,7 +5055,6 @@ cavalier = {
             }
 
         }
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0.75
             NOT = {
@@ -5059,7 +5066,6 @@ cavalier = {
     }
     ai_will_do = {
         factor = 1
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0
             OR = {
@@ -5096,14 +5102,15 @@ cavalier = {
 army_colonel = {
     monarch_power = MIL
     # Primary Modifier
-    infantry_power = 0.1
+    infantry_power = 0.10
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            infantry_cost = -0.1
+            infantry_cost = -0.05
+            shock_damage_received = -0.05
         }
     }
     # Republican Tradition
@@ -5171,7 +5178,6 @@ army_colonel = {
                 }
             }
         }
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0.75
             NOT = {
@@ -5183,7 +5189,6 @@ army_colonel = {
     }
     ai_will_do = {
         factor = 1
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0
             OR = {
@@ -5220,14 +5225,15 @@ army_colonel = {
 bombardier = {
     monarch_power = MIL
     # Primary Modifier
-    artillery_power = 0.1
+    artillery_power = 0.10
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            artillery_cost = -0.1
+            artillery_cost = -0.05
+            backrow_artillery_damage = 0.05
         }
     }
     # Republican Tradition
@@ -5294,9 +5300,7 @@ bombardier = {
                     mil_tech = 30
                 }
             }
-
         }
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0.75
             NOT ={
@@ -5308,7 +5312,6 @@ bombardier = {
     }
     ai_will_do = {
         factor = 1
-        #un-hash after Idea-Group update
         modifier = {
             factor = 0
             OR = {
@@ -5321,7 +5324,6 @@ bombardier = {
             NOT = {
                 has_idea_group = gunpowder_ideas
             }
-
         }
         modifier = {
             factor = 0.75
@@ -5345,15 +5347,15 @@ bombardier = {
 drunkard = {
     monarch_power = MIL
     # Primary Modifier
-    movement_speed = 0.1
+    movement_speed = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            morale_damage_received = -0.025
-            morale_damage = 0.015
+            morale_damage_received = -0.05
+            morale_damage = 0.02
         }
     }
     # Republican Tradition
@@ -5407,14 +5409,12 @@ drunkard = {
         factor = 1
         modifier = {
             factor = 0
-            OR = {
-                religion_group = christian
-                owner = {
+            owner = {
+                OR = {
+                    government = native
+                    government = tribal
                     NOT = {
-                        OR = {
-                            government = native
-                            government = tribal
-                        }
+                        religion_group = christian
                     }
                 }
             }
@@ -5439,6 +5439,18 @@ drunkard = {
     ai_will_do = {
         factor = 1
         modifier = {
+            factor = 0
+            NOT = {
+                religion_group = christian
+                NOT = {
+                    beer = 1
+                    vodka = 1
+                    rum = 1
+                    cider = 1
+                }
+            }
+        }
+        modifier = {
             factor = 0.5
             NOT = {
                 primary_culture = czech
@@ -5448,20 +5460,6 @@ drunkard = {
             factor = 0.5
             NOT = {
                 ruler_has_personality = drunkard_personality
-            }
-        }
-        modifier = {
-            factor = 0
-            OR = {
-                religion_group = christian
-                NOT = {
-                    OR = {
-                        beer = 1
-                        vodka = 1
-                        rum = 1
-                        cider = 1
-                    }
-                }
             }
         }
         modifier = {
@@ -5506,7 +5504,7 @@ bard = {
         }
         modifier = {
             land_morale = 0.025
-            reserves_organisation = 0.025
+            army_tradition_from_battle = 0.01
         }
     }
     # Republican Tradition
@@ -5576,18 +5574,6 @@ bard = {
     ai_will_do = {
         factor = 1
         modifier = {
-            factor = 0
-            OR = {
-                is_year = 1500
-                NOT = {
-                    has_global_modifier_value = {
-                        which = army_tradition
-                        value = 1
-                    }
-                }
-            }
-        }
-        modifier = {
             factor = 0			#AI will prefer other advisors past 1500s
             is_year = 1500
         }
@@ -5606,7 +5592,7 @@ bard = {
 army_organiser = {
     monarch_power = MIL
     # Primary Modifier
-    land_forcelimit_modifier = 0.1
+    land_forcelimit_modifier = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
@@ -5614,7 +5600,7 @@ army_organiser = {
         }
         modifier = {
             reserves_organisation = 0.025
-            global_supply_limit_modifier = 0.1
+            global_supply_limit_modifier = 0.15
         }
     }
     # Republican Tradition
@@ -5665,13 +5651,13 @@ army_organiser = {
         }
     }
     chance = {
-        factor = 1
+        factor = 0.75
         modifier = {
             factor = 0.5
             owner = {
                 NOT = {
                     has_idea_group = quantity_ideas
-                    has_idea_group = conscription_ideas #un-hash after Idea groups update
+                    has_idea_group = conscription_ideas
                 }
             }
         }
@@ -5714,15 +5700,15 @@ army_organiser = {
 quartermaster = {
     monarch_power = MIL
     # Primary Modifier
-    reinforce_speed = 0.3
+    reinforce_speed = 0.25
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            land_maintenance_modifier = -0.075
-            manpower_recovery_speed = 0.05
+            land_maintenance_modifier = -0.05
+            manpower_recovery_speed = 0.075
         }
     }
     # Republican Tradition
@@ -5775,24 +5761,26 @@ quartermaster = {
     chance = {
         factor = 1
         modifier = {
-            factor = 0.55
-            NOT = {
-                has_building = barracks
-                has_building = training_fields
-            }
-        }
-        modifier = {
-            factor = 0.45
+            factor = 0
             NOT = {
                 has_building = regimental_camp
                 has_building = conscription_center
-                #un-hash after Idea groups update
-                owner = {
-                    OR = {
-                        has_idea_group = conscription_ideas
-                        has_idea_group = quantity_ideas
-                    }
+            }
+        }
+        modifier = {
+            factor = 0.5
+            owner = {
+                NOT = {
+                    has_idea_group = conscription_ideas
+                    has_idea_group = quantity_ideas
                 }
+            }
+        }
+        modifier = {
+            factor = 0.75
+            NOT = {
+                has_building = barracks
+                has_building = training_fields
             }
         }
     }
@@ -5806,7 +5794,6 @@ quartermaster = {
             factor = 0.5
             manpower_percentage = 0.5
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.5
             NOT = {
@@ -5821,14 +5808,14 @@ quartermaster = {
 recruitmaster = {
     monarch_power = MIL
     # Primary Modifier
-    global_manpower_modifier = 0.1
+    global_regiment_cost = -0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            global_regiment_cost = -0.05
+            global_manpower_modifier = 0.05
             manpower_recovery_speed = 0.05
         }
     }
@@ -5882,18 +5869,31 @@ recruitmaster = {
     chance = {
         factor = 1
         modifier = {
-            factor = 0.45
+            factor = 0
+            NOT = {
+                owner = {
+                    mil_tech = 23
+                }
+            }
+        }
+        modifier = {
+            factor = 0.5
             NOT = {
                 has_building = barracks
                 has_building = training_fields
-                owner = {
+            }
+        }
+        modifier = {
+            factor = 0.5
+            owner = {
+                NOT = {
                     has_idea_group = quantity_ideas
                     has_idea_group = conscription_ideas
                 }
             }
         }
         modifier = {
-            factor = 0.55
+            factor = 0.75
             NOT = {
                 has_building = regimental_camp
                 has_building = conscription_center
@@ -5914,9 +5914,7 @@ recruitmaster = {
         }
         modifier = {
             factor = 0.5
-
             army_size_percentage = 0.62
-
         }
         modifier = {
             factor = 0.25
@@ -5999,6 +5997,22 @@ mercenary_captain = {
     allow_only_male = yes
     chance = {
         factor = 1
+        modifier = {
+            factor = 0
+            NOT = {
+                owner = {
+                    num_of_hired_mercenary_companies = 1
+                }
+            }
+        }
+        modifier = {
+            factor = 0.5
+            NOT = {
+                owner = {
+                    has_idea_group = mercenary_ideas
+                }
+            }
+        }
     }
     ai_will_do = {
         factor = 1
@@ -6013,9 +6027,7 @@ mercenary_captain = {
             NOT = {
                 has_idea_group = mercenary_ideas
             }
-
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.5
             OR = {
@@ -6036,14 +6048,15 @@ mercenary_captain = {
 fortification_expert = {
     monarch_power = MIL
     # Primary Modifier
-    defensiveness = 0.2
+    defensiveness = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-            hostile_attrition = 0.3
+            hostile_attrition = 0.25
+            garrison_growth = 0.1
         }
     }
     # Republican Tradition
@@ -6096,16 +6109,15 @@ fortification_expert = {
     chance = {
         factor = 1
         modifier = {
+            factor = 0
+            NOT = {
+                fort_level = 1
+            }
+        }
+        modifier = {
             factor = 0.75
             NOT = {
                 fort_level = 2
-            }
-
-        }
-        modifier = {
-            factor = 0.5
-            NOT = {
-                fort_level = 1
             }
         }
         modifier = {
@@ -6208,12 +6220,11 @@ defensive_planner = {
             }
         }
         modifier = {
-            factor = 0.55
+            factor = 0.75
             fort_level = 2
         }
-
         modifier = {
-            factor = 0.75
+            factor = 0.90
             fort_level = 3
         }
         modifier = {
@@ -6260,7 +6271,7 @@ defensive_planner = {
             factor = 0.5
             NOT = {
                 has_idea_group = defensive_ideas
-                has_idea_group = fortress_ideas #un-hash after Idea groups update
+                has_idea_group = fortress_ideas
             }
         }
         modifier = {
@@ -6282,6 +6293,7 @@ tactician = {
         }
         modifier = {
             movement_speed = 0.05
+            military_tactics = 0.05
         }
     }
     # Republican Tradition
@@ -6340,7 +6352,6 @@ tactician = {
                 development = 35
             }
         }
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.85
             NOT = {
@@ -6349,10 +6360,18 @@ tactician = {
                 }
             }
         }
+        modifier = {
+            factor = 0.75
+            NOT = {
+                owner = {
+                    has_idea_group = defensive_ideas
+                    has_idea_group = fortress_ideas
+                }
+            }
+        }
     }
     ai_will_do = {
         factor = 0.5
-        #un-hash after Idea groups update
         modifier = {
             factor = 0.3
             NOT = {
@@ -6363,7 +6382,7 @@ tactician = {
             factor = 0.3
             NOT = {
                 has_idea_group = defensive_ideas
-                has_idea_group = fortress_ideas #un-hash after Idea groups update
+                has_idea_group = fortress_ideas
             }
         }
     }
@@ -6383,6 +6402,7 @@ sapper = {
         }
         modifier = {
             assault_fort_cost_modifier = -0.15
+            artillery_barrage_cost = -0.05
         }
     }
     # Republican Tradition
@@ -6437,19 +6457,14 @@ sapper = {
         modifier = {
             factor = 0
             NOT = {
-                OR = {
-                    is_institution_enabled = renaissance
-                    owner = {
-                        mil_tech = 24
-                    }
-                    owner = {
-                        has_idea_group = offensive_ideas
-                    }
+                is_institution_enabled = renaissance
+                owner = {
+                    mil_tech = 24
                 }
             }
         }
         modifier = {
-            factor = 0.5
+            factor = 0.75
             NOT = {
                 owner = {
                     has_idea_group = offensive_ideas
@@ -6457,7 +6472,7 @@ sapper = {
             }
         }
         modifier = {
-            factor = 0.5
+            factor = 0.70
             NOT = {
                 owner = {
                     mil_tech = 31
@@ -6470,10 +6485,8 @@ sapper = {
         modifier = {
             factor = 0
             OR = {
-                OR = {
-                    has_idea_group = defensive_ideas
-                    has_idea_group = fortress_ideas #un-hash past idea group update
-                }
+                has_idea_group = defensive_ideas
+                has_idea_group = fortress_ideas
                 NOT = {
                     is_year = 1550
                 }
@@ -6500,8 +6513,8 @@ combat_engineer = {
             always = yes
         }
         modifier = {
-            siege_ability = 0.1
-            artillery_barrage_cost = -0.15
+            siege_ability = 0.075
+            artillery_barrage_cost = -0.10
         }
     }
     # Republican Tradition
@@ -6555,12 +6568,14 @@ combat_engineer = {
         factor = 1
         modifier = {
             factor = 0
-            owner = {
-                has_institution = gunpowder_warfare
+            NOT = {
+                owner = {
+                    has_institution = gunpowder_warfare
+                }
             }
         }
         modifier = {
-            factor = 0.75
+            factor = 0.9
             NOT = {
                 owner = {
                     has_idea_group = offensive_ideas
@@ -6568,11 +6583,11 @@ combat_engineer = {
             }
         }
         modifier = {
-            factor = 0.5
+            factor = 0.25
             owner = {
                 OR = {
                     has_idea_group = defensive_ideas
-                    has_idea_group = fortress_ideas #un-hash after Idea groups update
+                    has_idea_group = fortress_ideas
                 }
             }
         }
@@ -6580,7 +6595,7 @@ combat_engineer = {
     ai_will_do = {
         factor = 1
         modifier = {
-            factor = 0.5
+            factor = 0.25
             is_at_war = no
         }
         modifier = {
@@ -6590,14 +6605,11 @@ combat_engineer = {
             }
         }
         modifier = {
-            factor = 0.5
-            OR ={
-                is_at_war = no
-                NOT = {
-                    any_enemy_country = {
-                        has_idea_group = defensive_ideas
-                        has_idea_group = fortress_ideas #un-hash after Idea groups update
-                    }
+            factor = 0.75
+            NOT = {
+                any_enemy_country = {
+                    has_idea_group = defensive_ideas
+                    has_idea_group = fortress_ideas
                 }
             }
         }
@@ -6605,7 +6617,7 @@ combat_engineer = {
             factor = 0.5
             OR = {
                 has_idea_group = defensive_ideas
-                has_idea_group = fortress_ideas #un-hash after Idea groups update
+                has_idea_group = fortress_ideas
             }
         }
     }
@@ -6625,6 +6637,7 @@ grand_captain = {
         }
         modifier = {
             naval_forcelimit_modifier = 0.05
+            global_naval_engagement_modifier = 0.025
         }
     }
     # Republican Tradition
@@ -6718,7 +6731,6 @@ grand_captain = {
                 OR = {
                     has_idea_group = maritime_ideas
                     has_idea_group = naval_ideas
-                    #un-hash after Idea groups update
                     has_idea_group = heavy_ideas
                     has_idea_group = galley_ideas
                     has_idea_group = transport_ideas
@@ -6804,24 +6816,11 @@ smuggler = {
             has_port = no
         }
         modifier = {
-            factor = 0
-            owner = {
-                NOT = {
-                    num_of_total_ports = 1
-                }
-            }
-        }
-        modifier = {
-            factor = 0.75
-            has_port = no
-        }
-        modifier = {
             factor = 0.5
             owner = {
                 NOT = {
                     has_idea_group = naval_ideas
                     has_idea_group = maritime_ideas
-                    #un-hash after Idea groups update
                     has_idea_group = heavy_ideas
                     has_idea_group = galley_ideas
                     has_idea_group = light_ship_ideas
@@ -6835,15 +6834,12 @@ smuggler = {
         modifier = {
             factor = 0
             NOT = {
-                OR = {
-                    has_idea_group = naval_ideas
-                    has_idea_group = maritime_ideas
-                    #un-hash after Idea groups update
-                    has_idea_group = heavy_ideas
-                    has_idea_group = galley_ideas
-                    has_idea_group = light_ship_ideas
-                    has_idea_group = transport_ideas
-                }
+                has_idea_group = naval_ideas
+                has_idea_group = maritime_ideas
+                has_idea_group = heavy_ideas
+                has_idea_group = galley_ideas
+                has_idea_group = light_ship_ideas
+                has_idea_group = transport_ideas
             }
         }
         modifier = {
@@ -6861,16 +6857,15 @@ smuggler = {
 commando = {
     monarch_power = MIL
     # Primary Modifier
-    allowed_marine_fraction = 0.15
+    sailors_recovery_speed = 0.15
     # Secondary Modifier
     skill_scaled_modifier = {
         trigger = {
             always = yes
         }
         modifier = {
-
+            allowed_marine_fraction = 0.10
             global_sailors_modifier = 0.05
-            sailors_recovery_speed = 0.05
         }
     }
     # Republican Tradition
@@ -6924,14 +6919,7 @@ commando = {
         factor = 1
         modifier = {
             factor = 0
-            OR = {
-                has_port = no
-                owner = {
-                    NOT = {
-                        num_of_total_ports = 1
-                    }
-                }
-            }
+            has_port = no
         }
         modifier = {
             factor = 0.5
@@ -6946,7 +6934,9 @@ commando = {
         factor = 1
         modifier = {
             factor = 0.3
-            has_idea_group = maritime_ideas
+            NOT = {
+                has_idea_group = maritime_ideas
+            }
         }
     }
 }

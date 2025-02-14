@@ -22,7 +22,6 @@ country_event = {
     immediate = {
         vu_discover_the_world = yes #effect
         vu_colour_all_countries = yes
-        enable_hard_to_colonise = yes
         spawn_troops_on_startup = yes #spawn the historical amounts of troops for countries
         crownland_share_on_startup = yes #set the crownland share
     }
@@ -79,6 +78,15 @@ country_event = {
         add_treasury = 1
         if = {
             limit = {
+                NOT = {
+                    has_country_flag = vu_startup_disable_hard_to_colonise
+                }
+            }
+            enable_hard_to_colonise = yes
+            clr_country_flag = vu_startup_disable_hard_to_colonise
+        }
+        if = {
+            limit = {
                 has_country_flag = vu_startup_disable_subject_colouring
             }
             turn_off_subject_colouring = yes
@@ -92,21 +100,21 @@ country_event = {
             clr_country_flag = vu_startup_disable_hard_to_colonise
         }
         if = {
-            limit = { 
+            limit = {
                 has_country_flag = vu_startup_simplify_HRE
             }
             remove_extra_HRE_tags = yes
             clr_country_flag = vu_startup_simplify_HRE
         }
         if = {
-            limit = { 
+            limit = {
                 has_country_flag = vu_startup_simplify_western_europe
             }
             remove_extra_western_tags = yes
             clr_country_flag = vu_startup_simplify_western_europe
         }
         if = {
-            limit = { 
+            limit = {
                 has_country_flag = vu_startup_simplify_italy
             }
             remove_extra_italian_tags = yes
