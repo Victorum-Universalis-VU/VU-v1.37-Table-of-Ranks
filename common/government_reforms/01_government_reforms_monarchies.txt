@@ -4180,6 +4180,38 @@ feudal_theocracy = {
         enables_aristocratic_idea_group = no
     }
 }
+islamic_feudal_theocratic_order_reform = {
+    icon = "islamic_feudal_theocratic_order_reform"
+    allow_normal_conversion = no
+    lock_level_when_selected = yes
+    fixed_rank = 5
+    potential = {
+        religion = shiite
+        tag = ARL
+    }
+    legacy_equivalent = feudal_theocracy_legacy
+    modifiers = {
+        missionaries = 1
+        global_missionary_strength = 0.01
+        tolerance_own = 2
+        governing_capacity = 75 #Decreased from 100 (old VU value) but Increased to 75 from 50 (EU4 vanilla) by San Felipe
+        brahmins_hindu_loyalty_modifier = 0.05
+        church_loyalty_modifier = 0.05
+    }
+    maintain_dynasty = yes
+
+    conditional = {
+        allow = { has_dlc = "Cradle of Civilization" }
+        government_abilities = {
+            feudal_theocracy_mechanic
+        }
+    }
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_aristocratic_idea_group = no
+    }
+}
+
 mughal_government = {
     icon = "peacock_throne"
     allow_normal_conversion = yes
@@ -10496,6 +10528,7 @@ unlocked_islamic_governate_reform = { #T5 - Marquisate level
         OR = {
             religion = shiite
             religion = ibadi
+            tag = QOM
         }
         NOT = {
             is_subject_of_type = islamic_governate

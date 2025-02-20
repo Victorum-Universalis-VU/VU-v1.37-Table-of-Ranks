@@ -1,4 +1,4 @@
-#All Theocracy government names go here, at the top add the specific ones, the further down the file, the more generic they get. 
+#All Theocracy government names go here, at the top add the specific ones, the further down the file, the more generic they get.
 #Game will pick the first applicable government name from this file.
 #Contributors: Don, Modus, Prussia
 #Contains Original and modified entries from Victorum Universalis, Vanilla, Missions Expanded and Government's Expanded, they were all transformatively changed according
@@ -132,6 +132,25 @@ ayatollah_shiite = { #Persian Caliphate
         NOT = { religion = sunni }
     }
 }
+
+safaviyya = { #Persian Caliphate
+    rank = {
+        5 = SAFAVIYYA
+    }
+    ruler_male = {
+        5 = SAFAVIY
+    }
+    consort_female = {
+        5 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        5 = SHAZADEH
+    }
+    trigger = {
+        has_reform = islamic_feudal_theocratic_order_reform
+    }
+}
+
 ########################
 ##	Islamic Subjects  ##
 ########################
@@ -178,10 +197,13 @@ sunni_subject = {
     }
     trigger = {
         OR = {
-			is_muslim_subject_type = yes
-			has_ToR_muslim_government_reform = yes
+            is_muslim_subject_type = yes
+            has_ToR_muslim_government_reform = yes
         }
-        NOT = { religion = shiite }
+        NOT = {
+            religion = shiite
+            is_subject_of_type = islamic_governate
+        }
     }
 }
 shiite_subject = {
@@ -230,7 +252,6 @@ shiite_subject = {
             is_muslim_subject_type = yes
             has_ToR_muslim_government_reform = yes
         }
-        NOT = { religion = sunni }
     }
 }
 #############################
@@ -1131,7 +1152,7 @@ church_of_portugal = {
         7 = PORTUGUESE_SISTER_fem
     }
     trigger = {
-		OR = {
+        OR = {
             primary_culture = brazilian
             primary_culture = portugese
         }
@@ -1863,7 +1884,7 @@ pagan_theocracy = {
         9 = LORD
     }
     trigger = {
-		government_rank = 6
+        government_rank = 6
         religion_group = pagan
         government = theocracy
     }
