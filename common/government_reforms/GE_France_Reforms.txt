@@ -1,29 +1,29 @@
-ancien_regime_reform = {
-	icon = French_Reformed #ancien_regime
-	allow_normal_conversion = yes
-	lock_level_when_selected = no
-	valid_for_nation_designer = yes
-	nation_designer_cost = 10
-	potential = { 
-		OR = {
-			culture_group = french
-			has_reform = french_absolutism
-		}
-	}
-	trigger = {
-		has_reform = ancien_regime_reform
-	}
-	
-	modifiers = {
-		global_autonomy = -0.025
-		governing_capacity = 150
-	}
-	ai = {
-		factor = 100
-	}
-}
+#ancien_regime_reform = {
+#	icon = French_Reformed #ancien_regime
+#	allow_normal_conversion = yes
+#	lock_level_when_selected = no
+#	valid_for_nation_designer = yes
+#	nation_designer_cost = 10
+#	potential = { 
+#		OR = {
+#			culture_group = french
+#			has_reform = french_absolutism
+#		}
+#	}
+#	trigger = {
+#		has_reform = ancien_regime_reform
+#	}
+#	
+#	modifiers = {
+#		global_autonomy = -0.025
+#		governing_capacity = 150
+#	}
+#	ai = {
+#		factor = 100
+#	}
+#}
 
-french_absolutism = {
+french_absolutism = { #
 	icon = French_Absolutism
 	allow_normal_conversion = yes
 	lock_level_when_selected = no
@@ -74,7 +74,7 @@ blood_tax_reform = {
 			culture_group = french
 			has_reform = blood_tax_reform
 		}
-		NOT = { has_reform = ancien_regime_reform }
+		NOT = { has_reform = feudal_france_reform }
 		NOT = { has_reform = french_absolutism }
 	}
 	trigger = {
@@ -111,7 +111,7 @@ noblesse_d_epee_reform = {
 			culture_group = french
 			has_reform = noblesse_d_epee_reform
 		}
-		has_reform = ancien_regime_reform
+		has_reform = feudal_france_reform
 	}
 	trigger = {
 	}
@@ -218,7 +218,7 @@ generalites_reform = {
 			primary_culture = cosmopolitan_french
 			has_reform = generalites_reform
 		}
-		has_reform = ancien_regime_reform
+		has_reform = feudal_france_reform
 	}
 	modifiers = {
 		global_autonomy = -0.025
@@ -317,7 +317,7 @@ abolish_the_patronage_system_reform = {
 			primary_culture = cosmopolitan_french
 			has_reform = abolish_the_patronage_system_reform
 		}
-		has_reform = ancien_regime_reform
+		has_reform = feudal_france_reform
 	}
 	modifiers = {
 		land_maintenance_modifier = -0.05
@@ -392,10 +392,7 @@ parisian_court_reform = {
 			primary_culture = cosmopolitan_french
 			has_reform = parisian_court_reform
 		}
-		OR = {
-			has_reform = feudal_france_reform
-			has_reform = ancien_regime_reform
-		}
+		has_reform = feudal_france_reform
 	}
 	modifiers = {
 		advisor_pool = 1
@@ -429,10 +426,7 @@ corps_diplomatique_reform = {
 			primary_culture = cosmopolitan_french
 			has_reform = corps_diplomatique_reform
 		}
-		OR = {
-			has_reform = french_absolutism
-			has_reform = ancien_regime_reform
-		}
+		has_reform = french_absolutism
 	}
 	modifiers = {
 		diplomatic_reputation = 1
@@ -475,7 +469,7 @@ bourgeoisie_aristocracy_reform = {
 			primary_culture = cosmopolitan_french
 			has_reform = bourgeoisie_aristocracy_reform
 		}
-		has_reform = ancien_regime_reform
+		has_reform = feudal_france_reform
 	}
 	modifiers = {
 		global_tax_modifier = 0.10

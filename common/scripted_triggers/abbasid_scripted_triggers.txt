@@ -1,41 +1,43 @@
 ME_caliph_tag_trigger = {
-    if = { 
-	    limit = { 
-	    	NOT = { 
-	    		has_saved_event_target = Caliph_province 
-	    	} 
-	    } 
-	    #log = "NO, DUH IT'S HERE" 
-	}
-	event_target:Caliph_province = {
-		owner = {
-			$trigger$
-		}
-	}
+    if = {
+        limit = {
+            NOT = {
+                has_saved_event_target = Caliph_province
+            }
+        }
+        #log = "NO, DUH IT'S HERE"
+    }
+    event_target:Caliph_province = {
+        owner = {
+            $trigger$
+        }
+    }
 }
 
 ME_is_caliphate_trigger = {
-	OR = {
-		has_reform = caliphate_reform
-		has_reform = ME_caliphate_reform_sunni_andalusia
-		has_reform = ME_caliphate_reform_sunni_arabian
-		has_reform = ME_caliphate_reform_shia_ibadi
-	}
+    OR = {
+        has_reform = caliphate_reform
+        has_reform = ME_caliphate_reform_sunni_andalusia #Caliphate of Cordoba
+        has_reform = ME_caliphate_reform_sunni_arabian   #Caliphate of Mekkah
+        has_reform = ME_caliphate_reform_shia_ibadi      #Caliphate of Oman
+        has_country_modifier = unified_islam             #Unified Mega-Caliphate
+        has_country_modifier = hsn_ayyubid_caliphate     #Caliphate of Cairo
+    }
 }
 
 #alias for cases where the condition has to be this
 ME_has_caliphate_reform_trigger = {
-	OR = {
-		has_reform = caliphate_reform
-		has_reform = ME_caliphate_reform_sunni_andalusia
-		has_reform = ME_caliphate_reform_sunni_arabian
-		has_reform = ME_caliphate_reform_shia_ibadi
-	}
+    OR = {
+        has_reform = caliphate_reform
+        has_reform = ME_caliphate_reform_sunni_andalusia
+        has_reform = ME_caliphate_reform_sunni_arabian
+        has_reform = ME_caliphate_reform_shia_ibadi
+    }
 }
 
 ME_can_benefit_from_abbasid_caliph = {
-	religion = sunni
-	NOT = { has_disaster = ABB_abbasid_caliph_revolt }
+    religion = sunni
+    NOT = { has_disaster = ABB_abbasid_caliph_revolt }
 }
 
 # ME_caliphate_is_active
@@ -44,79 +46,79 @@ ME_can_benefit_from_abbasid_caliph = {
 # The requirement for all decisions/missions that would fire an event/give the caliphate reform.
 
 ME_there_is_a_caliph = {
-	OR = {
-		has_global_flag = ME_caliphate_is_active
-		has_global_flag = ME_abbasid_caliph_exists
-	}
+    OR = {
+        has_global_flag = ME_caliphate_is_active
+        has_global_flag = ME_abbasid_caliph_exists
+    }
 }
 
 ME_has_abbasid_caliph = {
-	if = {
-		limit = {
-			has_global_flag = ME_caliphate_is_active
-		}
-		custom_trigger_tooltip = {
-			tooltip = ME_caliphate_is_already_taken_trigger
-			ME_is_caliphate_trigger = yes
-		}
-	}
-	else_if = {
-		limit = {
-			has_global_flag = ME_abbasid_caliph_exists
-		}
-		custom_trigger_tooltip = {
-			tooltip = ME_has_abbasid_caliph
-        #if = { limit = { NOT = { has_saved_event_target = Caliph_province } } log = "A POTATO HAS MORE IQ THAN YOU!" }
-        has_saved_event_target = Caliph_province
-			event_target:Caliph_province = {
-				owned_by = PREV
-			}
-		}
-	}
-	else = {
-		custom_trigger_tooltip = {
-			tooltip = ME_use_decision
-			always = no
-		}
-	}
+    if = {
+        limit = {
+            has_global_flag = ME_caliphate_is_active
+        }
+        custom_trigger_tooltip = {
+            tooltip = ME_caliphate_is_already_taken_trigger
+            ME_is_caliphate_trigger = yes
+        }
+    }
+    else_if = {
+        limit = {
+            has_global_flag = ME_abbasid_caliph_exists
+        }
+        custom_trigger_tooltip = {
+            tooltip = ME_has_abbasid_caliph
+            #if = { limit = { NOT = { has_saved_event_target = Caliph_province } } log = "A POTATO HAS MORE IQ THAN YOU!" }
+            has_saved_event_target = Caliph_province
+            event_target:Caliph_province = {
+                owned_by = PREV
+            }
+        }
+    }
+    else = {
+        custom_trigger_tooltip = {
+            tooltip = ME_use_decision
+            always = no
+        }
+    }
 }
 
 Abbasid_valid_escape_route = {
-	NOT = { has_siege = yes }
-	fort_level = 2
-	controlled_by = ROOT
-	NOT = { province_id = event_target:Caliph_province }
+    NOT = { has_siege = yes }
+    fort_level = 2
+    controlled_by = ROOT
+    NOT = { province_id = event_target:Caliph_province }
 }
 
 ME_abbasid_caliph_mission_trigger = {
-	if = {
-		limit = {
-			religion = sunni
-		}
-		#ME_has_abbasid_caliph = yes #Was this but changed to 'caliphate_reform' as it is already in the base game - by SF
-		has_reform = caliphate_reform #VU - ET entry used by PDX that they've not given any credit to ET for. 
-	}
-	else = {
-		ME_captured_caliph = yes
-	}
+    if = {
+        limit = {
+            religion = sunni
+        }
+        #ME_has_abbasid_caliph = yes #Was this but changed to 'caliphate_reform' as it is already in the base game - by SF
+        has_reform = caliphate_reform #VU - ET entry used by PDX that they've not given any credit to ET for.
+    }
+    else = {
+        ME_captured_caliph = yes
+    }
 }
 
 ME_captured_caliph = {
-	if = {
-		limit = {
-			OR = {
-				has_global_flag = ME_abbasid_caliph_exists
-				has_country_flag = ME_captured_caliph_at_one_point
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = ABA_captured_caliph
-			has_country_flag = ME_captured_caliph_at_one_point
-		}
-	}
-	else = {
-		is_defender_of_faith = yes
-	}
+    if = {
+        limit = {
+            OR = {
+                has_global_flag = ME_abbasid_caliph_exists
+                has_country_flag = ME_captured_caliph_at_one_point
+            }
+        }
+        custom_trigger_tooltip = {
+            tooltip = ABA_captured_caliph
+            has_country_flag = ME_captured_caliph_at_one_point
+        }
+    }
+    else = {
+        is_defender_of_faith = yes
+    }
 }
 
 ########
@@ -127,12 +129,12 @@ ME_captured_caliph = {
 ########
 
 ME_can_become_caliphate_gov = {
-	hidden_trigger = {
-		always = yes
-	}
+    hidden_trigger = {
+        always = yes
+    }
 }
 
 ME_abbasid_caliph_pth = {
-	province_id = event_target:Caliph_province
-	NOT = { owned_by = ROOT }
+    province_id = event_target:Caliph_province
+    NOT = { owned_by = ROOT }
 }

@@ -148,6 +148,7 @@ is_county_subject_type = {
         is_subject_of_type = daimyo_county_vassal
         is_subject_of_type = danish_county
         is_subject_of_type = dutch_county
+        is_subject_of_type = english_earldom
         is_subject_of_type = french_county
         is_subject_of_type = german_county
         is_subject_of_type = hungarian_county
@@ -311,13 +312,44 @@ is_crown_subject_type = {
     }
 }
 
-ToR_subject_limit_reached = {
-    calc_true_if = {
-        all_subject_country = {
-            is_ToR_subject_type = yes
-        }
-        amount = 25 #Edited by Prussia as part of checking where the threshold before performance issues start due to subject amount
+has_ToR_government_reform = {
+    OR = {
+        has_reform = eue_lordship_reform
+        has_reform = unlocked_eue_lordship_reform
+        has_reform = eue_barony_reform
+        has_reform = unlocked_eue_barony_reform
+        has_reform = eue_viscounty_reform
+        has_reform = unlocked_eue_viscounty_reform
+        has_reform = eue_county_reform
+        has_reform = unlocked_eue_county_reform
+        has_reform = eue_marquisate_reform
+        has_reform = unlocked_eue_marquisate_reform
+        has_reform = eue_duchy_reform
+        has_reform = unlocked_eue_duchy_reform
+        has_reform = eue_kingdom_reform
+        has_reform = unlocked_eue_kingdom_reform
     }
+}
+
+has_ToR_muslim_government_reform = {
+    has_reform = islamic_imamate_reform
+    has_reform = islamic_grand_muftate_reform
+    has_reform = islamic_sheikdom_reform
+    has_reform = islamic_sharifate_reform
+    has_reform = islamic_governate_reform
+    has_reform = islamic_emirate_reform
+    has_reform = islamic_sultanate_reform
+    has_reform = islamic_taifa_reform
+    has_reform = islamic_malikate_reform
+    has_reform = unlocked_islamic_imamate_reform
+    has_reform = unlocked_islamic_grand_muftate_reform
+    has_reform = unlocked_islamic_sheikdom_reform
+    has_reform = unlocked_islamic_sharifate_reform
+    has_reform = unlocked_islamic_governate_reform
+    has_reform = unlocked_islamic_emirate_reform
+    has_reform = unlocked_islamic_sultanate_reform
+    has_reform = unlocked_islamic_taifa_reform
+    has_reform = unlocked_islamic_malikate_reform
 }
 
 is_muslim_subject_type = {
@@ -331,61 +363,32 @@ is_muslim_subject_type = {
         is_subject_of_type = islamic_sultanate
         is_subject_of_type = islamic_taifa
         is_subject_of_type = islamic_malikate
-    }
-}
-
-ToR_Muslim_subject_limit_reached = {
-    calc_true_if = {
-        all_subject_country = {
-            OR = {
-                is_subject_of_type = islamic_imamate
-                is_subject_of_type = islamic_grand_muftate
-                is_subject_of_type = islamic_sheikdom
-                is_subject_of_type = islamic_sharifate
-                is_subject_of_type = islamic_governate
-                is_subject_of_type = islamic_emirate
-                is_subject_of_type = islamic_sultanate
-                is_subject_of_type = islamic_taifa
-                is_subject_of_type = islamic_malikate
-            }
-        }
-        amount = 25 #Edited by Prussia as part of checking where the threshold before performance issues start due to subject amount
-    }
-}
-
-is_turkish_beylik_subject_type = {
-    is_subject_of_type = turkish_tributary_beylik_vassal
-}
-
-ToR_Turkish_Beylik_subject_limit_reached = {
-    calc_true_if = {
-        all_subject_country = {
-            is_subject_of_type = turkish_tributary_beylik_vassal
-        }
-        amount = 15 #change this to change the limit of the
+        is_subject_of_type = islamic_nikkah_PU
     }
 }
 
 is_slavic_subject_type = {
     OR = {
         is_subject_of_type = bosnian_banat_kingdom
-        is_subject_of_type = lezhe_league_member
         is_subject_of_type = slavic_vojvodina
         is_subject_of_type = voivodeship
     }
 }
 
-ToR_Slavic_subject_limit_reached = {
-    calc_true_if = {
-        all_subject_country = {
-            OR = {
-                is_subject_of_type = bosnian_banat_kingdom
-                is_subject_of_type = lezhe_league_member
-                is_subject_of_type = slavic_vojvodina
-                is_subject_of_type = voivodeship
-            }
-        }
-        amount = 15 #change this to change the limit of the
+is_theocratic_subject_type = {
+    OR = {
+        is_subject_of_type = european_abbacy
+        is_subject_of_type = european_bishopric
+        is_subject_of_type = european_archbishopric
+    }
+}
+
+is_republican_subject_type = {
+    OR = {
+        is_subject_of_type = feudal_republic
+        is_subject_of_type = merchantlist_republic
+        is_subject_of_type = venetian_republic
+        is_subject_of_type = genoese_commercial_republic
     }
 }
 
@@ -403,12 +406,40 @@ is_ToR_subject_type = {
         is_crown_subject_type = yes
         is_muslim_subject_type = yes
         is_slavic_subject_type = yes
-        is_turkish_beylik_subject_type = yes
+        #is_theocratic_subject_type = yes
+        is_subject_of_type = turkish_tributary_beylik_vassal
+        is_subject_of_type = lezhe_league_member
+    }
+}
+
+is_ToR_rein_in_able = {
+    OR = {
+        is_lordship_subject_type = yes
+        is_barony_subject_type = yes
+        is_viscounty_subject_type = yes
+        is_county_subject_type = yes
+        is_earldom_subject_type = yes
+        is_marquisate_subject_type = yes
+        is_duchy_subject_type = yes
+        is_principality_subject_type = yes
+        is_kingdom_subject_type = yes
+        is_crown_subject_type = yes
+        is_muslim_subject_type = yes
     }
 }
 
 is_colourable_subject_type = {
     NOT = {
         is_subject_of_type = tributary_state
+        is_subject_of_type = brother_kingdom
+    }
+}
+
+ToR_subject_limit_reached = {
+    calc_true_if = {
+        all_subject_country = {
+            is_ToR_subject_type = yes
+        }
+        amount = 25 #Total limit for Subjects -Don, Prussia
     }
 }

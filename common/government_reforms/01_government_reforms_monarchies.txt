@@ -29,6 +29,9 @@ feudalism_reform = {
     legacy_equivalent = feudal_monarchy
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    potential = {
+        is_ToR_subject_type = no
+    }
     modifiers = {
         vassal_income = 0.25
         nobles_influence_modifier = 0.05
@@ -50,6 +53,9 @@ administrative_reform = {
     legacy_equivalent = administrative_monarchy
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    potential = {
+        is_ToR_subject_type = no
+    }
     modifiers = {
         governing_capacity = 150
         production_efficiency = 0.1
@@ -161,6 +167,9 @@ autocracy_reform = {
     legacy_equivalent = despotic_monarchy
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    potential = {
+        is_ToR_subject_type = no
+    }
     modifiers = {
         unjustified_demands = -0.1
         harsh_treatment_cost = -0.1
@@ -178,7 +187,8 @@ autocracy_reform = {
 elective_monarchy_reform = {
     icon = "ballot_box"
     potential = {
-        has_dlc = "Domination"
+        NOT = { tag = POL }
+        is_subject = no
     }
     allow_normal_conversion = yes
     valid_for_nation_designer = yes
@@ -192,7 +202,7 @@ elective_monarchy_reform = {
         has_ruler_election = yes
     }
     ai = {
-        factor = 0.5
+        factor = 0.25
     }
 }
 #VU addition by SF
@@ -2109,6 +2119,7 @@ ottoman_government = {
     icon = "ottoman_government"
     potential = {
         religion_group = muslim
+        government_rank = 8
         OR = {
             AND = {
                 tag = TUR
@@ -2146,18 +2157,9 @@ ottoman_government = {
         has_janissaries = yes
         has_harem = yes
         custom_attributes = {
-            has_tributaries = yes
             has_harem_events = yes
             enables_estate_janissaries = yes
             has_eyalets = yes
-            has_islamic_imamate = yes
-            has_islamic_grand_muftate = yes
-            has_islamic_sheikdom = yes
-            has_islamic_sharifate_reform = yes
-            has_islamic_emirate = yes
-            has_islamic_sultanate = yes
-            has_islamic_malikate = yes
-            has_islamic_taifa = yes
         }
         government_abilities = {
             ottoman_decadence_mechanic
@@ -2971,6 +2973,7 @@ portuguese_monarchy_reform = {
     allow_normal_conversion = yes
     potential = {
         primary_culture = portugese
+        is_ToR_subject_type = no
     }
     nation_designer_trigger = {
         primary_culture = portugese
@@ -3210,240 +3213,6 @@ janissary_autocracy_reform = {
     }
     custom_attributes = {
         force_general_leader = yes
-    }
-    ai = {
-        factor = 1
-    }
-}
-
-admiralty_regime_reform = { #VU 1.37 addition - SF
-    icon = "admiralty_reform"
-    allow_normal_conversion = no
-    potential = {
-        has_dlc = "Domination"
-        OR = {
-            AND = {
-                has_reform = admiralty_regime_reform
-                is_playing_custom_nation = yes
-            }
-            has_idea_group = maritime_ideas
-            has_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = high_admiral_reform
-            has_reform = supreme_admiral_reform
-        }
-    }
-    trigger = {
-        OR = {
-            AND = {
-                has_reform = admiralty_regime_reform
-                is_playing_custom_nation = yes
-            }
-            full_idea_group = maritime_ideas
-            full_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = high_admiral_reform
-            has_reform = supreme_admiral_reform
-        }
-    }
-    fixed_rank = 4
-    queen = no
-    valid_for_nation_designer = yes
-    nation_designer_trigger = {
-        num_of_ports = 1
-    }
-    nation_designer_cost = 40
-    modifiers = {
-        leader_naval_fire = 1
-        naval_tradition_from_battle = 0.5
-        allowed_marine_fraction = 0.1
-        max_admiral_fire = 1
-    }
-    custom_attributes = {
-        cheaper_coastal_province_core = yes
-        force_admiral_leader = yes
-    }
-    effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_port = yes
-                }
-                add_province_modifier = {
-                    name = gov_coastal_government
-                    duration = -1
-                    hidden = yes
-                }
-            }
-        }
-    }
-    removed_effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = gov_coastal_government
-                }
-                remove_province_modifier = gov_coastal_government
-            }
-        }
-    }
-    ai = {
-        factor = 1
-    }
-}
-
-high_admiral_reform = { #Was admiralty_regime_reform but changed in VU v1.37 addition - SF
-    icon = "admiralty_reform"
-    allow_normal_conversion = no
-    potential = {
-        has_dlc = "Domination"
-        OR = {
-            AND = {
-                has_reform = high_admiral_reform
-                is_playing_custom_nation = yes
-            }
-            has_idea_group = maritime_ideas
-            has_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = admiralty_regime_reform
-            has_reform = supreme_admiral_reform
-        }
-    }
-    trigger = {
-        OR = {
-            AND = {
-                has_reform = high_admiral_reform
-                is_playing_custom_nation = yes
-            }
-            full_idea_group = maritime_ideas
-            full_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = admiralty_regime_reform
-            has_reform = supreme_admiral_reform
-        }
-    }
-    fixed_rank = 6
-    queen = no
-    valid_for_nation_designer = yes
-    nation_designer_trigger = {
-        num_of_ports = 1
-    }
-    nation_designer_cost = 40
-    modifiers = {
-        leader_naval_fire = 1
-        naval_tradition_from_battle = 0.5
-        allowed_marine_fraction = 0.1
-        max_admiral_fire = 1
-    }
-    custom_attributes = {
-        cheaper_coastal_province_core = yes
-        force_admiral_leader = yes
-    }
-    effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_port = yes
-                }
-                add_province_modifier = {
-                    name = gov_coastal_government
-                    duration = -1
-                    hidden = yes
-                }
-            }
-        }
-    }
-    removed_effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = gov_coastal_government
-                }
-                remove_province_modifier = gov_coastal_government
-            }
-        }
-    }
-    ai = {
-        factor = 1
-    }
-}
-
-supreme_admiral_reform = { #VU 1.37 addition - SF
-    icon = "admiralty_reform"
-    allow_normal_conversion = no
-    potential = {
-        has_dlc = "Domination"
-        OR = {
-            AND = {
-                has_reform = supreme_admiral_reform
-                is_playing_custom_nation = yes
-            }
-            has_idea_group = maritime_ideas
-            has_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = admiralty_regime_reform
-            has_reform = high_admiral_reform
-        }
-    }
-    trigger = {
-        OR = {
-            AND = {
-                has_reform = supreme_admiral_reform
-                is_playing_custom_nation = yes
-            }
-            full_idea_group = maritime_ideas
-            full_idea_group = naval_ideas
-        }
-        NOT = {
-            has_reform = admiralty_regime_reform
-            has_reform = high_admiral_reform
-        }
-    }
-    fixed_rank = 8
-    queen = no
-    valid_for_nation_designer = yes
-    nation_designer_trigger = {
-        num_of_ports = 1
-    }
-    nation_designer_cost = 40
-    modifiers = {
-        leader_naval_fire = 1
-        naval_tradition_from_battle = 0.5
-        allowed_marine_fraction = 0.1
-        max_admiral_fire = 1
-    }
-    custom_attributes = {
-        cheaper_coastal_province_core = yes
-        force_admiral_leader = yes
-    }
-    effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_port = yes
-                }
-                add_province_modifier = {
-                    name = gov_coastal_government
-                    duration = -1
-                    hidden = yes
-                }
-            }
-        }
-    }
-    removed_effect = {
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = gov_coastal_government
-                }
-                remove_province_modifier = gov_coastal_government
-            }
-        }
     }
     ai = {
         factor = 1
@@ -3979,7 +3748,10 @@ principality = {
     icon = "russian_principality"
     allow_normal_conversion = yes
     potential = {
-        NOT = { has_reform = tsardom }
+        NOT = {
+            is_crown_subject_type = yes
+            is_kingdom_subject_type = yes 
+        }
         religion = orthodox
         OR = {
             culture_group = east_slavic
@@ -9706,6 +9478,23 @@ system_of_councils_reform = {
                 culture_group = iberian
             }
         }
+        NOT = {
+            has_reform = eue_lordship_reform
+            has_reform = eue_barony_reform
+            has_reform = eue_viscounty_reform
+            has_reform = eue_county_reform
+            has_reform = eue_marquisate_reform
+            has_reform = eue_duchy_reform
+            has_reform = eue_principality_reform
+            has_reform = eue_kingdom_reform
+            has_reform = kingdom_of_castile_and_leon
+            has_reform = hispanic_kingdom
+            has_reform = respect_union_reform
+            has_reform = english_monarchy
+            has_reform = british_monarchy
+            has_reform = absolute_british_monarchy
+            has_reform = portuguese_monarchy_reform
+        }
     }
     trigger = {
         OR = {
@@ -10121,9 +9910,6 @@ eue_lordship_reform = { #T1 - Lordship level
         is_lordship_subject_type = yes
     }
     lock_level_when_selected = yes
-    valid_for_nation_designer = no
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
@@ -10145,9 +9931,7 @@ unlocked_eue_lordship_reform = { #T1 - Lordship level
             superregion = europe_superregion
         }
     }
-    valid_for_nation_designer = yes
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
+    fixed_rank = 1
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10172,9 +9956,6 @@ eue_barony_reform = { #T2 - Barony level
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_barony_legacy
-    valid_for_nation_designer = no
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
@@ -10199,9 +9980,7 @@ unlocked_eue_barony_reform = { #T2 - Barony level
         }
         government_rank = 2
     }
-    valid_for_nation_designer = yes
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
+    fixed_rank = 2
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10227,9 +10006,6 @@ eue_viscounty_reform = { #T3 - Viscounty level
         is_viscounty_subject_type = yes
     }
     lock_level_when_selected = yes
-    valid_for_nation_designer = no
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
     }
@@ -10255,9 +10031,7 @@ unlocked_eue_viscounty_reform = { #T3 - Viscounty level
         }
         government_rank = 3
     }
-    valid_for_nation_designer = yes
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
+    fixed_rank = 3
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10282,11 +10056,11 @@ eue_county_reform = { #T4 - County level
     maintain_dynasty = yes
     potential = {
         is_county_subject_type = yes
+        NOT = {
+            is_earldom_subject_type = yes
+        }
     }
     lock_level_when_selected = yes
-    valid_for_nation_designer = no
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10314,9 +10088,7 @@ unlocked_eue_county_reform = { #T4 - County level
         }
         government_rank = 4
     }
-    valid_for_nation_designer = yes
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
+    fixed_rank = 4
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10343,9 +10115,6 @@ eng_earldom_reform = { #T4 - County Level
         is_earldom_subject_type = yes
     }
     lock_level_when_selected = yes
-    valid_for_nation_designer = no
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
     custom_attributes = {
         vu_has_ToR_subjects = yes
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10372,9 +10141,7 @@ unlocked_eng_earldom_reform = { #T4 - County Level
         }
         government_rank = 4
     }
-    valid_for_nation_designer = yes
-    nation_designer_cost = 20
-    nation_designer_trigger = {	}
+    fixed_rank = 4
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10431,6 +10198,7 @@ unlocked_eue_marquisate_reform = { #T5 - Marquisate level
         }
         government_rank = 5
     }
+    fixed_rank = 5
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10483,6 +10251,7 @@ unlocked_eue_duchy_reform = { #T6 - Duchy level
         }
         government_rank = 6
     }
+    fixed_rank = 6
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10536,6 +10305,7 @@ unlocked_eue_principality_reform = { #T7 - Principality level
         }
         government_rank = 7
     }
+    fixed_rank = 7
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10551,7 +10321,7 @@ unlocked_eue_principality_reform = { #T7 - Principality level
     }
 }
 
-eue_kingdom_reform = { #T8 - Kingdom level
+eue_kingdom_reform = { #T8 - Kingdom level #
     icon = "eue_kingdom_reform"
     allow_normal_conversion = no
     lock_level_when_selected = yes
@@ -10560,7 +10330,21 @@ eue_kingdom_reform = { #T8 - Kingdom level
     fixed_rank = 8
     maintain_dynasty = yes
     potential = {
-        is_kingdom_subject_type = yes
+        OR = {
+            is_crown_subject_type = yes
+            is_kingdom_subject_type = yes
+        }
+        NOT = {
+            has_reform = crown_of_aragon
+            has_reform = kingdom_of_castile_and_leon
+            has_reform = hispanic_kingdom
+            has_reform = respect_union_reform
+            has_reform = english_monarchy
+            has_reform = british_monarchy
+            has_reform = absolute_british_monarchy
+            has_reform = portuguese_monarchy_reform
+
+        }
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10580,6 +10364,7 @@ unlocked_eue_kingdom_reform = { #T8 - Kingdom level
     valid_for_nation_designer = no
     potential = {
         NOT = {
+            is_crown_subject_type = yes
             is_kingdom_subject_type = yes
             government_rank = 9
         }
@@ -10588,6 +10373,7 @@ unlocked_eue_kingdom_reform = { #T8 - Kingdom level
         }
         government_rank = 8
     }
+    fixed_rank = 8
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10615,6 +10401,7 @@ unlocked_eue_empire_reform = { #T9 - Empire level
         }
         government_rank = 9
     }
+    fixed_rank = 9
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -11042,58 +10829,6 @@ welsh_principality = {
         global_unrest = -1
         global_tax_modifier = 0.05
         governing_capacity = 75 #No change in VU
-    }
-}
-
-western_principality = {
-    icon = "king"
-    allow_normal_conversion = yes
-    potential = {
-        NOT = { has_reform = revolutionary_empire_reform }
-        NOT = { religion = orthodox }
-        NOT = {
-            primary_culture = celtic_welsh_culture
-        }
-        religion_group = christian
-        OR = {
-            culture_group = brythonic
-            culture_group = british
-            culture_group = french
-            culture_group = germanic
-            culture_group = iberian
-            culture_group = gaelic
-            culture_group = latin
-            culture_group = scandinavian
-            culture_group = illyrian
-            AND = {
-                have_had_reform = western_principality
-            }
-        }
-        #government_rank = 6 #Apparently AI France and Danemark take that reform, hopefully that should stop that from happening
-    }
-    fixed_rank = 7
-    valid_for_nation_designer = yes
-    nation_designer_cost = 5
-    nation_designer_trigger = {
-        NOT = { has_reform = revolutionary_empire_reform }
-        NOT = { religion = orthodox }
-        religion_group = christian
-        OR = {
-            culture_group = brythonic
-            culture_group = british
-            culture_group = french
-            culture_group = germanic
-            culture_group = gaelic
-            culture_group = iberian
-            culture_group = latin
-            culture_group = scandinavian
-            culture_group = illyrian
-        }
-    }
-    modifiers = {
-        global_unrest = -1
-        global_tax_modifier = 0.05
-        governing_capacity = 75  #No change in VU
     }
 }
 

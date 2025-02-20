@@ -1,0 +1,1870 @@
+#All Theocracy government names go here, at the top add the specific ones, the further down the file, the more generic they get. 
+#Game will pick the first applicable government name from this file.
+#Contributors: Don, Modus, Prussia
+#Contains Original and modified entries from Victorum Universalis, Vanilla, Missions Expanded and Government's Expanded, they were all transformatively changed according
+#to the DMCA. Permissions were granted for all entries by the constituent parties.
+#########################
+##	Asian Theocracies  ##
+#########################
+#Japan
+ikko_ikki_temple = {
+    rank = {
+        5 = IKKO_IKKI_ORDER
+    }
+    ruler_male = {
+        5 = MONSHU
+    }
+    consort_female = {
+        5 = HAIGUSHA_fem
+    }
+    heir_male = {
+        5 = MONK
+    }
+    trigger = {
+        has_reform = ikko_ikki_reform
+    }
+}
+asian_monastic_order = {
+    rank = {
+        5 = WARRIOR_MONK_ORDER
+    }
+    ruler_male = {
+        5 = MONSHU
+    }
+    consort_female = {
+        5 = HAIGUSHA_fem
+    }
+    heir_male = {
+        5 = MONK
+    }
+    trigger = {
+        has_reform = asian_monastic_order_reform
+        OR = {
+            religion_group = eastern
+            culture_group = japanese_g
+            capital_scope = {
+                region = japan_region
+            }
+        }
+    }
+}
+##########################
+##  Muslim Theocracies  ##
+##########################
+#Caliphates
+timurid_amirate_reform = { #Timurid Caliphate
+    rank = {
+        9 = AMIRATE
+    }
+    ruler_male = {
+        9 = AMIR
+    }
+    consort_female = {
+        9 = AMIRA_CONSORT_fem
+    }
+    heir_male = {
+        9 = SHAZADEH
+    }
+    trigger = {
+        has_reform = timurid_amirate_reform
+    }
+}
+turkic_ghazinate_reform = { #Turkic Caliphate
+    rank = {
+        8 = GHAZINATE
+        9 = GRAND_GHAZINATE
+    }
+    ruler_male = {
+        8 = GHAZI
+        9 = GRAND_GHAZI
+    }
+    consort_female = {
+        8 = HATUN_BEGUM_CONSORT_fem
+        9 = HATUN_BEGUM_CONSORT_fem
+    }
+    heir_male = {
+        8 = ORHAN
+        9 = ORHAN
+    }
+    trigger = {
+        OR = {
+            has_reform = ghazi_reform
+            AND = {
+                government_rank = 8
+                culture_group = turkish_g
+            }
+        }
+    }
+}
+caliphate_sunni = { #Sunni Caliphate
+    rank = {
+        9 = CALIPHATE
+    }
+    ruler_male = {
+        9 = CALIPH
+    }
+    consort_female = {
+        9 = SAYIDA_CONSORT_fem
+    }
+    heir_male = {
+        9 = SHAHZADE
+    }
+    trigger = {
+        ME_is_caliphate_trigger = yes
+        NOT = { religion = shiite }
+    }
+}
+ayatollah_shiite = { #Persian Caliphate
+    rank = {
+        9 = AYATOLLATE
+    }
+    ruler_male = {
+        9 = AYATOLLAH
+    }
+    consort_female = {
+        9 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        9 = SHAZADEH
+    }
+    trigger = {
+        ME_is_caliphate_trigger = yes
+        NOT = { religion = sunni }
+    }
+}
+########################
+##	Islamic Subjects  ##
+########################
+sunni_subject = {
+    rank = {
+        1 = IMAMATE
+        2 = GRAND_MUFTATE_VU
+        3 = SHEIKHDOM
+        4 = SHARIFATE
+        5 = EMIRATE
+        6 = SULTANATE
+        7 = TAIFATE_VU
+        8 = MALEKATE_VU
+    }
+    ruler_male = {
+        1 = IMAM
+        2 = GRAND_MUFTI_VU
+        3 = SHEIKH
+        4 = SHARIF
+        5 = EMIR
+        6 = SULTAN
+        7 = TAIF_VU
+        8 = MALIK
+    }
+    consort_female = {
+        1 = SAYIDA_CONSORT_fem
+        2 = SAYIDA_CONSORT_fem
+        3 = SAYIDA_CONSORT_fem
+        4 = SAYIDA_CONSORT_fem
+        5 = SAYIDA_CONSORT_fem
+        6 = SAYIDA_CONSORT_fem
+        7 = SAYIDA_CONSORT_fem
+        8 = SAYIDA_CONSORT_fem
+    }
+    heir_male = {
+        1 = EALAM
+        2 = RABA
+        3 = RABA
+        4 = RABA
+        5 = RABA
+        6 = SHAHZADE
+        7 = SHAHZADE
+        8 = SHAHZADE
+    }
+    trigger = {
+        OR = {
+			is_muslim_subject_type = yes
+			has_ToR_muslim_government_reform = yes
+        }
+        NOT = { religion = shiite }
+    }
+}
+shiite_subject = {
+    rank = {
+        1 = MULLAHATE
+        2 = GRAND_MUFTATE_VU
+        3 = SHEIKHDOM
+        4 = SHARIFATE
+        5 = SOYURGHATE_VU
+        6 = SALTANATE
+        7 = TAIFATE_VU
+        8 = MOLKEHATE
+    }
+    ruler_male = {
+        1 = MULLAH
+        2 = GRAND_MUFTI_VU
+        3 = SHEIKH
+        4 = SHARIF
+        5 = SOYURGHAL_VU
+        6 = SALTAN
+        7 = TAIF_VU
+        8 = MOLK
+    }
+    consort_female = {
+        1 = KHANUM_CONSORT_fem
+        2 = KHANUM_CONSORT_fem
+        3 = KHANUM_CONSORT_fem
+        4 = KHANUM_CONSORT_fem
+        5 = KHANUM_CONSORT_fem
+        6 = KHANUM_CONSORT_fem
+        7 = KHANUM_CONSORT_fem
+        8 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        1 = ARBAB
+        2 = ARBAB
+        3 = ARBAB
+        4 = ARBAB
+        5 = ARBAB
+        6 = SHAZADEH
+        7 = SHAZADEH
+        8 = SHAZADEH
+    }
+    trigger = {
+        OR = {
+            is_muslim_subject_type = yes
+            has_ToR_muslim_government_reform = yes
+        }
+        NOT = { religion = sunni }
+    }
+}
+#############################
+##	Christian Theocracies  ##
+#############################
+savonarola_unique = {
+    rank = {
+        6 = SAVANAROLA_GOVERNMENT
+        7 = SAVANAROLA_GOVERNMENT
+    }
+    ruler_male = {
+        6 = BROTHER
+        7 = BROTHER
+    }
+    heir_male = {
+        6 = CONGREGAZIONE
+        7 = CONGREGAZIONE
+    }
+    trigger = {
+        has_reform = church_of_italy_archbishopric_reform
+        OR = {
+            tag = FER
+            tag = LAN
+        }
+    }
+}
+gov_papal_government = {
+    rank = {
+        8 = PAPACY
+    }
+    ruler_male = {
+        8 = POPE
+    }
+    heir_male = {
+        8 = PREFERATI_VU
+    }
+    trigger = {
+        has_reform = papacy_reform
+    }
+}
+brewing_order = {
+    rank = {
+        5 = TRAPPIST_STATE
+    }
+    ruler_male = {
+        5 = TRAPPIST
+    }
+    heir_male = {
+        5 = LORD
+    }
+    trigger = {
+        has_reform = monastic_breweries_reform
+        religion = catholic
+    }
+}
+livonian_monastic_order = {
+    rank = {
+        5 = LIV_MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = LIV_COUNTRY_MASTER
+    }
+    heir_male = {
+        5 = LIV_MONK
+    }
+    trigger = {
+        has_reform = monastic_order_reform
+        tag = LIV
+    }
+}
+knights_monastic_order = {
+    rank = {
+        5 = KNI_MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = KNI_GRAND_MASTER
+    }
+    heir_male = {
+        5 = KNI_COMMANDER
+    }
+    trigger = {
+        has_reform = monastic_order_reform
+        tag = KNI
+    }
+}
+northerner_king_monastic_order = {
+    rank = {
+        5 = BLACK_KNIGHTS
+    }
+    ruler_male = {
+        5 = FIRST_RANGER
+    }
+    consort_female = {
+        5 = CONSORT_fem
+    }
+    heir_male = {
+        5 = RANGER
+    }
+    trigger = {
+        has_reform = commander_king_reform
+        OR = {
+            tag = NOL
+            capital_scope = {
+                area = yorkshire_area
+            }
+            capital_scope = {
+                area = scottish_marches_area
+            }
+        }
+    }
+}
+northerner_monastic_order = {
+    rank = {
+        5 = BLACK_WATCH
+    }
+    ruler_male = {
+        5 = LORD_COMMANDER
+    }
+    consort_female = {
+        5 = CONSORT_fem
+    }
+    heir_male = {
+        5 = SIR
+    }
+    trigger = {
+        has_reform = monastic_order_reform
+        OR = {
+            tag = NOL
+            capital_scope = {
+                area = yorkshire_area
+            }
+            capital_scope = {
+                area = scottish_marches_area
+            }
+        }
+    }
+}
+gov_religious_order_of_jerusalem = {
+    rank = {
+        5 = MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = GRAND_MASTER
+    }
+    heir_male = {
+        5 = MONK
+    }
+    trigger = {
+        OR = {
+            has_reform = monastic_order_reform
+            AND = {
+                government = theocracy
+                tag = KOJ
+            }
+        }
+    }
+}
+sisters_crusader_state = {
+    rank = {
+        5 = SISTERHOOD
+    }
+    ruler_female = {
+        5 = ABBESS_fem
+    }
+    heir_female = {
+        5 = SISTER_fem
+    }
+    trigger = {
+        OR = {
+            AND = {
+                has_reform = holy_state_reform
+                has_country_modifier = sisters_takeover
+            }
+            has_reform = sisterhood_of_jeanne_darc_reform
+        }
+    }
+}
+germanic_monastic_order = {
+    rank = {
+        5 = GER_MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = GER_GRAND_MASTER
+    }
+    heir_male = {
+        5 = GER_MONK
+    }
+    trigger = {
+        OR = {
+            has_reform = monastic_order_reform
+            AND = {
+                government = theocracy
+                has_reform = holy_state_reform
+            }
+        }
+        culture_group = germanic
+    }
+}
+teutonic_monastic_order = {
+    rank = {
+        5 = TEU_MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = TEU_HIGH_CHAMPION
+    }
+    heir_male = {
+        5 = TEU_WARRIOR_MONK
+    }
+    trigger = {
+        has_reform = monastic_order_reform
+        tag = TEU
+    }
+}
+imperial_abbacy = {
+    rank = {
+        1 = IMPERIAL_ABBACY
+    }
+    ruler_male = {
+        1 = IMPERIAL_ABBOT
+    }
+
+    ruler_female = {
+        1 = IMPERIAL_ABBESS_fem
+    }
+    trigger = {
+        has_reform = imperial_abbacy_reform
+    }
+}
+ellwangen_abbacy = {
+    rank = {
+        2 = ELWANGEN_ABBACY
+    }
+
+    ruler_male = {
+        2 = ELWANGEN_ABBOT
+    }
+
+    ruler_female = {
+        2 = ELWANGEN_ABBESS_fem
+    }
+
+    trigger = {
+        tag = ELW
+        has_reform = prince_provost_reform
+    }
+}
+prince_pencil_kempten = {
+    rank = {
+        2 = PRINCE_PENCIL_ABBACY
+    }
+
+    ruler_male = {
+        2 = PRINCE_PENCIL_ABBOT
+    }
+
+    ruler_female = {
+        2 = PRINCE_PENCIL_ABBESS_fem
+    }
+
+    trigger = {
+        has_reform = prince_pencil_reform
+    }
+}
+german_ecclesiastical_principality = {
+    rank = {
+        7 = GERMAN_ECCLESIASTICAL_PRINCIPALITY
+    }
+    ruler_male = {
+        7 = GERMAN_ECCLESIASTICAL_PRINCE
+    }
+    trigger = {
+        culture_group = germanic
+        has_reform = leading_clergy_reform
+    }
+}
+#More Generic Churches Reforms
+church_of_bohemia = {
+    rank = {
+        1 = BOHEMIA_ABBACY
+        2 = BOHEMIA_PRINCE_ABBACY
+        3 = BOHEMIA_BISHOPRIC
+        4 = BOHEMIA_PRINCE_BISHOPRIC
+        5 = BOHEMIA_ARCHBISHOPRIC
+        6 = BOHEMIA_PRINCE_ARCHBISHOPRIC
+        7 = BOHEMIA_CARDINALATE
+    }
+    ruler_male = {
+        1 = BOHEMIA_ABBOT
+        2 = BOHEMIA_PRINCE_ABBOT
+        3 = BOHEMIA_BISHOP
+        4 = BOHEMIA_PRINCE_BISHOP
+        5 = BOHEMIA_ARCHBISHOP
+        6 = BOHEMIA_ARCHBISHOP
+        7 = BOHEMIA_CARDINAL
+    }
+    ruler_female = {
+        1 = BOHEMIA_ABBESS_fem
+        2 = BOHEMIA_PRINCESS_ABBESS_fem
+        3 = BOHEMIA_PRINCESS_ABBESS_fem
+        4 = BOHEMIA_PRINCESS_ABBESS_fem
+        5 = BOHEMIA_PRINCESS_ABBESS_fem
+        6 = BOHEMIA_PRINCESS_ABBESS_fem
+        7 = BOHEMIA_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = BOHEMIA_MONK
+        2 = BOHEMIA_MONK
+        3 = BOHEMIA_FATHER
+        4 = BOHEMIA_FATHER
+        5 = BOHEMIA_BISHOP
+        6 = BOHEMIA_ARCHBISHOP
+        7 = BOHEMIA_ARCHBISHOP
+    }
+    heir_female = {
+        1 = BOHEMIA_MOTHER_SUPERIOR_fem
+        2 = BOHEMIA_MOTHER_SUPERIOR_fem
+        3 = BOHEMIA_MOTHER_SUPERIOR_fem
+        4 = BOHEMIA_MOTHER_SUPERIOR_fem
+        5 = BOHEMIA_MOTHER_SUPERIOR_fem
+        6 = BOHEMIA_MOTHER_SUPERIOR_fem
+        7 = BOHEMIA_MOTHER_SUPERIOR_fem
+    }
+    trigger = {
+        OR = {
+            primary_culture = czech
+            primary_culture = kashubian_culture
+            primary_culture = moravian
+            primary_culture = polabian_culture
+            primary_culture = slovak
+            primary_culture = sorbian
+            primary_culture = wendish
+        }
+        OR = {
+            has_reform = church_of_bohemia_abbacy_reform
+            has_reform = church_of_bohemia_bishopric_reform
+            has_reform = church_of_bohemia_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_switzerland = {
+    rank = {
+        1 = SWISS_ABBACY
+        2 = SWISS_PRINCE_ABBACY
+        3 = SWISS_BISHOPRIC
+        4 = SWISS_PRINCE_BISHOPRIC
+        5 = SWISS_ARCHBISHOPRIC
+        6 = SWISS_PRINCE_ARCHBISHOPRIC
+        7 = SWISS_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = SWISS_ABBOT
+        2 = SWISS_PRINCE_ABBOT
+        3 = SWISS_BISHOP
+        4 = SWISS_PRINCE_BISHOP
+        5 = SWISS_ARCHBISHOP
+        6 = SWISS_ARCHBISHOP
+        7 = SWISS_CARDINAL
+    }
+    ruler_female = {
+        1 = SWISS_ABBESS_fem
+        2 = SWISS_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = SWISS_FATHER
+        2 = SWISS_FATHER
+        3 = SWISS_FATHER
+        4 = SWISS_FATHER
+        5 = SWISS_BISHOP
+        6 = SWISS_ARCHBISHOP
+        7 = SWISS_ARCHBISHOP
+    }
+    heir_female = {
+        1 = SWISS_SISTER_fem
+        2 = SWISS_SISTER_fem
+    }
+    trigger = {
+        OR = {
+            primary_culture = swiss
+            primary_culture = romanch_culture
+        }
+        OR = {
+            has_reform = church_of_switzerland_abbacy_reform
+            has_reform = church_of_switzerland_bishopric_reform
+            has_reform = church_of_switzerland_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_lotharingia = {
+    rank = {
+        1 = DUTCH_ABBACY
+        2 = DUTCH_PRINCE_ABBACY
+        3 = DUTCH_BISHOPRIC
+        4 = DUTCH_PRINCE_BISHOPRIC
+        5 = DUTCH_ARCHBISHOPRIC
+        6 = DUTCH_PRINCE_ARCHBISHOPRIC
+        7 = DUTCH_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = DUTCH_ABBOT
+        2 = DUTCH_PRINCE_ABBOT
+        3 = DUTCH_BISHOP
+        4 = DUTCH_PRINCE_BISHOP
+        5 = DUTCH_ARCHBISHOP
+        6 = DUTCH_ARCHBISHOP
+        7 = DUTCH_CARDINAL
+    }
+    ruler_female = {
+        1 = DUTCH_ABBESS_fem
+        2 = DUTCH_PRINCESS_ABBESS_fem
+        3 = DUTCH_PRINCESS_ABBESS_fem
+        4 = DUTCH_PRINCESS_ABBESS_fem
+        5 = DUTCH_PRINCESS_ABBESS_fem
+        6 = DUTCH_PRINCESS_ABBESS_fem
+        7 = DUTCH_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = DUTCH_FATHER
+        2 = DUTCH_FATHER
+        3 = DUTCH_FATHER
+        4 = DUTCH_FATHER
+        5 = DUTCH_BISHOP
+        6 = DUTCH_ARCHBISHOP
+        7 = DUTCH_ARCHBISHOP
+    }
+    heir_female = {
+        1 = DUTCH_SISTER_fem
+        2 = DUTCH_SISTER_fem
+        3 = DUTCH_SISTER_fem
+        4 = DUTCH_SISTER_fem
+        5 = DUTCH_SISTER_fem
+        6 = DUTCH_SISTER_fem
+        7 = DUTCH_SISTER_fem
+    }
+    trigger = {
+        OR = {
+            primary_culture = ger_dutch
+            primary_culture = ger_brabantian
+            primary_culture = ger_dutch_saxon
+            primary_culture = ger_zeelandic
+            primary_culture = ger_limburgish
+            primary_culture = ger_guelders
+            primary_culture = ger_flemish
+            primary_culture = ger_frisian
+            primary_culture = ger_east_frisian
+            primary_culture = ger_north_frisian
+            primary_culture = wallonian
+            culture_group = low_franconian
+        }
+        OR = {
+            has_reform = church_of_lotharingia_abbacy_reform
+            has_reform = church_of_lotharingia_bishopric_reform
+            has_reform = church_of_lotharingia_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_baltics = {
+    rank = {
+        1 = BALTICS_ABBACY
+        2 = BALTICS_PRINCE_ABBACY
+        3 = BALTICS_BISHOPRIC
+        4 = BALTICS_PRINCE_BISHOPRIC
+        5 = BALTICS_ARCHBISHOPRIC
+        6 = BALTICS_PRINCE_ARCHBISHOPRIC
+        7 = BALTICS_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = BALTICS_ABBOT
+        2 = BALTICS_PRINCE_ABBOT
+        3 = BALTICS_BISHOP
+        4 = BALTICS_PRINCE_BISHOP
+        5 = BALTICS_ARCHBISHOP
+        6 = BALTICS_ARCHBISHOP
+        7 = BALTICS_CARDINAL
+    }
+    ruler_female = {
+        1 = BALTICS_ABBESS_fem
+        2 = BALTICS_PRINCESS_ABBESS_fem
+        3 = BALTICS_PRINCESS_ABBESS_fem
+        4 = BALTICS_PRINCESS_ABBESS_fem
+        5 = BALTICS_PRINCESS_ABBESS_fem
+        6 = BALTICS_PRINCESS_ABBESS_fem
+        7 = BALTICS_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = BALTICS_FATHER
+        2 = BALTICS_FATHER
+        3 = BALTICS_FATHER
+        4 = BALTICS_FATHER
+        5 = BALTICS_BISHOP
+        6 = BALTICS_ARCHBISHOP
+        7 = BALTICS_ARCHBISHOP
+    }
+    heir_female = {
+        1 = BALTICS_SISTER_fem
+        2 = BALTICS_SISTER_fem
+        3 = BALTICS_SISTER_fem
+        4 = BALTICS_SISTER_fem
+        5 = BALTICS_SISTER_fem
+        6 = BALTICS_SISTER_fem
+        7 = BALTICS_SISTER_fem
+    }
+    trigger = {
+        OR = {
+            culture_group = baltic
+            culture_group = finno_ugric
+        }
+        OR = {
+            has_reform = church_of_baltics_abbacy_reform
+            has_reform = church_of_baltics_bishopric_reform
+            has_reform = church_of_baltics_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_england = {
+    rank = {
+        1 = EAB_ABBACY_1
+        2 = EAB_PRINCE_ABBACY_1
+        3 = EAB_BISHOPRIC_1
+        4 = EAB_PRINCE_BISHOPRIC_1
+        5 = EAB_ARCHBISHOPRIC_1
+        6 = EAB_PRINCE_ARCHBISHOPRIC_1
+        7 = EAB_METROPOLITANATE_1
+    }
+    ruler_male = {
+        1 = EAB_ABBOT_1
+        2 = EAB_PRINCE_ABBOT_1
+        3 = EAB_BISHOP_1
+        4 = EAB_PRINCE_BISHOP_1
+        5 = EAB_ARCHBISHOP_1
+        6 = EAB_PRINCE_ARCHBISHOP_1
+        7 = EAB_CARDINAL_1
+    }
+    ruler_female = {
+        1 = EAB_ABBESS_fem_1
+        2 = EAB_PRINCESS_ABBESS_fem_1
+        3 = EAB_FATHER_1
+        4 = EAB_FATHER_1
+        5 = EAB_BISHOP_1
+        6 = EAB_ARCHBISHOP_1
+        7 = EAB_ARCHBISHOP_1
+    }
+    heir_male = {
+        1 = EAB_FATHER_1
+        2 = EAB_FATHER_1
+        3 = EAB_FATHER_1
+        4 = EAB_FATHER_1
+        5 = EAB_FATHER_1
+        6 = EAB_FATHER_1
+        7 = EAB_FATHER_1
+    }
+    heir_female = {
+        1 = EAB_SISTER_fem_1
+        2 = EAB_SISTER_fem_1
+        3 = EAB_SISTER_fem_1
+        4 = EAB_SISTER_fem_1
+        5 = EAB_SISTER_fem_1
+        6 = EAB_SISTER_fem_1
+        7 = EAB_SISTER_fem_1
+    }
+    trigger = {
+        culture_group = british
+        OR = {
+            has_reform = church_of_england_abbacy_reform
+            has_reform = church_of_england_bishopric_reform
+            has_reform = church_of_england_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_france = {
+    rank = {
+        1 = FRENCH_ABBACY
+        2 = FRENCH_PRINCE_ABBACY
+        3 = FRENCH_BISHOPRIC
+        4 = FRENCH_PRINCE_BISHOPRIC
+        5 = FRENCH_ARCHBISHOPRIC
+        6 = FRENCH_PRINCE_ARCHBISHOPRIC
+        7 = FRENCH_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = FRENCH_ABBOT
+        2 = FRENCH_PRINCE_ABBOT
+        3 = FRENCH_BISHOP
+        4 = FRENCH_PRINCE_BISHOP
+        5 = FRENCH_ARCHBISHOP
+        6 = FRENCH_ARCHBISHOP
+        7 = FRENCH_CARDINAL
+    }
+    ruler_female = {
+        1 = FRENCH_ABBESS_fem
+        2 = FRENCH_PRINCESS_ABBESS_fem
+        3 = FRENCH_PRINCESS_ABBESS_fem
+        4 = FRENCH_PRINCESS_ABBESS_fem
+        5 = FRENCH_PRINCESS_ABBESS_fem
+        6 = FRENCH_PRINCESS_ABBESS_fem
+        7 = FRENCH_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = FRENCH_FATHER
+        2 = FRENCH_FATHER
+        3 = FRENCH_FATHER
+        4 = FRENCH_FATHER
+        5 = FRENCH_BISHOP
+        6 = FRENCH_ARCHBISHOP
+        7 = FRENCH_ARCHBISHOP
+    }
+    heir_female = {
+        1 = FRENCH_SISTER_fem
+        2 = FRENCH_SISTER_fem
+        3 = FRENCH_SISTER_fem
+        4 = FRENCH_SISTER_fem
+        5 = FRENCH_SISTER_fem
+        6 = FRENCH_SISTER_fem
+        7 = FRENCH_SISTER_fem
+    }
+    trigger = {
+        culture_group = french
+        OR = {
+            has_reform = church_of_france_abbacy_reform
+            has_reform = church_of_france_bishopric_reform
+            has_reform = church_of_france_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_germany = {
+    rank = {
+        1 = GERMAN_ABBACY
+        2 = GERMAN_PRINCE_ABBACY
+        3 = GERMAN_BISHOPRIC
+        4 = GERMAN_PRINCE_BISHOPRIC
+        5 = GERMAN_ARCHBISHOPRIC
+        6 = GERMAN_PRINCE_ARCHBISHOPRIC
+        7 = GERMAN_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = GERMAN_ABBOT
+        2 = GERMAN_PRINCE_ABBOT
+        3 = GERMAN_BISHOP
+        4 = GERMAN_PRINCE_BISHOP
+        5 = GERMAN_ARCHBISHOP
+        6 = GERMAN_ARCHBISHOP
+        7 = GERMAN_CARDINAL
+    }
+    ruler_female = {
+        1 = GERMAN_ABBESS_fem
+        2 = GERMAN_PRINCESS_ABBESS_fem
+        3 = GERMAN_PRINCESS_ABBESS_fem
+        4 = GERMAN_PRINCESS_ABBESS_fem
+        5 = GERMAN_PRINCESS_ABBESS_fem
+        6 = GERMAN_PRINCESS_ABBESS_fem
+        7 = GERMAN_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = GERMAN_FATHER
+        2 = GERMAN_FATHER
+        3 = GERMAN_FATHER
+        4 = GERMAN_FATHER
+        5 = GERMAN_BISHOP
+        6 = GERMAN_ARCHBISHOP
+        7 = GERMAN_ARCHBISHOP
+    }
+    heir_female = {
+        1 = GERMAN_SISTER_fem
+        2 = GERMAN_SISTER_fem
+        3 = GERMAN_SISTER_fem
+        4 = GERMAN_SISTER_fem
+        5 = GERMAN_SISTER_fem
+        6 = GERMAN_SISTER_fem
+        7 = GERMAN_SISTER_fem
+    }
+    trigger = {
+        culture_group = germanic
+        OR = {
+            has_reform = church_of_germany_abbacy_reform
+            has_reform = church_of_germany_bishopric_reform
+            has_reform = church_of_germany_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_balkans = {
+    rank = {
+        1 = BALKAN_ABBACY
+        2 = BALKAN_PRINCE_ABBACY
+        3 = BALKAN_BISHOPRIC
+        4 = BALKAN_PRINCE_BISHOPRIC
+        5 = BALKAN_ARCHBISHOPRIC
+        6 = BALKAN_PRINCE_ARCHBISHOPRIC
+        7 = BALKAN_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = BALKAN_ABBOT
+        2 = BALKAN_PRINCE_ABBOT
+        3 = BALKAN_BISHOP
+        4 = BALKAN_PRINCE_BISHOP
+        5 = BALKAN_ARCHBISHOP
+        6 = BALKAN_ARCHBISHOP
+        7 = BALKAN_CARDINAL
+    }
+    ruler_female = {
+        1 = BALKAN_ABBESS_fem
+        2 = BALKAN_PRINCESS_ABBESS_fem
+        3 = BALKAN_PRINCESS_ABBESS_fem
+        4 = BALKAN_PRINCESS_ABBESS_fem
+        5 = BALKAN_PRINCESS_ABBESS_fem
+        6 = BALKAN_PRINCESS_ABBESS_fem
+        7 = BALKAN_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = BALKAN_FATHER
+        2 = BALKAN_FATHER
+        3 = BALKAN_FATHER
+        4 = BALKAN_FATHER
+        5 = BALKAN_BISHOP
+        6 = BALKAN_ARCHBISHOP
+        7 = BALKAN_ARCHBISHOP
+    }
+    heir_female = {
+        1 = BALKAN_SISTER_fem
+        2 = BALKAN_SISTER_fem
+        3 = BALKAN_SISTER_fem
+        4 = BALKAN_SISTER_fem
+        5 = BALKAN_SISTER_fem
+        6 = BALKAN_SISTER_fem
+        7 = BALKAN_SISTER_fem
+    }
+    trigger = {
+        culture_group = south_slavic
+        OR = {
+            has_reform = church_of_balkans_abbacy_reform
+            has_reform = church_of_balkans_bishopric_reform
+            has_reform = church_of_balkans_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_italy = {
+    rank = {
+        1 = ITALIAN_ABBACY
+        2 = ITALIAN_PRINCE_ABBACY
+        3 = ITALIAN_BISHOPRIC
+        4 = ITALIAN_PRINCE_BISHOPRIC
+        5 = ITALIAN_ARCHBISHOPRIC
+        6 = ITALIAN_PRINCE_ARCHBISHOPRIC
+        7 = ITALIAN_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = ITALIAN_ABBOT
+        2 = ITALIAN_PRINCE_ABBOT
+        3 = ITALIAN_BISHOP
+        4 = ITALIAN_PRINCE_BISHOP
+        5 = ITALIAN_ARCHBISHOP
+        6 = ITALIAN_ARCHBISHOP
+        7 = ITALIAN_CARDINAL
+    }
+    ruler_female = {
+        1 = ITALIAN_ABBESS_fem
+        2 = ITALIAN_PRINCESS_ABBESS_fem
+        3 = ITALIAN_PRINCESS_ABBESS_fem
+        4 = ITALIAN_PRINCESS_ABBESS_fem
+        5 = ITALIAN_PRINCESS_ABBESS_fem
+        6 = ITALIAN_PRINCESS_ABBESS_fem
+        7 = ITALIAN_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = ITALIAN_FATHER
+        2 = ITALIAN_FATHER
+        3 = ITALIAN_FATHER
+        4 = ITALIAN_FATHER
+        5 = ITALIAN_BISHOP
+        6 = ITALIAN_ARCHBISHOP
+        7 = ITALIAN_ARCHBISHOP
+    }
+    heir_female = {
+        1 = ITALIAN_SISTER_fem
+        2 = ITALIAN_SISTER_fem
+        3 = ITALIAN_SISTER_fem
+        4 = ITALIAN_SISTER_fem
+        5 = ITALIAN_SISTER_fem
+        6 = ITALIAN_SISTER_fem
+        7 = ITALIAN_SISTER_fem
+    }
+    trigger = {
+        culture_group = latin
+        OR = {
+            has_reform = church_of_italy_abbacy_reform
+            has_reform = church_of_italy_bishopric_reform
+            has_reform = church_of_italy_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_poland = {
+    rank = {
+        1 = POLAND_ABBACY
+        2 = POLAND_PRINCE_ABBACY
+        3 = POLAND_BISHOPRIC
+        4 = POLAND_PRINCE_BISHOPRIC
+        5 = POLAND_ARCHBISHOPRIC
+        6 = POLAND_PRINCE_ARCHBISHOPRIC
+        7 = POLAND_CARDINALATE
+    }
+    ruler_male = {
+        1 = POLAND_ABBOT
+        2 = POLAND_PRINCE_ABBOT
+        3 = POLAND_BISHOP
+        4 = POLAND_PRINCE_BISHOP
+        5 = POLAND_ARCHBISHOP
+        6 = POLAND_ARCHBISHOP
+        7 = POLAND_CARDINAL
+    }
+    ruler_female = {
+        1 = POLAND_ABBESS_fem
+        2 = POLAND_PRINCESS_ABBESS_fem
+        3 = POLAND_PRINCESS_ABBESS_fem
+        4 = POLAND_PRINCESS_ABBESS_fem
+        5 = POLAND_PRINCESS_ABBESS_fem
+        6 = POLAND_PRINCESS_ABBESS_fem
+        7 = POLAND_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = POLAND_MONK
+        2 = POLAND_MONK
+        3 = POLAND_FATHER
+        4 = POLAND_FATHER
+        5 = POLAND_BISHOP
+        6 = POLAND_ARCHBISHOP
+        7 = POLAND_ARCHBISHOP
+    }
+    heir_female = {
+        1 = POLAND_MOTHER_SUPERIOR_fem
+        2 = POLAND_MOTHER_SUPERIOR_fem
+        3 = POLAND_MOTHER_SUPERIOR_fem
+        4 = POLAND_MOTHER_SUPERIOR_fem
+        5 = POLAND_MOTHER_SUPERIOR_fem
+        6 = POLAND_MOTHER_SUPERIOR_fem
+        7 = POLAND_MOTHER_SUPERIOR_fem
+    }
+    trigger = {
+        culture_group = west_slavic
+        OR = {
+            has_reform = church_of_poland_abbacy_reform
+            has_reform = church_of_poland_bishopric_reform
+            has_reform = church_of_poland_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+church_of_portugal = {
+    rank = {
+        1 = PORTUGUESE_ABBACY
+        2 = PORTUGUESE_PRINCE_ABBACY
+        3 = PORTUGUESE_BISHOPRIC
+        4 = PORTUGUESE_PRINCE_BISHOPRIC
+        5 = PORTUGUESE_ARCHBISHOPRIC
+        6 = PORTUGUESE_PRINCE_ARCHBISHOPRIC
+        7 = PORTUGUESE_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = PORTUGUESE_ABBOT
+        2 = PORTUGUESE_PRINCE_ABBOT
+        3 = PORTUGUESE_BISHOP
+        4 = PORTUGUESE_PRINCE_BISHOP
+        5 = PORTUGUESE_ARCHBISHOP
+        6 = PORTUGUESE_ARCHBISHOP
+        7 = PORTUGUESE_CARDINAL
+    }
+    ruler_female = {
+        1 = PORTUGUESE_ABBESS_fem
+        2 = PORTUGUESE_PRINCESS_ABBESS_fem
+        3 = PORTUGUESE_PRINCESS_ABBESS_fem
+        4 = PORTUGUESE_PRINCESS_ABBESS_fem
+        5 = PORTUGUESE_PRINCESS_ABBESS_fem
+        6 = PORTUGUESE_PRINCESS_ABBESS_fem
+        7 = PORTUGUESE_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = PORTUGUESE_FATHER
+        2 = PORTUGUESE_FATHER
+        3 = PORTUGUESE_FATHER
+        4 = PORTUGUESE_FATHER
+        5 = PORTUGUESE_BISHOP
+        6 = PORTUGUESE_ARCHBISHOP
+        7 = PORTUGUESE_ARCHBISHOP
+    }
+    heir_female = {
+        1 = PORTUGUESE_SISTER_fem
+        2 = PORTUGUESE_SISTER_fem
+        3 = PORTUGUESE_SISTER_fem
+        4 = PORTUGUESE_SISTER_fem
+        5 = PORTUGUESE_SISTER_fem
+        6 = PORTUGUESE_SISTER_fem
+        7 = PORTUGUESE_SISTER_fem
+    }
+    trigger = {
+		OR = {
+            primary_culture = brazilian
+            primary_culture = portugese
+        }
+        OR = {
+            has_reform = church_of_portugal_abbacy_reform
+            has_reform = church_of_portugal_bishopric_reform
+            has_reform = church_of_portugal_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+
+church_of_catalonia = {
+    rank = {
+        1 = CATALAN_ABBACY
+        2 = CATALAN_PRINCE_ABBACY
+        3 = CATALAN_BISHOPRIC
+        4 = CATALAN_PRINCE_BISHOPRIC
+        5 = CATALAN_ARCHBISHOPRIC
+        6 = CATALAN_PRINCE_ARCHBISHOPRIC
+        7 = CATALAN_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = CATALAN_ABBOT
+        2 = CATALAN_PRINCE_ABBOT
+        3 = CATALAN_BISHOP
+        4 = CATALAN_PRINCE_BISHOP
+        5 = CATALAN_ARCHBISHOP
+        6 = CATALAN_ARCHBISHOP
+        7 = CATALAN_CARDINAL
+    }
+    ruler_female = {
+        1 = CATALAN_ABBESS_fem
+        2 = CATALAN_PRINCESS_ABBESS_fem
+        3 = CATALAN_PRINCESS_ABBESS_fem
+        4 = CATALAN_PRINCESS_ABBESS_fem
+        5 = CATALAN_PRINCESS_ABBESS_fem
+        6 = CATALAN_PRINCESS_ABBESS_fem
+        7 = CATALAN_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = CATALAN_FATHER
+        2 = CATALAN_FATHER
+        3 = CATALAN_FATHER
+        4 = CATALAN_FATHER
+        5 = CATALAN_BISHOP
+        6 = CATALAN_ARCHBISHOP
+        7 = CATALAN_ARCHBISHOP
+    }
+    heir_female = {
+        1 = CATALAN_SISTER_fem
+        2 = CATALAN_SISTER_fem
+        3 = CATALAN_SISTER_fem
+        4 = CATALAN_SISTER_fem
+        5 = CATALAN_SISTER_fem
+        6 = CATALAN_SISTER_fem
+        7 = CATALAN_SISTER_fem
+    }
+    trigger = {
+        OR = {
+            primary_culture = aragonese
+            primary_culture = catalan
+        }
+        OR = {
+            has_reform = church_of_spain_abbacy_reform
+            has_reform = church_of_spain_bishopric_reform
+            has_reform = church_of_spain_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+
+church_of_spain = {
+    rank = {
+        1 = SPANISH_ABBACY
+        2 = SPANISH_PRINCE_ABBACY
+        3 = SPANISH_BISHOPRIC
+        4 = SPANISH_PRINCE_BISHOPRIC
+        5 = SPANISH_ARCHBISHOPRIC
+        6 = SPANISH_PRINCE_ARCHBISHOPRIC
+        7 = SPANISH_METROPOLITANATE
+    }
+    ruler_male = {
+        1 = SPANISH_ABBOT
+        2 = SPANISH_PRINCE_ABBOT
+        3 = SPANISH_BISHOP
+        4 = SPANISH_PRINCE_BISHOP
+        5 = SPANISH_ARCHBISHOP
+        6 = SPANISH_ARCHBISHOP
+        7 = SPANISH_CARDINAL
+    }
+    ruler_female = {
+        1 = SPANISH_ABBESS_fem
+        2 = SPANISH_PRINCESS_ABBESS_fem
+        3 = SPANISH_PRINCESS_ABBESS_fem
+        4 = SPANISH_PRINCESS_ABBESS_fem
+        5 = SPANISH_PRINCESS_ABBESS_fem
+        6 = SPANISH_PRINCESS_ABBESS_fem
+        7 = SPANISH_PRINCESS_ABBESS_fem
+    }
+    heir_male = {
+        1 = SPANISH_FATHER
+        2 = SPANISH_FATHER
+        3 = SPANISH_FATHER
+        4 = SPANISH_FATHER
+        5 = SPANISH_BISHOP
+        6 = SPANISH_ARCHBISHOP
+        7 = SPANISH_ARCHBISHOP
+    }
+    heir_female = {
+        1 = SPANISH_SISTER_fem
+        2 = SPANISH_SISTER_fem
+        3 = SPANISH_SISTER_fem
+        4 = SPANISH_SISTER_fem
+        5 = SPANISH_SISTER_fem
+        6 = SPANISH_SISTER_fem
+        7 = SPANISH_SISTER_fem
+    }
+    trigger = {
+        culture_group = iberian
+        OR = {
+            has_reform = church_of_spain_abbacy_reform
+            has_reform = church_of_spain_bishopric_reform
+            has_reform = church_of_spain_archbishopric_reform
+            is_theocratic_subject_type = yes
+        }
+    }
+}
+
+########################
+##  Religion Generic  ##
+########################
+jewish_theocracy = {
+    rank = {
+        1 = MEDINAT_KODSH
+        2 = MEDINAT_KODSH
+        3 = MEDINAT_KODSH
+        4 = MEDINAT_KODSH
+        5 = MEDINAT_KODSH
+        6 = MEDINAT_KODSH
+        7 = MEDINAT_KODSH
+        8 = MEDINAT_KODSH
+        9 = MEDINAT_KODSH
+    }
+    ruler_male = {
+        1 = SANHEDRIN
+        2 = SANHEDRIN
+        3 = SANHEDRIN
+        4 = SANHEDRIN
+        5 = SANHEDRIN
+        6 = SANHEDRIN
+        7 = SANHEDRIN
+        8 = SANHEDRIN
+        9 = SANHEDRIN
+    }
+    consort_female = {
+        1 = GVERET_fem
+        2 = GVERET_fem
+        3 = GVERET_fem
+        4 = GVERET_fem
+        5 = GVERET_fem
+        6 = GVERET_fem
+        7 = GVERET_fem
+        8 = GVERET_fem
+        9 = GVERET_fem
+    }
+    heir_male = {
+        1 = ADON
+        2 = ADON
+        3 = ADON
+        4 = ADON
+        5 = ADON
+        6 = ADON
+        7 = ADON
+        8 = ADON
+        9 = ADON
+    }
+    trigger = {
+        religion = jewish
+        government = theocracy
+    }
+}
+zoroastrian_theocracy = {
+    rank = {
+        1 = HERBADOM
+        2 = HERBADOM
+        3 = HERBADOM
+        4 = HERBADOM
+        5 = HERBADOM
+        6 = HERBADOM
+        7 = MOBEDOM
+        8 = ZARATHUSTRADOM
+        9 = EAZAM_ZARATHUSTRADOM
+    }
+    ruler_male = {
+        1 = HERBAD
+        2 = HERBAD
+        3 = HERBAD
+        4 = HERBAD
+        5 = HERBAD
+        6 = HERBAD
+        7 = MOBED
+        8 = MOABADAN_MOABAD
+        9 = GRAND_MOABADAN_MOABAD
+    }
+    consort_female = {
+        1 = KHANUM_CONSORT_fem
+        2 = KHANUM_CONSORT_fem
+        3 = KHANUM_CONSORT_fem
+        4 = KHANUM_CONSORT_fem
+        5 = KHANUM_CONSORT_fem
+        6 = KHANUM_CONSORT_fem
+        7 = KHANUM_CONSORT_fem
+        8 = KHANUM_CONSORT_fem
+        9 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        1 = PRORDEGAR
+        2 = PRORDEGAR
+        3 = PRORDEGAR
+        4 = PRORDEGAR
+        5 = PRORDEGAR
+        6 = PRORDEGAR
+        7 = PRORDEGAR
+        8 = PRORDEGAR
+        9 = PRORDEGAR
+    }
+    trigger = {
+        religion = zoroastrian
+        government = theocracy
+    }
+}
+sikh_theocracy = {
+    rank = {
+        1 = JATHEDARI
+        2 = JATHEDARI
+        3 = JATHEDARI
+        4 = JATHEDARI
+        5 = JATHEDARI
+        6 = JATHEDARI
+        7 = UCA_JATHEDARI
+        8 = MISALADARADAMA
+        9 = GRAINDA_MISALADARADAMA
+    }
+    ruler_male = {
+        1 = JATHEDARA
+        2 = JATHEDARA
+        3 = JATHEDARA
+        4 = JATHEDARA
+        5 = JATHEDARA
+        6 = JATHEDARA
+        7 = UCA_JATHEDARA
+        8 = MISALADARA
+        9 = GRAINDA_MISALADARA
+    }
+    consort_female = {
+        1 = LEDI_fem
+        2 = LEDI_fem
+        3 = LEDI_fem
+        4 = LEDI_fem
+        5 = LEDI_fem
+        6 = LEDI_fem
+        7 = LEDI_fem
+        8 = LEDI_fem
+        9 = LEDI_fem
+    }
+    heir_male = {
+        1 = PRABHU
+        2 = PRABHU
+        3 = PRABHU
+        4 = PRABHU
+        5 = PRABHU
+        6 = PRABHU
+        7 = PRABHU
+        8 = PRABHU
+        9 = PRABHU
+    }
+    trigger = {
+        religion = sikhism
+        government = theocracy
+    }
+}
+hindu_theocracy = {
+    rank = {
+        1 = PANDITDOM
+        2 = PANDITDOM
+        3 = PANDITDOM
+        4 = PANDITDOM
+        5 = PANDITDOM
+        6 = PANDITDOM
+        7 = PANDITDOM
+        8 = PANDITDOM
+        9 = PANDITDOM
+    }
+    ruler_male = {
+        1 = PANDIT
+        2 = PANDIT
+        3 = PANDIT
+        4 = PANDIT
+        5 = PANDIT
+        6 = PANDIT
+        7 = PANDIT
+        8 = PANDIT
+        9 = PANDIT
+    }
+    consort_female = {
+        1 = CONSORT_fem
+        2 = CONSORT_fem
+        3 = CONSORT_fem
+        4 = CONSORT_fem
+        5 = CONSORT_fem
+        6 = CONSORT_fem
+        7 = CONSORT_fem
+        8 = CONSORT_fem
+        9 = CONSORT_fem
+    }
+    heir_male = {
+        1 = BHAGAVAAN
+        2 = BHAGAVAAN
+        3 = BHAGAVAAN
+        4 = BHAGAVAAN
+        5 = BHAGAVAAN
+        6 = BHAGAVAAN
+        7 = BHAGAVAAN
+        8 = BHAGAVAAN
+        9 = BHAGAVAAN
+    }
+    trigger = {
+        religion = hinduism
+        government = theocracy
+    }
+}
+shinto_theocracy = {
+    rank = {
+        1 = KANNUSHIYO
+        2 = KANNUSHIYO
+        3 = KANNUSHIYO
+        4 = KANNUSHIYO
+        5 = KANNUSHIYO
+        6 = KANNUSHIYO
+        7 = KANNUSHIYO
+        8 = KANNUSHIYO
+        9 = KANNUSHIYO
+    }
+    ruler_male = {
+        1 = O_KANNUSHI
+        2 = O_KANNUSHI
+        3 = O_KANNUSHI
+        4 = O_KANNUSHI
+        5 = O_KANNUSHI
+        6 = O_KANNUSHI
+        7 = O_KANNUSHI
+        8 = O_KANNUSHI
+        9 = O_KANNUSHI
+    }
+    consort_female = {
+        1 = CONSORT_fem
+        2 = CONSORT_fem
+        3 = CONSORT_fem
+        4 = CONSORT_fem
+        5 = CONSORT_fem
+        6 = CONSORT_fem
+        7 = CONSORT_fem
+        8 = CONSORT_fem
+        9 = CONSORT_fem
+    }
+    heir_male = {
+        1 = OMO
+        2 = OMO
+        3 = OMO
+        4 = OMO
+        5 = OMO
+        6 = OMO
+        7 = OMO
+        8 = OMO
+        9 = OMO
+    }
+    trigger = {
+        religion = shinto
+        government = theocracy
+    }
+}
+buddhist_theocracy = {
+    rank = {
+        1 = GANDEN_PHODRANG
+        2 = GANDEN_PHODRANG
+        3 = GANDEN_PHODRANG
+        4 = GANDEN_PHODRANG
+        5 = GANDEN_PHODRANG
+        6 = GANDEN_PHODRANG
+        7 = GANDEN_PHODRANG
+        8 = GANDEN_PHODRANG
+        9 = GANDEN_PHODRANG
+    }
+
+    ruler_male = {
+        1 = DALAI_LAMA
+        2 = DALAI_LAMA
+        3 = DALAI_LAMA
+        4 = DALAI_LAMA
+        5 = DALAI_LAMA
+        6 = DALAI_LAMA
+        7 = DALAI_LAMA
+        8 = DALAI_LAMA
+        9 = DALAI_LAMA
+    }
+
+    heir_male = {
+        1 = MGON
+        2 = MGON
+        3 = MGON
+        4 = MGON
+        5 = MGON
+        6 = MGON
+        7 = MGON
+        8 = MGON
+        9 = MGON
+    }
+    trigger = {
+        OR = {
+            religion = buddhism #Theravada
+            religion = vajrayana
+            religion = mahayana
+        }
+        government = theocracy
+    }
+}
+confucian_theocracy = {
+    rank = {
+        1 = ELDERDOM
+        2 = ELDERDOM
+        3 = ELDERDOM
+        4 = ELDERDOM
+        5 = ELDERDOM
+        6 = ELDERDOM
+        7 = ELDERDOM
+        8 = ELDERDOM
+        9 = ELDERDOM
+    }
+    ruler_male = {
+        1 = ELDER
+        2 = ELDER
+        3 = ELDER
+        4 = ELDER
+        5 = ELDER
+        6 = ELDER
+        7 = ELDER
+        8 = ELDER
+        9 = ELDER
+    }
+    consort_female = {
+        1 = CONSORT_fem
+        2 = CONSORT_fem
+        3 = CONSORT_fem
+        4 = CONSORT_fem
+        5 = CONSORT_fem
+        6 = CONSORT_fem
+        7 = CONSORT_fem
+        8 = CONSORT_fem
+        9 = CONSORT_fem
+    }
+    heir_male = {
+        1 = MONK
+        2 = MONK
+        3 = MONK
+        4 = MONK
+        5 = MONK
+        6 = MONK
+        7 = MONK
+        8 = MONK
+        9 = MONK
+    }
+    trigger = {
+        religion = confucianism
+        government = theocracy
+    }
+}
+ibadi_theocracy_imamate_reform = {
+    rank = {
+        1 = IMAMATE
+        2 = HIGH_IMAMATE
+        3 = GREAT_IMAMATE
+        4 = GRAND_IMAMATE
+    }
+    ruler_male = {
+        1 = IMAM
+        2 = HIGH_IMAM
+        3 = GREAT_IMAM
+        4 = GRAND_IMAM
+    }
+    consort_female = {
+        1 = SAYIDA_CONSORT_fem
+        2 = SAYIDA_CONSORT_fem
+        3 = SAYIDA_CONSORT_fem
+        4 = SAYIDA_CONSORT_fem
+    }
+    heir_male = {
+        1 = ISLAMIC_SCHOLAR
+        2 = IMAM
+        3 = HIGH_IMAM
+        4 = GREAT_IMAM
+    }
+    trigger = {
+        religion = ibadi
+        has_reform = islamic_imamate_reform
+    }
+}
+yemenite_theocracy = {
+    rank = {
+        1 = MULLAHATE
+        2 = HIGH_MULLAHATE
+        3 = GREAT_MULLAHATE
+        4 = GRAND_MULLAHATE
+    }
+    ruler_male = {
+        1 = MULLAH
+        2 = HIGH_MULLAHATE
+        3 = GREAT_MULLAHATE
+        4 = GRAND_MULLAHATE
+    }
+    consort_female = {
+        1 = KHANUM_CONSORT_fem
+        2 = KHANUM_CONSORT_fem
+        3 = KHANUM_CONSORT_fem
+        4 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        1 = ARBAB
+        2 = ARBAB
+        3 = ARBAB
+        4 = ARBAB
+    }
+    trigger = {
+        religion = shiite
+        OR = {
+            government = theocracy
+            has_reform = feudal_theocracy
+        }
+        primary_culture = yemeni_culture
+    }
+}
+shiite_theocracy = {
+    rank = {
+        6 = AYATOLLATE
+        7 = HIGH_AYATOLLATE
+        8 = GREAT_AYATOLLATE
+        9 = GRAND_AYATOLLATE
+    }
+    ruler_male = {
+        6 = AYATOLLAH
+        7 = HIGH_AYATOLLAH
+        8 = GREAT_AYATOLLAH
+        9 = GRAND_AYATOLLAH
+    }
+    consort_female = {
+        6 = KHANUM_CONSORT_fem
+        7 = KHANUM_CONSORT_fem
+        8 = KHANUM_CONSORT_fem
+        9 = KHANUM_CONSORT_fem
+    }
+    heir_male = {
+        6 = ARBAB
+        7 = ARBAB
+        8 = ARBAB
+        9 = ARBAB
+    }
+    trigger = {
+        religion = shiite
+        OR = {
+            government = theocracy
+            has_reform = feudal_theocracy
+        }
+        NOT = { primary_culture = yemeni_culture }
+        NOT = {
+            tag = AKK
+            tag = EGI
+            tag = HAK
+        }
+    }
+}
+uyghur_theocracy = {
+    rank = {
+        6 = KHOJAHATE
+        7 = HIGH_KHOJAHATE
+        8 = GREAT_KHOJAHATE
+        9 = GRAND_KHOJAHATE
+    }
+    ruler_male = {
+        6 = KHOJA
+        7 = HIGH_KHOJA
+        8 = GREAT_KHOJA
+        9 = GRAND_KHOJA
+    }
+    consort_female = {
+        6 = KANIM_CONSORT_fem
+        7 = KANIM_CONSORT_fem
+        8 = KANIM_CONSORT_fem
+        9 = KANIM_CONSORT_fem
+    }
+    heir_male = {
+        6 = REBBIM
+        7 = REBBIM
+        8 = REBBIM
+        9 = REBBIM
+    }
+    trigger = {
+        religion = sunni
+        government = theocracy
+        OR = {
+            primary_culture = uyghur
+            has_country_flag = end_of_khojas
+        }
+    }
+}
+sunni_theocracy = {
+    rank = {
+        3 = SHEIKHDOM
+        4 = SHARIFATE
+        5 = EMIRATE
+        6 = SULTANATE
+        7 = HIGH_SULTANATE
+        8 = GREAT_SULTANATE
+        9 = CALIPHATE
+    }
+    ruler_male = {
+        3 = SHEIKH
+        4 = SHARIF
+        5 = EMIR
+        6 = SULTAN
+        7 = HIGH_SULTAN
+        8 = GREAT_SULTAN
+        9 = CALIPH
+    }
+    consort_female = {
+        3 = SAYIDA_CONSORT_fem
+        4 = SAYIDA_CONSORT_fem
+        5 = SAYIDA_CONSORT_fem
+        6 = SAYIDA_CONSORT_fem
+        7 = SAYIDA_CONSORT_fem
+        8 = SAYIDA_CONSORT_fem
+        9 = SAYIDA_CONSORT_fem
+    }
+    heir_male = {
+        3 = RABA
+        4 = RABA
+        5 = RABA
+        6 = RABA
+        7 = RABA
+        8 = RABA
+        9 = RABA
+    }
+    trigger = {
+        religion = sunni
+        OR = {
+            has_reform = feudal_theocracy
+            government = theocracy
+        }
+        NOT = {
+            tag = AKK
+            tag = EGI
+            tag = HAK
+            tag = QAR
+        }
+    }
+}
+orthodox_theocracy = {
+    rank = {
+        7 = METROPOLIS
+    }
+    ruler_male = {
+        7 = PATRIARCH
+    }
+    consort_female = {
+        7 = CONSORT_fem
+    }
+    heir_male = {
+        7 = BISHOP
+    }
+    trigger = {
+        OR = {
+            religion = orthodox
+            religion = coptic
+        }
+        government_rank = 7
+        government = theocracy
+    }
+}
+inti_theocracy = {
+    rank = {
+        7 = MICHOQDOM
+    }
+    ruler_male = {
+        7 = MICHOQ
+    }
+    consort_female = {
+        7 = CONSORT
+    }
+    heir_male = {
+        7 = HIGH_PRIEST
+    }
+    trigger = {
+        religion = inti
+        government = theocracy
+    }
+}
+pagan_theocracy = {
+    rank = {
+        6 = PRIESTDOM
+        7 = PRIESTDOM
+        8 = PRIESTDOM
+        9 = PRIESTDOM
+    }
+    ruler_male = {
+        6 = PRIEST
+        7 = PRIEST
+        8 = HIGH_PRIEST
+        9 = PARAMOUNT_PRIEST
+    }
+    consort_female = {
+        6 = CONSORT_fem
+        7 = CONSORT_fem
+        8 = CONSORT_fem
+        9 = CONSORT_fem
+    }
+    heir_male = {
+        6 = LORD
+        7 = LORD
+        8 = LORD
+        9 = LORD
+    }
+    trigger = {
+		government_rank = 6
+        religion_group = pagan
+        government = theocracy
+    }
+}

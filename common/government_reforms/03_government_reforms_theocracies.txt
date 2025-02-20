@@ -32,6 +32,7 @@ leading_clergy_reform = {
     icon = "religious_leader"
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    fixed_rank = 7
     modifiers = {
         church_loyalty_modifier = 0.1
         global_tax_modifier = 0.1
@@ -44,9 +45,6 @@ leading_clergy_reform = {
             gain_devotion_from_conversions = yes
         }
     }
-    #custom_attributes = {
-    #	gain_monarch_power_from_force_converting = yes
-    #}
 }
 
 monastic_order_reform = {
@@ -932,17 +930,11 @@ ajuuraan_theocracy_reform = {
 islamic_imamate_reform = { #T1 - Lordship level
     icon = "islamic_imamate_reform"
     allow_normal_conversion = no
+    fixed_rank = 1
     potential = {
         religion_group = muslim
-        OR = {
-            has_reform = islamic_imamate_reform
-            is_subject_of_type = islamic_imamate
-            have_had_reform = islamic_imamate_reform
-        }
+        is_muslim_subject_type = yes
     }
-    valid_for_nation_designer = no
-    nation_designer_cost = 0
-    nation_designer_trigger = {}
     queen = no
     modifiers = {
         tolerance_own = 1
@@ -950,33 +942,59 @@ islamic_imamate_reform = { #T1 - Lordship level
         tolerance_heretic = -1
         warscore_cost_vs_other_religion = -0.1
     }
+    lock_level_when_selected = yes
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_custodian_of_cities = yes
+        enables_aristocratic_idea_group = no
+    }
     rulers_can_be_generals = yes
     heirs_can_be_generals = yes
     effect = { change_dip = 1 }
     removed_effect = { change_dip = -1 }
     government_abilities = { iqta_mechanic }
+}
+
+unlocked_islamic_imamate_reform = { #T1 - Lordship level
+    icon = "islamic_imamate_reform"
+    allow_normal_conversion = no
+    fixed_rank = 1
+    potential = {
+        religion_group = muslim
+        NOT = {
+            is_muslim_subject_type = yes
+            government_rank = 2
+        }
+        government_rank = 1
+    }
+    queen = no
+    modifiers = {
+        tolerance_own = 1
+        tolerance_heathen = -1
+        tolerance_heretic = -1
+        warscore_cost_vs_other_religion = -0.1
+    }
+    lock_level_when_selected = yes
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_custodian_of_cities = yes
         enables_aristocratic_idea_group = no
-        has_islamic_imamate = yes
     }
+    rulers_can_be_generals = yes
+    heirs_can_be_generals = yes
+    effect = { change_dip = 1 }
+    removed_effect = { change_dip = -1 }
+    government_abilities = { iqta_mechanic }
 }
 
 islamic_grand_muftate_reform = { #T2 - Barony level
     icon = "islamic_grand_muftate_reform"
     allow_normal_conversion = no
+    fixed_rank = 2
     potential = {
         religion_group = muslim
-        OR = {
-            has_reform = islamic_grand_muftate_reform
-            have_had_reform = islamic_grand_muftate_reform
-            is_subject_of_type = islamic_grand_muftate
-        }
+        is_muslim_subject_type = yes
     }
-    valid_for_nation_designer = no
-    nation_designer_cost = 10
-    nation_designer_trigger = {}
     queen = no
     modifiers = {
         tolerance_own = 2
@@ -984,33 +1002,60 @@ islamic_grand_muftate_reform = { #T2 - Barony level
         tolerance_heretic = -2
         warscore_cost_vs_other_religion = -0.1
     }
+    lock_level_when_selected = yes
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_custodian_of_cities = yes
+        enables_aristocratic_idea_group = no
+    }
     rulers_can_be_generals = yes
     heirs_can_be_generals = yes
     effect = { set_government_rank = 2 }
     removed_effect = { set_government_rank = 1 }
     government_abilities = { iqta_mechanic }
+}
+
+unlocked_islamic_grand_muftate_reform = { #T2 - Barony level
+    icon = "islamic_grand_muftate_reform"
+    allow_normal_conversion = no
+    fixed_rank = 2
+    potential = {
+        religion_group = muslim
+        NOT = {
+            is_muslim_subject_type = yes
+            government_rank = 3
+        }
+        government_rank = 2
+    }
+    queen = no
+    modifiers = {
+        tolerance_own = 2
+        tolerance_heathen = -2
+        tolerance_heretic = -2
+        warscore_cost_vs_other_religion = -0.1
+    }
+    lock_level_when_selected = yes
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_custodian_of_cities = yes
         enables_aristocratic_idea_group = no
-        has_islamic_grand_muftate = yes
     }
+    rulers_can_be_generals = yes
+    heirs_can_be_generals = yes
+    effect = { set_government_rank = 2 }
+    removed_effect = { set_government_rank = 1 }
+    government_abilities = { iqta_mechanic }
 }
 
 islamic_sheikdom_reform = { #T3 - Viscounty level
     icon = "islamic_sheikdom_reform"
     allow_normal_conversion = no
+    fixed_rank = 2
+    maintain_dynasty = yes
     potential = {
         religion_group = muslim
-        OR = {
-            has_reform = islamic_sheikdom_reform
-            is_subject_of_type = islamic_sheikdom
-            have_had_reform = islamic_sheikdom_reform
-        }
+        is_muslim_subject_type = yes
     }
-    valid_for_nation_designer = no
-    nation_designer_cost = 0
-    nation_designer_trigger = {}
     queen = no
     modifiers = {
         tolerance_own = 3
@@ -1018,32 +1063,61 @@ islamic_sheikdom_reform = { #T3 - Viscounty level
         tolerance_heretic = -3
         warscore_cost_vs_other_religion = -0.15
     }
-    rulers_can_be_generals = yes
-    heirs_can_be_generals = yes
-    effect = { set_government_rank = 3 }
-    removed_effect = { set_government_rank = 2 }
-    government_abilities = { iqta_mechanic }
+    lock_level_when_selected = yes
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_custodian_of_cities = yes
         enables_aristocratic_idea_group = no
     }
+    rulers_can_be_generals = yes
+    heirs_can_be_generals = yes
+    effect = { set_government_rank = 3 }
+    removed_effect = { set_government_rank = 2 }
+    government_abilities = { iqta_mechanic }
+}
+
+unlocked_islamic_sheikdom_reform = { #T3 - Viscounty level
+    icon = "islamic_sheikdom_reform"
+    allow_normal_conversion = no
+    fixed_rank = 3
+    maintain_dynasty = yes
+    potential = {
+        religion_group = muslim
+        NOT = {
+            is_muslim_subject_type = yes
+            government_rank = 4
+        }
+        government_rank = 3
+    }
+    queen = no
+    modifiers = {
+        tolerance_own = 3
+        tolerance_heathen = -3
+        tolerance_heretic = -3
+        warscore_cost_vs_other_religion = -0.15
+    }
+    lock_level_when_selected = yes
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_custodian_of_cities = yes
+        enables_aristocratic_idea_group = no
+    }
+    rulers_can_be_generals = yes
+    heirs_can_be_generals = yes
+    effect = { set_government_rank = 3 }
+    removed_effect = { set_government_rank = 2 }
+    government_abilities = { iqta_mechanic }
 }
 
 islamic_sharifate_reform = { #T4 - County level
     icon = "islamic_sharifate_reform"
     allow_normal_conversion = no
+    fixed_rank = 4
+    maintain_dynasty = yes
     potential = {
         religion_group = muslim
-        OR = {
-            has_reform = islamic_sharifate_reform
-            is_subject_of_type = islamic_sharifate
-            have_had_reform = islamic_sharifate_reform
-        }
+        is_muslim_subject_type = yes
     }
-    valid_for_nation_designer = no
-    nation_designer_cost = 0
-    nation_designer_trigger = {}
     queen = no
     modifiers = {
         tolerance_own = 4
@@ -1051,17 +1125,50 @@ islamic_sharifate_reform = { #T4 - County level
         tolerance_heretic = -4
         warscore_cost_vs_other_religion = -0.2
     }
+    lock_level_when_selected = yes
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_custodian_of_cities = yes
+        enables_aristocratic_idea_group = no
+    }
     rulers_can_be_generals = yes
     heirs_can_be_generals = yes
     effect = { set_government_rank = 4 }
     removed_effect = { set_government_rank = 3 }
     government_abilities = { iqta_mechanic }
+}
+
+unlocked_islamic_sharifate_reform = { #T4 - County level
+    icon = "islamic_sharifate_reform"
+    allow_normal_conversion = no
+    fixed_rank = 4
+    maintain_dynasty = yes
+    potential = {
+        religion_group = muslim
+        NOT = {
+            is_muslim_subject_type = yes
+            government_rank = 5
+        }
+        government_rank = 4
+    }
+    queen = no
+    modifiers = {
+        tolerance_own = 4
+        tolerance_heathen = -4
+        tolerance_heretic = -4
+        warscore_cost_vs_other_religion = -0.2
+    }
+    lock_level_when_selected = yes
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_custodian_of_cities = yes
         enables_aristocratic_idea_group = no
-        has_islamic_sharifate = yes
     }
+    rulers_can_be_generals = yes
+    heirs_can_be_generals = yes
+    effect = { set_government_rank = 4 }
+    removed_effect = { set_government_rank = 3 }
+    government_abilities = { iqta_mechanic }
 }
 
 islamic_mystic_order_reform = {
@@ -1072,10 +1179,7 @@ islamic_mystic_order_reform = {
         religion_group = muslim
         has_reform = islamic_mystic_order_reform
     }
-    valid_for_nation_designer = no
-    nation_designer_cost = 0
     queen = no
-    nation_designer_trigger = {	}
     custom_attributes = {
         enables_custodian_of_cities = yes
         has_islamic_mystic_order = yes
@@ -1410,6 +1514,7 @@ monastic_breweries_reform = {
             }
         }
     }
+    fixed_rank = 5
     icon = "monastic_breweries_reform"
     allow_normal_conversion = yes
     modifiers = {
