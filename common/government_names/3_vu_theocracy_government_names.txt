@@ -48,6 +48,64 @@ asian_monastic_order = {
         }
     }
 }
+########################
+##  Jewish Theocracy  ##
+########################
+jewish_theocracy = {
+    rank = {
+        1 = MEDINAT_KODSH
+        2 = MEDINAT_KODSH
+        3 = MEDINAT_KODSH
+        4 = MEDINAT_KODSH
+        5 = MEDINAT_KODSH
+        6 = MEDINAT_KODSH
+        7 = MEDINAT_KODSH
+        8 = MEDINAT_KODSH
+        9 = MEDINAT_KODSH
+    }
+    ruler_male = {
+        1 = SANHEDRIN
+        2 = SANHEDRIN
+        3 = SANHEDRIN
+        4 = SANHEDRIN
+        5 = SANHEDRIN
+        6 = SANHEDRIN
+        7 = SANHEDRIN
+        8 = SANHEDRIN
+        9 = SANHEDRIN
+    }
+    consort_female = {
+        1 = GVERET_fem
+        2 = GVERET_fem
+        3 = GVERET_fem
+        4 = GVERET_fem
+        5 = GVERET_fem
+        6 = GVERET_fem
+        7 = GVERET_fem
+        8 = GVERET_fem
+        9 = GVERET_fem
+    }
+    heir_male = {
+        1 = ADON
+        2 = ADON
+        3 = ADON
+        4 = ADON
+        5 = ADON
+        6 = ADON
+        7 = ADON
+        8 = ADON
+        9 = ADON
+    }
+    trigger = {
+        OR = {
+            AND = {
+                government = theocracy
+                religion = jewish
+            }
+            has_reform = jewish_patriarchate_reform
+        }
+    }
+}
 ##########################
 ##  Muslim Theocracies  ##
 ##########################
@@ -199,6 +257,7 @@ sunni_subject = {
         OR = {
             is_muslim_subject_type = yes
             has_ToR_muslim_government_reform = yes
+            has_ToR_unique_government_reform = yes
         }
         NOT = {
             religion = shiite
@@ -320,6 +379,21 @@ livonian_monastic_order = {
     trigger = {
         has_reform = monastic_order_reform
         tag = LIV
+    }
+}
+teutonic_monastic_order = {
+    rank = {
+        5 = TEU_MONASTIC_ORDER
+    }
+    ruler_male = {
+        5 = TEU_HIGH_CHAMPION
+    }
+    heir_male = {
+        5 = TEU_WARRIOR_MONK
+    }
+    trigger = {
+        has_reform = monastic_order_reform
+        tag = TEU
     }
 }
 knights_monastic_order = {
@@ -448,21 +522,6 @@ germanic_monastic_order = {
             }
         }
         culture_group = germanic
-    }
-}
-teutonic_monastic_order = {
-    rank = {
-        5 = TEU_MONASTIC_ORDER
-    }
-    ruler_male = {
-        5 = TEU_HIGH_CHAMPION
-    }
-    heir_male = {
-        5 = TEU_WARRIOR_MONK
-    }
-    trigger = {
-        has_reform = monastic_order_reform
-        tag = TEU
     }
 }
 imperial_abbacy = {
@@ -1285,56 +1344,6 @@ church_of_spain = {
 ########################
 ##  Religion Generic  ##
 ########################
-jewish_theocracy = {
-    rank = {
-        1 = MEDINAT_KODSH
-        2 = MEDINAT_KODSH
-        3 = MEDINAT_KODSH
-        4 = MEDINAT_KODSH
-        5 = MEDINAT_KODSH
-        6 = MEDINAT_KODSH
-        7 = MEDINAT_KODSH
-        8 = MEDINAT_KODSH
-        9 = MEDINAT_KODSH
-    }
-    ruler_male = {
-        1 = SANHEDRIN
-        2 = SANHEDRIN
-        3 = SANHEDRIN
-        4 = SANHEDRIN
-        5 = SANHEDRIN
-        6 = SANHEDRIN
-        7 = SANHEDRIN
-        8 = SANHEDRIN
-        9 = SANHEDRIN
-    }
-    consort_female = {
-        1 = GVERET_fem
-        2 = GVERET_fem
-        3 = GVERET_fem
-        4 = GVERET_fem
-        5 = GVERET_fem
-        6 = GVERET_fem
-        7 = GVERET_fem
-        8 = GVERET_fem
-        9 = GVERET_fem
-    }
-    heir_male = {
-        1 = ADON
-        2 = ADON
-        3 = ADON
-        4 = ADON
-        5 = ADON
-        6 = ADON
-        7 = ADON
-        8 = ADON
-        9 = ADON
-    }
-    trigger = {
-        religion = jewish
-        government = theocracy
-    }
-}
 zoroastrian_theocracy = {
     rank = {
         1 = HERBADOM

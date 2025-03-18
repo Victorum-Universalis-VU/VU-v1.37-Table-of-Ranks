@@ -148,7 +148,6 @@ is_county_subject_type = {
         is_subject_of_type = daimyo_county_vassal
         is_subject_of_type = danish_county
         is_subject_of_type = dutch_county
-        is_subject_of_type = english_earldom
         is_subject_of_type = french_county
         is_subject_of_type = german_county
         is_subject_of_type = hungarian_county
@@ -326,8 +325,74 @@ has_ToR_government_reform = {
         has_reform = unlocked_eue_marquisate_reform
         has_reform = eue_duchy_reform
         has_reform = unlocked_eue_duchy_reform
+        has_reform = eue_principality_reform
+        has_reform = unlocked_eue_principality_reform
         has_reform = eue_kingdom_reform
         has_reform = unlocked_eue_kingdom_reform
+    }
+}
+
+has_ToR_unique_government_reform = {
+    OR = {
+        has_reform = scottish_monarchy                       #Scottish Monarchy
+        has_reform = welsh_principality                      #Welsh Principality
+        has_reform = english_monarchy                        #English Monarchy
+        has_reform = british_monarchy                        #British Monarchy
+        has_reform = absolute_british_monarchy               #Absolute British Monarchy
+        has_reform = duchy_of_brittany_reform                #Duchy of Brittany
+        has_reform = burgundian_state_reform                 #Burgundian State
+        has_reform = feudal_france_reform                    #French Feudalism
+        has_reform = bourgeoisie_aristocracy_reform          #Bourgeoisie Aristocracy
+        has_reform = french_absolutism                       #Royaume du Soleil
+        has_reform = french_kingdom_reform                   #French Monarchy
+        has_reform = french_orleanist_restoration_reform     #French Orleanist Monarchy
+        has_reform = crusader_state_vu_reform                #Crusader State
+        has_reform = french_monarchic_restoration_reform     #French Bourbon Monarchy
+        has_reform = courts_of_navarra                       #Courts of Navarra
+        has_reform = kingdom_of_castile_and_leon             #Kingdom of Castile and Leon
+        has_reform = crown_of_castile                        #Crown of Castile
+        has_reform = hispanic_kingdom                        #Hispanic Kingdom
+        has_reform = spanish_parliamentary_monarchy          #Cortes Generales
+        has_reform = system_of_councils_reform               #System of Councils
+        has_reform = aragonese_cortes_reform                 #Cortz d'Aragon
+        has_reform = crown_of_aragon                         #Crown of Aragon
+        has_reform = respect_union_reform                    #Composite Monarchy
+        has_reform = portuguese_monarchy_reform              #Portuguese Monarchy
+        has_reform = kingdom_of_portugal_and_azures          #Portuguese Thassalocracy
+        has_reform = portuguese_empire_reform                #Portuguese Empire  
+        has_reform = bohemian_elective_kingdom_reform        #Bohemian Elective Monarchy
+        has_reform = polish_great_sejm                       #Great Sejm
+        has_reform = grand_duchy_reform                      #Grand Duchy
+        has_reform = norwegian_parliamentary_monarchy        #Norwegian Monarchy
+        has_reform = office_of_lord_regent_reform            #Office of the Lord Regent
+        has_reform = tsardom                                 #Tsardom
+        has_reform = german_kaiserreich                      #German Kaiserreich
+        has_reform = prussian_monarchy                       #Prussian Monarchy
+        has_reform = prussian_republic                       #Stratocratic Administration
+        has_reform = german_prussian_reform                  #Army with a State
+        has_reform = savoia_reform                           #I Savoia
+        has_reform = visconti_dukes_of_milan                 #Visconti Dukes of Milan
+        has_reform = house_of_este_reform                    #House of Este
+        has_reform = house_of_gonzaga_reform                 #House of Gonzaga
+        has_reform = palaiologos_montferrat_reform           #Palaiologos of Montferrat
+        has_reform = autocracy_reform                        #Autocracy
+        has_reform = kingdom_of_sicily_reform                #Kingdom of Sicily
+        has_reform = italian_monarchy_reform                 #Italian Monarchy
+        has_reform = giudicati_sardi_reform                  #Giudicati Sardi
+        has_reform = apostolic_kingdom                       #Apostolic Kingdom
+        has_reform = stadthalter_monarchy_reform             #Stadhouder Monarchy
+        has_reform = elective_monarchy_reform                #Elective Monarchy
+        has_reform = kalmar_union                            #Kalmar Union
+        has_reform = byzantine_autocracy_reform              #Byzantine Autocracy
+        has_reform = belgian_kingdom_reform                  #Belgian Kingdom
+        has_reform = austrian_duchy_reform                   #Austrian Duchy
+        has_reform = austrian_archduchy_reform               #Austrian Archduchy
+        has_reform = austrian_absolute_monarchy              #Austrian Absolute Monarchy
+        has_reform = hessian_militarized_monarchy_reform     #Hessian Militarized Monarchy
+        has_reform = granadan_iqta_reform                    #Granadan Iqta
+        has_reform = kingdom_of_gao_reform                   #Kingdom of Gao
+        has_reform = ajuuraan_theocracy_reform               #Somalian Theocracy
+        has_reform = jewish_patriarchate_reform              #Patriarhiya
     }
 }
 
@@ -336,25 +401,25 @@ has_ToR_muslim_government_reform = {
         has_reform = iqta
         has_reform = mamluk_government
         has_reform = barbary_sultanate_reform
-        has_reform = islamic_mystic_order_reform
         has_reform = islamic_imamate_reform
-        has_reform = islamic_grand_muftate_reform
-        has_reform = islamic_sheikdom_reform
-        has_reform = islamic_sharifate_reform
-        has_reform = islamic_governate_reform
-        has_reform = islamic_emirate_reform
-        has_reform = islamic_sultanate_reform
-        has_reform = islamic_taifa_reform
-        has_reform = islamic_malikate_reform
         has_reform = unlocked_islamic_imamate_reform
+        has_reform = islamic_grand_muftate_reform
         has_reform = unlocked_islamic_grand_muftate_reform
+        has_reform = islamic_sheikdom_reform
         has_reform = unlocked_islamic_sheikdom_reform
+        has_reform = islamic_sharifate_reform
         has_reform = unlocked_islamic_sharifate_reform
+        has_reform = islamic_governate_reform
         has_reform = unlocked_islamic_governate_reform
+        has_reform = islamic_emirate_reform
         has_reform = unlocked_islamic_emirate_reform
+        has_reform = islamic_sultanate_reform
         has_reform = unlocked_islamic_sultanate_reform
+        has_reform = islamic_taifa_reform
         has_reform = unlocked_islamic_taifa_reform
+        has_reform = islamic_malikate_reform
         has_reform = unlocked_islamic_malikate_reform
+        has_reform = islamic_mystic_order_reform
     }
 }
 
@@ -445,6 +510,15 @@ ToR_subject_limit_reached = {
     calc_true_if = {
         all_subject_country = {
             is_ToR_subject_type = yes
+        }
+        amount = 25 #Total limit for Subjects -Don, Prussia
+    }
+}
+
+ToR_Muslim_subject_limit_reached = {
+    calc_true_if = {
+        all_subject_country = {
+            is_muslim_subject_type = yes
         }
         amount = 25 #Total limit for Subjects -Don, Prussia
     }

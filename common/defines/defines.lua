@@ -618,16 +618,28 @@ NCountry = {
 	HRE_INCIDENT_AI_EMPEROR_OPINION = 0.025,	-- How much opinion wit emperor is worh for AI to side with him --increased by .005, just to make it a smidge easier for the emperor -don
 	HRE_INCIDENT_AI_RANDOM_FACTOR = 10,			-- A little random spice to AI for deciding what option to pick as a member, will be -10 to 10
 	
-	PRESTIGE_GAIN_FOR_GOV_RANK_2 = 10,			-- Prestige gained on upgrading to government rank 2 - Barony
-	PRESTIGE_GAIN_FOR_GOV_RANK_3 = 20,			-- Prestige gained on upgrading to government rank 3 - Vicounty
-	MIN_PRESTIGE_FOR_GOV_RANK_2 = 10,			-- Required prestige to to upgrade to government rank 2
-	MIN_PRESTIGE_FOR_GOV_RANK_3 = 20,			-- Required prestige to to upgrade to government rank 3
-	MIN_DEVELOPMENT_FOR_GOV_RANK_2 = 30,		-- Need at least this much development to upgrade to Viscounty government rank 2
-	MIN_DEVELOPMENT_FOR_GOV_RANK_3 = 100,		-- Need at least this much development to upgrade to County government rank 3 
-	PRESTIGE_GAIN_FOR_GOV_RANK_X = 30,					-- Prestige gained on upgrading to government rank above 3               Was 25
-	MIN_PRESTIGE_FOR_GOV_RANK_X = 75,					-- Was 75 Required prestige to to upgrade to government above 3                 Was 75
-	ADDITIONAL_MIN_DEVELOPMENT_FOR_GOV_RANK_X = 200,    -- Was 3000 ADDITIONAL development needed to upgrade to government rank above 3   Was 3000 -- Being able to form an empire with 600 dev was a bit too easy
-	MAX_GOV_RANK = 9,									-- Max possible is 10
+	PRESTIGE_GAIN_FOR_GOV_RANK_2 = 5,			-- Prestige from forming a Barony from a Lordship
+	PRESTIGE_GAIN_FOR_GOV_RANK_3 = 10,			-- Prestige from forming a Viscounty from a Barony
+	PRESTIGE_GAIN_FOR_GOV_RANK_4 = 15,			-- Prestige from forming a County from a Viscounty	
+	PRESTIGE_GAIN_FOR_GOV_RANK_5 = 20,			-- Prestige from forming a Marquisate from a County
+	PRESTIGE_GAIN_FOR_GOV_RANK_6 = 25,			-- Prestige from forming a Duchy from a Marquisate
+	PRESTIGE_GAIN_FOR_GOV_RANK_7 = 30,			-- Prestige from forming a Principality from a Duchy	
+	PRESTIGE_GAIN_FOR_GOV_RANK_8 = 35,			-- Prestige from forming a Kingdom from a Principality	
+	PRESTIGE_GAIN_FOR_GOV_RANK_9 = 40,			-- Prestige from forming an Empire from a Kingdom
+
+	MIN_PRESTIGE_FOR_GOV_RANK_2 = 5,			-- Prestige required to form a Barony from a Lordship
+	MIN_PRESTIGE_FOR_GOV_RANK_3 = 10,			-- Prestige required to form a Viscounty from a Barony
+	MIN_PRESTIGE_FOR_GOV_RANK_4 = 15,			-- Prestige required to form a County from a Viscounty	
+	MIN_PRESTIGE_FOR_GOV_RANK_5 = 25,			-- Prestige required to form a Marquisate from a County
+	MIN_PRESTIGE_FOR_GOV_RANK_6 = 50,			-- Prestige required to form a Duchy from a Marquisate	
+	MIN_PRESTIGE_FOR_GOV_RANK_7 = 75,			-- Prestige required to form a Principality from a Duchy	
+	MIN_PRESTIGE_FOR_GOV_RANK_8 = 90,			-- Prestige required to form a Kingdom from a Principality	
+	MIN_PRESTIGE_FOR_GOV_RANK_9 = 100,			-- Prestige required to form an Empire from a Kingdom
+	MIN_DEVELOPMENT_FOR_GOV_RANK_2 = 25,		-- Development to form a Barony from a Lordship
+	MIN_DEVELOPMENT_FOR_GOV_RANK_3 = 50,		-- Development to form a Viscounty from a Barony
+	--MIN_DEVELOPMENT_FOR_GOV_RANK_4 etc. do not function properly
+ 	ADDITIONAL_MIN_DEVELOPMENT_FOR_GOV_RANK_X = 150,	-- ADDITIONAL development needed to upgrade to government rank above 3
+	MAX_GOV_RANK = 9,	
 
 	PARLIAMENT_BACKING_PERCENTAGE = 25,			-- average percent of seats backing an issue (0-100)
 	PARLIAMENT_EFFECT_DURATION = 10,			-- in years
@@ -729,14 +741,13 @@ NCountry = {
 	POWER_MAX = 2500,								-- how much power can be stored at maximum. Set this to 2.5k due to the edumacation mechanic and because of the increase in required power points for certain tasks that Rob has increased the cost of - Darth Modus (minimum value, will increase with missing techs, etc.)
 	DISMANTLE_HRE_PRESTIGE = 100,					-- Prestige gain on dismantling HRE
 	CROWN_LANDS_ALERT_THRESHOLD = 30,
-	FREE_IDEA_GROUP_COST  = 8,						-- modifier on cheapness of "free" idea group #Was 3, set it to 8 because too OP imo, can be revised when we work again on the 1215 bookmark - by Altan
+	FREE_IDEA_GROUP_COST = 7,						-- modifier on cheapness of "free" idea group #Was 3, set it to 8 because too OP imo, can be revised when we work again on the 1215 bookmark - by Altan | Lowered to 7, 1 full Idea Group per National Idea sounds a lot better and simpler - Don
 	CONVERSION_COOLDOWN = 120,						-- months before you can convert again.
 	CONVERSION_COOLDOWN_SECONDARY = 120,			-- months before you can convert secondary religion again.
 
 	IDEA_TO_TECH = -0.02,			-- percentage on tech reduction per idea. (each idea tier gives -2% permanent tech cost -> -14% per idea group total)
-	TECH_TIME_COST = 0.3,			-- tech grow with 20% cost over time.
+	TECH_TIME_COST = 0.3,			-- tech grow with 30% cost over time.
 	TECH_AHEAD_OF_TIME = 0.1,		-- per year ahead.
-
 
 	PS_BUY_IDEA = 100,				-- decreased to 100 due to new Idea Groups
 	PS_BUY_NATIVE_ADVANCEMENT = 500,

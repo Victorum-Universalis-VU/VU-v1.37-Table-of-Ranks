@@ -685,6 +685,146 @@ christian = {
 		
 		date = 1534.11.3 # act of supremacy
 	}
+
+	methodist = { #Added by Prussia
+		color = { 255 54 54 }
+		icon = 85
+		allow_female_defenders_of_the_faith = yes
+		allowed_conversion = {
+			lollardy
+			protestant
+			reformed
+		}
+
+		allowed_center_conversion = {
+			catholic
+			lollardy
+			protestant
+			reformed
+		}
+
+		country = {
+			#VU Start of Don's stuff
+			morale_damage = 0.025
+			religious_unity = 0.15
+			missionaries = 1
+			#debuffs
+			church_power_modifier = -0.15 #might have to decrease, it might be too bit hard to activate any powers
+			church_influence_modifier = 0.15
+			#VU End of Don's stuff
+			development_cost = -0.15 #Increased this from -0.1 to -0.15 - SF
+			technology_cost = -0.15 #Increased this to -0.15 from -0.05 - SF
+			idea_cost = -0.15 #Increased from -0.1 to -0.15 - SF
+		}
+		
+		country_as_secondary = {
+			technology_cost = -0.025 #Don't remove this - SF
+			fire_damage_received = -0.05
+			tolerance_own = 0.5
+			religious_unity = 0.1
+		}
+
+		province = {
+			local_autonomy = -0.05
+		}
+		
+		uses_anglican_power = yes				# Uses church power/aspect mechanics
+
+		on_convert = {
+			change_religion = anglican
+			add_prestige = -100
+			remove_country_modifier = counter_reformation
+			remove_country_modifier = the_statue_in_restraint_of_appeals
+			remove_country_modifier = revocation_of_restraint_of_appeals
+			remove_country_modifier = bavarian_jesuits
+			remove_country_modifier = the_societas_jesu
+			remove_country_modifier = the_declaration_of_indulgence
+			remove_country_modifier = de_heretico_comburendo
+			remove_country_modifier = the_conventicle_act
+			if = {
+				limit = {
+					has_country_flag = reformation_money
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = anglican
+								is_reformation_center = yes
+							}
+							amount = 2
+						}
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = anglican
+							}
+						}
+						change_religion = anglican
+						add_reform_center = anglican
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = reformation_money }
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = anglican
+								is_reformation_center = yes
+							}
+							amount = 2
+						}
+					}
+				}
+				add_years_of_income = 5.0 #increased to 5 by don
+				#add_years_of_income = 4.0 #Increased from 3.0
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = anglican
+							}
+						}
+						change_religion = anglican
+						add_reform_center = anglican
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
+		}
+		
+		aspects = {
+			#Vu - Don's stuff
+			vu_stability_aspect
+			vu_innovativeness_aspect
+			vu_expel_heretics_aspect
+			vu_diplomats_of_the_reformation_aspect
+			vu_spread_the_book_of_common_prayer
+			vu_bibles_for_soldiers
+			#Vu - End of Don's stuff
+			vu_divorce_consort_aspect
+			vu_gain_consort_aspect
+			vu_dissolve_monasteries_aspect
+			vu_monopoly_aspect
+			#dissolve_monasteries_aspect
+			#monopoly_aspect
+			#stability_aspect
+			#innovativeness_aspect
+			#expel_heretics_aspect
+			#diplomats_of_the_reformation_aspect
+			icons_of_the_church_aspect
+			#spread_the_book_of_common_prayer
+		}
+		aspects_name = ANGLICAN_ASPECTS
+		
+		heretic = { PENTECOSTAL PURITAN CONGREGATIONALIST }
+		
+		date = 1534.11.3 # act of supremacy
+	}
 	
 	hussite = {
 		color = { 250 55 10 }

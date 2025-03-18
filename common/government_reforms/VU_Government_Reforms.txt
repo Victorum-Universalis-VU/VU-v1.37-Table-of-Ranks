@@ -895,3 +895,75 @@ vu_timurid_one_empire_one_throne_reform = { #T12
         factor = 1
     }
 }
+#Iranian reforms
+vu_iranian_revolutionary_republic = {
+    icon = "iranian_revolutionary_republic"
+    allow_normal_conversion = yes
+    potential = {
+        OR = {
+            AND = {
+                religion = shiite
+                OR = {
+                    has_reform = vu_iranian_revolutionary_republic
+                    have_had_reform = vu_iranian_revolutionary_republic
+                }
+            }
+            AND = {
+                is_playing_custom_nation = yes
+                have_had_reform = vu_iranian_revolutionary_republic
+            }
+        }
+		tag = IRN
+    }
+    nation_designer_trigger = {
+        religion = shiite
+    }
+    legacy_equivalent = feudal_theocracy_legacy
+    valid_for_nation_designer = yes
+    nation_designer_cost = 60
+    modifiers = {
+        missionaries = 1
+        global_missionary_strength = 0.02
+        tolerance_own = 2
+        governing_capacity = 200
+        church_loyalty_modifier = 0.05
+		legitimacy = 1
+		can_claim_states = yes
+    }
+    maintain_dynasty = yes
+
+    conditional = {
+        allow = { has_dlc = "Cradle of Civilization" }
+        government_abilities = {
+            feudal_theocracy_mechanic
+        }
+    }
+    custom_attributes = {
+        enables_divine_idea_group = yes
+        enables_aristocratic_idea_group = no
+    }
+}
+vu_islamic_revolutionary_guard_corps = { #T2
+    icon = "islamic_revolutionary_guards"
+    allow_normal_conversion = yes
+    potential = {
+        tag = IRN
+    }
+    trigger = {
+        religion = shiite
+    }
+    lock_level_when_selected = yes
+    nation_designer_trigger = {
+        religion = shiite
+    }
+    valid_for_nation_designer = yes
+    nation_designer_cost = 50
+    modifiers = {
+        can_recruit_revolutionary_guards = yes
+		allowed_rev_guard_fraction = 0.5
+		discipline = 0.05
+    }
+    ai = {
+        factor = 1
+    }
+}

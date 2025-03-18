@@ -3112,10 +3112,9 @@ stadthalter_monarchy_reform = {
                 }
                 NOT = { map_setup = map_setup_random }
             }
-            AND = {
-                is_playing_custom_nation = yes
-                have_had_reform = stadthalter_monarchy_reform
-            }
+        }
+        NOT = {
+            is_ToR_subject_type = yes
         }
     }
     trigger = {
@@ -3750,7 +3749,7 @@ principality = {
     potential = {
         NOT = {
             is_crown_subject_type = yes
-            is_kingdom_subject_type = yes 
+            is_kingdom_subject_type = yes
         }
         religion = orthodox
         OR = {
@@ -4088,6 +4087,8 @@ russian_empire_reform = {
 mamluk_government = {
     icon = "mamluk_government"
     allow_normal_conversion = yes
+    fixed_rank = 7
+    lock_level_when_selected = yes
     potential = {
         religion_group = muslim
         OR = {
@@ -9587,10 +9588,8 @@ courts_of_navarra = {
     icon = "parliament_hall"
     allow_normal_conversion = yes
     potential = {
-        OR = {
-            primary_culture = basque
-            tag = NAV
-        }
+        primary_culture = basque
+        tag = NAV
     }
     modifiers = {
         same_culture_advisor_cost = -0.2
@@ -9939,7 +9938,10 @@ eue_lordship_reform = { #T1 - Lordship level
     fixed_rank = 1
     maintain_dynasty = yes
     potential = {
-        is_lordship_subject_type = yes
+        OR = {
+            is_lordship_subject_type = yes
+            has_reform = eue_lordship_reform
+        }
     }
     lock_level_when_selected = yes
     custom_attributes = {
@@ -9955,15 +9957,17 @@ eue_lordship_reform = { #T1 - Lordship level
 unlocked_eue_lordship_reform = { #T1 - Lordship level
     icon = "eue_lordship_reform"
     potential = {
+        has_reform = unlocked_eue_lordship_reform
         NOT = {
             is_lordship_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 2
         }
         capital_scope = {
             superregion = europe_superregion
         }
     }
-    fixed_rank = 1
+    #fixed_rank = 1 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -9975,6 +9979,14 @@ unlocked_eue_lordship_reform = { #T1 - Lordship level
         vassal_income = 0.05
         nobles_influence_modifier = 0.05
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 2
+            }
+            add_government_reform = unlocked_eue_barony_reform
+        }
+    }
 }
 
 eue_barony_reform = { #T2 - Barony level
@@ -9984,7 +9996,10 @@ eue_barony_reform = { #T2 - Barony level
     fixed_rank = 2
     maintain_dynasty = yes
     potential = {
-        is_barony_subject_type = yes
+        OR = {
+            is_barony_subject_type = yes
+            has_reform = eue_barony_reform
+        }
     }
     lock_level_when_selected = yes
     #legacy_equivalent = eue_barony_legacy
@@ -10003,8 +10018,10 @@ eue_barony_reform = { #T2 - Barony level
 unlocked_eue_barony_reform = { #T2 - Barony level
     icon = "eue_barony_reform"
     potential = {
+        has_reform = unlocked_eue_barony_reform
         NOT = {
             is_barony_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 3
         }
         capital_scope = {
@@ -10012,7 +10029,7 @@ unlocked_eue_barony_reform = { #T2 - Barony level
         }
         government_rank = 2
     }
-    fixed_rank = 2
+    #fixed_rank = 2  #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10026,6 +10043,14 @@ unlocked_eue_barony_reform = { #T2 - Barony level
         nobles_influence_modifier = 0.05
         nobles_loyalty_modifier = 0.05
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 3
+            }
+            add_government_reform = unlocked_eue_viscounty_reform
+        }
+    }
 }
 
 eue_viscounty_reform = { #T3 - Viscounty level
@@ -10035,7 +10060,10 @@ eue_viscounty_reform = { #T3 - Viscounty level
     fixed_rank = 3
     maintain_dynasty = yes
     potential = {
-        is_viscounty_subject_type = yes
+        OR = {
+            is_viscounty_subject_type = yes
+            has_reform = eue_viscounty_reform
+        }
     }
     lock_level_when_selected = yes
     custom_attributes = {
@@ -10054,8 +10082,10 @@ eue_viscounty_reform = { #T3 - Viscounty level
 unlocked_eue_viscounty_reform = { #T3 - Viscounty level
     icon = "eue_viscounty_reform"
     potential = {
+        has_reform = unlocked_eue_viscounty_reform
         NOT = {
             is_viscounty_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 4
         }
         capital_scope = {
@@ -10063,7 +10093,7 @@ unlocked_eue_viscounty_reform = { #T3 - Viscounty level
         }
         government_rank = 3
     }
-    fixed_rank = 3
+    #fixed_rank = 3 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10078,6 +10108,14 @@ unlocked_eue_viscounty_reform = { #T3 - Viscounty level
         nobles_influence_modifier = 0.05
         nobles_loyalty_modifier = 0.05
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 4
+            }
+            add_government_reform = unlocked_eue_county_reform
+        }
+    }
 }
 
 eue_county_reform = { #T4 - County level
@@ -10087,9 +10125,9 @@ eue_county_reform = { #T4 - County level
     fixed_rank = 4
     maintain_dynasty = yes
     potential = {
-        is_county_subject_type = yes
-        NOT = {
-            is_earldom_subject_type = yes
+        OR = {
+            is_county_subject_type = yes
+            has_reform = eue_county_reform
         }
     }
     lock_level_when_selected = yes
@@ -10111,8 +10149,11 @@ eue_county_reform = { #T4 - County level
 unlocked_eue_county_reform = { #T4 - County level
     icon = "eue_county_reform"
     potential = {
+        has_reform = unlocked_eue_county_reform
         NOT = {
             is_county_subject_type = yes
+            is_earldom_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 5
         }
         capital_scope = {
@@ -10120,7 +10161,7 @@ unlocked_eue_county_reform = { #T4 - County level
         }
         government_rank = 4
     }
-    fixed_rank = 4
+    #fixed_rank = 4 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10135,6 +10176,14 @@ unlocked_eue_county_reform = { #T4 - County level
         nobles_influence_modifier = 0.05
         nobles_loyalty_modifier = 0.05
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 5
+            }
+            add_government_reform = unlocked_eue_marquisate_reform 
+        }
+    }
 }
 
 eng_earldom_reform = { #T4 - County Level
@@ -10144,7 +10193,10 @@ eng_earldom_reform = { #T4 - County Level
     fixed_rank = 4
     maintain_dynasty = yes
     potential = {
-        is_earldom_subject_type = yes
+        OR = {
+            is_earldom_subject_type = yes
+            has_reform = eng_earldom_reform
+        }
     }
     lock_level_when_selected = yes
     custom_attributes = {
@@ -10164,8 +10216,11 @@ eng_earldom_reform = { #T4 - County Level
 unlocked_eng_earldom_reform = { #T4 - County Level
     icon = "eng_earldom_reform"
     potential = {
+        has_reform = unlocked_eng_earldom_reform
         NOT = {
             is_earldom_subject_type = yes
+            is_county_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 5
         }
         capital_scope = {
@@ -10173,7 +10228,7 @@ unlocked_eng_earldom_reform = { #T4 - County Level
         }
         government_rank = 4
     }
-    fixed_rank = 4
+    #fixed_rank = 4  #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10188,6 +10243,14 @@ unlocked_eng_earldom_reform = { #T4 - County Level
         nobles_influence_modifier = 0.05
         nobles_loyalty_modifier = 0.05
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 5
+            }
+            add_government_reform = unlocked_eue_marquisate_reform 
+        }
+    }
 }
 
 eue_marquisate_reform = { #T5 - Marquisate level
@@ -10199,7 +10262,10 @@ eue_marquisate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        is_marquisate_subject_type = yes
+        OR = {
+            is_marquisate_subject_type = yes
+            has_reform = eue_marquisate_reform
+        }
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10223,6 +10289,7 @@ unlocked_eue_marquisate_reform = { #T5 - Marquisate level
         has_reform = unlocked_eue_marquisate_reform
         NOT = {
             is_marquisate_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 6
         }
         capital_scope = {
@@ -10230,7 +10297,7 @@ unlocked_eue_marquisate_reform = { #T5 - Marquisate level
         }
         government_rank = 5
     }
-    fixed_rank = 5
+    #fixed_rank = 5 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10246,6 +10313,14 @@ unlocked_eue_marquisate_reform = { #T5 - Marquisate level
         nobles_influence_modifier = 0.075
         nobles_loyalty_modifier = 0.075
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 6
+            }
+            add_government_reform = unlocked_eue_duchy_reform 
+        }
+    }
 }
 
 eue_duchy_reform = { #T6 - Duchy level
@@ -10256,7 +10331,10 @@ eue_duchy_reform = { #T6 - Duchy level
     fixed_rank = 6
     maintain_dynasty = yes
     potential = {
-        is_duchy_subject_type = yes
+        OR = {
+            is_duchy_subject_type = yes
+            has_reform = eue_duchy_reform
+        }
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10274,8 +10352,10 @@ unlocked_eue_duchy_reform = { #T6 - Duchy level
     icon = "eue_duchy_reform"
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_eue_duchy_reform
         NOT = {
             is_duchy_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 7
         }
         capital_scope = {
@@ -10283,7 +10363,7 @@ unlocked_eue_duchy_reform = { #T6 - Duchy level
         }
         government_rank = 6
     }
-    fixed_rank = 6
+    #fixed_rank = 6  #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10297,6 +10377,14 @@ unlocked_eue_duchy_reform = { #T6 - Duchy level
         nobles_influence_modifier = 0.075
         nobles_loyalty_modifier = 0.075
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 7
+            }
+            add_government_reform = unlocked_eue_principality_reform 
+        }
+    }
 }
 
 eue_principality_reform = { #T7 - Principality level
@@ -10308,7 +10396,10 @@ eue_principality_reform = { #T7 - Principality level
     fixed_rank = 7
     maintain_dynasty = yes
     potential = {
-        is_principality_subject_type = yes
+        OR = {
+            is_principality_subject_type = yes
+            has_reform = eue_principality_reform
+        }
     }
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
@@ -10328,8 +10419,10 @@ unlocked_eue_principality_reform = { #T7 - Principality level
     #legacy_equivalent = eue_principality_legacy
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_eue_principality_reform
         NOT = {
             is_principality_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 8
         }
         capital_scope = {
@@ -10337,7 +10430,7 @@ unlocked_eue_principality_reform = { #T7 - Principality level
         }
         government_rank = 7
     }
-    fixed_rank = 7
+    #fixed_rank = 7 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10351,6 +10444,14 @@ unlocked_eue_principality_reform = { #T7 - Principality level
         nobles_influence_modifier = 0.1
         nobles_loyalty_modifier = 0.1
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 8
+            }
+            add_government_reform = unlocked_eue_kingdom_reform 
+        }
+    }
 }
 
 eue_kingdom_reform = { #T8 - Kingdom level #
@@ -10363,8 +10464,8 @@ eue_kingdom_reform = { #T8 - Kingdom level #
     maintain_dynasty = yes
     potential = {
         OR = {
-            is_crown_subject_type = yes
             is_kingdom_subject_type = yes
+            has_reform = eue_kingdom_reform
         }
         NOT = {
             has_reform = crown_of_aragon
@@ -10395,9 +10496,11 @@ unlocked_eue_kingdom_reform = { #T8 - Kingdom level
     allow_normal_conversion = no
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_eue_kingdom_reform
         NOT = {
             is_crown_subject_type = yes
             is_kingdom_subject_type = yes
+            has_ToR_unique_government_reform = yes
             government_rank = 9
         }
         capital_scope = {
@@ -10405,7 +10508,7 @@ unlocked_eue_kingdom_reform = { #T8 - Kingdom level
         }
         government_rank = 8
     }
-    fixed_rank = 8
+    #fixed_rank = 8 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -10420,6 +10523,14 @@ unlocked_eue_kingdom_reform = { #T8 - Kingdom level
         nobles_influence_modifier = 0.1
         nobles_loyalty_modifier = 0.125
     }
+    removed_effect = {
+        if = {
+            limit = {
+                government_rank = 9
+            }
+            add_government_reform = unlocked_eue_empire_reform 
+        }
+    }
 }
 
 unlocked_eue_empire_reform = { #T9 - Empire level
@@ -10428,12 +10539,16 @@ unlocked_eue_empire_reform = { #T9 - Empire level
     lock_level_when_selected = yes
     nation_designer_cost = 100
     potential = {
+        has_reform = unlocked_eue_empire_reform
+        NOT = {
+            has_ToR_unique_government_reform = yes
+        }
         capital_scope = {
             superregion = europe_superregion
         }
         government_rank = 9
     }
-    fixed_rank = 9
+    #fixed_rank = 9 #Don't need this, as when you upgrade your govenment rank, you loose this one and gain the upgraded one
     custom_attributes = {
         buffed_strong_duchies = yes #+5% Loyalty
         vu_has_ToR_crowns = yes
@@ -13455,5 +13570,28 @@ tur_reform_eyalets = {
     potential = {
         tag = TUR
         mission_completed = tur_develop_the_devshime_system_further #Was TUR_eyalets
+    }
+}
+
+duchy_of_brittany_reform = {
+    icon = "duchy_of_brittany" #Was "feudal_france_reform"
+    allow_normal_conversion = no
+    lock_level_when_selected = yes
+    potential = {
+        tag = BRI
+    }
+    fixed_rank = 6
+    modifiers = {
+        nobles_influence_modifier = 0.1
+        vassal_income = 0.2
+        max_absolutism = -50
+    }
+    custom_attributes = {
+        locked_government_type = yes
+        has_appanages = yes
+        need_crownland_to_annex = yes
+        nobility_loyalty_hit_on_integration = yes
+        #vu_has_ToR_subjects = yes
+        #vu_has_ToR_crowns = yes
     }
 }

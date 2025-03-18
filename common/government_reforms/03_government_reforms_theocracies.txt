@@ -25,7 +25,10 @@ theocracy_mechanic = {
 #Leadership
 leading_clergy_reform = {
     potential = {
-        NOT = { tag = PAP }
+        NOT = { 
+            tag = AOR 
+            tag = PAP
+        }
     }
     allow_normal_conversion = yes
     legacy_equivalent = theocratic_government
@@ -49,8 +52,15 @@ leading_clergy_reform = {
 
 monastic_order_reform = {
     potential = {
-        NOT = { tag = PAP }
-        NOT = { have_had_reform = teutonic_bishopric_reform }
+        OR = {
+            religion_group = christian
+            has_reform = monastic_order_reform
+        }
+        NOT = { 
+            tag = PAP
+            tag = AOR
+            have_had_reform = teutonic_bishopric_reform 
+        }
     }
     modifiers = {
         fort_maintenance_modifier = -0.2
@@ -72,8 +82,9 @@ monastic_order_reform = {
 
 asian_monastic_order_reform = {
     potential = {
-        NOT = { tag = PAP }
-        NOT = { have_had_reform = teutonic_bishopric_reform }
+        NOT = {
+            religion_group = christian 
+        }
     }
     modifiers = {
         fort_maintenance_modifier = -0.2
@@ -766,6 +777,19 @@ orthodox_patriarchate_reform = {
         religion = orthodox
     }
     nation_designer_cost = 10
+    modifiers = {
+        church_privilege_slots = 1
+        church_loyalty_modifier = 0.1
+        tolerance_own = 1
+    }
+}
+
+jewish_patriarchate_reform = {
+    icon = "patriarch"
+    allow_normal_conversion = yes
+    potential = {
+        has_reform = jewish_patriarchate_reform
+    }
     modifiers = {
         church_privilege_slots = 1
         church_loyalty_modifier = 0.1
@@ -4309,6 +4333,11 @@ ajuraan_theocracy_reform = {
 dynastic_theocracy_reform = {
     allow_normal_conversion = yes
     icon = "feudal_theocracy"
+    potential = {
+        NOT = {
+            is_ToR_subject_type = yes
+        }
+    }
     valid_for_nation_designer = yes
     nation_designer_cost = 0
     queen = yes

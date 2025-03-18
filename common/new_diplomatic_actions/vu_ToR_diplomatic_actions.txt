@@ -14,11 +14,11 @@ vu_promote_vassal_to_lordship = {
         ToR_subject_limit_reached = no
         government_rank = 2
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #No Don behave, bad boy, BAD! - SF
+            government = monarchy
         }
     }
 
@@ -66,11 +66,11 @@ vu_promote_vassal_to_barony = {
         ToR_subject_limit_reached = no
         government_rank = 3
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #No Don behave, bad donkey, BAD! - SF
+            government = monarchy
         }
     }
 
@@ -118,11 +118,11 @@ vu_promote_vassal_to_viscounty = {
         ToR_subject_limit_reached = no
         government_rank = 4
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #Don...NO! Behave, get some help. - SF
+            government = monarchy
         }
     }
 
@@ -170,11 +170,11 @@ vu_promote_vassal_to_marquisate = {
         ToR_subject_limit_reached = no
         government_rank = 6
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #Stop it! STOP! Get some help. - SF
+            government = monarchy
         }
     }
 
@@ -455,10 +455,10 @@ vu_promote_vassal_to_imamate = {
     is_visible = {
         #Checks if the overlord has access to the appropriate subject types
         religion_group = muslim
-        ToR_Muslim_subject_limit_reached = no
+        #ToR_Muslim_subject_limit_reached = no
         government_rank = 2
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
@@ -516,10 +516,10 @@ vu_promote_vassal_to_grand_muftate = {
     is_visible = {
         #Checks if the overlord has access to the appropriate subject types
         religion_group = muslim
-        ToR_Muslim_subject_limit_reached = no
+        #ToR_Muslim_subject_limit_reached = no
         government_rank = 3
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
@@ -577,10 +577,10 @@ vu_promote_vassal_to_sheikdom = {
     is_visible = {
         #Checks if the overlord has access to the appropriate subject types
         religion_group = muslim
-        ToR_Muslim_subject_limit_reached = no
+        #ToR_Muslim_subject_limit_reached = no
         government_rank = 4
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
@@ -638,10 +638,10 @@ vu_promote_vassal_to_emirate = {
     is_visible = {
         #Checks if the overlord has access to the appropriate subject types
         religion_group = muslim
-        ToR_Muslim_subject_limit_reached = no
+        #ToR_Muslim_subject_limit_reached = no
         government_rank = 6
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
@@ -1018,8 +1018,7 @@ vu_convert_personal_union = {
         #Checks if the overlord has access to the appropriate subject types
         has_government_attribute = vu_has_ToR_crowns
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
-            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
             is_subject_of = ROOT
             is_subject_of_type = personal_union
         }
@@ -1051,56 +1050,58 @@ vu_convert_personal_union = {
 #   vu_turkish_beylik_subjects	                                                        #
 #########################################################################################
 vu_release_beylik_subject = { #Added by Prussia to allow breaking of Beylik Vassals for the Ottomans due to populat demand
-	category = influence
-	require_acceptance = no
-	is_visible = {
-		FROM = {
-			is_subject_of = ROOT
-			is_subject_of_type = turkish_tributary_beylik_vassal
-		}
-	}
-    #Very good Prussia, Good! Very tidy and neat. :) - SF
-	is_allowed = {
-		always = yes
-	}
-	on_accept = {
-		from = {
-			if = {
-				limit = { not = { liberty_desire = 50 } }
-				add_opinion = {
-					who = root
-					modifier = vassal_abandoned
-				}
-			}
-			grant_independence = yes
+    category = influence
+    require_acceptance = no
+
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = turkish_tributary_beylik_vassal
+        }
+    }
+
+    is_allowed = {
+        always = yes
+    }
+
+    on_accept = {
+        FROM = {
+            if = {
+                limit = { NOT = { liberty_desire = 50 } }
+                add_opinion = {
+                    who = ROOT
+                    modifier = vassal_abandoned
+                }
+            }
+            grant_independence = yes
             add_truce_with = ROOT
-			every_owned_province = {
-				limit = {
-					or = {
-						is_claim = root
-						is_permanent_claim = root
-						is_core = root
-					}
-				}
-				if = {
-					limit = { is_permanent_claim = root }
-					remove_claim = root
-				}
-				if = {
-					limit = { is_claim = root }
-					remove_claim = root
-				}
-				if = {
-					limit = { is_core = root }
-					remove_core = root
-				}
-			}
-		}
-		add_prestige = -25
-	}
-	ai_will_do = {
-		always = no
-	}
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        is_claim = ROOT
+                        is_permanent_claim = ROOT
+                        is_core = ROOT
+                    }
+                }
+                if = {
+                    limit = { is_permanent_claim = ROOT }
+                    remove_claim = ROOT
+                }
+                if = {
+                    limit = { is_claim = ROOT }
+                    remove_claim = ROOT
+                }
+                if = {
+                    limit = { is_core = ROOT }
+                    remove_core = ROOT
+                }
+            }
+        }
+        add_prestige = -25
+    }
+    ai_will_do = {
+        always = no
+    }
 }
 
 #########################################################################################
@@ -1112,17 +1113,13 @@ vu_invite_vassal_to_league_of_lezhe = {
     alert_tooltip = vu_invite_vassal_to_league_of_lezhe_alert_tooltip
 
     is_visible = {
-        #Checks if the overlord has access to the appropriate subject types
-        #has_vu_ToR_subjects = yes
         culture = albanian
-        #ToR_subject_limit_reached = no
-        #government_rank = 6
+        ToR_subject_limit_reached = no
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
-            #(you can't make a republic or a theocracy into a Lordship you dummy)
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
+            government = monarchy
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #No Don behave, bad boy, BAD! - SF
         }
     }
 
@@ -1144,8 +1141,6 @@ vu_invite_vassal_to_league_of_lezhe = {
     }
 
     on_accept = {
-        #Made a scripted effect for this, to make this a bit less long and
-        #also to make it a bit more efficient as we can re-use these later on
         create_subject = {
             subject_type = lezhe_league_member
             who = FROM
@@ -1169,17 +1164,17 @@ vu_invite_vassal_to_ottoman_empire = {
     alert_tooltip = vu_invite_vassal_to_ottoman_empire_alert_tooltip
 
     is_visible = {
-        #Checks if the overlord has access to the appropriate subject types
-        #has_vu_ToR_subjects = yes
-        tag = TUR
-        #ToR_subject_limit_reached = no
-        #government_rank = 6
+        ToR_subject_limit_reached = no
         FROM = {
-            #FROM has to be a subject of Root, a vassal specifically, and also has to be a monarchy
-            #(you can't make a republic or a theocracy into a Lordship you dummy)
             is_subject_of = ROOT
             is_subject_of_type = vassal
-            #government = monarchy #No Don behave, bad boy, BAD! - SF
+            government = monarchy
+        }
+        OR = {
+            culture_group = turkish_g
+            culture_group = turko_semitic
+            technology_group = ottoman
+            has_reform = ottoman_government
         }
     }
 
@@ -1201,8 +1196,6 @@ vu_invite_vassal_to_ottoman_empire = {
     }
 
     on_accept = {
-        #Made a scripted effect for this, to make this a bit less long and
-        #also to make it a bit more efficient as we can re-use these later on
         create_subject = {
             subject_type = turkish_tributary_beylik_vassal
             who = FROM
