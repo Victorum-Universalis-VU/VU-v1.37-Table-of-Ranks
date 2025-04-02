@@ -31,6 +31,20 @@ feudalism_reform = {
     nation_designer_cost = 0
     potential = {
         is_ToR_subject_type = no
+        NOT = {
+            primary_culture = gulf_arabic
+            primary_culture = al_misr_arabic
+            primary_culture = al_iraqiya_arabic
+            primary_culture = persian
+            primary_culture = uzbehk
+            primary_culture = turkish
+            primary_culture = yemeni_culture
+            primary_culture = al_suryah_arabic
+            primary_culture = kurdish
+            primary_culture = mahri_culture
+            primary_culture = somali
+            primary_culture = swahili
+        }
     }
     modifiers = {
         vassal_income = 0.25
@@ -169,6 +183,21 @@ autocracy_reform = {
     nation_designer_cost = 0
     potential = {
         is_ToR_subject_type = no
+        NOT = {
+            primary_culture = gulf_arabic
+            primary_culture = al_misr_arabic
+            primary_culture = al_iraqiya_arabic
+            tag = POL
+            primary_culture = persian
+            primary_culture = uzbehk
+            primary_culture = turkish
+            primary_culture = yemeni_culture
+            primary_culture = al_suryah_arabic
+            primary_culture = kurdish
+            primary_culture = mahri_culture
+            primary_culture = somali
+            primary_culture = swahili
+        }
     }
     modifiers = {
         unjustified_demands = -0.1
@@ -187,7 +216,22 @@ autocracy_reform = {
 elective_monarchy_reform = {
     icon = "ballot_box"
     potential = {
-        NOT = { tag = POL }
+        NOT = {
+            primary_culture = gulf_arabic
+            primary_culture = al_misr_arabic
+            primary_culture = al_iraqiya_arabic
+            tag = POL
+            primary_culture = persian
+            primary_culture = uzbehk
+            primary_culture = turkish
+            primary_culture = omani_culture
+            primary_culture = yemeni_culture
+            primary_culture = al_suryah_arabic
+            primary_culture = kurdish
+            primary_culture = mahri_culture
+            primary_culture = somali
+            primary_culture = swahili
+        }
         is_subject = no
     }
     allow_normal_conversion = yes
@@ -235,6 +279,15 @@ plutocratic_reform = {
         NOT = {
             culture_group = filipino_i
             culture_group = nakh_daghestani
+            primary_culture = gulf_arabic
+            primary_culture = al_misr_arabic
+            primary_culture = al_iraqiya_arabic
+            primary_culture = yemeni_culture
+            primary_culture = omani_culture
+            primary_culture = al_suryah_arabic
+            primary_culture = mahri_culture
+            primary_culture = somali
+            primary_culture = swahili
         }
         OR = {
             technology_group = indian
@@ -2546,14 +2599,6 @@ caliphate_reform = {
     custom_attributes = {
         enables_divine_idea_group = yes
         enables_aristocratic_idea_group = no
-        has_islamic_imamate = yes
-        has_islamic_grand_muftate = yes
-        has_islamic_sheikdom = yes
-        has_islamic_sharifate_reform = yes
-        #has_islamic_governate = yes
-        has_islamic_sultanate = yes
-        has_islamic_taifa = yes
-        has_islamic_malikate = yes
     }
     conditional = {
         allow = { has_dlc = "Cradle of Civilization" }
@@ -3503,6 +3548,7 @@ beylik_government = {
     potential = {
         religion_group = muslim
         primary_culture = turkish
+        NOT = { tag = TUR }
     }
     valid_for_nation_designer = yes
     nation_designer_cost = 5
@@ -4087,7 +4133,7 @@ russian_empire_reform = {
 mamluk_government = {
     icon = "mamluk_government"
     allow_normal_conversion = yes
-    fixed_rank = 7
+    fixed_rank = 6 #Set correctly by SF
     lock_level_when_selected = yes
     potential = {
         religion_group = muslim
@@ -4122,14 +4168,6 @@ mamluk_government = {
             mamluk_mechanic
         }
         custom_attributes = {
-            has_islamic_imamate = yes
-            has_islamic_grand_muftate = yes
-            has_islamic_sheikdom = yes
-            has_islamic_sharifate_reform = yes
-            has_islamic_emirate = yes
-            has_islamic_sultanate = yes
-            has_islamic_malikate = yes
-            has_islamic_taifa = yes
         }
         heir = no
         foreign_slave_rulers = yes
@@ -10576,9 +10614,17 @@ islamic_emirate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        is_subject_of_type = islamic_emirate
+        OR = {
+            is_subject_of_type = islamic_emirate
+            is_subject_of_type = islamic_nikkah_PU
+        }
+        NOT = { government_rank = 6 }
+        government_rank = 5
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 5
         tolerance_own = 3
@@ -10595,14 +10641,19 @@ unlocked_islamic_emirate_reform = { #T5 - Marquisate level
     #legacy_equivalent = islamic_emirate_legacy
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_islamic_emirate_reform
         religion = sunni
         NOT = {
             is_subject_of_type = islamic_emirate
             government_rank = 6
+            tag = QOM
         }
         government_rank = 5
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 5
         tolerance_own = 3
@@ -10622,9 +10673,17 @@ islamic_governate_reform = { #T5 - Marquisate level
     fixed_rank = 5
     maintain_dynasty = yes
     potential = {
-        is_subject_of_type = islamic_governate
+        OR = {
+            is_subject_of_type = islamic_governate
+            is_subject_of_type = islamic_nikkah_PU
+        }
+        NOT = { government_rank = 6 }
+        government_rank = 5
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 2
         tolerance_own = 1
@@ -10640,6 +10699,7 @@ unlocked_islamic_governate_reform = { #T5 - Marquisate level
     #legacy_equivalent = islamic_governate_legacy
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_islamic_governate_reform
         OR = {
             religion = shiite
             religion = ibadi
@@ -10652,6 +10712,9 @@ unlocked_islamic_governate_reform = { #T5 - Marquisate level
         government_rank = 5
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 2
         tolerance_own = 1
@@ -10671,9 +10734,17 @@ islamic_sultanate_reform = { #T6 - Duchy level
     fixed_rank = 6
     maintain_dynasty = yes
     potential = {
-        is_subject_of_type = islamic_sultanate
+        OR = {
+            is_subject_of_type = islamic_sultanate
+            is_subject_of_type = islamic_nikkah_PU
+        }
+        NOT = { government_rank = 7 }
+        government_rank = 6
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 6
         tolerance_own = 4
@@ -10691,14 +10762,22 @@ unlocked_islamic_sultanate_reform = { #T6 - Duchy level
     valid_for_nation_designer = yes
     nation_designer_cost = 10
     potential = {
+        has_reform = unlocked_islamic_sultanate_reform
         religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_sultanate
+            is_subject_of_type = islamic_nikkah_PU
             government_rank = 7
+            tag = MAM
+            tag = MSY
+            tag = TUR
         }
         government_rank = 6
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 6
         tolerance_own = 4
@@ -10718,9 +10797,17 @@ islamic_taifa_reform = { #T7 - Principality level
     fixed_rank = 7
     maintain_dynasty = yes
     potential = {
-        is_subject_of_type = islamic_taifa
+        OR = {
+            is_subject_of_type = islamic_taifa
+            is_subject_of_type = islamic_nikkah_PU
+        }
+        NOT = { government_rank = 8 }
+        government_rank = 7
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 7
         tolerance_own = 5
@@ -10737,14 +10824,20 @@ unlocked_islamic_taifa_reform = { #T7 - Principality level
     #legacy_equivalent = islamic_malikate_legacy
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_islamic_taifa_reform
         religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_taifa
             government_rank = 8
+            tag = MAM
+            tag = TUR
         }
         government_rank = 7
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 7
         tolerance_own = 5
@@ -10764,9 +10857,17 @@ islamic_malikate_reform = { #T8 - Kingdom level
     fixed_rank = 8
     maintain_dynasty = yes
     potential = {
-        is_subject_of_type = islamic_malikate
+        OR = {
+            is_subject_of_type = islamic_malikate
+            is_subject_of_type = islamic_nikkah_PU
+        }
+        NOT = { government_rank = 9 }
+        government_rank = 8
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 8
         tolerance_own = 6
@@ -10783,14 +10884,20 @@ unlocked_islamic_malikate_reform = { #T8 - Kingdom level
     #legacy_equivalent = islamic_malikate_legacy
     valid_for_nation_designer = no
     potential = {
+        has_reform = unlocked_islamic_malikate_reform
         religion_group = muslim
         NOT = {
             is_subject_of_type = islamic_malikate
             government_rank = 9
+            tag = MAM
+            tag = TUR
         }
         government_rank = 8
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 8
         tolerance_own = 6
@@ -10811,6 +10918,9 @@ unlocked_islamic_sublimating_khalifa_reform = { #T8 - Kingdom level
         government_rank = 9
     }
     queen = no
+    custom_attributes = {
+        vu_has_ToR_crowns = yes
+    }
     modifiers = {
         tolerance_heathen = 8
         tolerance_own = 6

@@ -661,7 +661,7 @@ NCountry = {
 	DEVELOPMENT_ON_CONTINENT_FOR_NEW_CAPITAL = 0.0,	-- How many percent of your development needs to be on the other continent to move your capital there
 
 	EXPLORE_COAST_EVENT_CHANCE = 2,				-- Chance (in %) of getting an event when exploring coasts
-	MIN_TECH_FOR_CIRCUMNAVIGATE = 26,			-- Must have this level of dip tech to circumnavigate the globe
+	MIN_TECH_FOR_CIRCUMNAVIGATE = 20,			-- Must have this level of dip tech to circumnavigate the globe
 	CIRCUMNAVIGATION_PROVINCE_1 = 1468,			-- Provinces for circumnavigation (coast of gambia)
 	CIRCUMNAVIGATION_PROVINCE_2 = 1539,			-- Provinces for circumnavigation (magellan strait)
 	CIRCUMNAVIGATION_PROVINCE_3 = 1697,			-- Provinces for circumnavigation (hawaii sea)
@@ -853,7 +853,7 @@ NCountry = {
 	CORE_LOSE_PRIMARY_CULTURE_TAG = -1,				-- how many years until a core is lost for the primary tag of a country (-1 = never lost)
 	CORE_LOSE_PRESTIGE = -10.0,						-- Prestige change when lost core
 	ABANDON_CORE_PRESTIGE = -5.0,					-- The cost of abandoning a core that some other country owns.
-	ABANDON_IDEAGROUP_REFUND = 0.20,				-- The part of the idea group spent that will be refunded upon abandonment.
+	ABANDON_IDEAGROUP_REFUND = 0.10,				-- The part of the idea group spent that will be refunded upon abandonment.
 	NEIGHBOURBONUS = -0.025, 						-- _CDEF_NEIGHBOURBONUS_
 	NEIGHBOURBONUS_CAP = -0.5, 						-- _CDEF_NEIGHBOURBONUS_CAP_
 	NEIGHBOURBONUS_CORRUPTION = 0.0,

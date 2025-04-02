@@ -3316,10 +3316,22 @@ dom_cas_missions_4 = {
         position = 4
         provinces_to_highlight = { }
         trigger = {
-            HAB = {
-                NOT = { army_size = ROOT }
-                NOT = { total_development = ROOT }
+            NOT = { tag = CAS }
+            if = {
+                limit = {
+                    exists = AUH
+                }
+                AUH = {
+                    NOT = { army_size = ROOT }
+                    NOT = { total_development = ROOT }
+                }
             }
+            else = {
+                HAB = {
+                    NOT = { army_size = ROOT }
+                    NOT = { total_development = ROOT }
+                }
+            }           
             OR = {
                 power_projection = 50
                 is_great_power = yes
@@ -3329,6 +3341,20 @@ dom_cas_missions_4 = {
             add_country_modifier = {
                 name = spa_bid_for_the_hab_crown_modifier
                 duration = 5475
+            }
+            if = {
+                limit = {
+                    exists = AUH
+                    valid_for_personal_unions_trigger = yes
+                    AUH = {
+                        valid_for_personal_unions_trigger = yes
+                    }
+                }
+                add_casus_belli = {
+                    type = cb_restore_personal_union
+                    months = 300
+                    target = AUH
+                }
             }
             if = {
                 limit = {

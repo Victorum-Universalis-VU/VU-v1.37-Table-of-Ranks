@@ -1,16 +1,19 @@
 # Do not change tags in here without changing every other reference to them.
 # If adding new resources, make sure they are uniquely named.
 # Please add price definitions to prices.txt as well.
-
 #Base resources
 grain = {
 	is_valuable = yes
-	color = { 0.96 0.93 0.58 }
+	color = {
+		0.96
+		0.93
+		0.58
+	}
 	modifier = {
-		land_forcelimit_modifier = 0.20
+		land_forcelimit_modifier = 0.2
 	}
 	province = {
-		land_forcelimit = 0.5
+		land_forcelimit = 1
 	}
 	chance = {
 		factor = 35
@@ -20,7 +23,7 @@ grain = {
 		}
 		modifier = {
 			factor = 0
-			AND = { 
+			AND = {
 				OR = {
 					has_terrain = desert
 					has_terrain = salt_flats
@@ -29,7 +32,7 @@ grain = {
 					has_climate = arctic
 				}
 				NOT = {
-					province_id = 5304	#North African Oasis with famous dates
+					province_id = 5304					#North African Oasis with famous dates
 				}
 			}
 		}
@@ -56,7 +59,6 @@ grain = {
 			OR = {
 				has_climate = arid
 				has_climate = tropical
-
 			}
 		}
 		modifier = {
@@ -86,8 +88,8 @@ grain = {
 				region = ruthenia_region
 			}
 		}
-
-		modifier = { #Rich agriculture in the central valley
+		modifier = {
+			#Rich agriculture in the central valley
 			factor = 1.5
 			area = california_area
 		}
@@ -109,14 +111,13 @@ grain = {
 				has_country_flag = grain_chance_flag_high
 			}
 		}
-
-
-		modifier = { #Grain very rare in Athabaska
+		modifier = {
+			#Grain very rare in Athabaska
 			factor = 0.25
 			area = athabasca_area
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			OR = {
 				#Nile River
 				area = sennar_area
@@ -126,22 +127,23 @@ grain = {
 				region = new_zealand_region
 			}
 		}
-		modifier = { #Specific provinces which should get grain
-			factor = 4.0
+		modifier = {
+			#Specific provinces which should get grain
+			factor = 4
 			OR = {
-				province_id = 5032		# Tachi
-				province_id = 4961		# Palus
-				province_id = 2488		# Yakama
-				province_id = 2483		# Umatilla
-				province_id = 2486		# Sdukalbixw
-				province_id = 4949		# Nlakapamux
+				province_id = 5032				# Tachi
+				province_id = 4961				# Palus
+				province_id = 2488				# Yakama
+				province_id = 2483				# Umatilla
+				province_id = 2486				# Sdukalbixw
+				province_id = 4949				# Nlakapamux
 				#province_id = 5043		# Cocopah			#removed, may add through irrigation event
 				#province_id = 867		# Ivilluat			#removed, may add through irrigation event
-				province_id = 5304		# Tachi
+				province_id = 5304				# Tachi
 			}
 		}
 		modifier = {
-			factor = 6.0
+			factor = 6
 			OR = {
 				#Rich agriculture on the prairies extra bonus to overcome natural penalties
 				area = prairies_area
@@ -153,8 +155,8 @@ grain = {
 				area = dominica_area
 			}
 		}
-		modifier = { 
-			factor = 8.0
+		modifier = {
+			factor = 8
 			OR = {
 				#Rich agriculture along the Peace River despite climate extra bonus to overcome natural penalties
 				area = peace_river_area
@@ -164,14 +166,14 @@ grain = {
 			}
 		}
 		modifier = {
-			factor = 0.0
+			factor = 0
 			OR = {
 				#Newfoundland has the best fishing in the world but little else
-				province_id = 980			#E Newfoundland
-				province_id = 981			#N Newfoundland
-				province_id = 2573			#S Newfoundland
-				province_id = 982			#Cape Breton
-				province_id = 983			#PEI
+				province_id = 980				#E Newfoundland
+				province_id = 981				#N Newfoundland
+				province_id = 2573				#S Newfoundland
+				province_id = 982				#Cape Breton
+				province_id = 983				#PEI
 				#No grain in Rockies
 				area = kootenays_area
 				area = interior_plateau_area
@@ -182,8 +184,8 @@ grain = {
 				area = california_area
 				#Really want Avalon to have fish
 				area = newfoundland_area
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 				#No grain in Alaska
 				region = alaska_region
 				#No grain in the north too cold
@@ -202,31 +204,36 @@ grain = {
 					}
 				}
 				#No grain in NWT outside athabaska and peace river
-				AND = { 
+				AND = {
 					region = northwest_territories_region
-					NOT = {	area = peace_river_area	}
+					NOT = {
+						area = peace_river_area
+					}
 				}
 			}
 		}
-		modifier = { #Acadia actually has some decent farming   -x8 bonus because other factors cause penaltes
-			factor = 12.0
+		modifier = {
+			#Acadia actually has some decent farming   -x8 bonus because other factors cause penaltes
+			factor = 12
 			OR = {
 				area = lower_acadia_area
 				area = upper_acadia_area
 			}
 		}
-		modifier = { #The western Canadian prairies produce large amounts of grain
-			factor = 12.0
+		modifier = {
+			#The western Canadian prairies produce large amounts of grain
+			factor = 12
 			OR = {
 				area = prairies_area
 				area = saskatchewan_area
 				area = assiniboia_area
 				area = red_river_area
-				province_id = 5894 # Great Prairie
+				province_id = 5894				# Great Prairie
 			}
 		}
-		modifier = { #The richer parts of Canada had some excellent maize and other grainy type foods production   -x8 bonus because other factors cause penaltes
-			factor = 16.0
+		modifier = {
+			#The richer parts of Canada had some excellent maize and other grainy type foods production   -x8 bonus because other factors cause penaltes
+			factor = 16
 			OR = {
 				area = lower_canada_area
 				area = upper_canada_area
@@ -237,12 +244,17 @@ grain = {
 
 wine = {
 	is_valuable = yes
-	color = { 0.36 0.13 0.28 }
+	color = {
+		0.36
+		0.13
+		0.28
+	}
 	modifier = {
 		global_unrest = -1
 	}
 	province = {
 		local_unrest = -1
+		land_forcelimit = 0.15
 	}
 	chance = {
 		factor = 6
@@ -269,27 +281,65 @@ wine = {
 			}
 		}
 		modifier = {
-		#Added various areas known for producing wine in North America -NK.
+			#Added various areas known for producing wine in North America -NK.
 			factor = 0.25
-			NOT = { continent = south_america }
-			NOT = { region = south_africa_region }
-			NOT = { area = cuyo_area }
-			NOT = { area = nehuenken_area }
-			NOT = { area = california_area }
-			NOT = { area = cape_of_good_hope_area }
-			NOT = { area = eastern_cape_area }
-			NOT = { area = northern_cape_area }
-			NOT = { area = xhosa_area }
-			NOT = { area = vu_natal_area }
-			NOT = { area = macaronesia_area }
-			NOT = { area = upper_canada_area }
-			NOT = { area = oregon_area }
-			NOT = { area = salish_sea_area }
-			NOT = { area = hudson_valley_area }
-			NOT = { area = ohio_country_area }
-			NOT = { area = upper_louisiana_area }
-			NOT = { region = canada_region }
-			NOT = { region = new_zealand_region }
+			NOT = {
+				continent = south_america
+			}
+			NOT = {
+				region = south_africa_region
+			}
+			NOT = {
+				area = cuyo_area
+			}
+			NOT = {
+				area = nehuenken_area
+			}
+			NOT = {
+				area = california_area
+			}
+			NOT = {
+				area = cape_of_good_hope_area
+			}
+			NOT = {
+				area = eastern_cape_area
+			}
+			NOT = {
+				area = northern_cape_area
+			}
+			NOT = {
+				area = xhosa_area
+			}
+			NOT = {
+				area = vu_natal_area
+			}
+			NOT = {
+				area = macaronesia_area
+			}
+			NOT = {
+				area = upper_canada_area
+			}
+			NOT = {
+				area = oregon_area
+			}
+			NOT = {
+				area = salish_sea_area
+			}
+			NOT = {
+				area = hudson_valley_area
+			}
+			NOT = {
+				area = ohio_country_area
+			}
+			NOT = {
+				area = upper_louisiana_area
+			}
+			NOT = {
+				region = canada_region
+			}
+			NOT = {
+				region = new_zealand_region
+			}
 		}
 		modifier = {
 			factor = 0.25
@@ -344,17 +394,19 @@ wine = {
 				has_country_flag = wine_chance_flag_high
 			}
 		}
-		modifier = { #Wine country
-			factor = 4.0
-			province_id = 5764		# Wintu
-			province_id = 2737		# Napier (NZ)
-			province_id = 987		# Niagara
+		modifier = {
+			#Wine country
+			factor = 4
+			province_id = 5764			# Wintu
+			province_id = 2737			# Napier (NZ)
+			province_id = 987			# Niagara
 		}
-		modifier = { #Overcoming biases from other factors
-			factor = 20.0
+		modifier = {
+			#Overcoming biases from other factors
+			factor = 20
 			OR = {
-				province_id = 2607		# Okanogan
-				province_id = 5885		# Okanogan
+				province_id = 2607				# Okanogan
+				province_id = 5885				# Okanogan
 			}
 		}
 	}
@@ -362,12 +414,16 @@ wine = {
 
 wool = {
 	is_valuable = yes
-	color = { 0.83 0.83 0.83  }
+	color = {
+		0.83
+		0.83
+		0.83
+	}
 	modifier = {
 		global_ship_cost = -0.05
 	}
 	province = {
-		local_friendly_movement_speed = 0.10
+		local_friendly_movement_speed = 0.1
 	}
 	chance = {
 		factor = 30
@@ -375,14 +431,17 @@ wool = {
 			factor = 0
 			area = newfoundland_area
 		}
-		modifier = { #No wool in america until 1492
-            factor = 0.0
-            OR = {
-                continent = north_america
-                continent = south_america
-            }
-            NOT = { is_year = 1492 }
-        }
+		modifier = {
+			#No wool in america until 1492
+			factor = 0
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = {
+				is_year = 1492
+			}
+		}
 		modifier = {
 			factor = 0
 			OR = {
@@ -397,25 +456,39 @@ wool = {
 				region = central_africa_region
 				AND = {
 					has_climate = tropical
-					NOT = { area = paraguay_area }
-					NOT = { area = chaco_area }
+					NOT = {
+						area = paraguay_area
+					}
+					NOT = {
+						area = chaco_area
+					}
 				}
 				AND = {
 					has_climate = arctic
-					NOT = { region = tibet_region }
+					NOT = {
+						region = tibet_region
+					}
 				}
 				AND = {
 					has_winter = severe_winter
-					NOT = { region = tibet_region }
-					NOT = { region = hindusthan_region }
-					NOT = { region = central_asia_region }
-					NOT = { region = caucasia_region }
+					NOT = {
+						region = tibet_region
+					}
+					NOT = {
+						region = hindusthan_region
+					}
+					NOT = {
+						region = central_asia_region
+					}
+					NOT = {
+						region = caucasia_region
+					}
 				}
 			}
 		}
 		modifier = {
 			factor = 0
-			AND = { 
+			AND = {
 				OR = {
 					region = carribeans_region
 					region = brazil_region
@@ -423,7 +496,9 @@ wool = {
 					region = southeast_america_region
 					region = mississippi_region
 				}
-				NOT = { has_terrain = mountain }
+				NOT = {
+					has_terrain = mountain
+				}
 			}
 		}
 		modifier = {
@@ -453,20 +528,23 @@ wool = {
 			factor = 1.5
 			region = tibet_region
 		}
-
-		modifier = {	#A lot of wool in NZ
+		modifier = {
+			#A lot of wool in NZ
 			factor = 2.5
 			region = new_zealand_region
 		}
-		modifier = { #Wool less common in rich central valley
+		modifier = {
+			#Wool less common in rich central valley
 			factor = 0.5
 			area = california_area
 		}
-		modifier = { #Salish dog hair goods
+		modifier = {
+			#Salish dog hair goods
 			factor = 1.5
 			area = salish_sea_area
 		}
-		modifier = { #California climate plus what else in most parts
+		modifier = {
+			#California climate plus what else in most parts
 			factor = 1.5
 			region = california_region
 			NOT = {
@@ -494,15 +572,18 @@ wool = {
 				has_country_flag = wool_chance_flag_high
 			}
 		}
-		modifier = { #Wool rare in Alaska
+		modifier = {
+			#Wool rare in Alaska
 			factor = 0.5
 			region = alaska_region
 		}
-		modifier = { #Better options in most of Cascadia
+		modifier = {
+			#Better options in most of Cascadia
 			factor = 0.75
 			region = cascadia_region
 		}
-		modifier = { #Paradox went livestock for Arabia, so I might as well follow suit
+		modifier = {
+			#Paradox went livestock for Arabia, so I might as well follow suit
 			factor = 0.1
 			region = arabia_region
 		}
@@ -511,7 +592,11 @@ wool = {
 
 cloth = {
 	is_valuable = yes
-	color = { 0.86 0.19 0.19 }
+	color = {
+		0.86
+		0.19
+		0.19
+	}
 	modifier = {
 		merc_maintenance_modifier = -0.15
 	}
@@ -526,10 +611,12 @@ cloth = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { development_discounting_tribal = 9 }
+			NOT = {
+				development_discounting_tribal = 9
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			development_discounting_tribal = 16
 		}
 	}
@@ -537,18 +624,25 @@ cloth = {
 
 fish = {
 	is_valuable = yes
-	color = { 0.55 0.82 0.97 }
+	color = {
+		0.55
+		0.82
+		0.97
+	}
 	modifier = {
 		global_sailors_modifier = 0.25
 	}
 	province = {
 		local_sailors_modifier = 0.25
+		naval_forcelimit = 0.15
 	}
 	chance = {
 		factor = 20
 		modifier = {
 			factor = 0
-			NOT = { has_port = yes }
+			NOT = {
+				has_port = yes
+			}
 		}
 		modifier = {
 			factor = 0.65
@@ -569,8 +663,9 @@ fish = {
 			factor = 15
 			area = newfoundland_area
 		}
-		modifier = { #Newfoundland has the best fishing in the world but little else
-			factor = 10.0
+		modifier = {
+			#Newfoundland has the best fishing in the world but little else
+			factor = 10
 			OR = {
 				#province_id = 980			#E Newfoundland
 				#province_id = 981			#N Newfoundland
@@ -578,14 +673,15 @@ fish = {
 				area = lower_acadia_area
 			}
 		}
-		modifier = { #Really want Avalon to have fish
-			factor = 999.0
+		modifier = {
+			#Really want Avalon to have fish
+			factor = 999
 			OR = {
-				province_id = 5059			#Avalon
-				province_id = 5058			#Avalon
-				province_id = 5013			#Avalon
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5059				#Avalon
+				province_id = 5058				#Avalon
+				province_id = 5013				#Avalon
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 			}
 		}
 		modifier = {
@@ -595,8 +691,9 @@ fish = {
 				has_terrain = coastal_desert
 			}
 		}
-		modifier = { #VictorumUniversalis changed this number from 1.2 to 2.0 was too low there are few furs in glacial areas which was the primary alternative choice
-			factor = 2.0
+		modifier = {
+			#VictorumUniversalis changed this number from 1.2 to 2.0 was too low there are few furs in glacial areas which was the primary alternative choice
+			factor = 2
 			has_terrain = glacier
 		}
 		modifier = {
@@ -617,12 +714,14 @@ fish = {
 				has_country_flag = fish_chance_flag_high
 			}
 		}
-		modifier = {	#despite all the islands and water, ironically, the Caribbean doesn't have the most fantastic fish and would generally be better with some tropical crops like sugar, tropical wood, cocao, coffee, or tabacco
+		modifier = {
+			#despite all the islands and water, ironically, the Caribbean doesn't have the most fantastic fish and would generally be better with some tropical crops like sugar, tropical wood, cocao, coffee, or tabacco
 			factor = 0.5
 			region = carribeans_region
 		}
-		modifier = { #Pacific fishing lesser
-			factor = 3.0
+		modifier = {
+			#Pacific fishing lesser
+			factor = 3
 			OR = {
 				area = oregon_area
 				area = polynesia_area
@@ -636,30 +735,33 @@ fish = {
 				area = upper_acadia_area
 			}
 		}
-		modifier = { #These provinces should have fishing or at least a very good chance of fishing
-			factor = 4.0
+		modifier = {
+			#These provinces should have fishing or at least a very good chance of fishing
+			factor = 4
 			OR = {
-				province_id = 982			# Cape Breton
-				province_id = 986			# South Gaspesie
-				province_id = 2569		# Halifax bay
-				province_id = 5048		# NE NS along the Grand Banks
+				province_id = 982				# Cape Breton
+				province_id = 986				# South Gaspesie
+				province_id = 2569				# Halifax bay
+				province_id = 5048				# NE NS along the Grand Banks
 			}
 		}
-		modifier = { #Cote Nord and Labrador wants fish to be more likely   -x4 because for whatever reason fish is not showing up there
-			factor = 8.0
+		modifier = {
+			#Cote Nord and Labrador wants fish to be more likely   -x4 because for whatever reason fish is not showing up there
+			factor = 8
 			OR = {
 				area = cote_nord_area
 				area = labrador_area
-				province_id = 2578		# Anticosti
+				province_id = 2578				# Anticosti
 				#Remote Island Fishing and too much gold chance because of few options fishing
-				province_id = 5027		# Tristan
-				province_id = 5028		# Bonin
-				province_id = 5020		# Revilla Gigedo
-				province_id = 5093		# Desolation Islands
+				province_id = 5027				# Tristan
+				province_id = 5028				# Bonin
+				province_id = 5020				# Revilla Gigedo
+				province_id = 5093				# Desolation Islands
 			}
 		}
-		modifier = { #Pacific salmon
-			factor = 9.0
+		modifier = {
+			#Pacific salmon
+			factor = 9
 			OR = {
 				area = salish_sea_area
 				area = hecate_strait_area
@@ -673,14 +775,18 @@ fish = {
 
 fur = {
 	is_valuable = yes
-	color = { 0.54 0.40 0.31 }
+	color = {
+		0.54
+		0.4
+		0.31
+	}
 	modifier = {
 		prestige = 0.5
 	}
 	province = {
-		province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
+		local_regiment_cost = -0.1
 	}
-
 	chance = {
 		factor = 10
 		modifier = {
@@ -694,8 +800,12 @@ fur = {
 				has_terrain = coastal_desert
 				has_terrain = coastline
 			}
-			NOT = { has_winter = normal_winter }
-			NOT = { has_winter = severe_winter }
+			NOT = {
+				has_winter = normal_winter
+			}
+			NOT = {
+				has_winter = severe_winter
+			}
 		}
 		modifier = {
 			factor = 0
@@ -729,14 +839,17 @@ fur = {
 		}
 		modifier = {
 			factor = 0.5
-			NOT = { native_size = 1 }
+			NOT = {
+				native_size = 1
+			}
 		}
-		modifier = { #VictorumUniversalis change there are few furs or any animals for that matter in glacial areas fish and whale bone much more common goods and also usually in abundance   - laternote there are seals, of course, but we only want so many seal fur provinces
+		modifier = {
+			#VictorumUniversalis change there are few furs or any animals for that matter in glacial areas fish and whale bone much more common goods and also usually in abundance   - laternote there are seals, of course, but we only want so many seal fur provinces
 			factor = 0.65
 			has_terrain = glacier
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			native_size = 1
 		}
 		modifier = {
@@ -750,18 +863,23 @@ fur = {
 		modifier = {
 			factor = 2.5
 			has_winter = severe_winter
-			NOT = { has_terrain = glacier }
+			NOT = {
+				has_terrain = glacier
+			}
 		}
-		modifier = { #Furs very rare in California
+		modifier = {
+			#Furs very rare in California
 			factor = 0.25
 			region = california_region
 		}
-		modifier = { #Canadian Fur Trade
+		modifier = {
+			#Canadian Fur Trade
 			factor = 1.5
 			region = canada_region
 		}
-		modifier = { #Fine furs in the west
-			factor = 2.0
+		modifier = {
+			#Fine furs in the west
+			factor = 2
 			OR = {
 				region = cascadia_region
 				region = alaska_region
@@ -769,12 +887,11 @@ fur = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -794,10 +911,11 @@ fur = {
 			}
 		}
 		modifier = {
-			factor = 3.0
+			factor = 3
 			region = ural_region
 		}
-		modifier = { #Less fur in Acadia and Gaspesie than elsewhere in Canada
+		modifier = {
+			#Less fur in Acadia and Gaspesie than elsewhere in Canada
 			factor = 0.25
 			OR = {
 				area = lower_acadia_area
@@ -805,51 +923,61 @@ fur = {
 				area = notre_dame_mountains_area
 			}
 		}
-		modifier = { #Trying to discourage fur in Acadia only when province isnt hilly, hills should still have fur
+		modifier = {
+			#Trying to discourage fur in Acadia only when province isnt hilly, hills should still have fur
 			factor = 0.25
 			area = upper_acadia_area
-			NOT = { has_terrain = hills }
+			NOT = {
+				has_terrain = hills
+			}
 		}
-		modifier = { #Fur less likely in the Laurentides to encourage ores
+		modifier = {
+			#Fur less likely in the Laurentides to encourage ores
 			factor = 0.35
 			area = laurentian_area
 		}
-		modifier = { #Fur less likely in the Lower Canada to encourage Tobacco and Grain
+		modifier = {
+			#Fur less likely in the Lower Canada to encourage Tobacco and Grain
 			factor = 0.5
 			area = lower_canada_area
 		}
-		modifier = { #Newfoundland has the best fishing in the world but little else
+		modifier = {
+			#Newfoundland has the best fishing in the world but little else
 			factor = 0.2
 			OR = {
-				province_id = 980			#E Newfoundland
-				province_id = 981			#N Newfoundland
-				province_id = 2573			#S Newfoundland
-				province_id = 982			#CapeBreton
-				province_id = 983			#PEI
+				province_id = 980				#E Newfoundland
+				province_id = 981				#N Newfoundland
+				province_id = 2573				#S Newfoundland
+				province_id = 982				#CapeBreton
+				province_id = 983				#PEI
 				province_id = 8910
 				province_id = 8764
 			}
 		}
-		modifier = { #Really want Avalon to have fish
-			factor = 0.0
+		modifier = {
+			#Really want Avalon to have fish
+			factor = 0
 			OR = {
-				province_id = 5059			#Avalon
-				province_id = 5013			#Avalon
-				province_id = 5058			#Avalon
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5059				#Avalon
+				province_id = 5013				#Avalon
+				province_id = 5058				#Avalon
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 			}
 		}
-		modifier = { #These provinces should have fur or at least a very good chance of fur
-			factor = 4.0
-			province_id = 2578		# Anticosti
+		modifier = {
+			#These provinces should have fur or at least a very good chance of fur
+			factor = 4
+			province_id = 2578			# Anticosti
 		}
-		modifier = { #Niagara shouldn't usually get furs
+		modifier = {
+			#Niagara shouldn't usually get furs
 			factor = 0.1
-			province_id = 987		# Niagara
+			province_id = 987			# Niagara
 		}
-		modifier = {	#Disabled for a few areas where we don't really want fur
-			factor = 0.0
+		modifier = {
+			#Disabled for a few areas where we don't really want fur
+			factor = 0
 			OR = {
 				region = new_zealand_region
 				area = sennar_area
@@ -863,12 +991,16 @@ fur = {
 
 salt = {
 	is_valuable = yes
-	color = { 0.999 0.999 0.999 }
+	color = {
+		0.999
+		0.999
+		0.999
+	}
 	modifier = {
 		land_maintenance_modifier = -0.05
 	}
 	province = {
-		local_defensiveness = 0.15
+		local_defensiveness = 0.10
 	}
 	chance = {
 		factor = 5
@@ -878,10 +1010,18 @@ salt = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { has_terrain = desert }
-			NOT = { has_terrain = marsh }
-			NOT = { has_terrain = mountain }
-			NOT = { has_terrain = highlands }
+			NOT = {
+				has_terrain = desert
+			}
+			NOT = {
+				has_terrain = marsh
+			}
+			NOT = {
+				has_terrain = mountain
+			}
+			NOT = {
+				has_terrain = highlands
+			}
 		}
 		modifier = {
 			factor = 2
@@ -889,19 +1029,21 @@ salt = {
 				has_terrain = desert
 				AND = {
 					has_terrain = marsh
-					NOT = { has_climate = arctic } #Hudson Bay
+					NOT = {
+						has_climate = arctic
+					}
+					#Hudson Bay
 				}
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			region = peru_region
 		}
 		modifier = {
-			factor = 5.0
+			factor = 5
 			area = western_sahara_area
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -920,12 +1062,14 @@ salt = {
 				has_country_flag = salt_chance_flag_high
 			}
 		}
-		modifier = {	#Salt very likely
-			factor = 8.0
+		modifier = {
+			#Salt very likely
+			factor = 8
 			area = lucayan_area			#Salt in the Bahamas
 		}
-		modifier = { #Salt very very rare in Cascadia Alaska NWT and Hudson Bay all fresh water and little evaporation for salt water   -just removing it, chance was negligable anyway
-			factor = 0.0
+		modifier = {
+			#Salt very very rare in Cascadia Alaska NWT and Hudson Bay all fresh water and little evaporation for salt water   -just removing it, chance was negligable anyway
+			factor = 0
 			OR = {
 				region = cascadia_region
 				region = alaska_region
@@ -933,22 +1077,25 @@ salt = {
 				region = northwest_territories_region
 			}
 		}
-		modifier = { #Salt very common in California
+		modifier = {
+			#Salt very common in California
 			factor = 1.5
 			region = california_region
 		}
-		modifier = { #Salt very very abundant in the Great Basin Desert
-			factor = 3.0
+		modifier = {
+			#Salt very very abundant in the Great Basin Desert
+			factor = 3
 			OR = {
 				area = mojave_area
 				area = utah_area
 			}
 		}
-		modifier = { #bonus chance
+		modifier = {
+			#bonus chance
 			factor = 1.5
 			OR = {
-				province_id = 4952		# Southern Sierra Nevadas by death valley
-				province_id = 2490		# Salt Lake province
+				province_id = 4952				# Southern Sierra Nevadas by death valley
+				province_id = 2490				# Salt Lake province
 			}
 		}
 	}
@@ -956,14 +1103,17 @@ salt = {
 
 naval_supplies = {
 	is_valuable = yes
-	color = { 0.11 0.17 0.4 }
+	color = {
+		0.11
+		0.17
+		0.4
+	}
 	modifier = {
-		naval_forcelimit_modifier = 0.20
+		naval_forcelimit_modifier = 0.2
 	}
 	province = {
-		naval_forcelimit = 0.5
+		naval_forcelimit = 0.25
 	}
-
 	chance = {
 		factor = 15
 		modifier = {
@@ -993,7 +1143,9 @@ naval_supplies = {
 			OR = {
 				AND = {
 					has_terrain = mountain
-					NOT = { region = cascadia_region }
+					NOT = {
+						region = cascadia_region
+					}
 				}
 				has_terrain = grasslands
 				region = central_africa_region
@@ -1002,7 +1154,9 @@ naval_supplies = {
 		modifier = {
 			factor = 0.5
 			FROM = {
-				NOT = { num_of_ports = 1 }
+				NOT = {
+					num_of_ports = 1
+				}
 			}
 		}
 		modifier = {
@@ -1021,7 +1175,6 @@ naval_supplies = {
 				has_terrain = jungle
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -1040,105 +1193,123 @@ naval_supplies = {
 				has_country_flag = naval_supplies_chance_flag_high
 			}
 		}
-		modifier = { #Logging capital of the world
-			factor = 4.0
+		modifier = {
+			#Logging capital of the world
+			factor = 4
 			OR = {
 				area = salish_sea_area
 				area = oregon_area
 				area = california_area
 			}
 		}
-		modifier = { #Fantastic wood in the rainforests of the Pacific Coast
-			factor = 4.0
+		modifier = {
+			#Fantastic wood in the rainforests of the Pacific Coast
+			factor = 4
 			OR = {
 				area = queen_charlotte_sound_area
 				area = hecate_strait_area
 			}
 		}
-		modifier = { #very good wood in the Cascade ranges and Rockies
+		modifier = {
+			#very good wood in the Cascade ranges and Rockies
 			factor = 1.5
 			OR = {
 				area = lower_fraser_area
 			}
 		}
-		modifier = { #Trees too small and weak for the most part in California too dry
+		modifier = {
+			#Trees too small and weak for the most part in California too dry
 			factor = 0.25
 			region = california_region
 		}
-		modifier = { #Historical lumber trade of the Ottawa River   -x3 to overcome penalties
-			factor = 9.0
+		modifier = {
+			#Historical lumber trade of the Ottawa River   -x3 to overcome penalties
+			factor = 9
 			OR = {
 				area = grand_river_area
 			}
 		}
-		modifier = { #Too cold and dark for good lumber in far north
+		modifier = {
+			#Too cold and dark for good lumber in far north
 			factor = 0.5
 			OR = {
 				region = northwest_territories_region
 				AND = {
 					region = alaska_region
-					NOT = { area = alaska_area }
+					NOT = {
+						area = alaska_area
+					}
 				}
 			}
 		}
-		modifier = { #Timber slightly less likely in the Laurentides to encourage ores
+		modifier = {
+			#Timber slightly less likely in the Laurentides to encourage ores
 			factor = 0.65
 			area = laurentian_area
 		}
-		modifier = { #Protected areas of southern Alaska has okay trees
-			factor = 3.0
+		modifier = {
+			#Protected areas of southern Alaska has okay trees
+			factor = 3
 			area = alaska_area
 		}
-		modifier = { #Cascadia lumber bonus provinces
+		modifier = {
+			#Cascadia lumber bonus provinces
 			factor = 1.5
 			region = cascadia_region
 		}
-		modifier = { #Extreme north has no suitable trees or supplies
-			factor = 0.0
+		modifier = {
+			#Extreme north has no suitable trees or supplies
+			factor = 0
 			OR = {
 				area = arctic_coast_area
 				area = northern_alaska_area
 				area = the_barrens_area
-				province_id = 4999		# Hudson Bay islands
+				province_id = 4999				# Hudson Bay islands
 			}
 		}
-		modifier = { #Newfoundland doesnt have enough trees for lumber production
+		modifier = {
+			#Newfoundland doesnt have enough trees for lumber production
 			factor = 0.1
 			OR = {
-				province_id = 980			#E Newfoundland
-				province_id = 981			#N Newfoundland
-				province_id = 2573			#S Newfoundland
-				province_id = 982			#Cape Breton
-				province_id = 983			#PEI
+				province_id = 980				#E Newfoundland
+				province_id = 981				#N Newfoundland
+				province_id = 2573				#S Newfoundland
+				province_id = 982				#Cape Breton
+				province_id = 983				#PEI
 			}
 		}
-		modifier = { #Really want Avalon to have fish
-			factor = 0.0
+		modifier = {
+			#Really want Avalon to have fish
+			factor = 0
 			OR = {
-				province_id = 5059			#Avalon
-				province_id = 5013			#Avalon
-				province_id = 5058			#Avalon
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5059				#Avalon
+				province_id = 5013				#Avalon
+				province_id = 5058				#Avalon
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 			}
 		}
-		modifier = { #Naval Supplies very likely
-			factor = 5.0
+		modifier = {
+			#Naval Supplies very likely
+			factor = 5
 			OR = {
 				area = salish_sea_area
 				area = california_area
-				province_id = 497			# Dominica
-				province_id = 4622		# Isle of Pines
+				province_id = 497				# Dominica
+				province_id = 4622				# Isle of Pines
 			}
 		}
 	}
 }
 
-
 # metals
 copper = {
 	is_valuable = yes
-	color = { 0.85 0.46 0.15 }
+	color = {
+		0.85
+		0.46
+		0.15
+	}
 	modifier = {
 		global_regiment_recruit_speed = -0.2
 	}
@@ -1157,7 +1328,9 @@ copper = {
 				has_terrain = steppe
 				AND = {
 					has_terrain = desert
-					NOT = { area = arizona_area }
+					NOT = {
+						area = arizona_area
+					}
 				}
 				has_terrain = coastal_desert
 				has_terrain = drylands
@@ -1173,35 +1346,98 @@ copper = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { province_id = 990 } #St Maurice ironworks
-			NOT = { area = minas_gerais_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = great_valley_area }
-			NOT = { area = susquehanna_area }
-			NOT = { area = hudson_valley_area }
-			NOT = { area = lake_superior_area }
-			NOT = { area = south_iroquoisia_area }
-			NOT = { area = upper_ontario_area }
-			NOT = { area = laurentian_area }
-			NOT = { area = inner_ontario_area }
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = central_africa_region }
-			NOT = { area = chesapeake_area }
-			NOT = { area = upper_american_georgia_area }
-			NOT = { area = arizona_area }
-			NOT = { area = colorado_plateau_area }
-			NOT = { area = utah_area }
-			NOT = { area = upper_louisiana_area }
-			NOT = { area = ozarks_area }
-			NOT = { area = labrador_area }
-			NOT = { area = cote_nord_area }
-			NOT = { region = northwest_territories_region }
-			NOT = { region = alaska_region }
-			NOT = { region = mexico_region } #Not covered improve later
-			NOT = { region = peru_region } #Not covered improve later
-			NOT = { region = upper_peru_region } #Not covered improve later
-			NOT = { region = la_plata_region } #Not covered improve later
+			NOT = {
+				province_id = 990
+			}
+			#St Maurice ironworks
+			NOT = {
+				area = minas_gerais_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = great_valley_area
+			}
+			NOT = {
+				area = susquehanna_area
+			}
+			NOT = {
+				area = hudson_valley_area
+			}
+			NOT = {
+				area = lake_superior_area
+			}
+			NOT = {
+				area = south_iroquoisia_area
+			}
+			NOT = {
+				area = upper_ontario_area
+			}
+			NOT = {
+				area = laurentian_area
+			}
+			NOT = {
+				area = inner_ontario_area
+			}
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				area = chesapeake_area
+			}
+			NOT = {
+				area = upper_american_georgia_area
+			}
+			NOT = {
+				area = arizona_area
+			}
+			NOT = {
+				area = colorado_plateau_area
+			}
+			NOT = {
+				area = utah_area
+			}
+			NOT = {
+				area = upper_louisiana_area
+			}
+			NOT = {
+				area = ozarks_area
+			}
+			NOT = {
+				area = labrador_area
+			}
+			NOT = {
+				area = cote_nord_area
+			}
+			NOT = {
+				region = northwest_territories_region
+			}
+			NOT = {
+				region = alaska_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			#Not covered improve later
+			NOT = {
+				region = peru_region
+			}
+			#Not covered improve later
+			NOT = {
+				region = upper_peru_region
+			}
+			#Not covered improve later
+			NOT = {
+				region = la_plata_region
+			}
+			#Not covered improve later
 			NOT = {
 				AND = {
 					region = carribeans_region
@@ -1216,9 +1452,15 @@ copper = {
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { continent = new_world }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				continent = new_world
+			}
 		}
 		modifier = {
 			factor = 0.7
@@ -1246,7 +1488,6 @@ copper = {
 				region = east_siberia_region
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -1265,15 +1506,18 @@ copper = {
 				has_country_flag = copper_chance_flag_high
 			}
 		}
-		modifier = { #What is with all the copper in Arizona
-			factor = 4.0
+		modifier = {
+			#What is with all the copper in Arizona
+			factor = 4
 			area = arizona_area
 		}
-		modifier = { #Cooper River
-			factor = 4.0
-			province_id = 4936		# Copper River
+		modifier = {
+			#Cooper River
+			factor = 4
+			province_id = 4936			# Copper River
 		}
-		modifier = { #Copper still pretty rare elsewhere
+		modifier = {
+			#Copper still pretty rare elsewhere
 			factor = 0.5
 			OR = {
 				area = colorado_plateau_area
@@ -1282,15 +1526,18 @@ copper = {
 				region = alaska_region
 			}
 		}
-		modifier = { #Reduce copper in NWT because of lack of other options
+		modifier = {
+			#Reduce copper in NWT because of lack of other options
 			factor = 0.35
 			region = northwest_territories_region
 		}
-		modifier = { #Copper was too common, want it lower than Iron
+		modifier = {
+			#Copper was too common, want it lower than Iron
 			factor = 0.65
 			region = canada_region
 		}
-		modifier = { #Copper very rare in the east
+		modifier = {
+			#Copper very rare in the east
 			factor = 0.25
 			OR = {
 				area = upper_louisiana_area
@@ -1301,7 +1548,11 @@ copper = {
 }
 
 gold = {
-	color = { 1.0 0.84 0.19 }
+	color = {
+		1
+		0.84
+		0.19
+	}
 	#no modifiers
 	is_valuable = yes
 	chance = {
@@ -1313,44 +1564,112 @@ gold = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = cascadia_region }
-			NOT = { region = australia_region }
-			NOT = { region = california_region }
-			NOT = { region = south_africa_region }
-			NOT = { region = central_africa_region }
-			NOT = { region = peru_region }
-			NOT = { region = upper_peru_region }
-			NOT = { region = mexico_region }
-			NOT = { region = rio_grande_region }
-			NOT = { region = central_america_region }
-			NOT = { area = goias_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = minas_gerais_area }
-			NOT = { area = grao_para_area }
-			NOT = { area = ucayali_area }
-			NOT = { area = amazon_area }
-			NOT = { region = alaska_region }
-			NOT = { region = northwest_territories_region }
-			NOT = { region = new_zealand_region }
-			NOT = { area = hispaniola_area }
-			NOT = { area = dominica_area }
-			NOT = { region = maranhao_region }
-			NOT = { region = rio_grande_do_sul_region }
-			NOT = { area = espirito_santo_area }
-			NOT = { area = rio_de_janeiro_area }
-			NOT = { province_id = 8764  }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = cascadia_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				region = california_region
+			}
+			NOT = {
+				region = south_africa_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				region = peru_region
+			}
+			NOT = {
+				region = upper_peru_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = rio_grande_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				area = goias_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = minas_gerais_area
+			}
+			NOT = {
+				area = grao_para_area
+			}
+			NOT = {
+				area = ucayali_area
+			}
+			NOT = {
+				area = amazon_area
+			}
+			NOT = {
+				region = alaska_region
+			}
+			NOT = {
+				region = northwest_territories_region
+			}
+			NOT = {
+				region = new_zealand_region
+			}
+			NOT = {
+				area = hispaniola_area
+			}
+			NOT = {
+				area = dominica_area
+			}
+			NOT = {
+				region = maranhao_region
+			}
+			NOT = {
+				region = rio_grande_do_sul_region
+			}
+			NOT = {
+				area = espirito_santo_area
+			}
+			NOT = {
+				area = rio_de_janeiro_area
+			}
+			NOT = {
+				province_id = 8764
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { continent = new_world }
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = australia_region }
-			NOT = { region = south_africa_region }
-			NOT = { region = central_africa_region }
+			NOT = {
+				continent = new_world
+			}
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				region = south_africa_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
 		}
 		modifier = {
 			factor = 0
@@ -1373,14 +1692,16 @@ gold = {
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 2
 			FROM = {
 				OR = {
 					has_country_flag = por_bandeirantes_flag
-					colonial_parent = { has_country_flag = por_bandeirantes_flag }
+					colonial_parent = {
+						has_country_flag = por_bandeirantes_flag
+					}
 				}
 			}
 		}
@@ -1399,7 +1720,8 @@ gold = {
 				has_terrain = marsh
 			}
 		}
-		modifier = { #A few terrain modifers
+		modifier = {
+			#A few terrain modifers
 			factor = 1.2
 			OR = {
 				has_terrain = mountain
@@ -1415,28 +1737,30 @@ gold = {
 			factor = 3.5
 			region = peru_region
 		}
-		modifier = {	#Gold is grows on trees here
-			factor = 6.0
+		modifier = {
+			#Gold is grows on trees here
+			factor = 6
 			area = klondike_area
 		}
 		modifier = {
-			factor = 4.0
+			factor = 4
 			OR = {
-				province_id = 852		# Mexico
-				province_id = 853		# Huastec
-				province_id = 854		# Sayultecas
-				province_id = 2617		# Huichol
-				province_id = 856		# Zacatecas
-				province_id = 857		# Guichichil
-				province_id = 858		# Tamaulipas
-				province_id = 2615		# Guamares
-				province_id = 4781		# Transvaal (Johannesburg mines)
+				province_id = 852				# Mexico
+				province_id = 853				# Huastec
+				province_id = 854				# Sayultecas
+				province_id = 2617				# Huichol
+				province_id = 856				# Zacatecas
+				province_id = 857				# Guichichil
+				province_id = 858				# Tamaulipas
+				province_id = 2615				# Guamares
+				province_id = 4781				# Transvaal (Johannesburg mines)
 			}
 		}
-		modifier = {	#Gold is common here
+		modifier = {
+			#Gold is common here
 			factor = 2.5
 			OR = {
-				area = hispaniola_area			#Hispaniola has been described as 'one immense gold field', though ironically, the Spanish didn't find many of the deposits in the colonial period, and instead travelled further inland in search of often poorer gold mines
+				area = hispaniola_area				#Hispaniola has been described as 'one immense gold field', though ironically, the Spanish didn't find many of the deposits in the colonial period, and instead travelled further inland in search of often poorer gold mines
 				area = dominica_area
 				area = california_area
 			}
@@ -1454,25 +1778,29 @@ gold = {
 			FROM = {
 				OR = {
 					has_country_flag = por_bandeirantes_flag
-					colonial_parent = { has_country_flag = por_bandeirantes_flag }
+					colonial_parent = {
+						has_country_flag = por_bandeirantes_flag
+					}
 				}
 			}
 		}
-
-		modifier = {	#Gold is a bit more common here
+		modifier = {
+			#Gold is a bit more common here
 			factor = 1.5
 			region = alaska_region
 		}
-		modifier = {	#Gold is a bit rarer here
+		modifier = {
+			#Gold is a bit rarer here
 			factor = 0.85
 			OR = {
-				region = northwest_territories_region			#Chance was a bit too high in the NWT because of lack of other option
+				region = northwest_territories_region				#Chance was a bit too high in the NWT because of lack of other option
 				area = baja_california_area
 				area = mojave_area
 				area = sao_paolo_area
 			}
 		}
-		modifier = {	#Gold is rarer here
+		modifier = {
+			#Gold is rarer here
 			factor = 0.25
 			OR = {
 				AND = {
@@ -1491,7 +1819,9 @@ gold = {
 			FROM = {
 				OR = {
 					has_country_flag = kor_gold_rush
-					colonial_parent = { has_country_flag = kor_gold_rush }
+					colonial_parent = {
+						has_country_flag = kor_gold_rush
+					}
 				}
 			}
 			#OR = {
@@ -1500,7 +1830,6 @@ gold = {
 			#	area = northern_california_area
 			#}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -1519,59 +1848,65 @@ gold = {
 				has_country_flag = gold_chance_flag_high
 			}
 		}
-		modifier = {	# About half the gold ever mined in the entire world was mined from the Highveld in 100 years, apparently
-			factor = 24.0
+		modifier = {
+			# About half the gold ever mined in the entire world was mined from the Highveld in 100 years, apparently
+			factor = 24
 			area = highveld_area
 		}
-		modifier = {	#Specific province bonuses
-			factor = 8.0
+		modifier = {
+			#Specific province bonuses
+			factor = 8
 			OR = {
-				province_id = 4937		# Klondike
-				province_id = 1109		# Otago
-				province_id = 5599		# Westland (NZ)
+				province_id = 4937				# Klondike
+				province_id = 1109				# Otago
+				province_id = 5599				# Westland (NZ)
 			}
 		}
-		modifier = {	#Specific province bonuses
-			factor = 4.0
+		modifier = {
+			#Specific province bonuses
+			factor = 4
 			OR = {
-				province_id = 4925		# Nome or Chinik
-				province_id = 4934		# Han Hwichin
-				province_id = 2480		# Shasta
-				province_id = 4967		# Nevada (east)
-				province_id = 5597		# Tahuna (Central Otago NZ)
-				province_id = 5608		# Cormorandel Peninsula (NZ)
-				province_id = 8764 		# The Black Hills (SD, USA)
-				province_id = 5815		# Elko (NV, USA)
+				province_id = 4925				# Nome or Chinik
+				province_id = 4934				# Han Hwichin
+				province_id = 2480				# Shasta
+				province_id = 4967				# Nevada (east)
+				province_id = 5597				# Tahuna (Central Otago NZ)
+				province_id = 5608				# Cormorandel Peninsula (NZ)
+				province_id = 8764				# The Black Hills (SD, USA)
+				province_id = 5815				# Elko (NV, USA)
 			}
 		}
-		modifier = {	#Specific province bonuses
-			factor = 2.0
+		modifier = {
+			#Specific province bonuses
+			factor = 2
 			OR = {
-				province_id = 858		# Tamaulipas
-				province_id = 2738		# Nelson (NZ)
-				province_id = 4926		# Kenai
-				province_id = 4956		# Klamath A
-				province_id = 4958		# Klamath B
-				province_id = 5078		# NWT
-				province_id = 5079		# NWT
-				province_id = 5601		# Westland (NZ)
-				province_id = 5603		# Westland (NZ)
-				province_id = 5069		# Reno (NV, USA)
-				province_id = 8764 		# Carson City (NV, USA)
+				province_id = 858				# Tamaulipas
+				province_id = 2738				# Nelson (NZ)
+				province_id = 4926				# Kenai
+				province_id = 4956				# Klamath A
+				province_id = 4958				# Klamath B
+				province_id = 5078				# NWT
+				province_id = 5079				# NWT
+				province_id = 5601				# Westland (NZ)
+				province_id = 5603				# Westland (NZ)
+				province_id = 5069				# Reno (NV, USA)
+				province_id = 8764				# Carson City (NV, USA)
 			}
 		}
-		modifier = {	#Specific province bonuses
+		modifier = {
+			#Specific province bonuses
 			factor = 0.25
 			OR = {
-				province_id = 4972		# Tahltan
-				province_id = 4977		# Teechik
+				province_id = 4972				# Tahltan
+				province_id = 4977				# Teechik
 			}
 		}
-		modifier = {	#Cut in these provinces
-			factor = 0.0
+		modifier = {
+			#Cut in these provinces
+			factor = 0
 			OR = {
-				province_id = 5021		# NZ Islands
-				province_id = 5022		# NZ Islands
+				province_id = 5021				# NZ Islands
+				province_id = 5022				# NZ Islands
 			}
 		}
 	}
@@ -1579,7 +1914,11 @@ gold = {
 
 iron = {
 	is_valuable = yes
-	color = { 0.2 0.2 0.2 }
+	color = {
+		0.2
+		0.2
+		0.2
+	}
 	modifier = {
 		global_regiment_cost = -0.05
 	}
@@ -1620,10 +1959,10 @@ iron = {
 		}
 		modifier = {
 			factor = 12
-			OR = { 
+			OR = {
 				province_id = 4898
 				province_id = 4899
-				province_id = 910 
+				province_id = 910
 				province_id = 4902
 				province_id = 5622
 				province_id = 2517
@@ -1643,7 +1982,7 @@ iron = {
 			factor = 2.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 1.2
@@ -1668,38 +2007,44 @@ iron = {
 		#	continent = north_america
 		#	NOT = { has_terrain = forest }
 		#}
-		modifier = { #Vast forests in NA give too much iron
+		modifier = {
+			#Vast forests in NA give too much iron
 			factor = 0.65
 			continent = north_america
 			has_terrain = forest
 		}
-		modifier = { #Iron is somewhat more common in SA still a bit rare
+		modifier = {
+			#Iron is somewhat more common in SA still a bit rare
 			factor = 0.8
 			continent = south_america
 		}
-		modifier = { #Havent done Australia yet but how did Paradox miss this I will improve later
-			factor = 3.0
+		modifier = {
+			#Havent done Australia yet but how did Paradox miss this I will improve later
+			factor = 3
 			area = western_australia_area
 		}
-		modifier = { #Newfoundland has the best fishing in the world but little else
+		modifier = {
+			#Newfoundland has the best fishing in the world but little else
 			factor = 0.1
 			OR = {
-				province_id = 980			#E Newfoundland
-				province_id = 981			#N Newfoundland
-				province_id = 2573			#S Newfoundland
-				province_id = 982			#Cape Breton
-				province_id = 983			#PEI
+				province_id = 980				#E Newfoundland
+				province_id = 981				#N Newfoundland
+				province_id = 2573				#S Newfoundland
+				province_id = 982				#Cape Breton
+				province_id = 983				#PEI
 			}
 		}
-		modifier = { #Really want Avalon to have fish
-			factor = 0.0
+		modifier = {
+			#Really want Avalon to have fish
+			factor = 0
 			OR = {
 				area = newfoundland_area
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 			}
 		}
-		modifier = { #Fix Iron was too common in some areas
+		modifier = {
+			#Fix Iron was too common in some areas
 			factor = 0.5
 			OR = {
 				area = california_area
@@ -1709,11 +2054,14 @@ iron = {
 	}
 }
 
-
 #African Resources
 slaves = {
 	is_valuable = yes
-	color = { 0.0 0.0 0.0 }
+	color = {
+		0
+		0
+		0
+	}
 	modifier = {
 		global_tariffs = 0.25
 	}
@@ -1733,9 +2081,13 @@ slaves = {
 		modifier = {
 			factor = 0
 			OR = {
-				FROM = { has_country_modifier = the_abolish_slavery_act }
-				NOT = { continent = africa }
-				province_id = 1174 #Namibia
+				FROM = {
+					has_country_modifier = the_abolish_slavery_act
+				}
+				NOT = {
+					continent = africa
+				}
+				province_id = 1174				#Namibia
 			}
 		}
 		modifier = {
@@ -1743,7 +2095,7 @@ slaves = {
 			island = yes
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			OR = {
 				region = horn_of_africa_region
 				region = kongo_region
@@ -1757,7 +2109,7 @@ slaves = {
 			region = south_africa_region
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -1781,7 +2133,7 @@ slaves = {
 			}
 		}
 		modifier = {
-			factor = 3.0
+			factor = 3
 			OR = {
 				area = kurdufan_area
 				area = darfur_central_sahara_area
@@ -1798,14 +2150,17 @@ slaves = {
 
 ivory = {
 	is_valuable = yes
-	color = { 0.75 0.7 0.63 }
+	color = {
+		0.75
+		0.7
+		0.63
+	}
 	modifier = {
 		diplomatic_reputation = 2
 	}
 	province = {
 		local_state_maintenance_modifier = -0.2
 	}
-
 	chance = {
 		factor = 15
 		modifier = {
@@ -1814,10 +2169,18 @@ ivory = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { continent = asia }
-			NOT = { continent = africa }
-			NOT = { area = subarctic_islands_area }
-			NOT = { area = greenland_area }
+			NOT = {
+				continent = asia
+			}
+			NOT = {
+				continent = africa
+			}
+			NOT = {
+				area = subarctic_islands_area
+			}
+			NOT = {
+				area = greenland_area
+			}
 			NOT = {
 				AND = {
 					has_terrain = glacier
@@ -1828,9 +2191,15 @@ ivory = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { has_terrain = jungle }
-			NOT = { has_terrain = savannah }
-			NOT = { has_terrain = glacier }
+			NOT = {
+				has_terrain = jungle
+			}
+			NOT = {
+				has_terrain = savannah
+			}
+			NOT = {
+				has_terrain = glacier
+			}
 		}
 		modifier = {
 			factor = 0
@@ -1865,7 +2234,7 @@ ivory = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -1888,8 +2257,9 @@ ivory = {
 				has_country_flag = ivory_chance_flag_high
 			}
 		}
-		modifier = {	#High chance of ivory (whaling/scrimshaw)
-			factor = 4.0
+		modifier = {
+			#High chance of ivory (whaling/scrimshaw)
+			factor = 4
 			OR = {
 				province_id = 5591
 				province_id = 5093
@@ -1898,16 +2268,20 @@ ivory = {
 	}
 }
 
-
 #Eastern Resources
 tea = {
 	is_valuable = yes
-	color = { 0.07 0.33 0.09 }
+	color = {
+		0.07
+		0.33
+		0.09
+	}
 	modifier = {
-		advisor_cost = -0.10
+		advisor_cost = -0.1
 	}
 	province = {
 		garrison_growth = 0.25
+		land_forcelimit = 1
 	}
 	chance = {
 		factor = 15
@@ -1918,44 +2292,119 @@ tea = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = {	region = malaya_region }
-			NOT = {	region = moluccas_region }
-			NOT = {	region = indonesia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = indo_china_region }
-			NOT = { region = south_china_sea_islands_region }
-			NOT = { region = south_china_region }
-			NOT = { region = xinan_region }
-			NOT = { region = japan_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
-			NOT = { region = celebes_region }
-			NOT = { region = philippines_region }
-			NOT = { area = taiwan_area }
-			NOT = { area = assam_area }
-			NOT = { area = banda_oriental_area } #Yerba Mate
-			NOT = { area = rio_grande_do_sol_area } #Yerba Mate
-			NOT = { area = buenos_aires_area } #Yerba Mate
-			NOT = { area = misiones_area } #Yerba Mate
-			NOT = { area = beni_area } #Yerba Mate
-			NOT = { area = moxos_area } #Yerba Mate
-			NOT = { area = paraguay_area } #Yerba Mate
-			NOT = { area = sao_paolo_area } #Yerba Mate
-			NOT = { area = west_sao_paolo_area } #Yerba Mate
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = indo_china_region
+			}
+			NOT = {
+				region = south_china_sea_islands_region
+			}
+			NOT = {
+				region = south_china_region
+			}
+			NOT = {
+				region = xinan_region
+			}
+			NOT = {
+				region = japan_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
+			NOT = {
+				region = celebes_region
+			}
+			NOT = {
+				region = philippines_region
+			}
+			NOT = {
+				area = taiwan_area
+			}
+			NOT = {
+				area = assam_area
+			}
+			NOT = {
+				area = banda_oriental_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = rio_grande_do_sol_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = buenos_aires_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = misiones_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = beni_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = moxos_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = paraguay_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = sao_paolo_area
+			}
+			#Yerba Mate
+			NOT = {
+				area = west_sao_paolo_area
+			}
+			#Yerba Mate
 		}
 		modifier = {
 			factor = 0
-			is_random_new_world = yes #Only the below cultures can get tea in the RNW
+			is_random_new_world = yes			#Only the below cultures can get tea in the RNW
 			FROM = {
-				NOT = { culture_group = east_asian }
-				NOT = { culture_group = central_indic }
-				NOT = { culture_group = dravidian }
-				NOT = { culture_group = western_aryan }
-				NOT = { culture_group = hindusthani }
-				NOT = { culture_group = eastern_aryan }
-				NOT = { culture_group = korean_g }
-				NOT = { culture_group = japanese_g }
+				NOT = {
+					culture_group = east_asian
+				}
+				NOT = {
+					culture_group = central_indic
+				}
+				NOT = {
+					culture_group = dravidian
+				}
+				NOT = {
+					culture_group = western_aryan
+				}
+				NOT = {
+					culture_group = hindusthani
+				}
+				NOT = {
+					culture_group = eastern_aryan
+				}
+				NOT = {
+					culture_group = korean_g
+				}
+				NOT = {
+					culture_group = japanese_g
+				}
 			}
 		}
 		modifier = {
@@ -1990,24 +2439,23 @@ tea = {
 		modifier = {
 			factor = 1.5
 			OR = {
-				area = banda_oriental_area #Yerba Mate
-				area = rio_grande_do_sol_area #Yerba Mate
-				area = buenos_aires_area #Yerba Mate
-				area = misiones_area #Yerba Mate
-				area = beni_area #Yerba Mate
-				area = moxos_area #Yerba Mate
-				area = paraguay_area #Yerba Mate
-				area = sao_paolo_area  #Yerba Mate
-				area = west_sao_paolo_area  #Yerba Mate
+				area = banda_oriental_area				#Yerba Mate
+				area = rio_grande_do_sol_area				#Yerba Mate
+				area = buenos_aires_area				#Yerba Mate
+				area = misiones_area				#Yerba Mate
+				area = beni_area				#Yerba Mate
+				area = moxos_area				#Yerba Mate
+				area = paraguay_area				#Yerba Mate
+				area = sao_paolo_area				#Yerba Mate
+				area = west_sao_paolo_area				#Yerba Mate
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -2031,7 +2479,11 @@ tea = {
 
 chinaware = {
 	is_valuable = yes
-	color = { 0.18 0.57 0.8 }
+	color = {
+		0.18
+		0.57
+		0.8
+	}
 	modifier = {
 		legitimacy = 0.25
 		devotion = 0.25
@@ -2041,9 +2493,7 @@ chinaware = {
 	}
 	province = {
 		local_autonomy = -0.1
-
 	}
-
 	chance = {
 		factor = 15
 		modifier = {
@@ -2052,22 +2502,42 @@ chinaware = {
 		}
 		modifier = {
 			factor = 0
-			NOT = {	region = malaya_region }
-			NOT = {	region = moluccas_region }
-			NOT = {	region = indonesia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = south_china_region }
-			NOT = { region = japan_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = south_china_region
+			}
+			NOT = {
+				region = japan_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
 		}
 		modifier = {
 			factor = 0
-			NOT = { development_discounting_tribal = 8 }
+			NOT = {
+				development_discounting_tribal = 8
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2095,7 +2565,11 @@ chinaware = {
 
 spices = {
 	is_valuable = yes
-	color = { 0.4 0.65 0.38 }
+	color = {
+		0.4
+		0.65
+		0.38
+	}
 	modifier = {
 		spy_offence = 0.25
 	}
@@ -2108,36 +2582,73 @@ spices = {
 			factor = 0
 			area = newfoundland_area
 		}
-		modifier = { #Chilies originated in Mexico
-            factor = 0.55
+		modifier = {
+			#Chilies originated in Mexico
+			factor = 0.55
 			OR = {
-                region = mexico_region
+				region = mexico_region
 				region = central_america_region
 			}
-        }
-		modifier = { #Columbian Exchange, chilies spread to South America
+		}
+		modifier = {
+			#Columbian Exchange, chilies spread to South America
 			factor = 0.45
 			continent = south_america
-			NOT = { is_year = 1492 }
+			NOT = {
+				is_year = 1492
+			}
 		}
 		modifier = {
 			factor = 0
-			NOT = {	region = malaya_region }
-			NOT = {	region = moluccas_region }
-			NOT = {	region = indonesia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = deccan_region }
-			NOT = { region = bengal_region }
-			NOT = { region = coromandel_region }
-			NOT = { region = central_america_region }
-			NOT = { region = mexico_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
-			NOT = { region = celebes_region }
-			NOT = { region = philippines_region }
-			NOT = { area = indian_ocean_islands_area }
-			NOT = { province_id = 1244 } # Tahiti
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = coromandel_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
+			NOT = {
+				region = celebes_region
+			}
+			NOT = {
+				region = philippines_region
+			}
+			NOT = {
+				area = indian_ocean_islands_area
+			}
+			NOT = {
+				province_id = 1244
+			}
+			# Tahiti
 		}
 		modifier = {
 			factor = 0
@@ -2169,7 +2680,7 @@ spices = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2208,11 +2719,14 @@ spices = {
 	}
 }
 
-
 #New World Resources
 coffee = {
 	is_valuable = yes
-	color = { 0.22 0.15 0.09 }
+	color = {
+		0.22
+		0.15
+		0.09
+	}
 	modifier = {
 		global_institution_spread = 0.05
 	}
@@ -2228,26 +2742,66 @@ coffee = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { area = southern_ethiopia_area }
-			NOT = { area = hadiya_area }
-			NOT = { area = damot_area }
-			NOT = { area = shewa_area }
-			NOT = {	region = malaya_region }
-			NOT = { region = indonesia_region }
-			NOT = { region = moluccas_region }
-			NOT = { region = la_plata_region }
-			NOT = { region = peru_region }
-			NOT = { region = brazil_region }
-			NOT = { region = carribeans_region }
-			NOT = { region = central_america_region }
-			NOT = { region = mexico_region }
-			NOT = { region = colombia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
-			NOT = { region = celebes_region }
-			NOT = { region = philippines_region }
+			NOT = {
+				area = southern_ethiopia_area
+			}
+			NOT = {
+				area = hadiya_area
+			}
+			NOT = {
+				area = damot_area
+			}
+			NOT = {
+				area = shewa_area
+			}
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = la_plata_region
+			}
+			NOT = {
+				region = peru_region
+			}
+			NOT = {
+				region = brazil_region
+			}
+			NOT = {
+				region = carribeans_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = colombia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
+			NOT = {
+				region = celebes_region
+			}
+			NOT = {
+				region = philippines_region
+			}
 		}
 		modifier = {
 			factor = 0
@@ -2267,7 +2821,8 @@ coffee = {
 			is_year = 1500
 			region = tanzania_region
 		}
-		modifier = { #Coffee arrives in India circa mid 16th century
+		modifier = {
+			#Coffee arrives in India circa mid 16th century
 			factor = 1.5
 			is_year = 1550
 			OR = {
@@ -2278,11 +2833,12 @@ coffee = {
 				region = hindusthan_region
 			}
 		}
-		modifier = { #Coffee arrives in Central America and Colombia circa 17th century
+		modifier = {
+			#Coffee arrives in Central America and Colombia circa 17th century
 			factor = 1.5
 			is_year = 1600
 			OR = {
-			    region = colombia_region
+				region = colombia_region
 				region = central_america_region
 				region = mexico_region
 				region = amazon_region
@@ -2294,11 +2850,13 @@ coffee = {
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			continent = new_world #Always in RNW
-			NOT = { has_climate = tropical }
+			continent = new_world			#Always in RNW
+			NOT = {
+				has_climate = tropical
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2321,31 +2879,35 @@ coffee = {
 				has_country_flag = coffee_chance_flag_high
 			}
 		}
-		modifier = { #Coffee arrives in South East Asia circa late 18th to 19th century
+		modifier = {
+			#Coffee arrives in South East Asia circa late 18th to 19th century
 			factor = 1.5
 			is_year = 1750
 			OR = {
-			    region = sumatran_region
+				region = sumatran_region
 				region = indo_china_region
 			}
 		}
-		modifier = { #Coffee arrives in Côte d'Ivoire circa 19th century
+		modifier = {
+			#Coffee arrives in Côte d'Ivoire circa 19th century
 			factor = 1.5
 			is_year = 1800
 			OR = {
-			    area = west_africa_coast_area
+				area = west_africa_coast_area
 				area = kong_area
 			}
 		}
-		modifier = { #Coffee arrives in Uganda & Kenya circa 19th century
+		modifier = {
+			#Coffee arrives in Uganda & Kenya circa 19th century
 			factor = 1.5
 			is_year = 1825
 			OR = {
-			    region = uganda_region
+				region = uganda_region
 				region = central_africa_region
 			}
 		}
-		modifier = {	#Caribbean wants sugar, cocao, and tobacco to be more common than coffee
+		modifier = {
+			#Caribbean wants sugar, cocao, and tobacco to be more common than coffee
 			factor = 0.5
 			region = carribeans_region
 		}
@@ -2354,7 +2916,11 @@ coffee = {
 
 cotton = {
 	is_valuable = yes
-	color = { 0.52 0.68 0.6 }
+	color = {
+		0.52
+		0.68
+		0.6
+	}
 	modifier = {
 		global_colonial_growth = 20
 	}
@@ -2370,29 +2936,68 @@ cotton = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = southeast_america_region }
-			NOT = { region = carribeans_region }
-			NOT = { region = mississippi_region }
-			NOT = { region = rio_grande_region }
-			NOT = { region = egypt_region }
-			NOT = { region = sudan_region }
-			NOT = { region = hindusthan_region }
-			NOT = { region = bengal_region }
-			NOT = { region = deccan_region }
-			NOT = { region = anatolia_region }
-			NOT = { region = mongolia_region }
+			NOT = {
+				region = southeast_america_region
+			}
+			NOT = {
+				region = carribeans_region
+			}
+			NOT = {
+				region = mississippi_region
+			}
+			NOT = {
+				region = rio_grande_region
+			}
+			NOT = {
+				region = egypt_region
+			}
+			NOT = {
+				region = sudan_region
+			}
+			NOT = {
+				region = hindusthan_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = anatolia_region
+			}
+			NOT = {
+				region = mongolia_region
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { region = egypt_region }
-			NOT = { region = sudan_region }
-			NOT = { region = hindusthan_region }
-			NOT = { region = bengal_region }
-			NOT = { region = deccan_region }
-			NOT = { region = anatolia_region }
-			NOT = { region = mongolia_region }
-			NOT = { continent = new_world } #Always in RNW
+			NOT = {
+				region = egypt_region
+			}
+			NOT = {
+				region = sudan_region
+			}
+			NOT = {
+				region = hindusthan_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = anatolia_region
+			}
+			NOT = {
+				region = mongolia_region
+			}
+			NOT = {
+				continent = new_world
+			}
+			#Always in RNW
 		}
 		modifier = {
 			factor = 0
@@ -2411,7 +3016,9 @@ cotton = {
 				province_id = 481
 				AND = {
 					continent = europe
-					NOT = { region = anatolia_region }
+					NOT = {
+						region = anatolia_region
+					}
 				}
 			}
 		}
@@ -2424,7 +3031,7 @@ cotton = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2448,7 +3055,7 @@ cotton = {
 			}
 		}
 		modifier = {
-			factor = 10.0
+			factor = 10
 			area = lucayan_area			#But more in the Bahamas
 		}
 	}
@@ -2456,7 +3063,11 @@ cotton = {
 
 sugar = {
 	is_valuable = yes
-	color = { 0.74 0.95 0.68 }
+	color = {
+		0.74
+		0.95
+		0.68
+	}
 	modifier = {
 		war_exhaustion_cost = -0.2
 	}
@@ -2471,7 +3082,9 @@ sugar = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { has_climate = tropical }
+			NOT = {
+				has_climate = tropical
+			}
 			OR = {
 				has_winter = severe_winter
 				has_winter = normal_winter
@@ -2487,26 +3100,58 @@ sugar = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = carribeans_region }
-			NOT = { region = brazil_region }
-			NOT = { region = mexico_region }
-			NOT = { region = rio_grande_region }
-			NOT = { region = central_america_region }
-			NOT = { region = colombia_region }
-			NOT = { region = deccan_region }
-			NOT = { region = west_india_region }
-			NOT = { area = mascarenes_area }
-			NOT = { region = amazon_region }
-			NOT = { region = rio_grande_do_sul_region }
-			NOT = { region = mato_grosso_region }
-			NOT = { area = macaronesia_area }
-			NOT = { area = florida_area }
-			NOT = { area = lower_louisiana_area }
+			NOT = {
+				region = carribeans_region
+			}
+			NOT = {
+				region = brazil_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = rio_grande_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = colombia_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = west_india_region
+			}
+			NOT = {
+				area = mascarenes_area
+			}
+			NOT = {
+				region = amazon_region
+			}
+			NOT = {
+				region = rio_grande_do_sul_region
+			}
+			NOT = {
+				region = mato_grosso_region
+			}
+			NOT = {
+				area = macaronesia_area
+			}
+			NOT = {
+				area = florida_area
+			}
+			NOT = {
+				area = lower_louisiana_area
+			}
 		}
 		modifier = {
 			factor = 2.5
 			is_random_new_world = no
-			NOT = { province_id = 481 }
+			NOT = {
+				province_id = 481
+			}
 			OR = {
 				region = carribeans_region
 				area = ceara_area
@@ -2517,7 +3162,7 @@ sugar = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2545,12 +3190,16 @@ sugar = {
 
 tobacco = {
 	is_valuable = yes
-	color = { 0.33 0.56 0.38 }
+	color = {
+		0.33
+		0.56
+		0.38
+	}
 	modifier = {
 		global_spy_defence = 0.25
 	}
 	province = {
-		 province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
@@ -2561,29 +3210,58 @@ tobacco = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = la_plata_region }
-			NOT = { region = northeast_america_region }
-			NOT = { region = southeast_america_region }
-			NOT = { region = rio_grande_region }
-			NOT = { region = brazil_region }
-			NOT = { region = carribeans_region }
-			NOT = { region = australia_region }
-			NOT = { area = appalachia_area }
-			NOT = { area = upper_canada_area }			#VU New
-			NOT = { area = lower_canada_area }			#VU New
+			NOT = {
+				region = la_plata_region
+			}
+			NOT = {
+				region = northeast_america_region
+			}
+			NOT = {
+				region = southeast_america_region
+			}
+			NOT = {
+				region = rio_grande_region
+			}
+			NOT = {
+				region = brazil_region
+			}
+			NOT = {
+				region = carribeans_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				area = appalachia_area
+			}
+			NOT = {
+				area = upper_canada_area
+			}
+			#VU New
+			NOT = {
+				area = lower_canada_area
+			}
+			#VU New
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { continent = new_world } #Always in RNW
+			NOT = {
+				continent = new_world
+			}
+			#Always in RNW
 		}
 		modifier = {
 			factor = 0
 			OR = {
 				AND = {
 					has_climate = arid
-					NOT = { has_terrain = grasslands }
-					NOT = { has_terrain = farmlands }
+					NOT = {
+						has_terrain = grasslands
+					}
+					NOT = {
+						has_terrain = farmlands
+					}
 				}
 				has_winter = severe_winter
 				has_terrain = glacier
@@ -2604,7 +3282,7 @@ tobacco = {
 			region = australia_region
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2632,14 +3310,17 @@ tobacco = {
 
 cocoa = {
 	is_valuable = yes
-	color = { 0.45 0.21 0.09 }
+	color = {
+		0.45
+		0.21
+		0.09
+	}
 	modifier = {
 		manpower_recovery_speed = 0.05
 	}
 	province = {
-		local_manpower_modifier = 0.10
+		local_manpower_modifier = 0.1
 	}
-
 	chance = {
 		factor = 15
 		modifier = {
@@ -2649,27 +3330,42 @@ cocoa = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = central_america_region }
-			NOT = { region = colombia_region }
-			NOT = { region = peru_region }
-			NOT = { region = brazil_region }
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = colombia_region
+			}
+			NOT = {
+				region = peru_region
+			}
+			NOT = {
+				region = brazil_region
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = no
 			is_year = 1822
-			NOT = { province_id = 1464 }
+			NOT = {
+				province_id = 1464
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = no
 			is_year = 1870
-			NOT = { region = central_africa_region }
+			NOT = {
+				region = central_africa_region
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { continent = new_world } #Always in RNW
+			NOT = {
+				continent = new_world
+			}
+			#Always in RNW
 		}
 		modifier = {
 			factor = 0
@@ -2719,7 +3415,11 @@ cocoa = {
 
 silk = {
 	is_valuable = yes
-	color = { 0.72 0.10 0.10 }
+	color = {
+		0.72
+		0.1
+		0.1
+	}
 	modifier = {
 		num_accepted_cultures = 1
 	}
@@ -2759,8 +3459,16 @@ silk = {
 		modifier = {
 			factor = 0.5
 			normal_or_historical_nations = no
-			FROM = { NOT = { religion_group = dharmic } }
-			FROM = { NOT = { religion_group = eastern } }
+			FROM = {
+				NOT = {
+					religion_group = dharmic
+				}
+			}
+			FROM = {
+				NOT = {
+					religion_group = eastern
+				}
+			}
 		}
 		modifier = {
 			factor = 1.5
@@ -2777,7 +3485,7 @@ silk = {
 			development_discounting_tribal = 20
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -2805,14 +3513,17 @@ silk = {
 
 dyes = {
 	is_valuable = yes
-	color = { 0.63 0.17 0.50 }
+	color = {
+		0.63
+		0.17
+		0.5
+	}
 	modifier = {
 		heir_chance = 0.33
 	}
 	province = {
-		 province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
-	
 	chance = {
 		factor = 15
 		modifier = {
@@ -2821,7 +3532,9 @@ dyes = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { has_terrain = jungle }
+			NOT = {
+				has_terrain = jungle
+			}
 		}
 		modifier = {
 			factor = 0
@@ -2835,22 +3548,35 @@ dyes = {
 		}
 		modifier = {
 			factor = 0
-			is_random_new_world =  no
-			NOT = { region = niger_region }
-			NOT = { region = guinea_region }
-			NOT = { region = kongo_region }
-			NOT = { region = central_america_region }
-			NOT = { region = mexico_region }
-			NOT = { region = carribeans_region }
-			NOT = { region = lower_guinea_region }
+			is_random_new_world = no
+			NOT = {
+				region = niger_region
+			}
+			NOT = {
+				region = guinea_region
+			}
+			NOT = {
+				region = kongo_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = carribeans_region
+			}
+			NOT = {
+				region = lower_guinea_region
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -2874,7 +3600,11 @@ dyes = {
 
 tropical_wood = {
 	is_valuable = yes
-	color = { 0.45 0.47 0.09 }
+	color = {
+		0.45
+		0.47
+		0.09
+	}
 	modifier = {
 		development_cost = -0.05
 	}
@@ -2886,13 +3616,19 @@ tropical_wood = {
 		modifier = {
 			factor = 0
 			AND = {
-				NOT = { has_climate = tropical }
-				NOT = { province_id = 1240 }
+				NOT = {
+					has_climate = tropical
+				}
+				NOT = {
+					province_id = 1240
+				}
 			}
-		}	
+		}
 		modifier = {
 			factor = 0.4
-			NOT = { has_terrain = jungle }
+			NOT = {
+				has_terrain = jungle
+			}
 		}
 		modifier = {
 			factor = 1.5
@@ -2913,12 +3649,11 @@ tropical_wood = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -2942,12 +3677,17 @@ tropical_wood = {
 
 livestock = {
 	is_valuable = yes
-	color = { 0.62 0.49 0.44 }
+	color = {
+		0.62
+		0.49
+		0.44
+	}
 	modifier = {
 		cavalry_cost = -0.1
 	}
 	province = {
 		supply_limit_modifier = 0.5
+		land_forcelimit = 0.45
 	}
 	chance = {
 		factor = 30
@@ -2955,8 +3695,8 @@ livestock = {
 			factor = 0
 			OR = {
 				area = newfoundland_area
-				province_id = 5019			#St Pierre et Miquelon
-				province_id = 4974			#Grand Banks
+				province_id = 5019				#St Pierre et Miquelon
+				province_id = 4974				#Grand Banks
 			}
 		}
 		modifier = {
@@ -2967,29 +3707,57 @@ livestock = {
 				has_terrain = jungle
 				AND = {
 					has_terrain = coastline
-					NOT = { province_id = 2002 }
+					NOT = {
+						province_id = 2002
+					}
 				}
 				has_terrain = hills
 				has_terrain = forest
 				has_terrain = woods
 				AND = {
 					has_climate = tropical
-					NOT = { area = paraguay_area }
-					NOT = { area = chaco_area }
-					NOT = { region = central_africa_region }
-					NOT = { region = east_africa_region }
-					NOT = { region = colombia_region }
-					NOT = { region = brazil_region }
-					NOT = { region = tanzania_region }
-					NOT = { region = uganda_region }
-					NOT = { region = madagascar_region }
-					NOT = { region = malawi_region }
-					NOT = { region = zimbabwe_region }
-					NOT = { region = zambia_region }
+					NOT = {
+						area = paraguay_area
+					}
+					NOT = {
+						area = chaco_area
+					}
+					NOT = {
+						region = central_africa_region
+					}
+					NOT = {
+						region = east_africa_region
+					}
+					NOT = {
+						region = colombia_region
+					}
+					NOT = {
+						region = brazil_region
+					}
+					NOT = {
+						region = tanzania_region
+					}
+					NOT = {
+						region = uganda_region
+					}
+					NOT = {
+						region = madagascar_region
+					}
+					NOT = {
+						region = malawi_region
+					}
+					NOT = {
+						region = zimbabwe_region
+					}
+					NOT = {
+						region = zambia_region
+					}
 				}
 				AND = {
 					has_climate = arctic
-					NOT = { region = tibet_region }
+					NOT = {
+						region = tibet_region
+					}
 				}
 			}
 		}
@@ -3002,9 +3770,11 @@ livestock = {
 				region = southeast_america_region
 				region = mississippi_region
 			}
-			NOT = { has_terrain = mountain }
+			NOT = {
+				has_terrain = mountain
+			}
 		}
-		modifier = { 
+		modifier = {
 			factor = 0.05
 			province_id = 2002
 		}
@@ -3020,8 +3790,8 @@ livestock = {
 		modifier = {
 			factor = 0.2
 			OR = {
-				region = hudson_bay_region			#mostly fur in the north and grain in the south
-				region = great_plains_region			#mostly grain
+				region = hudson_bay_region				#mostly fur in the north and grain in the south
+				region = great_plains_region				#mostly grain
 			}
 		}
 		modifier = {
@@ -3029,7 +3799,7 @@ livestock = {
 			has_winter = severe_winter
 		}
 		modifier = {
-			factor = 1.25 #Pastoralists
+			factor = 1.25			#Pastoralists
 			OR = {
 				has_terrain = desert
 				has_terrain = savannah
@@ -3088,7 +3858,11 @@ livestock = {
 
 incense = {
 	is_valuable = yes
-	color = { 0.89 0.79 0.47 }
+	color = {
+		0.89
+		0.79
+		0.47
+	}
 	modifier = {
 		tolerance_own = 0.5
 	}
@@ -3106,21 +3880,51 @@ incense = {
 		}
 		modifier = {
 			factor = 0
-			NOT = {	region = arabia_region }
-			NOT = {	region = malaya_region }
-			NOT = {	region = moluccas_region }
-			NOT = {	region = indonesia_region }
-			NOT = { region = deccan_region }
-			NOT = { region = bengal_region }
-			NOT = { region = coromandel_region }
-			NOT = { region = south_east_pacific_region }
-			NOT = { area = indian_ocean_islands_area }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
-			NOT = { region = celebes_region }
-			NOT = { region = philippines_region }
+			NOT = {
+				region = arabia_region
+			}
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = coromandel_region
+			}
+			NOT = {
+				region = south_east_pacific_region
+			}
+			NOT = {
+				area = indian_ocean_islands_area
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
+			NOT = {
+				region = celebes_region
+			}
+			NOT = {
+				region = philippines_region
+			}
 		}
 		modifier = {
 			factor = 0
@@ -3135,12 +3939,11 @@ incense = {
 			region = arabia_region
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -3164,7 +3967,11 @@ incense = {
 
 glass = {
 	is_valuable = yes
-	color = { 0.0 0.60 0.45 }
+	color = {
+		0
+		0.6
+		0.45
+	}
 	modifier = {
 		dip_tech_cost_modifier = -0.05
 	}
@@ -3180,10 +3987,12 @@ glass = {
 		modifier = {
 			factor = 0
 			#Lower average dev in VU, so lowering from 18 to 12
-			NOT = { development_discounting_tribal = 12 }
+			NOT = {
+				development_discounting_tribal = 12
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			#Lower average dev in VU, so lowering from 22 to 16
 			development_discounting_tribal = 16
 		}
@@ -3192,7 +4001,11 @@ glass = {
 
 paper = {
 	is_valuable = yes
-	color = { 0.9 0.86 0.71 }
+	color = {
+		0.9
+		0.86
+		0.71
+	}
 	modifier = {
 		adm_tech_cost_modifier = -0.05
 	}
@@ -3208,10 +4021,12 @@ paper = {
 		modifier = {
 			factor = 0
 			#Lower average dev in VU, so lowering from 18 to 12
-			NOT = { development_discounting_tribal = 12 }
+			NOT = {
+				development_discounting_tribal = 12
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			#Lower average dev in VU, so lowering from 22 to 16
 			development_discounting_tribal = 16
 		}
@@ -3220,7 +4035,11 @@ paper = {
 
 gems = {
 	is_valuable = yes
-	color = { 0.96 0.78 0.78 }
+	color = {
+		0.96
+		0.78
+		0.78
+	}
 	modifier = {
 		inflation_reduction = 0.05
 	}
@@ -3228,7 +4047,7 @@ gems = {
 		local_tax_modifier = 0.15
 	}
 	chance = {
-		factor = 4			#reduced from 5, gems were a bit too common
+		factor = 4		#reduced from 5, gems were a bit too common
 		modifier = {
 			factor = 0
 			area = newfoundland_area
@@ -3236,68 +4055,184 @@ gems = {
 		modifier = {
 			factor = 0.3
 			is_random_new_world = no
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = australia_region }
-			NOT = { region = south_africa_region }
-			NOT = { region = central_africa_region }
-			NOT = { region = central_america_region }
-			NOT = { region = peru_region }
-			NOT = { region = upper_peru_region }
-			NOT = { region = colombia_region }
-			NOT = { region = indonesia_region }
-			NOT = { region = moluccas_region }
-			NOT = { region = hindusthan_region }
-			NOT = { region = west_india_region }
-			NOT = { region = bengal_region }
-			NOT = { region = deccan_region }
-			NOT = { region = coromandel_region }
-			NOT = { region = indo_china_region }
-			NOT = { continent = oceania }
-			NOT = { area = minas_gerais_area }
-			NOT = { area = amazon_area }
-			NOT = { area = bogota_area }
-			NOT = { area = popayan_area }
-			NOT = { area = venezuela_area }
-			NOT = { area = guyana_area }
-			NOT = { area = upper_guyana_area }
-			NOT = { area = grao_para_area }
-			NOT = { area = goias_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = bechuanaland_area }
-			NOT = { area = upper_limpopo_area }
-			NOT = { area = kalahari_area }
-			NOT = { area = skeleton_coast_land_area }
-			NOT = { area = northern_cape_area }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = south_china_sea_islands_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
-			NOT = { region = celebes_region }
-			NOT = { region = philippines_region }
-			NOT = { area = rio_grande_do_sol_area }
-			NOT = { area = santa_catarina_area }
-			NOT = { area = sao_paolo_area }
-			NOT = { area = west_sao_paolo_area }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				region = south_africa_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				region = peru_region
+			}
+			NOT = {
+				region = upper_peru_region
+			}
+			NOT = {
+				region = colombia_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = hindusthan_region
+			}
+			NOT = {
+				region = west_india_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = coromandel_region
+			}
+			NOT = {
+				region = indo_china_region
+			}
+			NOT = {
+				continent = oceania
+			}
+			NOT = {
+				area = minas_gerais_area
+			}
+			NOT = {
+				area = amazon_area
+			}
+			NOT = {
+				area = bogota_area
+			}
+			NOT = {
+				area = popayan_area
+			}
+			NOT = {
+				area = venezuela_area
+			}
+			NOT = {
+				area = guyana_area
+			}
+			NOT = {
+				area = upper_guyana_area
+			}
+			NOT = {
+				area = grao_para_area
+			}
+			NOT = {
+				area = goias_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = bechuanaland_area
+			}
+			NOT = {
+				area = upper_limpopo_area
+			}
+			NOT = {
+				area = kalahari_area
+			}
+			NOT = {
+				area = skeleton_coast_land_area
+			}
+			NOT = {
+				area = northern_cape_area
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = south_china_sea_islands_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
+			NOT = {
+				region = celebes_region
+			}
+			NOT = {
+				region = philippines_region
+			}
+			NOT = {
+				area = rio_grande_do_sol_area
+			}
+			NOT = {
+				area = santa_catarina_area
+			}
+			NOT = {
+				area = sao_paolo_area
+			}
+			NOT = {
+				area = west_sao_paolo_area
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { continent = new_world }
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = australia_region }
-			NOT = { region = south_africa_region }
-			NOT = { region = indonesia_region }
-			NOT = { region = moluccas_region }
-			NOT = { region = hindusthan_region }
-			NOT = { region = west_india_region }
-			NOT = { region = bengal_region }
-			NOT = { region = deccan_region }
-			NOT = { region = coromandel_region }
-			NOT = { region = indo_china_region }
-			NOT = { continent = oceania }
+			NOT = {
+				continent = new_world
+			}
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				region = south_africa_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = moluccas_region
+			}
+			NOT = {
+				region = hindusthan_region
+			}
+			NOT = {
+				region = west_india_region
+			}
+			NOT = {
+				region = bengal_region
+			}
+			NOT = {
+				region = deccan_region
+			}
+			NOT = {
+				region = coromandel_region
+			}
+			NOT = {
+				region = indo_china_region
+			}
+			NOT = {
+				continent = oceania
+			}
 		}
 		modifier = {
 			factor = 0
@@ -3335,18 +4270,18 @@ gems = {
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			OR = {
 				area = bogota_area
-				area = murray_river_area #Opal
+				area = murray_river_area				#Opal
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			OR = {
-				province_id = 1093 #Opal
-				province_id = 2736 #Opal
-				province_id = 4862 #Opal
+				province_id = 1093				#Opal
+				province_id = 2736				#Opal
+				province_id = 4862				#Opal
 			}
 		}
 		modifier = {
@@ -3360,21 +4295,21 @@ gems = {
 				has_terrain = jungle
 				has_terrain = hills
 				has_terrain = highlands
-				has_terrain = coastline #Pearls
+				has_terrain = coastline				#Pearls
 			}
 		}
 		modifier = {
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 1.5
 			normal_or_historical_nations = no
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -3407,7 +4342,8 @@ gems = {
 		#		has_terrain = coastline #Pearls
 		#	}
 		#}
-		modifier = {			#Also allowing gems in dryland and savannah only in Africa (at a penalty)
+		modifier = {
+			#Also allowing gems in dryland and savannah only in Africa (at a penalty)
 			factor = 0.5
 			OR = {
 				has_terrain = drylands
@@ -3415,15 +4351,17 @@ gems = {
 			}
 			continent = africa
 		}
-		modifier = {			#And gems in march only the Americas (at a penalty)
+		modifier = {
+			#And gems in march only the Americas (at a penalty)
 			factor = 0.5
 			has_terrain = marsh
 			OR = {
-			continent = north_america
-			continent = south_america
+				continent = north_america
+				continent = south_america
 			}
 		}
-		modifier = {			#Furthermore, making gems in some enabled terrains less common. Only full chance terrains are now Coastline (pearls), Hills, Mountains, Jungles, Coastal Deserts (pearls), and Glacial
+		modifier = {
+			#Furthermore, making gems in some enabled terrains less common. Only full chance terrains are now Coastline (pearls), Hills, Mountains, Jungles, Coastal Deserts (pearls), and Glacial
 			factor = 0.5
 			OR = {
 				has_terrain = forest
@@ -3438,8 +4376,8 @@ gems = {
 		modifier = {
 			factor = 2.5
 			OR = {
-				continent = africa			#Diamonds in Africa
-				region = northwest_territories_region			#Gems quite common in the north, especially diamonds. Offsetting penalties above
+				continent = africa				#Diamonds in Africa
+				region = northwest_territories_region				#Gems quite common in the north, especially diamonds. Offsetting penalties above
 				area = minas_gerais_area
 				area = bogota_area
 			}
@@ -3459,108 +4397,123 @@ gems = {
 				region = riau_islands_region
 				region = nusa_tenggara_region
 				continent = oceania
-				continent = north_america			#Gems were occuring far too often without this
+				continent = north_america				#Gems were occuring far too often without this
 			}
 		}
 		modifier = {
 			factor = 0.5
 			OR = {
-				region = california_region			#Gold and salt more common than gems here
-				region = alaska_region			#Gold and metal more common than gems here
-				region = great_plains_region			#Gems were much too common in the mountains
-				region = new_zealand_region			#Gold and other more common here
-				area = nunavut_area			#Gems too common due to lack of other options
-				area = klondike_area			#We want gold to be more common here, offsetting the NWT bonus above
-				province_id = 5071			#Gems too common due to lack of other options, offsetting the NWT bonus above
+				region = california_region				#Gold and salt more common than gems here
+				region = alaska_region				#Gold and metal more common than gems here
+				region = great_plains_region				#Gems were much too common in the mountains
+				region = new_zealand_region				#Gold and other more common here
+				area = nunavut_area				#Gems too common due to lack of other options
+				area = klondike_area				#We want gold to be more common here, offsetting the NWT bonus above
+				province_id = 5071				#Gems too common due to lack of other options, offsetting the NWT bonus above
 			}
 		}
 		modifier = {
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 1.5
 			normal_or_historical_nations = no
 		}
 		modifier = {
-			factor = 32.0
+			factor = 32
 			OR = {
-				province_id = 5579			#Margarita Island - pearls
-				province_id = 5387			#Sperrgebiet
-				province_id = 5585			#Kimberley
-			}
-		}
-		modifier = {			#Not the greatest... bit rushed for update, so I'll probably come back and clean this up later
-			factor = 8.0
-			OR = {
-				#province_id = 4781			#Praetoria
-				province_id = 1175			#Orange River
-				province_id = 5386			#Orange River
-				province_id = 5347			#Orange River
-				province_id = 2864			#Orange River
-				province_id = 5362			#Orange River
-				province_id = 2880			#Orange River
-				province_id = 5384			#Orange River
+				province_id = 5579				#Margarita Island - pearls
+				province_id = 5387				#Sperrgebiet
+				province_id = 5585				#Kimberley
 			}
 		}
 		modifier = {
-			factor = 0.0			#disabled for specific provinces
+			#Not the greatest... bit rushed for update, so I'll probably come back and clean this up later
+			factor = 8
 			OR = {
-				province_id = 481			#Bermuda
-				province_id = 4999			#Belcher Islands
-				province_id = 5077			#Sivuqaq
+				#province_id = 4781			#Praetoria
+				province_id = 1175				#Orange River
+				province_id = 5386				#Orange River
+				province_id = 5347				#Orange River
+				province_id = 2864				#Orange River
+				province_id = 5362				#Orange River
+				province_id = 2880				#Orange River
+				province_id = 5384				#Orange River
+			}
+		}
+		modifier = {
+			factor = 0			#disabled for specific provinces
+			OR = {
+				province_id = 481				#Bermuda
+				province_id = 4999				#Belcher Islands
+				province_id = 5077				#Sivuqaq
 			}
 		}
 	}
 }
 
 coal = {
-	color = { 0.0 1.0 1.0 }
+	color = {
+		0
+		1
+		1
+	}
 	is_latent = yes
 	is_valuable = yes
-
-	rnw_latent_chance = 7 # Kind of on average how many provinces we want to spawn with it
-
+	rnw_latent_chance = 7	# Kind of on average how many provinces we want to spawn with it
 	trigger = {
 		OR = {
 			development_discounting_tribal = 20
-			owner = { innovativeness = 20 }
+			owner = {
+				innovativeness = 20
+			}
 		}
-		NOT = { has_province_flag = has_latent_good }
+		NOT = {
+			has_province_flag = has_latent_good
+		}
 		provincial_institution_progress = {
 			which = enlightenment
 			value = 100
 		}
-		owner = { has_institution = enlightenment }
+		owner = {
+			has_institution = enlightenment
+		}
 	}
-
 	modifier = {
 		global_trade_goods_size_modifier = 0.1
 	}
-
 	province = {
 		local_state_maintenance_modifier = -0.2
 	}
-
 	chance = {
 		factor = 1
 	}
 }
 
 unknown = {
-	color = { 0.5 0.5 0.5 }
+	color = {
+		0.5
+		0.5
+		0.5
+	}
 }
 
 beer = {
 	is_valuable = yes
-	color = {  0.90 0.60 0.00  }
+	color = {
+		0.9
+		0.6
+		0
+	}
 	modifier = {
 		land_morale = 0.05
 	}
 	province = {
 		local_years_of_nationalism = -2
+		land_forcelimit = 0.15
 	}
 	chance = {
 		factor = 10
@@ -3589,14 +4542,13 @@ beer = {
 				has_terrain = steppe
 			}
 		}
-		
-
-		
 		modifier = {
 			factor = 0
 			NOT = {
 				owner = {
-					capital_scope = { continent = europe }
+					capital_scope = {
+						continent = europe
+					}
 				}
 			}
 		}
@@ -3620,10 +4572,15 @@ beer = {
 		}
 	}
 }
+
 #VU - Update, using this for a resource with apothacary
 apiculture = {
 	#is_valuable = yes
-	color = { 0.90 0.90 0.10 }
+	color = {
+		0.9
+		0.9
+		0.1
+	}
 	modifier = {
 		manpower_recovery_speed = 0.05
 	}
@@ -3652,7 +4609,8 @@ apiculture = {
 					technology_group = high_american
 				}
 			}
-		}	#Beekeeping was an Old World affair.
+		}
+		#Beekeeping was an Old World affair.
 		modifier = {
 			factor = 0.15
 			OR = {
@@ -3691,7 +4649,8 @@ apiculture = {
 			factor = 0.5
 			has_winter = normal_winter
 		}
-		modifier = { #Added this to make bees more prominant in the areas they are in today -NK.
+		modifier = {
+			#Added this to make bees more prominant in the areas they are in today -NK.
 			factor = 0.5
 			OR = {
 				continent = north_america
@@ -3718,7 +4677,6 @@ apiculture = {
 				has_terrain = forest
 			}
 		}
-
 		modifier = {
 			factor = 0
 			area = newfoundland_area
@@ -3746,7 +4704,11 @@ apiculture = {
 
 whaling = {
 	is_valuable = yes
-	color = { 0.11 0.85 0.4 }
+	color = {
+		0.11
+		0.85
+		0.4
+	}
 	modifier = {
 		production_efficiency = 0.1
 	}
@@ -3757,68 +4719,70 @@ whaling = {
 		factor = 10
 		modifier = {
 			factor = 0
-			NOT = { has_port = yes }
+			NOT = {
+				has_port = yes
+			}
 		}
 		modifier = {
 			factor = 0
-			    OR = {
-			    	NOT = { 
-			    		region = canada_region
-			    		region = hudson_bay_region
-			    		region = cascadia_region
-			    		region = moluccas_region
-			    		region = indonesia_region
-			    		region = riau_islands_region
-			    		region = nusa_tenggara_region
-			    		region = carribeans_region
-			    		region = northeast_america_region
-			    		region = southeast_america_region
-			    		region = east_siberia_region
-			    		region = oceanea_region
-			    		region = australia_region
-			    		region = philippines_region
-			    		region = new_zealand_region
-			    		region = peru_region
-			    		region = upper_peru_region
-			    		region = maranhao_region
-			    		region = brazil_region
-			    		region = rio_grande_do_sul_region
-			    		region = angola_region
-			    		region = namibia_region
-			    	}
-			    	area = northeast_mexico_area
-			    	area = upper_kongo_area
-			    	area = lower_kasai
-			    	area = amazon_area
-			    	area = paraguay_area
-			    	area = misiones_area
-			    	area = chaco_area
-			    	area = upper_guyana_area
-			    	area = eastern_llanos
-			    	area = ucayali_area
-			    	area = moxos_area
-			    	area = goias_area
-			    	area = lower_volta_area
-			    	area = adamawa_plateau_area
-			    	area = eastern_australia_area
-			    	area = southern_australia_area
-			    	area = iquitos_area
-			    	area = colombian_amazonas_area
-			    	area = buenos_aires_area
-			    	area = grao_para_area
-			    	area = upper_ontario_area
-			    	area = lower_canada_area
-			    	area = upper_canada_area
-			    	area = moxos_area
-			    	area = paraguay_area
+			OR = {
+				NOT = {
+					region = canada_region
+					region = hudson_bay_region
+					region = cascadia_region
+					region = moluccas_region
+					region = indonesia_region
+					region = riau_islands_region
+					region = nusa_tenggara_region
+					region = carribeans_region
+					region = northeast_america_region
+					region = southeast_america_region
+					region = east_siberia_region
+					region = oceanea_region
+					region = australia_region
+					region = philippines_region
+					region = new_zealand_region
+					region = peru_region
+					region = upper_peru_region
+					region = maranhao_region
+					region = brazil_region
+					region = rio_grande_do_sul_region
+					region = angola_region
+					region = namibia_region
+				}
+				area = northeast_mexico_area
+				area = upper_kongo_area
+				area = lower_kasai
+				area = amazon_area
+				area = paraguay_area
+				area = misiones_area
 				area = chaco_area
-			    	area = ucayali_area
+				area = upper_guyana_area
+				area = eastern_llanos
+				area = ucayali_area
+				area = moxos_area
+				area = goias_area
+				area = lower_volta_area
+				area = adamawa_plateau_area
+				area = eastern_australia_area
+				area = southern_australia_area
+				area = iquitos_area
+				area = colombian_amazonas_area
+				area = buenos_aires_area
+				area = grao_para_area
+				area = upper_ontario_area
+				area = lower_canada_area
+				area = upper_canada_area
+				area = moxos_area
+				area = paraguay_area
+				area = chaco_area
+				area = ucayali_area
 				area = iquitos_area
 				area = appalachia_area
 				area = susquehanna_area
-			    	province_id = 6126
-			    	region = amazon_region
-			    }
+				province_id = 6126
+				region = amazon_region
+			}
 		}
 		modifier = {
 			factor = 0
@@ -3831,20 +4795,17 @@ whaling = {
 				region = canada_region
 				region = cascadia_region
 				region = east_siberia_region
-			    	region = northeast_america_region
+				region = northeast_america_region
 			}
 		}
-
 		modifier = {
 			factor = 3
 			region = cascadia_region
 		}
-
 		modifier = {
 			factor = 2
-		    	region = northeast_america_region
+			region = northeast_america_region
 		}
-
 		modifier = {
 			factor = 1.5
 			OR = {
@@ -3854,7 +4815,6 @@ whaling = {
 				region = nusa_tenggara_region
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			OR = {
@@ -3863,8 +4823,6 @@ whaling = {
 				region = southeast_america_region
 			}
 		}
-		
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -3886,26 +4844,37 @@ whaling = {
 	}
 }
 
-lumber = { 
+lumber = {
 	is_valuable = yes
-	color = { 0.20 0.10 0.05 }
+	color = {
+		0.2
+		0.1
+		0.05
+	}
 	modifier = {
-		build_cost = -0.10
+		build_cost = -0.1
 	}
 	province = {
-		local_build_cost = -0.20
+		local_build_cost = -0.2
+		naval_forcelimit = 0.2
 	}
 	chance = {
 		factor = 25
 		modifier = {
 			factor = 0
-			NOT = { has_terrain = forest }
-			NOT = { has_terrain = woods }
-			NOT = { has_terrain = mountain }
-			NOT = { has_terrain = hills }
+			NOT = {
+				has_terrain = forest
+			}
+			NOT = {
+				has_terrain = woods
+			}
+			NOT = {
+				has_terrain = mountain
+			}
+			NOT = {
+				has_terrain = hills
+			}
 		}
-		
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -3944,13 +4913,17 @@ lumber = {
 }
 
 palm_oil = {
-	is_valuable = yes 
-	color = { 0.60 0.20 0.0 }
+	is_valuable = yes
+	color = {
+		0.6
+		0.2
+		0
+	}
 	modifier = {
 		embargo_efficiency = 0.25
 	}
 	province = {
-		province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
@@ -3970,18 +4943,21 @@ palm_oil = {
 						region = central_america_region
 						AND = {
 							superregion = east_indies_superregion
-							NOT = { region = burma_region }
-							NOT = { region = indo_china_region }
+							NOT = {
+								region = burma_region
+							}
+							NOT = {
+								region = indo_china_region
+							}
 						}
 					}
 					has_climate = tropical
 				}
 			}
 		}
-
 		modifier = {
 			factor = 0.4
-			OR = { 
+			OR = {
 				area = eastern_llanos
 				area = colombian_amazonas_area
 				area = western_llanos
@@ -3992,17 +4968,15 @@ palm_oil = {
 				area = cayanne_area
 			}
 		}
-
 		modifier = {
 			factor = 0.4
-			AND = { 
+			AND = {
 				region = central_america_region
-				NOT = { 
+				NOT = {
 					area = honduras_area
 				}
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -4024,24 +4998,31 @@ palm_oil = {
 	}
 }
 
-cinnamon = { 
+cinnamon = {
 	is_valuable = yes
-	color = { 0.80 0.60 0.40 }
+	color = {
+		0.8
+		0.6
+		0.4
+	}
 	modifier = {
 		ae_impact = -0.1
 	}
 	province = {
-		trade_value_modifier = 0.10
+		trade_value_modifier = 0.1
 	}
-
 	chance = {
 		factor = 0
 	}
 }
 
-saffron = { 
+saffron = {
 	is_valuable = yes
-	color = { 0.99 0.60 0.80 }
+	color = {
+		0.99
+		0.6
+		0.8
+	}
 	modifier = {
 		merc_maintenance_modifier = -0.1
 	}
@@ -4052,10 +5033,18 @@ saffron = {
 		factor = 5
 		modifier = {
 			factor = 0
-			NOT = { superregion = india_superregion }
-			NOT = { region = east_africa_region }
-			NOT = { superregion = east_indies_superregion }
-			NOT = { superregion = china_superregion }
+			NOT = {
+				superregion = india_superregion
+			}
+			NOT = {
+				region = east_africa_region
+			}
+			NOT = {
+				superregion = east_indies_superregion
+			}
+			NOT = {
+				superregion = china_superregion
+			}
 		}
 		modifier = {
 			factor = 1.2
@@ -4078,14 +5067,19 @@ saffron = {
 	}
 }
 
-rice = { 
+rice = {
 	is_valuable = yes
-	color = { 0.80 0.80 0.65 }
+	color = {
+		0.8
+		0.8
+		0.65
+	}
 	modifier = {
-		global_manpower_modifier = 0.10
+		land_forcelimit_modifier = 0.1
 	}
 	province = {
-		local_manpower_modifier = 0.25
+		local_manpower_modifier = 0.20
+		land_forcelimit = 5
 	}
 	chance = {
 		factor = 10
@@ -4093,14 +5087,30 @@ rice = {
 			factor = 0
 			is_random_new_world = yes
 			FROM = {
-				NOT = { culture_group = east_asian }
-				NOT = { culture_group = central_indic }
-				NOT = { culture_group = dravidian }
-				NOT = { culture_group = western_aryan }
-				NOT = { culture_group = hindusthani }
-				NOT = { culture_group = eastern_aryan }
-				NOT = { culture_group = korean_g }
-				NOT = { culture_group = japanese_g }
+				NOT = {
+					culture_group = east_asian
+				}
+				NOT = {
+					culture_group = central_indic
+				}
+				NOT = {
+					culture_group = dravidian
+				}
+				NOT = {
+					culture_group = western_aryan
+				}
+				NOT = {
+					culture_group = hindusthani
+				}
+				NOT = {
+					culture_group = eastern_aryan
+				}
+				NOT = {
+					culture_group = korean_g
+				}
+				NOT = {
+					culture_group = japanese_g
+				}
 			}
 		}
 		modifier = {
@@ -4121,8 +5131,8 @@ rice = {
 		}
 		modifier = {
 			factor = 0.25
-				has_terrain = coastal_desert
-				has_terrain = desert
+			has_terrain = coastal_desert
+			has_terrain = desert
 		}
 		modifier = {
 			factor = 0.25
@@ -4172,16 +5182,20 @@ rice = {
 		}
 		modifier = {
 			factor = 1.6
-		FROM = {
+			FROM = {
 				has_country_flag = rice_chance_flag_high
 			}
 		}
 	}
 }
 
-opium = { 
+opium = {
 	is_valuable = yes
-	color = { 0.72 0.30 0.99 }
+	color = {
+		0.72
+		0.3
+		0.99
+	}
 	modifier = {
 		yearly_corruption = -0.1
 	}
@@ -4203,7 +5217,7 @@ opium = {
 					area = taiwan_area
 				}
 			}
-		} 
+		}
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -4225,9 +5239,13 @@ opium = {
 	}
 }
 
-rum = { 
+rum = {
 	is_valuable = yes
-	color = { 0.40 0.20 0.20 }
+	color = {
+		0.4
+		0.2
+		0.2
+	}
 	modifier = {
 		privateer_efficiency = 0.2
 	}
@@ -4235,7 +5253,7 @@ rum = {
 		ship_recruit_speed = -0.25
 	}
 	chance = {
-		factor = 15 
+		factor = 15
 		modifier = {
 			factor = 0
 			NOT = {
@@ -4260,30 +5278,37 @@ rum = {
 			}
 			FROM = {
 				OR = {
-					capital_scope = { continent = north_america }
-					capital_scope = { continent = south_america }
-					capital_scope = { continent = oceania }
-					capital_scope = { continent = new_world }
+					capital_scope = {
+						continent = north_america
+					}
+					capital_scope = {
+						continent = south_america
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					capital_scope = {
+						continent = new_world
+					}
 				}
 				NOT = {
 					OR = {
 						is_colonial_nation = yes
 						technology_group = western
-				        technology_group = english_tech_group
-				        technology_group = french_tech_group
-				        technology_group = dutch_tech_group
-				        technology_group = german_tech_group
-				        technology_group = italian_tech_group
-					    technology_group = portuguese_tech_group
-				        technology_group = roman_tech_group
+						technology_group = english_tech_group
+						technology_group = french_tech_group
+						technology_group = dutch_tech_group
+						technology_group = german_tech_group
+						technology_group = italian_tech_group
+						technology_group = portuguese_tech_group
+						technology_group = roman_tech_group
 						technology_group = scandinavian_tech_group
-				        technology_group = spanish_tech_group
-					    technology_group = swiss_tech_group
+						technology_group = spanish_tech_group
+						technology_group = swiss_tech_group
 					}
 				}
 			}
 		}
-
 		modifier = {
 			factor = 3
 			region = carribeans_region
@@ -4309,18 +5334,22 @@ rum = {
 	}
 }
 
-horses = { 
+horses = {
 	is_valuable = yes
-	color = { 0.50 0.60 0.35 }
+	color = {
+		0.5
+		0.6
+		0.35
+	}
 	modifier = {
 		cavalry_power = 0.1
 	}
 	province = {
 		local_friendly_movement_speed = 0.2
+		land_forcelimit = 0.25
 	}
 	chance = {
-		factor = 2 
-
+		factor = 2
 		modifier = {
 			factor = 0
 			OR = {
@@ -4344,7 +5373,9 @@ horses = {
 				}
 				continent = oceania
 			}
-			NOT = { is_year = 1520 }
+			NOT = {
+				is_year = 1520
+			}
 		}
 		modifier = {
 			factor = 0.25
@@ -4364,7 +5395,7 @@ horses = {
 			}
 		}
 		modifier = {
-		#Added some American areas that have been notable horse breeding area -NK.
+			#Added some American areas that have been notable horse breeding area -NK.
 			factor = 30.5
 			OR = {
 				area = miami_river_area
@@ -4395,32 +5426,31 @@ horses = {
 
 olive_oil = {
 	is_valuable = yes
-	color = { 0.80 0.87 0.29 }
+	color = {
+		0.8
+		0.87
+		0.29
+	}
 	modifier = {
 		global_prov_trade_power_modifier = 0.1
 	}
 	province = {
-		trade_value_modifier = 0.10
+		trade_value_modifier = 0.1
 	}
 	chance = {
 		factor = 10
-
 		modifier = {
 			factor = 1.5
 			AND = {
 				region = la_plata_region
 			}
-
 		}
-
 		modifier = {
 			factor = 0
 			NOT = {
 				region = la_plata_region
 			}
-
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -4444,7 +5474,11 @@ olive_oil = {
 
 amber = {
 	is_valuable = yes
-	color = { 0.84 0.40 0.01 }
+	color = {
+		0.84
+		0.4
+		0.01
+	}
 	modifier = {
 		development_cost = -0.05
 	}
@@ -4458,7 +5492,11 @@ amber = {
 
 jade = {
 	is_valuable = yes
-	color = {  0.30 0.99 0.30 }
+	color = {
+		0.3
+		0.99
+		0.3
+	}
 	modifier = {
 		free_adm_policy = 1
 	}
@@ -4479,9 +5517,7 @@ jade = {
 				area = new_mexico_area
 				area = california_area
 			}
-
 		}
-
 		modifier = {
 			factor = 0
 			NOT = {
@@ -4490,9 +5526,7 @@ jade = {
 				area = new_mexico_area
 				area = california_area
 			}
-
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -4511,15 +5545,16 @@ jade = {
 				has_country_flag = jade_chance_flag_high
 			}
 		}
-		
-		
-		
 	}
 }
 
 marble = {
 	is_valuable = yes
-	color = { 0.15 0.00 0.00 }
+	color = {
+		0.15
+		0
+		0
+	}
 	modifier = {
 		fort_maintenance_modifier = -0.15
 	}
@@ -4530,7 +5565,9 @@ marble = {
 		factor = 2
 		modifier = {
 			factor = 0
-			NOT = { has_terrain = mountain }
+			NOT = {
+				has_terrain = mountain
+			}
 		}
 		modifier = {
 			factor = 4
@@ -4539,9 +5576,13 @@ marble = {
 	}
 }
 
-lead = { 
+lead = {
 	is_valuable = yes
-	color = { 0.36 0.36 0.54 }
+	color = {
+		0.36
+		0.36
+		0.54
+	}
 	modifier = {
 		infantry_cost = -0.15
 	}
@@ -4565,24 +5606,60 @@ lead = {
 		modifier = {
 			factor = 0
 			normal_or_historical_nations = yes
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = central_africa_region }
-			NOT = { area = great_valley_area }
-			NOT = { area = susquehanna_area }
-			NOT = { area = hudson_valley_area }
-			NOT = { area = lake_superior_area }
-			NOT = { area = south_iroquoisia_area }
-			NOT = { area = upper_ontario_area }
-			NOT = { area = laurentian_area }
-			NOT = { area = inner_ontario_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = upper_louisiana_area }
-			NOT = { area = salish_sea_area }
-			NOT = { area = upper_acadia_area }
-			NOT = { area = manitoba_area }
-			NOT = { area = interior_plateau_area }
-			NOT = { area = qikiqtaaluk_area }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				area = great_valley_area
+			}
+			NOT = {
+				area = susquehanna_area
+			}
+			NOT = {
+				area = hudson_valley_area
+			}
+			NOT = {
+				area = lake_superior_area
+			}
+			NOT = {
+				area = south_iroquoisia_area
+			}
+			NOT = {
+				area = upper_ontario_area
+			}
+			NOT = {
+				area = laurentian_area
+			}
+			NOT = {
+				area = inner_ontario_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = upper_louisiana_area
+			}
+			NOT = {
+				area = salish_sea_area
+			}
+			NOT = {
+				area = upper_acadia_area
+			}
+			NOT = {
+				area = manitoba_area
+			}
+			NOT = {
+				area = interior_plateau_area
+			}
+			NOT = {
+				area = qikiqtaaluk_area
+			}
 			is_random_new_world = no
 		}
 		modifier = {
@@ -4598,7 +5675,7 @@ lead = {
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 15.5
@@ -4633,9 +5710,13 @@ lead = {
 	}
 }
 
-cloves = { 
+cloves = {
 	is_valuable = yes
-	color = { 0.55 0.40 0.30 }
+	color = {
+		0.55
+		0.4
+		0.3
+	}
 	modifier = {
 		trade_efficiency = 0.1
 	}
@@ -4643,16 +5724,24 @@ cloves = {
 		province_trade_power_modifier = 0.1
 	}
 	chance = {
-		factor = 50 
+		factor = 50
 		modifier = {
 			factor = 0
-			NOT = { superregion = india_superregion }
-			NOT = { region = east_africa_region }
-			NOT = { superregion = east_indies_superregion }
-			NOT = { superregion = china_superregion }
+			NOT = {
+				superregion = india_superregion
+			}
+			NOT = {
+				region = east_africa_region
+			}
+			NOT = {
+				superregion = east_indies_superregion
+			}
+			NOT = {
+				superregion = china_superregion
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -4669,7 +5758,6 @@ cloves = {
 			factor = 0.1
 			region = east_africa_region
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -4693,7 +5781,11 @@ cloves = {
 
 mercury = {
 	is_valuable = yes
-	color = { 0.55 0.55 0.65 }
+	color = {
+		0.55
+		0.55
+		0.65
+	}
 	modifier = {
 		idea_cost = -0.05
 	}
@@ -4705,10 +5797,18 @@ mercury = {
 		modifier = {
 			factor = 0
 			OR = {
-				FROM = { is_tribal = yes }
-				FROM = { technology_group = north_american }
-				FROM = { technology_group = aboriginal_tech }
-				FROM = { technology_group = south_american }
+				FROM = {
+					is_tribal = yes
+				}
+				FROM = {
+					technology_group = north_american
+				}
+				FROM = {
+					technology_group = aboriginal_tech
+				}
+				FROM = {
+					technology_group = south_american
+				}
 			}
 		}
 		modifier = {
@@ -4725,15 +5825,27 @@ mercury = {
 				}
 				AND = {
 					is_random_new_world = yes
-					NOT = { continent = new_world }
+					NOT = {
+						continent = new_world
+					}
 				}
 			}
 			normal_or_historical_nations = yes
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { province_id = 18 }
-			NOT = { continent = africa }
-			NOT = { region = australia_region }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				province_id = 18
+			}
+			NOT = {
+				continent = africa
+			}
+			NOT = {
+				region = australia_region
+			}
 		}
 		modifier = {
 			factor = 0
@@ -4741,7 +5853,9 @@ mercury = {
 				island = yes
 				AND = {
 					has_terrain = desert
-					NOT = { region = australia_region }
+					NOT = {
+						region = australia_region
+					}
 				}
 				has_terrain = glacier
 			}
@@ -4780,7 +5894,7 @@ mercury = {
 			}
 		}
 		modifier = {
-		#Added several areas in North America with mercury deposits -NK.
+			#Added several areas in North America with mercury deposits -NK.
 			factor = 1.5
 			continent = south_america
 			area = florida_area
@@ -4797,7 +5911,7 @@ mercury = {
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 1.2
@@ -4820,9 +5934,13 @@ mercury = {
 	}
 }
 
-camel = { 
+camel = {
 	is_valuable = yes
-	color = { 0.80 0.60 0.01 }
+	color = {
+		0.8
+		0.6
+		0.01
+	}
 	modifier = {
 		caravan_power = 0.2
 	}
@@ -4871,14 +5989,18 @@ camel = {
 
 gunpowder = {
 	is_valuable = yes
-	color = { 0.48 0.48 0.32 }
+	color = {
+		0.48
+		0.48
+		0.32
+	}
 	modifier = {
 		fire_damage = 0.1
 	}
 	province = {
 		local_hostile_attrition = 1
 	}
-	chance = { 
+	chance = {
 		factor = 10
 		modifier = {
 			factor = 0
@@ -4889,24 +6011,24 @@ gunpowder = {
 				region = central_asia_region
 				region = south_africa_region
 				NOT = {
-				    region = canada_region
-				    region = northeast_america_region
-				    region = southeast_america_region
-				    region = carribeans_region
-				    region = central_america_region
-				    region = mississippi_region
-				    region = great_plains_region
-				    region = hudson_bay_region
-				    region = cascadia_region
-				    region = northwest_territories_region
-				    region = alaska_region
-				    area = ohio_country_area
-				    area = miami_river_area
-				    area = michigan_area
-				    area = wisconsin_area
-				    area = lake_superior_area
-				    region = central_asia_region
-				    region = south_africa_region
+					region = canada_region
+					region = northeast_america_region
+					region = southeast_america_region
+					region = carribeans_region
+					region = central_america_region
+					region = mississippi_region
+					region = great_plains_region
+					region = hudson_bay_region
+					region = cascadia_region
+					region = northwest_territories_region
+					region = alaska_region
+					area = ohio_country_area
+					area = miami_river_area
+					area = michigan_area
+					area = wisconsin_area
+					area = lake_superior_area
+					region = central_asia_region
+					region = south_africa_region
 				}
 			}
 		}
@@ -4914,26 +6036,35 @@ gunpowder = {
 }
 
 elephants = {
-	color = { 0.28 0.42 0.42 }
+	color = {
+		0.28
+		0.42
+		0.42
+	}
 	modifier = {
 		shock_damage = 0.1
 	}
 	province = {
 		local_production_efficiency = 0.1
 	}
-	chance = { factor = 0 }
+	chance = {
+		factor = 0
+	}
 }
 
-tin = { 
+tin = {
 	is_valuable = yes
-	color = { 0.52 0.43 0.30 }
+	color = {
+		0.52
+		0.43
+		0.3
+	}
 	modifier = {
 		artillery_cost = -0.1
 	}
 	province = {
-		local_production_efficiency = 0.10
+		local_production_efficiency = 0.1
 	}
-
 	chance = {
 		factor = 15
 		modifier = {
@@ -4959,28 +6090,65 @@ tin = {
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { province_id = 990 } #St Maurice ironworks
-			NOT = { area = minas_gerais_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = great_valley_area }
-			NOT = { area = susquehanna_area }
-			NOT = { area = hudson_valley_area }
-			NOT = { area = lake_superior_area }
-			NOT = { area = south_iroquoisia_area }
-			NOT = { area = upper_ontario_area }
-			NOT = { area = laurentian_area }
-			NOT = { area = inner_ontario_area }
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { region = central_africa_region }
-			NOT = { area = mato_grosso_area }
+			NOT = {
+				province_id = 990
+			}
+			#St Maurice ironworks
+			NOT = {
+				area = minas_gerais_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = great_valley_area
+			}
+			NOT = {
+				area = susquehanna_area
+			}
+			NOT = {
+				area = hudson_valley_area
+			}
+			NOT = {
+				area = lake_superior_area
+			}
+			NOT = {
+				area = south_iroquoisia_area
+			}
+			NOT = {
+				area = upper_ontario_area
+			}
+			NOT = {
+				area = laurentian_area
+			}
+			NOT = {
+				area = inner_ontario_area
+			}
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
 		}
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { continent = new_world }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				continent = new_world
+			}
 		}
 		modifier = {
 			factor = 0.7
@@ -5031,28 +6199,39 @@ tin = {
 
 dates = {
 	is_valuable = yes
-	color = { 0.50 0.20 0.14 }
+	color = {
+		0.5
+		0.2
+		0.14
+	}
 	modifier = {
 		manpower_recovery_speed = 0.05
 	}
 	province = {
-		local_manpower_modifier = 0.1
+		local_manpower_modifier = 0.15
 	}
-	chance = { factor = 0 }
+	chance = {
+		factor = 0
+	}
 }
 
-cheese = { 
+cheese = {
 	is_valuable = yes
-	color = { 0.88 0.66 0.37 }
+	color = {
+		0.88
+		0.66
+		0.37
+	}
 	modifier = {
 		garrison_size = 0.15
 	}
 	province = {
-		local_culture_conversion_cost = -0.20
+		local_culture_conversion_cost = -0.2
+		land_forcelimit = 0.15
 	}
 	chance = {
 		factor = 13
-		modifier = { 
+		modifier = {
 			factor = 0
 			OR = {
 				has_climate = arid
@@ -5064,7 +6243,7 @@ cheese = {
 			}
 		}
 		modifier = {
-			factor = 0 #only old world nations in standard setup
+			factor = 0			#only old world nations in standard setup
 			OR = {
 				AND = {
 					is_random_new_world = no
@@ -5077,24 +6256,32 @@ cheese = {
 			}
 			FROM = {
 				OR = {
-					capital_scope = { continent = north_america }
-					capital_scope = { continent = south_america }
-					capital_scope = { continent = oceania }
-					capital_scope = { continent = new_world }
+					capital_scope = {
+						continent = north_america
+					}
+					capital_scope = {
+						continent = south_america
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					capital_scope = {
+						continent = new_world
+					}
 				}
 				NOT = {
 					OR = {
 						is_colonial_nation = yes
 						technology_group = western
-					    technology_group = english_tech_group
-					    technology_group = french_tech_group
-					    technology_group = dutch_tech_group
-					    technology_group = german_tech_group
-					    technology_group = italian_tech_group
+						technology_group = english_tech_group
+						technology_group = french_tech_group
+						technology_group = dutch_tech_group
+						technology_group = german_tech_group
+						technology_group = italian_tech_group
 						technology_group = portuguese_tech_group
-					    technology_group = roman_tech_group
+						technology_group = roman_tech_group
 						technology_group = scandinavian_tech_group
-					    technology_group = spanish_tech_group
+						technology_group = spanish_tech_group
 						technology_group = swiss_tech_group
 					}
 				}
@@ -5110,7 +6297,7 @@ cheese = {
 			}
 		}
 		modifier = {
-		#Added Wisconsin, nicknamed, the Dairy State -NK.
+			#Added Wisconsin, nicknamed, the Dairy State -NK.
 			factor = 30.5
 			OR = {
 				area = wisconsin_area
@@ -5137,24 +6324,28 @@ cheese = {
 	}
 }
 
-citrus = { 
+citrus = {
 	is_valuable = yes
 	#south europe, china
-	color = { 0.97 0.95 0.35 } 
+	color = {
+		0.97
+		0.95
+		0.35
+	}
 	modifier = {
 		naval_attrition = -0.15
 	}
 	province = {
-		trade_value_modifier = 0.10
+		trade_value_modifier = 0.1
 	}
 	chance = {
 		factor = 10
 		modifier = {
 			factor = 0
 			is_random_new_world = yes
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 			OR = {
-			#Added more locations in which rum is extremely difficult to distill -NK.
+				#Added more locations in which rum is extremely difficult to distill -NK.
 				has_climate = arid
 				has_climate = arctic
 				has_terrain = glacier
@@ -5172,7 +6363,8 @@ citrus = {
 				has_terrain = steppe
 			}
 		}
-		modifier = { #Less likely in arid and artic climates
+		modifier = {
+			#Less likely in arid and artic climates
 			factor = 0.25
 			OR = {
 				has_climate = arid
@@ -5200,24 +6392,32 @@ citrus = {
 			}
 			FROM = {
 				OR = {
-					capital_scope = { continent = north_america }
-					capital_scope = { continent = south_america }
-					capital_scope = { continent = oceania }
-					capital_scope = { continent = new_world }
+					capital_scope = {
+						continent = north_america
+					}
+					capital_scope = {
+						continent = south_america
+					}
+					capital_scope = {
+						continent = oceania
+					}
+					capital_scope = {
+						continent = new_world
+					}
 				}
 				NOT = {
 					OR = {
 						is_colonial_nation = yes
 						technology_group = western
-					    technology_group = english_tech_group
-					    technology_group = french_tech_group
-					    technology_group = dutch_tech_group
-					    technology_group = german_tech_group
-					    technology_group = italian_tech_group
+						technology_group = english_tech_group
+						technology_group = french_tech_group
+						technology_group = dutch_tech_group
+						technology_group = german_tech_group
+						technology_group = italian_tech_group
 						technology_group = portuguese_tech_group
-					    technology_group = roman_tech_group
+						technology_group = roman_tech_group
 						technology_group = scandinavian_tech_group
-					    technology_group = spanish_tech_group
+						technology_group = spanish_tech_group
 						technology_group = swiss_tech_group
 					}
 				}
@@ -5244,9 +6444,8 @@ citrus = {
 				area = lucayan_area
 			}
 		}
-
 		modifier = {
-			factor = 30.0
+			factor = 30
 			is_random_new_world = no
 			OR = {
 				area = california_area
@@ -5289,7 +6488,6 @@ citrus = {
 				area = lucayan_area
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
@@ -5308,64 +6506,82 @@ citrus = {
 				has_country_flag = citrus_chance_flag_high
 			}
 		}
-
 	}
 }
 
 seafood = {
 	is_valuable = yes
-	color = { 0.52 0.11 0.18 }
+	color = {
+		0.52
+		0.11
+		0.18
+	}
 	modifier = {
 		improve_relation_modifier = 0.15
 	}
 	province = {
-		local_sailors_modifier = 0.20
+		local_sailors_modifier = 0.2
+		naval_forcelimit = 0.1
 	}
 	chance = {
 		factor = 14
 		modifier = {
 			factor = 0
-			NOT = { has_port = yes }
+			NOT = {
+				has_port = yes
+			}
 		}
-
 		modifier = {
 			factor = 0
-			OR = { 
+			OR = {
 				area = upper_ontario_area
-			    	area = lower_canada_area
-			    	area = upper_canada_area
-			    	area = moxos_area
-			    	area = paraguay_area
+				area = lower_canada_area
+				area = upper_canada_area
+				area = moxos_area
+				area = paraguay_area
 				area = chaco_area
-			    	area = ucayali_area
+				area = ucayali_area
 				area = iquitos_area
 				area = appalachia_area
 				area = susquehanna_area
 				area = manitoba_area
 				area = buenos_aires_area
 				area = misiones_area
-			    	province_id = 6126
-			    	province_id = 3022
-			    	province_id = 2816
-			    	province_id = 4617
-			    	province_id = 8742
-			    	province_id = 1161
-			    	region = amazon_region
+				province_id = 6126
+				province_id = 3022
+				province_id = 2816
+				province_id = 4617
+				province_id = 8742
+				province_id = 1161
+				region = amazon_region
 				region = great_lakes_region
 				region = great_plains_region
-				AND = { 
+				AND = {
 					region = mississippi_region
-					NOT = { province_id = 922 }
-					NOT = { province_id = 2530 }
-					NOT = { province_id = 912 } 
-					NOT = { province_id = 893 }
-					NOT = { province_id = 5993 }
-					NOT = { province_id = 2516 }
-					NOT = { province_id = 8863 }
+					NOT = {
+						province_id = 922
+					}
+					NOT = {
+						province_id = 2530
+					}
+					NOT = {
+						province_id = 912
+					}
+					NOT = {
+						province_id = 893
+					}
+					NOT = {
+						province_id = 5993
+					}
+					NOT = {
+						province_id = 2516
+					}
+					NOT = {
+						province_id = 8863
+					}
 				}
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			OR = {
@@ -5386,19 +6602,19 @@ seafood = {
 		}
 		modifier = {
 			factor = 2.5
-			OR = { 
+			OR = {
 				has_terrain = glacier
 				area = west_florida_area
 				area = chesapeake_area
 			}
 		}
 		modifier = {
-			factor = 6.0
+			factor = 6
 			region = cascadia_region
 		}
 		modifier = {
-			factor = 12.0
-			OR = { 
+			factor = 12
+			OR = {
 				area = maine_area
 				area = upper_acadia_area
 				area = lower_acadia_area
@@ -5425,34 +6641,51 @@ seafood = {
 	}
 }
 
-
-carpet = { 
+carpet = {
 	is_valuable = yes
-	color = { 0.44 0.21 0.26 }
+	color = {
+		0.44
+		0.21
+		0.26
+	}
 	modifier = {
 		culture_conversion_cost = -0.15
 	}
 	province = {
-		province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
 		modifier = {
 			factor = 0
 			is_random_new_world = no
-			NOT = { region = scandinavia_region }
-			NOT = { superregion = near_east_superregion }
-			NOT = { superregion = persia_superregion }
-			NOT = { superregion = india_superregion }
-			NOT = { superregion = china_superregion }
+			NOT = {
+				region = scandinavia_region
+			}
+			NOT = {
+				superregion = near_east_superregion
+			}
+			NOT = {
+				superregion = persia_superregion
+			}
+			NOT = {
+				superregion = india_superregion
+			}
+			NOT = {
+				superregion = china_superregion
+			}
 		}
 		modifier = {
 			factor = 0.5
-			NOT = { development = 10 }
+			NOT = {
+				development = 10
+			}
 		}
 		modifier = {
 			factor = 0.8
-			NOT = { development = 12 }
+			NOT = {
+				development = 12
+			}
 		}
 		modifier = {
 			factor = 1.2
@@ -5460,8 +6693,10 @@ carpet = {
 		}
 		modifier = {
 			factor = 0
-			is_random_new_world = yes #Only the below cultures can get chinaware in the RNW
-			NOT = { development = 6 }
+			is_random_new_world = yes			#Only the below cultures can get chinaware in the RNW
+			NOT = {
+				development = 6
+			}
 		}
 		modifier = {
 			factor = 1.2
@@ -5486,9 +6721,13 @@ carpet = {
 
 nutmeg = {
 	is_valuable = yes
-	color = { 0.82 0.41 0.06 }
+	color = {
+		0.82
+		0.41
+		0.06
+	}
 	modifier = {
-		global_foreign_trade_power = 0.10
+		global_foreign_trade_power = 0.1
 	}
 	province = {
 		local_development_cost = -0.05
@@ -5497,10 +6736,18 @@ nutmeg = {
 		factor = 50
 		modifier = {
 			factor = 0
-			NOT = { superregion = india_superregion }
-			NOT = { region = east_africa_region }
-			NOT = { superregion = east_indies_superregion }
-			NOT = { superregion = china_superregion }
+			NOT = {
+				superregion = india_superregion
+			}
+			NOT = {
+				region = east_africa_region
+			}
+			NOT = {
+				superregion = east_indies_superregion
+			}
+			NOT = {
+				superregion = china_superregion
+			}
 		}
 		modifier = {
 			factor = 0
@@ -5510,34 +6757,34 @@ nutmeg = {
 				has_climate = arid
 			}
 		}
-		modifier = {  
+		modifier = {
 			factor = 0
-			NOT = { superregion = east_indies_superregion }		
+			NOT = {
+				superregion = east_indies_superregion
+			}
 		}
 		modifier = {
 			factor = 0.1
 			region = east_africa_region
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
-		}	
+		}
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = nutmeg_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = nutmeg_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -5547,9 +6794,13 @@ nutmeg = {
 	}
 }
 
-maize = { 
+maize = {
 	is_valuable = yes
-	color = { 0.98 0.93 0.36 }
+	color = {
+		0.98
+		0.93
+		0.36
+	}
 	modifier = {
 		land_maintenance_modifier = -0.05
 	}
@@ -5558,7 +6809,6 @@ maize = {
 	}
 	chance = {
 		factor = 25
-
 		modifier = {
 			factor = 0
 			OR = {
@@ -5603,7 +6853,9 @@ maize = {
 		modifier = {
 			factor = 1.5
 			has_winter = severe_winter
-			NOT = { has_terrain = glacier }
+			NOT = {
+				has_terrain = glacier
+			}
 		}
 		modifier = {
 			factor = 0.25
@@ -5624,7 +6876,6 @@ maize = {
 				has_terrain = mediterranean_grasslands
 			}
 		}
-
 		modifier = {
 			factor = 1.5
 			has_terrain = farmlands
@@ -5640,7 +6891,7 @@ maize = {
 			}
 		}
 		modifier = {
-		#Made corn more prominent in these places, where a lot of corn is produced today -NK.
+			#Made corn more prominent in these places, where a lot of corn is produced today -NK.
 			factor = 6
 			OR = {
 				area = miami_river_area
@@ -5651,21 +6902,18 @@ maize = {
 				area = central_plains_area
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = maize_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = maize_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -5677,7 +6925,11 @@ maize = {
 
 pearls = {
 	is_valuable = yes
-	color = { 0.79 0.99 0.90 }
+	color = {
+		0.79
+		0.99
+		0.9
+	}
 	modifier = {
 		monarch_diplomatic_power = 1
 	}
@@ -5686,50 +6938,63 @@ pearls = {
 	}
 	chance = {
 		factor = 10
-
 		modifier = {
 			factor = 0
-			NOT = { has_port = yes }
+			NOT = {
+				has_port = yes
+			}
 		}
-
 		modifier = {
 			factor = 0
-			OR = { 
+			OR = {
 				area = upper_ontario_area
-			    	area = lower_canada_area
-			    	area = upper_canada_area
-			    	area = moxos_area
-			    	area = paraguay_area
+				area = lower_canada_area
+				area = upper_canada_area
+				area = moxos_area
+				area = paraguay_area
 				area = chaco_area
-			    	area = ucayali_area
+				area = ucayali_area
 				area = iquitos_area
 				area = appalachia_area
 				area = susquehanna_area
 				area = manitoba_area
 				area = buenos_aires_area
 				area = misiones_area
-			    	province_id = 6126
-			    	province_id = 3022
-			    	province_id = 2816
-			    	province_id = 4617
-			    	province_id = 8742
-			    	province_id = 1161
-			    	region = amazon_region
+				province_id = 6126
+				province_id = 3022
+				province_id = 2816
+				province_id = 4617
+				province_id = 8742
+				province_id = 1161
+				region = amazon_region
 				region = great_lakes_region
 				region = great_plains_region
-				AND = { 
+				AND = {
 					region = mississippi_region
-					NOT = { province_id = 922 }
-					NOT = { province_id = 2530 }
-					NOT = { province_id = 912 } 
-					NOT = { province_id = 893 }
-					NOT = { province_id = 5993 }
-					NOT = { province_id = 2516 }
-					NOT = { province_id = 8863 }
+					NOT = {
+						province_id = 922
+					}
+					NOT = {
+						province_id = 2530
+					}
+					NOT = {
+						province_id = 912
+					}
+					NOT = {
+						province_id = 893
+					}
+					NOT = {
+						province_id = 5993
+					}
+					NOT = {
+						province_id = 2516
+					}
+					NOT = {
+						province_id = 8863
+					}
 				}
 			}
 		}
-
 		modifier = {
 			factor = 2
 			OR = {
@@ -5739,9 +7004,7 @@ pearls = {
 				region = riau_islands_region
 				region = nusa_tenggara_region
 			}
-
 		}
-
 		modifier = {
 			factor = 1.2
 			region = moluccas_region
@@ -5758,26 +7021,22 @@ pearls = {
 			factor = 0.5
 			continent = oceania
 		}
-
 		modifier = {
 			factor = 1.5
 			island = yes
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = pearls_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = pearls_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -5789,52 +7048,103 @@ pearls = {
 
 metalworking = {
 	is_valuable = yes
-	color = {  0.00 0.4 0.4 }
+	color = {
+		0
+		0.4
+		0.4
+	}
 	is_latent = yes
 	modifier = {
-		global_trade_goods_size =  0.1
+		global_trade_goods_size = 0.1
 	}
 	province = {
-		
 	}
 	chance = {
 		factor = 0
 	}
 }
 
-silver = { 
+silver = {
 	is_valuable = yes
-	color = { 0.33 0.38 0.44 }
-	province = {	#Extremely important; balancing silver compared to gold. Since silver is not as priced as gold, it only produces 50% of what gold would've made from precious minerals.
+	color = {
+		0.33
+		0.38
+		0.44
+	}
+	province = {
+		#Extremely important; balancing silver compared to gold. Since silver is not as priced as gold, it only produces 50% of what gold would've made from precious minerals.
 		trade_goods_size_modifier = -0.5
 	}
 	chance = {
 		factor = 20
-
 		modifier = {
 			factor = 0
-			NOT = { region = central_asia_region }
-			NOT = { region = cascadia_region }
-			NOT = { region = australia_region }
-			NOT = { region = california_region }
-			NOT = { region = peru_region }
-			NOT = { region = mexico_region }
-			NOT = { region = central_america_region }
-			NOT = { area = goias_area }
-			NOT = { area = mato_grosso_area }
-			NOT = { area = minas_gerais_area }
-			NOT = { area = grao_para_area }
-			NOT = { area = ucayali_area }
-			NOT = { area = amazon_area }
-			NOT = { region = upper_peru_region }
-			NOT = { region = la_plata_region }
-			NOT = { region = maranhao_region }
-			NOT = { region = amazon_region }
-			NOT = { region = rio_grande_do_sul_region }
-			NOT = { area = ucayali_area }
-			NOT = { area = espirito_santo_area }
-			NOT = { area = rio_de_janeiro_area }
-			NOT = { area = sao_paolo_area }
+			NOT = {
+				region = central_asia_region
+			}
+			NOT = {
+				region = cascadia_region
+			}
+			NOT = {
+				region = australia_region
+			}
+			NOT = {
+				region = california_region
+			}
+			NOT = {
+				region = peru_region
+			}
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				area = goias_area
+			}
+			NOT = {
+				area = mato_grosso_area
+			}
+			NOT = {
+				area = minas_gerais_area
+			}
+			NOT = {
+				area = grao_para_area
+			}
+			NOT = {
+				area = ucayali_area
+			}
+			NOT = {
+				area = amazon_area
+			}
+			NOT = {
+				region = upper_peru_region
+			}
+			NOT = {
+				region = la_plata_region
+			}
+			NOT = {
+				region = maranhao_region
+			}
+			NOT = {
+				region = amazon_region
+			}
+			NOT = {
+				region = rio_grande_do_sul_region
+			}
+			NOT = {
+				area = ucayali_area
+			}
+			NOT = {
+				area = espirito_santo_area
+			}
+			NOT = {
+				area = rio_de_janeiro_area
+			}
+			NOT = {
+				area = sao_paolo_area
+			}
 		}
 		modifier = {
 			factor = 0.5
@@ -5845,7 +7155,7 @@ silver = {
 			}
 		}
 		modifier = {
-		#Made it more common to find and mine silver in mountainous places -NK.
+			#Made it more common to find and mine silver in mountainous places -NK.
 			factor = 2.5
 			has_terrain = cold_mountains
 			has_terrain = mountain
@@ -5859,10 +7169,12 @@ silver = {
 		modifier = {
 			factor = 2
 			region = peru_region
-			NOT = { area = beni_area }
+			NOT = {
+				area = beni_area
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			OR = {
 				province_id = 852
 				province_id = 853
@@ -5882,21 +7194,18 @@ silver = {
 				area = goias_area
 			}
 		}
-	
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = silver_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = silver_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -5908,28 +7217,51 @@ silver = {
 
 exotic_animals = {
 	is_valuable = yes
-	color = { 0.64 0.0 0.43 }
-	modifier = { prestige = 1 }
+	color = {
+		0.64
+		0
+		0.43
+	}
+	modifier = {
+		prestige = 1
+	}
 	province = {
 		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 10
-
 		modifier = {
 			factor = 0
-			NOT = { superregion = central_america_superregion }
-			NOT = { superregion = south_america_superregion }
-			NOT = { continent = oceania }
-			NOT = { region = niger_region }
-			NOT = { region = angola_region }
-			NOT = { region = central_africa_region }
-			NOT = { region = kongo_region }
-			NOT = { region = zambia_region }
-			NOT = { region = zimbabwe_region }
+			NOT = {
+				superregion = central_america_superregion
+			}
+			NOT = {
+				superregion = south_america_superregion
+			}
+			NOT = {
+				continent = oceania
+			}
+			NOT = {
+				region = niger_region
+			}
+			NOT = {
+				region = angola_region
+			}
+			NOT = {
+				region = central_africa_region
+			}
+			NOT = {
+				region = kongo_region
+			}
+			NOT = {
+				region = zambia_region
+			}
+			NOT = {
+				region = zimbabwe_region
+			}
 		}
 		modifier = {
-		#Added more terrain where many jungle animals can be found that Europeans would not have seen before -NK.
+			#Added more terrain where many jungle animals can be found that Europeans would not have seen before -NK.
 			factor = 2.5
 			has_terrain = jungle
 			has_terrain = steppe
@@ -5943,14 +7275,12 @@ exotic_animals = {
 				has_country_flag = exotic_animals_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = exotic_animals_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -5960,10 +7290,16 @@ exotic_animals = {
 	}
 }
 
-vanilla = { 
+vanilla = {
 	is_valuable = yes
-	color = { 0.38 0.25 0.32 }
-	modifier = { vassal_forcelimit_bonus = 0.2 }
+	color = {
+		0.38
+		0.25
+		0.32
+	}
+	modifier = {
+		vassal_forcelimit_bonus = 0.2
+	}
 	province = {
 		province_trade_power_modifier = 0.1
 	}
@@ -5990,7 +7326,7 @@ vanilla = {
 				area = texas_area
 				NOT = {
 					OR = {
-					#Added regions that produce significant quantities of vanilla -NK.
+						#Added regions that produce significant quantities of vanilla -NK.
 						region = mexico_region
 						region = central_america_region
 						region = nusa_tenggara_region
@@ -6006,11 +7342,19 @@ vanilla = {
 		}
 		modifier = {
 			factor = 0
-			NOT = { region = mexico_region }
-			NOT = { region = central_america_region }
-			NOT = { superregion = east_indies_superregion }
-			NOT = { superregion = china_superregion }	
-		} 
+			NOT = {
+				region = mexico_region
+			}
+			NOT = {
+				region = central_america_region
+			}
+			NOT = {
+				superregion = east_indies_superregion
+			}
+			NOT = {
+				superregion = china_superregion
+			}
+		}
 		modifier = {
 			factor = 0
 			OR = {
@@ -6026,14 +7370,12 @@ vanilla = {
 				has_country_flag = vanilla_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = vanilla_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6045,9 +7387,13 @@ vanilla = {
 
 munitions = {
 	is_valuable = yes
-	color = {  0.10 0.21 0.13 }
+	color = {
+		0.1
+		0.21
+		0.13
+	}
 	is_latent = yes
-	modifier = {  
+	modifier = {
 		discipline = 0.025
 	}
 	province = {
@@ -6060,7 +7406,11 @@ munitions = {
 
 woodworking = {
 	is_valuable = yes
-	color = {  0.24 0.05 0.01 }
+	color = {
+		0.24
+		0.05
+		0.01
+	}
 	is_latent = yes
 	modifier = {
 		governing_capacity_modifier = 0.1
@@ -6073,10 +7423,13 @@ woodworking = {
 	}
 }
 
-
 ebony = {
 	is_valuable = yes
-	color = {  0.23 0.18 0.18 }
+	color = {
+		0.23
+		0.18
+		0.18
+	}
 	modifier = {
 		global_allowed_num_of_buildings = 1
 	}
@@ -6093,7 +7446,6 @@ ebony = {
 				region = indonesia_region
 				region = riau_islands_region
 				region = nusa_tenggara_region
-
 				AND = {
 					continent = africa
 					OR = {
@@ -6103,7 +7455,6 @@ ebony = {
 				}
 			}
 		}
-
 		modifier = {
 			factor = 0
 			NOT = {
@@ -6112,7 +7463,6 @@ ebony = {
 				region = indonesia_region
 				region = riau_islands_region
 				region = nusa_tenggara_region
-
 				AND = {
 					continent = africa
 					OR = {
@@ -6122,21 +7472,18 @@ ebony = {
 				}
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = ebony_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = ebony_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6148,16 +7495,19 @@ ebony = {
 
 tar = {
 	is_valuable = yes
-	color = { 0.10 0.10 0.20 }
-	modifier = { 
+	color = {
+		0.1
+		0.1
+		0.2
+	}
+	modifier = {
 		ship_durability = 0.05
 	}
-	province = { 
+	province = {
 		naval_maintenance_modifier = -0.01
 	}
 	chance = {
 		factor = 15
-					
 		modifier = {
 			factor = 0
 			NOT = {
@@ -6188,17 +7538,29 @@ tar = {
 			OR = {
 				has_climate = tropical
 				AND = {
-					NOT = { region = canada_region }
-					NOT = { region = northeast_america_region }
-					NOT = { region = great_lakes_region }
+					NOT = {
+						region = canada_region
+					}
+					NOT = {
+						region = northeast_america_region
+					}
+					NOT = {
+						region = great_lakes_region
+					}
 				}
 			}
 		}
 		modifier = {
 			factor = 0.75
-			NOT = { region = canada_region }
-			NOT = { region = northeast_america_region }
-			NOT = { region = great_lakes_region }
+			NOT = {
+				region = canada_region
+			}
+			NOT = {
+				region = northeast_america_region
+			}
+			NOT = {
+				region = great_lakes_region
+			}
 		}
 		modifier = {
 			factor = 0.6
@@ -6227,21 +7589,18 @@ tar = {
 			factor = 1.5
 			has_terrain = marsh
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = tar_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = tar_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6253,16 +7612,19 @@ tar = {
 
 sulfur = {
 	is_valuable = yes
-	color = { 1.0 0.78 0.14 }
-	modifier = { 
+	color = {
+		1
+		0.78
+		0.14
+	}
+	modifier = {
 		infantry_power = 0.05
 	}
-	province = { 
+	province = {
 		local_hostile_attrition = 1
 	}
 	chance = {
 		factor = 25
-
 		modifier = {
 			factor = 0
 			NOT = {
@@ -6317,7 +7679,6 @@ sulfur = {
 				}
 			}
 		}
-		
 		modifier = {
 			factor = 0.8
 			OR = {
@@ -6332,22 +7693,18 @@ sulfur = {
 				province_id = 4878
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = sulfur_chance_flag_low
 			}
 		}
-		
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = sulfur_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6357,10 +7714,13 @@ sulfur = {
 	}
 }
 
-
 leather = {
 	is_valuable = yes
-	color = { 0.4 0.27 0.05 }
+	color = {
+		0.4
+		0.27
+		0.05
+	}
 	is_latent = yes
 	modifier = {
 		shock_damage_received = -0.05
@@ -6370,28 +7730,36 @@ leather = {
 	}
 	chance = {
 		factor = 0
-
 	}
 }
 
 jewellery = {
-	color = { 0.72 0.53 0.04 }
+	color = {
+		0.72
+		0.53
+		0.04
+	}
 	is_valuable = yes
 	is_latent = yes
 	modifier = {
 		administrative_efficiency = 0.025
 	}
 	province = {
-		province_trade_power_value = 0.15 # Trade value makes more sense I think - Q
+		province_trade_power_value = 0.15		# Trade value makes more sense I think - Q
 	}
 	chance = {
 		factor = 0
 	}
 }
 
-maple_syrup = { #73
+maple_syrup = {
+	#73
 	is_valuable = yes
-	color = { 0.91 0.45 0.32 }
+	color = {
+		0.91
+		0.45
+		0.32
+	}
 	modifier = {
 		num_accepted_cultures = 1
 	}
@@ -6412,7 +7780,7 @@ maple_syrup = { #73
 			}
 		}
 		modifier = {
-		#Added more terrain in which maple trees don't survive -NK.
+			#Added more terrain in which maple trees don't survive -NK.
 			factor = 0
 			OR = {
 				has_climate = arid
@@ -6443,34 +7811,28 @@ maple_syrup = { #73
 			has_terrain = forest
 			has_terrain = woods
 		}
-
 		modifier = {
 			factor = 1.5
 			area = grand_river_area
 			area = laurentian_area
 			area = notre_dame_mountains_area
 		}
-
-
 		modifier = {
-			factor = 8.0
+			factor = 8
 			area = lower_canada_area
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = maple_syrup_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = maple_syrup_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6480,10 +7842,14 @@ maple_syrup = { #73
 	}
 }
 
-
-potato = { #74
+potato = {
+	#74
 	is_valuable = yes
-	color = { 0.60 0.40 0.40 }
+	color = {
+		0.6
+		0.4
+		0.4
+	}
 	modifier = {
 		reinforce_cost_modifier = -0.05
 	}
@@ -6492,17 +7858,19 @@ potato = { #74
 	}
 	chance = {
 		factor = 25
-		modifier = { #No potatos arrive in europe and introduced to ireland 1589
-            factor = 0.0
-			OR = {
-                continent = europe #Ireland, England etc..
-				continent = asia #S.E Asia because of Spain & Portugal
-			}
-            NOT = { is_year = 1589 }
-        }
-
 		modifier = {
-		#Added more terrain in which potato plants do not grow, and terrain in which it can grow -NK.
+			#No potatos arrive in europe and introduced to ireland 1589
+			factor = 0
+			OR = {
+				continent = europe				#Ireland, England etc..
+				continent = asia				#S.E Asia because of Spain & Portugal
+			}
+			NOT = {
+				is_year = 1589
+			}
+		}
+		modifier = {
+			#Added more terrain in which potato plants do not grow, and terrain in which it can grow -NK.
 			factor = 0
 			OR = {
 				has_terrain = desert
@@ -6511,7 +7879,7 @@ potato = { #74
 				has_terrain = jungle
 				has_climate = arctic
 				has_climate = arid
-				has_terrain = impassable_mountains				
+				has_terrain = impassable_mountains
 				has_terrain = cold_mountains
 				has_terrain = desert_ranges
 				has_terrain = salt_flats
@@ -6561,7 +7929,9 @@ potato = { #74
 		modifier = {
 			factor = 1.5
 			has_winter = severe_winter
-			NOT = { has_terrain = glacier }
+			NOT = {
+				has_terrain = glacier
+			}
 		}
 		modifier = {
 			factor = 1.5
@@ -6581,21 +7951,18 @@ potato = { #74
 				region = southeast_america_region
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = potato_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = potato_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6605,9 +7972,14 @@ potato = { #74
 	}
 }
 
-steam_engine = { #75
+steam_engine = {
+	#75
 	is_valuable = yes
-	color = { 0.62 0.99 0.22 }
+	color = {
+		0.62
+		0.99
+		0.22
+	}
 	is_latent = yes
 	modifier = {
 		technology_cost = -0.025
@@ -6620,10 +7992,14 @@ steam_engine = { #75
 	}
 }
 
-
-zinc = { #76
+zinc = {
+	#76
 	is_valuable = yes
-	color = { 0.74 0.72 0.42 }
+	color = {
+		0.74
+		0.72
+		0.42
+	}
 	modifier = {
 		innovativeness_gain = 0.25
 	}
@@ -6632,7 +8008,6 @@ zinc = { #76
 	}
 	chance = {
 		factor = 5
-
 		modifier = {
 			factor = 0
 			OR = {
@@ -6647,23 +8022,34 @@ zinc = { #76
 				}
 				AND = {
 					is_random_new_world = yes
-					NOT = { continent = new_world }
+					NOT = {
+						continent = new_world
+					}
 				}
 			}
 			normal_or_historical_nations = yes
-			NOT = { region = west_siberia_region }
-			NOT = { region = east_siberia_region }
-			NOT = { province_id = 18 }
-			NOT = { region = australia_region }
+			NOT = {
+				region = west_siberia_region
+			}
+			NOT = {
+				region = east_siberia_region
+			}
+			NOT = {
+				province_id = 18
+			}
+			NOT = {
+				region = australia_region
+			}
 		}
-
 		modifier = {
 			factor = 0
 			OR = {
 				island = yes
 				AND = {
 					has_terrain = desert
-					NOT = { region = australia_region }
+					NOT = {
+						region = australia_region
+					}
 				}
 				has_terrain = glacier
 			}
@@ -6693,7 +8079,7 @@ zinc = { #76
 			}
 		}
 		modifier = {
-			factor = 1.0
+			factor = 1
 			OR = {
 				has_terrain = mountain
 				has_terrain = hills
@@ -6701,21 +8087,18 @@ zinc = { #76
 				has_terrain = cold_mountains
 			}
 		}
-		
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = zinc_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = zinc_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6725,10 +8108,14 @@ zinc = { #76
 	}
 }
 
-
-optics = { #77
+optics = {
+	#77
 	is_valuable = yes
-	color = { 0.13 0.26 0.71 }
+	color = {
+		0.13
+		0.26
+		0.71
+	}
 	is_latent = yes
 	modifier = {
 		leader_naval_manuever = 1
@@ -6741,10 +8128,15 @@ optics = { #77
 	}
 }
 
-brass = { #78
-	color = { 0.67 0.88 0.69 }
+brass = {
+	#78
+	color = {
+		0.67
+		0.88
+		0.69
+	}
 	modifier = {
-		advisor_cost = -0.10
+		advisor_cost = -0.1
 	}
 	province = {
 		local_monthly_devastation = -0.1
@@ -6754,14 +8146,19 @@ brass = { #78
 	}
 }
 
-fur_clothing = { #79
+fur_clothing = {
+	#79
 	is_valuable = yes
-	color = { 0.33 0.68 0.44 }
+	color = {
+		0.33
+		0.68
+		0.44
+	}
 	is_latent = yes
 	modifier = {
-		land_attrition = -0.10
+		land_attrition = -0.1
 	}
-	province = {	
+	province = {
 		local_monthly_devastation = -0.1
 	}
 	chance = {
@@ -6769,12 +8166,17 @@ fur_clothing = { #79
 	}
 }
 
-cannon = { #80
+cannon = {
+	#80
 	is_valuable = yes
-	color = { 0.1 0.1 0.28 }
+	color = {
+		0.1
+		0.1
+		0.28
+	}
 	is_latent = yes
 	modifier = {
-		artillery_power = 0.10
+		artillery_power = 0.1
 	}
 	province = {
 		local_hostile_attrition = 1
@@ -6784,21 +8186,24 @@ cannon = { #80
 	}
 }
 
-tomato = { #81
+tomato = {
+	#81
 	is_valuable = yes
-	color = { 1.0 0.4 0.1 }
+	color = {
+		1
+		0.4
+		0.1
+	}
 	modifier = {
 		placed_merchant_power = 5
-
 	}
 	province = {
 		local_manpower_modifier = 0.15
 	}
 	chance = {
 		factor = 20
-
 		modifier = {
-		#Added common terrain for growing tomatoes -NK.
+			#Added common terrain for growing tomatoes -NK.
 			factor = 1.5
 			OR = {
 				has_terrain = drylands
@@ -6818,12 +8223,12 @@ tomato = { #81
 			has_terrain = dry_highlands
 		}
 		modifier = {
-		#Added California, which is where 30% of the tomatoes on the planet are grown -NK.
+			#Added California, which is where 30% of the tomatoes on the planet are grown -NK.
 			factor = 21.25
 			area = california_area
 		}
 		modifier = {
-		#Added terrain where tomatoes do not grow -NK.
+			#Added terrain where tomatoes do not grow -NK.
 			factor = 0
 			OR = {
 				has_climate = arid
@@ -6857,21 +8262,18 @@ tomato = { #81
 				}
 			}
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = tomato_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = tomato_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -6881,27 +8283,39 @@ tomato = { #81
 	}
 }
 
-champagne_bottle = { #82
+champagne_bottle = {
+	#82
 	is_valuable = yes
-	color = { 0.66 0.12 0.29 }
-	modifier = { 
-		reform_progress_growth = 0.10 
+	color = {
+		0.66
+		0.12
+		0.29
 	}
-	province = { 
-		local_unrest = -1 
+	modifier = {
+		reform_progress_growth = 0.1
+	}
+	province = {
+		local_unrest = -1
 	}
 	chance = {
 		factor = 15
 		modifier = {
 			factor = 0
-			NOT = {area = champagne_area }
+			NOT = {
+				area = champagne_area
+			}
 		}
 	}
 }
 
 #VU addition by San Felipe & Jay (this was copied by TGE)
-alpaca_wool = { #83
-	color = { 0.85 0.82 0.85  }
+alpaca_wool = {
+	#83
+	color = {
+		0.85
+		0.82
+		0.85
+	}
 	modifier = {
 		infantry_cost = -0.15
 	}
@@ -6927,11 +8341,21 @@ alpaca_wool = { #83
 		modifier = {
 			factor = 0
 			AND = {
-				NOT = { region = peru_region }
-				NOT = { region = upper_peru_region }
-				NOT = { area = cuyo_area }
-				NOT = { area = nehuenken_area }
-				NOT = { area = central_chile_area }
+				NOT = {
+					region = peru_region
+				}
+				NOT = {
+					region = upper_peru_region
+				}
+				NOT = {
+					area = cuyo_area
+				}
+				NOT = {
+					area = nehuenken_area
+				}
+				NOT = {
+					area = central_chile_area
+				}
 			}
 		}
 		modifier = {
@@ -6956,22 +8380,26 @@ alpaca_wool = { #83
 		modifier = {
 			factor = 2.5
 			OR = {
-			    region = peru_region
-			    region = upper_peru_region
+				region = peru_region
+				region = upper_peru_region
 			}
 		}
 	}
 }
 
-
-indigo = { #84
+indigo = {
+	#84
 	is_valuable = yes
-	color = { 0.18 0.11 0.71}
+	color = {
+		0.18
+		0.11
+		0.71
+	}
 	modifier = {
-		envoy_travel_time = -0.2 # Changed because prestige is used in so many of these - Q
+		envoy_travel_time = -0.2		# Changed because prestige is used in so many of these - Q
 	}
 	province = {
-		 province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
@@ -6980,7 +8408,7 @@ indigo = { #84
 			area = newfoundland_area
 		}
 		modifier = {
-		#Added additional regions where indigo has been gorwn -NK.
+			#Added additional regions where indigo has been gorwn -NK.
 			factor = 0
 			OR = {
 				has_climate = arid
@@ -7021,7 +8449,7 @@ indigo = { #84
 			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			FROM = {
 				has_country_flag = encourage_cash_crops_flag
 			}
@@ -7029,36 +8457,40 @@ indigo = { #84
 	}
 }
 
-sea_turtle = { #85
+sea_turtle = {
+	#85
 	is_valuable = yes
-	color = { 0.55 0.85 0.97 }
+	color = {
+		0.55
+		0.85
+		0.97
+	}
 	modifier = {
 		native_assimilation = 0.25
 	}
 	province = {
-		province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
-
 		modifier = {
 			factor = 0
 			NOT = {
 				OR = {
-					region = moluccas_region 
-					region = indonesia_region 
-					continent = oceania 
-				}		
+					region = moluccas_region
+					region = indonesia_region
+					continent = oceania
+				}
 			}
-
 		}
-
 		modifier = {
 			factor = 0
-			NOT = { has_port = yes }
+			NOT = {
+				has_port = yes
+			}
 		}
 		modifier = {
-		#Changed locations to exclude rivers, and match the distributions of various sea turtle species -NK.
+			#Changed locations to exclude rivers, and match the distributions of various sea turtle species -NK.
 			factor = 0
 			OR = {
 				has_climate = arctic
@@ -7119,26 +8551,22 @@ sea_turtle = { #85
 			factor = 0.5
 			continent = oceania
 		}
-
 		modifier = {
 			factor = 1.5
 			island = yes
 		}
-
 		modifier = {
 			factor = 1.2
 			FROM = {
 				has_country_flag = sea_turtle_chance_flag_low
 			}
 		}
-		
 		modifier = {
 			factor = 1.4
 			FROM = {
 				has_country_flag = sea_turtle_chance_flag_medium
 			}
 		}
-		
 		modifier = {
 			factor = 1.6
 			FROM = {
@@ -7148,9 +8576,14 @@ sea_turtle = { #85
 	}
 }
 
-uniforms = { #86
+uniforms = {
+	#86
 	is_valuable = yes
-	color = { 0.58 0.45 0.31 }
+	color = {
+		0.58
+		0.45
+		0.31
+	}
 	is_latent = yes
 	modifier = {
 		land_morale = 0.05
@@ -7163,14 +8596,19 @@ uniforms = { #86
 	}
 }
 
-marble_sculpture = { #87
+marble_sculpture = {
+	#87
 	is_valuable = yes
-	color = { 0.100 0.149 0.237 }
+	color = {
+		0.1
+		0.149
+		0.237
+	}
 	is_latent = yes
 	modifier = {
 		great_project_upgrade_cost = -0.15
 	}
-	province = {	
+	province = {
 		local_development_cost = -0.05
 	}
 	chance = {
@@ -7178,15 +8616,18 @@ marble_sculpture = { #87
 	}
 }
 
-
-cigars = { #88
+cigars = {
+	#88
 	is_valuable = yes
-	color = { 0.92 0.70 0.54 }
+	color = {
+		0.92
+		0.7
+		0.54
+	}
 	is_latent = yes
 	modifier = {
-	
 	}
-	province = {	
+	province = {
 		local_prosperity_growth = +0.1
 	}
 	chance = {
@@ -7194,30 +8635,39 @@ cigars = { #88
 	}
 }
 
-
-chocolate = { #89
+chocolate = {
+	#89
 	is_valuable = yes
-	color = { 0.21 0.1 0.0 }
+	color = {
+		0.21
+		0.1
+		0
+	}
 	is_latent = yes
 	modifier = {
 		global_unrest = -1
 	}
 	province = {
-		local_culture_conversion_cost = -0.30
+		local_culture_conversion_cost = -0.3
 	}
 	chance = {
 		factor = 0
 	}
 }
 
-jade_sculptures = { #90
+jade_sculptures = {
+	#90
 	is_valuable = yes
-	color = { 0.138 0.224 0.198 }
+	color = {
+		0.138
+		0.224
+		0.198
+	}
 	is_latent = yes
 	modifier = {
 		development_cost_modifier = -0.025
 	}
-	province = {	
+	province = {
 		allowed_num_of_buildings = 1
 	}
 	chance = {
@@ -7225,38 +8675,46 @@ jade_sculptures = { #90
 	}
 }
 
-
-millet = { #91
+millet = {
+	#91
 	is_valuable = yes
-	color = { 0.200 0.140 0.110 }
+	color = {
+		0.2
+		0.14
+		0.11
+	}
 	modifier = {
 		manpower_in_own_culture_provinces = 0.15
 	}
-	province = {	
-		local_garrison_size = 0.10
+	province = {
+		local_garrison_size = 0.1
+		land_forcelimit = 3
 	}
 	chance = {
 		factor = 0
 	}
 }
 
-
-exotic_fur = { #92
+exotic_fur = {
+	#92
 	is_valuable = yes
-	color = { 0.200 0.150 0.80 }
+	color = {
+		0.2
+		0.15
+		0.8
+	}
 	modifier = {
 		all_estate_loyalty_equilibrium = 0.05
 	}
-	province = {	
+	province = {
 		local_prosperity_growth = +0.1
 	}
 	chance = {
 		factor = 15
-		
 		modifier = {
 			factor = 0
 			NOT = {
-				OR = { 
+				OR = {
 					region = guinea_region
 					region = central_america_region
 					region = colombia_region
@@ -7268,15 +8726,20 @@ exotic_fur = { #92
 	}
 }
 
-String_Instruments = { #93
+String_Instruments = {
+	#93
 	is_valuable = yes
-	color = { 0.250 0.200 0.160 }
+	color = {
+		0.25
+		0.2
+		0.16
+	}
 	is_latent = yes
 	modifier = {
 		governing_capacity = 150
 	}
-	province = {	
-		province_trade_power_value = 2.0
+	province = {
+		province_trade_power_value = 2
 	}
 	chance = {
 		factor = 0
@@ -7284,13 +8747,19 @@ String_Instruments = { #93
 }
 
 #VU addition by San Felipe
-sweet_confectioneries = { #94
-	color = { 1.0 0.73 0.95 }
+sweet_confectioneries = {
+	#94
+	color = {
+		1
+		0.73
+		0.95
+	}
 	modifier = {
-		culture_conversion_cost = -0.15 #changed because of unrest reduction modifier bloat - Q
+		culture_conversion_cost = -0.15		#changed because of unrest reduction modifier bloat - Q
 	}
 	province = {
 		local_culture_conversion_cost = -0.15
+		land_forcelimit = 1.25
 	}
 	chance = {
 		factor = 0
@@ -7298,14 +8767,19 @@ sweet_confectioneries = { #94
 }
 
 #VU addition by San Felipe
-bison_hides = { #95
-#Modified distribution to better reflect the distribution of large bison herds before the 19th century -NK. 
-	color = { 0.39 0.18 0 }
+bison_hides = {
+	#95
+	#Modified distribution to better reflect the distribution of large bison herds before the 19th century -NK. 
+	color = {
+		0.39
+		0.18
+		0
+	}
 	modifier = {
-		global_trade_power = 0.1 # Changed because prestige is used in so many of these - Q
+		global_trade_power = 0.1		# Changed because prestige is used in so many of these - Q
 	}
 	province = {
-		province_trade_power_modifier = 0.10
+		province_trade_power_modifier = 0.1
 	}
 	chance = {
 		factor = 15
@@ -7358,7 +8832,7 @@ bison_hides = { #95
 				area = greenland_area
 				NOT = {
 					OR = {
-							continent = north_america
+						continent = north_america
 					}
 				}
 			}
@@ -7369,10 +8843,12 @@ bison_hides = { #95
 		}
 		modifier = {
 			factor = 0.5
-			NOT = { native_size = 1 }
+			NOT = {
+				native_size = 1
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			native_size = 1
 		}
 		modifier = {
@@ -7400,11 +8876,12 @@ bison_hides = { #95
 			has_terrain = alluvial_plains
 			has_terrain = tundra_terrain
 		}
-		modifier = { #Bison did travel to Canada but were usually present on the canadian prairies
+		modifier = {
+			#Bison did travel to Canada but were usually present on the canadian prairies
 			factor = 1.75
 			OR = {
-		        area = assiniboia_area
-			    area = prairies_area
+				area = assiniboia_area
+				area = prairies_area
 				area = saskatchewan_area
 			}
 		}
@@ -7412,9 +8889,14 @@ bison_hides = { #95
 }
 
 #VU addition by San Felipe (this was copied by TGE)
-llama = { #96
+llama = {
+	#96
 	is_valuable = yes
-	color = { 0.85 0.82 0.85 }
+	color = {
+		0.85
+		0.82
+		0.85
+	}
 	modifier = {
 		infantry_cost = -0.05
 	}
@@ -7440,11 +8922,21 @@ llama = { #96
 		modifier = {
 			factor = 0
 			AND = {
-				NOT = { region = peru_region }
-				NOT = { region = upper_peru_region }
-				NOT = { area = cuyo_area }
-				NOT = { area = nehuenken_area }
-				NOT = { area = central_chile_area }
+				NOT = {
+					region = peru_region
+				}
+				NOT = {
+					region = upper_peru_region
+				}
+				NOT = {
+					area = cuyo_area
+				}
+				NOT = {
+					area = nehuenken_area
+				}
+				NOT = {
+					area = central_chile_area
+				}
 			}
 		}
 		modifier = {
@@ -7469,17 +8961,22 @@ llama = { #96
 		modifier = {
 			factor = 2.5
 			OR = {
-			    region = peru_region
-			    region = upper_peru_region
+				region = peru_region
+				region = upper_peru_region
 			}
 		}
 	}
 }
 
 #VU addition by San Felipe
-agave = { #97
-#Modified the distribution of agave to have it grown in the warm climates it grows in bulk today -NK.
-	color = { 0.37 0.54 0.44 }
+agave = {
+	#97
+	#Modified the distribution of agave to have it grown in the warm climates it grows in bulk today -NK.
+	color = {
+		0.37
+		0.54
+		0.44
+	}
 	modifier = {
 		land_maintenance_modifier = -0.05
 	}
@@ -7586,21 +9083,31 @@ agave = { #97
 	}
 }
 
-canned_goods = { #98
-	color = { 0.144 0.107 0.53 }
+canned_goods = {
+	#98
+	color = {
+		0.144
+		0.107
+		0.53
+	}
 	modifier = {
-		development_cost = -0.1 # Changed to be in line with in game tooltip
+		development_cost = -0.1		# Changed to be in line with in game tooltip
 	}
 	province = {
-		local_culture_conversion_cost = -0.30
+		local_culture_conversion_cost = -0.3
 	}
 	chance = {
 		factor = 0
 	}
 }
 
-copra = { #99
-	color = { 0.161 0.137 0.101 }
+copra = {
+	#99
+	color = {
+		0.161
+		0.137
+		0.101
+	}
 	modifier = {
 		development_cost = -0.05
 	}
@@ -7610,7 +9117,7 @@ copra = { #99
 	chance = {
 		factor = 25
 		modifier = {
-		#Added a port requirement, as copra is mostly grown along ocean coasts, and only in tropical areas -NK.
+			#Added a port requirement, as copra is mostly grown along ocean coasts, and only in tropical areas -NK.
 			factor = 0
 			OR = {
 				has_climate = arctic
@@ -7699,14 +9206,20 @@ copra = { #99
 	}
 }
 
-vegetables = { #100
-#Added terrains to various sections to make some more prevelant than others -NK.
-	color = { 0.57 0.85 0.28 }
+vegetables = {
+	#100
+	#Added terrains to various sections to make some more prevelant than others -NK.
+	color = {
+		0.57
+		0.85
+		0.28
+	}
 	modifier = {
 		naval_attrition = -0.1
 	}
 	province = {
 		local_monthly_devastation = -0.1
+		land_forcelimit = 0.35
 	}
 	chance = {
 		factor = 20
@@ -7720,14 +9233,17 @@ vegetables = { #100
 				region = west_siberia_region
 				region = east_siberia_region
 				region = sahel_region
-			}			#Vegetables disabled in these regions
+			}
+			#Vegetables disabled in these regions
 		}
 		modifier = {
 			factor = 0
 			OR = {
 				AND = {
 					has_winter = severe_winter
-					NOT = { area = lower_fraser_area }
+					NOT = {
+						area = lower_fraser_area
+					}
 				}
 				has_climate = arid
 				has_climate = arctic
@@ -7759,7 +9275,7 @@ vegetables = { #100
 			factor = 0.5
 			OR = {
 				has_winter = normal_winter
-				has_terrain = farmlands			#Counterintuitive, but in core farming areas we would typically prefer grain or rich goods like cloth.
+				has_terrain = farmlands				#Counterintuitive, but in core farming areas we would typically prefer grain or rich goods like cloth.
 				has_terrain = savannah
 				has_terrain = woods
 				has_terrain = dry_river
@@ -7784,7 +9300,7 @@ vegetables = { #100
 			area = newfoundland_area
 		}
 		modifier = {
-			factor = 0.0
+			factor = 0
 			is_random_new_world = no
 			OR = {
 				area = east_alaska_area
@@ -7819,24 +9335,27 @@ vegetables = { #100
 				province_id = 5880
 				province_id = 5805
 			}
-		}	#Apples, cherries, raspberries, peas, pears, onions, carrots, & hops of the Lower Columbia and NE Cascades. Today this area produces a strong majority of the entire US's supply of most of these things (except onions, California produces tonnes of those). It didn't in period, true.... but it also wasn't settled in the period, so moot point.
+		}
+		#Apples, cherries, raspberries, peas, pears, onions, carrots, & hops of the Lower Columbia and NE Cascades. Today this area produces a strong majority of the entire US's supply of most of these things (except onions, California produces tonnes of those). It didn't in period, true.... but it also wasn't settled in the period, so moot point.
 	}
 }
 
 #Added in Eastern Europe expansion By RobertK
-vodka = { #101 - Limited to Russia and Eastern Europe
-	color = { 0.50 0.87 0.95 }
-	
+vodka = {
+	#101 - Limited to Russia and Eastern Europe
+	color = {
+		0.5
+		0.87
+		0.95
+	}
 	modifier = {
 		reform_progress_growth = -0.05
 		stability_cost_modifier = -0.1
 	}
-	
 	province = {
 		local_unrest = -4
 		regiment_recruit_speed = 0.1
 	}
-	
 	chance = {
 		factor = 25
 		modifier = {
@@ -7884,7 +9403,6 @@ vodka = { #101 - Limited to Russia and Eastern Europe
 				region = ural_region
 			}
 		}
-
 		modifier = {
 			factor = 1.5
 			development = 10
@@ -7899,10 +9417,15 @@ vodka = { #101 - Limited to Russia and Eastern Europe
 	}
 }
 
-diamonds = { #102
-#Did a big overhaul on diamonds. Whoever coded before seems to have been trying to code diamonds, gold, pearls, and 
-#gems, all in one entry. I've modified it try to capture the locations of diamond deposits in the real world -NK.
-	color = { 0.96 0.78 0.78 }
+diamonds = {
+	#102
+	#Did a big overhaul on diamonds. Whoever coded before seems to have been trying to code diamonds, gold, pearls, and 
+	#gems, all in one entry. I've modified it try to capture the locations of diamond deposits in the real world -NK.
+	color = {
+		0.96
+		0.78
+		0.78
+	}
 	modifier = {
 		inflation_reduction = 0.05
 	}
@@ -7910,7 +9433,7 @@ diamonds = { #102
 		local_tax_modifier = 0.15
 	}
 	chance = {
-		factor = 3			#reduced from 5, gems were a bit too common
+		factor = 3		#reduced from 5, gems were a bit too common
 		modifier = {
 			factor = 0
 			OR = {
@@ -7958,8 +9481,8 @@ diamonds = { #102
 		modifier = {
 			factor = 2.5
 			OR = {
-				continent = africa			#Diamonds in Africa
-				region = northwest_territories_region			#Gems quite common in the north, especially diamonds. Offsetting penalties above
+				continent = africa				#Diamonds in Africa
+				region = northwest_territories_region				#Gems quite common in the north, especially diamonds. Offsetting penalties above
 				area = minas_gerais_area
 			}
 		}
@@ -7971,49 +9494,55 @@ diamonds = { #102
 			factor = 1.5
 			is_random_new_world = yes
 			has_terrain = mountain
-			continent = new_world #Always in RNW
+			continent = new_world			#Always in RNW
 		}
 		modifier = {
 			factor = 1.5
 			normal_or_historical_nations = no
 		}
 		modifier = {
-			factor = 32.0
+			factor = 32
 			OR = {
-				province_id = 5387			#Sperrgebiet
-				province_id = 5585			#Kimberley
-			}
-		}
-		modifier = {			#Not the greatest... bit rushed for update, so I'll probably come back and clean this up later
-			factor = 8.0
-			OR = {
-				#province_id = 4781			#Praetoria
-				province_id = 1175			#Orange River
-				province_id = 5386			#Orange River
-				province_id = 5347			#Orange River
-				province_id = 2864			#Orange River
-				province_id = 5362			#Orange River
-				province_id = 2880			#Orange River
-				province_id = 5384			#Orange River
+				province_id = 5387				#Sperrgebiet
+				province_id = 5585				#Kimberley
 			}
 		}
 		modifier = {
-			factor = 0.0			#disabled for specific provinces
+			#Not the greatest... bit rushed for update, so I'll probably come back and clean this up later
+			factor = 8
 			OR = {
-				province_id = 481			#Bermuda
-				province_id = 4999			#Belcher Islands
-				province_id = 5077			#Sivuqaq
+				#province_id = 4781			#Praetoria
+				province_id = 1175				#Orange River
+				province_id = 5386				#Orange River
+				province_id = 5347				#Orange River
+				province_id = 2864				#Orange River
+				province_id = 5362				#Orange River
+				province_id = 2880				#Orange River
+				province_id = 5384				#Orange River
+			}
+		}
+		modifier = {
+			factor = 0			#disabled for specific provinces
+			OR = {
+				province_id = 481				#Bermuda
+				province_id = 4999				#Belcher Islands
+				province_id = 5077				#Sivuqaq
 			}
 		}
 	}
 }
 
-pottery = { #103
-	color = { 0.148 0.98 0.89 }
+pottery = {
+	#103
+	color = {
+		0.148
+		0.98
+		0.89
+	}
 	modifier = {
 		monthly_splendor = 1
 	}
-	province = {	
+	province = {
 		local_prosperity_growth = 0.1
 	}
 	chance = {
@@ -8021,12 +9550,17 @@ pottery = { #103
 	}
 }
 
-lace = { #104
-	color = { 0.143 0.224 0.190 }
+lace = {
+	#104
+	color = {
+		0.143
+		0.224
+		0.19
+	}
 	modifier = {
 		caravan_power = 0.05
 	}
-	province = {	
+	province = {
 		province_trade_power_value = 1
 	}
 	chance = {
@@ -8034,22 +9568,26 @@ lace = { #104
 	}
 }
 
-sake = { #105
-	color = { 0.222 0.211 0.1 }
+sake = {
+	#105
+	color = {
+		0.222
+		0.211
+		0.1
+	}
 	modifier = {
 		harsh_treatment_cost = -0.1
 	}
-	province = {	
+	province = {
 		local_unrest = -2
 		regiment_recruit_speed = 0.15
 	}
 	chance = {
 		factor = 3
 		modifier = {
-		#Added more restrictive terrain and regions to only be places where rice wine is commonly produced -NK.
+			#Added more restrictive terrain and regions to only be places where rice wine is commonly produced -NK.
 			factor = 0
 			OR = {
-				
 				has_winter = severe_winter
 				has_winter = normal_winter
 				has_winter = mild_winter
@@ -8082,71 +9620,108 @@ sake = { #105
 	}
 }
 
-bamboo = { #106
-	color = { 0.147 0.169 0.18 }
+bamboo = {
+	#106
+	color = {
+		0.147
+		0.169
+		0.18
+	}
 	modifier = {
 		build_cost = -0.05
 	}
-	province = {	
+	province = {
 		local_build_cost = -0.2
 	}
 	chance = {
 		factor = 15
 		modifier = {
 			factor = 0
-			NOT = {	region = malaya_region }
-			NOT = {	region = indonesia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = south_china_region }
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = south_china_region
+			}
 			#NOT = { region = hainan_region }
-            #NOT = { region = guangdong_region }
-            #NOT = { region = fujian_region }
-            #NOT = { region = jiangxi_region }
-            #NOT = { region = zhejiang_region }
-            #NOT = { region = jiangsu_region }
-            #NOT = { region = hunan_region }
-            #NOT = { region = guangxi_region }
-            #NOT = { region = taiwan_region }
-			NOT = { region = xinan_region }
-            #NOT = { region = sichuan_region }
-            #NOT = { region = yunnan_region }
-			NOT = { region = japan_region }
-			NOT = { region = borneo_region }
-			NOT = { region = sumatran_region }
+			#NOT = { region = guangdong_region }
+			#NOT = { region = fujian_region }
+			#NOT = { region = jiangxi_region }
+			#NOT = { region = zhejiang_region }
+			#NOT = { region = jiangsu_region }
+			#NOT = { region = hunan_region }
+			#NOT = { region = guangxi_region }
+			#NOT = { region = taiwan_region }
+			NOT = {
+				region = xinan_region
+			}
+			#NOT = { region = sichuan_region }
+			#NOT = { region = yunnan_region }
+			NOT = {
+				region = japan_region
+			}
+			NOT = {
+				region = borneo_region
+			}
+			NOT = {
+				region = sumatran_region
+			}
 		}
 	}
 }
 
-whiskey = { #107
-	color = { 0.191 0.135 0.4 }
+whiskey = {
+	#107
+	color = {
+		0.191
+		0.135
+		0.4
+	}
 	modifier = {
 		promote_culture_cost = -0.15
 	}
-	province = {	
+	province = {
 		local_unrest = -2
 		local_sailors_modifier = -0.1
 		local_manpower_modifier = -0.1
 		trade_value = 0.5
 	}
 	chance = {
-	#Added the chance for whiskey to be produced in places in North America known for their whiskey and bourbon -NK.
+		#Added the chance for whiskey to be produced in places in North America known for their whiskey and bourbon -NK.
 		factor = 0
 		modifier = {
 			factor = 0
-			NOT = {	area = kentucky_area }
-			NOT = {	area = choctaw_area }
+			NOT = {
+				area = kentucky_area
+			}
+			NOT = {
+				area = choctaw_area
+			}
 		}
 	}
 }
 
-silkworm = { #108
-	color = { 0.231 0.240 0.220 }
+silkworm = {
+	#108
+	color = {
+		0.231
+		0.24
+		0.22
+	}
 	modifier = {
 		infantry_cost = -0.025
 		justify_trade_conflict_cost = -0.15
 	}
-	province = {	
+	province = {
 		trade_value_modifier = 0.1
 	}
 	chance = {
@@ -8154,83 +9729,103 @@ silkworm = { #108
 	}
 }
 
-bronze = { #109
-	color = { 0.82 0.41 0.06 }
+bronze = {
+	#109
+	color = {
+		0.82
+		0.41
+		0.06
+	}
 	modifier = {
-		artillery_power = 0.10
+		artillery_power = 0.1
 	}
 	province = {
-		local_production_efficiency = 0.10
+		local_production_efficiency = 0.1
 	}
-	chance = { factor = 0 }
+	chance = {
+		factor = 0
+	}
 }
 
-oil = { #110
-	color = { 0.71 0.08 0.98 }
+oil = {
+	#110
+	color = {
+		0.71
+		0.08
+		0.98
+	}
 	is_latent = yes
 	is_valuable = yes
-
 	rnw_latent_chance = 5
-
 	trigger = {
 		OR = {
 			development = 30
-			owner = { innovativeness = 30 }
+			owner = {
+				innovativeness = 30
+			}
 		}
 		provincial_institution_progress = {
 			which = nationalism_institution
 			value = 100
 		}
-		owner = { has_institution = nationalism_institution }
+		owner = {
+			has_institution = nationalism_institution
+		}
 	}
-
 	modifier = {
-		naval_maintenance_modifier = -0.20
+		naval_maintenance_modifier = -0.2
 	}
-
 	province = {
 		local_regiment_cost = -0.2
 	}
-
 	chance = {
 		factor = 1
 	}
 }
 
-rubber = { #111
-	color = { 0.63 0.98 0.1 }
+rubber = {
+	#111
+	color = {
+		0.63
+		0.98
+		0.1
+	}
 	is_latent = yes
 	is_valuable = yes
-
 	rnw_latent_chance = 5
-
 	trigger = {
 		OR = {
 			development = 20
-			owner = { innovativeness = 20 }
+			owner = {
+				innovativeness = 20
+			}
 		}
 		provincial_institution_progress = {
 			which = industrialization
 			value = 100
 		}
-		owner = { has_institution = industrialization }
+		owner = {
+			has_institution = industrialization
+		}
 	}
-
 	modifier = {
-		global_trade_goods_size_modifier = 0.1 # Oil really improved production - Q
+		global_trade_goods_size_modifier = 0.1		# Oil really improved production - Q
 	}
-
 	province = {
 		local_production_efficiency = 0.1
 	}
-
 	chance = {
 		factor = 1
 	}
 }
 
-cider = { #112
-	color = { 0.159 0.48 0.25 }
+cider = {
+	#112
+	color = {
+		0.159
+		0.48
+		0.25
+	}
 	modifier = {
 		land_morale = 0.05
 	}
@@ -8264,12 +9859,11 @@ cider = { #112
 				has_terrain = steppe
 			}
 		}
-		
-
-		
 		modifier = {
 			factor = 0
-			NOT = { continent = europe }
+			NOT = {
+				continent = europe
+			}
 		}
 		modifier = {
 			factor = 1.2
@@ -8292,8 +9886,13 @@ cider = { #112
 	}
 }
 
-books = { #113
-	color = { 0.9 0.86 0.71 }
+books = {
+	#113
+	color = {
+		0.9
+		0.86
+		0.71
+	}
 	modifier = {
 		adm_tech_cost_modifier = -0.05
 	}
@@ -8308,61 +9907,88 @@ books = { #113
 		}
 		modifier = {
 			factor = 0
-			NOT = { development = 18 }
+			NOT = {
+				development = 18
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			development = 25
 		}
 	}
 }
 
-lacquerware = { #114
-	color = { 0.69 0.7 0.7 }
-	modifier = {
-		 all_estate_possible_privileges = 1
+lacquerware = {
+	#114
+	color = {
+		0.69
+		0.7
+		0.7
 	}
-	province = {	
+	modifier = {
+		all_estate_possible_privileges = 1
+	}
+	province = {
 		trade_value = 1
 	}
 	chance = {
 		factor = 3
 		modifier = {
 			factor = 0
-			NOT = {	region = malaya_region }
-			NOT = {	region = indonesia_region }
-			NOT = {	region = riau_islands_region }
-			NOT = {	region = nusa_tenggara_region }
-			NOT = { region = south_china_region }
+			NOT = {
+				region = malaya_region
+			}
+			NOT = {
+				region = indonesia_region
+			}
+			NOT = {
+				region = riau_islands_region
+			}
+			NOT = {
+				region = nusa_tenggara_region
+			}
+			NOT = {
+				region = south_china_region
+			}
 			#NOT = { region = hainan_region }
-            #NOT = { region = guangdong_region }
-            #NOT = { region = fujian_region }
-            #NOT = { region = jiangxi_region }
-            #NOT = { region = zhejiang_region }
-            #NOT = { region = jiangsu_region }
-            #NOT = { region = hunan_region }
-            #NOT = { region = guangxi_region }
-            #NOT = { region = taiwan_region }
-			NOT = { region = xinan_region }
-            #NOT = { region = sichuan_region }
-            #NOT = { region = yunnan_region }
-			NOT = { region = japan_region }
+			#NOT = { region = guangdong_region }
+			#NOT = { region = fujian_region }
+			#NOT = { region = jiangxi_region }
+			#NOT = { region = zhejiang_region }
+			#NOT = { region = jiangsu_region }
+			#NOT = { region = hunan_region }
+			#NOT = { region = guangxi_region }
+			#NOT = { region = taiwan_region }
+			NOT = {
+				region = xinan_region
+			}
+			#NOT = { region = sichuan_region }
+			#NOT = { region = yunnan_region }
+			NOT = {
+				region = japan_region
+			}
 		}
 		modifier = {
-			factor = 2.0
+			factor = 2
 			development = 25
 		}
 	}
 }
 
-fruit = { #115
-#Added more terrain to make some more prevalent, with the banana production in Central America in mind -NK.
-	color = { 0.13 0.63 0.09 }
+fruit = {
+	#115
+	#Added more terrain to make some more prevalent, with the banana production in Central America in mind -NK.
+	color = {
+		0.13
+		0.63
+		0.09
+	}
 	modifier = {
 		naval_attrition = -0.1
 	}
 	province = {
 		local_monthly_devastation = -0.1
+		local_manpower = 0.15
 	}
 	chance = {
 		factor = 20
@@ -8376,14 +10002,17 @@ fruit = { #115
 				region = west_siberia_region
 				region = east_siberia_region
 				region = sahel_region
-			}			#Fruit disabled in these regions
+			}
+			#Fruit disabled in these regions
 		}
 		modifier = {
 			factor = 0
 			OR = {
 				AND = {
 					has_winter = severe_winter
-					NOT = { area = lower_fraser_area }
+					NOT = {
+						area = lower_fraser_area
+					}
 				}
 				has_climate = arid
 				has_climate = arctic
@@ -8417,7 +10046,7 @@ fruit = { #115
 			factor = 0.5
 			OR = {
 				has_winter = normal_winter
-				has_terrain = farmlands			#Counterintuitive, but in core farming areas we would typically prefer grain or rich goods like cloth.
+				has_terrain = farmlands				#Counterintuitive, but in core farming areas we would typically prefer grain or rich goods like cloth.
 				has_terrain = savannah
 				has_terrain = grasslands
 				has_terrain = woods
@@ -8442,7 +10071,7 @@ fruit = { #115
 			area = newfoundland_area
 		}
 		modifier = {
-			factor = 0.0
+			factor = 0
 			is_random_new_world = no
 			OR = {
 				area = east_alaska_area
@@ -8477,7 +10106,8 @@ fruit = { #115
 				province_id = 5880
 				province_id = 5805
 			}
-		}	#Apples, cherries, raspberries, peas, pears, onions, carrots, & hops of the Lower Columbia and NE Cascades. Today this area produces a strong majority of the entire US's supply of most of these things (except onions, California produces tonnes of those). It didn't in period, true.... but it also wasn't settled in the period, so moot point.
+		}
+		#Apples, cherries, raspberries, peas, pears, onions, carrots, & hops of the Lower Columbia and NE Cascades. Today this area produces a strong majority of the entire US's supply of most of these things (except onions, California produces tonnes of those). It didn't in period, true.... but it also wasn't settled in the period, so moot point.
 	}
 }
 
@@ -8485,16 +10115,19 @@ fruit = { #115
 # Please change things in localisation/vu/vu_trade_goods_l_english.yml if you change the name  or effect
 # Please change things in common/prices/00_prices.txt and localisation/vu/vu_trade_goods_l_english.yml if you change the price
 # Set is_latent = yes or is_valuable = yes
-
-sand = { #116
-	color = { 0.8 0.8 0.71 }
+sand = {
+	#116
+	color = {
+		0.8
+		0.8
+		0.71
+	}
 	modifier = {
 		#naval_attrition = -0.1
 	}
 	province = {
 		#local_monthly_devastation = -0.1
 	}
-
 	chance = {
 		factor = 0
 		modifier = {
@@ -8504,15 +10137,19 @@ sand = { #116
 	}
 }
 
-clay = { #117
-	color = { 0.8 0.75 0.75 }
+clay = {
+	#117
+	color = {
+		0.8
+		0.75
+		0.75
+	}
 	modifier = {
 		#naval_attrition = -0.1
 	}
 	province = {
 		#local_monthly_devastation = -0.1
 	}
-
 	chance = {
 		factor = 0
 		modifier = {
@@ -8522,90 +10159,34 @@ clay = { #117
 	}
 }
 
-steel = { #118
+steel = {
+	#118
 	is_valuable = yes
-	color = { 0.8 0.55 0.75 }
+	color = {
+		0.8
+		0.55
+		0.75
+	}
 	is_latent = yes
 	modifier = {
 		#naval_attrition = -0.1
 	}
-
 	province = {
 		#local_monthly_devastation = -0.1
 	}
-
 	chance = {
 		factor = 0
 	}
 }
 
-regular_clothes = { #119
+regular_clothes = {
+	#119
 	is_valuable = yes
-	color = { 0.8 0.65 0.75 }
-	is_latent = yes
-	modifier = {
-		#TBD
+	color = {
+		0.8
+		0.65
+		0.75
 	}
-	province = {
-		#TBD
-	}
-
-	chance = {
-		factor = 0
-	}
-}
-
-luxury_clothes = { #120
-	is_valuable = yes
-	color = { 0.8 0.60 0.75 }
-	is_latent = yes
-	modifier = {
-		#TBD
-	}
-	province = {
-		#TBD
-	}
-
-	chance = {
-		factor = 0
-	}
-}
-
-accoutrements = { #121
-	is_valuable = yes
-	color = { 0.5 0.65 0.75 }
-	is_latent = yes
-	modifier = {
-		#TBD
-	}
-	province = {
-		#TBD
-	}
-
-	chance = {
-		factor = 0
-	}
-}
-
-english_tea = { #122
-	is_valuable = yes
-	color = { 0.2 0.85 0.25 }
-	is_latent = yes
-	modifier = {
-		#TBD
-	}
-	province = {
-		#TBD
-	}
-
-	chance = {
-		factor = 0
-	}
-}
-
-espresso = { #123
-	is_valuable = yes
-	color = { 0.8 0.25 0.85 }
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8618,9 +10199,14 @@ espresso = { #123
 	}
 }
 
-medicaments = { #124
+luxury_clothes = {
+	#120
 	is_valuable = yes
-	color = { 0.85 0.16 0.05 }
+	color = {
+		0.8
+		0.6
+		0.75
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8633,9 +10219,14 @@ medicaments = { #124
 	}
 }
 
-locomotives = { #125
+accoutrements = {
+	#121
 	is_valuable = yes
-	color = { 0.86 0.17 0.06 }
+	color = {
+		0.5
+		0.65
+		0.75
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8648,9 +10239,14 @@ locomotives = { #125
 	}
 }
 
-tractors = { #126
+english_tea = {
+	#122
 	is_valuable = yes
-	color = { 0.87 0.18 0.07 }
+	color = {
+		0.2
+		0.85
+		0.25
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8663,9 +10259,14 @@ tractors = { #126
 	}
 }
 
-bicycles = { #127
+espresso = {
+	#123
 	is_valuable = yes
-	color = { 0.88 0.19 0.08 }
+	color = {
+		0.8
+		0.25
+		0.85
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8678,9 +10279,14 @@ bicycles = { #127
 	}
 }
 
-motorcycles = { #128
+medicaments = {
+	#124
 	is_valuable = yes
-	color = { 0.89 0.20 0.09 }
+	color = {
+		0.85
+		0.16
+		0.05
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8693,9 +10299,14 @@ motorcycles = { #128
 	}
 }
 
-automobiles = { #129
+locomotives = {
+	#125
 	is_valuable = yes
-	color = { 0.90 0.21 0.10 }
+	color = {
+		0.86
+		0.17
+		0.06
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8708,9 +10319,14 @@ automobiles = { #129
 	}
 }
 
-airships = { #130
+tractors = {
+	#126
 	is_valuable = yes
-	color = { 0.91 0.22 0.11 }
+	color = {
+		0.87
+		0.18
+		0.07
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8723,9 +10339,14 @@ airships = { #130
 	}
 }
 
-bricks = { #131
+bicycles = {
+	#127
 	is_valuable = yes
-	color = { 0.92 0.23 0.12 }
+	color = {
+		0.88
+		0.19
+		0.08
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8738,9 +10359,14 @@ bricks = { #131
 	}
 }
 
-cement = { #132
+motorcycles = {
+	#128
 	is_valuable = yes
-	color = { 0.93 0.24 0.13 }
+	color = {
+		0.89
+		0.2
+		0.09
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8753,9 +10379,14 @@ cement = { #132
 	}
 }
 
-limestone = { #133
+automobiles = {
+	#129
 	is_valuable = yes
-	color = { 0.94 0.25 0.14 }
+	color = {
+		0.9
+		0.21
+		0.1
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8768,9 +10399,14 @@ limestone = { #133
 	}
 }
 
-herbs = { #134
+airships = {
+	#130
 	is_valuable = yes
-	color = { 0.95 0.26 0.15 }
+	color = {
+		0.91
+		0.22
+		0.11
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8783,9 +10419,14 @@ herbs = { #134
 	}
 }
 
-hats_and_gloves = { #135
+bricks = {
+	#131
 	is_valuable = yes
-	color = { 0.96 0.27 0.16 }
+	color = {
+		0.92
+		0.23
+		0.12
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8798,9 +10439,14 @@ hats_and_gloves = { #135
 	}
 }
 
-military_equipment = { #136
+cement = {
+	#132
 	is_valuable = yes
-	color = { 0.97 0.28 0.17 }
+	color = {
+		0.93
+		0.24
+		0.13
+	}
 	is_latent = yes
 	modifier = {
 		#TBD
@@ -8813,9 +10459,94 @@ military_equipment = { #136
 	}
 }
 
-shoes = { #137
+limestone = {
+	#133
 	is_valuable = yes
-	color = { 0.98 0.29 0.18 }
+	color = {
+		0.94
+		0.25
+		0.14
+	}
+	is_latent = yes
+	modifier = {
+		#TBD
+	}
+	province = {
+		#TBD
+	}
+	chance = {
+		factor = 0
+	}
+}
+
+herbs = {
+	#134
+	is_valuable = yes
+	color = {
+		0.95
+		0.26
+		0.15
+	}
+	is_latent = yes
+	modifier = {
+		#TBD
+	}
+	province = {
+		#TBD
+	}
+	chance = {
+		factor = 0
+	}
+}
+
+hats_and_gloves = {
+	#135
+	is_valuable = yes
+	color = {
+		0.96
+		0.27
+		0.16
+	}
+	is_latent = yes
+	modifier = {
+		#TBD
+	}
+	province = {
+		#TBD
+	}
+	chance = {
+		factor = 0
+	}
+}
+
+military_equipment = {
+	#136
+	is_valuable = yes
+	color = {
+		0.97
+		0.28
+		0.17
+	}
+	is_latent = yes
+	modifier = {
+		#TBD
+	}
+	province = {
+		#TBD
+	}
+	chance = {
+		factor = 0
+	}
+}
+
+shoes = {
+	#137
+	is_valuable = yes
+	color = {
+		0.98
+		0.29
+		0.18
+	}
 	is_latent = yes
 	modifier = {
 		#TBD

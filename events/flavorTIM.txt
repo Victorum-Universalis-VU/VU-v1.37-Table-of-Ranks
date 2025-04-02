@@ -1353,3 +1353,112 @@ country_event = {
 	}
 	
 }
+namespace = prussia_tim_disaster
+#Timurid disaster to make sure they collapse when the AI plays them
+country_event = { # Timurids dying as historical when AI is controlling them - Prussia
+	id = prussia_tim_disaster.1
+	title = prussia_tim_disaster.1.t
+	desc = prussia_tim_disaster.1.d
+	picture = BORDER_TENSION_eventPicture
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		AND = {
+			tag = TIM
+			ai = yes
+		}
+		is_year = 1447
+		TIM = { 	#Shah Rukh must be dead
+			NOT = { has_ruler = "Shah Rukh" }
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = { #Disaster is upon us!
+		name = prussia_tim_disaster.1.a
+		ai_chance = { factor = 60 }
+		add_mil_power = 20
+		add_prestige = 5
+		khorasan_region = {
+			add_core = TRS
+			add_core = KHO
+			add_core = AFG
+			add_core = SIS
+			add_core = FRS
+			add_core = QOM
+		}
+		persia_region = {
+			add_core = TRS
+			add_core = KHO
+			add_core = AFG
+			add_core = SIS
+			add_core = FRS
+			add_core = QOM
+		}
+		AND = {
+			TRS = {
+				grant_independence = yes
+			}
+			KHO = {
+				grant_independence = yes
+			}
+			SIS = {
+				grant_independence = yes
+			}
+			AFG = {
+				grant_independence = yes
+			}
+			FRS = {
+				grant_independence = yes
+			}
+		}
+		TRS = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		FRS = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		KHO = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		SIS = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		AFG = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		QOM = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		QAR = {
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+	}
+}
