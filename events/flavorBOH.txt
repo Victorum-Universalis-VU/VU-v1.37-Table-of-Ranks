@@ -955,14 +955,20 @@ country_event = {
 
     immediate = {
         hidden_effect = {
-            bohemia_area = {
+            prague_area = {
+                add_devastation = 30
+            }
+            bohemia_area = { #Pardubice
+                add_devastation = 40
+            }
+            bohemian_forest_area = {
                 add_devastation = 50
             }
             erzgebirge_area = {
-                add_devastation = 20
+                add_devastation = 30
             }
             moravia_area = {
-                add_devastation = 20
+                add_devastation = 60
             }
             if = {
                 limit = {
@@ -1248,11 +1254,11 @@ country_event = {
 #Lusatian situation event tree
 #BOH    flavor_boh.22 -BOH start of event tree,
 #BRA    flavor_boh.23 -BOH offers alliance for lower lusatia
-#BRA    flavor_boh.24 -BOH concedes Cottobus
+#BRA    flavor_boh.24 -BOH concedes Cottbus
 #BRA    flavor_boh.25 -BOH denies inheritance
 #BOH    flavor_boh.26 -BRA declines the alliance
 #BOH    flavor_boh.27 -BRA demmands all of lower lusatia
-#BOH    flavor_boh.28 -BRA offers cottobus in return for alliance
+#BOH    flavor_boh.28 -BRA offers cottbus in return for alliance
 ###############
 #             #
 #   Bohemia   #
@@ -1308,7 +1314,7 @@ country_event = {
         }
     }
     option = {
-        #bohemia just conceeds cottobus
+        #bohemia just conceeds cottbus
         name = flavor_boh.22.b
         custom_tooltip = flavor_boh.22.b.tt
         BRA = {
@@ -1317,7 +1323,7 @@ country_event = {
             }
         }
         ai_chance = {
-            factor = 0.5
+            factor = 1 #VU v1.37 changed from 0.5 to 1 by SF
             modifier = {
                 factor = 2
                 BRA = {
@@ -1343,7 +1349,7 @@ country_event = {
             }
         }
         ai_chance = {
-            factor = 1
+            factor = 0.5 #VU v1.37 changed from 1 to 0.5 by SF
             modifier = {
                 factor = 0
                 OR = {
@@ -1459,9 +1465,9 @@ country_event = {
     picture = HRE_eventPicture
     is_triggered_only = yes
     major = yes
-    #BOH conceeds Cottobus
+    #BOH conceeds Cottbus
     option = {
-        #take just cottobus
+        #take just cottbus
         name = flavor_boh.24.a
         1763 = {
             cede_province = BRA
@@ -1517,7 +1523,10 @@ country_event = {
         #How dare they deny our rights? This means war! Call our allies, we must defend our rights!
         name = flavor_boh.25.a
         BOH = {
-            declare_war = BRA
+            declare_war_with_cb = {
+                casus_belli = cottbus_succession_war
+                who = BRA
+            }
         }
         emperor = {
             join_all_defensive_wars_of = BRA
@@ -1607,7 +1616,10 @@ country_event = {
         name = flavor_boh.27.a
         custom_tooltip = flavor_boh.27.a.tt
         BRA = {
-            declare_war = BOH
+            declare_war_with_cb = {
+                casus_belli = cottbus_succession_war
+                who = BOH
+            }
         }
         STY = {
             join_all_offensive_wars_of = BRA
@@ -1664,7 +1676,7 @@ country_event = {
     picture = HRE_eventPicture
     is_triggered_only = yes
     major = yes
-    #Brandenburg offers us alliance in return for Cottobus
+    #Brandenburg offers us alliance in return for Cottbus
     option = {
         #We accept your offer
         name = flavor_boh.28.a

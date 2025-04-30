@@ -16,7 +16,10 @@ vu_promote_vassal_to_lordship = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 	}
@@ -63,7 +66,10 @@ vu_promote_vassal_to_barony = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 	}
@@ -110,7 +116,10 @@ vu_promote_vassal_to_viscounty = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 	}
@@ -157,7 +166,10 @@ vu_promote_vassal_to_marquisate = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 	}
@@ -183,7 +195,19 @@ vu_promote_vassal_to_marquisate = {
 		vu_create_ToR_marquisate = yes
 		FROM = {
 			change_religion = ROOT
-			set_dynasty = ROOT
+			if = { #Added by Prussia to stop Daimyo dynasties being overwritten
+				limit = {
+					ROOT = {
+						NOT = {
+							has_reform = shogunate
+							has_reform = absolute_shogunate_reform
+							has_reform = japanese_divine_empire
+							has_reform = japanese_divine_empire
+						}
+					}
+				}
+				set_dynasty = ROOT
+			}
 		}
 		vu_colour_refresh = yes
 	}
@@ -434,7 +458,10 @@ vu_promote_vassal_to_imamate = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 	}
@@ -465,8 +492,10 @@ vu_promote_vassal_to_imamate = {
 		FROM = {
 			#adding the gov reform for the apropriate rank...
 			#might make it a scripted effect if we make more unique ones
-			add_government_reform = islamic_imamate_reform
 			change_religion = ROOT
+			set_dynasty = ROOT
+			change_government = monarchy
+			add_government_reform = islamic_imamate_reform
 		}
 		vu_colour_refresh = yes
 	}
@@ -491,7 +520,10 @@ vu_promote_vassal_to_grand_muftate = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			#government = monarchy #No Don, behave! - SF
 		}
 	}
@@ -522,8 +554,10 @@ vu_promote_vassal_to_grand_muftate = {
 		FROM = {
 			#adding the gov reform for the apropriate rank...
 			#might make it a scripted effect if we make more unique ones
-			add_government_reform = islamic_grand_muftate_reform
 			change_religion = ROOT
+			set_dynasty = ROOT
+			change_government = monarchy
+			add_government_reform = islamic_grand_muftate_reform
 		}
 		vu_colour_refresh = yes
 	}
@@ -548,7 +582,10 @@ vu_promote_vassal_to_sheikdom = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			#government = monarchy #No Don, behave! - SF
 		}
 	}
@@ -579,8 +616,10 @@ vu_promote_vassal_to_sheikdom = {
 		FROM = {
 			#adding the gov reform for the apropriate rank...
 			#might make it a scripted effect if we make more unique ones
-			add_government_reform = islamic_sheikdom_reform
 			change_religion = ROOT
+			set_dynasty = ROOT
+			change_government = monarchy
+			add_government_reform = islamic_sheikdom_reform
 		}
 		vu_colour_refresh = yes
 	}
@@ -605,7 +644,10 @@ vu_promote_vassal_to_emirate = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			#(you can't make a republic or a theocracy into a Lordship you dummy)
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			#government = monarchy #No Don, behave! - SF
 		}
 	}
@@ -628,6 +670,11 @@ vu_promote_vassal_to_emirate = {
 	on_accept = {
 		#Made a scripted effect for this, to make this a bit less long and
 		#also to make it a bit more efficient as we can re-use these later on
+		FROM = {
+			change_religion = ROOT
+			set_dynasty = ROOT
+			change_government = monarchy
+		}
 		if = {
 			limit = {
 				OR = {
@@ -655,10 +702,6 @@ vu_promote_vassal_to_emirate = {
 			FROM = {
 				add_government_reform = islamic_emirate_reform
 			}
-		}
-		FROM = {
-			change_religion = ROOT
-			set_dynasty = ROOT
 		}
 		vu_colour_refresh = yes
 	}
@@ -753,22 +796,15 @@ vu_rein_muslim_subject_in = {
 			}
 			government_rank = 8
 		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 8
-					NOT = {
-						government_rank = 9
-					}
-				}
-			}
-			government_rank = 9
-		}
 		FROM = {
 			#only works of subjects yours
 			is_subject_of = ROOT
 			#checks for your subject being any type of a ToR subject
 			is_ToR_rein_in_able = yes
+			#Check the Kingdom leve
+			NOT = {
+				government_rank = 8
+			}
 		}
 	}
 	is_allowed = {
@@ -829,127 +865,7 @@ vu_rein_muslim_subject_in = {
 		}
 	}
 	on_accept = {
-		if = {
-			limit = {
-				FROM = {
-					government_rank = 7
-				}
-			}
-			create_subject = {
-				subject_type = islamic_malikate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_malikate_reform
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 6
-				}
-			}
-			create_subject = {
-				subject_type = islamic_taifa
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_taifa_reform
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 5
-				}
-			}
-			create_subject = {
-				subject_type = islamic_sultanate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_sultanate_reform
-			}
-		}
-		else_if = {
-			limit = {
-				OR = {
-					tag = MUG
-					tag = TIM
-					tag = YUA
-					religion = ibadi
-				}
-				FROM = {
-					government_rank = 4
-				}
-			}
-			create_subject = {
-				subject_type = islamic_governate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_governate_reform
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 4
-				}
-			}
-			create_subject = {
-				subject_type = islamic_emirate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_emirate_reform
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 3
-				}
-			}
-			create_subject = {
-				subject_type = islamic_sharifate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_sharifate_reform
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					government_rank = 2
-				}
-			}
-			create_subject = {
-				subject_type = islamic_sheikdom
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_sheikdom_reform
-			}
-		}
-		else = {
-			create_subject = {
-				subject_type = islamic_grand_muftate
-				subject = FROM
-				keep_liberty_desire = yes
-			}
-			FROM = {
-				add_government_reform = islamic_grand_muftate_reform
-			}
-		}
+		vu_create_muslim_subject = yes
 		vu_colour_refresh = yes
 	}
 	ai_will_do = {
@@ -992,7 +908,7 @@ vu_convert_personal_union = {
 }
 
 #########################################################################################
-#   vu_turkish_beylik_subjects	                                                        #
+#   VU Turkish Subjects	                                                        #
 #########################################################################################
 vu_release_beylik_subject = {
 	#Added by Prussia to allow breaking of Beylik Vassals for the Ottomans due to populat demand
@@ -1057,6 +973,68 @@ vu_release_beylik_subject = {
 	}
 }
 
+vu_release_timariot_march_subject = {
+    category = influence
+    require_acceptance = no
+    is_visible = {
+        FROM = {
+            is_subject_of = ROOT
+            is_subject_of_type = turkish_timariot_march
+        }
+    }
+    is_allowed = {
+        always = yes
+    }
+    on_accept = {
+        FROM = {
+            if = {
+                limit = {
+                    NOT = {
+                        liberty_desire = 50
+                    }
+                }
+                add_opinion = {
+                    who = ROOT
+                    modifier = vassal_abandoned
+                }
+            }
+            grant_independence = yes
+            add_truce_with = ROOT
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        is_claim = ROOT
+                        is_permanent_claim = ROOT
+                        is_core = ROOT
+                    }
+                }
+                if = {
+                    limit = {
+                        is_permanent_claim = ROOT
+                    }
+                    remove_claim = ROOT
+                }
+                if = {
+                    limit = {
+                        is_claim = ROOT
+                    }
+                    remove_claim = ROOT
+                }
+                if = {
+                    limit = {
+                        is_core = ROOT
+                    }
+                    remove_core = ROOT
+                }
+            }
+        }
+        add_prestige = -25
+    }
+    ai_will_do = {
+        always = no
+    }
+}
+
 #########################################################################################
 #   vu_invite_vassal_to_league_of_lezhe by Prussia                                      #
 #########################################################################################
@@ -1071,7 +1049,10 @@ vu_invite_vassal_to_league_of_lezhe = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
 			government = monarchy
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 		}
 	}
 	is_allowed = {
@@ -1102,18 +1083,21 @@ vu_invite_vassal_to_league_of_lezhe = {
 	}
 }
 
-#########################################################################################
-#   vu_invite_vassal_to_Ottermen Empire by SF                                           #
-#########################################################################################
-vu_invite_vassal_to_ottoman_empire = {
+###############################################
+#   VU invite vassal to become a Beylik by SF #                                          #
+###############################################
+vu_invite_vassal_to_become_a_beylik = {
 	category = influence
 	alert_index = 6
-	alert_tooltip = vu_invite_vassal_to_ottoman_empire_alert_tooltip
+	alert_tooltip = vu_invite_vassal_to_become_a_beylik_alert_tooltip
 	is_visible = {
 		ToR_subject_limit_reached = no
 		FROM = {
 			is_subject_of = ROOT
-			is_subject_of_type = vassal
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
 			government = monarchy
 		}
 		OR = {
@@ -1149,4 +1133,53 @@ vu_invite_vassal_to_ottoman_empire = {
 	ai_will_do = {
 		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
 	}
+}
+
+vu_invite_vassal_to_become_a_timariot_march = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_invite_vassal_to_become_a_timariot_march_alert_tooltip
+    is_visible = {
+        ToR_subject_limit_reached = no
+        FROM = {
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+            }
+            government = monarchy
+        }
+        OR = {
+            culture_group = turkish_g
+            culture_group = turko_semitic
+            technology_group = ottoman
+            has_reform = ottoman_government
+        }
+    }
+    is_allowed = {
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+    on_accept = {
+        create_subject = {
+            subject_type = turkish_timariot_march
+            who = FROM
+        }
+        vu_colour_refresh = yes
+    }
+    ai_will_do = {
+        always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
 }

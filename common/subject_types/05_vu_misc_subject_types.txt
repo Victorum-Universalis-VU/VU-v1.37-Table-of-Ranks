@@ -1,0 +1,435 @@
+# VU ToR v1.37 subject types by SF
+# Credits go to: Prussia and Modus.
+# All subjects listed here are for VU and were created by the VU team.
+
+#Misc VU Subject Types
+#TRADE LEAGUE SUBJECTS
+hanseatic_league_member_vu = {}
+#MESOPOTAMIAN LARP SUBJECTS
+selucid_satrapy = {}
+issiak_assur = {}
+#SWISS SUBJECTS
+canton = {}
+autonomous_canton = {}
+#THEOCRATIC SUBJECTS
+papal_subject_vu = {}
+#COSSACK SUBJECT
+cossack_subject = {}
+
+#TRADE LEAGUE SUBJECTS
+hanseatic_league_member_vu = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_vassal
+    diplomacy_overlord_sprite = GFX_diplomacy_leadvassal
+    diplomacy_subject_sprite = GFX_diplomacy_amvassal
+
+    # Properties:
+    takes_diplo_slot = no #Modified
+    can_be_annexed = yes
+    has_power_projection = no
+    gets_help_with_rebels = yes
+
+    max_government_rank = 6
+
+    liberty_desire_development_ratio = 0.20
+    liberty_desire_same_dynasty = -5.0
+    pays_overlord = 1.0
+    forcelimit_to_overlord = 0.1
+
+    relative_power_class = 2
+
+    restoration_cb = cb_disloyal_vassal
+
+    # Subject Interactions:
+    scutage = yes
+    place_relative_on_throne = yes
+    seize_territory = yes
+
+    # Modifiers:
+    modifier_subject = {
+        modifier = vassal_nation
+    }
+    modifier_overlord = {
+        modifier = vassal_subject
+    }
+
+    overlord_opinion_modifier = is_vassal
+    subject_opinion_modifier = is_vassal
+}
+
+#MESOPOTAMIAN LARP SUBJECTS
+selucid_satrapy = {
+    copy_from = vassal
+    count = vassal
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = no
+    contribute_to_capital = no
+    conscript_general = no
+    force_isolation = no
+    return_land = no
+    #(special)
+    sword_hunt = no
+    sankin_kotai = no
+    expel_ronin = no
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_subject
+    }
+}
+
+issiak_assur = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_issiak_assur
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_assyrian_issiak
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_assyrian_issiak
+
+    # Properties:
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.1
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_annexed = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+    is_march = yes
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = yes
+    enforce_religion = yes
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_issiak #Was cb_disloyal_eyalet
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = issiak_bonus #Was english_royal_duchy_bonus - Edited by Prussia
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = duchy_subject #Was english_royal_duchy_subject - Edited by Prussia
+    }
+
+    overlord_opinion_modifier = is_issiak
+    subject_opinion_modifier = is_issiak
+}
+
+#SWISS SUBJECTS
+canton = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_canton
+    diplomacy_overlord_sprite = GFX_diplomacy_leadcanton
+    diplomacy_subject_sprite = GFX_diplomacy_amcanton
+
+    # Triggers:
+    is_potential_overlord = { has_country_flag = can_make_canton }
+
+    # Properties:
+    can_fight_independence_war = yes
+    joins_overlords_wars = yes
+    overlord_can_be_subject = yes
+    can_be_annexed = yes
+    takes_diplo_slot = no
+    can_release_in_peace = yes
+    counts_for_borders = yes
+    can_use_claims = yes
+    share_rebel_popup = yes
+    can_set_mil_focus = yes
+    overlord_can_fabricate_for = yes
+    base_liberty_desire = 0.0
+    liberty_desire_negative_prestige = 0.0
+    liberty_desire_development_ratio = 0.2
+    liberty_desire_same_dynasty = -10.0
+    pays_overlord = 1.0
+    forcelimit_to_overlord = 0
+    manpower_to_overlord = 0.1
+    relative_power_class = 1
+    restoration_cb = cb_disloyal_vassal
+    #
+    # Subject Interactions:
+    scutage = yes
+    place_relative_on_throne = yes
+    #sacrifice_ruler = yes #???? Aztects of Europe
+    #sacrifice_heir = yes
+    divert_trade = yes
+    #seize_territory = yes
+    embargo_rivals = yes
+    #send_officers = yes
+    placate_rulers = yes
+    takeondebt = yes
+    knowledge_sharing = yes
+
+    # Modifiers:
+    modifier_subject = clear
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = swi_canton_republican_ties_modifier
+    }
+    overlord_opinion_modifier = is_vassal
+    subject_opinion_modifier = is_vassal
+}
+
+#VU 1.37 ToR additions by SF
+#AUTONOMOUS CANTON
+autonomous_canton = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_autonomous_canton
+    diplomacy_overlord_sprite = GFX_diplomacy_leadautonomous_canton
+    diplomacy_subject_sprite = GFX_diplomacy_amautonomous_canton
+
+    # Triggers:
+    is_potential_overlord = { has_country_flag = can_make_autonomous_canton } 			# This part is not copied in copy_from. Actual default is equivalent to always = yes
+
+    # Properties:
+    can_fight_independence_war = yes
+    joins_overlords_wars = yes
+    overlord_can_be_subject = yes
+    can_be_annexed = no
+    takes_diplo_slot = no
+    can_release_in_peace = yes
+    counts_for_borders = yes
+    can_use_claims = yes
+    share_rebel_popup = yes
+    can_set_mil_focus = yes
+    overlord_can_fabricate_for = yes
+    base_liberty_desire = 0.0
+    liberty_desire_negative_prestige = 0.0
+    liberty_desire_development_ratio = 0.2
+    liberty_desire_same_dynasty = -10.0
+    pays_overlord = 1.0
+    forcelimit_to_overlord = 0
+    manpower_to_overlord = 0.1
+    relative_power_class = 1
+    restoration_cb = cb_disloyal_vassal
+    #
+    # Subject Interactions:
+    scutage = yes
+    place_relative_on_throne = yes
+    divert_trade = no
+    embargo_rivals = no
+    placate_rulers = yes
+    takeondebt = yes
+    knowledge_sharing = yes
+
+    # Modifiers:
+    modifier_subject = clear
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = swi_autonomous_canton_republican_ties_modifier
+    }
+    overlord_opinion_modifier = is_vassal
+    subject_opinion_modifier = is_vassal
+}
+
+#Basically a non-voluntary tributary, but who gives no tribute.... in other words, pretty much worthless. Papal States' goal will be to convert these to vassals via decision, or possibly an event or two.
+papal_subject_vu = {
+    #Note from tributary state entry - If similar subject added check if it needs to be added to these scripted triggers: is_subject_except_tributary_trigger, is_free_or_tributary_trigger . Thanks Paradox person!
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_papal_vassal
+    diplomacy_overlord_sprite = GFX_diplomacy_papal_leadclients
+    diplomacy_subject_sprite = GFX_diplomacy_papal_areclients
+
+    # Properties:
+    transfer_trade_power = no
+    joins_overlords_wars = no
+    can_have_subjects_of_other_types = yes
+    takes_diplo_slot = no
+    has_power_projection = yes
+    uses_military_focus = yes
+    overlord_protects_external = yes
+    can_use_claims = no
+    share_rebel_popup = no
+    can_transfer_in_peace = no
+    can_set_mil_focus = yes
+
+    #max_government_rank = 6
+    trust_on_start = 10
+
+    relative_power_class = 1
+
+    can_fight = {
+        independent_nations = yes
+        same_overlord = papal_subject_vu
+        other_overlord = all
+    }
+    can_rival = {
+        independent_nations = yes
+        same_overlord = papal_subject_vu
+        other_overlord = all
+    }
+    can_ally = {
+        independent_nations = yes
+        same_overlord = papal_subject_vu
+        other_overlord = all
+    }
+    can_marry = {
+        independent_nations = yes
+        same_overlord = papal_subject_vu
+        other_overlord = all
+    }
+
+    # Subject Interactions
+    #Disabling
+    embargo_rivals = no
+    placate_rulers = no
+    knowledge_sharing = no
+
+    #Enabling
+    support_loyalists = yes
+    place_relative_on_throne = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = { modifier = subject_nation }
+    modifier_overlord = clear
+
+    overlord_opinion_modifier = vu_is_papal_subject
+    subject_opinion_modifier = vu_is_papal_subject
+}
+
+#fiefdom_vu = {
+#	copy_from = default
+#
+#	# Graphics:
+#	sprite = GFX_icon_vassal
+#	diplomacy_overlord_sprite = GFX_diplomacy_leadvassal
+#	diplomacy_subject_sprite = GFX_diplomacy_amvassal
+#
+#	# Properties:
+#	takes_diplo_slot = yes #Modified
+#	can_be_annexed = yes
+#	has_power_projection = no
+#	gets_help_with_rebels = yes
+#
+#	max_government_rank = 6
+#
+#	liberty_desire_development_ratio = 0.20
+#	liberty_desire_same_dynasty = -5.0
+#	pays_overlord = 1.0
+#	forcelimit_to_overlord = 0.1
+#
+#	relative_power_class = 2
+#
+#	restoration_cb = cb_disloyal_vassal
+#
+#	# Subject Interactions:
+#	scutage = yes
+#	place_relative_on_throne = yes
+#	seize_territory = yes
+#
+#	# Modifiers:
+#	modifier_subject = {
+#		modifier = vassal_nation
+#	}
+#	modifier_overlord = {
+#		modifier = vassal_subject
+#	}
+#
+#	overlord_opinion_modifier = is_vassal
+#	subject_opinion_modifier = is_vassal
+#}
+
+#COSSACK SUBJECT
+cossack_subject = {
+    copy_from = vassal
+    count = vassal
+
+    can_transfer_in_peace = no
+
+    modifier_overlord = clear
+    modifier_overlord = {
+        modifier = cossack_subject_modifier
+    }
+}

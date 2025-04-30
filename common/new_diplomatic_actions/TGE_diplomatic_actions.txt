@@ -1,0 +1,2439 @@
+cancel_trade_deal_generic = {
+	category = trade
+	require_acceptance = no
+	is_visible = {
+		OR = {
+			AND = {
+				FROM = {
+					has_country_flag = VU_Trade_Deal_With_@Root
+				}
+				ROOT = {
+					has_country_flag = VU_Trade_Deal_From_@From
+				}
+			}
+			AND = {
+				FROM = {
+					has_country_flag = VU_Trade_Deal_From_@Root
+				}
+				ROOT = {
+					has_country_flag = VU_Trade_Deal_With_@From
+				}
+			}
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			if = {
+				limit = {
+					has_country_flag = VU_Trade_Deal_With_@Root
+				}
+				change_variable = {
+					which = VU_num_of_incoming_trade
+					value = -1
+				}
+				add_import_effect = yes
+				clr_country_flag = VU_Trade_Deal_With_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Trade_Deal_From_@Root
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Trade_Deal_From_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Initiated_Trade_Deal_With_@Root
+				}
+				change_variable = {
+					which = VU_num_of_total_trade
+					value = -1
+				}
+				clr_country_flag = VU_Initiated_Trade_Deal_With_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Rural_Trade_Deal_From_@Root
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_rural_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Rural_Trade_Deal_From_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Urban_Trade_Deal_From_@Root
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_urban_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Urban_Trade_Deal_From_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Mining_Trade_Deal_From_@Root
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_mining_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Mining_Trade_Deal_From_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Plantation_Trade_Deal_From_@Root
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_plantation_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Plantation_Trade_Deal_From_@Root
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Rural_Trade_Deal_With_@ROOT
+				}
+				change_variable = {
+					which = VU_num_of_incoming_rural_trade
+					value = -1
+				}
+				clr_country_flag = VU_Rural_Trade_Deal_With_@ROOT
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Urban_Trade_Deal_With_@ROOT
+				}
+				change_variable = {
+					which = VU_num_of_incoming_urban_trade
+					value = -1
+				}
+				clr_country_flag = VU_Urban_Trade_Deal_With_@ROOT
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Mining_Trade_Deal_With_@ROOT
+				}
+				change_variable = {
+					which = VU_num_of_incoming_mining_trade
+					value = -1
+				}
+				clr_country_flag = VU_Mining_Trade_Deal_With_@ROOT
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Plantation_Trade_Deal_With_@ROOT
+				}
+				change_variable = {
+					which = VU_num_of_incoming_plantation_trade
+					value = -1
+				}
+				clr_country_flag = VU_Plantation_Trade_Deal_With_@ROOT
+				add_import_effect = yes
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = VU_Cancel_Trade_Deal_Angry
+			}
+		}
+		ROOT = {
+			if = {
+				limit = {
+					has_country_flag = VU_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_incoming_trade
+					value = -1
+				}
+				# change_variable = {
+				# 	which = VU_num_of_total_trade
+				# 	value = -1
+				# }
+				add_import_effect = yes
+				clr_country_flag = VU_Trade_Deal_With_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Trade_Deal_From_@From
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_trade
+					value = -1
+				}
+				# change_variable = {
+				# 	which = VU_num_of_total_trade
+				# 	value = -1
+				# }
+				add_export_effect = yes
+				clr_country_flag = VU_Trade_Deal_From_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Initiated_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_total_trade
+					value = -1
+				}
+				clr_country_flag = VU_Initiated_Trade_Deal_With_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Rural_Trade_Deal_From_@From
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_rural_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Rural_Trade_Deal_From_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Urban_Trade_Deal_From_@From
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_urban_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Urban_Trade_Deal_From_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Mining_Trade_Deal_From_@From
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_mining_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Mining_Trade_Deal_From_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Plantation_Trade_Deal_From_@From
+				}
+				change_variable = {
+					which = VU_num_of_outgoing_plantation_trade
+					value = -1
+				}
+				add_export_effect = yes
+				clr_country_flag = VU_Plantation_Trade_Deal_From_@From
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Rural_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_incoming_rural_trade
+					value = -1
+				}
+				clr_country_flag = VU_Rural_Trade_Deal_With_@From
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Urban_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_incoming_urban_trade
+					value = -1
+				}
+				clr_country_flag = VU_Urban_Trade_Deal_With_@From
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Mining_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_incoming_mining_trade
+					value = -1
+				}
+				clr_country_flag = VU_Mining_Trade_Deal_With_@From
+				add_import_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = VU_Plantation_Trade_Deal_With_@From
+				}
+				change_variable = {
+					which = VU_num_of_incoming_plantation_trade
+					value = -1
+				}
+				clr_country_flag = VU_Plantation_Trade_Deal_With_@From
+				add_import_effect = yes
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		AND = {
+			NOT = {
+				FROM = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+			NOT = {
+				FROM = {
+					OR = {
+						alliance_with = ROOT
+						AND = {
+							is_trade_league_leader = yes
+							is_in_trade_league_with = ROOT
+						}
+						AND = {
+							ROOT = {
+								is_trade_league_leader = yes
+							}
+							is_in_trade_league_with = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_rural_exports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		ROOT = {
+			custom_trigger_tooltip = {
+				tooltip = VU_ROOT_produces_enough_rural_goods
+				check_variable = {
+					which = VU_percentage_of_rural_goods
+					value = 50
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_With_@Root
+			set_country_flag = VU_Rural_Trade_Deal_With_@Root
+			change_variable = {
+				which = VU_num_of_incoming_rural_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_From_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			set_country_flag = VU_Rural_Trade_Deal_From_@From
+			change_variable = {
+				which = VU_num_of_outgoing_rural_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+20% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#+5 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			change_variable = {
+				which = ai_value
+				value = 5
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_rural_imports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		FROM = {
+			custom_trigger_tooltip = {
+				tooltip = VU_FROM_produces_enough_rural_goods
+				check_variable = {
+					which = VU_percentage_of_rural_goods
+					value = 50
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_From_@Root
+			set_country_flag = VU_Rural_Trade_Deal_From_@Root
+			change_variable = {
+				which = VU_num_of_outgoing_rural_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_With_@From
+			set_country_flag = VU_Rural_Trade_Deal_With_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			change_variable = {
+				which = VU_num_of_incoming_rural_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+20% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-15 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 15
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_urban_exports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		ROOT = {
+			custom_trigger_tooltip = {
+				tooltip = VU_ROOT_produces_enough_urban_goods
+				check_variable = {
+					which = VU_percentage_of_urban_goods
+					value = 40
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_With_@Root
+			set_country_flag = VU_Urban_Trade_Deal_With@Root
+			change_variable = {
+				which = VU_num_of_incoming_urban_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_From_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			set_country_flag = VU_Urban_Trade_Deal_From_@From
+			change_variable = {
+				which = VU_num_of_outgoing_urban_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+20% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#+5 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			change_variable = {
+				which = ai_value
+				value = 5
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_urban_imports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		FROM = {
+			custom_trigger_tooltip = {
+				tooltip = VU_FROM_produces_enough_urban_goods
+				check_variable = {
+					which = VU_percentage_of_urban_goods
+					value = 40
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_From_@Root
+			set_country_flag = VU_Urban_Trade_Deal_From_@Root
+			change_variable = {
+				which = VU_num_of_outgoing_urban_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_With_@From
+			set_country_flag = VU_Urban_Trade_Deal_With_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			change_variable = {
+				which = VU_num_of_incoming_urban_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+20% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-15 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 15
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_mining_exports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		ROOT = {
+			custom_trigger_tooltip = {
+				tooltip = VU_ROOT_produces_enough_mining_goods
+				check_variable = {
+					which = VU_percentage_of_mining_goods
+					value = 20
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_With_@Root
+			set_country_flag = VU_Mining_Trade_Deal_From@Root
+			change_variable = {
+				which = VU_num_of_incoming_mining_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_From_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			set_country_flag = VU_Mining_Trade_Deal_With_@From
+			change_variable = {
+				which = VU_num_of_outgoing_mining_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+10% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#+5 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			change_variable = {
+				which = ai_value
+				value = 5
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_mining_imports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		FROM = {
+			custom_trigger_tooltip = {
+				tooltip = VU_FROM_produces_enough_mining_goods
+				check_variable = {
+					which = VU_percentage_of_mining_goods
+					value = 20
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_From_@Root
+			set_country_flag = VU_Mining_Trade_Deal_From_@Root
+			change_variable = {
+				which = VU_num_of_outgoing_mining_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_With_@From
+			set_country_flag = VU_Mining_Trade_Deal_With_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			change_variable = {
+				which = VU_num_of_incoming_mining_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+20% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-15 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 15
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_plantation_exports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		ROOT = {
+			custom_trigger_tooltip = {
+				tooltip = VU_ROOT_produces_enough_plantation_goods
+				check_variable = {
+					which = VU_percentage_of_plantation_goods
+					value = 10
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_With_@Root
+			set_country_flag = VU_Plantation_Trade_Deal_With@Root
+			change_variable = {
+				which = VU_num_of_incoming_plantation_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_From_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			set_country_flag = VU_Plantation_Trade_Deal_From_@From
+			change_variable = {
+				which = VU_num_of_outgoing_plantation_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+10% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#+5 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			change_variable = {
+				which = ai_value
+				value = 5
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+offer_trade_deal_plantation_imports = {
+	category = trade
+	alert_index = 34	#27             # The alert to use for the action. Refer to static_actions for the indexes. Optional.
+	alert_tooltip = ICON_VU_TD	# The localisation key to display in the alert tooltip. Optional.
+	require_acceptance = yes
+	is_visible = {
+		has_global_modifier_value = {
+			which = trade_deals_slots
+			value = 1
+		}
+		NOT = {
+			OR = {
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_With_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_From_@From
+					}
+				}
+				AND = {
+					FROM = {
+						has_country_flag = VU_Trade_Deal_From_@Root
+					}
+					ROOT = {
+						has_country_flag = VU_Trade_Deal_With_@From
+					}
+				}
+			}
+		}
+	}
+	is_allowed = {
+		Trade_Deals_Allowed = yes
+		FROM = {
+			custom_trigger_tooltip = {
+				tooltip = VU_FROM_produces_enough_plantation_goods
+				check_variable = {
+					which = VU_percentage_of_plantation_goods
+					value = 10
+				}
+			}
+		}
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+					}
+					AND = {
+						FROM = {
+							has_country_flag = VU_Trade_Deal_From_@Root
+						}
+						ROOT = {
+							has_country_flag = VU_Trade_Deal_With_@Root
+						}
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_country_flag = VU_Trade_Deal_From_@Root
+			set_country_flag = VU_Plantation_Trade_Deal_From_@Root
+			change_variable = {
+				which = VU_num_of_outgoing_plantation_trade
+				value = 1
+			}
+			add_export_effect = yes
+		}
+		ROOT = {
+			set_country_flag = VU_Trade_Deal_With_@From
+			set_country_flag = VU_Plantation_Trade_Deal_With_@From
+			set_country_flag = VU_Initiated_Trade_Deal_With_@From
+			change_variable = {
+				which = VU_num_of_incoming_plantation_trade
+				value = 1
+			}
+			change_variable = {
+				which = VU_num_of_total_trade
+				value = 1
+			}
+			add_import_effect = yes
+		}
+	}
+	on_decline = {
+	}
+	ai_acceptance = {
+		# This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			#+3*DipRep
+			name = VU_diplomatic_reputation			# The localisation key to display for this factor
+			# ai_value MUST always be created within an entry first.
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation				# Which exportable value to export
+				who = ROOT				# Who to export the value from
+				with = FROM				# Who the ai_value is for
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+		add_entry = {
+			#+10% Opinion
+			name = VU_opinion_modifier
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value
+				value = 0.1
+			}
+		}
+		add_entry = {
+			#-10 base acceptance
+			name = VU_base_acceptance
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10				#10
+			}
+		}
+		add_entry = {
+			#-10 if not Allied Player
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = no
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 10
+			}
+		}
+		add_entry = {
+			#-100 if not Allied AI
+			name = VU_not_willing
+			limit = {
+				ROOT = {
+					ai = yes
+				}
+				NOT = {
+					FROM = {
+						OR = {
+							alliance_with = ROOT
+							AND = {
+								is_trade_league_leader = yes
+								is_in_trade_league_with = ROOT
+							}
+							AND = {
+								ROOT = {
+									is_trade_league_leader = yes
+								}
+								is_in_trade_league_with = ROOT
+							}
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-100 if broken trade treaty
+			name = VU_angry_merchants
+			limit = {
+				FROM = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = VU_Cancel_Trade_Deal_Angry
+					}
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 100
+			}
+		}
+		add_entry = {
+			#-15 Merchant Republic
+			name = VU_merchant_republic
+			limit = {
+				FROM = {
+					has_government_attribute = is_merchant_republic
+				}
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:always
+			}
+			subtract_variable = {
+				which = ai_value
+				value = 15
+			}
+		}
+	}
+	ai_will_do = {
+		# this is a trigger
+		FROM = {
+			OR = {
+				alliance_with = ROOT
+				AND = {
+					is_trade_league_leader = yes
+					is_in_trade_league_with = ROOT
+				}
+				AND = {
+					ROOT = {
+						is_trade_league_leader = yes
+					}
+					is_in_trade_league_with = ROOT
+				}
+			}
+		}
+	}
+}

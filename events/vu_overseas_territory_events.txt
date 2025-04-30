@@ -1,0 +1,94 @@
+namespace = vu_overseas_territory_events
+
+# vu_overseas_territory_events.1 deleted
+
+country_event = {
+	id = vu_overseas_territory_events.2
+	title = vu_overseas_territory_events.EVTNAME2
+	desc = vu_overseas_territory_events.EVTDESC2
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = vu_overseas_territory_events2.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {
+	id = vu_overseas_territory_events.3
+	title = vu_overseas_territory_events.EVTNAME3
+	desc = vu_overseas_territory_events.EVTDESC3
+	picture = DIPLOMACY_eventPicture
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_subject_of_type = overseas_territory
+		war_with = FROM
+		overlord = {
+			NOT = {
+				is_in_war = {
+					participants = FROM
+					participants = THIS
+				}
+			}
+		}
+		liberty_desire = 50
+		overlord = {
+			reverse_has_opinion_modifier = {
+				modifier = refused_join_war
+				who = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = vu_overseas_territory_events3.EVTOPT1
+
+		ai_chance = { factor = 100 }
+
+		overlord = {
+			ROOT = { grant_independence = yes }
+		}
+	}
+}
+
+country_event = {
+	id = vu_overseas_territory_events.4
+	title = vu_overseas_territory_events.EVTNAME4
+	desc = vu_overseas_territory_events.EVTDESC4
+	picture = DIPLOMACY_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		is_subject_of_type = overseas_territory
+		overlord = {
+			capital_scope = {
+				NOT = { has_discovered = ROOT }
+			}
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	immediate = {
+		hidden_effect = {
+			overlord = {
+				capital_scope = {
+					discover_country = ROOT
+				}
+			}
+		}
+	}
+
+	option = {
+		name = vu_overseas_territory_events4.EVTOPT1
+
+		ai_chance = { factor = 100 }
+	}
+}

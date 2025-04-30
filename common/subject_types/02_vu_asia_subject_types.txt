@@ -1,0 +1,2117 @@
+# VU ToR v1.37 subject types by SF
+# Credits go to: Prussia and Modus.
+# All subjects listed here are for VU and were created by the VU team.
+
+#CHINESE PRINCIPALITIES
+vu_chinese_heaven_principality = {}
+vu_chinese_lake_principality = {}
+vu_chinese_fire_principality = {}
+vu_chinese_thunder_principality = {}
+vu_chinese_wind_principality = {}
+vu_chinese_water_principality = {}
+vu_chinese_mountain_principality = {}
+vu_chinese_earth_principality = {}
+#JAPANESE DAIMYO SUBJECTS
+daimyo_barony_vassal = {}
+daimyo_viscounty_vassal = {}
+daimyo_county_vassal = {}
+daimyo_marquisate_vassal = {}
+daimyo_duchy_vassal = {}
+daimyo_principality_vassal = {}
+#JAPANESE IMPERIAL SUBJECTS
+vu_japanese_imperial_colony = {}
+vu_japanese_imperial_directorate = {}
+vu_japanese_imperial_governate = {}
+vu_japanese_imperial_warlord = {}
+#HINDU SUBJECTS
+vu_hindu_brahma_prince = {}
+vu_hindu_vishnu_prince = {}
+vu_hindu_shiva_prince = {}
+vu_hindu_saraswati_prince = {}
+vu_hindu_lakshimi_prince = {}
+vu_hindu_parvarti_prince = {}
+#BUDDHIST SUBJECTS
+vu_buddhist_hinayana_prince = {}
+vu_buddhist_bodhisattva_prince = {}
+vu_buddhist_sakya_prince = {}
+
+#########################
+# CHINESE SUBJECT TYPES #
+#########################
+
+vu_chinese_heaven_principality = { #Aristocratic Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_heaven_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_heaven_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_lake_principality = { #Religious Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_lake_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_lake_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_fire_principality = { #Industrial Principality type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_fire_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_fire_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_thunder_principality = { #Offensive Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_thunder_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_thunder_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_wind_principality = { #Trade Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_wind_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_wind_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_water_principality = { #Naval Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_water_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_water_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_mountain_principality = { #Defensive Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_mountain_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_mountain_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_chinese_earth_principality = { #Agricultural Principality Type
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_chinese_earth_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_chinese_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_chinese_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = chinese_earth_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = chinese_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+##########################
+# JAPANESE SUBJECT TYPES #
+##########################
+
+#DAIMYO SUBJECTS
+daimyo_barony_vassal = {
+    copy_from = daimyo_vassal
+    count = daimyo_vassal
+    sprite = GFX_icon_japanese_shinto_barony_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+        same_overlord = daimyo_barony_vassal
+    }
+    can_rival = {
+        same_overlord = daimyo_barony_vassal
+    }
+    can_ally = {
+        same_overlord = daimyo_barony_vassal
+    }
+    can_marry = {
+        same_overlord = daimyo_barony_vassal
+    }
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_barony_subject
+    }
+}
+
+daimyo_viscounty_vassal = {
+    copy_from = daimyo_barony_vassal
+    count = daimyo_barony_vassal
+    sprite = GFX_icon_japanese_shinto_viscounty_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+        same_overlord = daimyo_viscounty_vassal
+    }
+    can_rival = {
+        same_overlord = daimyo_viscounty_vassal
+    }
+    can_ally = {
+        same_overlord = daimyo_viscounty_vassal
+    }
+    can_marry = {
+        same_overlord = daimyo_viscounty_vassal
+    }
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_viscounty_subject
+    }
+}
+
+daimyo_county_vassal = {
+    copy_from = daimyo_viscounty_vassal
+    count = daimyo_viscounty_vassal
+    sprite = GFX_icon_japanese_shinto_county_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+        same_overlord = daimyo_county_vassal
+    }
+    can_rival = {
+        same_overlord = daimyo_county_vassal
+    }
+    can_ally = {
+        same_overlord = daimyo_county_vassal
+    }
+    can_marry = {
+        same_overlord = daimyo_county_vassal
+    }
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_county_subject
+    }
+}
+
+daimyo_marquisate_vassal = {
+    copy_from = march
+    sprite = GFX_icon_japanese_shinto_marquisate_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    can_fight = {
+        same_overlord = daimyo_marquisate_vassal
+    }
+    can_rival = {
+        same_overlord = daimyo_marquisate_vassal
+    }
+    can_ally = {
+        same_overlord = daimyo_marquisate_vassal
+    }
+    can_marry = {
+        same_overlord = daimyo_marquisate_vassal
+    }
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_marquisate_subject
+    }
+}
+
+daimyo_duchy_vassal = {
+    copy_from = default
+    sprite = GFX_icon_japanese_shinto_duchy_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_duchy_subject
+    }
+}
+
+daimyo_principality_vassal = {
+    copy_from = daimyo_duchy_vassal
+    sprite = GFX_icon_japanese_shinto_principality_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_shinto_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_shinto_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = yes
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    #(disable)
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    #(special)
+    sword_hunt = yes
+    sankin_kotai = yes
+    expel_ronin = yes
+
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = subject_nation
+    }
+    modifier_overlord = {
+        modifier = daimyo_principality_subject
+    }
+}
+
+#JAPANESE IMPERIAL SUBJECTS
+vu_japanese_imperial_colony = {
+    copy_from = default
+
+    # Graphics:
+    sprite = GFX_icon_japanese_imperial_colony
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_imperial_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_imperial_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+    joins_overlords_wars = no
+    counts_for_borders = yes
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    force_seppuku = yes
+    contribute_to_capital = no
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    transfer_trade_power = yes
+    
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = japanese_imperial_colony_modifier
+    }
+    modifier_overlord = {
+        modifier = japanese_imperial_colony_overlord_modifier
+    }
+}
+
+vu_japanese_imperial_directorate = {
+    copy_from = vu_japanese_imperial_colony
+
+    # Graphics:
+    sprite = GFX_icon_japanese_imperial_directorate
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_imperial_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_imperial_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+    joins_overlords_wars = yes
+    counts_for_borders = yes
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    force_seppuku = yes
+    contribute_to_capital = no
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    transfer_trade_power = yes
+    
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = japanese_imperial_directorate_modifier
+    }
+    modifier_overlord = {
+        modifier = japanese_imperial_directorate_overlord_modifier
+    }
+}
+
+vu_japanese_imperial_governate = {
+    copy_from = vu_japanese_imperial_directorate
+
+    # Graphics:
+    sprite = GFX_icon_japanese_imperial_governate
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_imperial_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_imperial_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+    joins_overlords_wars = yes
+    counts_for_borders = yes
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no
+    enforce_culture = no
+    seize_territory = no
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    transfer_trade_power = yes
+    
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = japanese_imperial_governate_modifier
+    }
+    modifier_overlord = {
+        modifier = japanese_imperial_governate_overlord_modifier
+    }
+}
+
+vu_japanese_imperial_warlord = {
+    copy_from = vu_japanese_imperial_governate
+
+    # Graphics:
+    sprite = GFX_icon_japanese_imperial_warlord
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_japanese_imperial_subject
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_japanese_imperial_subject
+
+    # Properties:
+    has_power_projection = yes
+    takes_diplo_slot = no
+    gives_daimyo_bonuses = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    allows_taking_land_without_independence = yes
+    can_use_claims = no
+    forms_trade_companies = no
+    can_concentrate_development = no
+    joins_overlords_wars = yes
+    counts_for_borders = yes
+
+    trust_on_start = 0
+
+    base_liberty_desire = 10.0
+    military_focus = 1.2
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    # Subject Interactions
+    scutage = no
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = yes
+    enforce_culture = yes
+    seize_territory = yes
+    force_seppuku = yes
+    contribute_to_capital = yes
+    conscript_general = yes
+    force_isolation = yes
+    return_land = yes
+    transfer_trade_power = yes
+    seize_court_resources = yes
+    request_extra_levies = yes
+    
+    # Modifiers
+
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+    modifier_subject = clear #Ditto
+    modifier_subject = {
+        modifier = japanese_imperial_governate_modifier
+    }
+    modifier_overlord = {
+        modifier = japanese_imperial_governate_overlord_modifier
+    }
+}
+
+#Hindu Subjects
+
+vu_hindu_brahma_prince = {
+copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_hindu_brahma_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_brahma_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_hindu_vishnu_prince = {
+copy_from = vu_hindu_brahma_prince
+
+    # Graphics:
+    sprite = GFX_icon_hindu_vishnu_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_vishnu_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_hindu_shiva_prince = {
+copy_from = vu_hindu_brahma_prince
+
+    # Graphics:
+    sprite = GFX_icon_hindu_shiva_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_shiva_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_hindu_saraswati_prince = {
+copy_from = vu_hindu_brahma_prince
+
+    # Graphics:
+    sprite = GFX_icon_hindu_saraswati_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_saraswati_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_hindu_lakshimi_prince = {
+copy_from = vu_hindu_brahma_prince
+
+    # Graphics:
+    sprite = GFX_icon_hindu_lakshimi_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_lakshimi_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_hindu_parvarti_prince = {
+copy_from = vu_hindu_brahma_prince
+
+    # Graphics:
+    sprite = GFX_icon_hindu_parvarti_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_hindu_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_hindu_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = hindu_parvarti_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = hindu_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+#Buddhist Subjects by Prussia
+vu_buddhist_hinayana_prince = {
+copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_buddhist_hinayana_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_buddhist_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_buddhist_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = no
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = buddhist_hinayana_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = buddhist_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_buddhist_bodhisattva_prince = {
+copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_buddhist_bodhisattva_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_buddhist_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_buddhist_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = no
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = buddhist_bodhisattva_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = buddhist_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}
+
+vu_buddhist_sakya_prince = {
+copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_buddhist_sakya_principality #Was GFX_icon_core_eyalet
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_buddhist_principality #Was GFX_icon_diplomacy_lead_core_eyalet
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_buddhist_principality #Was GFX_icon_diplomacy_am_core_eyalet
+
+    # Properties:
+	can_send_tribute = no
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 20.0
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Changed to no for now so Sphinx can decide how to handle integration - Prussia
+    can_be_annexed = no
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = yes
+    conscript_general = yes
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = buddhist_sakya_principality_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = buddhist_principality_subject
+    }
+
+    overlord_opinion_modifier = is_principality
+    subject_opinion_modifier = is_principality
+}

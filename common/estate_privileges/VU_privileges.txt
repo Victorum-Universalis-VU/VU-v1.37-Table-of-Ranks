@@ -1634,37 +1634,6 @@ ME_estate_dhimmi_MAM_dhimmi_in_high_places = {
 	}
 }
 
-# ME_estate_dhimmi_recruit_trader = {
-	# icon = privilege_promoto_dhimmi_nobles
-	# max_absolutism = -5
-	# influence = 0.1
-	# loyalty = 0.05
-	# is_valid = {
-	# }
-	# penalties = {
-	# }
-	# benefits = {
-
-	# }
-	# on_granted = {
-		# if = {
-			# limit = {
-				# monthly_income = 25
-			# }
-			# define_advisor = {
-				# type = trader
-				# skill = 3
-				# culture = english
-				# religion = ROOT
-			# }
-		# }
-	# }
-	# on_revoked = {
-	# }
-	# ai_will_do = {
-		# factor = 0
-	# }
-# }
 
 ME_estate_burghers_SWI_peace_in_the_cantons = {
 	icon = privilege_recruit_minister
@@ -5415,22 +5384,18 @@ estate_nobles_very_strong_duchies = {
 		calc_true_if = {
 			all_subject_country = {
 				OR = {
-			        #Brother Kingdom
-			        is_subject_of_type = brother_kingdom
+			        #Cadet Branch
+			        is_subject_of_type = cadet_branch
 			        #Silesian Duchy
 			        #is_subject_of_type = silesian_duke
 			        #Appenage
 			        is_subject_of_type = appanage
 			        #Marches
 			        is_subject_of_type = march
-			        is_subject_of_type = naval_march
 			        is_subject_of_type = defensive_march
 			        is_subject_of_type = client_march
-			        is_subject_of_type = religious_march
-			        is_subject_of_type = agricultural_march
 			        #Status Ponifincii
 			        is_subject_of_type = papal_subject_vu
-			        is_subject_of_type = papal_sanctuary_subject
 			        #Voivodeship
 					is_subject_of_type = bosnian_banat_kingdom
 					is_subject_of_type = lezhe_league_member
@@ -5440,7 +5405,6 @@ estate_nobles_very_strong_duchies = {
 			        is_subject_of_type = vassal
 			    	is_subject_of_type = client_vassal
 			    	is_subject_of_type = incorporated_vassal
-			    	is_subject_of_type = medieval_vassal
 			    	is_subject_of_type = mandala_trade_vassal
 			    	#Viceroyalty
 			    	is_subject_of_type = viceroyalty_vu
@@ -5474,10 +5438,10 @@ estate_nobles_very_strong_duchies = {
 			        #Swiss Cantons
 			        is_subject_of_type = canton
 			        is_subject_of_type = autonomous_canton
-			        #European & Archbishoprics
-			        is_subject_of_type = european_abbacy
-			        is_subject_of_type = european_bishopric
-			        is_subject_of_type = european_archbishopric
+			        #Christian Subjects
+			        is_subject_of_type = christian_abbacy
+			        is_subject_of_type = christian_bishopric
+			        is_subject_of_type = christian_archbishopric
 			        #Islamic Subjects
                     is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
                     is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
@@ -5488,10 +5452,12 @@ estate_nobles_very_strong_duchies = {
                     is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
                     is_subject_of_type = islamic_taifa			           #Equivalent to principality
                     is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
-					#Mongolian Subjects
+					#Mongolian Subject
                     is_subject_of_type = mongolian_vassal
-                    #Turkish Beylik Subjects
+                    #Turkish Beylik Subject
                     is_subject_of_type = turkish_tributary_beylik_vassal
+					#Turkish Timariot Subject
+					is_subject_of_type = turkish_timariot_march
 			    }
 			}
 			amount = 3
@@ -5512,22 +5478,18 @@ estate_nobles_very_strong_duchies = {
 				calc_true_if = {
 					all_subject_country = {
 						OR = {
-			                #Brother Kingdom
-			                is_subject_of_type = brother_kingdom
+			                #Cadet Branch
+			                is_subject_of_type = cadet_branch
 			                #Silesian Duchy
 			                #is_subject_of_type = silesian_duke
 			                #Appenage
 			                is_subject_of_type = appanage
 			                #Marches
 			                is_subject_of_type = march
-			                is_subject_of_type = naval_march
 			                is_subject_of_type = defensive_march
 			                is_subject_of_type = client_march
-			                is_subject_of_type = religious_march
-			                is_subject_of_type = agricultural_march
 			                #Status Ponifincii
 			                is_subject_of_type = papal_subject_vu
-			                is_subject_of_type = papal_sanctuary_subject
 			                #Voivodeship
                             is_subject_of_type = bosnian_banat_kingdom
                             is_subject_of_type = lezhe_league_member
@@ -5537,7 +5499,6 @@ estate_nobles_very_strong_duchies = {
 			                is_subject_of_type = vassal
 			            	is_subject_of_type = client_vassal
 			            	is_subject_of_type = incorporated_vassal
-			            	is_subject_of_type = medieval_vassal
 			            	is_subject_of_type = mandala_trade_vassal
 			            	#Viceroyalty
 			            	is_subject_of_type = viceroyalty_vu
@@ -5571,10 +5532,10 @@ estate_nobles_very_strong_duchies = {
 							#Swiss Cantons
 			                is_subject_of_type = canton
 			                is_subject_of_type = autonomous_canton
-			                #European & Archbishoprics
-			                is_subject_of_type = european_abbacy
-			                is_subject_of_type = european_bishopric
-			                is_subject_of_type = european_archbishopric
+			                #Christian Subjects
+			                is_subject_of_type = christian_abbacy
+			                is_subject_of_type = christian_bishopric
+			                is_subject_of_type = christian_archbishopric
 			                #Islamic Subjects
                             is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
                             is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
@@ -5585,10 +5546,12 @@ estate_nobles_very_strong_duchies = {
                             is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
                             is_subject_of_type = islamic_taifa			           #Equivalent to principality
                             is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
-							#Mongolian Subjects
+							#Mongolian Subject
 							is_subject_of_type = mongolian_vassal
-							#Turkish Beylik Subjects
+							#Turkish Beylik Subject
 							is_subject_of_type = turkish_tributary_beylik_vassal
+							#Turkish Timariot Subject
+							is_subject_of_type = turkish_timariot_march
 			            }
 					}
 				amount = 4
@@ -5623,22 +5586,18 @@ estate_nobles_extremely_strong_duchies = {
 			amount = 5
 			all_subject_country = {
 				OR = {
-			        #Brother Kingdom
-			        is_subject_of_type = brother_kingdom
+			        #Cadet Branch
+			        is_subject_of_type = cadet_branch
 			        #Silesian Duchy
 			        #is_subject_of_type = silesian_duke
 			        #Appenage
 			        is_subject_of_type = appanage
 			        #Marches
 			        is_subject_of_type = march
-			        is_subject_of_type = naval_march
 			        is_subject_of_type = defensive_march
 			        is_subject_of_type = client_march
-			        is_subject_of_type = religious_march
-			        is_subject_of_type = agricultural_march
 			        #Status Ponifincii
 			        is_subject_of_type = papal_subject_vu
-			        is_subject_of_type = papal_sanctuary_subject
 			        #Voivodeship
                     is_subject_of_type = bosnian_banat_kingdom
                     is_subject_of_type = lezhe_league_member
@@ -5648,7 +5607,6 @@ estate_nobles_extremely_strong_duchies = {
 			        is_subject_of_type = vassal
 			    	is_subject_of_type = client_vassal
 			    	is_subject_of_type = incorporated_vassal
-			    	is_subject_of_type = medieval_vassal
 			    	is_subject_of_type = mandala_trade_vassal
 			    	#Viceroyalty
 			    	is_subject_of_type = viceroyalty_vu
@@ -5682,10 +5640,10 @@ estate_nobles_extremely_strong_duchies = {
 					#Swiss Cantons
 			        is_subject_of_type = canton
 			        is_subject_of_type = autonomous_canton
-			        #European & Archbishoprics
-			        is_subject_of_type = european_abbacy
-			        is_subject_of_type = european_bishopric
-			        is_subject_of_type = european_archbishopric
+			        #Christian Subjects
+			        is_subject_of_type = christian_abbacy
+			        is_subject_of_type = christian_bishopric
+			        is_subject_of_type = christian_archbishopric
 			        #Islamic Subjects
                     is_subject_of_type = islamic_imamate			       #Equivalent to Lordship
                     is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
@@ -5696,10 +5654,12 @@ estate_nobles_extremely_strong_duchies = {
                     is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
                     is_subject_of_type = islamic_taifa			           #Equivalent to principality
                     is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
-					#Mongolian Subjects
+					#Mongolian Subject
 					is_subject_of_type = mongolian_vassal
-					#Turkish Beylik Subjects
+					#Turkish Beylik Subject
 					is_subject_of_type = turkish_tributary_beylik_vassal
+					#Turkish Timariot Subject
+					is_subject_of_type = turkish_timariot_march
 			    }
 			}
 		}
@@ -5716,22 +5676,18 @@ estate_nobles_extremely_strong_duchies = {
 					amount = 6
 					all_subject_country = {
 						OR = {
-			                #Brother Kingdom
-			                is_subject_of_type = brother_kingdom
+			                #Cadet Branch
+			                is_subject_of_type = cadet_branch
 			                #Silesian Duchy
 			                #is_subject_of_type = silesian_duke
 			                #Appenage
 			                is_subject_of_type = appanage
 			                #Marches
 			                is_subject_of_type = march
-			                is_subject_of_type = naval_march
 			                is_subject_of_type = defensive_march
 			                is_subject_of_type = client_march
-			                is_subject_of_type = religious_march
-			                is_subject_of_type = agricultural_march
 			                #Status Ponifincii
 			                is_subject_of_type = papal_subject_vu
-			                is_subject_of_type = papal_sanctuary_subject
 			                #Voivodeship
                             is_subject_of_type = bosnian_banat_kingdom
                             is_subject_of_type = lezhe_league_member
@@ -5741,7 +5697,6 @@ estate_nobles_extremely_strong_duchies = {
 			                is_subject_of_type = vassal
 			            	is_subject_of_type = client_vassal
 			            	is_subject_of_type = incorporated_vassal
-			            	is_subject_of_type = medieval_vassal
 			            	is_subject_of_type = mandala_trade_vassal
 			            	#Viceroyalty
 			            	is_subject_of_type = viceroyalty_vu
@@ -5775,10 +5730,10 @@ estate_nobles_extremely_strong_duchies = {
 							#Swiss Cantons
 			                is_subject_of_type = canton
 			                is_subject_of_type = autonomous_canton
-			                #European & Archbishoprics
-			                is_subject_of_type = european_abbacy
-			                is_subject_of_type = european_bishopric
-			                is_subject_of_type = european_archbishopric
+			                #Christian Subjects
+			                is_subject_of_type = christian_abbacy
+			                is_subject_of_type = christian_bishopric
+			                is_subject_of_type = christian_archbishopric
 			                #Islamic Subjects
 			                is_subject_of_type = islamic_imamate			       #Equivalent to Lordship  
 			                is_subject_of_type = islamic_grand_muftate			   #Equivalent to barony
@@ -5789,10 +5744,12 @@ estate_nobles_extremely_strong_duchies = {
 			                is_subject_of_type = islamic_sultanate			       #Equivalent to duchy
 			                is_subject_of_type = islamic_taifa			           #Equivalent to principality
 			                is_subject_of_type = islamic_malikate			       #Equivalent to kingdom
-							#Mongolian Subjects
+							#Mongolian Subject
 							is_subject_of_type = mongolian_vassal
-							#Turkish Beylik Subjects
+							#Turkish Beylik Subject
 							is_subject_of_type = turkish_tributary_beylik_vassal
+							#Turkish Timariot Subject
+							is_subject_of_type = turkish_timariot_march
 			            }
 					}
 				}
@@ -5879,13 +5836,9 @@ estate_nobles_british_strong_marches = { #
 							is_subject_of_type = march
 							is_subject_of_type = client_march
 							is_subject_of_type = personal_union
-							is_subject_of_type = naval_march
 							is_subject_of_type = defensive_march 
 							is_subject_of_type = march
 							is_subject_of_type = viceroyalty_vu
-							is_subject_of_type = religious_march
-							is_subject_of_type = agricultural_march 
-							is_subject_of_type = medieval_vassal 
 							#is_subject_of_type = silesian_duke
 						}
 					}

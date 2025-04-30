@@ -5,37 +5,32 @@
 # written by Sara Wendel-Örtqvist
 # Events rewritten and adapted for patch 1.22 by Henrik Lohmander
 ########################################
-
 namespace = flavor_tim
 normal_or_historical_nations = yes
-
 # Muhammad Baysonqor's Rebellion
 country_event = {
 	id = flavor_tim.0
 	title = "flavor_tim.0.t"
 	desc = "flavor_tim.0.d"
 	picture = OVEREXTENSION_eventPicture
-	
 	fire_only_once = yes
-	
 	trigger = {
 		tag = TIM
 		exists = QOM
 		has_ruler = "Shah Rukh"
 	}
-
 	mean_time_to_happen = {
 		months = 1
 	}
-	
-	option = { 
-		name = "flavor_tim.0.a" #
+	option = {
+		name = "flavor_tim.0.a"		#
 		custom_tooltip = flavor_tim.0.a.tt
-		
 		hidden_effect = {
 			every_country = {
 				limit = {
-					NOT = { tag = ROOT }
+					NOT = {
+						tag = ROOT
+					}
 					OR = {
 						is_neighbor_of = ROOT
 						dynasty = Timurid
@@ -47,7 +42,9 @@ country_event = {
 						}
 					}
 				}
-				country_event = { id = flavor_tim.4 }
+				country_event = {
+					id = flavor_tim.4
+				}
 			}
 		}
 	}
@@ -59,37 +56,36 @@ country_event = {
 	title = "flavor_tim.1.t"
 	desc = "flavor_tim.1.d"
 	picture = DEATH_OF_HEIR_eventPicture
-	
 	is_triggered_only = yes
 	fire_only_once = yes
-	
 	trigger = {
 		tag = TIM
-		NOT = { has_global_flag = death_of_shah_rukh }
+		NOT = {
+			has_global_flag = death_of_shah_rukh
+		}
 	}
-
 	mean_time_to_happen = {
 		days = 1
 	}
-	
 	immediate = {
 		set_global_flag = death_of_shah_rukh
 		hidden_effect = {
-			country_event = { 
-				id = flavor_tim.20 
+			country_event = {
+				id = flavor_tim.20
 				days = 30
 				random = 60
 			}
 		}
 	}
-	
-	option = { 
-		name = "flavor_tim.1.a" # My time has come!
+	option = {
+		name = "flavor_tim.1.a"		# My time has come!
 		custom_tooltip = flavor_tim.1.a.tt
 		hidden_effect = {
 			every_country = {
 				limit = {
-					NOT = { tag = ROOT }
+					NOT = {
+						tag = ROOT
+					}
 					OR = {
 						is_neighbor_of = ROOT
 						dynasty = Timurid
@@ -101,7 +97,9 @@ country_event = {
 						}
 					}
 				}
-				country_event = { id = flavor_tim.2 }
+				country_event = {
+					id = flavor_tim.2
+				}
 			}
 		}
 	}
@@ -113,36 +111,54 @@ country_event = {
 	title = "flavor_tim.2.t"
 	desc = "flavor_tim.2.d"
 	picture = DEATH_OF_HEIR_eventPicture
-	
 	is_triggered_only = yes
-
 	option = {
-		name = "flavor_tim.2.a" # My time has come!
-		trigger = { dynasty = Timurid }
+		name = "flavor_tim.2.a"		# My time has come!
+		trigger = {
+			dynasty = Timurid
+		}
 		custom_tooltip = flavor_tim.2.a.tt
 	}
 	option = {
-		name = "flavor_tim.2.b" #
-		trigger = { NOT = { dynasty = Timurid } }
+		name = "flavor_tim.2.b"		#
+		trigger = {
+			NOT = {
+				dynasty = Timurid
+			}
+		}
 		custom_tooltip = flavor_tim.2.a.tt
 		if = {
 			limit = {
-				NOT = { dynasty = "Timurid" }
+				NOT = {
+					dynasty = "Timurid"
+				}
 				government = monarchy
-				NOT = { tag = HLR }
-				NOT = { tag = ROM }
-				NOT = { tag = MUG }
-				NOT = { tag = PER }
+				NOT = {
+					tag = HLR
+				}
+				NOT = {
+					tag = ROM
+				}
+				NOT = {
+					tag = MUG
+				}
+				NOT = {
+					tag = PER
+				}
 				OR = {
 					culture_group = iranian
 					primary_culture = uzbehk
 					primary_culture = turkmeni
 				}
-				NOT = { primary_culture = azerbaijani }
-				NOT = { has_reform = tribal_federation }
+				NOT = {
+					primary_culture = azerbaijani
+				}
+				NOT = {
+					has_reform = tribal_federation
+				}
 				religion_group = muslim
 			}
-		custom_tooltip = flavor_tim.2.b.tt
+			custom_tooltip = flavor_tim.2.b.tt
 		}
 	}
 }
@@ -150,60 +166,53 @@ country_event = {
 # Ismail's Resurrection of Persia
 # Removed as the Safavids are in control of a tag in Ardabil from 1.22.
 # country_event = {
-	# id = flavor_tim.2
-	# title = "flavor_tim.EVTNAME2"
-	# desc = "flavor_tim.EVTDESC2"
-	# picture = ANGRY_MOB_eventPicture
-	
-	# fire_only_once = yes
-	
-	# trigger = {
-		# tag = TIM
-		# any_owned_province = { is_core = PER }
-		# NOT = { exists = PER }
-		# NOT = { is_year = 1550 }
-	# }
-
-	# mean_time_to_happen = {
-		# months = 2000
-	# }
-	
-	# option = {
-		# name = "flavor_tim.EVTOPTA2" # Crush the Shiite rebels
-		# every_owned_province = {
-			# limit = { is_core = PER }
-			# add_province_modifier = {
-				# name = add_unrest_10_modifier
-				# duration = 1825
-			# }
-		# }
-	# }
+# id = flavor_tim.2
+# title = "flavor_tim.EVTNAME2"
+# desc = "flavor_tim.EVTDESC2"
+# picture = ANGRY_MOB_eventPicture
+# fire_only_once = yes
+# trigger = {
+# tag = TIM
+# any_owned_province = { is_core = PER }
+# NOT = { exists = PER }
+# NOT = { is_year = 1550 }
 # }
-
+# mean_time_to_happen = {
+# months = 2000
+# }
+# option = {
+# name = "flavor_tim.EVTOPTA2" # Crush the Shiite rebels
+# every_owned_province = {
+# limit = { is_core = PER }
+# add_province_modifier = {
+# name = add_unrest_10_modifier
+# duration = 1825
+# }
+# }
+# }
+# }
 # Ulugh Beg's Observatory
 country_event = {
 	id = flavor_tim.3
 	title = "flavor_tim.EVTNAME3"
 	desc = "flavor_tim.EVTDESC3"
 	picture = UNIVERSITY_eventPicture
-	
 	fire_only_once = yes
-	
 	trigger = {
 		OR = {
 			tag = TRS
 			tag = TIM
 		}
 		has_ruler = "Ulugh Beg"
-		NOT = { is_year = 1465 }
+		NOT = {
+			is_year = 1465
+		}
 	}
-
 	mean_time_to_happen = {
 		months = 63
 	}
-	
 	option = {
-		name = "flavor_tim.EVTOPTA3" # Build it!
+		name = "flavor_tim.EVTOPTA3"		# Build it!
 		add_years_of_income = -1
 		add_dip_power = 50
 		add_mil_power = 50
@@ -211,7 +220,7 @@ country_event = {
 		add_innovativeness_big_effect = yes
 	}
 	option = {
-		name = "flavor_tim.EVTOPTB3" # We don't have the time or the money for such foolishness!
+		name = "flavor_tim.EVTOPTB3"		# We don't have the time or the money for such foolishness!
 		add_prestige = -5
 	}
 }
@@ -221,11 +230,9 @@ country_event = {
 	title = "flavor_tim.0.t"
 	desc = "flavor_tim.0.d"
 	picture = OVEREXTENSION_eventPicture
-	
 	is_triggered_only = yes
-	
-	option = { 
-		name = "flavor_tim.0.a" # My time has come!
+	option = {
+		name = "flavor_tim.0.a"		# My time has come!
 		custom_tooltip = flavor_tim.0.a.tt
 	}
 }
@@ -235,25 +242,20 @@ country_event = {
 	title = "flavor_tim.5.t"
 	desc = "flavor_tim.5.d"
 	picture = BATTLE_eventPicture
-	
 	is_triggered_only = yes
 	major = yes
 	major_trigger = {
 		TIM_interested_in_persian_matter = yes
 	}
-	
-	option = { 
+	option = {
 		name = "flavor_tim.5.a"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		add_country_modifier = {
-			name = TIM_resolved_the_mushasha_milleniarism #increase ruler expectancy due to assassination concerns
+			name = TIM_resolved_the_mushasha_milleniarism			#increase ruler expectancy due to assassination concerns
 			duration = 10950
 		}
-		
 		khuzestan_area = {
 			add_base_manpower = 1
 		}
@@ -265,51 +267,35 @@ country_event = {
 	title = "flavor_tim.6.t"
 	desc = "flavor_tim.6.d"
 	picture = ECONOMY_eventPicture
-	
 	is_triggered_only = yes
-	
-	option = { 
+	option = {
 		name = "flavor_tim.6.a"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		custom_tooltip = TIM_upgrade_iqta_tax
 		set_country_flag = TIM_upgrade_iqta_tax_flag
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_adm_power = 50
 	}
-	
-	option = { 
+	option = {
 		name = "flavor_tim.6.b"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		custom_tooltip = TIM_upgrade_iqta_manpower
 		set_country_flag = TIM_upgrade_iqta_manpower_flag
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_mil_power = 50
 	}
-	
-	option = { 
+	option = {
 		name = "flavor_tim.6.c"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		custom_tooltip = TIM_upgrade_iqta_ld
 		set_country_flag = TIM_upgrade_iqta_ld_flag
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_dip_power = 50
 	}
 }
@@ -319,23 +305,18 @@ country_event = {
 	title = "flavor_tim.7.t"
 	desc = "flavor_tim.7.d"
 	picture = CONQUEST_eventPicture
-	
 	is_triggered_only = yes
 	major = yes
 	major_trigger = {
 		TIM_interested_in_persian_matter = yes
 	}
-	
-	option = { 
+	option = {
 		name = "flavor_tim.7.a"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		azerbaijan_area = {
 			add_random_development = 1
-			
 			add_province_modifier = {
 				name = TIM_conflict_with_qara_qoyunlu_over
 				duration = 5475
@@ -349,29 +330,22 @@ country_event = {
 	title = "flavor_tim.8.t"
 	desc = "flavor_tim.8.d"
 	picture = CONQUEST_eventPicture
-	
 	is_triggered_only = yes
 	major = yes
 	major_trigger = {
 		TIM_interested_in_persian_matter = yes
 	}
-	
-	
-	option = { 
+	option = {
 		name = "flavor_tim.8.a"
-		
 		ai_chance = {
 			factor = 50
 		}
-		
 		custom_tooltip = TIM_lock_mughal_formable
 		set_country_flag = TIM_lock_mughal_formable
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		if = {
 			limit = {
-				tag = TIM 
+				tag = TIM
 			}
 			add_country_modifier = {
 				name = TIM_india_conquest
@@ -379,18 +353,18 @@ country_event = {
 				desc = TIM_for_as_long_as_we_are_tim
 			}
 		}
-		
-		add_power_projection_mission = { amount = 25 }
+		add_power_projection_mission = {
+			amount = 25
+		}
 	}
-	
-	option = { 
+	option = {
 		name = "flavor_tim.8.b"
-		
 		ai_chance = {
 			factor = 50
 		}
-		
-		add_power_projection_mission = { amount = 25 }
+		add_power_projection_mission = {
+			amount = 25
+		}
 	}
 }
 
@@ -399,16 +373,12 @@ country_event = {
 	title = "flavor_tim.9.t"
 	desc = "flavor_tim.9.d"
 	picture = RELIGION_eventPicture
-	
 	is_triggered_only = yes
-	
-	option = { 
+	option = {
 		name = "flavor_tim.9.a"
-		
 		ai_chance = {
 			factor = 20
 		}
-		
 		if = {
 			limit = {
 				NOT = {
@@ -423,30 +393,28 @@ country_event = {
 				school = hanbali_school
 			}
 		}
-		else = { add_adm_power = 200 }
-		
-		custom_tooltip = " "
-		
+		else = {
+			add_adm_power = 200
+		}
+		custom_tooltip = ""
 		add_piety = -0.5
 	}
-	
-	option = { 
-		name = "flavor_tim.9.b" 
-		
+	option = {
+		name = "flavor_tim.9.b"
 		ai_chance = {
 			factor = 80
 		}
-		
 		set_country_flag = TIM_religious_diplomats_hanbali
 		if = {
 			limit = {
 				has_estate = estate_church
 			}
 			custom_tooltip = TIM_religious_diplomats_hanbali_tt
-			
-			custom_tooltip = " "
-			
-			add_estate_loyalty = { estate = estate_church loyalty = 15 }
+			custom_tooltip = ""
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
 		}
 		else = {
 			add_stability_or_adm_power = yes
@@ -459,48 +427,34 @@ country_event = {
 	title = "flavor_tim.10.t"
 	desc = "flavor_tim.10.d"
 	picture = RELIGION_eventPicture
-	
 	is_triggered_only = yes
-	
-	option = { 
+	option = {
 		name = "flavor_tim.10.a"
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		custom_tooltip = TIM_revoking_yasa_will_be_easier
 		set_country_flag = TIM_revoking_yasa_will_be_easier_flag
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_legitimacy = 10
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_country_modifier = {
 			name = TIM_a_pious_ruler
 			duration = 10950
 		}
 	}
-	
-	option = { 
-		name = "flavor_tim.10.b" 
-		
+	option = {
+		name = "flavor_tim.10.b"
 		ai_chance = {
 			factor = 0
 		}
-		
 		custom_tooltip = TIM_soyurghals_will_be_less_penalizing
 		set_country_flag = TIM_soyurghals_will_be_less_penalizing_flag
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_country_modifier = {
 			name = TIM_approval_of_governors
 			duration = 9125
 		}
-		
 		add_mil_power = 100
 	}
 }
@@ -510,12 +464,9 @@ country_event = {
 	title = "flavor_tim.11.t"
 	desc = "flavor_tim.11.d"
 	picture = ECONOMY_eventPicture
-	
 	is_triggered_only = yes
-	
 	option = {
 		name = flavor_tim.11.a
-		
 		ai_chance = {
 			factor = 100
 		}
@@ -536,10 +487,11 @@ country_event = {
 				government_reform = timurid_diwan_reform
 			}
 		}
-		
 		if = {
 			limit = {
-				NOT = { reform_level = 3 }
+				NOT = {
+					reform_level = 3
+				}
 			}
 			change_government_reform_progress = 100
 		}
@@ -550,14 +502,11 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		name = flavor_tim.11.b
-		
 		ai_chance = {
 			factor = 0
 		}
-		
 		trigger = {
 			reform_level = 3
 		}
@@ -567,7 +516,6 @@ country_event = {
 				government_reform = timurid_diwan_reform
 			}
 		}
-		
 		custom_tooltip = TIM_unlock_timurid_diwan_reform
 	}
 }
@@ -577,79 +525,75 @@ country_event = {
 	title = "flavor_tim.12.t"
 	desc = "flavor_tim.12.d"
 	picture = OVEREXTENSION_eventPicture
-	
 	is_triggered_only = yes
 	hidden = yes
-	
 	immediate = {
 		pick_best_provinces = {
 			3 = yes
-			global_trigger = "
-				has_manpower_building_trigger = yes
+			global_trigger = "has_manpower_building_trigger = yes
 			"
 			scale = higher_development_than
 			event_target_name = tim_target
 			scope = every_owned_province
 		}
 	}
-	
 	option = {
 		name = flavor_tim.12.a
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		event_target:tim_target_1 = {
 			add_or_upgrade_manpower_building = yes
 		}
-		
 		event_target:tim_target_2 = {
 			add_or_upgrade_manpower_building = yes
 		}
-		
 		event_target:tim_target_3 = {
 			add_or_upgrade_manpower_building = yes
 		}
 	}
 }
 
-
 country_event = {
 	id = flavor_tim.13
 	title = "flavor_tim.13.t"
 	desc = "flavor_tim.13.d"
 	picture = OVEREXTENSION_eventPicture
-	
 	is_triggered_only = yes
-	
 	#AI section
 	option = {
 		trigger = {
 			ai = yes
 		}
-		
 		random_list = {
-			1 = { set_country_flag = TIM_persian_missions clr_country_flag = TIM_nomad_missions }
-			1 = { set_country_flag = TIM_nomad_missions clr_country_flag = TIM_persian_missions }
+			1 = {
+				set_country_flag = TIM_persian_missions
+				clr_country_flag = TIM_nomad_missions
+			}
+			1 = {
+				set_country_flag = TIM_nomad_missions
+				clr_country_flag = TIM_persian_missions
+			}
 		}
 		swap_non_generic_missions = yes
-		select_current_missions = { key = TIM }
+		select_current_missions = {
+			key = TIM
+		}
 		ai_chance = {
 			factor = 100
 		}
 	}
 }
+
 country_event = {
 	id = flavor_tim.14
 	title = "flavor_tim.14.t"
 	desc = "flavor_tim.14.d"
 	picture = CHINESE_GENERAL_eventPicture
-	
 	is_triggered_only = yes
 	major = yes
 	major_trigger = {
-		OR = { 
+		OR = {
 			TIM_interested_in_persian_matter = yes
 			capital_scope = {
 				superregion = china_superregion
@@ -659,34 +603,35 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 100
 		}
 		name = flavor_tim.14.a
-		
 		mongolia_region = {
 			limit = {
 				country_or_non_sovereign_subject_holds = ROOT
 				hidden_trigger = {
 					OR = {
-						owner = { ai = yes }
+						owner = {
+							ai = yes
+						}
 						owned_by = ROOT
 					}
 				}
 			}
 			tooltip = {
 				cede_province = YUA
-			} 
+			}
 			add_core = YUA
 		}
-
 		hidden_effect = {
 			release = YUA
 			if = {
 				limit = {
-					NOT = { exists = YUA }
+					NOT = {
+						exists = YUA
+					}
 				}
 				random_subject_country = {
 					limit = {
@@ -702,7 +647,9 @@ country_event = {
 					country_or_non_sovereign_subject_holds = ROOT
 					hidden_trigger = {
 						OR = {
-							owner = { ai = yes }
+							owner = {
+								ai = yes
+							}
 							owned_by = ROOT
 						}
 					}
@@ -710,49 +657,41 @@ country_event = {
 				cede_province = YUA
 			}
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		create_subject = {
 			subject = YUA
 			subject_type = incorporated_vassal
 		}
-		
 		custom_tooltip = TIM_what_is_integrated_vassal
 		YUA = {
 			set_country_flag = free_incorporated_vassal
 			custom_tooltip = WoC_free_integrated_vassal_str
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		north_china_region = {
-			add_permanent_claim = YUA 
+			add_permanent_claim = YUA
 		}
 		south_china_region = {
 			add_permanent_claim = YUA
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = TIM_cb_to_get_china
 		YUA = {
 			set_country_flag = TIM_cb_to_get_china_flag
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 0
 		}
 		name = flavor_tim.14.b
-		
-		give_claims = { region = north_china_region }
-		
-		custom_tooltip = " "
-		
-		add_power_projection_mission = { amount = 25 }
-		
+		give_claims = {
+			region = north_china_region
+		}
+		custom_tooltip = ""
+		add_power_projection_mission = {
+			amount = 25
+		}
 		add_country_modifier = {
 			name = TIM_conquest_of_china
 			duration = 5475
@@ -765,34 +704,25 @@ country_event = {
 	title = "flavor_tim.15.t"
 	desc = "flavor_tim.15.d"
 	picture = RELIGIOUS_TURMOIL_eventPicture
-	
 	is_triggered_only = yes
-	
-	
 	option = {
 		ai_chance = {
 			factor = 100
 		}
 		name = flavor_tim.15.a
-		
 		change_primary_culture = persian
-					
 		custom_tooltip = TIM_will_be_necessary_to_form_persia
-		
-		custom_tooltip = " "
-		 
+		custom_tooltip = ""
 		add_accepted_culture_or_dip_power = {
 			culture = uzbehk
 			dip_reward = yes
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 0
 		}
 		name = flavor_tim.15.b
-		
 		add_country_modifier = {
 			name = TIM_dev_cost_until_persia_formation
 			duration = -1
@@ -806,31 +736,23 @@ country_event = {
 	title = "flavor_tim.16.t"
 	desc = "flavor_tim.16.d"
 	picture = TRADEGOODS_eventPicture
-	
 	is_triggered_only = yes
-	
-	
 	option = {
 		ai_chance = {
 			factor = 50
 		}
 		name = flavor_tim.16.a
-		
 		add_country_modifier = {
 			name = TIM_internal_benefits
 			duration = -1
 		}
-		
 		add_adm_power = 100
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = TIM_distribute_15_dev_amongst_trade_centers
 		hidden_effect = {
 			for = {
 				amount = 15
-				effect = "
-					random_owned_province = {
+				effect = "random_owned_province = {
 						limit = { province_has_center_of_trade_of_level = 1 }
 						add_random_development = 1
 					}
@@ -838,24 +760,19 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 50
 		}
 		name = flavor_tim.16.b
-		
 		add_country_modifier = {
 			name = TIM_external_benefits
 			duration = -1
 		}
-		
 		add_dip_power = 100
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = TIM_gain_1_yearly_manpower_per_soyurghal_we_have
-		hidden_effect ={
+		hidden_effect = {
 			every_subject_country = {
 				limit = {
 					OR = {
@@ -863,7 +780,9 @@ country_event = {
 						is_subject_of_type = islamic_governate
 					}
 				}
-				ROOT = { add_yearly_manpower = 1 }
+				ROOT = {
+					add_yearly_manpower = 1
+				}
 			}
 		}
 	}
@@ -874,30 +793,31 @@ country_event = {
 	title = "flavor_tim.17.t"
 	desc = "flavor_tim.17.d"
 	picture = BAD_WITH_MONARCH_eventPicture
-	
 	mean_time_to_happen = {
 		months = 12
 	}
-	
 	fire_only_once = yes
-	
 	trigger = {
-		tag = FRS 
+		tag = FRS
 		is_subject_of = TIM
-		NOT = { liberty_desire = 50 }
+		NOT = {
+			liberty_desire = 50
+		}
 		has_ruler = "Mu'izz al-Din Malik"
-		NOT = { is_year = 1450 }
+		NOT = {
+			is_year = 1450
+		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.17.a
 		add_prestige = -5
-		
 		TIM = {
-			country_event = { id = flavor_tim.18 }
+			country_event = {
+				id = flavor_tim.18
+			}
 		}
 	}
 }
@@ -907,19 +827,17 @@ country_event = {
 	title = "flavor_tim.18.t"
 	desc = "flavor_tim.18.d"
 	picture = BAD_WITH_MONARCH_eventPicture
-	
 	is_triggered_only = yes
 	major = yes
 	major_trigger = {
 		OR = {
-			tag = QOM 
+			tag = QOM
 			is_subject_of = TIM
-			is_rival = TIM 
-			is_enemy = TIM 
+			is_rival = TIM
+			is_enemy = TIM
 			is_neighbor_of = TIM
 		}
 	}
-	
 	immediate = {
 		hidden_effect = {
 			define_exiled_ruler = {
@@ -968,115 +886,121 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.18.a
-		
 		FRS = {
 			set_ruler = FRS_candidate_1
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = FRS_color_will_change
 		hidden_effect = {
 			FRS = {
-				change_country_color = { color = { 79 0 185 } }
+				change_country_color = {
+					color = {
+						79
+						0
+						185
+					}
+				}
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.18.b
-		
 		FRS = {
 			set_ruler = FRS_candidate_2
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = FRS_color_will_change
 		hidden_effect = {
 			FRS = {
-				change_country_color = { color = { 254 197 229 } }
+				change_country_color = {
+					color = {
+						254
+						197
+						229
+					}
+				}
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.18.c
-		
 		FRS = {
 			set_ruler = FRS_candidate_3
 		}
-			
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = FRS_color_will_change
 		hidden_effect = {
 			FRS = {
-				change_country_color = { color = { 0 62 107 } }
+				change_country_color = {
+					color = {
+						0
+						62
+						107
+					}
+				}
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.18.e
-		
 		FRS = {
 			set_ruler = FRS_candidate_4
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = FRS_color_will_change
 		hidden_effect = {
 			FRS = {
-				change_country_color = { color = { 232 206 0 } }
+				change_country_color = {
+					color = {
+						232
+						206
+						0
+					}
+				}
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.18.g
-		
 		FRS = {
 			set_ruler = FRS_candidate_5
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		custom_tooltip = FRS_color_will_change
 		hidden_effect = {
 			FRS = {
-				change_country_color = { color = { 100 255 200 } }
+				change_country_color = {
+					color = {
+						100
+						255
+						200
+					}
+				}
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
-		
 		name = flavor_tim.18.f
-		
-		
 	}
 }
 
@@ -1085,111 +1009,123 @@ country_event = {
 	title = "flavor_tim.19.t"
 	desc = "flavor_tim.19.d"
 	picture = ASSASSINATION_eventPicture
-	
-	fire_only_once = yes 
-	
+	fire_only_once = yes
 	trigger = {
-		NOT = { has_country_flag = TIM_muhammad_juki_no_longer_candidate }
-		NOT = { is_year = 1455 }
+		NOT = {
+			has_country_flag = TIM_muhammad_juki_no_longer_candidate
+		}
+		NOT = {
+			is_year = 1455
+		}
 		tag = TIM
 	}
 	mean_time_to_happen = {
 		months = 36
 	}
-	
 	immediate = {
 		hidden_effect = {
 			set_country_flag = TIM_muhammad_juki_no_longer_candidate
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 0
 		}
-		
 		name = flavor_tim.19.a
 		change_estate_land_share = {
 			estate = estate_nobles
 			share = -5
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		every_subject_country = {
 			add_liberty_desire = 15
 		}
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		if = {
 			limit = {
 				owns = 2227
 			}
-			2227 = { add_local_autonomy = -25 }
+			2227 = {
+				add_local_autonomy = -25
+			}
 		}
 		if = {
 			limit = {
 				owns = 4343
 			}
-			4343 = { add_local_autonomy = -25 }
+			4343 = {
+				add_local_autonomy = -25
+			}
 		}
 		if = {
 			limit = {
 				owns = 1968
 			}
-			1968 = { add_local_autonomy = -25 }
+			1968 = {
+				add_local_autonomy = -25
+			}
 		}
 		if = {
 			limit = {
 				owns = 450
 			}
-			450 = { add_local_autonomy = -25 }
+			450 = {
+				add_local_autonomy = -25
+			}
 		}
 		if = {
 			limit = {
 				owns = 452
 			}
-			452 = { add_local_autonomy = -25 }
+			452 = {
+				add_local_autonomy = -25
+			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
-		
 		name = flavor_tim.19.b
-		
 		if = {
 			limit = {
 				owns = 2227
 			}
-			2227 = { add_local_autonomy = -10 }
+			2227 = {
+				add_local_autonomy = -10
+			}
 		}
 		if = {
 			limit = {
 				owns = 4343
 			}
-			4343 = { add_local_autonomy = -10 }
+			4343 = {
+				add_local_autonomy = -10
+			}
 		}
 		if = {
 			limit = {
 				owns = 1968
 			}
-			1968 = { add_local_autonomy = -10 }
+			1968 = {
+				add_local_autonomy = -10
+			}
 		}
 		if = {
 			limit = {
 				owns = 450
 			}
-			450 = { add_local_autonomy = -10 }
+			450 = {
+				add_local_autonomy = -10
+			}
 		}
 		if = {
 			limit = {
 				owns = 452
 			}
-			452 = { add_local_autonomy = -10 }
+			452 = {
+				add_local_autonomy = -10
+			}
 		}
 	}
 }
@@ -1199,14 +1135,13 @@ country_event = {
 	title = "flavor_tim.20.t"
 	desc = "flavor_tim.20.d"
 	picture = SIEGE_eventPicture
-	
 	is_triggered_only = yes
-	
 	trigger = {
 		tag = TIM
-		NOT = { has_country_flag = TIM_muhammad_juki_no_longer_candidate }
-	} 
-	
+		NOT = {
+			has_country_flag = TIM_muhammad_juki_no_longer_candidate
+		}
+	}
 	immediate = {
 		hidden_effect = {
 			set_country_flag = TIM_muhammad_juki_no_longer_candidate
@@ -1227,22 +1162,15 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 0.8
 		}
-		
 		name = flavor_tim.20.a
-		
 		add_legitimacy = -10
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_mil_power = -25
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		if = {
 			limit = {
 				owns = event_target:tim_juki_revolt_prov
@@ -1253,7 +1181,7 @@ country_event = {
 					size = 2
 					leader = "Muhammad Juki"
 					leader_dynasty = "Timurid"
-				}	
+				}
 			}
 		}
 		else = {
@@ -1267,24 +1195,20 @@ country_event = {
 			}
 		}
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 0.2
 		}
-		
 		name = flavor_tim.20.b
-		
 		define_ruler = {
 			name = "Muhammad Juki"
 			dynasty = "Timurid"
-			adm = 3 #governing Khuttalan
+			adm = 3			#governing Khuttalan
 			dip = 2
-			mil = 5 
+			mil = 5
 			age = 40
 			claim = 75
 		}
-		
 		add_ruler_modifier = {
 			name = TIM_usurped_throne
 			duration = -1
@@ -1297,92 +1221,85 @@ country_event = {
 	title = "flavor_tim.21.t"
 	desc = "flavor_tim.21.d"
 	picture = COUNTRY_COLLAPSE_eventPicture
-	
 	fire_only_once = yes
-	
 	mean_time_to_happen = {
 		months = 6
 	}
-	
 	major = yes
 	major_trigger = {
 		TIM_interested_in_persian_matter = yes
 	}
-	
 	trigger = {
 		exists = QOM
-		NOT = { war_with = QOM }
+		NOT = {
+			war_with = QOM
+		}
 		tag = TIM
 		is_year = 1445
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 			modifier = {
 				factor = 0
-				QOM = { ai = no }
+				QOM = {
+					ai = no
+				}
 			}
 		}
 		name = flavor_tim.21.a
-		
 		declare_war_with_cb = {
 			who = QOM
 			casus_belli = cb_tim_crush_rebellion
 			war_goal_province = 429
 		}
-		
 		custom_tooltip = TIM_cb_benefits
-		
-		custom_tooltip = " "
-		
+		custom_tooltip = ""
 		add_years_of_income = -0.5
-		
-		custom_tooltip = " "
-		
-		add_yearly_manpower = -0.25 
+		custom_tooltip = ""
+		add_yearly_manpower = -0.25
 	}
-	
 	option = {
 		ai_chance = {
 			factor = 1
 		}
 		name = flavor_tim.21.b
-		
 		add_prestige = -10
 	}
-	
 }
+
 namespace = prussia_tim_disaster
 #Timurid disaster to make sure they collapse when the AI plays them
-country_event = { # Timurids dying as historical when AI is controlling them - Prussia
+country_event = {
+	# Timurids dying as historical when AI is controlling them - Prussia
 	id = prussia_tim_disaster.1
 	title = prussia_tim_disaster.1.t
 	desc = prussia_tim_disaster.1.d
 	picture = BORDER_TENSION_eventPicture
-	
 	major = yes
-	
 	fire_only_once = yes
-	
 	trigger = {
 		AND = {
 			tag = TIM
 			ai = yes
 		}
 		is_year = 1447
-		TIM = { 	#Shah Rukh must be dead
-			NOT = { has_ruler = "Shah Rukh" }
+		TIM = {
+			#Shah Rukh must be dead
+			NOT = {
+				has_ruler = "Shah Rukh"
+			}
 		}
 	}
-	
 	mean_time_to_happen = {
 		months = 6
 	}
-
-	option = { #Disaster is upon us!
+	option = {
+		#Disaster is upon us!
 		name = prussia_tim_disaster.1.a
-		ai_chance = { factor = 60 }
+		ai_chance = {
+			factor = 60
+		}
 		add_mil_power = 20
 		add_prestige = 5
 		khorasan_region = {
@@ -1401,48 +1318,42 @@ country_event = { # Timurids dying as historical when AI is controlling them - P
 			add_core = FRS
 			add_core = QOM
 		}
-		AND = {
-			TRS = {
-				grant_independence = yes
-			}
-			KHO = {
-				grant_independence = yes
-			}
-			SIS = {
-				grant_independence = yes
-			}
-			AFG = {
-				grant_independence = yes
-			}
-			FRS = {
-				grant_independence = yes
-			}
-		}
 		TRS = {
-			declare_war_with_cb = {
-				who = TIM
-				casus_belli = cb_annex
-			}
-		}
-		FRS = {
+			grant_independence = yes
 			declare_war_with_cb = {
 				who = TIM
 				casus_belli = cb_annex
 			}
 		}
 		KHO = {
+			grant_independence = yes
 			declare_war_with_cb = {
 				who = TIM
 				casus_belli = cb_annex
 			}
 		}
 		SIS = {
+			grant_independence = yes
 			declare_war_with_cb = {
 				who = TIM
 				casus_belli = cb_annex
 			}
 		}
 		AFG = {
+			grant_independence = yes
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		FRS = {
+			grant_independence = yes
+			declare_war_with_cb = {
+				who = TIM
+				casus_belli = cb_annex
+			}
+		}
+		FRS = {
 			declare_war_with_cb = {
 				who = TIM
 				casus_belli = cb_annex

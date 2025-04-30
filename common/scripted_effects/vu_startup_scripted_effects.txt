@@ -53,7 +53,6 @@
 #		}
 #	}
 #}
-
 ############################################################################################
 #Use sparingly, will cause some lag, but should be called whenever a new country forms, 
 #a tag gets released etc., this will make sure all tags in the game are coloured correctly, 
@@ -66,14 +65,6 @@ vu_colour_refresh = {
 					has_global_flag = vu_startup_disable_subject_colouring
 				}
 			}
-			every_country = {
-				limit = {
-					NOT = {
-						has_country_flag = has_overriden_color_flag
-					}
-				}
-				restore_country_color = yes
-			}
 			vu_colour_all_countries = yes
 		}
 	}
@@ -84,6 +75,9 @@ vu_colour_all_countries = {
 	hidden_effect = {
 		every_country = {
 			limit = {
+				NOT = {
+					has_country_flag = vu_uncoloured_subjects_overlord
+				}
 				num_of_subjects = 1
 			}
 			every_subject_country = {
@@ -103,6 +97,16 @@ vu_colour_all_countries = {
 				}
 			}
 		}
+		every_country = {
+			limit = {
+				OR = {
+					has_country_flag = has_subject_of_a_subject_colour_flag
+					has_country_flag = has_subject_colour_flag
+				}
+				is_subject = no
+			}
+			restore_country_color = yes
+		}
 	}
 }
 
@@ -111,7 +115,16 @@ vu_colour_country = {
 	if = {
 		limit = {
 			PREV = {
-				tag = BOH
+				OR = {
+					AND = {
+						tag = BOH
+						is_subject = no
+					}
+					PREV = {
+						tag = BOH
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -125,7 +138,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = POL
+				OR = {
+					AND = {
+						tag = POL
+						is_subject = no
+					}
+					PREV = {
+						tag = POL
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -139,7 +161,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = PLC
+				OR = {
+					AND = {
+						tag = PLC
+						is_subject = no
+					}
+					PREV = {
+						tag = PLC
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -153,7 +184,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = LIT
+				OR = {
+					AND = {
+						tag = LIT
+						is_subject = no
+					}
+					PREV = {
+						tag = LIT
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -167,7 +207,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = BRA
+				OR = {
+					AND = {
+						tag = BRA
+						is_subject = no
+					}
+					PREV = {
+						tag = BRA
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -181,7 +230,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = PRU
+				OR = {
+					AND = {
+						tag = PRU
+						is_subject = no
+					}
+					PREV = {
+						tag = PRU
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -195,7 +253,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = TEU
+				OR = {
+					AND = {
+						tag = TEU
+						is_subject = no
+					}
+					PREV = {
+						tag = TEU
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -209,7 +276,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = LIV
+				OR = {
+					AND = {
+						tag = LIV
+						is_subject = no
+					}
+					PREV = {
+						tag = LIV
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -223,7 +299,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = DAN
+				OR = {
+					AND = {
+						tag = DAN
+						is_subject = no
+					}
+					PREV = {
+						tag = DAN
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -237,7 +322,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = HUN
+				OR = {
+					AND = {
+						tag = HUN
+						is_subject = no
+					}
+					PREV = {
+						tag = HUN
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -251,7 +345,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = TUR
+				OR = {
+					AND = {
+						tag = TUR
+						is_subject = no
+					}
+					PREV = {
+						tag = TUR
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -265,7 +368,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = MOS
+				OR = {
+					AND = {
+						tag = MOS
+						is_subject = no
+					}
+					PREV = {
+						tag = MOS
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -279,7 +391,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = TIM
+				OR = {
+					AND = {
+						tag = TIM
+						is_subject = no
+					}
+					PREV = {
+						tag = TIM
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -293,7 +414,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = ASK
+				OR = {
+					AND = {
+						tag = ASK
+						is_subject = no
+					}
+					PREV = {
+						tag = ASK
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -307,7 +437,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = MAM
+				OR = {
+					AND = {
+						tag = MAM
+						is_subject = no
+					}
+					PREV = {
+						tag = MAM
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -321,7 +460,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = ETH
+				OR = {
+					AND = {
+						tag = ETH
+						is_subject = no
+					}
+					PREV = {
+						tag = ETH
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -335,7 +483,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = MOR
+				OR = {
+					AND = {
+						tag = MOR
+						is_subject = no
+					}
+					PREV = {
+						tag = MOR
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -349,21 +506,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = MOR
-			}
-		}
-		change_country_color = {
-			color = {
-				210
-				130
-				80
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			PREV = {
-				tag = ARA
+				OR = {
+					AND = {
+						tag = ARA
+						is_subject = no
+					}
+					PREV = {
+						tag = ARA
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -377,21 +529,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = ARA
-			}
-		}
-		change_country_color = {
-			color = {
-				180
-				90
-				90
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			PREV = {
-				tag = PAP
+				OR = {
+					AND = {
+						tag = PAP
+						is_subject = no
+					}
+					PREV = {
+						tag = PAP
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -405,7 +552,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = STY
+				OR = {
+					AND = {
+						tag = STY
+						is_subject = no
+					}
+					PREV = {
+						tag = STY
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -420,45 +576,90 @@ vu_colour_country = {
 		limit = {
 			PREV = {
 				OR = {
-					tag = AUT
-					tag = HAB
+					AND = {
+						OR = {
+							tag = AUT
+							tag = HAB
+						}
+						is_subject = no
+					}
+					PREV = {
+						OR = {
+							tag = AUT
+							tag = HAB
+						}
+						is_subject = no
+					}
 				}
 			}
 		}
 		change_country_color = {
 			color = {
-				240  230  220
+				240
+				230
+				220
 			}
 		}
 	}
 	else_if = {
 		limit = {
 			PREV = {
-				tag = SAX
+				OR = {
+					AND = {
+						tag = SAX
+						is_subject = no
+					}
+					PREV = {
+						tag = SAX
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
 			color = {
-				180  170  200
+				180
+				170
+				200
 			}
 		}
 	}
 	else_if = {
 		limit = {
 			PREV = {
-				tag = PRO
+				OR = {
+					AND = {
+						tag = PRO
+						is_subject = no
+					}
+					PREV = {
+						tag = PRO
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
 			color = {
-				110  180  180 
+				110
+				180
+				180
 			}
 		}
 	}
 	else_if = {
 		limit = {
 			PREV = {
-				tag = AUT
+				OR = {
+					AND = {
+						tag = AUT
+						is_subject = no
+					}
+					PREV = {
+						tag = AUT
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -472,7 +673,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = CAS
+				OR = {
+					AND = {
+						tag = CAS
+						is_subject = no
+					}
+					PREV = {
+						tag = CAS
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -486,7 +696,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = SPA
+				OR = {
+					AND = {
+						tag = SPA
+						is_subject = no
+					}
+					PREV = {
+						tag = SPA
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -500,7 +719,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = POR
+				OR = {
+					AND = {
+						tag = POR
+						is_subject = no
+					}
+					PREV = {
+						tag = POR
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -514,7 +742,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = FRA
+				OR = {
+					AND = {
+						tag = FRA
+						is_subject = no
+					}
+					PREV = {
+						tag = FRA
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -528,7 +765,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = BUR
+				OR = {
+					AND = {
+						tag = BUR
+						is_subject = no
+					}
+					PREV = {
+						tag = BUR
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -543,8 +789,20 @@ vu_colour_country = {
 		limit = {
 			PREV = {
 				OR = {
-					tag = UKS
-					tag = ENG
+					AND = {
+						OR = {
+							tag = UKS
+							tag = ENG
+						}
+						is_subject = no
+					}
+					PREV = {
+						OR = {
+							tag = UKS
+							tag = ENG
+						}
+						is_subject = no
+					}
 				}
 			}
 		}
@@ -560,8 +818,20 @@ vu_colour_country = {
 		limit = {
 			PREV = {
 				OR = {
-					tag = UNK
-					tag = GBR
+					AND = {
+						OR = {
+							tag = UNK
+							tag = GBR
+						}
+						is_subject = no
+					}
+					PREV = {
+						OR = {
+							tag = UNK
+							tag = GBR
+						}
+						is_subject = no
+					}
 				}
 			}
 		}
@@ -576,7 +846,16 @@ vu_colour_country = {
 	else_if = {
 		limit = {
 			PREV = {
-				tag = SCO
+				OR = {
+					AND = {
+						tag = SCO
+						is_subject = no
+					}
+					PREV = {
+						tag = SCO
+						is_subject = no
+					}
+				}
 			}
 		}
 		change_country_color = {
@@ -4344,7 +4623,7 @@ vu_add_docks = {
 					has_port = yes
 					area = delta_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		MAM = {
@@ -4353,7 +4632,7 @@ vu_add_docks = {
 					has_port = yes
 					area = tunisia_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		TUR = {
@@ -4365,7 +4644,7 @@ vu_add_docks = {
 						area = thrace_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		TLC = {
@@ -4374,7 +4653,7 @@ vu_add_docks = {
 					has_port = yes
 					area = barbary_coast_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		TUN = {
@@ -4386,7 +4665,7 @@ vu_add_docks = {
 						area = djerba_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		MOR = {
@@ -4398,7 +4677,7 @@ vu_add_docks = {
 						area = northern_morocco_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		GRA = {
@@ -4407,7 +4686,7 @@ vu_add_docks = {
 					has_port = yes
 					area = upper_andalucia_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		POR = {
@@ -4416,7 +4695,7 @@ vu_add_docks = {
 					has_port = yes
 					area = estremadura_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		FRA = {
@@ -4428,7 +4707,7 @@ vu_add_docks = {
 						area = west_languedoc_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		HOL = {
@@ -4436,7 +4715,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		FLA = {
@@ -4444,7 +4723,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		SCO = {
@@ -4453,7 +4732,7 @@ vu_add_docks = {
 					has_port = yes
 					area = lowlands_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		DAN = {
@@ -4465,7 +4744,7 @@ vu_add_docks = {
 						area = denmark_strait_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		BRE = {
@@ -4473,7 +4752,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		HAM = {
@@ -4481,7 +4760,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		HSA = {
@@ -4490,8 +4769,8 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = drydock
 				add_building = grand_shipyard
+				add_building = drydock
 			}
 		}
 		GOT = {
@@ -4500,7 +4779,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = drydock
+				add_building = grand_shipyard
 			}
 		}
 		VEN = {
@@ -4513,7 +4792,7 @@ vu_add_docks = {
 						area = friuli_area
 					}
 				}
-				add_building = drydock
+				add_building = grand_shipyard
 			}
 		}
 		GEN = {
@@ -4526,7 +4805,7 @@ vu_add_docks = {
 						area = corsica_sardinia_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		LAN = {
@@ -4534,7 +4813,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		SIE = {
@@ -4542,7 +4821,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		PAP = {
@@ -4551,7 +4830,7 @@ vu_add_docks = {
 					has_port = yes
 					area = lazio_area
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		CYP = {
@@ -4560,7 +4839,7 @@ vu_add_docks = {
 				limit = {
 					has_port = yes
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		VIJ = {
@@ -4572,7 +4851,7 @@ vu_add_docks = {
 						area = south_carnatic_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		KOR = {
@@ -4586,7 +4865,7 @@ vu_add_docks = {
 						area = left_hwanghae_area
 					}
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 		BRA = {
@@ -4596,7 +4875,7 @@ vu_add_docks = {
 					has_port = yes
 					province_id = 3528
 				}
-				add_building = dock
+				add_building = shipyard
 			}
 		}
 	}

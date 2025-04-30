@@ -75,9 +75,9 @@ is_possible_subject_of_subject_type_tributary_state = {
 	NOT = { is_subject_of_type = tributary_state }
 }
 
-is_possible_subject_of_subject_type_protectorate = {
+is_possible_subject_of_subject_type_overseas_territory = {
 	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = protectorate }
+	NOT = { is_subject_of_type = overseas_territory }
 	is_subject = no
 	NOT = { 
 		OR = {
@@ -166,9 +166,10 @@ is_possible_subject_of_subject_type_protectorate = {
 	# Capital in Trade Range of possible Overlord has to be checked additionally
 }
 
-is_possible_subject_of_subject_type_puppet_state = {
+#NEW VU ToR v1.37 addition by SF
+is_possible_subject_of_subject_type_satellite_state = {
 	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = puppet_state }
+	NOT = { is_subject_of_type = satellite_state }
 	OR = {
 		is_subject = no
 		AND = {
@@ -240,45 +241,6 @@ is_possible_subject_of_subject_type_voivodeship = {
 		is_subject_of_type = march
 	}
 	is_neighbor_of = PREV
-}
-
-is_possible_subject_of_subject_type_fief_subject = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = fief_subject }
-	OR = {
-		is_subject = no
-		AND = {
-			is_subject_of = PREV
-			is_vassal_or_similar_subject = yes
-			NOT = { 
-				is_subject_of_type = daimyo_vassal
-				is_subject_of_type = daimyo_barony_vassal
-				is_subject_of_type = daimyo_viscounty_vassal
-				is_subject_of_type = daimyo_county_vassal
-				is_subject_of_type = daimyo_marquisate_vassal
-				is_subject_of_type = daimyo_duchy_vassal
-				is_subject_of_type = daimyo_principality_vassal
-			}
-		}
-	}
-	OR = {
-		primary_culture = PREV
-		AND = {
-			culture_group = PREV
-			PREV = {
-				OR = {
-					accepted_culture = PREV
-					has_cultural_union = yes
-				}
-			}
-		}
-		AND = {
-			is_subject_of = PREV
-			PREV = {
-				accepted_culture = PREV
-			}
-		}
-	}
 }
 
 is_possible_subject_of_subject_type_crusader_state_vassal = {
@@ -574,24 +536,6 @@ is_possible_subject_of_subject_type_persian_satrapy = {
 	}
 }
 
-is_possible_subject_of_subject_type_naval_march = {
-	# PREVs in THIS scope refer to possible overlord
-	PREV = {
-		is_subject = no
-	}
-	NOT = { is_subject_of_type = naval_march }
-	OR = {
-		vassal_of = PREV
-		march_of = PREV
-		AND = {
-			is_subject_of = PREV
-			is_different_march_subject = yes
-		}
-	}
-	num_of_ports = 1
-	primitives = no
-}
-
 is_possible_subject_of_subject_type_trade_outpost = {
 	# PREVs in THIS scope refer to possible overlord
 	NOT = { is_subject_of_type = trade_outpost }
@@ -637,9 +581,9 @@ is_possible_subject_of_subject_type_integrated_personal_union = {
 	}
 }
 
-is_possible_subject_of_subject_type_brother_kingdom = {
+is_possible_subject_of_subject_type_cadet_branch = {
 	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = brother_kingdom }
+	NOT = { is_subject_of_type = cadet_branch }
 	OR = {
 		is_subject = no
 		AND = {
@@ -647,7 +591,6 @@ is_possible_subject_of_subject_type_brother_kingdom = {
 			OR = {
 				is_subject_of_type = vassal
 				is_subject_of_type = client_vassal
-				is_subject_of_type = medieval_vassal
 			}
 		}
 	}
@@ -655,94 +598,6 @@ is_possible_subject_of_subject_type_brother_kingdom = {
 	dynasty = PREV
 	has_regency = no
 	religion_group = christian
-}
-
-is_possible_subject_of_subject_type_iqta_vassal = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = iqta_vassal }
-	religion_group = muslim
-	is_neighbor_of = PREV
-	OR = {
-		is_subject = no
-		AND = {
-			is_subject_of = PREV
-			is_vassal_or_similar_subject = yes
-			NOT = { 
-	        	is_subject_of_type = daimyo_vassal
-	        	is_subject_of_type = daimyo_barony_vassal
-	        	is_subject_of_type = daimyo_viscounty_vassal
-	        	is_subject_of_type = daimyo_county_vassal
-	        	is_subject_of_type = daimyo_marquisate_vassal
-	        	is_subject_of_type = daimyo_duchy_vassal
-	        	is_subject_of_type = daimyo_principality_vassal
-	        }
-			religion = PREV
-			PREV = {
-				is_defender_of_faith = yes
-			}
-		}
-	}
-}
-
-is_possible_subject_of_subject_type_papal_sanctuary_subject = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = papal_sanctuary_subject }
-	is_subject = no
-	religion = PREV
-	same_continent = PREV
-	NOT = { has_country_modifier = the_statue_in_restraint_of_appeals }
-	is_excommunicated = no
-}
-
-is_possible_subject_of_subject_type_imperial_feud_subject = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = imperial_feud_subject }
-	is_subject = no
-	is_part_of_hre = no
-	capital_scope = {
-		continent = europe
-	}
-	OR = {
-		AND = {
-			OR = {
-				NOT = { has_dlc = "Art of War" }
-				hre_religion_locked = no
-			}
-			OR = {
-				religion = catholic
-				religion = protestant
-				religion = reformed
-				religion = PREV
-			}
-		}
-		AND = {
-			has_dlc = "Art of War"
-			hre_religion_locked = yes
-			religion = PREV
-		}
-	}
-	any_owned_province = {
-		OR = {
-			any_neighbor_province = {
-				is_part_of_hre = yes
-				owner = {
-					is_part_of_hre = yes
-				}
-			}
-			AND = {
-				has_port = yes
-				sea_zone = {
-					any_neighbor_province = {
-						has_port = yes
-						is_part_of_hre = yes
-						owner = {
-							is_part_of_hre = yes
-						}
-					}
-				}
-			}
-		}
-	}
 }
 
 is_possible_subject_of_subject_type_pagan_chiefdom = {
@@ -758,9 +613,9 @@ is_possible_subject_of_subject_type_pagan_chiefdom = {
 	}
 }
 
-is_possible_subject_of_subject_type_native_reserve = {
+is_possible_subject_of_subject_type_first_nations_reserve = {
 	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = native_reserve }
+	NOT = { is_subject_of_type = first_nations_reserve }
 	is_subject = no
 	is_former_colonial_nation = no
 	NOT = { 
@@ -911,42 +766,6 @@ is_possible_subject_of_subject_type_annexable_colony = {
 	}
 }
 
-is_possible_subject_of_subject_type_agricultural_march = {
-	# PREVs in THIS scope refer to possible overlord
-	PREV = {
-		is_subject = no
-	}
-	NOT = { is_subject_of_type = agricultural_march }
-	OR = {
-		vassal_of = PREV
-		march_of = PREV
-		AND = {
-			is_subject_of = PREV
-			is_different_march_subject = yes
-		}
-	}
-	primitives = no
-}
-
-is_possible_subject_of_subject_type_religious_march = {
-	# PREVs in THIS scope refer to possible overlord
-	PREV = {
-		is_subject = no
-	}
-	NOT = { is_subject_of_type = religious_march }
-	religion = PREV
-	has_border_with_religious_enemy = yes
-	OR = {
-		vassal_of = PREV
-		march_of = PREV
-		AND = {
-			is_subject_of = PREV
-			is_different_march_subject = yes
-		}
-	}
-	primitives = no
-}
-
 #New VU 1.37.* Generic Merchantlist Republic by SF
 is_possible_subject_of_subject_type_merchantlist_republic = {
 	# PREVs in THIS scope refer to possible overlord
@@ -1034,14 +853,6 @@ is_possible_subject_of_subject_type_genoese_commercial_republic = {
     # Capital in Trade Range of possible Overlord has to be checked additionally
 }
 
-is_possible_subject_of_subject_type_medieval_vassal = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = medieval_vassal }
-	NOT = { government = native }
-	NOT = { government = tribal }
-	is_subject = no
-}
-
 can_create_subject_type = {
 	can_be_overlord = $subject_type$
 	$subject$ = {
@@ -1064,10 +875,9 @@ is_vassal_or_similar_subject = {
 
 is_similar_vassal_subject = {
 	OR = {
-		is_subject_of_type = puppet_state
+		is_subject_of_type = satellite_state
 		is_subject_of_type = roman_client_kingdom
 		is_subject_of_type = voivodeship
-		is_subject_of_type = fief_subject
 		is_subject_of_type = nahuatl_vassal
 		is_subject_of_type = peasant_vassal
 		is_subject_of_type = pirate_brotherhood_vassal
@@ -1075,7 +885,6 @@ is_similar_vassal_subject = {
 		is_subject_of_type = mandala_trade_vassal
 		is_subject_of_type = integrated_tribe_subject
 		is_subject_of_type = persian_satrapy
-		is_subject_of_type = iqta_vassal
 		is_subject_of_type = administrative_region
 		is_subject_of_type = palatinate_vassal
 		is_subject_of_type = merchantlist_republic
@@ -1095,21 +904,13 @@ is_march_or_similar_subject = {
 is_similar_march_subject = {
 	OR = {
 		is_subject_of_type = crusader_state_vassal
-		is_subject_of_type = naval_march
 		is_subject_of_type = pagan_chiefdom
 		is_subject_of_type = defensive_march
-		is_subject_of_type = agricultural_march
-		is_subject_of_type = religious_march
 	}
 }
 
 is_different_march_subject = {
-	OR = {
-		is_subject_of_type = naval_march
-		is_subject_of_type = defensive_march
-		is_subject_of_type = agricultural_march
-		is_subject_of_type = religious_march
-	}
+	is_subject_of_type = defensive_march
 }
 
 is_tributary_or_similar_subject = {
@@ -1121,16 +922,13 @@ is_tributary_or_similar_subject = {
 
 is_similar_tributary_subject = {
 	OR = {
-		is_subject_of_type = protectorate
+		is_subject_of_type = overseas_territory
 		is_subject_of_type = peasant_vassal
 		is_subject_of_type = imperial_tributary_state
 		is_subject_of_type = sister_republic
 		is_subject_of_type = dutch_province_subject
-		is_subject_of_type = papal_sanctuary_subject
-		is_subject_of_type = imperial_feud_subject
 		is_subject_of_type = trade_outpost
 		is_subject_of_type = banking_family_subject
-		is_subject_of_type = medieval_vassal
 	}
 }
 
@@ -1141,14 +939,11 @@ is_subject_type_that_pays_vassal_tax = {
 		is_subject_of_type = client_vassal
 		is_subject_of_type = nahuatl_vassal
 		is_subject_of_type = roman_client_kingdom
-		is_subject_of_type = fief_subject
 		is_subject_of_type = crusader_state_vassal
 		is_subject_of_type = imperial_tributary_state
 		is_subject_of_type = dutch_province_subject
 		is_subject_of_type = revolution_subject
 		is_subject_of_type = trade_outpost
-		is_subject_of_type = iqta_vassal
-		is_subject_of_type = papal_sanctuary_subject
 	}
 }
 
@@ -1167,20 +962,16 @@ is_subject_type_that_can_have_subjects = {
 	OR = {
 		is_subject_of_type = personal_union
 		is_subject_of_type = tributary_state
-		#is_subject_of_type = salic_personal_union
 		is_subject_of_type = integrated_personal_union
-		is_subject_of_type = protectorate
+		is_subject_of_type = overseas_territory
 		is_subject_of_type = pirate_brotherhood_vassal
 		is_subject_of_type = imperial_tributary_state
 		is_subject_of_type = sister_republic
 		is_subject_of_type = mandala_trade_vassal
 		is_subject_of_type = dutch_province_subject
-		is_subject_of_type = brother_kingdom
-		is_subject_of_type = papal_sanctuary_subject
-		is_subject_of_type = imperial_feud_subject
-		is_subject_of_type = native_reserve
+		is_subject_of_type = cadet_branch
+		is_subject_of_type = first_nations_reserve
 		is_subject_of_type = banking_family_subject
-		is_subject_of_type = medieval_vassal
 	}
 }
 
@@ -1199,16 +990,13 @@ is_subject_type_that_can_be_annexed = {
 		is_subject_of_type = vassal
 		is_subject_of_type = daimyo_vassal
 		is_subject_of_type = client_vassal
-		is_subject_of_type = puppet_state
+		is_subject_of_type = satellite_state
 		is_subject_of_type = roman_client_kingdom
 		is_subject_of_type = voivodeship
-		is_subject_of_type = fief_subject
-		#is_subject_of_type = salic_personal_union
 		is_subject_of_type = nahuatl_vassal
 		is_subject_of_type = pirate_brotherhood_vassal
 		is_subject_of_type = integrated_tribe_subject
 		is_subject_of_type = revolution_subject
-		is_subject_of_type = iqta_vassal
 		is_subject_of_type = palatinate_vassal
 		is_subject_of_type = annexable_colony
 		is_subject_of_type = merchantlist_republic

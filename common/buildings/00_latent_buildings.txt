@@ -2513,12 +2513,27 @@ glassmaker = {
 	}
 	on_built = {
 		hidden_effect = {
-			ROOT = {
-				goods_save = yes
-				change_trade_goods = glass
-				set_province_flag = has_latent_good
-			}
-		}
+            if = {
+                limit = {
+                    trade_goods = glass
+                }
+                ROOT = {
+                    goods_save = yes
+                    change_trade_goods = glass
+                    set_province_flag = has_latent_good
+                }
+            }
+            else_if = {
+                limit = {
+                    trade_goods = coloured_stained_glass
+                }
+                ROOT = {
+                    goods_save = yes
+                    change_trade_goods = coloured_stained_glass
+                    set_province_flag = has_latent_good
+                }
+            }
+        }
 	}
 	on_destroyed = {
 		ROOT = {
@@ -2532,13 +2547,78 @@ glassmaker = {
 	}
 	ai_will_do = {
 		factor = 700
-		modifier = {
-			factor = 0
-			FROM = {
-				glass = 3
-			}
-		}
+		#modifier = {
+		#	factor = 0
+		#	FROM = {
+		#		glass = 3
+		#	}
+		#}
 	}
+}
+
+sculpture_workshop = {
+    cost = 600
+    time = 12
+    build_trigger = {
+        ROOT = {
+            OR = {
+                trade_goods = marble
+                trade_goods = jade
+            }
+            #development = 15
+            NOT = {
+                has_province_flag = has_latent_good
+            }
+        }
+        has_dlc = "Leviathan"
+        FROM = {
+            adm_tech = 24
+            #OR = {
+            #	innovativeness = 7
+            #	NOT = { has_dlc = "Rule Britannia" }
+            #}
+        }
+        NOT = {
+            has_global_flag = No_Marble_sculpture
+        }
+    }
+    on_built = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    trade_goods = marble
+                }
+                ROOT = {
+                    goods_save = yes
+                    change_trade_goods = marble_sculpture
+                    set_province_flag = has_latent_good
+                }
+            }
+            else_if = {
+                limit = {
+                    trade_goods = jade
+                }
+                ROOT = {
+                    goods_save = yes
+                    change_trade_goods = jade_sculptures
+                    set_province_flag = has_latent_good
+                }
+            }
+        }
+    }
+    on_destroyed = {
+        ROOT = {
+            clr_province_flag = has_latent_good
+            goods_back = yes
+        }
+    }
+    modifier = {
+        allowed_num_of_buildings = 1
+        local_governing_cost = 0.15
+    }
+    ai_will_do = {
+        factor = 700
+    }
 }
 
 #automobile_plant = { #Was glassmaker

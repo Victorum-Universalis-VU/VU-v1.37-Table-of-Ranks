@@ -41,6 +41,18 @@ has_transportation_trigger = {
 }
 
 #VU subject triggers - Altan, appended by Don with some modifications + new ones
+is_daimyo_subject_type = {
+	OR = {
+		is_subject_of_type = daimyo_vassal
+		is_subject_of_type = daimyo_barony_vassal
+		is_subject_of_type = daimyo_viscounty_vassal
+		is_subject_of_type = daimyo_county_vassal
+		is_subject_of_type = daimyo_marquisate_vassal
+		is_subject_of_type = daimyo_duchy_vassal
+		is_subject_of_type = daimyo_principality_vassal
+	}
+}
+
 is_lordship_subject_type = {
 	#check if the subject is any type of lordship
 	OR = {
@@ -444,9 +456,9 @@ is_slavic_subject_type = {
 
 is_theocratic_subject_type = {
 	OR = {
-		is_subject_of_type = european_abbacy
-		is_subject_of_type = european_bishopric
-		is_subject_of_type = european_archbishopric
+		is_subject_of_type = christian_abbacy
+		is_subject_of_type = christian_bishopric
+		is_subject_of_type = christian_archbishopric
 	}
 }
 
@@ -475,6 +487,7 @@ is_ToR_subject_type = {
 		is_slavic_subject_type = yes
 		#is_theocratic_subject_type = yes
 		is_subject_of_type = turkish_tributary_beylik_vassal
+		is_subject_of_type = turkish_timariot_march
 		is_subject_of_type = lezhe_league_member
 	}
 }
@@ -498,7 +511,7 @@ is_ToR_rein_in_able = {
 is_colourable_subject_type = {
 	NOT = {
 		is_subject_of_type = tributary_state
-		is_subject_of_type = brother_kingdom
+		is_subject_of_type = cadet_branch
 	}
 }
 
@@ -507,11 +520,11 @@ ToR_can_change_colour = {
 		overlord = {
 			has_country_flag = vu_uncoloured_subjects_overlord
 		}
-        overlord = {
-            overlord = {
-                has_country_flag = vu_uncoloured_subjects_overlord
-            }
-        }
+		overlord = {
+			overlord = {
+				has_country_flag = vu_uncoloured_subjects_overlord
+			}
+		}
 		has_country_flag = vu_uncoloured_subjects_subject
 	}
 }
@@ -532,4 +545,161 @@ ToR_Muslim_subject_limit_reached = {
 		}
 		amount = 25		#Total limit for Subjects -Don, Prussia
 	}
+}
+
+VU_ToR_protected_government_reforms = {
+	OR = {
+		#Put all the gov reforms you wish to protect from the ToR gov change here (useful when the gov rank changes when forming a new tag)
+		has_reform = prussian_monarchy
+	}
+}
+
+vu_is_caliphate = {
+	OR = {
+		AND = {
+			is_defender_of_faith = yes
+			government_rank = 9
+		}
+		has_reform = caliphate_theocracy_reform
+		has_reform = timurid_amirate_reform
+		has_reform = ghazi_reform #
+		ME_is_caliphate_trigger = yes		#Contains the vanilla + ME caliphates
+	}
+}
+
+## ALL RULER PERSONAILITIES ###
+################ GOOD ###################---------------------------------------------------------
+# just_personality 						| global_unrest = -2
+# righteous_personality 				| legitimacy = 1, republican_tradition = 0.5
+# tolerant_personality 					| tolerance_heretic = 1, tolerance_heathen = 1
+# kind_hearted_personality 				| war_exhaustion = -0.05
+# free_thinker_personality 				| idea_cost = -0.05
+# well_connected_personality 			| advisor_cost = -0.2
+# secretive_personality 				| global_spy_defence = 0.2
+# intricate_web_weaver_personality 		| spy_offence = 0.3
+# fertile_personality 					| heir_chance = 0.5
+# well_advised_personality 				| advisor_pool = 1
+# benevolent_personality 				| reduced_liberty_desire = 5
+# pious_personality 					| devotion = 1
+# lawgiver_personality 					| global_autonomy = -0.05
+# midas_touched_personality 			| global_tax_modifier = 0.1
+# architectural_visionary_personality 	| build_cost = -0.1
+# entrepreneur_personality 				| trade_efficiency = 0.1
+# industrious_personality 				| global_trade_goods_size_modifier = 0.1
+# expansionist_personality 				| global_colonial_growth = 15
+# charismatic_negotiator_personality 	| diplomatic_reputation = 1
+# conqueror_personality 				| years_of_nationalism = -5
+# tactical_genius_personality 			| leader_land_manuever = 1
+# bold_fighter_personality 				| leader_land_shock = 1
+# inspiring_leader_personality 			| land_morale = 0.05
+# martial_educator_personality 			| army_tradition_decay = -0.01
+# navigator_personality 				| ship_durability = 0.1
+# fierce_negotiator_personality 		| merc_maintenance_modifier = -0.25
+############## VERY GOOD ################---------------------------------------------------------
+# reformist_personality 				| 
+# strict_personality 					| discipline = 0.05
+# silver_tongue_personality 			| improve_relation_modifier = 0.2
+# entrepreneur_personality_upgrade		| trade_efficiency = 0.2
+# scholar_personality 					| technology_cost = -0.05
+# zealot_personality 					| global_missionary_strength = 0.01
+# calm_personality 						| stability_cost_modifier = -0.1
+# careful_personality 					| ae_impact = -0.1
+# incorruptible_personality 			| yearly_corruption = -0.05
+################# BAD ###################---------------------------------------------------------
+# drunkard_personality 					| trade_efficiency = -0.1
+# sinner_personality 					| tolerance_own = -2
+# greedy_personality 					| global_tax_modifier = -0.1
+# naive_personality 					| improve_relation_modifier = -0.2
+# craven_personality 					| land_morale = -0.05
+# loose_lips_personality 				| global_spy_defence = -0.2
+# obsessive_perfectionist_personality	| build_cost = 0.1
+############### VERY BAD ################---------------------------------------------------------
+# embezzler_personality 				| yearly_corruption = 0.05
+# malevolent_personality 				| reduced_liberty_desire = -5
+# babbling_buffoon_personality 			| diplomatic_reputation = -1
+# infertile_personality 				| heir_chance = -0.5
+# cruel_personality 					| global_unrest = 2
+################## N/A ##################---------------------------------------------------------
+# immortal_personality 					| 
+# legendary_pirate_personality 			| 
+# legendary_conqueror_personality		|
+# great_engineer_personality			|
+# patron_of_arts_personality			|
+# papal_puppetmaster_personality 		|
+# iron_crowned_personality				|
+# peasant_revolt_leader_personality		|
+# merchant_basileus_personality			|
+# orangist_stadholder_personality		|
+# reaver_personality					|
+# last_knight_personality				|
+#########################################---------------------------------------------------------
+
+vu_ruler_has_bad_personality_trait = {
+	OR = {
+		ruler_has_personality = greedy_personality
+		ruler_has_personality = drunkard_personality
+		ruler_has_personality = sinner_personality
+		ruler_has_personality = naive_personality
+		ruler_has_personality = craven_personality
+		ruler_has_personality = loose_lips_personality
+		ruler_has_personality = obsessive_perfectionist_personality
+	}
+}
+
+vu_ruler_has_very_bad_personality_trait = {
+	OR = {
+		ruler_has_personality = embezzler_personality
+		ruler_has_personality = malevolent_personality
+		ruler_has_personality = babbling_buffoon_personality
+		ruler_has_personality = infertile_personality
+		ruler_has_personality = cruel_personality
+	}
+}
+
+vu_ruler_has_good_personality_trait = {
+	OR = {
+		ruler_has_personality = just_personality
+		ruler_has_personality = righteous_personality
+		ruler_has_personality = tolerant_personality
+		ruler_has_personality = kind_hearted_personality
+		ruler_has_personality = free_thinker_personality
+		ruler_has_personality = well_connected_personality
+		ruler_has_personality = secretive_personality
+		ruler_has_personality = intricate_web_weaver_personality
+		ruler_has_personality = fertile_personality
+		ruler_has_personality = well_advised_personality
+		ruler_has_personality = benevolent_personality
+		ruler_has_personality = pious_personality
+		ruler_has_personality = lawgiver_personality
+		ruler_has_personality = midas_touched_personality
+		ruler_has_personality = architectural_visionary_personality
+		ruler_has_personality = entrepreneur_personality
+		ruler_has_personality = industrious_personality
+		ruler_has_personality = expansionist_personality
+		ruler_has_personality = charismatic_negotiator_personality
+		ruler_has_personality = conqueror_personality
+		ruler_has_personality = tactical_genius_personality
+		ruler_has_personality = bold_fighter_personality
+		ruler_has_personality = inspiring_leader_personality
+		ruler_has_personality = martial_educator_personality
+		ruler_has_personality = navigator_personality
+		ruler_has_personality = fierce_negotiator_personality
+	}
+}
+
+vu_ruler_has_very_good_personality_trait = {
+	OR = {
+		ruler_has_personality = reformist_personality
+		ruler_has_personality = strict_personality
+		ruler_has_personality = silver_tongue_personality
+		ruler_has_personality = scholar_personality
+		ruler_has_personality = zealot_personality
+		ruler_has_personality = calm_personality
+		ruler_has_personality = careful_personality
+		ruler_has_personality = incorruptible_personality
+	}
+}
+
+vu_ruler_has_educated_trait = {
+	
 }

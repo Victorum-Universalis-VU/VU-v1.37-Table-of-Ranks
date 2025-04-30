@@ -1,0 +1,358 @@
+# VU ToR v1.37 subject types by SF
+# Credits go to: Prussia and Modus.
+# All subjects listed here are for VU and were created by the VU team.
+
+#Aztecs
+aztec_lordship_subject = {}
+#Mayans
+mayan_lordship_subject = {}
+#Incas
+inca_lordship_subject = {}
+#Iroquois
+iroquois_confederacy_member = {}
+
+#AZTEC LORDSHIP
+
+aztec_lordship_subject = {
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_aztec_lordship_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_aztec_lordship
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_aztec_lordship
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 30.0 #Set this slightly higher for the Aztecs since most of their subjects hated them - Prussia
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Set to no since they'd be annexed, not integrated - Prussia
+    can_be_annexed = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+	#counts_as_overlord_holding = yes #Not sure what this actually means. No explaination is given anywhere that I can find, so leaving this hashed for now - Prussia
+	counts_for_borders = yes #This is here since the Aztecs will be subjugating a lot of their neighbors as part of their 'Empire' - Prussia
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = yes #Helps represent the contributions vassals had to make for sacrifices - Prussia
+    return_land = no
+    conscript_general = yes #Forcibly conscript the best talent of your lords - Prussia
+	sacrifice_ruler = yes
+	sacrifice_heir = yes #Figured these two entries appropriate for the Aztecs and Mayans - Prussia
+	placate_rulers = yes #Feel like you're gonna need a lot of this one - Prussia
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Modus what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = aztec_lordship_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = aztec_overlord_bonus
+    }
+}
+
+mayan_lordship_subject = {
+    copy_from = vassal
+
+    # Graphics:
+    sprite = GFX_icon_mayan_lordship_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_mayan_lordship
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_mayan_lordship
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 25.0 #Set this slightly lower than the Aztecs, but still higher because they still demanded tribute and sacrifices - Prussia
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Set to no since they'd be annexed, not integrated - Prussia
+    can_be_annexed = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+	#counts_as_overlord_holding = yes #Not sure what this actually means. No explaination is given anywhere that I can find, so leaving this hashed for now - Prussia
+	counts_for_borders = yes #This is here since the Mayans will also be subjugating a lot of their neighbors as part of their 'Empire' - Prussia
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = yes #Helps represent the contributions vassals had to make for sacrifices - Prussia
+    return_land = no
+    conscript_general = yes #Forcibly conscript the best talent of your lords - Prussia
+	sacrifice_ruler = yes
+	sacrifice_heir = yes #Figured these two entries appropriate for the Aztecs and Mayans - Prussia
+	placate_rulers = yes #Feel like you're gonna need a lot of this one - Prussia
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Modus what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = mayan_lordship_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = mayan_overlord_bonus
+    }
+}
+
+inca_lordship_subject = {
+    copy_from = vassal
+
+	#Graphics
+    sprite = GFX_icon_inca_lordship_subject
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_inca_lordship
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_inca_lordship
+
+    # Properties:
+	can_send_tribute = yes
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 25.0 #Set this slightly lower than the Aztecs, but still higher because they still demanded tribute and sacrifices - Prussia
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no #Set to no since they'd be annexed, not integrated - Prussia
+    can_be_annexed = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+	#counts_as_overlord_holding = yes #Not sure what this actually means. No explaination is given anywhere that I can find, so leaving this hashed for now - Prussia
+	counts_for_borders = yes
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    grant_administrative_autonomy = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no #Would already be a Prince of the Dynasty anyway. - Prussia
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = yes #Later Incan leaders were known for bullying everyone for more land
+    #(enable)
+    contribute_to_capital = yes #Helps represent the contributions vassals had to make for sacrifices - Prussia
+    return_land = no
+    conscript_general = yes #Expansion requires able generals - Prussia
+	demand_additional_tribute = yes #Incas loved their gold and bullying their neighbors
+	placate_rulers = yes #Feel like you're gonna need a lot of this one - Prussia
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Modus what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = inca_lordship_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = inca_overlord_bonus
+    }
+}
+
+iroquois_confederacy_member = {
+    copy_from = vassal
+
+    # Graphics:
+	sprite = GFX_icon_iroquois_confederacy_member
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_iroquois_confederacy_member
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_iroquois_confederacy_member
+
+    # Properties:
+	can_send_tribute = no
+    takes_diplo_slot = no
+    gets_help_with_rebels = no
+    separatists_become_subjects = yes
+    forms_trade_companies = no
+    can_concentrate_development = no
+    liberty_desire_development_ratio = 0.05
+    trust_on_start = 0
+    base_liberty_desire = 15.0 #Set this slightly for the Iroquois since there's was a more loose confederation
+    forcelimit_to_overlord = 0.00
+    military_focus = 1.2
+    pays_overlord = 0.25
+    can_be_integrated = no
+    can_be_annexed = no #Since this is a confederation, set this to no for now - Prussia
+    joins_overlords_wars = yes
+    can_use_claims = yes
+	#counts_as_overlord_holding = yes #Not sure what this actually means. No explaination is given anywhere that I can find, so leaving this hashed for now - Prussia
+	counts_for_borders = yes #This is here since the Aztecs will be subjugating a lot of their neighbors as part of their 'Empire' - Prussia
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+
+    # Subject Interactions
+    seize_court_resources = yes
+    request_extra_levies = yes
+    #(disable)
+    scutage = yes
+    grant_core_claim = yes
+    grant_province = yes
+    place_relative_on_throne = no
+    enforce_religion = no #Would be made their overlord's religion on creation. - Prussia
+    enforce_culture = no
+    seize_territory = no
+    #(enable)
+    contribute_to_capital = no
+    return_land = no
+    conscript_general = yes #Expansion requires able generals - Prussia
+	placate_rulers = yes #Feel like you're gonna need a lot of this one - Prussia
+
+    # Modifiers
+    modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+
+    restoration_cb = cb_disloyal_principality #Up to Sphinx what cb they would use - Prussia
+
+    # Subject Interactions:
+
+    # Modifiers:
+    modifier_subject = clear # Use this to clear after copy_from.
+
+    modifier_subject = {
+        modifier = iroquois_confederacy_subject_bonus
+    }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = iroquois_confederacy_overlord_bonus
+    }
+}

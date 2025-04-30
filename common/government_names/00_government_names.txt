@@ -478,6 +478,7 @@ beylik_government = {
     trigger = {
         government = monarchy
         religion_group = muslim
+        is_subject = no
         has_reform = beylik_government
     }
 }
@@ -621,6 +622,7 @@ bosnian_monarchy = {
         primary_culture = bosnian_new
         NOT = { government_rank = 8 }
         tag = HRZ
+        is_subject = no
     }
 }
 
@@ -737,7 +739,7 @@ holy_roman_electors_bishoprics = {
         is_emperor = no
         OR = {
             has_reform = church_of_germany_abbacy_reform
-            is_subject_of_type = european_abbacy
+            is_subject_of_type = christian_abbacy
         }
     }
 }
@@ -764,7 +766,7 @@ holy_roman_electors_bishoprics = {
         is_emperor = no
         OR = {
             has_reform = church_of_germany_bishopric_reform
-            is_subject_of_type = european_bishopric
+            is_subject_of_type = christian_bishopric
         }
     }
 }
@@ -794,7 +796,7 @@ holy_roman_electors_archbishoprics = {
         is_emperor = no
         OR = {
             has_reform = church_of_germany_archbishopric_reform
-            is_subject_of_type = european_archbishopric
+            is_subject_of_type = christian_archbishopric
         }
     }
 }
@@ -998,7 +1000,7 @@ navarran_kingdom = {
     trigger = {
         OR = {
             tag = NAV
-            culture_group = basque
+            culture_group = aquitanian #This is the Basque culture group - SF
         }
     }
 }
@@ -1165,6 +1167,7 @@ malian_monarchy = {
     trigger = {
         government = monarchy
         tag = MAL
+        is_subject = no
     }
 }
 
@@ -1266,6 +1269,7 @@ muslim_tribal = {
     trigger = {
         religion_group = muslim
         government = tribal
+        is_subject = no
         NOT = {
             has_reform = steppe_horde
             has_reform = scythian_horde_reform
@@ -1311,6 +1315,7 @@ jamdom_kingdom_monarchy = { #Sammas of Sindh are also Jams
     trigger = {
         government = tribal
         religion = hinduism
+        is_subject = no
         AND = {
             OR = {
                 primary_culture = saurashtri
@@ -1347,6 +1352,7 @@ sistan_monarchy = {
 
     trigger = {
         government = monarchy
+        is_subject = no
         tag = SIS
     }
 }
@@ -1430,6 +1436,7 @@ somali_monarchy = {
     trigger = {
         government = monarchy
         primary_culture = somali
+        is_subject = no
     }
 }
 
@@ -1644,6 +1651,7 @@ turkish_monarchy = {
     trigger = {
         government = monarchy
         primary_culture = turkish
+        is_subject = no
         NOT = { tag = TUR }
     }
 }
@@ -1667,6 +1675,7 @@ theodoro_monarchy = {
 
     trigger = {
         has_reform = merchant_aristocracy_reform
+        is_subject = no
     }
 }
 
@@ -1702,6 +1711,7 @@ finnish_monarchy = {
     trigger = {
         government = monarchy
         primary_culture = finnish
+        is_subject = no
     }
 }
 
@@ -1725,6 +1735,7 @@ grand_duchy_of_tuscany = {
     trigger = {
         government = monarchy
         tag = TUS
+        is_subject = no
     }
 }
 
@@ -2284,6 +2295,7 @@ egyptian_monarchy = {
 
     trigger = {
         religion_group = muslim
+        is_subject = no
         AND = {
             primary_culture = al_misr_arabic #Egyptian
             OR = {
@@ -2377,6 +2389,7 @@ pagan_egyptian_monarchy = {
 
     trigger = {
         government = monarchy
+        is_subject = no
         OR = {
             AND = {
                 primary_culture = al_misr_arabic #Egyptian
@@ -2418,6 +2431,7 @@ pagan_greek_monarchy = {
 
     trigger = {
         government = monarchy
+        is_subject = no
         OR = {
             AND = {
                 primary_culture = greek
@@ -2461,6 +2475,7 @@ pagan_roman_monarchy = {
 
     trigger = {
         government = monarchy
+        is_subject = no
         OR = {
             AND = {
                 primary_culture = umbrian
@@ -2489,6 +2504,7 @@ pagan_roman_republic = {
 
     trigger = {
         government = republic
+        is_subject = no
         OR = {
             AND = {
                 primary_culture = umbrian
@@ -2531,6 +2547,7 @@ jurchen_monarchy = {
 
     trigger = {
         primary_culture = manchu
+        is_subject = no
         OR = {
             has_reform = steppe_horde
             have_had_reform = steppe_horde
@@ -2571,6 +2588,7 @@ korean_monarchy = {
 
     trigger = {
         culture_group = korean_g
+        is_subject = no
         OR = {
             has_reform = korean_monarchy
             have_had_reform = korean_monarchy
@@ -2670,6 +2688,7 @@ muslim_indian_monarchy = {
     trigger = {
         government = monarchy
         religion_group = muslim
+        is_subject = no
         AND = {
             OR = {
                 culture_group = dravidian
@@ -2760,6 +2779,9 @@ hindu_rajput_monarchy = {
                 have_had_reform = tribal_kingdom
             }
         }
+        NOT = {
+            has_reform = vu_hindu_principality_reform
+        }
     }
 }
 
@@ -2837,6 +2859,9 @@ maratha_peshwas = {
                 have_had_reform = of_noble_bearing_reform
                 has_reform = meritocratic_focus_reform
                 have_had_reform = meritocratic_focus_reform
+            }
+            NOT = {
+                has_reform = vu_hindu_principality_reform
             }
         }
     }
@@ -2930,6 +2955,9 @@ indian_fiefdom_reform = {
                 has_reform = indian_fief_reform
                 have_had_reform = indian_fief_reform
             }
+        }
+        NOT = {
+            has_reform = vu_hindu_principality_reform
         }
     }
 }
@@ -3033,6 +3061,9 @@ assamese = {
                 have_had_reform = tribal_kingdom
             }
         }
+        NOT = {
+            has_reform = vu_hindu_principality_reform
+        }
     }
 }
 
@@ -3068,6 +3099,7 @@ gond_monarchy_reform = {
     trigger = {
         government = tribal
         religion = hinduism
+        is_subject = no
         AND = {
             OR = {
                 primary_culture = bengali
@@ -3121,6 +3153,7 @@ burmese_monarchy_reform = {
     }
 
     trigger = {
+        is_subject = no
         OR = {
             government = tribal
             government = monarchy
@@ -3211,6 +3244,7 @@ ethiopian_monarchies = {
     trigger = {
         government = monarchy
         religion_group = christian
+        is_subject = no
         OR = {
             primary_culture = amhara
             primary_culture = sidamo
@@ -3252,6 +3286,7 @@ nkore_monarchy = {
     trigger = {
         government = monarchy
         tag = NKO
+        is_subject = no
     }
 }
 
@@ -3287,6 +3322,7 @@ bunyoro_monarchy = {
     trigger = {
         government = monarchy
         tag = BNY
+        is_subject = no
     }
 }
 
@@ -3321,6 +3357,7 @@ lunda_monarchy = {
 
     trigger = {
         government = monarchy
+        is_subject = no
         OR = {
             primary_culture = lunda
             primary_culture = luba
@@ -3360,6 +3397,7 @@ mutapa_monarchy = {
     trigger = {
         government = monarchy
         tag = ZIM
+        is_subject = no
     }
 }
 
@@ -3395,6 +3433,7 @@ torwa_monarchy = {
     trigger = {
         government = monarchy
         tag = RZW
+        is_subject = no
     }
 }
 
@@ -3430,6 +3469,7 @@ rwanda_burundi_monarchy = {
     trigger = {
         government = monarchy
         primary_culture = rwandan
+        is_subject = no
     }
 }
 
@@ -3465,6 +3505,7 @@ ganda_monarchy = {
     trigger = {
         government = monarchy
         primary_culture = ganda
+        is_subject = no
     }
 }
 
@@ -3500,6 +3541,7 @@ antemoro_monarchy = {
     trigger = {
         government = monarchy
         tag = ANT
+        is_subject = no
     }
 }
 
@@ -3535,6 +3577,7 @@ betsimisaraka_monarchy = {
     trigger = {
         government = monarchy
         tag = BTS
+        is_subject = no
     }
 }
 
@@ -4337,6 +4380,7 @@ march_eastern_christian_monarchy = {
     trigger = {
         government = monarchy
         NOT = { has_reform = principality }
+        is_subject = no
         OR = {
             religion = coptic
             religion = orthodox
@@ -4476,7 +4520,7 @@ gov_japanese_divine_empire = {
 }
 
 #000 Subjects Expanded
-german_fascist_puppet_state = {
+german_fascist_satellite_state = {
     rank = {
         6 = KANZLERAMT
         7 = MARSCHALLAMT
@@ -4513,7 +4557,7 @@ german_fascist_puppet_state = {
     }
 
     trigger = {
-        is_subject_of_type = puppet_state
+        is_subject_of_type = satellite_state
         overlord = {
             tag = GER
             OR = {
@@ -4524,7 +4568,7 @@ german_fascist_puppet_state = {
     }
 }
 
-fascist_puppet_state = {
+fascist_satellite_state = {
     rank = {
         6 = CHANCELLORSHIP
         7 = HIGH_CHANCELLORSHIP
@@ -4561,7 +4605,7 @@ fascist_puppet_state = {
     }
 
     trigger = {
-        is_subject_of_type = puppet_state
+        is_subject_of_type = satellite_state
         overlord = {
             OR = {
                 #has_reform = fascist_government
@@ -4571,7 +4615,7 @@ fascist_puppet_state = {
     }
 }
 
-communist_puppet_state = {
+communist_satellite_state = {
     rank = {
         6 = COMMISSARIAT
         7 = HIGH_COMMISSARIAT
@@ -4608,7 +4652,7 @@ communist_puppet_state = {
     }
 
     trigger = {
-        is_subject_of_type = puppet_state
+        is_subject_of_type = satellite_state
         overlord = {
             OR = {
                 has_reform = peasants_republic
@@ -4618,12 +4662,12 @@ communist_puppet_state = {
     }
 }
 
-default_puppet_state = {
+default_satellite_state = {
     rank = {
-        6 = PUPPET_STATE
-        7 = PUPPET_STATE
-        8 = PUPPET_STATE
-        9 = PUPPET_STATE
+        6 = SATELLITE_STATE
+        7 = SATELLITE_STATE
+        8 = SATELLITE_STATE
+        9 = SATELLITE_STATE
     }
 
     ruler_male = {
@@ -4655,7 +4699,7 @@ default_puppet_state = {
     }
 
     trigger = {
-        is_subject_of_type = puppet_state
+        is_subject_of_type = satellite_state
     }
 }
 
@@ -4779,5 +4823,327 @@ mughal_shahanshadom = {
 
     trigger = {
         has_reform = mughal_government
+    }
+}
+
+chinese_principality = {
+    rank = {
+        7 = CHINESE_PRINCIPALITY
+    }
+
+    ruler_male = {
+        7 = CHINESE_PRINCE
+    }
+
+    ruler_female = {
+        7 = CHINESE_PRINCE_fem
+    }
+
+    consort_male = {
+        7 = CHINESE_PRINCE_CONSORT
+    }
+
+    consort_female = {
+        7 = CHINESE_PRINCE_CONSORT_fem
+    }
+
+    heir_male = {
+        7 = CHINESE_PRINCE_HEIR
+    }
+
+    heir_female = {
+        7 = CHINESE_PRINCE_HEIR_fem
+    }
+
+    trigger = {
+        has_reform = vu_chinese_principality_reform
+    }
+}
+
+vu_japanese_imperial_colony = {
+    rank = {
+        5 = JAPANESE_COLONY
+    }
+
+    ruler_male = {
+        5 = JAPANESE_DIRECTOR
+    }
+
+    consort_female = {
+        5 = JAPANESE_DIRECTOR_CONSORT_fem
+    }
+
+    heir_male = {
+        5 = JAPANESE_DIRECTOR_HEIR
+    }
+
+    trigger = {
+        has_reform = vu_japanese_imperial_colony_reform
+    }
+}
+
+vu_japanese_imperial_directorate = {
+    rank = {
+        6 = JAPANESE_PROTECTORATE
+    }
+
+    ruler_male = {
+        6 = JAPANESE_MARSHALL
+    }
+
+    consort_female = {
+        6 = JAPANESE_MARSHALL_CONSORT_fem
+    }
+
+    heir_male = {
+        6 = JAPANESE_MARSHALL_HEIR
+    }
+
+    trigger = {
+        has_reform = vu_japanese_imperial_directorate_reform
+    }
+}
+
+vu_japanese_imperial_governate = {
+    rank = {
+        7 = JAPANESE_GOVERNATE
+    }
+
+    ruler_male = {
+        7 = JAPANESE_GOVERNOR
+    }
+
+    consort_female = {
+        7 = JAPANESE_GOVERNOR_CONSORT_fem
+    }
+
+    heir_male = {
+        7 = JAPANESE_GOVERNOR_HEIR
+    }
+
+    trigger = {
+        has_reform = vu_japanese_imperial_governate_reform
+    }
+}
+
+vu_japanese_imperial_warlord = {
+    rank = {
+        8 = JAPANESE_WARLORD_STATE
+    }
+
+    ruler_male = {
+        8 = JAPANESE_WARLORD
+    }
+
+    consort_female = {
+        8 = JAPANESE_WARLORD_CONSORT_fem
+    }
+
+    heir_male = {
+        8 = JAPANESE_WARLORD_HEIR
+    }
+
+    trigger = {
+        has_reform = vu_japanese_imperial_warlord_reform
+    }
+}
+
+vu_hindu_principality = {
+    rank = {
+        7 = HINDU_PRINCIPALITY
+    }
+
+    ruler_male = {
+        7 = HINDU_PRINCE
+    }
+
+    ruler_female = {
+        7 = HINDU_PRINCE_fem
+    }
+
+    consort_male = {
+        7 = HINDU_PRINCE_CONSORT
+    }
+
+    consort_female = {
+        7 = HINDU_PRINCE_CONSORT_fem
+    }
+
+    heir_male = {
+        7 = HINDU_PRINCE_HEIR
+    }
+
+    heir_female = {
+        7 = HINDU_PRINCE_HEIR_fem
+    }
+
+    trigger = {
+        has_reform = vu_hindu_principality_reform
+    }
+}
+
+vu_buddhist_principality = {
+    rank = {
+        7 = BUDDHIST_PRINCIPALITY
+    }
+
+    ruler_male = {
+        7 = BUDDHIST_PRINCE
+    }
+
+    ruler_female = {
+        7 = BUDDHIST_PRINCE_fem
+    }
+
+    consort_male = {
+        7 = BUDDHIST_PRINCE_CONSORT
+    }
+
+    consort_female = {
+        7 = BUDDHIST_PRINCE_CONSORT_fem
+    }
+
+    heir_male = {
+        7 = BUDDHIST_PRINCE_HEIR
+    }
+
+    heir_female = {
+        7 = BUDDHIST_PRINCE_HEIR_fem
+    }
+
+    trigger = {
+        has_reform = vu_buddhist_principality_reform
+    }
+}
+
+#Native American Reforms
+
+aztec_lordship = {
+    rank = {
+        1 = AZTEC_LORDSHIP
+    }
+
+    ruler_male = {
+        1 = AZTEC_LORD
+    }
+
+    consort_female = {
+        1 = AZTEC_LORD_CONSORT_fem
+    }
+
+    heir_male = {
+        1 = AZTEC_LORD_HEIR
+    }
+
+    trigger = {
+        has_reform = aztec_lordship_reform
+    }
+}
+
+mayan_lordship = {
+    rank = {
+        1 = MAYAN_LORDSHIP
+    }
+
+    ruler_male = {
+        1 = MAYAN_LORD
+    }
+
+    consort_female = {
+        1 = MAYAN_LORD_CONSORT_fem
+    }
+
+    heir_male = {
+        1 = MAYAN_LORD_HEIR
+    }
+
+    trigger = {
+        has_reform = mayan_lordship_reform
+    }
+}
+
+inca_lordship = {
+    rank = {
+        1 = INCA_LORDSHIP
+    }
+
+    ruler_male = {
+        1 = INCA_LORD
+    }
+
+    consort_female = {
+        1 = INCA_LORD_CONSORT_fem
+    }
+
+    heir_male = {
+        1 = INCA_LORD_HEIR
+    }
+
+    trigger = {
+        has_reform = inca_lordship_reform
+    }
+}
+
+iroquois_confederacy_member = {
+    rank = {
+        3 = IROQUOIS_CONFEDERACY_MEMBER
+    }
+
+    ruler_male = {
+        3 = IROQUOIS_CONFEDERACY_CHIEF
+    }
+
+    consort_female = {
+        3 = IROQUOIS_CONFEDERACY_CHIEF_CONSORT_fem
+    }
+
+    heir_male = {
+        3 = IROQUOIS_CONFEDERACY_CHIEF_HEIR
+    }
+
+    trigger = {
+        has_reform = iroquois_confederacy_member_reform
+    }
+}
+
+iqta = {
+    rank = {
+        1 = IQTA_MUFTATE_VU
+        2 = IQTA_GRAND_MUFTATE_VU
+        3 = IQTA_SHEIKHDOM_VU
+        4 = IQTA_GRAND_SHEIKDOM_VU
+        5 = IQTA_EMIRATE
+        6 = IQTA_SULTANATE
+        7 = IQTA_TAIFATE
+        8 = IQTA_MALIKATE
+        9 = IQTA_CALIPHATE
+    }
+
+    ruler_male = {
+        1 = IQTA_MUFTI_VU
+        2 = IQTA_GRAND_MUFTI_VU
+        3 = IQTA_SHEIKH_VU
+        4 = IQTA_GRAND_SHEIKH_VU
+        5 = IQTA_EMIR_VU
+        6 = IQTA_SULTAN_VU
+        7 = IQTA_TAIFA_VU
+        8 = IQTA_MALIK_VU
+        9 = IQTA_CALIPH_VU
+    }
+
+    heir_male = {
+        1 = IQTA_MUFTI_VU_heir
+        2 = IQTA_GRAND_MUFTI_VU_heir
+        3 = IQTA_SHEIKH_VU_heir
+        4 = IQTA_GRAND_SHEIKH_VU_heir
+        5 = IQTA_EMIR_VU_heir
+        6 = IQTA_SULTAN_VU_heir
+        7 = IQTA_TAIFA_VU_heir
+        8 = IQTA_MALIK_VU_heir
+        9 = IQTA_CALIPH_VU_heir
+    }
+
+    trigger = {
+        has_reform = iqta
     }
 }

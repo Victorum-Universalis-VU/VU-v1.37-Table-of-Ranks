@@ -1,0 +1,199 @@
+vu_promote_vassal_to_aztec_lordship = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_aztec_lordship_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		primary_culture = aztek
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = aztec_lordship_subject
+		}
+		FROM = {
+			change_religion = ROOT
+			set_government_rank = 1
+			add_government_reform = aztec_lordship_reform
+		}
+		vu_colour_refresh = yes
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_promote_vassal_to_mayan_lordship = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_mayan_lordship_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		primary_culture = mayan
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = mayan_lordship_subject
+		}
+		FROM = {
+			change_religion = ROOT
+			set_government_rank = 1
+			add_government_reform = mayan_lordship_reform
+		}
+		vu_colour_refresh = yes
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_promote_vassal_to_inca_lordship = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_inca_lordship_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		primary_culture = inca
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = mayan_lordship_subject
+		}
+		FROM = {
+			change_religion = ROOT
+			set_government_rank = 1
+			add_government_reform = mayan_lordship_reform
+		}
+		vu_colour_refresh = yes
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_promote_vassal_to_iroquois_confederacy_member = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_iroqouis_confederacy_member_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		primary_culture = iroquois
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal
+			}
+			government = tribal
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = iroquois_confederacy_member
+		}
+		FROM = {
+			change_religion = ROOT
+			set_government_rank = 1
+			add_government_reform = iroquois_confederacy_member_reform
+		}
+		vu_colour_refresh = yes
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}

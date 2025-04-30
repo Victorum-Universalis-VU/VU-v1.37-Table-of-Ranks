@@ -575,7 +575,7 @@ NCountry = {
 	ALLOW_ZERO_BASE_VALUES = 0,						-- Affects base tax, base manpower, and base production
 
 	COUNTRY_DEVELOPMENT_SCALE = 600,
-	OVERSEAS_CLIENT_STATES = 0,					-- Allow overseas client states?
+	OVERSEAS_CLIENT_STATES = 1,					-- Allow overseas client states?
 
 	ESTATE_DROP_LOYALTY_IF_LOST_PRIVILEDGE = -0.2,
 	ESTATE_ANGRY_THRESHOLD = 30,
@@ -606,8 +606,8 @@ NCountry = {
 	CULTURAL_UNION_MIN_RANK = 9,				-- Minimum rank to get cultural union effect with Common Sense.
 	PRIMARY_NATION_BLOCK_CONVERT_CULTURE = 0,	-- Does primary nation of a tag existing block converting culture?
 
-	MIN_DEV_FOR_FREE_CITY = 15,					-- Capital must have at least this much development to be a free city
-	MAX_PROVINCES_FOR_FREE_CITY = 7,			-- A free city cannot have more provinces than this --from 1 to 7 so Bremen can be a free city as it should be -don
+	MIN_DEV_FOR_FREE_CITY = 10,					-- Capital must have at least this much development to be a free city
+	MAX_PROVINCES_FOR_FREE_CITY = 5,			-- A free city cannot have more provinces than this --from 1 to 7 so Bremen can be a free city as it should be -don
 
 	HRE_RANK = 9,								-- Emperor of the HRE is displayed as this rank (for ruler title only)
 	HRE_MAX_RANK = 6,							-- for members
@@ -638,6 +638,8 @@ NCountry = {
 	MIN_DEVELOPMENT_FOR_GOV_RANK_2 = 25,		-- Development to form a Barony from a Lordship
 	MIN_DEVELOPMENT_FOR_GOV_RANK_3 = 50,		-- Development to form a Viscounty from a Barony
 	--MIN_DEVELOPMENT_FOR_GOV_RANK_4 etc. do not function properly
+	MIN_PRESTIGE_FOR_GOV_RANK_X = 0,
+	PRESTIGE_GAIN_FOR_GOV_RANK_X = 0,
  	ADDITIONAL_MIN_DEVELOPMENT_FOR_GOV_RANK_X = 150,	-- ADDITIONAL development needed to upgrade to government rank above 3
 	MAX_GOV_RANK = 9,	
 
@@ -2735,7 +2737,7 @@ NNationDesigner = {
 },
 
 NGovernment = {
-	SELECT_HEIR_FROM_HAREM_AT_MONARCH_AGE = 30, -- The age in years when an heir is selected if the government "has_harem" flag is set.
+	SELECT_HEIR_FROM_HAREM_AT_MONARCH_AGE = 25, -- The age in years when an heir is selected if the government "has_harem" flag is set.
 
 	TRIBAL_ALLEGIANCE_HUMILIATE = 30.0, -- TA gained from doing Humiliate or Show Strength in a war.
 	GOVERNMENT_REFORM_BASE_COST = 100.0,

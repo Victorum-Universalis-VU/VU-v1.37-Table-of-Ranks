@@ -109,3 +109,35 @@ unify_germany_war_goal = {
 	
 	war_name = GERMAN_UNIFICATION_WAR_NAME	
 }
+
+take_capital_cottbus_succession_war_goal = {
+    type = take_capital
+
+    attacker = 	{ #Attacker would be Bohemia
+        badboy_factor = 1
+        prestige_factor = 1
+        peace_cost_factor = 1
+
+        peace_options = {
+			po_become_vassal
+        }
+    }
+
+    defender = 	{ #Defender would be Brandenburg
+        badboy_factor = 0.25
+        prestige_factor = 1
+        peace_cost_factor = 0.75
+
+        allowed_provinces = {
+            area = lusatia_area
+        }
+
+        peace_options = {
+            po_demand_provinces
+        }
+
+        prov_desc = ALL_BRA_PROVS #Was ALL_CORES
+    }
+
+    war_name = COTTBUS_SUCCESSION_WAR_NAME #Was HUNDRED_YEARS_WAR_NAME
+}

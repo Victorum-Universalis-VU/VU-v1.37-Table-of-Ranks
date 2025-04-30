@@ -1,648 +1,639 @@
 #Sending:
 vu_send_administrative_bureaucrats_for_ADM = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-    is_allowed = {
-        ROOT = {
-            adm_power = 25
-            has_opinion = { #This is opinion of sender towards receiver
-                who = FROM
-                value = 25
-            }
-        }
-        FROM = {
-            owes_favors = {
-                who = ROOT
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag #Don addition
-        set_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
-        set_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag #Don addition
-        clr_country_flag = vu_send_diplomatic_envoys_for_dip_flag
-        clr_country_flag = vu_send_military_attaches_for_mil_flag
-        #Yeeted ROOT because it is already in ROOT
-        add_adm_power = -25
-        add_treasury = -10   #State paid transportation fees for the Bureaucrats.
-        add_favors = {
-            who = FROM
-            amount = 10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_bureaucratic_adm_points
-        }
-        FROM = {
-            add_adm_power = 25
-            add_favors = {
-                who = ROOT
-                amount = -10
-            }
-            add_trust = {
-                who = ROOT
-                value = 5
-            }
-            add_opinion = {
-                who = ROOT
-                modifier = provided_25_bureaucratic_adm_points
-            }
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = 10   #Reimbursement of state paid transportation fees for the Bureaucrats.
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = { #Ai stuff by DonBrom
-        alliance_with = FROM
-        trust = {
-            who = FROM
-            value = 70
-        }
-        has_opinion = {
-            who = FROM
-            value = 150
-        }
-        treasury = 250
-        is_at_war = no
-        has_any_disaster = no
-        is_in_deficit = no
-        is_month = 11 #Don's a genius and I love it! December = Winter is coming. :P
-        adm_power = 750
-        is_great_power = yes #Another Don addition - If you're a shitty tag then forget it! xD
-        FROM = {
-            ai = no
-            is_subject = no #Another Don addition - Subjects don't get it! xD
-            is_great_power = no # xD
-            OR = {
-                is_at_war = yes
-                has_any_disaster = yes
-            }
-        }
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		ROOT = {
+			adm_power = 25
+			has_opinion = {
+				#This is opinion of sender towards receiver
+				who = FROM
+				value = 25
+			}
+		}
+		FROM = {
+			owes_favors = {
+				who = ROOT
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag		#Don addition
+		set_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
+		set_country_flag = vu_send_administrative_bureaucrats_for_adm_cooldown_flag		#Don addition
+		clr_country_flag = vu_send_diplomatic_envoys_for_dip_flag
+		clr_country_flag = vu_send_military_attaches_for_mil_flag
+		#Yeeted ROOT because it is already in ROOT
+		add_adm_power = -25
+		add_treasury = -10		#State paid transportation fees for the Bureaucrats.
+		add_favors = {
+			who = FROM
+			amount = 10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_bureaucratic_adm_points
+		}
+		FROM = {
+			add_adm_power = 25
+			add_favors = {
+				who = ROOT
+				amount = -10
+			}
+			add_trust = {
+				who = ROOT
+				value = 5
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = provided_25_bureaucratic_adm_points
+			}
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = 10		#Reimbursement of state paid transportation fees for the Bureaucrats.
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+		#Ai stuff by DonBrom
+		alliance_with = FROM
+		trust = {
+			who = FROM
+			value = 70
+		}
+		has_opinion = {
+			who = FROM
+			value = 150
+		}
+		treasury = 250
+		is_at_war = no
+		has_any_disaster = no
+		is_in_deficit = no
+		is_month = 11		#Don's a genius and I love it! December = Winter is coming. :P
+		adm_power = 750
+		is_great_power = yes		#Another Don addition - If you're a shitty tag then forget it! xD
+		FROM = {
+			ai = no
+			is_subject = no			#Another Don addition - Subjects don't get it! xD
+			is_great_power = no			# xD
+			OR = {
+				is_at_war = yes
+				has_any_disaster = yes
+			}
+		}
+	}
 }
 
 vu_send_diplomatic_envoys_for_DIP = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-    is_allowed = {
-        ROOT = {
-            dip_power = 25
-            diplomatic_reputation = 1 #Prussia contribution - SF
-            has_opinion = { #This is opinion of sender towards receiver
-                who = FROM
-                value = 25
-            }
-        }
-        FROM = {
-            owes_favors = {
-                who = ROOT
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_send_diplomatic_envoys_for_dip_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag #Don addition
-        set_country_flag = vu_send_diplomatic_envoys_for_dip_flag
-        set_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag #Don addition
-        clr_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
-        clr_country_flag = vu_send_military_attaches_for_mil_flag
-        #Yeeted ROOT because it is already in ROOT
-        add_dip_power = -25
-        add_treasury = -10   #State paid transportation fees for the Envoys.
-        add_favors = {
-            who = FROM
-            amount = 10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_diplomatic_dip_points
-        }
-        FROM = {
-            add_dip_power = 25
-            add_favors = {
-                who = ROOT
-                amount = -10
-            }
-            add_trust = {
-                who = ROOT
-                value = 5
-            }
-            add_opinion = {
-                who = ROOT
-                modifier = provided_25_diplomatic_dip_points
-            }
-
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = 10   #Reimbursement of state paid transportation fees for the Envoys.
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = { #Ai stuff by DonBrom
-        alliance_with = FROM
-        trust = {
-            who = FROM
-            value = 70
-        }
-        has_opinion = {
-            who = FROM
-            value = 150
-        }
-        treasury = 250
-        is_at_war = no
-        has_any_disaster = no
-        is_in_deficit = no
-        is_month = 11 #Don's a genius and I love it! December = Winter is coming. :P
-        dip_power = 750
-        is_great_power = yes #Another Don addition - If you're a shitty tag then forget it! xD
-        FROM = {
-            ai = no
-            is_subject = no #Another Don addition - Subjects don't get it! xD
-            is_great_power = no # xD
-            OR = {
-                is_at_war = yes
-                has_any_disaster = yes
-            }
-        }
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		ROOT = {
+			dip_power = 25
+			diplomatic_reputation = 1			#Prussia contribution - SF
+			has_opinion = {
+				#This is opinion of sender towards receiver
+				who = FROM
+				value = 25
+			}
+		}
+		FROM = {
+			owes_favors = {
+				who = ROOT
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_send_diplomatic_envoys_for_dip_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag		#Don addition
+		set_country_flag = vu_send_diplomatic_envoys_for_dip_flag
+		set_country_flag = vu_send_diplomatic_envoys_for_dip_cooldown_flag		#Don addition
+		clr_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
+		clr_country_flag = vu_send_military_attaches_for_mil_flag
+		#Yeeted ROOT because it is already in ROOT
+		add_dip_power = -25
+		add_treasury = -10		#State paid transportation fees for the Envoys.
+		add_favors = {
+			who = FROM
+			amount = 10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_diplomatic_dip_points
+		}
+		FROM = {
+			add_dip_power = 25
+			add_favors = {
+				who = ROOT
+				amount = -10
+			}
+			add_trust = {
+				who = ROOT
+				value = 5
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = provided_25_diplomatic_dip_points
+			}
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = 10		#Reimbursement of state paid transportation fees for the Envoys.
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+		#Ai stuff by DonBrom
+		alliance_with = FROM
+		trust = {
+			who = FROM
+			value = 70
+		}
+		has_opinion = {
+			who = FROM
+			value = 150
+		}
+		treasury = 250
+		is_at_war = no
+		has_any_disaster = no
+		is_in_deficit = no
+		is_month = 11		#Don's a genius and I love it! December = Winter is coming. :P
+		dip_power = 750
+		is_great_power = yes		#Another Don addition - If you're a shitty tag then forget it! xD
+		FROM = {
+			ai = no
+			is_subject = no			#Another Don addition - Subjects don't get it! xD
+			is_great_power = no			# xD
+			OR = {
+				is_at_war = yes
+				has_any_disaster = yes
+			}
+		}
+	}
 }
 
 vu_send_military_attaches_for_MIL = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-    is_allowed = {
-        ROOT = {
-            mil_power = 25
-            OR = {
-                army_tradition = 10 #Prussia contribution - SF
-                navy_tradition = 10 #Prussia contribution - SF
-            }
-            has_opinion = { #This is opinion of sender towards receiver
-                who = FROM
-                value = 25
-            }
-        }
-        FROM = {
-            owes_favors = {
-                who = ROOT
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_send_military_attaches_for_mil_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_send_military_attaches_for_mil_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_send_military_attaches_for_mil_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_send_military_attaches_for_mil_cooldown_flag #Don addition
-        set_country_flag = vu_send_military_attaches_for_mil_flag
-        set_country_flag = vu_send_military_attaches_for_mil_cooldown_flag #Don addition
-        clr_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
-        clr_country_flag = vu_send_diplomatic_envoys_for_dip_flag
-        #Yeeted ROOT because it is already in ROOT
-        add_mil_power = -25
-        add_treasury = -10   #State paid transportation fees for the Attaches.
-        add_favors = {
-            who = FROM
-            amount = 10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_military_mil_points
-        }
-        FROM = {
-            add_mil_power = 25
-            add_favors = {
-                who = ROOT
-                amount = -10
-            }
-            add_trust = {
-                who = ROOT
-                value = 5
-            }
-            add_opinion = {
-                who = ROOT
-                modifier = provided_25_military_mil_points
-            }
-
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = 10   #Reimbursement of state paid transportation fees for the Attaches.
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = { #Ai stuff by DonBrom
-        alliance_with = FROM
-        trust = {
-            who = FROM
-            value = 70
-        }
-        has_opinion = {
-            who = FROM
-            value = 150
-        }
-        treasury = 250
-        is_at_war = no
-        has_any_disaster = no
-        is_in_deficit = no
-        is_month = 11 #Don's a genius and I love it! December = Winter is coming. :P
-        mil_power = 750
-        is_great_power = yes #Another Don addition - If you're a shitty tag then forget it! xD
-        FROM = {
-            ai = no
-            is_subject = no #Another Don addition - Subjects don't get it! xD
-            is_great_power = no # xD
-            OR = {
-                is_at_war = yes
-                has_any_disaster = yes
-            }
-        }
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		ROOT = {
+			mil_power = 25
+			OR = {
+				army_tradition = 10				#Prussia contribution - SF
+				navy_tradition = 10				#Prussia contribution - SF
+			}
+			has_opinion = {
+				#This is opinion of sender towards receiver
+				who = FROM
+				value = 25
+			}
+		}
+		FROM = {
+			owes_favors = {
+				who = ROOT
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_send_military_attaches_for_mil_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_send_military_attaches_for_mil_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_send_military_attaches_for_mil_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_send_military_attaches_for_mil_cooldown_flag		#Don addition
+		set_country_flag = vu_send_military_attaches_for_mil_flag
+		set_country_flag = vu_send_military_attaches_for_mil_cooldown_flag		#Don addition
+		clr_country_flag = vu_send_administrative_bureaucrats_for_adm_flag
+		clr_country_flag = vu_send_diplomatic_envoys_for_dip_flag
+		#Yeeted ROOT because it is already in ROOT
+		add_mil_power = -25
+		add_treasury = -10		#State paid transportation fees for the Attaches.
+		add_favors = {
+			who = FROM
+			amount = 10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_military_mil_points
+		}
+		FROM = {
+			add_mil_power = 25
+			add_favors = {
+				who = ROOT
+				amount = -10
+			}
+			add_trust = {
+				who = ROOT
+				value = 5
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = provided_25_military_mil_points
+			}
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = 10		#Reimbursement of state paid transportation fees for the Attaches.
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+		#Ai stuff by DonBrom
+		alliance_with = FROM
+		trust = {
+			who = FROM
+			value = 70
+		}
+		has_opinion = {
+			who = FROM
+			value = 150
+		}
+		treasury = 250
+		is_at_war = no
+		has_any_disaster = no
+		is_in_deficit = no
+		is_month = 11		#Don's a genius and I love it! December = Winter is coming. :P
+		mil_power = 750
+		is_great_power = yes		#Another Don addition - If you're a shitty tag then forget it! xD
+		FROM = {
+			ai = no
+			is_subject = no			#Another Don addition - Subjects don't get it! xD
+			is_great_power = no			# xD
+			OR = {
+				is_at_war = yes
+				has_any_disaster = yes
+			}
+		}
+	}
 }
 
 #Requesting:
 vu_request_administrative_bureaucrats_for_ADM = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-
-    is_allowed = {
-        FROM = { #This is for receiving
-            adm_power = 25
-            has_opinion = { #This is opinion of receiver towards sender
-                who = ROOT
-                value = 25
-            }
-        }
-        ROOT = {
-            owes_favors = {
-                who = FROM
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag #Don addition
-        set_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
-        set_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag #Don addition
-        clr_country_flag = vu_request_diplomatic_envoys_for_dip_flag
-        clr_country_flag = vu_request_military_attaches_for_mil_flag
-        FROM = {
-            add_adm_power = -25
-            add_treasury = -10   #State paid transportation fees for the Bureaucrats.
-            add_favors = {
-                who = ROOT
-                amount = 10
-            }
-        }
-        add_adm_power = 25
-        add_trust = {
-            who = FROM
-            value = 5
-        }
-        add_favors = {
-            who = ROOT
-            amount = -10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_bureaucratic_adm_points
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = 10
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = { #Ai stuff by DonBrom
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		FROM = {
+			#This is for receiving
+			adm_power = 25
+			has_opinion = {
+				#This is opinion of receiver towards sender
+				who = ROOT
+				value = 25
+			}
+		}
+		ROOT = {
+			owes_favors = {
+				who = FROM
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag		#Don addition
+		set_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
+		set_country_flag = vu_request_administrative_bureaucrats_for_adm_cooldown_flag		#Don addition
+		clr_country_flag = vu_request_diplomatic_envoys_for_dip_flag
+		clr_country_flag = vu_request_military_attaches_for_mil_flag
+		FROM = {
+			add_adm_power = -25
+			add_treasury = -10			#State paid transportation fees for the Bureaucrats.
+			add_favors = {
+				who = ROOT
+				amount = 10
+			}
+		}
+		add_adm_power = 25
+		add_trust = {
+			who = FROM
+			value = 5
+		}
+		add_favors = {
+			who = ROOT
+			amount = -10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_bureaucratic_adm_points
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = 10
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+		#Ai stuff by DonBrom
+	}
 }
 
 vu_request_diplomatic_envoys_for_DIP = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-    is_allowed = {
-        FROM = { #This is for receiving
-            dip_power = 25
-            diplomatic_reputation = 1 #Prussia contribution - SF
-            has_opinion = { #This is opinion of receiver towards sender
-                who = ROOT
-                value = 25
-            }
-        }
-        ROOT = {
-            owes_favors = {
-                who = FROM
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_request_diplomatic_envoys_for_dip_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag #Don addition
-        set_country_flag = vu_request_diplomatic_envoys_for_dip_flag
-        set_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag #Don addition
-        clr_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
-        clr_country_flag = vu_request_military_attaches_for_mil_flag
-        FROM = {
-            add_dip_power = -25
-            add_treasury = -10   #State paid transportation fees for the Envoys.
-            add_favors = {
-                who = ROOT
-                amount = 10
-            }
-        }
-        add_dip_power = 25
-        add_trust = {
-            who = FROM
-            value = 5
-        }
-        add_favors = {
-            who = ROOT
-            amount = -10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_diplomatic_dip_points
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = -10
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            # Restricts this entry to the countries that validate the triggers. Optional.
-            #limit = {
-            #    always = yes
-            #}
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = { #Ai stuff by DonBrom
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		FROM = {
+			#This is for receiving
+			dip_power = 25
+			diplomatic_reputation = 1			#Prussia contribution - SF
+			has_opinion = {
+				#This is opinion of receiver towards sender
+				who = ROOT
+				value = 25
+			}
+		}
+		ROOT = {
+			owes_favors = {
+				who = FROM
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_request_diplomatic_envoys_for_dip_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag		#Don addition
+		set_country_flag = vu_request_diplomatic_envoys_for_dip_flag
+		set_country_flag = vu_request_diplomatic_envoys_for_dip_cooldown_flag		#Don addition
+		clr_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
+		clr_country_flag = vu_request_military_attaches_for_mil_flag
+		FROM = {
+			add_dip_power = -25
+			add_treasury = -10			#State paid transportation fees for the Envoys.
+			add_favors = {
+				who = ROOT
+				amount = 10
+			}
+		}
+		add_dip_power = 25
+		add_trust = {
+			who = FROM
+			value = 5
+		}
+		add_favors = {
+			who = ROOT
+			amount = -10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_diplomatic_dip_points
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = -10
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			# Restricts this entry to the countries that validate the triggers. Optional.
+			#limit = {
+			#    always = yes
+			#}
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+		#Ai stuff by DonBrom
+	}
 }
 
 vu_request_military_attaches_for_MIL = {
-    category = aid_actions
-
-    require_acceptance = yes #Set to no so that this is a player to player and or ai interaction. - SF
-
-    is_visible = {
-        ROOT = {
-            ai = no
-        }
-    }
-    is_allowed = {
-        FROM = { #This is for receiving
-            mil_power = 25
-            OR = {
-                army_tradition = 10 #Prussia contribution - SF
-                navy_tradition = 10 #Prussia contribution - SF
-            }
-            has_opinion = { #This is opinion of receiver towards sender
-                who = ROOT
-                value = 25
-            }
-        }
-        ROOT = {
-            owes_favors = {
-                who = FROM
-                value = 10
-            }
-        }
-        NOT = { #Don addition
-            has_country_flag = vu_request_military_attaches_for_mil_flag
-        }
-        if = { #Don addition
-            limit = {
-                has_country_flag = vu_request_military_attaches_for_mil_cooldown_flag
-            }
-            had_country_flag = { #Is the effect
-                flag = vu_request_military_attaches_for_mil_cooldown_flag
-                days = 1825
-            }
-        }
-    }
-    on_accept = {
-        clr_country_flag = vu_request_military_attaches_for_mil_cooldown_flag #Don addition
-        set_country_flag = vu_request_military_attaches_for_mil_flag
-        set_country_flag = vu_request_military_attaches_for_mil_cooldown_flag #Don addition
-        clr_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
-        clr_country_flag = vu_request_diplomatic_envoys_for_dip_flag
-        FROM = {
-            add_mil_power = -25
-            add_treasury = -10   #State paid transportation fees for the Envoys.
-            add_favors = {
-                who = ROOT
-                amount = 10
-            }
-        }
-        add_dip_power = 25
-        add_trust = {
-            who = FROM
-            value = 5
-        }
-        add_favors = {
-            who = ROOT
-            amount = -10
-        }
-        add_opinion = {
-            who = FROM
-            modifier = sought_25_military_mil_points
-        }
-    }
-    on_decline = {
-        add_prestige = -10
-        add_treasury = -10
-    }
-
-    ai_acceptance = {
-        add_entry = {
-            name = Don_is_a_TWAT
-
-            # Restricts this entry to the countries that validate the triggers. Optional.
-            #limit = {
-            #    always = yes
-            #}
-
-            export_to_variable = {
-                variable_name = ai_value
-                value = modifier:diplomatic_reputation
-                who = FROM
-                with = THIS
-            }
-
-            # You can then change ai_value with effects such as multiply_variable, etc
-        }
-    }
-
-    ai_will_do = {
-    }
+	category = aid_actions
+	require_acceptance = yes	#Set to no so that this is a player to player and or ai interaction. - SF
+	is_visible = {
+		ROOT = {
+			ai = no
+		}
+	}
+	is_allowed = {
+		FROM = {
+			#This is for receiving
+			mil_power = 25
+			OR = {
+				army_tradition = 10				#Prussia contribution - SF
+				navy_tradition = 10				#Prussia contribution - SF
+			}
+			has_opinion = {
+				#This is opinion of receiver towards sender
+				who = ROOT
+				value = 25
+			}
+		}
+		ROOT = {
+			owes_favors = {
+				who = FROM
+				value = 10
+			}
+		}
+		NOT = {
+			#Don addition
+			has_country_flag = vu_request_military_attaches_for_mil_flag
+		}
+		if = {
+			#Don addition
+			limit = {
+				has_country_flag = vu_request_military_attaches_for_mil_cooldown_flag
+			}
+			had_country_flag = {
+				#Is the effect
+				flag = vu_request_military_attaches_for_mil_cooldown_flag
+				days = 1825
+			}
+		}
+	}
+	on_accept = {
+		clr_country_flag = vu_request_military_attaches_for_mil_cooldown_flag		#Don addition
+		set_country_flag = vu_request_military_attaches_for_mil_flag
+		set_country_flag = vu_request_military_attaches_for_mil_cooldown_flag		#Don addition
+		clr_country_flag = vu_request_administrative_bureaucrats_for_adm_flag
+		clr_country_flag = vu_request_diplomatic_envoys_for_dip_flag
+		FROM = {
+			add_mil_power = -25
+			add_treasury = -10			#State paid transportation fees for the Envoys.
+			add_favors = {
+				who = ROOT
+				amount = 10
+			}
+		}
+		add_dip_power = 25
+		add_trust = {
+			who = FROM
+			value = 5
+		}
+		add_favors = {
+			who = ROOT
+			amount = -10
+		}
+		add_opinion = {
+			who = FROM
+			modifier = sought_25_military_mil_points
+		}
+	}
+	on_decline = {
+		add_prestige = -10
+		add_treasury = -10
+	}
+	ai_acceptance = {
+		add_entry = {
+			name = Don_is_a_TWAT
+			# Restricts this entry to the countries that validate the triggers. Optional.
+			#limit = {
+			#    always = yes
+			#}
+			export_to_variable = {
+				variable_name = ai_value
+				value = modifier:diplomatic_reputation
+				who = FROM
+				with = THIS
+			}
+			# You can then change ai_value with effects such as multiply_variable, etc
+		}
+	}
+	ai_will_do = {
+	}
 }

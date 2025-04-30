@@ -2,7 +2,7 @@
 #Please note, we are not claiming credit for these entries and we will slowly replace them at our own time - SF
 #Barbary Pirates Vassal Oriented Mission tree
 
-BRBR_missions_1 = { #BRBR is the namespace for this
+VU_missions_1 = { #BRBR is the namespace for this
 	slot = 1
 	generic = no
 	ai = yes
@@ -17,12 +17,12 @@ BRBR_missions_1 = { #BRBR is the namespace for this
 			tag = TRP
 			tag = TLC
 		}
-		has_country_flag = BRBR_mission_enabled
+		has_country_flag = VU_mission_enabled
 		has_country_flag = use_missions_expanded_missions_instead_of_paradox
 	}
 	has_country_shield = yes
 
-	BRBR_haven_for_the_expelled = {
+	VU_haven_for_the_expelled = {
 		icon = mission_cope_with_refugees
 		required_missions = { }
 		position = 2
@@ -37,7 +37,7 @@ BRBR_missions_1 = { #BRBR is the namespace for this
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_moorish_refugees
+				name = VU_moorish_refugees
 				duration = 7300
 			}
 			add_yearly_sailors = 0.5
@@ -45,9 +45,9 @@ BRBR_missions_1 = { #BRBR is the namespace for this
 		}
 	}
 	
-	BRBR_popular_support = {
+	VU_popular_support = {
 		icon = mission_reclaim_morocco
-		required_missions = { BRBR_haven_for_the_expelled }
+		required_missions = { VU_haven_for_the_expelled }
 		position = 4
 		provinces_to_highlight = {
 			OR = {
@@ -111,7 +111,7 @@ BRBR_missions_1 = { #BRBR is the namespace for this
 	}
 }
 
-BRBR_missions_2 = {
+VU_missions_2 = {
 	slot = 2
 	generic = no
 	ai = yes
@@ -126,12 +126,12 @@ BRBR_missions_2 = {
 			tag = TRP
 			tag = TLC
 		}
-		has_country_flag = BRBR_mission_enabled
+		has_country_flag = VU_mission_enabled
 		has_country_flag = use_missions_expanded_missions_instead_of_paradox
 	}
 	has_country_shield = yes
 
-	BRBR_the_coast = {
+	VU_the_coast = {
 		icon = mission_construct_a_corsair_fleet
 		required_missions = { }
 		position = 1
@@ -156,9 +156,9 @@ BRBR_missions_2 = {
 		}
 	}
 	
-	BRBR_pirate_havens = {
+	VU_pirate_havens = {
 		icon = mission_control_venice
-		required_missions = { BRBR_the_coast BRBR_haven_for_the_expelled }
+		required_missions = { VU_the_coast VU_haven_for_the_expelled }
 		position = 3
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -172,7 +172,7 @@ BRBR_missions_2 = {
 			}
 		}
 		effect = {
-			custom_tooltip = BRBR_3_most_developed_forts_be_like
+			custom_tooltip = VU_3_most_developed_forts_be_like
 			tooltip = {
 				add_or_upgrade_shipyard_building = yes
 			}
@@ -203,9 +203,9 @@ BRBR_missions_2 = {
 		}
 	}
 	
-	BRBR_dockyards = {
+	VU_dockyards = {
 		icon = mission_combat_barbary_piracy
-		required_missions = { BRBR_pirate_havens BRBR_large_navy }
+		required_missions = { VU_pirate_havens VU_large_navy }
 		position = 5
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -220,7 +220,7 @@ BRBR_missions_2 = {
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_the_barbary_arsenal
+				name = VU_the_barbary_arsenal
 				duration = -1
 			}
 			create_admiral = { tradition = 80 }
@@ -233,7 +233,7 @@ BRBR_missions_2 = {
 	}
 }
 
-BRBR_missions_3 = {
+VU_missions_3 = {
 	slot = 3
 	generic = no
 	ai = yes
@@ -248,12 +248,12 @@ BRBR_missions_3 = {
 			tag = TRP
 			tag = TLC
 		}
-		has_country_flag = BRBR_mission_enabled
+		has_country_flag = VU_mission_enabled
 		has_country_flag = use_missions_expanded_missions_instead_of_paradox
 	}
 	has_country_shield = yes
 
-	BRBR_barbary_navy = {
+	VU_barbary_navy = {
 		icon = mission_launch_a_flagship
 		required_missions = { }
 		position = 1
@@ -267,7 +267,7 @@ BRBR_missions_3 = {
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_berber_navy_1
+				name = VU_berber_navy_1
 				duration = -1
 			}
 			
@@ -275,9 +275,9 @@ BRBR_missions_3 = {
 		}
 	}
 	
-	BRBR_large_navy = {
+	VU_large_navy = {
 		icon = mission_corsairs_of_the_north_sea
-		required_missions = { BRBR_barbary_navy BRBR_pirate_havens }
+		required_missions = { VU_barbary_navy VU_pirate_havens }
 		position = 4
 		provinces_to_highlight = {
 		}
@@ -285,9 +285,9 @@ BRBR_missions_3 = {
 			navy_size = 30
 		}
 		effect = {
-			remove_country_modifier = BRBR_berber_navy_1
+			remove_country_modifier = VU_berber_navy_1
 			add_country_modifier = {
-				name = BRBR_berber_navy_2
+				name = VU_berber_navy_2
 				duration = -1
 			}
 			country_event = { id = ME_Barbary_Pirates_Events.1 }
@@ -295,7 +295,7 @@ BRBR_missions_3 = {
 	}
 }
 
-BRBR_missions_4 = {
+VU_missions_4 = {
 	slot = 4
 	generic = no
 	ai = yes
@@ -310,14 +310,14 @@ BRBR_missions_4 = {
 			tag = TRP
 			tag = TLC
 		}
-		has_country_flag = BRBR_mission_enabled
+		has_country_flag = VU_mission_enabled
 		has_country_flag = use_missions_expanded_missions_instead_of_paradox
 	}
 	has_country_shield = yes
 
-	BRBR_boarding_parties = {
+	VU_boarding_parties = {
 		icon = mission_sponsor_piracy
-		required_missions = { BRBR_barbary_navy BRBR_training }
+		required_missions = { VU_barbary_navy VU_training }
 		position = 2
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -331,7 +331,7 @@ BRBR_missions_4 = {
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_marines
+				name = VU_marines
 				duration = -1
 			}
 			add_mil_power = 100
@@ -340,9 +340,9 @@ BRBR_missions_4 = {
 		}
 	}
 	
-	BRBR_capture_islands = {
+	VU_capture_islands = {
 		icon = mission_portuguese_malacca
-		required_missions = { BRBR_boarding_parties BRBR_begin_the_raids }
+		required_missions = { VU_boarding_parties VU_begin_the_raids }
 		position = 4
 		provinces_to_highlight = {
 			OR = {
@@ -364,7 +364,7 @@ BRBR_missions_4 = {
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_capturing_christian_islands
+				name = VU_capturing_christian_islands
 				duration = 9125
 			}
 			add_navy_tradition = 25
@@ -372,9 +372,9 @@ BRBR_missions_4 = {
 		}
 	}
 	
-	BRBR_fortify_islands = {
+	VU_fortify_islands = {
 		icon = mission_occupy_alexandria
-		required_missions = { BRBR_capture_islands }
+		required_missions = { VU_capture_islands }
 		position = 5
 		provinces_to_highlight = {
 			OR = {
@@ -401,7 +401,7 @@ BRBR_missions_4 = {
 			
 			custom_tooltip = " "
 			
-			custom_tooltip = BRBR_3_most_developed_forts_be_like
+			custom_tooltip = VU_3_most_developed_forts_be_like
 			tooltip = {
 				add_or_upgrade_fort_building = yes
 			}
@@ -439,7 +439,7 @@ BRBR_missions_4 = {
 	}
 }
 
-BRBR_missions_5 = {
+VU_missions_5 = {
 	slot = 5
 	generic = no
 	ai = yes
@@ -454,12 +454,12 @@ BRBR_missions_5 = {
 			tag = TRP
 			tag = TLC
 		}
-		has_country_flag = BRBR_mission_enabled
+		has_country_flag = VU_mission_enabled
 		has_country_flag = use_missions_expanded_missions_instead_of_paradox
 	}
 	has_country_shield = yes
 
-	BRBR_training = {
+	VU_training = {
 		icon = mission_control_surat
 		required_missions = { }
 		position = 1
@@ -482,7 +482,7 @@ BRBR_missions_5 = {
 		}
 	}
 	
-	BRBR_begin_the_raids = {
+	VU_begin_the_raids = {
 		icon = mission_raid_on_venice
 		required_missions = { }
 		position = 3
@@ -560,18 +560,18 @@ BRBR_missions_5 = {
 		}
 		effect = {
 			add_country_modifier = {
-				name = BRBR_relentless_vile_raids
+				name = VU_relentless_vile_raids
 				duration = 10950
 			}
 			
-			set_country_flag = BRBR_slave_trade_nation
-			set_global_flag = BRBR_slave_trade
+			set_country_flag = VU_slave_trade_nation
+			set_global_flag = VU_slave_trade
 		}
 	}
 	
-	BRBR_christians_fear_us = {
+	VU_christians_fear_us = {
 		icon = mission_raid_christian_trade
-		required_missions = { BRBR_begin_the_raids }
+		required_missions = { VU_begin_the_raids }
 		position = 5
 		provinces_to_highlight = {
 		}
@@ -584,7 +584,7 @@ BRBR_missions_5 = {
 					}
 				}
 				custom_trigger_tooltip = {
-					tooltip = BRBR_provinces_raided_150
+					tooltip = VU_provinces_raided_150
 					check_variable = {
 						which = NumOfRaidedCoasts
 						value = 300

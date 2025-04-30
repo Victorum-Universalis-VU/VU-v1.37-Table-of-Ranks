@@ -526,6 +526,9 @@ tur_disaster_pasha_decadence = {
 tur_disaster_plot_of_the_harem = {
 	potential = {
 		has_disaster = tur_disaster_ottoman_power_struggle
+		NOT = {
+			has_disaster = tur_disaster_plot_of_the_selamlik
+		}
 		normal_or_historical_nations = yes
 		has_reform = ottoman_government
 		NOT = { has_country_flag = tur_had_plot_of_the_harem }
@@ -600,4 +603,86 @@ tur_disaster_plot_of_the_harem = {
 		}
 	}
 	ended_by_country_breaking_to_rebels = no
+}
+
+#Plot of the Selamlik Disaster or Turkish Femboys - SF
+tur_disaster_plot_of_the_selamlik = {
+    potential = {
+        has_disaster = tur_disaster_ottoman_power_struggle
+		NOT = {
+			has_disaster = tur_disaster_plot_of_the_harem
+		}
+        normal_or_historical_nations = yes
+        has_reform = ottoman_government
+        NOT = { has_country_flag = tur_had_plot_of_the_selamlik }
+        NOT = { has_country_modifier = tur_weakened_the_selamlik } #Was tur_weakened_the_harem
+        #NOT = { mission_completed = tur_the_reign_of_femboys } #Turned this off for now - SF
+    }
+    can_start = {
+        OR = {
+            NOT = { ruler_age = 30 }
+            NOT = { adm = 4 }
+            NOT = { dip = 4 }
+            NOT = { mil = 4 }
+            NOT = { legitimacy = 50 }
+        }
+    }
+    can_stop = {
+        ruler_age = 30
+        OR = {
+            adm = 4
+            dip = 4
+            mil = 4
+        }
+        legitimacy = 90
+    }
+    progress = {
+        modifier = {
+            factor = 3
+            NOT = { adm = 4 }
+            NOT = { dip = 4 }
+            NOT = { mil = 4 }
+        }
+        modifier = {
+            factor = 2
+            NOT = { prestige = 75 }
+        }
+        modifier = {
+            factor = 2
+            NOT = { prestige = 50 }
+        }
+        modifier = {
+            factor = 2
+            NOT = { prestige = 20 }
+        }
+
+    }
+    can_end = {
+        OR = {
+            NOT = { has_disaster = tur_disaster_ottoman_power_struggle }
+            #NOT = { has_mission = tur_the_reign_of_femboys } #Turned this off for now - SF
+            #mission_completed = tur_the_reign_of_femboys     #Turned this off for now - SF
+        }
+    }
+    modifier = {
+        # heir_chance = -1
+        # Heir chance has no effect on selamlik countries
+        advisor_cost = 0.5
+		yearly_corruption = 1
+    }
+    on_start = plot_of_the_selamlik_events.1
+    on_end = plot_of_the_selamlik_events.2
+    on_monthly = {
+        events = {
+        }
+        random_events = {
+            1250 = 0
+            50 = plot_of_the_selamlik_events.3
+            50 = plot_of_the_selamlik_events.4
+            50 = plot_of_the_selamlik_events.5
+            50 = plot_of_the_selamlik_events.6
+            50 = plot_of_the_selamlik_events.7
+        }
+    }
+    ended_by_country_breaking_to_rebels = no
 }

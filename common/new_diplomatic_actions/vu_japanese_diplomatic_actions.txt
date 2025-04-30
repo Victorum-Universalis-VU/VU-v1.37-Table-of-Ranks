@@ -1,0 +1,1169 @@
+#daimyo_diplomatic_actions
+onin_war_bribe_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		OR = {
+			tag = HSK
+			tag = YMN
+		}
+		has_global_flag = JAP_crisis
+		FROM = {
+			OR = {
+				has_reform = daimyo
+				has_reform = daimyo_barony_reform
+				has_reform = daimyo_viscounty_reform
+				has_reform = daimyo_county_reform
+				has_reform = daimyo_marquisate_reform
+				has_reform = daimyo_duchy_reform
+				has_reform = daimyo_principality_reform
+			}
+			NOT = {
+				tag = ASK
+			}
+			NOT = {
+				tag = HSK
+			}
+			NOT = {
+				tag = YMN
+			}
+			ai = yes
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			OR = {
+				tag = HSK
+				tag = YMN
+			}
+			has_global_flag = JAP_crisis
+			FROM = {
+				OR = {
+					has_reform = daimyo
+					has_reform = daimyo_barony_reform
+					has_reform = daimyo_viscounty_reform
+					has_reform = daimyo_county_reform
+					has_reform = daimyo_marquisate_reform
+					has_reform = daimyo_duchy_reform
+					has_reform = daimyo_principality_reform
+				}
+				NOT = {
+					tag = ASK
+				}
+				NOT = {
+					tag = HSK
+				}
+				NOT = {
+					tag = YMN
+				}
+				ai = yes
+			}
+		}
+		treasury = 25
+		custom_trigger_tooltip = {
+			tooltip = ONIN_WAR_DIP_ACTION_ONLY_EVERY_2_YEARS
+			FROM = {
+				OR = {
+					NOT = {
+						has_country_flag = onin_war_bribe_action_used_by_@ROOT
+					}
+					had_country_flag = {
+						flag = onin_war_bribe_action_used_by_@ROOT
+						days = 730
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		if = {
+			limit = {
+				OR = {
+					tag = HSK
+					tag = YMN
+				}
+				has_global_flag = JAP_crisis
+				FROM = {
+					OR = {
+						has_reform = daimyo
+						has_reform = daimyo_barony_reform
+						has_reform = daimyo_viscounty_reform
+						has_reform = daimyo_county_reform
+						has_reform = daimyo_marquisate_reform
+						has_reform = daimyo_duchy_reform
+						has_reform = daimyo_principality_reform
+					}
+					NOT = {
+						tag = ASK
+					}
+					NOT = {
+						tag = HSK
+					}
+					NOT = {
+						tag = YMN
+					}
+					ai = yes
+				}
+				treasury = 25
+				FROM = {
+					OR = {
+						NOT = {
+							has_country_flag = onin_war_bribe_action_used_by_@ROOT
+						}
+						had_country_flag = {
+							flag = onin_war_bribe_action_used_by_@ROOT
+							days = 730
+						}
+					}
+				}
+			}
+			add_treasury = -25
+			FROM = {
+				add_treasury = 25
+				if = {
+					limit = {
+						ROOT = {
+							tag = HSK
+						}
+					}
+					change_variable = {
+						which = Daimyo_Support_for_HSK
+						value = 10
+					}
+				}
+				else = {
+					change_variable = {
+						which = Daimyo_Support_for_YMN
+						value = 10
+					}
+				}
+				clr_country_flag = onin_war_bribe_action_used_by_@ROOT
+				set_country_flag = onin_war_bribe_action_used_by_@ROOT
+			}
+		}
+	}
+	ai_will_do = {
+		treasury = 100
+		NOT = {
+			is_rival = FROM
+		}
+		OR = {
+			FROM = {
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_HSK_temp
+						}
+					}
+				}
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_YMN_temp
+						}
+					}
+				}
+			}
+			AND = {
+				tag = HSK
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+			AND = {
+				tag = YMN
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+onin_war_send_men_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		OR = {
+			tag = HSK
+			tag = YMN
+		}
+		has_global_flag = JAP_crisis
+		FROM = {
+			OR = {
+				has_reform = daimyo
+				has_reform = daimyo_barony_reform
+				has_reform = daimyo_viscounty_reform
+				has_reform = daimyo_county_reform
+				has_reform = daimyo_marquisate_reform
+				has_reform = daimyo_duchy_reform
+				has_reform = daimyo_principality_reform
+			}
+			NOT = {
+				tag = ASK
+			}
+			NOT = {
+				tag = HSK
+			}
+			NOT = {
+				tag = YMN
+			}
+			ai = yes
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			OR = {
+				tag = HSK
+				tag = YMN
+			}
+			has_global_flag = JAP_crisis
+			FROM = {
+				OR = {
+					has_reform = daimyo
+					has_reform = daimyo_barony_reform
+					has_reform = daimyo_viscounty_reform
+					has_reform = daimyo_county_reform
+					has_reform = daimyo_marquisate_reform
+					has_reform = daimyo_duchy_reform
+					has_reform = daimyo_principality_reform
+				}
+				NOT = {
+					tag = ASK
+				}
+				NOT = {
+					tag = HSK
+				}
+				NOT = {
+					tag = YMN
+				}
+				ai = yes
+			}
+		}
+		manpower = 1
+		custom_trigger_tooltip = {
+			tooltip = ONIN_WAR_DIP_ACTION_ONLY_EVERY_2_YEARS
+			FROM = {
+				OR = {
+					NOT = {
+						has_country_flag = onin_war_send_men_action_used_by_@ROOT
+					}
+					had_country_flag = {
+						flag = onin_war_send_men_action_used_by_@ROOT
+						days = 730
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		if = {
+			limit = {
+				OR = {
+					tag = HSK
+					tag = YMN
+				}
+				has_global_flag = JAP_crisis
+				FROM = {
+					OR = {
+						has_reform = daimyo
+						has_reform = daimyo_barony_reform
+						has_reform = daimyo_viscounty_reform
+						has_reform = daimyo_county_reform
+						has_reform = daimyo_marquisate_reform
+						has_reform = daimyo_duchy_reform
+						has_reform = daimyo_principality_reform
+					}
+					NOT = {
+						tag = ASK
+					}
+					NOT = {
+						tag = HSK
+					}
+					NOT = {
+						tag = YMN
+					}
+					ai = yes
+				}
+				manpower = 1
+				FROM = {
+					OR = {
+						NOT = {
+							has_country_flag = onin_war_send_men_action_used_by_@ROOT
+						}
+						had_country_flag = {
+							flag = onin_war_send_men_action_used_by_@ROOT
+							days = 730
+						}
+					}
+				}
+			}
+			add_manpower = -1
+			FROM = {
+				add_manpower = 1
+				if = {
+					limit = {
+						ROOT = {
+							tag = HSK
+						}
+					}
+					change_variable = {
+						which = Daimyo_Support_for_HSK
+						value = 10
+					}
+				}
+				else = {
+					change_variable = {
+						which = Daimyo_Support_for_YMN
+						value = 10
+					}
+				}
+				clr_country_flag = onin_war_send_men_action_used_by_@ROOT
+				set_country_flag = onin_war_send_men_action_used_by_@ROOT
+			}
+		}
+	}
+	ai_will_do = {
+		is_at_war = no
+		manpower = 3
+		NOT = {
+			is_rival = FROM
+		}
+		OR = {
+			FROM = {
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_HSK_temp
+						}
+					}
+				}
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_YMN_temp
+						}
+					}
+				}
+			}
+			AND = {
+				tag = HSK
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+			AND = {
+				tag = YMN
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+onin_war_send_generals_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		OR = {
+			tag = HSK
+			tag = YMN
+		}
+		has_global_flag = JAP_crisis
+		FROM = {
+			OR = {
+				has_reform = daimyo
+				has_reform = daimyo_barony_reform
+				has_reform = daimyo_viscounty_reform
+				has_reform = daimyo_county_reform
+				has_reform = daimyo_marquisate_reform
+				has_reform = daimyo_duchy_reform
+				has_reform = daimyo_principality_reform
+			}
+			NOT = {
+				tag = ASK
+			}
+			NOT = {
+				tag = HSK
+			}
+			NOT = {
+				tag = YMN
+			}
+			ai = yes
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			OR = {
+				tag = HSK
+				tag = YMN
+			}
+			has_global_flag = JAP_crisis
+			FROM = {
+				OR = {
+					has_reform = daimyo
+					has_reform = daimyo_barony_reform
+					has_reform = daimyo_viscounty_reform
+					has_reform = daimyo_county_reform
+					has_reform = daimyo_marquisate_reform
+					has_reform = daimyo_duchy_reform
+					has_reform = daimyo_principality_reform
+				}
+				NOT = {
+					tag = ASK
+				}
+				NOT = {
+					tag = HSK
+				}
+				NOT = {
+					tag = YMN
+				}
+				ai = yes
+			}
+		}
+		army_tradition = 10
+		custom_trigger_tooltip = {
+			tooltip = ONIN_WAR_DIP_ACTION_ONLY_EVERY_5_YEARS
+			FROM = {
+				OR = {
+					NOT = {
+						has_country_flag = onin_war_send_generals_action_used_by_@ROOT
+					}
+					had_country_flag = {
+						flag = onin_war_send_generals_action_used_by_@ROOT
+						days = 1825
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		if = {
+			limit = {
+				OR = {
+					tag = HSK
+					tag = YMN
+				}
+				has_global_flag = JAP_crisis
+				FROM = {
+					OR = {
+						has_reform = daimyo
+						has_reform = daimyo_barony_reform
+						has_reform = daimyo_viscounty_reform
+						has_reform = daimyo_county_reform
+						has_reform = daimyo_marquisate_reform
+						has_reform = daimyo_duchy_reform
+						has_reform = daimyo_principality_reform
+					}
+					NOT = {
+						tag = ASK
+					}
+					NOT = {
+						tag = HSK
+					}
+					NOT = {
+						tag = YMN
+					}
+					ai = yes
+				}
+				army_tradition = 10
+				FROM = {
+					OR = {
+						NOT = {
+							has_country_flag = onin_war_send_generals_action_used_by_@ROOT
+						}
+						had_country_flag = {
+							flag = onin_war_send_generals_action_used_by_@ROOT
+							days = 1825
+						}
+					}
+				}
+			}
+			add_army_tradition = -10
+			FROM = {
+				add_army_tradition = 10
+				if = {
+					limit = {
+						ROOT = {
+							tag = HSK
+						}
+					}
+					change_variable = {
+						which = Daimyo_Support_for_HSK
+						value = 15
+					}
+				}
+				else = {
+					change_variable = {
+						which = Daimyo_Support_for_YMN
+						value = 15
+					}
+				}
+				clr_country_flag = onin_war_send_generals_action_used_by_@ROOT
+				set_country_flag = onin_war_send_generals_action_used_by_@ROOT
+			}
+		}
+	}
+	ai_will_do = {
+		army_tradition = 20
+		NOT = {
+			is_rival = FROM
+		}
+		OR = {
+			FROM = {
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_HSK_temp
+						}
+					}
+				}
+				NOT = {
+					variable_arithmetic_trigger = {
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_YMN_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							which = Daimyo_Support_for_YMN
+						}
+						export_to_variable = {
+							variable_name = Daimyo_Support_for_HSK_temp
+							value = 0
+						}
+						change_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_HSK
+						}
+						change_variable = {
+							which = Daimyo_Support_for_YMN_temp
+							value = 25
+						}
+						check_variable = {
+							which = Daimyo_Support_for_HSK_temp
+							which = Daimyo_Support_for_YMN_temp
+						}
+					}
+				}
+			}
+			AND = {
+				tag = HSK
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+			AND = {
+				tag = YMN
+				NOT = {
+					any_country = {
+						OR = {
+							has_reform = daimyo
+							has_reform = daimyo_barony_reform
+							has_reform = daimyo_viscounty_reform
+							has_reform = daimyo_county_reform
+							has_reform = daimyo_marquisate_reform
+							has_reform = daimyo_duchy_reform
+							has_reform = daimyo_principality_reform
+						}
+						NOT = {
+							tag = ASK
+						}
+						NOT = {
+							tag = HSK
+						}
+						NOT = {
+							tag = YMN
+						}
+						ai = yes
+						NOT = {
+							variable_arithmetic_trigger = {
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_YMN_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_YMN
+								}
+								export_to_variable = {
+									variable_name = Daimyo_Support_for_HSK_temp
+									value = 0
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									which = Daimyo_Support_for_HSK
+								}
+								change_variable = {
+									which = Daimyo_Support_for_HSK_temp
+									value = 25
+								}
+								check_variable = {
+									which = Daimyo_Support_for_YMN_temp
+									which = Daimyo_Support_for_HSK_temp
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+vu_promote_vassal_to_imperial_colony = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_heaven_prince_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		tag = JAP
+		OR = {
+			has_reform = japanese_divine_empire
+			has_reform = empire_of_japan_reform
+		}
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT			#Technically it'd be more efficient to use PREV here as you're using a nested Scope, I'll let this slide for now... -Don
+			OR = {
+				is_subject_of_type = vassal
+				is_subject_of_type = client_vassal				#Client vassal is not necessary as it's not used but it's all good -Don
+			}
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					AND = {
+						liberty_desire = 50
+						army_size = 5
+					}
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = vu_japanese_imperial_colony
+		}
+		FROM = {
+			add_government_reform = vu_japanese_imperial_colony_reform
+		}
+		vu_colour_refresh = yes		#Thank god somebody uses this -Don
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_rein_in_imperial_colony = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_heaven_prince_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		tag = JAP
+		OR = {
+			has_reform = japanese_divine_empire
+			has_reform = empire_of_japan_reform
+		}
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT			#Technically it'd be more efficient to use PREV here as you're using a nested Scope, I'll let this slide for now... -Don
+			is_subject_of_type = vu_japanese_imperial_colony
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					AND = {
+						liberty_desire = 50
+						army_size = 10
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = vu_japanese_imperial_directorate
+		}
+		FROM = {
+			add_government_reform = vu_japanese_imperial_directorate_reform
+		}
+		vu_colour_refresh = yes		#Thank god somebody uses this -Don
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_rein_in_imperial_protectorate = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_heaven_prince_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		tag = JAP
+		OR = {
+			has_reform = japanese_divine_empire
+			has_reform = empire_of_japan_reform
+		}
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT			#Technically it'd be more efficient to use PREV here as you're using a nested Scope, I'll let this slide for now... -Don
+			is_subject_of_type = vu_japanese_imperial_directorate
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					AND = {
+						liberty_desire = 50
+						army_size = 15
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = vu_japanese_imperial_governate
+		}
+		FROM = {
+			add_government_reform = vu_japanese_imperial_governate_reform
+		}
+		vu_colour_refresh = yes		#Thank god somebody uses this -Don
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+vu_rein_in_imperial_governate = {
+	category = influence
+	alert_index = 6
+	alert_tooltip = vu_promote_vassal_to_heaven_prince_alert_tooltip
+	is_visible = {
+		#Checks if the overlord has access to the appropriate subject types
+		tag = JAP
+		OR = {
+			has_reform = japanese_divine_empire
+			has_reform = empire_of_japan_reform
+		}
+		FROM = {
+			#FROM has to be a vassal of ROOT 
+			is_subject_of = ROOT			#Technically it'd be more efficient to use PREV here as you're using a nested Scope, I'll let this slide for now... -Don
+			is_subject_of_type = vu_japanese_imperial_governate
+			government = monarchy
+		}
+	}
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					AND = {
+						liberty_desire = 50
+						army_size = 20
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject = FROM
+			subject_type = vu_japanese_imperial_warlord
+		}
+		FROM = {
+			add_government_reform = vu_japanese_imperial_warlord_reform
+		}
+		vu_colour_refresh = yes		#Thank god somebody uses this -Don
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
