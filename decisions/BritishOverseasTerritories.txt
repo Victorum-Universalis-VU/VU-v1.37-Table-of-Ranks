@@ -48,6 +48,51 @@ country_decisions = {
 		}
 	}
 
+	#Heligoland
+	vu_lordship_of_heligoland = {
+		major = yes
+		potential = {
+			OR = {
+				tag = ENG
+				tag = GBR
+				tag = UNK
+			}
+			owns = 7692
+		}
+		provinces_to_highlight = {
+			area = heligoland_area
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			is_at_war = no
+		}
+		effect = {
+			heligoland_area = {
+				add_core = H3L
+			}
+			release = H3L
+			H3L = {
+				change_religion = ROOT
+				change_government = monarchy
+				set_government_rank = 1
+				add_government_reform = autocracy_reform
+				add_adm_power = 112
+				add_dip_power = 112
+				add_mil_power = 112
+				add_treasury = 136
+				add_manpower = 8
+				add_sailors = 3000
+				add_army_tradition = 10
+			}
+			create_subject = {
+				subject_type = vassal
+				who = H3L
+			}
+		}
+	}
+
 	#Malta
 	vu_lordship_of_malta = {
 		major = yes
