@@ -1,3 +1,4 @@
+#VU Marco Polo v1.37 update by SF
 #Same dip actions, just fixed up to not be 42 THOUSAND lines long...
 #########################################################################################
 #   vu_promote_vassal_to_lordship                                                       #
@@ -10,7 +11,6 @@ vu_promote_vassal_to_lordship = {
 		#Checks if the overlord has access to the appropriate subject types
 		#has_vu_ToR_subjects = yes
 		has_government_attribute = vu_has_ToR_subjects
-		ToR_subject_limit_reached = no
 		government_rank = 2
 		FROM = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
@@ -24,6 +24,7 @@ vu_promote_vassal_to_lordship = {
 		}
 	}
 	is_allowed = {
+		ToR_subject_limit_reached = no
 		if = {
 			#Limited that the vassal has less than 50 liberty desire
 			limit = {
@@ -60,7 +61,6 @@ vu_promote_vassal_to_barony = {
 	is_visible = {
 		#Checks if the overlord has access to the appropriate subject types
 		has_government_attribute = vu_has_ToR_subjects
-		ToR_subject_limit_reached = no
 		government_rank = 3
 		FROM = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
@@ -74,6 +74,7 @@ vu_promote_vassal_to_barony = {
 		}
 	}
 	is_allowed = {
+		ToR_subject_limit_reached = no
 		#Limited that the vassal has less than 50 liberty desire
 		if = {
 			limit = {
@@ -110,7 +111,6 @@ vu_promote_vassal_to_viscounty = {
 	is_visible = {
 		#Checks if the overlord has access to the appropriate subject types
 		has_government_attribute = vu_has_ToR_subjects
-		ToR_subject_limit_reached = no
 		government_rank = 4
 		FROM = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
@@ -126,6 +126,7 @@ vu_promote_vassal_to_viscounty = {
 	is_allowed = {
 		#Limited that the vassal has less than 50 liberty desire
 		if = {
+			ToR_subject_limit_reached = no
 			limit = {
 				FROM = {
 					liberty_desire = 50
@@ -160,7 +161,6 @@ vu_promote_vassal_to_marquisate = {
 	is_visible = {
 		#Checks if the overlord has access to the appropriate subject types
 		has_government_attribute = vu_has_ToR_subjects
-		ToR_subject_limit_reached = no
 		government_rank = 6
 		FROM = {
 			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
@@ -176,6 +176,7 @@ vu_promote_vassal_to_marquisate = {
 	is_allowed = {
 		#Limited that the vassal has less than 50 liberty desire
 		if = {
+			ToR_subject_limit_reached = no
 			limit = {
 				FROM = {
 					liberty_desire = 50
@@ -195,7 +196,8 @@ vu_promote_vassal_to_marquisate = {
 		vu_create_ToR_marquisate = yes
 		FROM = {
 			change_religion = ROOT
-			if = { #Added by Prussia to stop Daimyo dynasties being overwritten
+			if = { 
+				#Added by Prussia to stop Daimyo dynasties being overwritten
 				limit = {
 					ROOT = {
 						NOT = {
@@ -435,6 +437,202 @@ vu_rein_subject_in = {
 	ai_will_do = {
 		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
 	}
+}
+
+#######################################################################################
+#   vu_promote_vassal_to_abbacy                                                       #
+#######################################################################################
+vu_promote_vassal_to_abbacy = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_promote_vassal_to_lordship_alert_tooltip
+    is_visible = {
+        religion_group = christian
+        government_rank = 2
+        FROM = {
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+            }
+            government = theocracy
+        }
+    }
+    is_allowed = {
+        ToR_bishoprics_subject_limit_reached = no
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        create_subject = {
+            subject_type = christian_abbacy
+            who = FROM
+        }
+        FROM = {
+            set_government_rank = 1
+            vu_ToR_set_theocracy_gov_reform = yes
+        }
+        vu_colour_refresh = yes
+    }
+    ai_will_do = {
+        always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+
+################################################################################
+#   vu_promote_theocracy                                                       #
+################################################################################
+vu_promote_theocracy = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_promote_vassal_to_lordship_alert_tooltip
+    is_visible = {
+        religion_group = christian
+        FROM = {
+            OR = {
+                is_subject_of_type = christian_abbacy
+                is_subject_of_type = christian_bishopric
+            }
+            is_subject_of = ROOT
+        }
+    }
+    is_allowed = {
+        ToR_bishoprics_subject_limit_reached = no
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+        FROM = {
+            if = {
+                limit = {
+                    is_subject_of_type = christian_abbacy
+                }
+                total_development = 25
+                ToR_bishoprics_subject_limit_reached = no
+            }
+            else_if = {
+                limit = {
+                    is_subject_of_type = christian_bishopric
+                }
+                total_development = 50
+            }
+        }
+    }
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        if = {
+            limit = {
+                FROM = {
+                    is_subject_of_type = christian_abbacy
+                }
+            }
+            create_subject = {
+                subject_type = christian_bishopric
+                who = FROM
+            }
+            FROM = {
+                set_government_rank = 4
+            }
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    is_subject_of_type = christian_bishopric
+                }
+            }
+            create_subject = {
+                subject_type = christian_archbishopric
+                who = FROM
+            }
+            FROM = {
+                set_government_rank = 6
+            }
+        }
+        FROM = {
+            vu_ToR_set_theocracy_gov_reform = yes
+        }
+        vu_colour_refresh = yes
+    }
+    ai_will_do = {
+        always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
+}
+
+#######################################################################################
+#   vu_promote_vassal_to_feudal_republic                                              #
+#######################################################################################
+vu_promote_vassal_to_feudal_republic = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_promote_vassal_to_lordship_alert_tooltip
+    is_visible = {
+        religion_group = christian
+        government_rank = 7
+        FROM = {
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+            }
+            government = republic
+        }
+    }
+    is_allowed = {
+        ToR_bishoprics_subject_limit_reached = no
+        if = {
+            #Limited that the vassal has less than 50 liberty desire
+            limit = {
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+            custom_trigger_tooltip = {
+                tooltip = FROM_IS_REBELLIOUS_TT
+                FROM = {
+                    liberty_desire = 50
+                }
+            }
+        }
+    }
+    on_accept = {
+        #Made a scripted effect for this, to make this a bit less long and
+        #also to make it a bit more efficient as we can re-use these later on
+        create_subject = {
+            subject_type = feudal_republic
+            who = FROM
+        }
+        FROM = {
+        }
+        vu_colour_refresh = yes
+    }
+    ai_will_do = {
+        always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+    }
 }
 
 ###################################################################################################
@@ -907,9 +1105,9 @@ vu_convert_personal_union = {
 	}
 }
 
-#########################################################################################
-#   VU Turkish Subjects	                                                        #
-#########################################################################################
+###############################
+#   VU Turkish Subjects	by SF #
+###############################
 vu_release_beylik_subject = {
 	#Added by Prussia to allow breaking of Beylik Vassals for the Ottomans due to populat demand
 	category = influence
@@ -1035,26 +1233,75 @@ vu_release_timariot_march_subject = {
     }
 }
 
-#########################################################################################
-#   vu_invite_vassal_to_league_of_lezhe by Prussia                                      #
-#########################################################################################
-vu_invite_vassal_to_league_of_lezhe = {
-	category = influence
-	alert_index = 6
-	alert_tooltip = vu_invite_vassal_to_league_of_lezhe_alert_tooltip
-	is_visible = {
-		culture = albanian
-		ToR_subject_limit_reached = no
-		FROM = {
-			#FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
-			government = monarchy
-			is_subject_of = ROOT
-			OR = {
-				is_subject_of_type = vassal
-				is_subject_of_type = client_vassal
+vu_invite_vassal_to_become_a_timariot_march = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_invite_vassal_to_become_a_timariot_march_alert_tooltip
+    is_visible = {
+        ToR_subject_limit_reached = no
+        FROM = {
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+            }
+            government = monarchy
+        }
+        OR = {
+            culture_group = turkish_g
+            culture_group = turko_semitic
+            technology_group = ottoman
+            has_reform = ottoman_government
+        }
+    }
+	is_allowed = {
+		if = {
+			#Limited that the vassal has less than 50 liberty desire
+			limit = {
+				FROM = {
+					liberty_desire = 50
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = FROM_IS_REBELLIOUS_TT
+				FROM = {
+					liberty_desire = 50
+				}
 			}
 		}
 	}
+	on_accept = {
+		create_subject = {
+			subject_type = turkish_timariot_march
+			who = FROM
+		}
+		vu_colour_refresh = yes
+	}
+	ai_will_do = {
+		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
+	}
+}
+
+#####################################################
+#   vu_invite_vassal_to_league_of_lezhe by Prussia	#
+#####################################################
+vu_invite_vassal_to_league_of_lezhe = {
+    category = influence
+    alert_index = 6
+    alert_tooltip = vu_invite_vassal_to_league_of_lezhe_alert_tooltip
+    is_visible = {
+        culture = albanian
+        ToR_subject_limit_reached = no
+        FROM = {
+            #FROM has to be a subject of ROOT, a vassal specifically, and also has to be a monarchy
+            government = monarchy
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+            }
+        }
+    }
 	is_allowed = {
 		if = {
 			#Limited that the vassal has less than 50 liberty desire
@@ -1083,62 +1330,10 @@ vu_invite_vassal_to_league_of_lezhe = {
 	}
 }
 
-###############################################
-#   VU invite vassal to become a Beylik by SF #                                          #
-###############################################
 vu_invite_vassal_to_become_a_beylik = {
-	category = influence
-	alert_index = 6
-	alert_tooltip = vu_invite_vassal_to_become_a_beylik_alert_tooltip
-	is_visible = {
-		ToR_subject_limit_reached = no
-		FROM = {
-			is_subject_of = ROOT
-			OR = {
-				is_subject_of_type = vassal
-				is_subject_of_type = client_vassal
-			}
-			government = monarchy
-		}
-		OR = {
-			culture_group = turkish_g
-			culture_group = turko_semitic
-			technology_group = ottoman
-			has_reform = ottoman_government
-		}
-	}
-	is_allowed = {
-		if = {
-			#Limited that the vassal has less than 50 liberty desire
-			limit = {
-				FROM = {
-					liberty_desire = 50
-				}
-			}
-			custom_trigger_tooltip = {
-				tooltip = FROM_IS_REBELLIOUS_TT
-				FROM = {
-					liberty_desire = 50
-				}
-			}
-		}
-	}
-	on_accept = {
-		create_subject = {
-			subject_type = turkish_tributary_beylik_vassal
-			who = FROM
-		}
-		vu_colour_refresh = yes
-	}
-	ai_will_do = {
-		always = no		#Keeping the AI off this for now, can't be bothered teaching it what to do
-	}
-}
-
-vu_invite_vassal_to_become_a_timariot_march = {
     category = influence
     alert_index = 6
-    alert_tooltip = vu_invite_vassal_to_become_a_timariot_march_alert_tooltip
+    alert_tooltip = vu_invite_vassal_to_become_a_beylik_alert_tooltip
     is_visible = {
         ToR_subject_limit_reached = no
         FROM = {
@@ -1174,7 +1369,7 @@ vu_invite_vassal_to_become_a_timariot_march = {
     }
     on_accept = {
         create_subject = {
-            subject_type = turkish_timariot_march
+            subject_type = turkish_tributary_beylik_vassal
             who = FROM
         }
         vu_colour_refresh = yes

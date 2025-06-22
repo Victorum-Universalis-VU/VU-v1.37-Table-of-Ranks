@@ -691,9 +691,11 @@ christian = {
 		icon = 85
 		allow_female_defenders_of_the_faith = yes
 		allowed_conversion = {
+			catholic
 			lollardy
 			protestant
 			reformed
+			anglican
 		}
 
 		allowed_center_conversion = {
@@ -701,11 +703,12 @@ christian = {
 			lollardy
 			protestant
 			reformed
+			anglican
 		}
 
 		country = {
 			#VU Start of Don's stuff
-			morale_damage = 0.025
+			production_efficiency = 0.15
 			religious_unity = 0.15
 			missionaries = 1
 			#debuffs
@@ -719,7 +722,7 @@ christian = {
 		
 		country_as_secondary = {
 			technology_cost = -0.025 #Don't remove this - SF
-			fire_damage_received = -0.05
+			development_cost_modifier = -0.05
 			tolerance_own = 0.5
 			religious_unity = 0.1
 		}
@@ -731,7 +734,7 @@ christian = {
 		uses_anglican_power = yes				# Uses church power/aspect mechanics
 
 		on_convert = {
-			change_religion = anglican
+			change_religion = methodist
 			add_prestige = -100
 			remove_country_modifier = counter_reformation
 			remove_country_modifier = the_statue_in_restraint_of_appeals
@@ -747,7 +750,7 @@ christian = {
 					NOT = {
 						calc_true_if = {
 							all_province = {
-								religion = anglican
+								religion = methodist
 								is_reformation_center = yes
 							}
 							amount = 2
@@ -758,11 +761,11 @@ christian = {
 					random_owned_province = {
 						limit = {
 							can_have_center_of_reformation_trigger = {
-								RELIGION = anglican
+								RELIGION = methodist
 							}
 						}
-						change_religion = anglican
-						add_reform_center = anglican
+						change_religion = methodist
+						add_reform_center = methodist
 					}
 				}
 				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
@@ -773,7 +776,7 @@ christian = {
 					NOT = {
 						calc_true_if = {
 							all_province = {
-								religion = anglican
+								religion = methodist
 								is_reformation_center = yes
 							}
 							amount = 2
@@ -786,11 +789,11 @@ christian = {
 					random_owned_province = {
 						limit = {
 							can_have_center_of_reformation_trigger = {
-								RELIGION = anglican
+								RELIGION = methodist
 							}
 						}
-						change_religion = anglican
-						add_reform_center = anglican
+						change_religion = methodist
+						add_reform_center = methodist
 					}
 				}
 				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
@@ -798,14 +801,14 @@ christian = {
 		}
 		
 		aspects = {
-			#Vu - Don's stuff
-			vu_stability_aspect
-			vu_innovativeness_aspect
-			vu_expel_heretics_aspect
-			vu_diplomats_of_the_reformation_aspect
-			vu_spread_the_book_of_common_prayer
-			vu_bibles_for_soldiers
-			#Vu - End of Don's stuff
+			#Vu - Prussia's stuff
+			vu_methodist_encourage_abstentionism_aspect
+			vu_methodist_encourage_development_aspect
+			vu_methodist_encourage_productivity_aspect
+			vu_methodist_encourage_trade_aspect
+			vu_methodist_encourage_neigbourly_relations_aspect
+			vu_methodist_encourage_readiness_to_fight_aspect
+			#Vu - End of Prussia's stuff
 			vu_divorce_consort_aspect
 			vu_gain_consort_aspect
 			vu_dissolve_monasteries_aspect

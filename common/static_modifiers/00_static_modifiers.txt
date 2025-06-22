@@ -652,8 +652,7 @@ ai_nation = {
 	fort_maintenance_modifier = -0.3	#For proper fort logic
 	state_maintenance_modifier = -0.25
 	governing_capacity = 250	#Fixes pdx big brain (-_-)
-	governing_cost = -0.05
-	global_supply_limit_modifier = 1	#REDUCE ARMY EVAL ERRORS + LESS LAG IN LATE GAME | Increased it to 1, Should further reduce the errors -Don
+	global_supply_limit_modifier = 100	#REDUCE ARMY EVAL ERRORS + LESS LAG IN LATE GAME | Increased it to 1, Should further reduce the errors -Don
 	nobles_influence_modifier = -0.1	#Reminder : Remove after estate re-work
 	eunuchs_influence_modifier = -0.1
 	country_admin_power = 1	#AI is stupid with monarch points so they get more
@@ -1645,8 +1644,13 @@ self_governing_colony_overlord = {
 
 #VU - Addition by San Felipe
 self_governing_dominion_vu_overlord = {
-	governing_capacity_modifier = -0.05	#-5% per dominion, because granting a colony representation in government would reduce that government's power
+	governing_capacity_modifier = -0.025	#Reduced this slightly as with all the stuff added lately that hammers your gov cap, 5% is a bit much - Prussia
 	global_tariffs = -0.05	#-7,5% per every colony of this type
+	trade_steering = 0.1 #Added because they would help funnel trade through the dominions to the heartland - Prussia
+	global_trade_goods_size_modifier = 0.05 #Added this as the dominions would provide greater resources and manpower to produce more goods - Prussia
+	global_manpower_modifier = 0.1 #Added these following three entries because they were in the subject type file, but weren't applying properly there - Prussia
+	land_forcelimit_modifier = 0.1
+	naval_forcelimit_modifier = 0.1 
 }
 
 crown_colony_subject = {

@@ -368,7 +368,7 @@ has_ToR_unique_government_reform = {
 		has_reform = respect_union_reform		#Composite Monarchy
 		has_reform = portuguese_monarchy_reform		#Portuguese Monarchy
 		has_reform = kingdom_of_portugal_and_azures		#Portuguese Thassalocracy
-		has_reform = portuguese_empire_reform		#Portuguese Empire  
+		has_reform = portuguese_empire_reform		#Portuguese Empire
 		has_reform = bohemian_elective_kingdom_reform		#Bohemian Elective Monarchy
 		has_reform = polish_great_sejm		#Great Sejm
 		has_reform = grand_duchy_reform		#Grand Duchy
@@ -538,6 +538,36 @@ ToR_subject_limit_reached = {
 	}
 }
 
+ToR_feudal_republic_subject_limit_reached = {
+	calc_true_if = {
+		all_subject_country = {
+			is_subject_of_type = feudal_republic
+		}
+		amount = 10		#Total limit for Subjects -Don, Prussia
+	}
+}
+
+ToR_bishoprics_subject_limit_reached = {
+	calc_true_if = {
+		all_subject_country = {
+			OR = {
+				is_subject_of_type = christian_abbacy
+				is_subject_of_type = christian_bishopric
+			}
+		}
+		amount = 7		#Total limit for Subjects -Don, Prussia
+	}
+}
+
+ToR_archbishoprics_subject_limit_reached = {
+	calc_true_if = {
+		all_subject_country = {
+			is_subject_of_type = christian_archbishopric
+		}
+		amount = 3		#Total limit for Subjects -Don, Prussia
+	}
+}
+
 ToR_Muslim_subject_limit_reached = {
 	calc_true_if = {
 		all_subject_country = {
@@ -562,7 +592,7 @@ vu_is_caliphate = {
 		}
 		has_reform = caliphate_theocracy_reform
 		has_reform = timurid_amirate_reform
-		has_reform = ghazi_reform #
+		has_reform = ghazi_reform
 		ME_is_caliphate_trigger = yes		#Contains the vanilla + ME caliphates
 	}
 }
@@ -596,7 +626,7 @@ vu_is_caliphate = {
 # navigator_personality 				| ship_durability = 0.1
 # fierce_negotiator_personality 		| merc_maintenance_modifier = -0.25
 ############## VERY GOOD ################---------------------------------------------------------
-# reformist_personality 				| 
+# reformist_personality 				|
 # strict_personality 					| discipline = 0.05
 # silver_tongue_personality 			| improve_relation_modifier = 0.2
 # entrepreneur_personality_upgrade		| trade_efficiency = 0.2
@@ -620,11 +650,12 @@ vu_is_caliphate = {
 # infertile_personality 				| heir_chance = -0.5
 # cruel_personality 					| global_unrest = 2
 ################## N/A ##################---------------------------------------------------------
-# immortal_personality 					| 
-# legendary_pirate_personality 			| 
+# immortal_personality 					|
+# legendary_pirate_personality 			|
 # legendary_conqueror_personality		|
 # great_engineer_personality			|
-# patron_of_arts_personality			|
+# patron_of_arts_personality			| #EU4 vanilla Timurid specific entry
+# vu_patron_of_arts_personality			| #VU vanilla generic entry
 # papal_puppetmaster_personality 		|
 # iron_crowned_personality				|
 # peasant_revolt_leader_personality		|
@@ -633,7 +664,6 @@ vu_is_caliphate = {
 # reaver_personality					|
 # last_knight_personality				|
 #########################################---------------------------------------------------------
-
 vu_ruler_has_bad_personality_trait = {
 	OR = {
 		ruler_has_personality = greedy_personality
@@ -700,6 +730,290 @@ vu_ruler_has_very_good_personality_trait = {
 	}
 }
 
-vu_ruler_has_educated_trait = {
+vu_province_in_west_afrika = {
+	OR = {
+		trade_company_region = trade_company_senegal
+		trade_company_region = trade_company_gambia
+		trade_company_region = trade_company_bissau
+		trade_company_region = trade_company_guinea
+		trade_company_region = trade_company_sierra_leone
+		trade_company_region = trade_company_liberia
+		trade_company_region = trade_company_ivory_coast
+		trade_company_region = trade_company_ghana
+		trade_company_region = trade_company_togo
+		trade_company_region = trade_company_benin
+		trade_company_region = trade_company_nigeria
+		trade_company_region = trade_company_mali
+		trade_company_region = trade_company_mauritania
+		trade_company_region = trade_company_burkina
+		trade_company_region = trade_company_niger
+	}
+}
+
+vu_province_in_ost_afrika = {
+	OR = {
+		trade_company_region = trade_company_angola
+		trade_company_region = trade_company_namibia
+		trade_company_region = trade_company_kongo
+		trade_company_region = trade_company_gabon
+		trade_company_region = trade_company_cameroon
+		trade_company_region = trade_company_central_africa
+		trade_company_region = trade_company_chad
+		trade_company_region = trade_company_tanganyika
+		trade_company_region = trade_company_kenya
+		trade_company_region = trade_company_zambezi
+		trade_company_region = trade_company_mozambique
+		trade_company_region = trade_company_madagascar
+		trade_company_region = trade_company_buganda
+	}
+}
+
+##################
+## Don's New AI ##
+##################
+vu_don_economy_ai_never_do_when = {
+	OR = {
+		num_of_loans = 5
+		governing_capacity_percentage = 0.8
+	}
+}
+
+vu_don_economy_ai_avoid_doing_when = {
+	OR = {
+		is_in_deficit = yes
+		NOT = {
+			years_of_income = 0.25
+		}
+		is_at_war = yes
+		num_of_loans = 1
+	}
+}
+
+vu_don_economy_ai_never_build_in = {
+	OR = {
+		has_terrain = glacier
+		has_terrain = cold_mountains
+	}
+}
+
+vu_don_economy_ai_avoid_building_in = {
+	OR = {
+		has_climate = arctic
+		has_climate = arid
+		has_climate = tropical
+		has_terrain = mountain
+		has_terrain = swamp
+		has_terrain = marsh
+		has_terrain = hills
+		has_terrain = highlands
+		has_terrain = fertile_highlands
+	}
+}
+
+vu_don_economy_ai_trade_in = {
+	OR = {
+		has_river_estuary_trigger = yes
+		has_special_trade_modifier = yes
+		vu_province_has_naval_base = yes
+		province_has_center_of_trade_of_level = 1
+		trade_goods = fur
+		trade_goods = tobacco
+		trade_goods = silk
+		trade_goods = dyes
+		trade_goods = palm_oil
+		trade_goods = cloves
+		trade_goods = tin
+		trade_goods = carpet
+		trade_goods = exotic_animals
+		trade_goods = vanilla
+		trade_goods = jewellery
+		trade_goods = indigo
+		trade_goods = sea_turtle
+		trade_goods = String_Instruments
+		trade_goods = bison_hides
+		trade_goods = lace
+	}
+}
+
+vu_don_economy_ai_manpower_in = {
+	OR = {
+		base_manpower = 10
+		trade_goods = fruit
+		trade_goods = cocoa
+		trade_goods = rice
+		trade_goods = dates
+		trade_goods = maize
+		trade_goods = tomato
+		trade_goods = agave
+	}
+}
+
+vu_don_economy_ai_manpower_when = {
+	OR = {
+		max_manpower = 20
+		NOT = {
+			manpower_percentage = 0.5
+		}
+	}
+}
+
+vu_don_economy_ai_forcelimit_in = {
+	OR = {
+		base_manpower = 10
+		trade_goods = grain
+		trade_goods = wine
+		trade_goods = tea
+		trade_goods = livestock
+		trade_goods = beer
+		trade_goods = rice
+		trade_goods = horses
+		trade_goods = cheese
+		trade_goods = millet
+		trade_goods = sweet_confectioneries
+		trade_goods = vegetables
+	}
+}
+
+vu_don_economy_ai_forcelimit_when = {
+	OR = {
+		army_size_percentage = 0.9
+		NOT = {
+			army_size = 5
+		}
+	}
+}
+
+vu_don_economy_ai_naval_forcelimit_in = {
+	OR = {
+		vu_province_has_naval_base = yes
+		trade_goods = fish
+		trade_goods = naval_supplies
+		trade_goods = lumber
+		trade_goods = seafood
+	}
+}
+
+vu_don_economy_ai_naval_forcelimit_when = {
+	OR = {
+		navy_size_percentage = 0.9
+		NOT = {
+			navy_size = 5
+		}
+		num_of_galleass = 1
+		num_of_man_of_war = 1
+	}
+}
+
+vu_don_economy_ai_sailors_in = {
+	OR = {
+		vu_province_has_naval_base = yes
+		trade_goods = fish
+		trade_goods = seafood
+	}
+}
+
+vu_don_economy_ai_sailors_when = {
+	OR = {
+		num_of_marines = 1
+		NOT = {
+			sailors_percentage = 0.5
+		}
+	}
+}
+
+vu_don_economy_ai_government_when = {
+	OR = {
+		governing_capacity_percentage = 0.75
+		average_autonomy_above_min = 25
+	}
+}
+
+vu_don_economy_ai_government_never_do_when = {
+	NOT = {
+		governing_capacity_percentage = 0.5
+		average_autonomy_above_min = 25
+		num_of_loans = 1
+	}
+}
+
+vu_don_economy_ai_education_when = {
+	is_lacking_institutions = yes
+}
+
+vu_don_economy_ai_education_in = {
+	OR = {
+		NOT = {
+			current_institution = 100
+		}
+		development = 15
+	}
+}
+
+vu_don_economy_ai_church_when = {
+	NOT = {
+		religious_unity = 0.5
+	}
+}
+
+vu_don_economy_ai_church_in = {
+	OR = {
+		base_tax = 10
+		trade_goods = gems
+		trade_goods = pearls
+		trade_goods = diamonds
+		NOT = {
+			religion = owner
+		}
+	}
+}
+
+vu_don_economy_ai_fortress_never_in = {
+	OR = {
+		any_neighbor_province = {
+			OR = {
+				has_building = fort_15th
+				has_building = fort_16th
+				has_building = fort_17th
+				has_building = fort_18th
+			}
+		}
+		has_terrain = grasslands
+	}
+}
+
+vu_don_economy_ai_fortress_avoid_in = {
+	any_province_in_state = {
+		OR = {
+			has_building = fort_15th
+			has_building = fort_16th
+			has_building = fort_17th
+			has_building = fort_18th
+		}
+	}
+}
+
+vu_don_economy_ai_infrastructure_in = {
+	OR = {
+		development = 10
+		is_capital = yes
+		NOT = {
+			num_free_building_slots = 1
+		}
+	}
+}
+
+###################################
+## SF & Don's Province Modifiers ##
+###################################
+vu_has_builing_for_administration = {
+
+}
+vu_has_builing_for_education = {
+	
+}
+vu_has_builing_for_entertainment = {
+	
+}
+vu_has_builing_for_sanitation = {
 	
 }

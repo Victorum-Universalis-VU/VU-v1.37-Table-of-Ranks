@@ -1,0 +1,83 @@
+#Palácio Nacional de Mafra
+vu_spa_hot_springs = {
+    start = 8496
+    date = 79.01.01
+    time = { months = 0 }
+    build_cost = 0
+    can_be_moved = no
+    move_days_per_unit_distance = 7
+    starting_tier = 1
+    type = monument
+    build_trigger = {
+        #Anyone can use it and everyone has been using it since antiquity
+    }
+    on_built = { show_ambient_object = vu_spa_hot_springs }
+    on_destroyed = { hide_ambient_object = vu_spa_hot_springs }
+    can_use_modifiers_trigger = {
+    }
+    can_upgrade_trigger = {
+        #Anyone can use it and everyone has been using it since antiquity
+    }
+    keep_trigger = {}
+
+    tier_0 = {
+        upgrade_time = { months = 0	}
+        cost_to_upgrade = {	factor = 0 }
+        province_modifiers = {}
+        area_modifier = {}
+        country_modifiers = {}
+        on_upgraded = {}
+    }
+    #VU Update - Modified with advice and suggestions from Prussia. By SF
+    tier_1 = {
+        upgrade_time = { months = 240 }
+        cost_to_upgrade = {	factor = 3500 }
+        province_modifiers = {
+            local_unrest = -1
+        }
+        area_modifier = {
+            local_culture_conversion_cost = -0.15
+        }
+        country_modifiers = {
+            monarch_lifespan = 0.1
+        }
+        on_upgraded = {}
+    }
+    tier_2 = {
+        upgrade_time = { months = 480 }
+        cost_to_upgrade = {	factor = 7000 }
+        province_modifiers = {
+            local_unrest = -2
+            local_prosperity_growth = -0.1
+        }
+        area_modifier = {
+            local_culture_conversion_cost = -0.25
+            local_culture_conversion_time = -0.1
+        }
+        country_modifiers = {
+            culture_conversion_cost = -0.1
+            monarch_lifespan = 0.15
+        }
+        on_upgraded = {
+            add_building = bath_house
+        }
+    }
+    tier_3 = {
+        upgrade_time = { months = 960 }
+        cost_to_upgrade = {	factor = 14000 }
+        province_modifiers = {
+            local_unrest = -3
+            local_prosperity_growth = -0.2
+        }
+        area_modifier = {
+            local_culture_conversion_cost = -0.35
+            local_culture_conversion_time = -0.2
+        }
+        country_modifiers = {
+            same_culture_advisor_cost = -0.1
+            monarch_lifespan = 0.2
+            culture_conversion_cost = -0.2
+        }
+        on_upgraded = {}
+    }
+}

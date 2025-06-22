@@ -18,71 +18,53 @@ ME_has_completed_all_reforms = {
 	custom_trigger_tooltip = {
 		tooltip = ME_has_completed_all_reforms_tt
 		if = {
-			limit = { government = monarchy }
-			if = {
-				limit = {
-					is_expanded_mod_active = { mod = governments }
-				}
-				reform_level = 9
+			limit = {
+				government = monarchy
 			}
-			else = { reform_level = 7 }
+			reform_level = 9
 		}
 		else_if = {
-			limit = { government = republic }
-			if = {
-				limit = {
-					is_expanded_mod_active = { mod = governments }
-				}
-				reform_level = 11
+			limit = {
+				government = republic
 			}
-			else = { reform_level = 10 }
+			reform_level = 10
 		}
 		else_if = {
-			limit = { government = theocracy }
-			if = {
-				limit = {
-					is_expanded_mod_active = { mod = governments }
-				}
-				reform_level = 12
+			limit = {
+				government = theocracy
 			}
-			else = { reform_level = 8 }
+			reform_level = 12
 		}
 		else_if = {
-			limit = { government = tribal }
-			if = {
-				limit = {
-					is_expanded_mod_active = { mod = governments }
-				}
-				reform_level = 6
+			limit = {
+				government = tribal
 			}
-			else = { reform_level = 5 }
+			reform_level = 6
 		}
 		else_if = {
-			limit = { government = native }
-			if = {
-				limit = {
-					is_expanded_mod_active = { mod = governments }
-				}
-				reform_level = 5
+			limit = {
+				government = native
 			}
-			else = { reform_level = 5 }
+			reform_level = 5
 		}
-		else = { reform_level = 5 }
+		else = {
+			reform_level = 5
+		}
 	}
 }
 
 # This is just has_reform_on_level but with an accurate tooltip. Accepts level and value because why not? Levels count from 0, so tier 1 = 0. Not my fault. This is just to fix the tooltip :/ Supports up to 14 gov reforms. More than GE has!
 ME_has_reform_on_level = {
 	[[level]
-		custom_trigger_tooltip = {
-			tooltip = has_reform_on_level_$level$_tt
-			has_reform_on_level = $level$
-		}
+	custom_trigger_tooltip = {
+		tooltip = has_reform_on_level_$level$_tt
+		has_reform_on_level = $level$
+	}
 	]
 	[[value]
-		custom_trigger_tooltip = {
-			tooltip = has_reform_on_level_$value$_tt
-			has_reform_on_level = $value$
-		}
+	custom_trigger_tooltip = {
+		tooltip = has_reform_on_level_$value$_tt
+		has_reform_on_level = $value$
+	}
 	]
 }

@@ -175,7 +175,15 @@ eng_row_slot_1 = {
 				region = british_isles_region
 				value = 50
 			}
-			adm_tech = 27
+			OR = {
+				NOT = {
+					exists = SCO
+				}
+				SCO = {
+					is_subject_of = ENG
+				}
+			}
+			has_institution = renaissance
 		}
 		effect = {
 			add_prestige_or_monarch_power = {
@@ -1348,7 +1356,6 @@ gbr_row_slot_2 = {
 				}
 				add_country_modifier = {
 					name = gbr_unified_british_isles_culture
-					desc = gbr_develop_british_identity_vu
 					duration = -1
 				}
 			}

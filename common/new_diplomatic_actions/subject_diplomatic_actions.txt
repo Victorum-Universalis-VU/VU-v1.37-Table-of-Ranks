@@ -1,3 +1,4 @@
+#Updated for VU Marco Polo v1.37 by SF
 #Swiss
 request_canton = {
 	category = influence
@@ -2133,65 +2134,5 @@ administrative_region_disable_administrative_help = {
 		FROM = {
 			liberty_desire = 55
 		}
-	}
-}
-
-#subjects_expanded_diplomatic_actions_annexable_colony
-establish_annexable_colony = {
-	category = influence
-	require_acceptance = no
-	is_visible = {
-		ai = no
-		can_create_subject_type = {
-			subject = FROM
-			subject_type = annexable_colony
-		}
-	}
-	is_allowed = {
-		can_create_subject_type = {
-			subject = FROM
-			subject_type = annexable_colony
-		}
-		num_of_colonists = 2
-		is_at_war = no
-		FROM = {
-			is_at_war = no
-		}
-		FROM = {
-			NOT = {
-				liberty_desire = 50
-			}
-		}
-	}
-	on_accept = {
-		if = {
-			limit = {
-				can_create_subject_type = {
-					subject = FROM
-					subject_type = annexable_colony
-				}
-				num_of_colonists = 2
-				is_at_war = no
-				FROM = {
-					is_at_war = no
-				}
-				FROM = {
-					NOT = {
-						liberty_desire = 50
-					}
-				}
-			}
-			create_subject = {
-				subject = FROM
-				subject_type = annexable_colony
-			}
-			FROM = {
-				set_disabled_colonial_nation_spawning_for_region_for_overlord = yes
-			}
-			set_country_flag = has_had_annexable_colony
-		}
-	}
-	ai_will_do = {
-		always = no
 	}
 }

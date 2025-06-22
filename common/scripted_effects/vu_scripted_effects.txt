@@ -1,0 +1,540 @@
+vu_POW_on_battle_won_effect = {
+	# root = winning country, from = loser country
+	if = {
+		limit = {
+			check_variable = {
+				which = land_units_killed
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = vu_pow_neutral_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle
+					duration = 30
+					hidden = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_hostile_attitude
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle_hostile
+					duration = 30
+					hidden = yes
+				}
+				add_manpower = -0.25
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_friendly_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle_friendly
+				duration = 30
+				hidden = yes
+			}
+			vu_POW_friendly_effect = yes
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_slavery_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle_hostile
+					duration = 30
+					hidden = yes
+				}
+			}
+			vu_POW_slavery_effect = yes
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_sacrificial_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle_hostile
+					duration = 30
+					hidden = yes
+				}
+			}
+			vu_POW_sacrifice_effect = yes
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_cannibalism_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle_hostile
+					duration = 30
+					hidden = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_noble_ransom_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle
+					duration = 30
+					hidden = yes
+				}
+			}
+			vu_POW_noble_ransom_effect = yes
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_community_service_attitude
+			}
+			add_country_modifier = {
+				name = vu_pow_won_battle_friendly
+				duration = 30
+				hidden = yes
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle
+					duration = 30
+					hidden = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_gladiatorial_attitude
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle
+					duration = 30
+					hidden = yes
+				}
+			}
+			vu_POW_gladiatorial_effect = yes
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_resettlement_attitude
+			}
+			FROM = {
+				add_country_modifier = {
+					name = vu_pow_lost_battle
+					duration = 30
+					hidden = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = vu_pow_internment_camps_attitude
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = REB
+					}
+				}
+				change_variable = {
+					which = vu_battles_won_against_rebels
+					value = 1
+				}
+			}
+			else = {
+				change_variable = {
+					which = vu_battles_won_against_enemies
+					value = 1
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				which = naval_units_killed
+				value = 1
+			}
+		}
+		add_sailors = 10
+	}
+}
+
+vu_POW_friendly_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.1
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		add_manpower = 1
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		add_manpower = 0.001
+	}
+}
+
+vu_POW_slavery_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.15
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_slaves
+			value = 1000
+		}
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_slaves
+			value = 1
+		}
+	}
+}
+
+vu_POW_sell_slaves_effect = {
+	while = {
+		limit = {
+			check_variable = {
+				which = vu_pow_slaves
+				value = 1
+			}
+		}
+		subtract_variable = {
+			which = vu_pow_slaves
+			value = 1
+		}
+		add_treasury = 0.1
+	}
+}
+
+vu_POW_sacrifice_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.15
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_sacrifices
+			value = 1000
+		}
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_sacrifices
+			value = 1
+		}
+	}
+}
+
+vu_POW_mass_sacrifice_effect = {
+	add_country_modifier = {
+		name = vu_pow_gods_favour
+		duration = 365
+	}
+	set_variable = {
+		which = vu_pow_sacrifices
+		value = 0
+	}
+}
+
+vu_POW_noble_ransom_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.005
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_nobles
+			value = 1000
+		}
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_nobles
+			value = 1
+		}
+	}
+}
+
+vu_POW_ransom_nobles_effect = {
+	while = {
+		limit = {
+			check_variable = {
+				which = vu_pow_nobles
+				value = 1
+			}
+		}
+		subtract_variable = {
+			which = vu_pow_nobles
+			value = 1
+		}
+		add_treasury = 1
+	}
+}
+
+vu_POW_gladiatorial_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.15
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_gladiators
+			value = 1000
+		}
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_gladiators
+			value = 1
+		}
+	}
+}
+
+vu_POW_gladiator_fight_effect = {
+	add_country_modifier = {
+		name = vu_pow_arena_fights
+		duration = 730
+	}
+	set_variable = {
+		which = vu_pow_gladiators
+		value = 0
+	}
+}
+
+vu_POW_internment_effect = {
+	set_variable = {
+		which = land_units_killed_var
+		which = land_units_killed
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 0.15
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_prisoners
+			value = 1000
+		}
+	}
+	multiply_variable = {
+		which = land_units_killed_var
+		value = 1000
+	}
+	while = {
+		limit = {
+			check_variable = {
+				which = land_units_killed_var
+				value = 1000
+			}
+		}
+		subtract_variable = {
+			which = land_units_killed_var
+			value = 1000
+		}
+		change_variable = {
+			which = vu_pow_prisoners
+			value = 1
+		}
+	}
+}
+
+vu_POW_set_reset = {
+	remove_country_modifier = vu_pow_neutral_attitude
+	remove_country_modifier = vu_pow_hostile_attitude
+	remove_country_modifier = vu_pow_friendly_attitude
+	remove_country_modifier = vu_pow_slavery_attitude
+	remove_country_modifier = vu_pow_sacrificial_attitude
+	remove_country_modifier = vu_pow_cannibalism_attitude
+	remove_country_modifier = vu_pow_noble_ransom_attitude
+	remove_country_modifier = vu_pow_community_service_attitude
+	remove_country_modifier = vu_pow_gladiatorial_attitude
+	remove_country_modifier = vu_pow_resettlement_attitude
+	remove_country_modifier = vu_pow_internment_camps_attitude
+}

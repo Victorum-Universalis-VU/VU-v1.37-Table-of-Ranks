@@ -53,15 +53,6 @@ abbasid_denounce_actions = {
 			amount = 10
 		}
 		set_country_flag = abbasid_recently_denounced
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
-		}
 	}
 	ai_will_do = {
 		always = yes
@@ -111,15 +102,6 @@ abbasid_call_jihad = {
 			}
 		}
 		set_country_flag = abbasid_recently_called_jihad
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
-		}
 	}
 	ai_will_do = {
 		FROM = {
@@ -179,15 +161,6 @@ abbasid_praise = {
 			mutual = yes
 		}
 		set_country_flag = abbasid_recently_praised
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
-		}
 	}
 	ai_will_do = {
 		FROM = {
@@ -205,7 +178,7 @@ abbasid_invite_scholar = {
 			religion = ROOT
 		}
 	}
-	is_allowed = {		
+	is_allowed = {
 		custom_trigger_tooltip = {
 			tooltip = Abbasid_has_not_invited_scholar_in_20_years
 			OR = {
@@ -223,15 +196,6 @@ abbasid_invite_scholar = {
 		set_variable = {
 			which = invited_scholar_reduction
 			value = 0
-		}
-		if = {
-			limit = {
-				has_country_flag = ARB_caliphal_invite_scholars_diplomatic_action
-			}
-			change_variable = {
-				which = invited_scholar_reduction
-				value = 25
-			}
 		}
 		if = {
 			limit = {
@@ -373,15 +337,6 @@ abbasid_invite_scholar = {
 			}
 		}
 		set_country_flag = abbasid_recently_invited_scholars
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
-		}
 		FROM = {
 			save_event_target_as = temp_aba_target
 		}
@@ -400,7 +355,7 @@ abbasid_invite_scholar = {
 			}
 		}
 		FROM = {
-			 alliance_with = ROOT
+			alliance_with = ROOT
 		}
 	}
 }
@@ -433,15 +388,6 @@ abbasid_send_help = {
 	on_accept = {
 		set_country_flag = abbasid_recently_sent_help
 		add_mil_power = -50
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
-		}
 		save_event_target_as = temp_caliph
 		FROM = {
 			country_event = {
@@ -457,7 +403,7 @@ abbasid_send_help = {
 		}
 		mil_power = 500
 		FROM = {
-			 alliance_with = ROOT
+			alliance_with = ROOT
 		}
 	}
 }
@@ -560,15 +506,6 @@ abbasid_zakat = {
 		set_variable = {
 			which = ABA_Temp
 			value = 0
-		}
-		if = {
-			limit = {
-				has_country_flag = me_tim_abbasid_completion
-			}
-			change_variable = {
-				which = METimCaliphActions
-				value = 1
-			}
 		}
 	}
 	ai_acceptance = {
@@ -779,6 +716,7 @@ abbasid_ransom = {
 			}
 		}
 		add_entry = {
+			#Ignore thise false flag errors, I've fixed up everything there is to fix - Don
 			name = ME_DOESNT_HAVE_ENOUGH_IN_BANK
 			export_to_variable = {
 				variable_name = ai_value
@@ -813,15 +751,6 @@ abbasid_ransom = {
 		}
 		add_entry = {
 			name = ME_OUR_BALANCE
-			export_to_variable = {
-				variable_name = ai_value
-				value = 0
-			}
-			export_to_variable = {
-				variable_name = ai_value
-				value = trigger_value:current_income_balance
-				who = FROM
-			}
 			export_to_variable = {
 				variable_name = ai_value
 				value = trigger_value:monthly_income

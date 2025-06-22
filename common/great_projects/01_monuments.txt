@@ -330,7 +330,7 @@ stonehenge = {
 
     # date built in real life (so anything built during game time will be there if you start a game after that date)
     #date = -2500.01.01
-	date = 1200.01.01
+    date = 1200.01.01
 
     #time to build
     time = {
@@ -485,7 +485,7 @@ stonehenge = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.1
+            local_hostile_movement_speed = -0.1
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -518,7 +518,7 @@ stonehenge = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.15
+            local_hostile_movement_speed = -0.15
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -555,7 +555,7 @@ stonehenge = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.2
+            local_hostile_movement_speed = -0.2
             local_autonomy = 0.02
         }
 
@@ -1292,7 +1292,7 @@ buddha_statues = {
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
             local_friendly_movement_speed = 0.1
-            local_hostile_movement_speed = 0.1
+            local_hostile_movement_speed = -0.1
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -1327,7 +1327,7 @@ buddha_statues = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.1
+            local_hostile_movement_speed = -0.1
             local_friendly_movement_speed = 0.1
         }
 
@@ -1354,7 +1354,7 @@ parthenon = {
 
     # date built in real life (so anything built during game time will be there if you start a game after that date)
     #date = -432.01.01
-	date = 1200.01.01
+    date = 1200.01.01
 
     #time to build
     time = {
@@ -1595,203 +1595,6 @@ parthenon = {
     }
 }
 
-forbidden_city = {
-    # province it starts in
-    start = 1816
-
-    # date built in real life (so anything built during game time will be there if you start a game after that date)
-    date = 1406.01.01
-
-    #time to build
-    time = {
-        months = 0
-    }
-
-    #how much to build one
-    build_cost = 0
-
-    #can we move it?
-    can_be_moved = no
-
-    #time to move the project one unit of distance, in days
-    move_days_per_unit_distance = 10
-
-    #tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
-    starting_tier = 2
-
-    #project type
-    type = monument
-
-    #can we build it?
-    build_trigger = {
-        owner = {
-            has_reform = celestial_empire
-        }
-    }
-
-    #what to do when it's built
-    on_built = {
-        show_ambient_object = forbidden_city
-    }
-
-    #what to do when it's destroyed
-    on_destroyed = {
-        hide_ambient_object = forbidden_city
-    }
-
-    #can our country use it?
-    can_use_modifiers_trigger = {
-        owner = {
-            has_reform = celestial_empire
-        }
-    }
-
-    #can our country upgrade it?
-    can_upgrade_trigger = {
-        owner = {
-            has_reform = celestial_empire
-        }
-    }
-
-    #can our country keep it or is it destroyed when we get hold of it?
-    keep_trigger = {
-    }
-
-    #tier data
-    tier_0 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 0
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 0
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 120
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 4750
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_defensiveness = 0.1
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            promote_culture_cost = -0.1
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            yearly_absolutism = 0.1
-            imperial_mandate = 0.01
-            governing_capacity = 25
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_2 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 240
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 9500
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_unrest = -2
-            local_defensiveness = 0.2
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            #local_warscore_cost_modifier = 0.2 #This modifier does not exist
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            yearly_absolutism = 0.2
-            imperial_mandate = 0.02
-            prestige = 0.20
-            governing_capacity = 50
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_3 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 960
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 19000
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_unrest = -3
-            local_defensiveness = 0.3
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            promote_culture_cost = -0.3
-            #local_warscore_cost_modifier = 0.3 #This modifier does not exist
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            yearly_absolutism = 0.3
-            imperial_mandate = 0.03
-            prestige = 0.30
-            governing_capacity = 75
-            legitimacy = 3
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-}
-
 angkor_wat = {
     # province it starts in
     start = 609
@@ -2008,7 +1811,7 @@ petra = {
 
     # date built in real life (so anything built during game time will be there if you start a game after that date)
     #date = -2500.01.01
-	date = 1200.01.01
+    date = 1200.01.01
 
     #time to build
     time = {
@@ -3000,7 +2803,7 @@ chichen_itza = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.1
+            local_hostile_movement_speed = -0.1
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -3040,7 +2843,7 @@ chichen_itza = {
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
             local_friendly_movement_speed = 0.2
-            local_hostile_movement_speed = 0.2
+            local_hostile_movement_speed = -0.2
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -3082,7 +2885,7 @@ chichen_itza = {
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
             local_friendly_movement_speed = 0.3
-            local_hostile_movement_speed = 0.3
+            local_hostile_movement_speed = -0.3
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -3892,6 +3695,7 @@ mount_fuji = {
             prestige = 0.3
             yearly_karma_decay = 0.003
             missionaries = 3
+            development_cost_modifier = -0.3
         }
 
         #what effects happen when this tier is achieved
@@ -4091,7 +3895,7 @@ tenochtitlan = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            tax_income = 25
+            tax_income = 20
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -4125,7 +3929,7 @@ tenochtitlan = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            tax_income = 50
+            tax_income = 40
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -4160,7 +3964,7 @@ tenochtitlan = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            tax_income = 75
+            tax_income = 60
             local_build_cost = -0.3
         }
 
@@ -4611,227 +4415,6 @@ shwedagon_pagoda = {
                     loyalty = 15
                 }
             }
-        }
-    }
-}
-
-the_great_wall_of_china = {
-    # province it starts in
-    start = 698
-
-    # date built in real life (so anything built during game time will be there if you start a game after that date)
-    date = 1368.01.01 #Ming dynasty
-
-    #time to build
-    time = {
-        months = 0
-    }
-
-    #how much to build one
-    build_cost = 0
-
-    #can we move it?
-    can_be_moved = no
-
-    #time to move the project one unit of distance, in days
-    move_days_per_unit_distance = 1
-
-    #tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
-    starting_tier = 2
-
-    #project type
-    type = monument
-
-    #can we build it?
-    build_trigger = {
-        OR = {
-            AND = {
-                culture_group = east_asian
-                province_is_or_accepts_culture = yes
-            }
-            owner = { is_emperor_of_china = yes }
-            custom_trigger_tooltip = {
-                tooltip = COMPLETED_SPECIAL_MISSION_THAT_UNLOCKS_GREAT_PROJECT
-                owner = { has_country_flag = hordes_unlocked_wall_of_china }
-            }
-        }
-    }
-
-    #what to do when it's built
-    on_built = {
-        #show_ambient_object = the_great_wall_of_china
-    }
-
-    #what to do when it's destroyed
-    on_destroyed = {
-        #hide_ambient_object = the_great_wall_of_china
-    }
-
-    #can our country use it?
-    can_use_modifiers_trigger = {
-        OR = {
-            AND = {
-                culture_group = east_asian
-                province_is_or_accepts_culture = yes
-            }
-            owner = { is_emperor_of_china = yes }
-            custom_trigger_tooltip = {
-                tooltip = COMPLETED_SPECIAL_MISSION_THAT_UNLOCKS_GREAT_PROJECT
-                owner = { has_country_flag = hordes_unlocked_wall_of_china }
-            }
-        }
-    }
-
-    #can our country upgrade it?
-    can_upgrade_trigger = {
-        OR = {
-            AND = {
-                culture_group = east_asian
-                province_is_or_accepts_culture = yes
-            }
-            owner = { is_emperor_of_china = yes }
-            custom_trigger_tooltip = {
-                tooltip = COMPLETED_SPECIAL_MISSION_THAT_UNLOCKS_GREAT_PROJECT
-                owner = { has_country_flag = hordes_unlocked_wall_of_china }
-            }
-        }
-    }
-
-    #can our country keep it or is it destroyed when we get hold of it?
-    keep_trigger = {
-    }
-
-    #tier data
-    tier_0 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 0
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 0
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 240
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 3500
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            garrison_growth = 0.1
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_defensiveness = 0.10
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            hostile_attrition = 1
-            garrison_size = 0.10
-            rival_border_fort_maintenance = -0.10
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_2 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 480
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 7000
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            garrison_growth = 0.2
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_unrest = -2
-            local_defensiveness = 0.20
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            hostile_attrition = 2
-            garrison_size = 0.20
-            rival_border_fort_maintenance = -0.20
-            land_maintenance_modifier = -0.20
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_3 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 960
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 14000
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_development_cost = -0.03
-            garrison_growth = 0.3
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_unrest = -3
-            local_defensiveness = 0.3
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            hostile_attrition = 3
-            garrison_size = 0.30
-            rival_border_fort_maintenance = -0.30
-            land_maintenance_modifier = -0.30
-            prestige = 0.3
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
         }
     }
 }
@@ -6652,7 +6235,7 @@ golden_temple = {
             monthly_piety = 0.002
             stability_cost_modifier = -0.2
             monthly_karma = 0.2
-            global_autonomy = -0.020
+            global_autonomy = -0.02
             min_autonomy_in_territories = -0.1
         }
 
@@ -6689,7 +6272,7 @@ golden_temple = {
             monthly_piety = 0.003
             stability_cost_modifier = -0.3
             monthly_karma = 0.3
-            global_autonomy = -0.030
+            global_autonomy = -0.03
             min_autonomy_in_territories = -0.30
 
         }
@@ -7097,237 +6680,6 @@ borobudur_temple = {
 
         #what effects happen when this tier is achieved
         on_upgraded = {
-        }
-    }
-}
-
-temple_of_confucius = {
-    # province it starts in
-    start = 2140
-
-    # date built in real life (so anything built during game time will be there if you start a game after that date)
-    date = 1302.01.01 #Yuan Dynasty restoration
-
-    #time to build
-    time = {
-        months = 0
-    }
-
-    #how much to build one
-    build_cost = 0
-
-    #can we move it?
-    can_be_moved = no
-
-    #time to move the project one unit of distance, in days
-    move_days_per_unit_distance = 1
-
-    #tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
-    starting_tier = 1
-
-    #project type
-    type = monument
-
-    #can we build it?
-    build_trigger = {
-        OR = {
-            province_is_or_accepts_religion = {
-                religion = confucianism
-            }
-            province_is_or_accepts_religion = {
-                religion = taoism
-            }
-        }
-    }
-
-    #what to do when it's built
-    on_built = {
-        #show_ambient_object = temple_of_confucius
-    }
-
-    #what to do when it's destroyed
-    on_destroyed = {
-        #hide_ambient_object = temple_of_confucius
-    }
-
-    #can our country use it?
-    can_use_modifiers_trigger = {
-        OR = {
-            province_is_or_accepts_religion = {
-                religion = confucianism
-            }
-            province_is_or_accepts_religion = {
-                religion = taoism
-            }
-        }
-    }
-
-    #can our country upgrade it?
-    can_upgrade_trigger = {
-        is_year = 1530
-        OR = {
-            province_is_or_accepts_religion = {
-                religion = confucianism
-            }
-            province_is_or_accepts_religion = {
-                religion = taoism
-            }
-        }
-    }
-
-    #can our country keep it or is it destroyed when we get hold of it?
-    keep_trigger = {
-    }
-
-    #tier data
-    tier_0 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 0
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 0
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 240
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 3500
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_autonomy = -0.03
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_institution_spread = 0.3
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            harmonization_speed = 0.3
-            yearly_harmony = 0.3
-            religious_unity = 0.3
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-            owner = {
-                add_estate_loyalty = {
-                    estate = estate_church
-                    loyalty = 5
-                }
-            }
-        }
-    }
-
-    tier_2 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 480
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 7000
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            local_autonomy = -0.03
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_institution_spread = 0.3
-            local_governing_cost = -0.3
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            monthly_heir_claim_increase = 0.05
-            harmonization_speed = 0.3
-            yearly_harmony = 0.3
-            religious_unity = 0.3
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-            owner = {
-                add_estate_loyalty = {
-                    estate = estate_church
-                    loyalty = 10
-                }
-            }
-        }
-    }
-
-    tier_3 = {
-        #time to upgrade to this level (0 for tier 0)
-        upgrade_time = {
-            months = 960
-        }
-
-        #cost to upgrade to this level (0 for tier 0)
-        cost_to_upgrade = {
-            factor = 14000
-        }
-
-        #what modifiers are added to the province when we have this project here on this tier
-        province_modifiers = {
-            inflation_reduction_local = 0.3
-            local_autonomy = -0.03
-        }
-
-        #what modifiers are added to the provinces in the map area when we have this project here on this tier
-        area_modifier = {
-            local_institution_spread = 0.3
-            local_governing_cost = -0.3
-        }
-
-        #what modifiers are added to the country when we have this project here on this tier
-        country_modifiers = {
-            monthly_heir_claim_increase = 0.05
-            harmonization_speed = 0.3
-            yearly_harmony = 0.3
-            religious_unity = 0.3
-            prestige = 0.3
-        }
-
-        #what effects happen when this tier is achieved
-        on_upgraded = {
-            owner = {
-                add_estate_loyalty = {
-                    estate = estate_church
-                    loyalty = 15
-                }
-            }
         }
     }
 }
@@ -8292,7 +7644,7 @@ khami_ruins = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.2
+            local_hostile_movement_speed = -0.2
             institution_growth = 2
         }
 
@@ -8328,7 +7680,7 @@ khami_ruins = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.3
+            local_hostile_movement_speed = -0.3
             institution_growth = 3
         }
 
@@ -8457,7 +7809,7 @@ prambanan_temple = {
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
             local_religious_conversion_resistance = 0.1
-			local_development_cost = -0.1
+            local_development_cost = -0.1
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -8491,7 +7843,7 @@ prambanan_temple = {
         area_modifier = {
             local_friendly_movement_speed = 0.2
             local_religious_conversion_resistance = 0.2
-			local_development_cost = -0.2
+            local_development_cost = -0.2
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -8527,7 +7879,7 @@ prambanan_temple = {
         area_modifier = {
             local_friendly_movement_speed = 0.3
             local_religious_conversion_resistance = 0.3
-			local_development_cost = -0.3
+            local_development_cost = -0.3
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -8550,7 +7902,7 @@ inukshuk = {
 
     # date built in real life (so anything built during game time will be there if you start a game after that date)
     #date = -2000.01.01
-	date = 1200.01.01
+    date = 1200.01.01
 
 
     #time to build
@@ -8858,7 +8210,7 @@ fire_temple_of_ateshgah = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.1
+            local_hostile_movement_speed = -0.1
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -8892,7 +8244,7 @@ fire_temple_of_ateshgah = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.2
+            local_hostile_movement_speed = -0.2
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -8927,7 +8279,7 @@ fire_temple_of_ateshgah = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            local_hostile_movement_speed = 0.3
+            local_hostile_movement_speed = -0.3
             local_unrest = -3
         }
 
@@ -9265,7 +8617,7 @@ pena_palace = {
 
         #what modifiers are added to the province when we have this project here on this tier
         province_modifiers = {
-            tax_income = 0.1
+            tax_income = 15
         }
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
@@ -9304,7 +8656,7 @@ pena_palace = {
 
         #what modifiers are added to the province when we have this project here on this tier
         province_modifiers = {
-            tax_income = 0.2
+            tax_income = 20
         }
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
@@ -9345,7 +8697,7 @@ pena_palace = {
 
         #what modifiers are added to the province when we have this project here on this tier
         province_modifiers = {
-            tax_income = 0.3
+            tax_income = 25
             local_years_of_nationalism = -5
         }
 
@@ -9605,7 +8957,7 @@ sankin_kotai_palaces = {
 
     #what to do when it's built
     on_built = {
-        #show_ambient_object = sankin_kotai_palaces
+        add_building = state_house #show_ambient_object = sankin_kotai_palaces
     }
 
     #what to do when it's destroyed
@@ -10760,7 +10112,7 @@ potosi = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            tax_income = 25
+            tax_income = 20
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -10825,7 +10177,7 @@ potosi = {
 
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
-            tax_income = 50
+            tax_income = 60
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -10892,7 +10244,7 @@ potosi = {
         #what modifiers are added to the provinces in the map area when we have this project here on this tier
         area_modifier = {
             trade_goods_size_modifier = 0.3
-            tax_income = 75
+            tax_income = 90
         }
 
         #what modifiers are added to the country when we have this project here on this tier
@@ -15973,120 +15325,6 @@ nan_madoll = {
     }
 }
 
-porcelain_tower_nanjing = {
-    start = 1821 #Nanjing
-    date = 1431.01.01
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 2
-    type = monument
-
-    build_trigger = {
-        culture_group = east_asian
-        province_is_or_accepts_culture = yes
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-        culture_group = east_asian
-        province_is_or_accepts_culture = yes
-    }
-
-    can_upgrade_trigger = {
-        culture_group = east_asian
-        province_is_or_accepts_culture = yes
-    }
-
-    keep_trigger = {
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 0
-        }
-        cost_to_upgrade = {
-            factor = 0
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 2000
-        }
-        province_modifiers = {
-            local_unrest = -1
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-            meritocracy = 0.1
-            global_institution_spread = 0.1
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 4000
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-            local_unrest = -1
-        }
-        country_modifiers = {
-            meritocracy = 0.25
-            global_institution_spread = 0.15
-            embracement_cost = -0.05
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 8000
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-            local_unrest = -2
-        }
-        country_modifiers = {
-            meritocracy = 0.5
-            global_institution_spread = 0.2
-            embracement_cost = -0.15
-        }
-        on_upgraded = {
-        }
-    }
-}
-
 qhapaq_nam = {
     start = 820 #Quito
     date = 100.01.01
@@ -19158,121 +18396,6 @@ harar_jugol = {
     }
 }
 
-dujiangyan = {
-    start = 679 #Chengdu
-    date = 100.01.01
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 0
-    type = monument
-
-    build_trigger = {
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-    }
-
-    can_upgrade_trigger = {
-        always = no
-    }
-
-    keep_trigger = {
-        always = yes
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            local_development_cost_modifier = -0.1
-        }
-        area_modifier = {
-            allowed_num_of_buildings = 1
-            local_governing_cost = -0.1
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.025
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 1000
-        }
-        province_modifiers = {
-            local_development_cost_modifier = -0.15
-        }
-        area_modifier = {
-            allowed_num_of_buildings = 1
-            local_governing_cost = -0.2
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.05
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 2500
-        }
-        province_modifiers = {
-            local_development_cost_modifier = -0.17
-        }
-        area_modifier = {
-            allowed_num_of_buildings = 1
-            local_governing_cost = -0.25
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.075
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            local_development_cost_modifier = -0.2
-        }
-        area_modifier = {
-            allowed_num_of_buildings = 1
-            local_governing_cost = -0.35
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.1
-        }
-        on_upgraded = {
-        }
-    }
-}
-
 palace_of_the_popes = {
     start = 202 #Avignon
     date = 1335.10.07
@@ -20046,490 +19169,6 @@ st_basil_cathedral = {
                 custom_tooltip = orthodox_icon_events_bonuses_tt
                 owner = { set_country_flag = orthodox_icon_events_bonuses_flag }
             }
-        }
-    }
-}
-
-grand_canal_1 = {
-    start = 684 #Hangzhou
-    date = 1427.01.09
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 1
-    type = monument
-
-    build_trigger = {
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-    }
-
-    can_upgrade_trigger = {
-    }
-
-    keep_trigger = {
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 0
-        }
-        cost_to_upgrade = {
-            factor = 0
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 1000
-        }
-        province_modifiers = {
-            trade_goods_size = 0.5
-            trade_value_modifier = 0.1
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.1
-            local_development_cost = -0.05
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.15
-        }
-        on_upgraded = {
-            add_base_tax = 1
-            add_base_production = 1
-            add_base_manpower = 1
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 2500
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.15
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.25
-            local_development_cost = -0.025
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.25
-        }
-        on_upgraded = {
-            add_base_tax = 2
-            add_base_production = 2
-            add_base_manpower = 2
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.25
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.33
-            local_development_cost = -0.1
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.35
-        }
-        on_upgraded = {
-            add_base_tax = 3
-            add_base_production = 3
-            add_base_manpower = 3
-        }
-    }
-}
-
-grand_canal_2 = {
-    start = 1822 #Suzhou
-    date = 1427.01.09
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 1
-    type = monument
-
-    build_trigger = {
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-    }
-
-    can_upgrade_trigger = {
-    }
-
-    keep_trigger = {
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 0
-        }
-        cost_to_upgrade = {
-            factor = 0
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 1000
-        }
-        province_modifiers = {
-            trade_goods_size = 0.5
-            trade_value_modifier = 0.1
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.1
-            local_development_cost = -0.025
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.15
-        }
-        on_upgraded = {
-            add_base_tax = 1
-            add_base_production = 1
-            add_base_manpower = 1
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 2500
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.15
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.25
-            local_development_cost = -0.05
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.25
-        }
-        on_upgraded = {
-            add_base_tax = 2
-            add_base_production = 2
-            add_base_manpower = 2
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.25
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.33
-            local_development_cost = -0.1
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.35
-        }
-        on_upgraded = {
-            add_base_tax = 3
-            add_base_production = 3
-            add_base_manpower = 3
-        }
-    }
-}
-
-grand_canal_3 = {
-    start = 2145 #Zhenjiang
-    date = 1427.01.09
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 1
-    type = monument
-
-    build_trigger = {
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-    }
-
-    can_upgrade_trigger = {
-    }
-
-    keep_trigger = {
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 0
-        }
-        cost_to_upgrade = {
-            factor = 0
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 1000
-        }
-        province_modifiers = {
-            trade_goods_size = 0.5
-            trade_value_modifier = 0.1
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.1
-            local_development_cost = -0.025
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.15
-        }
-        on_upgraded = {
-            add_base_tax = 1
-            add_base_production = 1
-            add_base_manpower = 1
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 2500
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.15
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.25
-            local_development_cost = -0.05
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.25
-        }
-        on_upgraded = {
-            add_base_tax = 2
-            add_base_production = 2
-            add_base_manpower = 2
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.25
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.33
-            local_development_cost = -0.1
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.35
-        }
-        on_upgraded = {
-            add_base_tax = 3
-            add_base_production = 3
-            add_base_manpower = 3
-        }
-    }
-}
-
-grand_canal_4 = {
-    start = 1821 #Nanjing
-    date = 1427.01.09
-    time = { months = 0	}
-    build_cost = 0
-    can_be_moved = no
-    move_days_per_unit_distance = 10
-    starting_tier = 1
-    type = monument
-
-    build_trigger = {
-    }
-
-    on_built = {
-    }
-
-    on_destroyed = {
-    }
-
-    can_use_modifiers_trigger = {
-    }
-
-    can_upgrade_trigger = {
-    }
-
-    keep_trigger = {
-    }
-
-    tier_0 = {
-        upgrade_time = {
-            months = 0
-        }
-        cost_to_upgrade = {
-            factor = 0
-        }
-        province_modifiers = {
-        }
-        area_modifier = {
-        }
-        country_modifiers = {
-        }
-        on_upgraded = {
-        }
-    }
-
-    tier_1 = {
-        upgrade_time = {
-            months = 120
-        }
-        cost_to_upgrade = {
-            factor = 1000
-        }
-        province_modifiers = {
-            trade_goods_size = 0.5
-            trade_value_modifier = 0.1
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.1
-            local_development_cost = -0.025
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.15
-        }
-        on_upgraded = {
-            add_base_tax = 1
-            add_base_production = 1
-            add_base_manpower = 1
-        }
-    }
-
-    tier_2 = {
-        upgrade_time = {
-            months = 240
-        }
-        cost_to_upgrade = {
-            factor = 2500
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.15
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.25
-            local_development_cost = -0.05
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.25
-        }
-        on_upgraded = {
-            add_base_tax = 2
-            add_base_production = 2
-            add_base_manpower = 2
-        }
-    }
-
-    tier_3 = {
-        upgrade_time = {
-            months = 480
-        }
-        cost_to_upgrade = {
-            factor = 5000
-        }
-        province_modifiers = {
-            trade_goods_size = 1
-            trade_value_modifier = 0.25
-        }
-        area_modifier = {
-            local_monthly_devastation = -0.33
-            local_development_cost = -0.1
-        }
-        country_modifiers = {
-            global_monthly_devastation = -0.35
-        }
-        on_upgraded = {
-            add_base_tax = 3
-            add_base_production = 3
-            add_base_manpower = 3
         }
     }
 }

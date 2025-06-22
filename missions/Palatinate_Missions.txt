@@ -6,59 +6,91 @@ palatinate_conquest_group = {
 	potential = {
 		has_country_flag = use_paradox_missions
 		tag = PAL
-		NOT = { map_setup = map_setup_random }
+		NOT = {
+			map_setup = map_setup_random
+		}
 	}
 	has_country_shield = yes
-
 	pal_expand_a_bit = {
 		icon = mission_have_two_subjects
-		required_missions = { }
-
+		required_missions = {
+		}
 		completed_by = 1618.05.20
-
 		trigger = {
 			num_of_cities = 7
-			army_size = 15
+			army_size_percentage = 1
 		}
-
 		effect = {
 			franconia_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
 			thuringia_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
-			70 = {
+			swabia_area = {
 				if = {
 					limit = {
-						NOT = { is_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_claim = root
 				}
 			}
-			2955 = {
+			wurttemburg_area = {
 				if = {
 					limit = {
-						NOT = { is_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_claim = root
 				}
 			}
-			4711 = {
+			baden_area = {
 				if = {
 					limit = {
-						NOT = { is_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
+					}
+					add_claim = root
+				}
+			}
+			bavaria_area = {
+				if = {
+					limit = {
+						NOT = {
+							is_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_claim = root
 				}
@@ -67,19 +99,21 @@ palatinate_conquest_group = {
 	}
 	pal_connect_oberpfalz = {
 		icon = mission_build_up_to_force_limit
-		required_missions = { pal_expand_a_bit }
-
+		required_missions = {
+			pal_expand_a_bit
+		}
 		provinces_to_highlight = {
 			OR = {
 				province_id = 77
 				province_id = 1757
 			}
 			OR = {
-				NOT = { owned_by = root }
+				NOT = {
+					owned_by = root
+				}
 				is_in_capital_area = no
 			}
 		}
-
 		trigger = {
 			77 = {
 				owned_by = root
@@ -90,7 +124,6 @@ palatinate_conquest_group = {
 				is_in_capital_area = yes
 			}
 		}
-
 		effect = {
 			if = {
 				limit = {
@@ -176,15 +209,23 @@ palatinate_conquest_group = {
 			else = {
 				bavaria_area = {
 					limit = {
-						NOT = { is_permanent_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_permanent_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_permanent_claim = root
 				}
 				tirol_area = {
 					limit = {
-						NOT = { is_permanent_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_permanent_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_permanent_claim = root
 				}
@@ -193,8 +234,9 @@ palatinate_conquest_group = {
 	}
 	pal_one_true_wittelsbach = {
 		icon = mission_unite_home_region
-		required_missions = { pal_connect_oberpfalz }
-
+		required_missions = {
+			pal_connect_oberpfalz
+		}
 		provinces_to_highlight = {
 			OR = {
 				area = bavaria_area
@@ -211,9 +253,10 @@ palatinate_conquest_group = {
 					}
 				}
 			}
-			NOT = { country_or_non_sovereign_subject_holds = root }
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
 		}
-
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 8
@@ -267,44 +310,59 @@ palatinate_conquest_group = {
 				}
 			}
 		}
-
 		effect = {
 			north_rhine_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
 			lower_rhineland_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
 			baden_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
 			alsace_area = {
 				limit = {
-					NOT = { is_permanent_claim = root }
-					NOT = { is_core = root }
+					NOT = {
+						is_permanent_claim = root
+					}
+					NOT = {
+						is_core = root
+					}
 				}
 				add_permanent_claim = root
 			}
 		}
 	}
-
 	pal_kingdom_of_the_rhine = {
 		icon = mission_empire
 		position = 5
-		required_missions = { pal_one_true_wittelsbach }
-
+		required_missions = {
+			pal_one_true_wittelsbach
+		}
 		provinces_to_highlight = {
 			OR = {
 				area = north_rhine_area
@@ -315,7 +373,7 @@ palatinate_conquest_group = {
 			ROOT = {
 				NOT = {
 					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-						value = 11 #out of 14
+						value = 11						#out of 14
 						OR = {
 							area = north_rhine_area
 							area = lower_rhineland_area
@@ -325,12 +383,13 @@ palatinate_conquest_group = {
 					}
 				}
 			}
-			NOT = { country_or_non_sovereign_subject_holds = root }
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
 		}
-
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 11 #out of 14
+				value = 11				#out of 14
 				OR = {
 					area = north_rhine_area
 					area = lower_rhineland_area
@@ -339,11 +398,12 @@ palatinate_conquest_group = {
 				}
 			}
 		}
-
 		effect = {
 			if = {
 				limit = {
-					NOT = { government_rank = 9 }
+					NOT = {
+						government_rank = 9
+					}
 					OR = {
 						is_elector = yes
 						is_part_of_hre = no
@@ -359,9 +419,6 @@ palatinate_conquest_group = {
 	}
 }
 
-
-
-
 palatinate_other_group = {
 	slot = 2
 	generic = no
@@ -369,31 +426,35 @@ palatinate_other_group = {
 	potential = {
 		has_country_flag = use_paradox_missions
 		tag = PAL
-		NOT = { map_setup = map_setup_random }
+		NOT = {
+			map_setup = map_setup_random
+		}
 	}
 	has_country_shield = yes
-
 	pal_religious_leadership = {
 		icon = mission_religious
 		position = 2
-		required_missions = { pal_expand_a_bit }
-
+		required_missions = {
+			pal_expand_a_bit
+		}
 		completed_by = 1618.08.26
-
 		provinces_to_highlight = {
 			ROOT = {
 				OR = {
-					NOT = { has_dlc = "Art of War" }
+					NOT = {
+						has_dlc = "Art of War"
+					}
 					is_part_of_hre = no
 					hre_religion_treaty = yes
 				}
 			}
 			owner = {
 				is_neighbor_of = root
-				NOT = { religion = root }
+				NOT = {
+					religion = root
+				}
 			}
 		}
-
 		trigger = {
 			OR = {
 				AND = {
@@ -403,7 +464,7 @@ palatinate_other_group = {
 					religious_unity = 1
 				}
 				if = {
-					limit  = {
+					limit = {
 						has_dlc = "Art of War"
 						is_part_of_hre = yes
 						hre_religion_treaty = no
@@ -437,7 +498,6 @@ palatinate_other_group = {
 				}
 			}
 		}
-
 		effect = {
 			if = {
 				limit = {
@@ -456,33 +516,45 @@ palatinate_other_group = {
 			else = {
 				bohemia_area = {
 					limit = {
-						NOT = { is_permanent_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_permanent_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_permanent_claim = root
 				}
 				moravia_area = {
 					limit = {
-						NOT = { is_permanent_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_permanent_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_permanent_claim = root
 				}
 				erzgebirge_area = {
 					limit = {
-						NOT = { is_permanent_claim = root }
-						NOT = { is_core = root }
+						NOT = {
+							is_permanent_claim = root
+						}
+						NOT = {
+							is_core = root
+						}
 					}
 					add_permanent_claim = root
 				}
 			}
 		}
 	}
-
 	pal_kingdom_of_bohemia = {
 		icon = mission_monarch_in_throne_room
-		required_missions = { pal_religious_leadership }
-
+		required_missions = {
+			pal_religious_leadership
+		}
 		provinces_to_highlight = {
 			OR = {
 				area = bohemia_area
@@ -490,7 +562,6 @@ palatinate_other_group = {
 				area = erzgebirge_area
 			}
 		}
-
 		trigger = {
 			bohemia_area = {
 				type = all
@@ -505,7 +576,6 @@ palatinate_other_group = {
 				country_or_non_sovereign_subject_holds = root
 			}
 		}
-
 		effect = {
 			add_country_modifier = {
 				name = pal_great_king
@@ -513,21 +583,22 @@ palatinate_other_group = {
 			}
 		}
 	}
-
 	pal_protect_from_france = {
 		icon = mission_assemble_an_army
-		required_missions = { pal_kingdom_of_bohemia }
-
+		required_missions = {
+			pal_kingdom_of_bohemia
+		}
 		provinces_to_highlight = {
 			owner = {
-				NOT = { tag = root }
+				NOT = {
+					tag = root
+				}
 				capital_scope = {
 					region = france_region
 				}
 				army_size = root
 			}
 		}
-
 		trigger = {
 			OR = {
 				custom_trigger_tooltip = {
@@ -537,7 +608,11 @@ palatinate_other_group = {
 							capital_scope = {
 								region = france_region
 							}
-							NOT = { ROOT = { army_size = prev } }
+							NOT = {
+								ROOT = {
+									army_size = prev
+								}
+							}
 						}
 					}
 				}
@@ -554,10 +629,10 @@ palatinate_other_group = {
 				}
 			}
 		}
-
 		effect = {
 			if = {
-				limit = { #has completed the mission objectives
+				limit = {
+					#has completed the mission objectives
 					OR = {
 						custom_trigger_tooltip = {
 							tooltip = pal_protect_from_france_trigger_tooltip
@@ -566,7 +641,11 @@ palatinate_other_group = {
 									capital_scope = {
 										region = france_region
 									}
-									NOT = { ROOT = { army_size = prev } }
+									NOT = {
+										ROOT = {
+											army_size = prev
+										}
+									}
 								}
 							}
 						}
@@ -601,29 +680,45 @@ palatinate_other_group = {
 					}
 					wallonia_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					lorraine_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					bourgogne_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					champagne_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
@@ -632,24 +727,48 @@ palatinate_other_group = {
 							any_owned_province = {
 								any_neighbor_province = {
 									region = france_region
-									NOT = { area = wallonia_area }
-									NOT = { area = lorraine_area }
-									NOT = { area = bourgogne_area }
-									NOT = { area = champagne_area }
-									NOT = { is_permanent_claim = root }
-									NOT = { is_core = root }
+									NOT = {
+										area = wallonia_area
+									}
+									NOT = {
+										area = lorraine_area
+									}
+									NOT = {
+										area = bourgogne_area
+									}
+									NOT = {
+										area = champagne_area
+									}
+									NOT = {
+										is_permanent_claim = root
+									}
+									NOT = {
+										is_core = root
+									}
 								}
 							}
 						}
 						every_province = {
 							limit = {
 								region = france_region
-								NOT = { area = wallonia_area }
-								NOT = { area = lorraine_area }
-								NOT = { area = bourgogne_area }
-								NOT = { area = champagne_area }
-								NOT = { is_permanent_claim = root }
-								NOT = { is_core = root }
+								NOT = {
+									area = wallonia_area
+								}
+								NOT = {
+									area = lorraine_area
+								}
+								NOT = {
+									area = bourgogne_area
+								}
+								NOT = {
+									area = champagne_area
+								}
+								NOT = {
+									is_permanent_claim = root
+								}
+								NOT = {
+									is_core = root
+								}
 								any_neighbor_province = {
 									owned_by = root
 								}
@@ -673,29 +792,45 @@ palatinate_other_group = {
 				tooltip = {
 					wallonia_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					lorraine_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					bourgogne_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
 					champagne_area = {
 						limit = {
-							NOT = { is_permanent_claim = root }
-							NOT = { is_core = root }
+							NOT = {
+								is_permanent_claim = root
+							}
+							NOT = {
+								is_core = root
+							}
 						}
 						add_permanent_claim = root
 					}
@@ -704,24 +839,48 @@ palatinate_other_group = {
 							any_owned_province = {
 								any_neighbor_province = {
 									region = france_region
-									NOT = { area = wallonia_area }
-									NOT = { area = lorraine_area }
-									NOT = { area = bourgogne_area }
-									NOT = { area = champagne_area }
-									NOT = { is_permanent_claim = root }
-									NOT = { is_core = root }
+									NOT = {
+										area = wallonia_area
+									}
+									NOT = {
+										area = lorraine_area
+									}
+									NOT = {
+										area = bourgogne_area
+									}
+									NOT = {
+										area = champagne_area
+									}
+									NOT = {
+										is_permanent_claim = root
+									}
+									NOT = {
+										is_core = root
+									}
 								}
 							}
 						}
 						every_province = {
 							limit = {
 								region = france_region
-								NOT = { area = wallonia_area }
-								NOT = { area = lorraine_area }
-								NOT = { area = bourgogne_area }
-								NOT = { area = champagne_area }
-								NOT = { is_permanent_claim = root }
-								NOT = { is_core = root }
+								NOT = {
+									area = wallonia_area
+								}
+								NOT = {
+									area = lorraine_area
+								}
+								NOT = {
+									area = bourgogne_area
+								}
+								NOT = {
+									area = champagne_area
+								}
+								NOT = {
+									is_permanent_claim = root
+								}
+								NOT = {
+									is_core = root
+								}
 								any_neighbor_province = {
 									owned_by = root
 								}
@@ -733,12 +892,12 @@ palatinate_other_group = {
 			}
 		}
 	}
-
 	pal_glorious_palatine = {
 		icon = mission_early_modern_university
 		position = 5
-		required_missions = { pal_protect_from_france }
-
+		required_missions = {
+			pal_protect_from_france
+		}
 		trigger = {
 			prestige = 75
 			capital_scope = {
@@ -749,7 +908,6 @@ palatinate_other_group = {
 			has_mil_advisor_3 = yes
 			is_in_deficit = no
 		}
-
 		effect = {
 			add_prestige = 25
 			add_country_modifier = {

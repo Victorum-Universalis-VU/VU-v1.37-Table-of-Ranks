@@ -41,7 +41,6 @@ viking_settlement = { }
 banking_family_subject = { }
 palatinate_vassal = { }
 defensive_march = { }
-annexable_colony = { }
 
 # Subjects
 
@@ -2075,7 +2074,6 @@ first_nations_reserve = {
                             is_subject_of_type = crown_colony
                             is_subject_of_type = private_enterprise
                             is_subject_of_type = self_governing_colony
-                            is_subject_of_type = annexable_colony
                         }
                     }
                     amount = 1
@@ -2498,7 +2496,6 @@ viking_settlement = {
         other_overlord = crown_colony
         other_overlord = private_enterprise
         other_overlord = self_governing_colony
-        other_overlord = annexable_colony
         neighboring_primitives = yes
         colonial_region_nations = yes
     }
@@ -2508,7 +2505,6 @@ viking_settlement = {
         other_overlord = crown_colony
         other_overlord = private_enterprise
         other_overlord = self_governing_colony
-        other_overlord = annexable_colony
         neighboring_primitives = yes
         colonial_region_nations = yes
     }
@@ -2845,53 +2841,4 @@ defensive_march = {
 
     overlord_opinion_modifier = is_defensive_march
     subject_opinion_modifier = is_defensive_march
-}
-
-annexable_colony = {
-    copy_from = colony
-    count = colony
-
-    # Graphics:
-    sprite = GFX_icon_annexable_colony
-    diplomacy_overlord_sprite = GFX_diplomacy_leadannexable_colony
-    diplomacy_subject_sprite = GFX_diplomacy_amannexable_colony
-
-    # Triggers:
-    is_potential_overlord = {
-        is_subject = no
-        is_year = 1500
-    }
-
-    # Properties:
-    relative_power_class = 0
-    diplomacy_view_class = 1
-
-    annex_cost_per_development = 1.5
-
-    can_send_missionary_to_subject = yes
-    can_be_annexed = yes
-
-    can_fight = {
-        other_overlord = viking_settlement
-        other_overlord = colony
-        other_overlord = crown_colony
-        other_overlord = private_enterprise
-        other_overlord = self_governing_colony
-        other_overlord = annexable_colony
-        neighboring_primitives = yes
-        colonial_region_nations = yes
-    }
-    can_rival = {
-        other_overlord = viking_settlement
-        other_overlord = colony
-        other_overlord = crown_colony
-        other_overlord = private_enterprise
-        other_overlord = self_governing_colony
-        other_overlord = annexable_colony
-        neighboring_primitives = yes
-        colonial_region_nations = yes
-    }
-    can_ally = {
-        neighboring_primitives = yes
-    }
 }

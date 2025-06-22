@@ -1,3 +1,4 @@
+#Updated for VU Marco Polo v1.37 by SF
 # Triggers and effects will be given the Actor's scope, with the Recipient's as FROM
 static_actions = {
 	# static_actions is a reserved token.
@@ -433,69 +434,6 @@ vu_enforce_temporal_authority_action = {
 		always = no
 		#stability = 1
 		#NOT = { any_subject_country = { liberty_desire = 50 } }
-	}
-}
-
-
-
-make_annexable_colony_to_colony_again = {
-	category = influence
-	require_acceptance = no
-	is_visible = {
-		FROM = {
-			is_subject_of = ROOT
-			is_subject_of_type = annexable_colony
-		}
-	}
-	is_allowed = {
-		hidden_trigger = {
-			FROM = {
-				is_subject_of = ROOT
-				is_subject_of_type = annexable_colony
-			}
-		}
-		is_at_war = no
-		FROM = {
-			is_at_war = no
-		}
-	}
-	on_accept = {
-		if = {
-			limit = {
-				FROM = {
-					is_subject_of = ROOT
-					is_subject_of_type = annexable_colony
-				}
-				is_at_war = no
-				FROM = {
-					is_at_war = no
-				}
-			}
-			FROM = {
-				grant_independence = yes
-			}
-			if = {
-				limit = {
-					has_dlc = "Leviathan"
-				}
-				create_subject = {
-					subject = FROM
-					subject_type = crown_colony
-				}
-			}
-			else = {
-				create_subject = {
-					subject = FROM
-					subject_type = colony
-				}
-			}
-			FROM = {
-				unset_disabled_colonial_nation_spawning_for_region_for_overlord = yes
-			}
-		}
-	}
-	ai_will_do = {
-		always = yes
 	}
 }
 

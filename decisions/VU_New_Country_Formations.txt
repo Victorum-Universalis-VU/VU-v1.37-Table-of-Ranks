@@ -1,2362 +1,5010 @@
 country_decisions = {
-
-    #Moving the 1001 different files into this one, mostly for my sanity, easier ctrl-f, and because I'm slowly overhauling them all anyway to a hopefully more dynamic system with fewer assumptions, limitations, and more dynamic possibilities. Playing checkers to get that one required province to form a country
-    #really isn't the point, I think, so in general I'm moving away from specific provinces requirments and moving towards percentage of the provinces in the general area.
-    #Note that, as a general rule, I'm removing religion requirements, most capital switching, most non-specific culture flipping, most government type switching, and most anything else that limits the decision to a certain historical path. With the current system of primary tags and cultures,
-    #Everything is far too linked with culture for some of this clutter, and I don't want to establish a precedent of making a new, different religion or differnt gov type versions for every tag in the game. If people want a new capital, they can set it themselves, if people want to change culture, unless
-    #it is a very logical switch, they can do so manually, if people want to reform their gov type and it isn't prevented by the tag's starting type, they can also do that manually.
-    #I'm also making allow requirements more consistant and stable. General 2 to 3 specific provinces for the main capitals of the tag and 2/3rds of the kingdom's traditional territory, plus 150 dev (50% discount from default 300 to achieve rank 2), and 25 prestige (also 50% discount).
-    #For empires, I'm typically going for 3 to 5 specific provinces and 3/4ths of the empire's traditional territory, as well as 500 dev (50% discount from default 1000 to achieve rank 3) and 40 prestige (default 75). Note I am making a few exceptions to all these rules on a case by case basis.
-
-    #Note this is the file specifically for new tags in VU, or for vanilla tags which lack a vanilla decision. Vanilla decisions are moved to vuPLReplaceVanillaCountryFormations.txt and a couple really odd or unique new ones are going in vuPLNewCountryFormationsSpecial.txt.
-
-    #################################################################################################
-    ################################		Austrian Empire 	   ##################################
-    #################################################################################################
-    austrian_empire_nation = {
-        major = yes
-        potential = {
-            normal_or_historical_nations = yes
-            NOT = { has_country_flag = formed_austrian_empire_flag }
-            OR = {
-                tag = HAB
-                tag = AUT #VU - SF addition
-            }
-            capital_scope = { is_part_of_hre = no }
-        }
-
-        provinces_to_highlight = {
-            OR = {
-                province_id = 134	# Wien
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-
-        allow = {
-            num_of_cities = 20
-            adm_tech = 42
-            is_free_or_tributary_trigger = yes
-            government = monarchy
-            is_nomad = no
-            is_at_war = no
-            owns_core_province = 134	# Wien
-        }
-
-        effect = {
-            change_tag = AUE
-            emperor = {
-                add_opinion = {
-                    who = root
-                    modifier = opinion_left_empire
-                }
-            }
-            set_in_empire = no
-            set_government_rank = 9
-            emperor = {
-                country_event = { id = hre_event.5 }
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 1825
-            }
-            add_prestige = 25
-            set_country_flag = formed_austrian_empire_flag
-            hidden_effect = {
-                every_province = {
-                    remove_core = HAB
-                    remove_core = AUT #VU - SF addition
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-    #################################################################################################
-    ################################		Austria-Hungary		   ##################################
-    #################################################################################################
-    #VU addition by San Felipe
-    austria_hungary_nation = {
-        major = yes
-        potential = {
-            OR = {
-                tag = HAB
-                tag = AUT #VU - SF addition
-                tag = AUE
-            }
-            normal_or_historical_nations = yes
-            NOT = { has_country_flag = formed_austria_hungary_flag }
-            NOT = { exists = HUN }
-            capital_scope = { is_part_of_hre = no }
-        }
-
-        provinces_to_highlight = {
-            OR = {
-                province_id = 134	# Wien
-                province_id = 153	# Pest
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-
-        allow = {
-            has_institution = nationalism_institution
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            is_at_war = no
-            owns_core_province = 134	# Wien
-            owns_core_province = 153	# Pest
-            num_of_owned_provinces_with = {
-                value = 5
-                culture = hungarian
-            }
-            NOT = { stability = 0 }
-        }
-
-        effect = {
-            change_tag = AUH
-            add_government_reform = parliamentary_reform
-            if = {
-                limit = { NOT = { accepted_culture = hungarian } }
-                add_accepted_culture = hungarian
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 3650
-            }
-            add_prestige = 25
-            add_stability = 1
-            set_country_flag = formed_austria_hungary_flag
-        }
-
-        ai_will_do = {
-            factor = 1
-        }
-    }
-    ###################################################################################################
-    ################################		Belgium			 ##############################################			#Note needs work
-    ###################################################################################################
-    #More or less Darth Modus's work with only a few adjustments from Altan
-    belgian_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_belgian_flag_vu }
-            NOT = { tag = BEL }
-            NOT = { tag = NED }
-            NOT = { tag = FRA }
-            NOT = { tag = BFR }
-            NOT = { tag = CEL }
-            NOT = { tag = RVF }
-            NOT = { tag = FSR }
-            NOT = { tag = FSE }
-            NOT = { tag = NPF }
-            NOT = { tag = OFR }
-            NOT = { tag = TFR }
-            NOT = { tag = SPA }
-            NOT = { tag = BSP }
-            NOT = { tag = SPB }
-            NOT = { tag = BBS }
-            NOT = { tag = CSP }
-            NOT = { tag = BUR }
-            OR = {
-                primary_culture = brabantian
-                primary_culture = flemish
-                primary_culture = wallonian
-                primary_culture = ger_dutch
-                primary_culture = ger_flemish
-                primary_culture = ger_brabantian
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 90
-                province_id = 91
-                province_id = 92
-                province_id = 93
-                province_id = 1744
-                province_id = 1865
-                province_id = 1866
-                province_id = 7695
-                province_id = 8014
-                province_id = 8015
-                province_id = 8018
-                province_id = 8019
-                province_id = 8020
-                province_id = 8022
-                province_id = 8024
-                province_id = 8025
-                province_id = 8497
-                province_id = 8499
-                province_id = 8502
-                province_id = 8503
-                province_id = 8506
-                province_id = 8507
-                province_id = 8508
-                province_id = 8509
-                province_id = 8510
-                province_id = 8511
-                province_id = 8515
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            adm_tech = 36
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            is_at_war = no
-            is_emperor = no
-            owns_core_province = 90
-            owns_core_province = 91
-            owns_core_province = 92
-            owns_core_province = 93
-            owns_core_province = 1744
-            owns_core_province = 1865
-            owns_core_province = 1866
-            owns_core_province = 7695
-            owns_core_province = 8014
-            owns_core_province = 8015
-            owns_core_province = 8018
-            owns_core_province = 8019
-            owns_core_province = 8020
-            owns_core_province = 8022
-            owns_core_province = 8024
-            owns_core_province = 8025
-            owns_core_province = 8497
-            owns_core_province = 8499
-            owns_core_province = 8502
-            owns_core_province = 8503
-            owns_core_province = 8506
-            owns_core_province = 8507
-            owns_core_province = 8508
-            owns_core_province = 8509
-            owns_core_province = 8510
-            owns_core_province = 8511
-            owns_core_province = 8515
-            total_development = 100			#Normal requirement for rank 2 is 500 dev, so this is 80 percent discounted.
-            prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
-        }
-        effect = {
-            change_tag = BEL
-            remove_non_electors_emperors_from_empire_effect = yes
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 7300
-            }
-            add_prestige = 25
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        region = low_countries_region
-                        area = picardy_area
-                    }
-                    #NOT = { province_id = 87 }
-                    NOT = { province_id = 1931 }
-                }
-                add_permanent_claim = BEL
-            }
-            swap_ideas = yes
-            set_country_flag = formed_belgian_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400 #
-    }
-
-    ###################################################################################################
-    ################################			Emilia			 ##############################################			#Note needs work
-    ###################################################################################################
-    #More or less Darth Modus's work with only a few adjustments from Altan
-    emilian_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_emilia_flag_vu }
-            NOT = { tag = EMR }
-            NOT = { tag = PAP }
-            NOT = { tag = HLR }
-            NOT = { tag = ITL }
-            NOT = { tag = ITA }
-            NOT = { tag = SPI }
-            NOT = { tag = TUS }
-            NOT = { tag = LVN }
-            OR = {
-                primary_culture = romagnan
-                tag = URB
-            }
-        }
-        provinces_to_highlight = {
-            culture = romagnan
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = EMR }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 4730	# Bologna
-            calc_true_if = {
-                all_owned_province = {
-                    is_core = ROOT
-                    culture = romagnan
-                }
-                amount = 15			#At least 2/3rds of Romagnol-cultured 22 provinces
-            }
-        }
-        effect = {
-            change_tag = EMR
-            #remove_non_electors_emperors_from_empire_effect = yes #Duchy rank, therefore should not remove from HRE.
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 3650
-            }
-            every_province = {
-                limit = {
-                    NOT = { is_core = ROOT }
-                    NOT = { is_permanent_claim = ROOT }
-                    culture = romagnan
-                }
-                add_permanent_claim = EMR
-            }
-            add_prestige = 10
-            #No Emilian ideas yet.
-            swap_ideas = yes
-            set_country_flag = formed_emilia_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400
-    }
-
-    ###################################################################################################
-    ################################			France (Diplomatically)			 ##############################################			#Using my work in Britain as a template here
-    ###################################################################################################
-    french_nation_diplomatically = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_france_flag }
-            NOT = { tag = FRA }
-            NOT = { tag = BFR }
-            NOT = { tag = CEL }
-            NOT = { tag = RVF }
-            NOT = { tag = FSR }
-            NOT = { tag = FSE }
-            NOT = { tag = NPF }
-            NOT = { tag = OFR }
-            NOT = { tag = TFR }
-            NOT = { tag = SPA }
-            NOT = { tag = BSP }
-            NOT = { tag = SPB }
-            NOT = { tag = BBS }
-            NOT = { tag = CSP }
-            OR = {
-                culture_group = french
-                primary_culture = basque
-                primary_culture = celtic_breton_culture
-            }
-            num_of_cities = 54			#At least 1/3 of France's 161 provinces to see for anyone
-        }
-        provinces_to_highlight = {
-            region = france_region
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = FRA }
-            is_nomad = no
-            is_free_or_tributary_trigger = yes
-            is_at_war = no
-            if = {
-                limit = { government = monarchy }
-                legitimacy = 100
-            }
-            adm_tech = 27			#Diplo tech requirement
-            owns_or_vassal_of = 183			# Paris
-            owns_or_vassal_of = 186			# Reims, coronation site
-            owns_or_vassal_of = 203			# Lyon
-            owns_or_vassal_of = 4389			# Tours
-            custom_trigger_tooltip = {
-                tooltip = hegemony_over_france_tooltip
-                calc_true_if = {
-                    all_province = {
-                        region = france_region
-                        country_or_vassal_holds = ROOT
-                        is_core = owner
-                    }
-                    amount = 149			#At least 90 percent of France's 161 provinces. Note the modern france includes a further 30 provinces, give or take a couple
-                }
-            }
-            total_development = 250			#Normal requirement for rank 2 is 500 dev, so this is 50 percent discounted
-            prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
-        }
-        effect = {
-            every_subject_country = {
-                limit = {
-                    ai = yes
-                    capital_scope = { region = france_region }
-                    NOT = { num_of_cities = 16 }
-                }
-                ROOT = { inherit = PREV }
-            }
-            change_tag = FRA
-            swap_non_generic_missions = yes
-            remove_non_electors_emperors_from_empire_effect = yes
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            add_prestige = 25
-            france_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    NOT = { area = brittany_area }
-                    NOT = { area = lower_brittany_area }
-                }
-                add_permanent_claim = FRA
-            }
-            brittany_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                }
-                add_claim = FRA
-            }
-            lower_brittany_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                }
-                add_claim = FRA
-            }
-            swap_ideas = yes
-            # custom_tooltip = spanish_unification_effect.tooltip
-            set_country_flag = formed_france_flag
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400
-    }
-    ###################################################################################################
-    ################################          German Empire		     ##################################
-    ###################################################################################################
-    german_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            was_never_end_game_tag_trigger = yes
-            NOT = { has_country_flag = formed_germany_flag }
-            OR = {
-                ai = no
-                is_playing_custom_nation = no
-            }
-            OR = {
-                is_free_or_tributary_trigger = yes
-                ai = no
-            }
-            NOT = { exists = GER }
-            NOT = { tag = PAP }
-            NOT = { tag = HLR }
-            NOT = { tag = ROM }
-            NOT = { tag = AUH }
-            OR = {
-                ai = no
-                AND = {
-                    ai = yes
-                    num_of_cities = 40
-                    adm_tech = 35
-                }
-            }
-            culture_group = germanic
-            NOT = {
-                OR = {
-                    primary_culture = austrian
-                    primary_culture = ger_dutch
-                    primary_culture = ger_brabantian
-                    primary_culture = ger_zeelandic
-                    primary_culture = ger_limburgish
-                    primary_culture = ger_guelders
-                    primary_culture = ger_flemish
-                    primary_culture = ger_frisian
-                    primary_culture = ger_east_frisian
-                    primary_culture = ger_north_frisian
-                }
-            }
-            is_colonial_nation = no
-            OR = {
-                is_former_colonial_nation = no
-                AND = {
-                    is_former_colonial_nation = yes
-                    ai = no
-                }
-            }
-            OR = {
-                has_country_flag = teu_can_form_germany
-                NOT = { has_mission = teu_pru_an_empire_of_blood_and_iron }	#Mission already makes you to Germany
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 44	# Hamburg
-                province_id = 46	# Rostock
-                province_id = 50	# Berlin
-                province_id = 57	# Brunswick
-                province_id = 61	# Dresden
-                province_id = 63	# Thüringen
-                province_id = 65	# München
-                province_id = 67	# Nürnberg
-                province_id = 81	# Hessen
-                province_id = 85	# Köln
-                province_id = 1761 # Worms
-                province_id = 1868 # Augsburg
-                province_id = 1876 # Frankfurt
-                AND = {
-                    province_id = 41
-                    ROOT = { NOT = { owns_core_province = 75 } }
-                }
-                AND = {
-                    province_id = 75
-                    ROOT = { NOT = { owns_core_province = 41 } }
-                }
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            OR = {
-                adm_tech = 35
-                custom_trigger_tooltip = {
-                    tooltip = me_completed_faster_german_formation_mission
-                    OR = {
-                        has_country_flag = remove_germany_tech_requirement_flag
-                        has_country_flag = me_hab_easier_german_formation
-                    }
-                }
-            }
-            NOT = { exists = GER }
-            is_free_or_tributary_trigger = yes
-
-            is_nomad = no
-            is_at_war = no
-            is_emperor = no
-            owns_core_province = 44	# Hamburg
-            owns_core_province = 46	# Rostock
-            owns_core_province = 50	# Berlin
-            owns_core_province = 57	# Brunswick
-            owns_core_province = 61	# Dresden
-            owns_core_province = 63	# Thüringen
-            owns_core_province = 65	# München
-            owns_core_province = 67	# Nürnberg
-            owns_core_province = 81	# Hessen
-            owns_core_province = 85	# Köln
-            owns_core_province = 1761 # Worms
-            owns_core_province = 1868 # Augsburg
-            owns_core_province = 1876 # Frankfurt
-            OR = {
-                owns_core_province = 41	# Königsberg
-                owns_core_province = 75	# Strassburg
-            }
-            num_of_owned_provinces_with = {
-                is_core = ROOT
-                OR = {
-                    region = north_german_region
-                    region = south_german_region
-                }
-                value = 350
-            }
-        }
-        effect = {
-            change_tag = GER
-            on_change_tag_effect = yes
-            restore_country_name_effect = yes
-            if = {
-                limit = {
-                    OR = {
-                        tag = HAB
-                        tag = AUT #VU - SF addition
-                    }
-                }
-                country_event = { id =  ME_Austria_Events.74 }
-                hidden_effect = {
-                    remove_country_modifier = me_hab_austrian_led_confederation
-                    remove_country_modifier = me_hab_unity_of_the_confederation
-                    remove_country_modifier = me_hab_german_ambitions
-                }
-            }
-            else_if = {
-                limit = {
-                    is_emperor = yes
-                }
-                dismantle_hre = yes
-            }
-            else = {
-                emperor = {
-                    add_opinion = {
-                        who = root
-                        modifier = opinion_left_empire
-                    }
-                }
-                set_in_empire = no
-                emperor = {
-                    country_event = { id = hre_event.5 }
-                }
-            }
-            custom_tooltip = become_an_empire_tt
-            hidden_effect = { set_government_rank = 9 }
-            north_german_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GER
-            }
-            south_german_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GER
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 7300
-            }
-            add_prestige = 25
-            set_country_flag = formed_germany_flag
-            if = {
-                limit = {
-                    has_custom_ideas = no
-                }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            swap_non_generic_missions = yes
-            if = {
-                limit = { has_dlc = "Winds of Change" }
-                set_country_flag = GER_stuck_disunited
-                add_government_reform = german_cultural_disunity_reform
-                freeze_government_power = {
-                    mechanic_type = cultural_unity_mechanic
-                    power_type = cultural_unity
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 1
-            modifier = {
-                factor = 0
-                OR = {
-                    tag = HAB
-                    tag = AUT #VU - SF addition
-                }
-                NOT = { has_country_flag = me_hab_easier_german_formation }
-            }
-        }
-    }
-
-    ###################################################################################################
-    ################################       North German Empire		 ##################################
-    ###################################################################################################
-    north_german_confederation_nation = {
-        major = yes
-        potential = {
-            normal_or_historical_nations = yes
-            NOT = { has_country_flag = formed_north_german_confederation_flag }
-            OR = {
-                ai = no
-                is_playing_custom_nation = no
-            }
-            NOT = { exists = GER }
-            NOT = { exists = NGC }
-            NOT = { tag = PAP }
-            NOT = { tag = HLR }
-            NOT = { tag = ROM }
-            OR = {
-                ai = no
-                AND = {
-                    ai = yes
-                    num_of_cities = 15
-                    adm_tech = 32
-                }
-            }
-            OR = {
-                ai = no
-                AND = {
-                    ai = yes
-                    NOT = { government = theocracy }
-                }
-            }
-            OR = {
-                primary_culture = hannoverian #Westphalian
-                primary_culture = pommeranian
-                primary_culture = hessian
-                primary_culture = saxon
-                primary_culture = prussian
-            }
-            is_colonial_nation = no
-            OR = {
-                is_former_colonial_nation = no
-                AND = {
-                    is_former_colonial_nation = yes
-                    ai = no
-                }
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 44	# Hamburg
-                province_id = 46	# Rostock
-                province_id = 50	# Berlin
-                province_id = 57	# Brunswick
-                province_id = 61	# Dresden
-                province_id = 63	# Thüringen
-                province_id = 81	# Hessen
-                province_id = 85	# Köln
-                province_id = 1876  # Frankfurt
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            adm_tech = 32
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            is_at_war = no
-            is_emperor = no
-            owns_core_province = 44	# Hamburg
-            owns_core_province = 46	# Rostock
-            owns_core_province = 50	# Berlin
-            owns_core_province = 57	# Brunswick
-            owns_core_province = 61	# Dresden
-            owns_core_province = 63	# Thüringen
-            owns_core_province = 81	# Hessen
-            owns_core_province = 85	# Köln
-            owns_core_province = 1876 # Frankfurt
-        }
-        effect = {
-            change_tag = NGC
-            emperor = {
-                add_opinion = {
-                    who = root
-                    modifier = opinion_left_empire
-                }
-            }
-            set_in_empire = no
-            IF = {
-                limit = {
-                    government = monarchy
-                }
-                set_legacy_government = constitutional_monarchy
-            }
-            emperor = {
-                country_event = { id = hre_event.5 }
-            }
-            north_german_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = NGC
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 1825
-            }
-            add_prestige = 25
-            set_country_flag = formed_north_german_confederation_flag
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-    ###################################################################################################
-    ################################			Iberia (Portugal-based)			 ##############################################
-    ###################################################################################################
-    iberian_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_iberia_flag_vu }
-            NOT = { tag = IBE }
-            NOT = { tag = SPA }
-            NOT = { tag = BSP }
-            NOT = { tag = SPB }
-            NOT = { tag = BBS }
-            NOT = { tag = CSP }
-            NOT = { tag = ADU }
-            primary_culture = portugese
-        }
-        provinces_to_highlight = {
-            region = iberia_region
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = IBE }
-            NOT = { exists = SPA }			#Special, no doubling up on Iberia superpowers
-            NOT = { exists = BSP }			#Special, no doubling up on Iberia superpowers
-            NOT = { exists = SPB }			#Special, no doubling up on Iberia superpowers
-            NOT = { exists = BBS }			#Special, no doubling up on Iberia superpowers
-            NOT = { exists = CSP }			#Special, no doubling up on Iberia superpowers
-            NOT = { exists = ADU }			#Special, no doubling up on Iberia superpowers
-            is_nomad = no
-            is_free_or_tributary_trigger = yes
-            is_at_war = no
-            owns_core_province = 227	# Lisboa
-            owns_core_province = 231	# Porto
-            owns_core_province = 8042	# Santiago de la Compostela
-            calc_true_if = {
-                all_owned_province = {
-                    is_core = ROOT
-                    region = iberia_region
-                }
-                amount = 103			#At least 2/3 of Iberia's 153 provinces. This is Portugal plus 72 other provinces, roughly half of non Portuguese Iberia.
-            }
-            total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
-            prestige = 40			#Normal requirement for rank 3 is 75 prestige.
-        }
-        effect = {
-            change_tag = IBE
-            #No Iberian missions yet.
-            #swap_non_generic_missions = yes
-            remove_non_electors_emperors_from_empire_effect = yes
-            if = {
-                limit = { NOT = { government_rank = 9 } }
-                set_government_rank = 9
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            add_prestige = 50
-            iberia_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                }
-                add_permanent_claim = IBE
-            }
-            #No Iberian ideas yet.
-            # swap_ideas = yes
-            set_country_flag = formed_iberia_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400 #
-    }
-
-    ###################################################################################################
-    ################################			Illyria			 ##############################################			#Note needs work
-    ###################################################################################################
-    #More or less HR's work with only a few adjustments from Draiocht
-    illyrian_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_illyria_flag_vu }
-            NOT = { tag = ILY }
-            OR = {
-                culture_group = south_slavic
-                culture_group = illyrian
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 131				# Zagreb
-                province_id = 137				# Ragusa
-                province_id = 138				# Zeta
-                province_id = 139				# Hum
-                province_id = 3002				# Lasva
-                province_id = 141				# Belgrade
-                province_id = 1766			# Kosovo
-                province_id = 1767			# Slavonia
-                province_id = 1826			# Lika
-                province_id = 3001			# Skopje
-                province_id = 4755			# Sarajevo
-                province_id = 3187			# Podrinje
-                province_id = 4752			# Rijeka
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = ILY }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            calc_true_if = {
-                all_owned_province = {
-                    is_core = ROOT
-                    OR = {
-                        province_id = 131				# Zagreb
-                        province_id = 137				# Ragusa
-                        province_id = 138				# Zeta
-                        province_id = 139				# Hum
-                        province_id = 3002				# Lasva
-                        province_id = 141				# Belgrade
-                        province_id = 1766			# Kosovo
-                        province_id = 1767			# Slavonia
-                        province_id = 1826			# Lika
-                        province_id = 3001			# Skopje
-                        province_id = 4755			# Sarajevo
-                        province_id = 3187			# Podrinje
-                        province_id = 4752			# Rijeka
-                    }
-                }
-                amount = 9			#At least 2/3 of Illyria's 13 provinces (approximate)
-            }
-            total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
-            prestige = 40			#Normal requirement for rank 3 is 75 prestige.
-        }
-        effect = {
-            change_tag = ILY
-            remove_non_electors_emperors_from_empire_effect = yes
-            if = {
-                limit = { NOT = { government_rank = 9 } }
-                set_government_rank = 9
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        region = balkan_region
-                        area = carinthia_area
-                    }
-                }
-                add_permanent_claim = ILY
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 7300
-            }
-            add_prestige = 25
-            #No Illyrian ideas yet.
-            # swap_ideas = yes
-            set_country_flag = formed_illyria_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400
-    }
-
-    ###################################################################################################
-    ################################			Kabylia			 ##############################################
-    ###################################################################################################
-    vu_kabylia_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_kabylia_flag }
-            NOT = { tag = KBA }
-            OR = {
-                primary_culture = kabylian
-                AND = {
-                    culture_group = berber_group
-                    capital_scope = { area = kabylia_area }
-                }
-            }
-        }
-        provinces_to_highlight = {
-            area = kabylia_area
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = KBA }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 339			# Bugia
-            calc_true_if = {
-                all_owned_province = {
-                    is_core = ROOT
-                    area = kabylia_area
-                }
-                amount = 4			#All of Kabylia's 4 provinces
-            }
-        }
-        effect = {
-            change_tag = KBA
-            remove_non_electors_emperors_from_empire_effect = yes
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 3650
-            }
-            add_prestige = 10
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_kabylia_flag
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400 #
-    }
-
-    ###################################################################################################
-    ############			LombardyVenetia (merged both of HR's decisions into one without gov type limits)			 ###########################			#Note needs work
-    ###################################################################################################
-    #More or less HR's work with only a few adjustments from Draiocht
-    lombardy_venetia_monarchy_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_lombardy_venetia_flag_vu }
-            NOT = { tag = LVN }
-            NOT = { tag = ITL }
-            NOT = { tag = ITA }
-            NOT = { tag = SPI }
-            NOT = { tag = EMR }
-            NOT = { tag = TUS }
-            NOT = { tag = TTS }
-            OR = {
-                tag = MLO #Milan
-                tag = LOM #Lombardy (Non-milanese Lombardy formable)
-                tag = VEN #Venice
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                area = lombardy_area
-                area = po_valley_area
-                area = venetia_area
-                area = carnia_area
-                AND = {
-                    owned_by = VEN
-                    region = italy_region
-                }
-                AND = {
-                    owned_by = MLO
-                    region = italy_region
-                }
-                AND = {
-                    owned_by = LOM
-                    region = italy_region
-                }
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            if = { #MLO
-                limit = {
-                    tag = MLO
-                }
-                if = {
-                    limit = {
-                        exists = VEN
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = VEN
-                        }
-                    }
-                }
-                if = {
-                    limit = {
-                        exists = LOM
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = LOM
-                        }
-                    }
-                }
-            }
-            else_if = { #VEN
-                limit = {
-                    tag = VEN
-                }
-                if = {
-                    limit = {
-                        exists = MLO
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = MLO
-                        }
-                    }
-                }
-                if = {
-                    limit = {
-                        exists = LOM
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = LOM
-                        }
-                    }
-                }
-            }
-            else_if = { #LOM
-                limit = {
-                    tag = LOM
-                }
-                if = {
-                    limit = {
-                        exists = MLO
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = MLO
-                        }
-                    }
-                }
-                if = {
-                    limit = {
-                        exists = VEN
-                    }
-                    NOT = {
-                        any_province = {
-                            region = italy_region
-                            owned_by = VEN
-                        }
-                    }
-                }
-            }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 104 #Milan
-            owns_core_province = 112 #Venezia
-            num_of_owned_provinces_with = {
-                is_core = ROOT
-                OR = {
-                    area = lombardy_area
-                    area = po_valley_area
-                    area = venetia_area
-                    area = carnia_area
-                }
-                value = 17			#At least 2/3 of LMV's 25 provinces
-            }
-            total_development = 250			#Normal requirement for rank 2 is 500 dev, so this is 50 percent discounted.
-            prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
-        }
-        effect = {
-            change_tag = LVN
-            remove_non_electors_emperors_from_empire_effect = yes
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 7300
-            }
-            add_prestige = 25
-            swap_ideas = yes
-            #Lombardy-Venetia no unique missions yet has.
-            #swap_non_generic_missions = yes
-            set_country_flag = formed_lombardy_venetia_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400
-    }
-
-    ###################################################################################################
-    #######################################			Moravia			 ############################################			#Note needs work
-    ###################################################################################################
-    #More or less HR's work with only a few adjustments from Draiocht
-    moravian_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_moravia_flag_vu }
-            NOT = { tag = GMA }
-            NOT = { tag = PLC }
-            culture_group = west_slavic
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 60			# Lusatia
-                province_id = 154		# Nitra
-                province_id = 257		# Warsaw
-                province_id = 262		# Krakow
-                province_id = 263		# Ratibor
-                province_id = 264		# Breslau
-                province_id = 265		# Brno
-                province_id = 266		# Prague
-                province_id = 1763		# Lusatia
-                province_id = 1772		# Bratislava
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = GMA }
-            is_at_war = no
-            is_emperor = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 60			# Lusatia
-            owns_core_province = 1763		# Lusatia
-            owns_core_province = 263		# Ratibor
-            owns_core_province = 264		# Breslau
-            owns_core_province = 265		# Brno
-            owns_core_province = 266		# Prague
-            owns_core_province = 154		# Nitra
-            owns_core_province = 1772		# Bratislava
-            owns_core_province = 262		# Krakow
-            owns_core_province = 257		# Warsaw
-            total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
-            prestige = 40			#Normal requirement for rank 3 is 75 prestige.
-        }
-        effect = {
-            change_tag = GMA
-            #remove_non_electors_emperors_from_empire_effect = yes
-            emperor = {
-                add_opinion = {
-                    who = root
-                    modifier = opinion_left_empire
-                }
-            }
-            set_in_empire = no
-            emperor = {
-                country_event = { id = hre_event.5 }
-            }
-            set_government_rank = 9
-            # if = {
-            # limit = { NOT = { government_rank = 9 } }
-            # set_government_rank = 9
-            # }
-            bohemia_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GMA
-            }
-            erzgebirge_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GMA
-            }
-            moravia_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GMA
-            }
-            slovakia_area = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GMA
-            }
-            poland_region = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                }
-                add_permanent_claim = GMA
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 7300
-            }
-            add_prestige = 50
-            #No Moravian ideas yet
-            # swap_ideas = yes
-            set_country_flag = formed_moravia_flag_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-        ai_importance = 400
-    }
-
-    ###################################################################################################
-    ################################			Najd			 ##############################################
-    ###################################################################################################
-    vu_najd_formation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_najd_vu }
-            NOT = { tag = NAJ }
-            NOT = { tag = ALH }
-            primary_culture = bedouin_arabic
-        }
-        provinces_to_highlight = {
-            OR = {
-                area = nafud_area
-                area = yamamah_area
-            }
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = NAJ }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 392
-            custom_trigger_tooltip = {
-                tooltip = half_of_najd_tooltip
-                num_of_owned_provinces_with = {
-                    value = 6
-                    OR = {
-                        area = nafud_area
-                        area = yamamah_area
-                    }
-                    is_core = ROOT
-                }
-            }
-            total_development = 50			#Normal requirement for rank 2 is 500 dev, so this is 90 percent discounted.
-            prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
-        }
-        effect = {
-            change_tag = NAJ
-            remove_non_electors_emperors_from_empire_effect = yes
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        area = nafud_area
-                        area = yamamah_area
-                    }
-                }
-                add_permanent_claim = NAJ
-            }
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            add_prestige = 25
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_najd_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ###################################################################################################
-    ################################			Pomerania			 ##############################################			#Done by JP 2019-4 & adjusted a bit by Draiocht
-    ###################################################################################################
-    #Moved to VU_Replace_Vanilla_Country_Formations due to appearing in vanilla in 1.30.
-
-    ###################################################################################################
-    ################################			Sennar			 ##############################################
-    ###################################################################################################
-    vu_sennar_formation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_sennar_vu }
-            NOT = { tag = NUB }
-            OR = {
-                tag = FNJ
-                AND = {
-                    owns_core_province = 2799
-                    culture_group = sudanese
-                    religion_group = muslim
-                }
-            }
-        }
-        provinces_to_highlight = {
-            province_id = 2799
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-        allow = {
-            NOT = { exists = NUB }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 2799
-        }
-        effect = {
-            2799 = { move_capital_effect = yes }
-            change_tag = NUB
-            remove_non_electors_emperors_from_empire_effect = yes
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        province_id = 2798
-                        province_id = 5285
-                        province_id = 1222
-                        province_id = 5287
-                        province_id = 2800
-                        province_id = 2797
-                        province_id = 5284
-                        province_id = 1220
-                        province_id = 5286
-                        province_id = 1221
-                        province_id = 1216
-                    }
-                }
-                add_permanent_claim = NUB
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        province_id = 5302
-                        province_id = 5281
-                        province_id = 5279
-                        province_id = 1228
-                    }
-                }
-                add_claim = NUB
-            }
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            2799 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 1
-            }
-            add_prestige = 10
-            change_religion = sunni
-            add_piety = -0.30
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_sennar_vu
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ###################################################################################################
-    ################################       Duchy of Warsaw		 ##################################
-    ###################################################################################################
-
-    duchy_warsaw_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_duchy_of_warsaw }
-            OR = {
-                tag = MAZ
-                AND = {
-                    owns_core_province = 257
-                    culture_group = west_slavic
-                    religion_group = christian
-                }
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 257
-                province_id = 1938
-                province_id = 7211
-                province_id = 256
-                province_id = 7263
-                province_id = 3221
-                province_id = 255
-                province_id = 8231
-            }
-        }
-        allow = {
-            NOT = { exists = DWA }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 257
-            owns_core_province = 1938
-            owns_core_province = 7211
-            owns_core_province = 256
-            owns_core_province = 7263
-            owns_core_province = 3221
-            owns_core_province = 255
-            owns_core_province = 8231
-            NOT = { exists = POL }
-            NOT = { exists = PLC }
-            adm_tech = 37
-            OR = {
-                tag = MAZ
-                AND = {
-                    dominant_culture = polish
-                    OR = {
-                        accepted_culture = polish
-                        has_unified_culture_group = yes
-                    }
-                }
-            }
-        }
-        effect = {
-            257 = { move_capital_effect = yes }
-            change_tag = DWA
-
-            if = {
-                limit = { NOT = { government_rank = 6 } }
-                set_government_rank = 6
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            257 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 1
-            }
-            add_prestige = 10
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_duchy_of_warsaw
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        area = mazovia_area
-                        area = central_poland_area
-                        area = kuyavia_area
-                        area = wielkopolska_area
-                        area = sandomierz_area
-                        province_id = 8224
-                        province_id = 3220
-                        province_id = 262
-                        province_id = 8222
-                        province_id = 2960
-                        province_id = 269
-                        province_id = 4538
-                        province_id = 7266
-                        province_id = 2424
-                        province_id = 7267
-                    }
-                }
-                add_core = ROOT
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    OR = {
-                        area = west_prussia_area
-                        area = red_ruthenia_area
-                        province_id = 7272
-                        province_id = 1940
-                        province_id = 7262
-                        province_id = 3223
-                        province_id = 3225
-                        province_id = 8732
-                        province_id = 8176
-                    }
-                }
-                add_permanent_claim = ROOT
-            }
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ###################################################################################################
-    ##########################	Dano-Norwegian Realm	###########################################
-    ###################################################################################################
-
-    denmark_norway_nation = {
-        major = yes
-        potential = {
-            AND = {
-                vu_generic_can_form_potential_check = yes
-                was_never_end_game_tag_trigger = yes
-            }
-            NOT = { has_country_flag = formed_denmark_norway }
-            OR = {
-                tag = DAN
-                tag = NOR
-                AND = {
-                    owns_core_province = 12
-                    owns_core_province = 17
-                    culture_group = scandinavian
-                }
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 12
-                province_id = 17
-                province_id = 14
-                province_id = 7770
-                province_id = 6
-                province_id = 23
-                province_id = 3119
-                province_id = 1983
-            }
-        }
-        allow = {
-            NOT = { exists = DNR }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_or_non_sovereign_subject_of = 12
-            owns_or_non_sovereign_subject_of = 17
-            owns_or_non_sovereign_subject_of = 14
-            owns_or_non_sovereign_subject_of = 7770
-            owns_or_non_sovereign_subject_of = 6
-            owns_or_non_sovereign_subject_of = 23
-            owns_or_non_sovereign_subject_of = 3119
-            owns_or_non_sovereign_subject_of = 1983
-            is_year = 1500
-            adm_tech = 27
-            NOT = {
-                OR = {
-                    SWE = { is_subject_of = ROOT }
-                    owns = 1
-                }
-            }
-            OR = {
-                NOR = { is_subject_of = ROOT }
-                DAN = { is_subject_of = ROOT }
-                num_of_owned_provinces_with = {
-                    is_core = ROOT
-                    OR = {
-                        area = jutland_area
-                        area = sjaelland_area
-                        area = kobenhavn_area
-                        area = denmark_area
-                        area = skaneland_area
-                        area = eastern_norway
-                        area = western_norway
-                        area = southern_norway_area
-                        area = trondelag_area
-                        area = northern_norway
-                    }
-                    value = 50	#50 provinces in Denmark or Norway
-                }
-            }
-        }
-        effect = {
-            12 = { move_capital_effect = yes }
-            change_tag = DNR
-
-            if = {
-                limit = { NOT = { government_rank = 9 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            12 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-            }
-            add_prestige = 20
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_denmark_norway
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        area = jutland_area
-                        area = sjaelland_area
-                        area = kobenhavn_area
-                        area = denmark_area
-                        area = skaneland_area
-                        area = eastern_norway
-                        area = western_norway
-                        area = southern_norway_area
-                        area = trondelag_area
-                        area = northern_norway
-                        province_id = 7774
-                        province_id = 3134
-                        province_id = 13
-                        province_id = 3135
-                        province_id = 1979
-                        province_id = 370
-                        province_id = 3115
-                        province_id = 371
-                        province_id = 3114
-                    }
-                }
-                add_core = ROOT
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    OR = {
-                        province_id = 1978
-                        province_id = 369
-                        province_id = 25
-                        province_id = 35
-                        province_id = 3231
-                        province_id = 16
-                    }
-                }
-                add_permanent_claim = ROOT
-            }
-            if = {
-                limit = {
-                    NOR = { is_subject_of = ROOT }
-                }
-                inherit = NOR
-            }
-            if = {
-                limit = {
-                    DAN = { is_subject_of = ROOT }
-                }
-                inherit = DAN
-            }
-            if = {
-                limit = {
-                    ICE = {
-                        is_subject_of = ROOT
-                        ai = yes
-                    }
-                }
-                inherit = ICE
-            }
-            if = {
-                limit = {
-                    GOT = {
-                        is_subject_of = ROOT
-                        ai = yes
-                    }
-                }
-                inherit = GOT
-            }
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ###################################################################################################
-    ##########################	Novgorodian Rus 	###########################################
-    ###################################################################################################
-
-    novgorod_rus_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_novgorod_rus }
-            OR = {
-                tag = NOV
-                tag = PSK
-                tag = VYA
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 310
-                province_id = 5644
-                province_id = 274
-                province_id = 313
-                province_id = 308
-                province_id = 293
-                province_id = 295
-                province_id = 6975
-                province_id = 33
-                province_id = 294
-                province_id = 1957
-                province_id = 276
-                province_id = 280
-                province_id = 289
-                province_id = 275
-            }
-        }
-        allow = {
-            government = republic
-            NOT = { exists = NRU }
-            is_at_war = no
-            is_free_or_tributary_trigger = yes
-            is_nomad = no
-            owns_core_province = 310
-            owns_core_province = 5644
-            owns_core_province = 274
-            owns_or_non_sovereign_subject_of = 313
-            owns_core_province = 308
-            owns_core_province = 293
-            owns_core_province = 295
-            owns_core_province = 6975
-            owns_core_province = 33
-            owns_or_non_sovereign_subject_of = 294
-            owns_or_non_sovereign_subject_of = 1957
-            owns_or_non_sovereign_subject_of = 276
-            owns_core_province = 280
-            owns_or_non_sovereign_subject_of = 289
-            owns_core_province = 275
-            NOT = { exists = MOS }
-            NOT = { exists = RUS }
-            NOT = { exists = TZR }
-            num_of_owned_provinces_with = {
-                is_core = ROOT
-                OR = {
-                    region = russia_region
-                    region = ruthenia_region
-                }
-                value = 100	#100 provinces in Russia or Ruthenia
-            }
-        }
-        effect = {
-            310 = { move_capital_effect = yes }
-            remove_government_reform = veche_republic
-            change_tag = NRU
-
-            add_government_reform = improved_veche_republic
-            if = {
-                limit = { NOT = { government_rank = 9 } }
-                set_government_rank = 9
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            310 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-            }
-            280 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-            }
-            add_prestige = 50
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_novgorod_rus
-            swap_non_generic_missions = yes
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    region = russia_region
-                }
-                add_core = ROOT
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    region = ruthenia_region
-                }
-                add_permanent_claim = ROOT
-            }
-            if = {
-                limit = {
-                    LIV = { is_subject_of = ROOT }
-                }
-                inherit = LIV
-            }
-            if = {
-                limit = {
-                    LIT = { is_subject_of = ROOT }
-                }
-                inherit = LIT
-            }
-            if = {
-                limit = {
-                    KIE = { is_subject_of = ROOT }
-                }
-                inherit = KIE
-            }
-            add_adm_power = 50
-            add_dip_power = 50
-            add_mil_power = 50
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ###########################################################################################
-    ################################         Assyria		 ##################################
-    ###########################################################################################
-
-    assyria_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_neo_assyria }
-            NOT = { tag = PER }
-            OR = {
-                any_owned_province = { culture = assyrian }
-                culture_group = mesopotamian_group
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 411
-                province_id = 6638
-                province_id = 2310
-                province_id = 6640
-                province_id = 6641
-                province_id = 4293
-                province_id = 6637
-                province_id = 6639
-                province_id = 6670
-                province_id = 2309
-                province_id = 415
-                province_id = 6642
-                province_id = 5296
-                province_id = 6635
-                province_id = 6636
-            }
-        }
-        allow = {
-            government = monarchy
-            OR = {
-                culture_group = mesopotamian_group
-                OR = {
-                    religion = ashurist
-                    religion = cult_of_marduk
-                }
-            }
-            NOT = { exists = ASY }
-            is_at_war = no
-            is_nomad = no
-            owns_core_province = 411
-            owns_core_province = 6638
-            owns_core_province = 2310
-            owns_core_province = 6640
-            owns_core_province = 6641
-            owns_core_province = 4293
-            owns_core_province = 6670
-            owns_core_province = 415
-            owns_or_non_sovereign_subject_of = 6642
-            owns_or_non_sovereign_subject_of = 6637
-            owns_or_non_sovereign_subject_of = 6639
-            owns_or_non_sovereign_subject_of = 2309
-            OR = {
-                owns_core_province = 5296
-                owns_core_province = 6635
-                owns_core_province = 6636
-            }
-            NOT = { exists = IRQ }
-            num_of_owned_provinces_with = {
-                religion = ROOT
-                region = mesopotamia_region
-                value = 15
-            }
-            OR = {
-                religion = zoroastrian
-                religion = nestorian
-                religion = miaphysite
-                religion = monothelite
-                religion = orthodox
-                religion = coptic
-                religion = druze_new
-            }
-            411 = {
-                OR = {
-                    culture = assyrian
-                    culture = aramaic
-                }
-                religion = ROOT
-            }
-        }
-        effect = {
-            411 = { move_capital_effect = yes }
-            change_tag = ASY
-
-            add_government_reform = autocracy_reform
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            411 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-                change_province_name = "Nineveh"
-                rename_capital = "Nineveh"
-                add_prosperity = 50
-            }
-            6638 = {
-                add_base_tax = 4
-                add_base_production = 4
-                add_base_manpower = 4
-                change_province_name = "Assur"
-                rename_capital = "Assur"
-                change_religion = ROOT
-                change_culture = assyrian
-            }
-            2310 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-                change_province_name = "Kar-Istar"
-                rename_capital = "Kar-Istar"
-                change_religion = ROOT
-                change_culture = assyrian
-            }
-            add_prestige = 50
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_neo_assyria
-            swap_non_generic_missions = yes
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        area = shahrizor_area
-                        area = al_jazira_area
-                        area = baghdad_area
-                        area = iraq_arabi_area
-                        area = kut_area
-                    }
-                }
-                add_core = ROOT
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    region = mesopotamia_region
-                }
-                add_permanent_claim = ROOT
-            }
-            custom_tooltip = assyria_nation_tooltip
-            hidden_effect = {
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    #######################################################################################
-    ################################         Assur		 ##################################
-    #######################################################################################
-
-    assur_nation = {
-        major = yes
-        potential = {
-            vu_generic_can_form_potential_check = yes
-            NOT = { has_country_flag = formed_neo_assyria }
-            NOT = { tag = PER }
-            OR = {
-                any_owned_province = { culture = assyrian }
-                culture_group = mesopotamian_group
-            }
-        }
-        provinces_to_highlight = {
-            OR = {
-                province_id = 411
-                province_id = 6638
-                province_id = 2310
-                province_id = 6640
-                province_id = 6641
-                province_id = 4293
-                province_id = 6637
-                province_id = 6639
-                province_id = 6670
-                province_id = 2309
-                province_id = 415
-                province_id = 6642
-                province_id = 5296
-                province_id = 6635
-                province_id = 6636
-            }
-        }
-        allow = {
-            government = monarchy
-            OR = {
-                culture_group = mesopotamian_group
-                NOT = { religion_group = muslim }
-            }
-            NOT = { exists = ASR }
-            is_at_war = no
-            is_nomad = no
-            owns_core_province = 411
-            owns_core_province = 6638
-            owns_core_province = 2310
-            owns_core_province = 6640
-            owns_core_province = 6641
-            owns_core_province = 4293
-            owns_core_province = 6670
-            owns_core_province = 415
-            owns_or_non_sovereign_subject_of = 6642
-            owns_or_non_sovereign_subject_of = 6637
-            owns_or_non_sovereign_subject_of = 6639
-            owns_or_non_sovereign_subject_of = 2309
-            OR = {
-                owns_core_province = 5296
-                owns_core_province = 6635
-                owns_core_province = 6636
-            }
-            NOT = { exists = IRQ }
-            num_of_owned_provinces_with = {
-                religion = ROOT
-                region = mesopotamia_region
-                value = 15
-            }
-            OR = {
-                religion = zoroastrian
-                religion = nestorian
-                religion = miaphysite
-                religion = monothelite
-                religion = orthodox
-                religion = coptic
-                religion = druze_new
-            }
-            411 = {
-                OR = {
-                    culture = assyrian
-                    culture = aramaic
-                }
-                religion = ROOT
-            }
-        }
-        effect = {
-            411 = { move_capital_effect = yes }
-            change_tag = ASR
-
-            add_government_reform = autocracy_reform
-            if = {
-                limit = { NOT = { government_rank = 8 } }
-                set_government_rank = 8
-            }
-            add_country_modifier = {
-                name = centralization_modifier
-                duration = 7300
-            }
-            411 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-                change_province_name = "Nineveh"
-                rename_capital = "Nineveh"
-                add_prosperity = 50
-            }
-            6638 = {
-                add_base_tax = 4
-                add_base_production = 4
-                add_base_manpower = 4
-                change_province_name = "Assur"
-                rename_capital = "Assur"
-                change_religion = ROOT
-                change_culture = assyrian
-            }
-            2310 = {
-                add_base_tax = 2
-                add_base_production = 2
-                add_base_manpower = 2
-                change_province_name = "Kar-Istar"
-                rename_capital = "Kar-Istar"
-                change_religion = ROOT
-                change_culture = assyrian
-            }
-            add_prestige = 50
-            if = {
-                limit = { has_custom_ideas = no }
-                country_event = { id = ideagroups.1 } #Swap Ideas
-            }
-            set_country_flag = formed_neo_assyria
-            swap_non_generic_missions = yes
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    OR = {
-                        area = shahrizor_area
-                        area = al_jazira_area
-                        area = baghdad_area
-                        area = iraq_arabi_area
-                        area = kut_area
-                    }
-                }
-                add_core = ROOT
-            }
-            every_province = {
-                limit = {
-                    NOT = { owned_by = ROOT }
-                    NOT = { is_core = ROOT }
-                    region = mesopotamia_region
-                }
-                add_permanent_claim = ROOT
-            }
-            custom_tooltip = assyria_nation_tooltip
-            hidden_effect = {
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-                random_owned_province = {
-                    limit = { NOT = { religion = ROOT } }
-                    change_religion = ROOT
-                    change_culture = ROOT
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
-
-    ########################################################################################
-    # Mecklenburg by Don
-    mecklenburg_nation = {
-        major = yes
-        potential = {
-            NOT = {
-                exists = MKL
-                tag = POM
-                tag = STE
-                tag = WOL
-                tag = RUG
-                tag = STP
-            }
-            OR = {
-                primary_culture = pommeranian
-                tag = M5H
-                tag = STR
-            }
-        }
-
-        provinces_to_highlight = {
-            area = mecklenburg_area
-            OR = {
-                NOT = { owned_by = ROOT }
-                NOT = { is_core = ROOT }
-            }
-        }
-
-        allow = {
-            num_of_owned_provinces_with = {
-                owned_by = ROOT
-                area = mecklenburg_area
-                value = 5
-            }
-            owns_core_province = 4749	# Stargard
-            owns_core_province = 46	# Rostock
-            owns_core_province = 2996	# Wismar
-        }
-
-        effect = {
-            change_tag = MKL
-            if = {
-                limit = {
-                    NOT = {
-                        government_rank = 6
-                    }
-                }
-                set_government_rank = 6
-            }
-            add_country_modifier = {
-                name = "centralization_modifier"
-                duration = 1825
-            }
-            add_prestige = 25
-        }
-        ai_will_do = {
-            factor = 1
-        }
-    }
+	#Moving the 1001 different files into this one, mostly for my sanity, easier ctrl-f, and because I'm slowly overhauling them all anyway to a hopefully more dynamic system with fewer assumptions, limitations, and more dynamic possibilities. Playing checkers to get that one required province to form a country
+	#really isn't the point, I think, so in general I'm moving away from specific provinces requirments and moving towards percentage of the provinces in the general area.
+	#Note that, as a general rule, I'm removing religion requirements, most capital switching, most non-specific culture flipping, most government type switching, and most anything else that limits the decision to a certain historical path. With the current system of primary tags and cultures,
+	#Everything is far too linked with culture for some of this clutter, and I don't want to establish a precedent of making a new, different religion or differnt gov type versions for every tag in the game. If people want a new capital, they can set it themselves, if people want to change culture, unless
+	#it is a very logical switch, they can do so manually, if people want to reform their gov type and it isn't prevented by the tag's starting type, they can also do that manually.
+	#I'm also making allow requirements more consistant and stable. General 2 to 3 specific provinces for the main capitals of the tag and 2/3rds of the kingdom's traditional territory, plus 150 dev (50% discount from default 300 to achieve rank 2), and 25 prestige (also 50% discount).
+	#For empires, I'm typically going for 3 to 5 specific provinces and 3/4ths of the empire's traditional territory, as well as 500 dev (50% discount from default 1000 to achieve rank 3) and 40 prestige (default 75). Note I am making a few exceptions to all these rules on a case by case basis.
+	#Note this is the file specifically for new tags in VU, or for vanilla tags which lack a vanilla decision. Vanilla decisions are moved to vuPLReplaceVanillaCountryFormations.txt and a couple really odd or unique new ones are going in vuPLNewCountryFormationsSpecial.txt.
+	#
+	#
+	#################################################################################################
+	################################	      Switzerland   	   ##################################
+	#################################################################################################
+	swiss_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = {
+				tag = SWI
+			}
+			capital_scope = {
+				OR = {
+					area = romandie_area
+					area = switzerland_area
+				}
+			}
+		}
+		color = {
+			150
+			0
+			0
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = romandie_area
+				area = switzerland_area
+			}
+		}
+		allow = {
+			owns_or_non_sovereign_subject_of = 165
+			owns_or_non_sovereign_subject_of = 1869
+			OR = {
+				AND = {
+					tag = BRN
+					NOT = {
+						exists = ZUR
+					}
+				}
+				AND = {
+					tag = ZUR
+					NOT = {
+						exists = BRN
+					}
+				}
+				AND = {
+					NOT = {
+						exists = ZUR
+					}
+					NOT = {
+						exists = BRN
+					}
+					num_of_owned_provinces_with = {
+						value = 15
+						OR = {
+							area = romandie_area
+							area = switzerland_area
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			change_tag = SWI
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 1825
+			}
+			every_subject_country = {
+				limit = {
+					capital_scope = {
+						OR = {
+							area = romandie_area
+							area = switzerland_area
+						}
+					}
+				}
+				PREV = {
+					inherit = PREV
+				}
+			}
+			vu_colour_refresh = yes
+		}
+	}
+	#################################################################################################
+	################################		Austrian Empire 	   ##################################
+	#################################################################################################
+	austrian_empire_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = {
+				has_country_flag = formed_austrian_empire_flag
+			}
+			tag = HAB
+			capital_scope = {
+				is_part_of_hre = no
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 134				# Wien
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			num_of_cities = 20
+			NOT = {
+				hre_size = 1
+			}
+			is_free_or_tributary_trigger = yes
+			government = monarchy
+			is_nomad = no
+			is_at_war = no
+			owns_core_province = 134			# Wien
+		}
+		effect = {
+			change_tag = AUE
+			emperor = {
+				add_opinion = {
+					who = root
+					modifier = opinion_left_empire
+				}
+			}
+			set_in_empire = no
+			set_government_rank = 9
+			emperor = {
+				country_event = {
+					id = hre_event.5
+				}
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 1825
+			}
+			add_prestige = 25
+			set_country_flag = formed_austrian_empire_flag
+			hidden_effect = {
+				every_province = {
+					remove_core = HAB
+					remove_core = AUT					#VU - SF addition
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#################################################################################################
+	################################		Austria-Hungary		   ##################################
+	#################################################################################################
+	#VU addition by San Felipe
+	austria_hungary_nation = {
+		major = yes
+		potential = {
+			OR = {
+				tag = HAB
+				tag = AUE
+			}
+			normal_or_historical_nations = yes
+			NOT = {
+				has_country_flag = formed_austria_hungary_flag
+			}
+			NOT = {
+				exists = HUN
+			}
+			capital_scope = {
+				is_part_of_hre = no
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 134				# Wien
+				province_id = 153				# Pest
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			has_institution = nationalism_institution
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			owns_core_province = 134			# Wien
+			owns_core_province = 153			# Pest
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = hungarian
+			}
+			NOT = {
+				stability = 0
+			}
+		}
+		effect = {
+			change_tag = AUH
+			add_government_reform = parliamentary_reform
+			if = {
+				limit = {
+					NOT = {
+						accepted_culture = hungarian
+					}
+				}
+				add_accepted_culture = hungarian
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 3650
+			}
+			add_prestige = 25
+			add_stability = 1
+			set_country_flag = formed_austria_hungary_flag
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###################################################################################################
+	################################		Belgium			 ##########################################		#Note needs work
+	###################################################################################################
+	#More or less Darth Modus's work with only a few adjustments from Altan
+	belgian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_belgian_flag_vu
+			}
+			NOT = {
+				tag = BEL
+				tag = NED
+				tag = FRA
+				tag = BFR
+				tag = CEL
+				tag = RVF
+				tag = FSR
+				tag = FSE
+				tag = NPF
+				tag = OFR
+				tag = TFR
+				tag = SPA
+				tag = BSP
+				tag = SPB
+				tag = BBS
+				tag = CSP
+				tag = BUR
+			}
+			OR = {
+				primary_culture = brabantian
+				primary_culture = flemish
+				primary_culture = wallonian
+				primary_culture = ger_dutch
+				primary_culture = ger_flemish
+				primary_culture = ger_brabantian
+			}
+		}
+		color = {
+			60
+			48
+			44
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 90
+				province_id = 91
+				province_id = 92
+				province_id = 93
+				province_id = 1744
+				province_id = 1865
+				province_id = 1866
+				province_id = 7695
+				province_id = 8014
+				province_id = 8015
+				province_id = 8018
+				province_id = 8019
+				province_id = 8020
+				province_id = 8022
+				province_id = 8024
+				province_id = 8025
+				province_id = 8497
+				province_id = 8499
+				province_id = 8502
+				province_id = 8503
+				province_id = 8506
+				province_id = 8507
+				province_id = 8508
+				province_id = 8509
+				province_id = 8510
+				province_id = 8511
+				province_id = 8515
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			is_emperor = no
+			owns_core_province = 90
+			owns_core_province = 91
+			owns_core_province = 92
+			owns_core_province = 93
+			owns_core_province = 1744
+			owns_core_province = 1865
+			owns_core_province = 1866
+			owns_core_province = 7695
+			owns_core_province = 8014
+			owns_core_province = 8015
+			owns_core_province = 8018
+			owns_core_province = 8019
+			owns_core_province = 8020
+			owns_core_province = 8022
+			owns_core_province = 8024
+			owns_core_province = 8025
+			owns_core_province = 8497
+			owns_core_province = 8499
+			owns_core_province = 8502
+			owns_core_province = 8503
+			owns_core_province = 8506
+			owns_core_province = 8507
+			owns_core_province = 8508
+			owns_core_province = 8509
+			owns_core_province = 8510
+			owns_core_province = 8511
+			owns_core_province = 8515
+			total_development = 100			#Normal requirement for rank 2 is 500 dev, so this is 80 percent discounted.
+			prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
+		}
+		effect = {
+			change_tag = BEL
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						region = low_countries_region
+						area = picardy_area
+					}
+					#NOT = { province_id = 87 }
+					NOT = {
+						province_id = 1931
+					}
+				}
+				add_permanent_claim = BEL
+			}
+			swap_ideas = yes
+			set_country_flag = formed_belgian_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400		#
+	}
+	###################################################################################################
+	################################			Emilia			 ######################################		#Note needs work
+	###################################################################################################
+	#More or less Darth Modus's work with only a few adjustments from Altan
+	emilian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_emilia_flag_vu
+			}
+			NOT = {
+				tag = EMR
+			}
+			NOT = {
+				tag = PAP
+			}
+			NOT = {
+				tag = HLR
+			}
+			NOT = {
+				tag = ITL
+			}
+			NOT = {
+				tag = ITA
+			}
+			NOT = {
+				tag = SPI
+			}
+			NOT = {
+				tag = TUS
+			}
+			NOT = {
+				tag = LVN
+			}
+			OR = {
+				primary_culture = romagnan
+				tag = URB
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			culture = romagnan
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = EMR
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 4730			# Bologna
+			calc_true_if = {
+				all_owned_province = {
+					is_core = ROOT
+					culture = romagnan
+				}
+				amount = 15				#At least 2/3rds of Romagnol-cultured 22 provinces
+			}
+		}
+		effect = {
+			change_tag = EMR
+			#remove_non_electors_emperors_from_empire_effect = yes #Duchy rank, therefore should not remove from HRE.
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 3650
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+					culture = romagnan
+				}
+				add_permanent_claim = EMR
+			}
+			add_prestige = 10
+			#No Emilian ideas yet.
+			swap_ideas = yes
+			set_country_flag = formed_emilia_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	###################################################################################################
+	################################			France (Diplomatically)			 ######################		#Using my work in Britain as a template here
+	###################################################################################################
+	french_nation_diplomatically = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_france_flag
+				tag = FRA
+				tag = BFR
+				tag = CEL
+				tag = RVF
+				tag = FSR
+				tag = FSE
+				tag = NPF
+				tag = OFR
+				tag = TFR
+				tag = SPA
+				tag = BSP
+				tag = SPB
+				tag = BBS
+				tag = CSP
+			}
+			OR = {
+				culture_group = french
+				primary_culture = basque
+				primary_culture = celtic_breton_culture
+			}
+			num_of_cities = 54			#At least 1/3 of France's 161 provinces to see for anyone
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			region = france_region
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = FRA
+			}
+			is_nomad = no
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			if = {
+				limit = {
+					government = monarchy
+				}
+				legitimacy = 100
+			}
+			owns_or_vassal_of = 183			# Paris
+			owns_or_vassal_of = 186			# Reims, coronation site
+			owns_or_vassal_of = 203			# Lyon
+			owns_or_vassal_of = 4389			# Tours
+			custom_trigger_tooltip = {
+				tooltip = hegemony_over_france_tooltip
+				calc_true_if = {
+					all_province = {
+						region = france_region
+						country_or_vassal_holds = ROOT
+						is_core = owner
+					}
+					amount = 149					#At least 90 percent of France's 161 provinces. Note the modern france includes a further 30 provinces, give or take a couple
+				}
+			}
+			total_development = 250			#Normal requirement for rank 2 is 500 dev, so this is 50 percent discounted
+			prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
+		}
+		effect = {
+			every_subject_country = {
+				limit = {
+					ai = yes
+					capital_scope = {
+						region = france_region
+					}
+					NOT = {
+						num_of_cities = 16
+					}
+				}
+				ROOT = {
+					inherit = PREV
+				}
+			}
+			change_tag = FRA
+			swap_non_generic_missions = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			add_prestige = 25
+			france_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						area = brittany_area
+					}
+					NOT = {
+						area = lower_brittany_area
+					}
+				}
+				add_permanent_claim = FRA
+			}
+			brittany_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_claim = FRA
+			}
+			lower_brittany_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_claim = FRA
+			}
+			swap_ideas = yes
+			# custom_tooltip = spanish_unification_effect.tooltip
+			set_country_flag = formed_france_flag
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	###################################################################################################
+	################################        German Federation	     ##################################
+	###################################################################################################
+	german_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			#was_never_end_game_tag_trigger = yes
+			NOT = {
+				has_country_flag = formed_germany_flag
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = {
+				exists = GER
+				exists = GEM
+				tag = PAP
+				tag = HLR
+				tag = ROM
+				tag = AUH
+				tag = BRA
+				tag = PRU
+				tag = NGC
+				OR = {
+					primary_culture = austrian
+					primary_culture = ger_dutch
+					primary_culture = ger_brabantian
+					primary_culture = ger_zeelandic
+					primary_culture = ger_limburgish
+					primary_culture = ger_guelders
+					primary_culture = ger_flemish
+					primary_culture = ger_frisian
+					primary_culture = ger_east_frisian
+					primary_culture = ger_north_frisian
+				}
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 40
+					OR = {
+						has_institution = nationalism_institution
+						has_idea_group = nationalism_ideas
+					}
+				}
+			}
+			culture_group = germanic
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+			OR = {
+				has_country_flag = teu_can_form_germany
+				NOT = {
+					has_mission = teu_pru_an_empire_of_blood_and_iron
+				}
+				#Mission already makes you to Germany
+			}
+		}
+		color = {
+			49
+			49
+			49
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 44				# Hamburg
+				province_id = 46				# Rostock
+				province_id = 50				# Berlin
+				province_id = 57				# Brunswick
+				province_id = 61				# Dresden
+				province_id = 63				# Thüringen
+				province_id = 65				# München
+				province_id = 67				# Nürnberg
+				province_id = 81				# Hessen
+				province_id = 85				# Köln
+				province_id = 1761				# Worms
+				province_id = 1868				# Augsburg
+				province_id = 1876				# Frankfurt
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			OR = {
+				has_institution = nationalism_institution
+				has_idea_group = nationalism_ideas
+			}
+			NOT = {
+				hre_size = 1
+			}
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			is_emperor = no
+			owns_core_province = 44			# Hamburg
+			owns_core_province = 46			# Rostock
+			owns_core_province = 50			# Berlin
+			owns_core_province = 57			# Brunswick
+			owns_core_province = 61			# Dresden
+			owns_core_province = 63			# Thüringen
+			owns_core_province = 65			# München
+			owns_core_province = 67			# Nürnberg
+			owns_core_province = 81			# Hessen
+			owns_core_province = 85			# Köln
+			owns_core_province = 1761			# Worms
+			owns_core_province = 1868			# Augsburg
+			owns_core_province = 1876			# Frankfurt
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+				value = 330
+			}
+		}
+		effect = {
+			change_tag = GER
+			on_change_tag_effect = yes
+			restore_country_name_effect = yes
+			if = {
+				limit = {
+					OR = {
+						tag = HAB
+						tag = AUT						#VU - SF addition
+					}
+				}
+				country_event = {
+					id = ME_Austria_Events.74
+				}
+				hidden_effect = {
+					remove_country_modifier = me_hab_austrian_led_confederation
+					remove_country_modifier = me_hab_unity_of_the_confederation
+					remove_country_modifier = me_hab_german_ambitions
+				}
+			}
+			custom_tooltip = become_an_empire_tt
+			hidden_effect = {
+				set_government_rank = 9
+			}
+			north_german_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GER
+			}
+			south_german_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GER
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			set_country_flag = formed_germany_flag
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					has_dlc = "Winds of Change"
+				}
+				set_country_flag = GER_stuck_disunited
+				add_government_reform = german_cultural_disunity_reform
+				freeze_government_power = {
+					mechanic_type = cultural_unity_mechanic
+					power_type = cultural_unity
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					tag = HAB
+					tag = AUT					#VU - SF addition
+				}
+				NOT = {
+					has_country_flag = me_hab_easier_german_formation
+				}
+			}
+		}
+	}
+	###############################################################################################
+	################################        German Empire	     ##################################			GEM
+	###############################################################################################
+	vu_german_empire = {
+		#By Don & SF
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			#was_never_end_game_tag_trigger = yes
+			NOT = {
+				has_country_flag = formed_germany_flag
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = {
+				exists = GEM
+				exists = GER
+				tag = PAP
+				tag = HLR
+				tag = ROM
+				tag = AUH
+				OR = {
+					primary_culture = austrian
+					primary_culture = ger_dutch
+					primary_culture = ger_brabantian
+					primary_culture = ger_zeelandic
+					primary_culture = ger_limburgish
+					primary_culture = ger_guelders
+					primary_culture = ger_flemish
+					primary_culture = ger_frisian
+					primary_culture = ger_east_frisian
+					primary_culture = ger_north_frisian
+				}
+			}
+			OR = {
+				tag = NGC
+				tag = PRU
+				tag = BRA
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 40
+					OR = {
+						has_institution = nationalism_institution
+						has_idea_group = nationalism_ideas
+					}
+				}
+			}
+			culture_group = germanic
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+			OR = {
+				has_country_flag = teu_can_form_germany
+				NOT = {
+					has_mission = teu_pru_an_empire_of_blood_and_iron
+				}
+				#Mission already makes you to Germany
+			}
+		}
+		color = {
+			40
+			40
+			40
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 44				# Hamburg
+				province_id = 46				# Rostock
+				province_id = 50				# Berlin
+				province_id = 57				# Brunswick
+				province_id = 61				# Dresden
+				province_id = 63				# Thüringen
+				province_id = 65				# München
+				province_id = 67				# Nürnberg
+				province_id = 81				# Hessen
+				province_id = 85				# Köln
+				province_id = 1761				# Worms
+				province_id = 1868				# Augsburg
+				province_id = 1876				# Frankfurt
+				province_id = 41
+				province_id = 75
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			OR = {
+				has_institution = nationalism_institution
+				has_idea_group = nationalism_ideas
+			}
+			NOT = {
+				hre_size = 1
+			}
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			is_emperor = no
+			owns_core_province = 44			# Hamburg
+			owns_core_province = 46			# Rostock
+			owns_core_province = 50			# Berlin
+			owns_core_province = 57			# Brunswick
+			owns_core_province = 61			# Dresden
+			owns_core_province = 63			# Thüringen
+			owns_core_province = 65			# München
+			owns_core_province = 67			# Nürnberg
+			owns_core_province = 81			# Hessen
+			owns_core_province = 85			# Köln
+			owns_core_province = 1761			# Worms
+			owns_core_province = 1868			# Augsburg
+			owns_core_province = 1876			# Frankfurt
+			owns_core_province = 41			# Königsberg
+			owns_core_province = 75			# Strassburg
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+				value = 360
+			}
+		}
+		effect = {
+			change_tag = GEM
+			on_change_tag_effect = yes
+			restore_country_name_effect = yes
+			custom_tooltip = become_an_empire_tt
+			hidden_effect = {
+				set_government_rank = 9
+			}
+			north_german_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GEM
+			}
+			south_german_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GEM
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			set_country_flag = formed_germany_flag
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			swap_non_generic_missions = yes
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###################################################################################################
+	#############################       North German Confederation		 ##############################
+	###################################################################################################
+	north_german_confederation_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = {
+				has_country_flag = formed_north_german_confederation_flag
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = {
+				exists = GER
+			}
+			NOT = {
+				exists = NGC
+			}
+			NOT = {
+				tag = PAP
+			}
+			NOT = {
+				tag = HLR
+			}
+			NOT = {
+				tag = ROM
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 15
+				}
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					NOT = {
+						government = theocracy
+					}
+				}
+			}
+			OR = {
+				primary_culture = hannoverian				#Westphalian
+				primary_culture = pommeranian
+				primary_culture = hessian
+				primary_culture = saxon
+				primary_culture = prussian
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		color = {
+			143
+			141
+			128
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 44				# Hamburg
+				province_id = 46				# Rostock
+				province_id = 50				# Berlin
+				province_id = 57				# Brunswick
+				province_id = 61				# Dresden
+				province_id = 63				# Thüringen
+				province_id = 81				# Hessen
+				province_id = 85				# Köln
+				province_id = 1876				# Frankfurt
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				hre_size = 1
+			}
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			is_emperor = no
+			owns_core_province = 44			# Hamburg
+			owns_core_province = 46			# Rostock
+			owns_core_province = 50			# Berlin
+			owns_core_province = 57			# Brunswick
+			owns_core_province = 61			# Dresden
+			owns_core_province = 63			# Thüringen
+			owns_core_province = 81			# Hessen
+			owns_core_province = 85			# Köln
+			owns_core_province = 1876			# Frankfurt
+		}
+		effect = {
+			change_tag = NGC
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			north_german_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = NGC
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 1825
+			}
+			add_prestige = 25
+			set_country_flag = formed_north_german_confederation_flag
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###################################################################################################
+	########################			Iberia (Portugal-based)			 ##############################
+	###################################################################################################
+	iberian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_iberia_flag_vu
+			}
+			NOT = {
+				tag = IBE
+			}
+			NOT = {
+				tag = SPA
+			}
+			NOT = {
+				tag = BSP
+			}
+			NOT = {
+				tag = SPB
+			}
+			NOT = {
+				tag = BBS
+			}
+			NOT = {
+				tag = CSP
+			}
+			NOT = {
+				tag = ADU
+			}
+			primary_culture = portugese
+		}
+		color = {
+			220
+			230
+			255
+		}
+		provinces_to_highlight = {
+			region = iberia_region
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = IBE
+			}
+			NOT = {
+				exists = SPA
+			}
+			#Special, no doubling up on Iberia superpowers
+			NOT = {
+				exists = BSP
+			}
+			#Special, no doubling up on Iberia superpowers
+			NOT = {
+				exists = SPB
+			}
+			#Special, no doubling up on Iberia superpowers
+			NOT = {
+				exists = BBS
+			}
+			#Special, no doubling up on Iberia superpowers
+			NOT = {
+				exists = CSP
+			}
+			#Special, no doubling up on Iberia superpowers
+			NOT = {
+				exists = ADU
+			}
+			#Special, no doubling up on Iberia superpowers
+			is_nomad = no
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			owns_core_province = 227			# Lisboa
+			owns_core_province = 231			# Porto
+			owns_core_province = 8042			# Santiago de la Compostela
+			calc_true_if = {
+				all_owned_province = {
+					is_core = ROOT
+					region = iberia_region
+				}
+				amount = 103				#At least 2/3 of Iberia's 153 provinces. This is Portugal plus 72 other provinces, roughly half of non Portuguese Iberia.
+			}
+			total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
+			prestige = 40			#Normal requirement for rank 3 is 75 prestige.
+		}
+		effect = {
+			change_tag = IBE
+			#No Iberian missions yet.
+			#swap_non_generic_missions = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 9
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			add_prestige = 50
+			iberia_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+				}
+				add_permanent_claim = IBE
+			}
+			#No Iberian ideas yet.
+			# swap_ideas = yes
+			set_country_flag = formed_iberia_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400		#
+	}
+	###################################################################################################
+	################################			Illyria			 ##############################################			#Note needs work
+	###################################################################################################
+	#More or less HR's work with only a few adjustments from Draiocht
+	illyrian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_illyria_flag_vu
+			}
+			NOT = {
+				tag = ILY
+			}
+			OR = {
+				culture_group = south_slavic
+				culture_group = illyrian
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 131				# Zagreb
+				province_id = 137				# Ragusa
+				province_id = 138				# Zeta
+				province_id = 139				# Hum
+				province_id = 3002				# Lasva
+				province_id = 141				# Belgrade
+				province_id = 1766				# Kosovo
+				province_id = 1767				# Slavonia
+				province_id = 1826				# Lika
+				province_id = 3001				# Skopje
+				province_id = 4755				# Sarajevo
+				province_id = 3187				# Podrinje
+				province_id = 4752				# Rijeka
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = ILY
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			calc_true_if = {
+				all_owned_province = {
+					is_core = ROOT
+					OR = {
+						province_id = 131						# Zagreb
+						province_id = 137						# Ragusa
+						province_id = 138						# Zeta
+						province_id = 139						# Hum
+						province_id = 3002						# Lasva
+						province_id = 141						# Belgrade
+						province_id = 1766						# Kosovo
+						province_id = 1767						# Slavonia
+						province_id = 1826						# Lika
+						province_id = 3001						# Skopje
+						province_id = 4755						# Sarajevo
+						province_id = 3187						# Podrinje
+						province_id = 4752						# Rijeka
+					}
+				}
+				amount = 9				#At least 2/3 of Illyria's 13 provinces (approximate)
+			}
+			total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
+			prestige = 40			#Normal requirement for rank 3 is 75 prestige.
+		}
+		effect = {
+			change_tag = ILY
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 9
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						region = balkan_region
+						area = carinthia_area
+					}
+				}
+				add_permanent_claim = ILY
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			#No Illyrian ideas yet.
+			# swap_ideas = yes
+			set_country_flag = formed_illyria_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	###################################################################################################
+	################################			Kabylia			 ##############################################
+	###################################################################################################
+	vu_kabylia_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_kabylia_flag
+			}
+			NOT = {
+				tag = KBA
+			}
+			OR = {
+				culture_group = berber_group
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			area = kabylia_area
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = KBA
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 339			# Bugia
+			calc_true_if = {
+				all_owned_province = {
+					is_core = ROOT
+					area = kabylia_area
+				}
+				amount = 4				#All of Kabylia's 4 provinces
+			}
+		}
+		effect = {
+			change_tag = KBA
+			remove_non_electors_emperors_from_empire_effect = yes
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			add_prestige = 10
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_kabylia_flag
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400		#
+	}
+	###################################################################################################
+	############			LombardyVenetia (merged both of HR's decisions into one without gov type limits)			 ###########################			#Note needs work
+	###################################################################################################
+	#More or less HR's work with only a few adjustments from Draiocht
+	lombardy_venetia_monarchy_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_lombardy_venetia_flag_vu
+			}
+			NOT = {
+				tag = LVN
+			}
+			NOT = {
+				tag = ITL
+			}
+			NOT = {
+				tag = ITA
+			}
+			NOT = {
+				tag = SPI
+			}
+			NOT = {
+				tag = EMR
+			}
+			NOT = {
+				tag = TUS
+			}
+			NOT = {
+				tag = TTS
+			}
+			OR = {
+				tag = MLO				#Milan
+				tag = LOM				#Lombardy (Non-milanese Lombardy formable)
+				tag = VEN				#Venice
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = lombardy_area
+				area = po_valley_area
+				area = venetia_area
+				area = carnia_area
+				AND = {
+					owned_by = VEN
+					region = italy_region
+				}
+				AND = {
+					owned_by = MLO
+					region = italy_region
+				}
+				AND = {
+					owned_by = LOM
+					region = italy_region
+				}
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			if = {
+				#MLO
+				limit = {
+					tag = MLO
+				}
+				if = {
+					limit = {
+						exists = VEN
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = VEN
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = LOM
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = LOM
+						}
+					}
+				}
+			}
+			else_if = {
+				#VEN
+				limit = {
+					tag = VEN
+				}
+				if = {
+					limit = {
+						exists = MLO
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = MLO
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = LOM
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = LOM
+						}
+					}
+				}
+			}
+			else_if = {
+				#LOM
+				limit = {
+					tag = LOM
+				}
+				if = {
+					limit = {
+						exists = MLO
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = MLO
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = VEN
+					}
+					NOT = {
+						any_province = {
+							region = italy_region
+							owned_by = VEN
+						}
+					}
+				}
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 104			#Milan
+			owns_core_province = 112			#Venezia
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				OR = {
+					area = lombardy_area
+					area = po_valley_area
+					area = venetia_area
+					area = carnia_area
+				}
+				value = 17				#At least 2/3 of LMV's 25 provinces
+			}
+			total_development = 250			#Normal requirement for rank 2 is 500 dev, so this is 50 percent discounted.
+			prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
+		}
+		effect = {
+			change_tag = LVN
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			swap_ideas = yes
+			#Lombardy-Venetia no unique missions yet has.
+			#swap_non_generic_missions = yes
+			set_country_flag = formed_lombardy_venetia_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	###################################################################################################
+	#######################################			Moravia			 ##################################			#Note needs work
+	###################################################################################################
+	#More or less HR's work with only a few adjustments from Draiocht
+	moravian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				tag = GMA
+				tag = PLC
+				has_country_flag = formed_moravia_flag_vu
+				tag = POL
+			}
+			culture_group = west_slavic
+		}
+		color = {
+			196
+			78
+			42
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 60				# Lusatia
+				province_id = 154				# Nitra
+				province_id = 257				# Warsaw
+				province_id = 262				# Krakow
+				province_id = 263				# Ratibor
+				province_id = 264				# Breslau
+				province_id = 265				# Brno
+				province_id = 266				# Prague
+				province_id = 1763				# Lusatia
+				province_id = 1772				# Bratislava
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = GMA
+			}
+			is_at_war = no
+			is_emperor = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 60			# Lusatia
+			owns_core_province = 1763			# Lusatia
+			owns_core_province = 263			# Ratibor
+			owns_core_province = 264			# Breslau
+			owns_core_province = 265			# Brno
+			owns_core_province = 266			# Prague
+			owns_core_province = 154			# Nitra
+			owns_core_province = 1772			# Bratislava
+			owns_core_province = 262			# Krakow
+			owns_core_province = 257			# Warsaw
+			total_development = 500			#Special discount. Normal requirement for rank 3 is 2000 dev, so this is 75 percent discounted.
+			prestige = 40			#Normal requirement for rank 3 is 75 prestige.
+		}
+		effect = {
+			change_tag = GMA
+			#remove_non_electors_emperors_from_empire_effect = yes
+			emperor = {
+				add_opinion = {
+					who = root
+					modifier = opinion_left_empire
+				}
+			}
+			set_in_empire = no
+			emperor = {
+				country_event = {
+					id = hre_event.5
+				}
+			}
+			set_government_rank = 9
+			# if = {
+			# limit = { NOT = { government_rank = 9 } }
+			# set_government_rank = 9
+			# }
+			bohemia_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GMA
+			}
+			erzgebirge_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GMA
+			}
+			moravia_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GMA
+			}
+			slovakia_area = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GMA
+			}
+			poland_region = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = GMA
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 50
+			#No Moravian ideas yet
+			# swap_ideas = yes
+			set_country_flag = formed_moravia_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	###################################################################################################
+	################################			Najd			 ######################################
+	###################################################################################################
+	vu_najd_formation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_najd_vu
+			}
+			NOT = {
+				tag = NAJ
+			}
+			NOT = {
+				tag = ALH
+			}
+			primary_culture = bedouin_arabic
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = nafud_area
+				area = yamamah_area
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = NAJ
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 392
+			custom_trigger_tooltip = {
+				tooltip = half_of_najd_tooltip
+				num_of_owned_provinces_with = {
+					value = 6
+					OR = {
+						area = nafud_area
+						area = yamamah_area
+					}
+					is_core = ROOT
+				}
+			}
+			total_development = 50			#Normal requirement for rank 2 is 500 dev, so this is 90 percent discounted.
+			prestige = 25			#Normal requirement for rank 2 is 50 prestige, so this is 50 percent discounted
+		}
+		effect = {
+			change_tag = NAJ
+			remove_non_electors_emperors_from_empire_effect = yes
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						area = nafud_area
+						area = yamamah_area
+					}
+				}
+				add_permanent_claim = NAJ
+			}
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			add_prestige = 25
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_najd_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###################################################################################################
+	################################			Sennar			 ######################################
+	###################################################################################################
+	vu_sennar_formation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_sennar_vu
+			}
+			NOT = {
+				tag = NUB
+			}
+			OR = {
+				tag = FNJ
+				AND = {
+					owns_core_province = 2799
+					culture_group = sudanese
+					religion_group = muslim
+				}
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			province_id = 2799
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = NUB
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 2799
+		}
+		effect = {
+			2799 = {
+				move_capital_effect = yes
+			}
+			change_tag = NUB
+			remove_non_electors_emperors_from_empire_effect = yes
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						province_id = 2798
+						province_id = 5285
+						province_id = 1222
+						province_id = 5287
+						province_id = 2800
+						province_id = 2797
+						province_id = 5284
+						province_id = 1220
+						province_id = 5286
+						province_id = 1221
+						province_id = 1216
+					}
+				}
+				add_permanent_claim = NUB
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						province_id = 5302
+						province_id = 5281
+						province_id = 5279
+						province_id = 1228
+					}
+				}
+				add_claim = NUB
+			}
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			2799 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 1
+			}
+			add_prestige = 10
+			change_religion = sunni
+			add_piety = -0.3
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_sennar_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###############################################################################################
+	################################       Duchy of Warsaw		 ##################################
+	###############################################################################################
+	duchy_warsaw_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_duchy_of_warsaw
+			}
+			OR = {
+				tag = MAZ
+				AND = {
+					owns_core_province = 257
+					culture_group = west_slavic
+					religion_group = christian
+				}
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 257
+				province_id = 1938
+				province_id = 7211
+				province_id = 256
+				province_id = 7263
+				province_id = 3221
+				province_id = 255
+				province_id = 8231
+			}
+		}
+		allow = {
+			NOT = {
+				exists = DWA
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 257
+			owns_core_province = 1938
+			owns_core_province = 7211
+			owns_core_province = 256
+			owns_core_province = 7263
+			owns_core_province = 3221
+			owns_core_province = 255
+			owns_core_province = 8231
+			NOT = {
+				exists = POL
+			}
+			NOT = {
+				exists = PLC
+			}
+			OR = {
+				tag = MAZ
+				AND = {
+					dominant_culture = polish
+					OR = {
+						accepted_culture = polish
+						has_unified_culture_group = yes
+					}
+				}
+			}
+		}
+		effect = {
+			257 = {
+				move_capital_effect = yes
+			}
+			change_tag = DWA
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 6
+					}
+				}
+				set_government_rank = 6
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			257 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 1
+			}
+			add_prestige = 10
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_duchy_of_warsaw
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						area = mazovia_area
+						area = central_poland_area
+						area = kuyavia_area
+						area = wielkopolska_area
+						area = sandomierz_area
+						province_id = 8224
+						province_id = 3220
+						province_id = 262
+						province_id = 8222
+						province_id = 2960
+						province_id = 269
+						province_id = 4538
+						province_id = 7266
+						province_id = 2424
+						province_id = 7267
+					}
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					OR = {
+						area = west_prussia_area
+						area = red_ruthenia_area
+						province_id = 7272
+						province_id = 1940
+						province_id = 7262
+						province_id = 3223
+						province_id = 3225
+						province_id = 8732
+						province_id = 8176
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###########################################################################################
+	##########################		Dano-Norwegian Realm	  #################################
+	###########################################################################################
+	denmark_norway_nation = {
+		major = yes
+		potential = {
+			AND = {
+				vu_generic_can_form_potential_check = yes
+				#was_never_end_game_tag_trigger = yes
+			}
+			NOT = {
+				has_country_flag = formed_denmark_norway
+			}
+			OR = {
+				tag = DAN
+				tag = NOR
+				AND = {
+					owns_core_province = 12
+					owns_core_province = 17
+					culture_group = scandinavian
+				}
+			}
+		}
+		color = {
+			200
+			100
+			100
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 12
+				province_id = 17
+				province_id = 14
+				province_id = 7770
+				province_id = 6
+				province_id = 23
+				province_id = 3119
+				province_id = 1983
+			}
+		}
+		allow = {
+			NOT = {
+				exists = DNR
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_or_non_sovereign_subject_of = 12
+			owns_or_non_sovereign_subject_of = 17
+			owns_or_non_sovereign_subject_of = 14
+			owns_or_non_sovereign_subject_of = 7770
+			owns_or_non_sovereign_subject_of = 6
+			owns_or_non_sovereign_subject_of = 23
+			owns_or_non_sovereign_subject_of = 3119
+			owns_or_non_sovereign_subject_of = 1983
+			OR = {
+				SWE = {
+					NOT = {
+						is_subject_of = ROOT
+					}
+				}
+				owns = 1
+			}
+			OR = {
+				NOR = {
+					is_subject_of = ROOT
+				}
+				DAN = {
+					is_subject_of = ROOT
+				}
+				num_of_owned_provinces_with = {
+					is_core = ROOT
+					OR = {
+						area = jutland_area
+						area = sjaelland_area
+						area = kobenhavn_area
+						area = denmark_area
+						area = skaneland_area
+						area = eastern_norway
+						area = western_norway
+						area = southern_norway_area
+						area = trondelag_area
+						area = northern_norway
+					}
+					value = 50					#50 provinces in Denmark or Norway
+				}
+			}
+		}
+		effect = {
+			12 = {
+				move_capital_effect = yes
+			}
+			change_tag = DNR
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			12 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			add_prestige = 20
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_denmark_norway
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						area = jutland_area
+						area = sjaelland_area
+						area = kobenhavn_area
+						area = denmark_area
+						area = skaneland_area
+						area = eastern_norway
+						area = western_norway
+						area = southern_norway_area
+						area = trondelag_area
+						area = northern_norway
+						province_id = 7774
+						province_id = 3134
+						province_id = 13
+						province_id = 3135
+						province_id = 1979
+						province_id = 370
+						province_id = 3115
+						province_id = 371
+						province_id = 3114
+					}
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					OR = {
+						province_id = 1978
+						province_id = 369
+						province_id = 25
+						province_id = 35
+						province_id = 3231
+						province_id = 16
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOR = {
+						is_subject_of = ROOT
+					}
+				}
+				inherit = NOR
+			}
+			if = {
+				limit = {
+					DAN = {
+						is_subject_of = ROOT
+					}
+				}
+				inherit = DAN
+			}
+			if = {
+				limit = {
+					ICE = {
+						is_subject_of = ROOT
+						ai = yes
+					}
+				}
+				inherit = ICE
+			}
+			if = {
+				limit = {
+					GOT = {
+						is_subject_of = ROOT
+						ai = yes
+					}
+				}
+				inherit = GOT
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###########################################################################################
+	##########################	Novgorodian Rus 	###########################################
+	###########################################################################################
+	novgorod_rus_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_novgorod_rus
+			}
+			OR = {
+				tag = NOV
+				tag = PSK
+				tag = VYA
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 310
+				province_id = 5644
+				province_id = 274
+				province_id = 313
+				province_id = 308
+				province_id = 293
+				province_id = 295
+				province_id = 6975
+				province_id = 33
+				province_id = 294
+				province_id = 1957
+				province_id = 276
+				province_id = 280
+				province_id = 289
+				province_id = 275
+			}
+		}
+		allow = {
+			government = republic
+			NOT = {
+				exists = NRU
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 310
+			owns_core_province = 5644
+			owns_core_province = 274
+			owns_or_non_sovereign_subject_of = 313
+			owns_core_province = 308
+			owns_core_province = 293
+			owns_core_province = 295
+			owns_core_province = 6975
+			owns_core_province = 33
+			owns_or_non_sovereign_subject_of = 294
+			owns_or_non_sovereign_subject_of = 1957
+			owns_or_non_sovereign_subject_of = 276
+			owns_core_province = 280
+			owns_or_non_sovereign_subject_of = 289
+			owns_core_province = 275
+			NOT = {
+				exists = MOS
+			}
+			NOT = {
+				exists = RUS
+			}
+			NOT = {
+				exists = TZR
+			}
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				OR = {
+					region = russia_region
+					region = ruthenia_region
+				}
+				value = 100				#100 provinces in Russia or Ruthenia
+			}
+		}
+		effect = {
+			310 = {
+				move_capital_effect = yes
+			}
+			remove_government_reform = veche_republic
+			change_tag = NRU
+			add_government_reform = improved_veche_republic
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 9
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			310 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			280 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			add_prestige = 50
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_novgorod_rus
+			swap_non_generic_missions = yes
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					region = russia_region
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					region = ruthenia_region
+				}
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					LIV = {
+						is_subject_of = ROOT
+					}
+				}
+				inherit = LIV
+			}
+			if = {
+				limit = {
+					LIT = {
+						is_subject_of = ROOT
+					}
+				}
+				inherit = LIT
+			}
+			if = {
+				limit = {
+					KIE = {
+						is_subject_of = ROOT
+					}
+				}
+				inherit = KIE
+			}
+			add_adm_power = 50
+			add_dip_power = 50
+			add_mil_power = 50
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	###########################################################################################
+	################################         Assyria		 ##################################
+	###########################################################################################
+	assyria_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_neo_assyria
+			}
+			NOT = {
+				tag = PER
+			}
+			OR = {
+				any_owned_province = {
+					culture = assyrian
+				}
+				culture_group = mesopotamian_group
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 411
+				province_id = 6638
+				province_id = 2310
+				province_id = 6640
+				province_id = 6641
+				province_id = 4293
+				province_id = 6637
+				province_id = 6639
+				province_id = 6670
+				province_id = 2309
+				province_id = 415
+				province_id = 6642
+				province_id = 5296
+				province_id = 6635
+				province_id = 6636
+			}
+		}
+		allow = {
+			government = monarchy
+			OR = {
+				culture_group = mesopotamian_group
+				OR = {
+					religion = ashurist
+					religion = cult_of_marduk
+				}
+			}
+			NOT = {
+				exists = ASY
+			}
+			is_at_war = no
+			is_nomad = no
+			owns_core_province = 411
+			owns_core_province = 6638
+			owns_core_province = 2310
+			owns_core_province = 6640
+			owns_core_province = 6641
+			owns_core_province = 4293
+			owns_core_province = 6670
+			owns_core_province = 415
+			owns_or_non_sovereign_subject_of = 6642
+			owns_or_non_sovereign_subject_of = 6637
+			owns_or_non_sovereign_subject_of = 6639
+			owns_or_non_sovereign_subject_of = 2309
+			OR = {
+				owns_core_province = 5296
+				owns_core_province = 6635
+				owns_core_province = 6636
+			}
+			NOT = {
+				exists = IRQ
+			}
+			num_of_owned_provinces_with = {
+				religion = ROOT
+				region = mesopotamia_region
+				value = 15
+			}
+			OR = {
+				religion = zoroastrian
+				religion = nestorian
+				religion = miaphysite
+				religion = monothelite
+				religion = orthodox
+				religion = coptic
+				religion = druze_new
+			}
+			411 = {
+				OR = {
+					culture = assyrian
+					culture = aramaic
+				}
+				religion = ROOT
+			}
+		}
+		effect = {
+			411 = {
+				move_capital_effect = yes
+			}
+			change_tag = ASY
+			add_government_reform = autocracy_reform
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			411 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				change_province_name = "Nineveh"
+				rename_capital = "Nineveh"
+				add_prosperity = 50
+			}
+			6638 = {
+				add_base_tax = 4
+				add_base_production = 4
+				add_base_manpower = 4
+				change_province_name = "Assur"
+				rename_capital = "Assur"
+				change_religion = ROOT
+				change_culture = assyrian
+			}
+			2310 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				change_province_name = "Kar-Istar"
+				rename_capital = "Kar-Istar"
+				change_religion = ROOT
+				change_culture = assyrian
+			}
+			add_prestige = 50
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_neo_assyria
+			swap_non_generic_missions = yes
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						area = shahrizor_area
+						area = al_jazira_area
+						area = baghdad_area
+						area = iraq_arabi_area
+						area = kut_area
+					}
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					region = mesopotamia_region
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = assyria_nation_tooltip
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	################################         Assur		 ##################################
+	#######################################################################################
+	assur_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			NOT = {
+				has_country_flag = formed_neo_assyria
+			}
+			NOT = {
+				tag = PER
+			}
+			OR = {
+				any_owned_province = {
+					culture = assyrian
+				}
+				culture_group = mesopotamian_group
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 411
+				province_id = 6638
+				province_id = 2310
+				province_id = 6640
+				province_id = 6641
+				province_id = 4293
+				province_id = 6637
+				province_id = 6639
+				province_id = 6670
+				province_id = 2309
+				province_id = 415
+				province_id = 6642
+				province_id = 5296
+				province_id = 6635
+				province_id = 6636
+			}
+		}
+		allow = {
+			government = monarchy
+			OR = {
+				culture_group = mesopotamian_group
+				NOT = {
+					religion_group = muslim
+				}
+			}
+			NOT = {
+				exists = ASR
+			}
+			is_at_war = no
+			is_nomad = no
+			owns_core_province = 411
+			owns_core_province = 6638
+			owns_core_province = 2310
+			owns_core_province = 6640
+			owns_core_province = 6641
+			owns_core_province = 4293
+			owns_core_province = 6670
+			owns_core_province = 415
+			owns_or_non_sovereign_subject_of = 6642
+			owns_or_non_sovereign_subject_of = 6637
+			owns_or_non_sovereign_subject_of = 6639
+			owns_or_non_sovereign_subject_of = 2309
+			OR = {
+				owns_core_province = 5296
+				owns_core_province = 6635
+				owns_core_province = 6636
+			}
+			NOT = {
+				exists = IRQ
+			}
+			num_of_owned_provinces_with = {
+				religion = ROOT
+				region = mesopotamia_region
+				value = 15
+			}
+			OR = {
+				religion = zoroastrian
+				religion = nestorian
+				religion = miaphysite
+				religion = monothelite
+				religion = orthodox
+				religion = coptic
+				religion = druze_new
+			}
+			411 = {
+				OR = {
+					culture = assyrian
+					culture = aramaic
+				}
+				religion = ROOT
+			}
+		}
+		effect = {
+			411 = {
+				move_capital_effect = yes
+			}
+			change_tag = ASR
+			add_government_reform = autocracy_reform
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 7300
+			}
+			411 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				change_province_name = "Nineveh"
+				rename_capital = "Nineveh"
+				add_prosperity = 50
+			}
+			6638 = {
+				add_base_tax = 4
+				add_base_production = 4
+				add_base_manpower = 4
+				change_province_name = "Assur"
+				rename_capital = "Assur"
+				change_religion = ROOT
+				change_culture = assyrian
+			}
+			2310 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				change_province_name = "Kar-Istar"
+				rename_capital = "Kar-Istar"
+				change_religion = ROOT
+				change_culture = assyrian
+			}
+			add_prestige = 50
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			set_country_flag = formed_neo_assyria
+			swap_non_generic_missions = yes
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					OR = {
+						area = shahrizor_area
+						area = al_jazira_area
+						area = baghdad_area
+						area = iraq_arabi_area
+						area = kut_area
+					}
+				}
+				add_core = ROOT
+			}
+			every_province = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					region = mesopotamia_region
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = assyria_nation_tooltip
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					change_religion = ROOT
+					change_culture = ROOT
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	#############################         Mecklenburg		 ##############################
+	#######################################################################################
+	mecklenburg_nation = {
+		major = yes
+		potential = {
+			NOT = {
+				exists = MKL
+				tag = POM
+				tag = STE
+				tag = WOL
+				tag = RUG
+				tag = STP
+			}
+			OR = {
+				primary_culture = pommeranian
+				tag = M5H
+				tag = STR
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			area = mecklenburg_area
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				owned_by = ROOT
+				area = mecklenburg_area
+				value = 5
+			}
+			owns_core_province = 4749			# Stargard
+			owns_core_province = 46			# Rostock
+			owns_core_province = 2996			# Wismar
+		}
+		effect = {
+			change_tag = MKL
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 6
+					}
+				}
+				set_government_rank = 6
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 1825
+			}
+			add_prestige = 25
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	##############################         Lombardy		 ##################################
+	#######################################################################################
+	lombard_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			vu_italy_stem_duchy_check = yes
+			NOT = {
+				tag = MLO
+			}
+			NOT = {
+				tag = LOM
+			}
+			NOT = {
+				has_country_flag = formed_lombardy_flag_vu
+			}
+			primary_culture = lombard
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = lombard
+				AND = {
+					owned_by = MLO
+					region = italy_region
+				}
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = LOM
+			}
+			if = {
+				limit = {
+					exists = MLO
+				}
+				NOT = {
+					any_province = {
+						region = italy_region
+						owned_by = MLO
+					}
+				}
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 104			#Milan
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				culture = lombard
+				value = 8				#At least 2/3 of 12 Lombard-cultured provinces
+			}
+		}
+		effect = {
+			change_tag = LOM
+			lombardy_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = LOM
+			}
+			po_valley_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = LOM
+			}
+			7080 = {
+				#Ossola
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							is_permanent_claim = ROOT
+						}
+					}
+					add_permanent_claim = LOM
+				}
+			}
+			2979 = {
+				#Novara
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							is_permanent_claim = ROOT
+						}
+					}
+					add_permanent_claim = LOM
+				}
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 10
+			swap_ideas = yes
+			#Romagna no unique missions yet has.
+			#swap_non_generic_missions = yes
+			set_country_flag = formed_lombardy_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	#######################################################################################
+	################################         Umbria		 ##################################
+	#######################################################################################
+	umbrian_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			vu_italy_stem_duchy_check = yes
+			NOT = {
+				tag = UMB
+			}
+			NOT = {
+				has_country_flag = formed_umbria_flag_vu
+			}
+			primary_culture = umbrian
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			culture = umbrian
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = UMB
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 2976			#Perugia
+			owns_core_province = 4731			#Spoleto, ambiguity over what's important here. Perugia is modern, Spoleto is medieval. Technically Citta di Castello & Foligno were important signorie as well.
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				culture = umbrian
+				value = 6				#At least 2/3 of 8 Umbrian-cultured provinces in Umbria + Citta di Castello + Gubbio + Orvieto.
+			}
+		}
+		effect = {
+			change_tag = UMB
+			umbria_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = UMB
+			}
+			7035 = {
+				#Citta di Castello
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							is_permanent_claim = ROOT
+						}
+					}
+					add_permanent_claim = UMB
+				}
+			}
+			7029 = {
+				#Gubbio
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							is_permanent_claim = ROOT
+						}
+					}
+					add_permanent_claim = UMB
+				}
+			}
+			7021 = {
+				#Orvieto
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							is_permanent_claim = ROOT
+						}
+					}
+					add_permanent_claim = UMB
+				}
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 10
+			swap_ideas = yes
+			#Umbria no unique missions yet has.
+			#swap_non_generic_missions = yes
+			set_country_flag = formed_umbria_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	#######################################################################################
+	##############################         Piedmontese		 ##############################
+	#######################################################################################
+	piedmontese_nation = {
+		major = yes
+		potential = {
+			vu_generic_can_form_potential_check = yes
+			vu_italy_stem_duchy_check = yes
+			NOT = {
+				tag = PIE
+			}
+			NOT = {
+				tag = SAV
+			}
+			NOT = {
+				has_country_flag = formed_piedmont_flag_vu
+			}
+			primary_culture = piedmontese
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = north_piedmont_area				#North Piedmont
+				area = piedmont_area				#Central Piedmont
+				area = south_piedmont_area				#South Piedmont
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = PIE
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			owns_core_province = 103			#Torino
+			owns_core_province = 102			#Nice
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				OR = {
+					area = north_piedmont_area					#North Piedmont
+					area = piedmont_area					#Central Piedmont
+					area = south_piedmont_area					#South Piedmont
+				}
+				value = 15				#Two thirds of Piedmont provinces (22)
+			}
+		}
+		effect = {
+			change_tag = PIE
+			north_piedmont_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = PIE
+			}
+			piedmont_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = PIE
+			}
+			south_piedmont_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						is_permanent_claim = ROOT
+					}
+				}
+				add_permanent_claim = PIE
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 10
+			swap_ideas = yes
+			#Piedmont no unique missions yet has.
+			#swap_non_generic_missions = yes
+			set_country_flag = formed_piedmont_flag_vu
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	#######################################################################################
+	###########################         Azerbaijan		 ##################################
+	#######################################################################################
+	form_azerbaijan = {
+		major = yes
+		potential = {
+			NOT = {
+				exists = AZE
+			}
+			normal_or_historical_nations = yes
+			primary_culture = azerbaijani
+			NOT = {
+				has_country_flag = AZE_flag
+			}
+			NOT = {
+				tag = TRK
+			}
+			NOT = {
+				tag = ARL
+			}
+			NOT = {
+				tag = QAR
+			}
+			NOT = {
+				tag = PER
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 416
+				province_id = 421
+				province_id = 424
+				province_id = 2215
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			owns = 421
+			owns = 416
+			owns = 424
+			owns = 2215
+		}
+		effect = {
+			override_country_name = AZE
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = AZE_flag
+			swap_non_generic_missions = yes
+			country_event = {
+				id = ideagroups.1
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	###########################        Bavarian Italy		 ##############################
+	#######################################################################################
+	me_bavaria_ferrara_form_italy = {
+		major = yes
+		potential = {
+			tag = FER
+			NOT = {
+				exists = ITA
+			}
+			NOT = {
+				has_country_flag = formed_italy_flag
+			}
+			is_subject = yes
+			overlord = {
+				has_country_flag = me_bav_ferrara_subject_can_form_italy
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 15
+				}
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					region = italy_region
+					root = {
+						NOT = {
+							num_of_owned_provinces_with = {
+								value = 30
+								region = italy_region
+								is_core = root
+							}
+						}
+						owns_core_province = 101
+						owns_core_province = 104
+						owns_core_province = 116
+						owns_core_province = 118
+					}
+				}
+				province_id = 101				# Genoa
+				province_id = 104				# Milan
+				province_id = 116				# Firenze
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			is_at_war = no
+			owns_core_province = 101			# Genoa
+			owns_core_province = 104			# Milan
+			owns_core_province = 116			# Firenze
+			num_of_owned_provinces_with = {
+				value = 30
+				region = italy_region
+				is_core = ROOT
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					is_part_of_hre = yes
+					is_elector = no
+					is_emperor = no
+					overlord = {
+						is_emperor = no
+						is_part_of_hre = no
+					}
+				}
+				emperor = {
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_left_empire
+					}
+				}
+				set_in_empire = no
+				emperor = {
+					country_event = {
+						id = hre_event.5
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_lesser_in_union = yes
+				}
+				set_government_rank_force = 8
+			}
+			change_tag = ITA
+			add_prestige = 25
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			swap_non_generic_missions = yes
+			set_country_flag = formed_italy_flag
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		ai_importance = 100
+	}
+	#######################################################################################
+	##############################        Caucasia		 ##################################
+	#######################################################################################
+	form_caucasia = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = formed_caucasia
+			}
+			culture_group = caucasian
+			#was_never_end_game_tag_trigger = yes
+			is_colonial_nation = no
+			NOT = {
+				exists = CAU
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 419
+				province_id = 2204
+				province_id = 423
+				province_id = 421
+				province_id = 425
+				province_id = 463
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			owns_core_province = 419
+			owns_core_province = 2204
+			owns_core_province = 423
+			owns_core_province = 421
+			owns_core_province = 425
+			owns_core_province = 463
+		}
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			change_tag = CAU
+			set_country_flag = formed_caucasia
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			vu_colour_refresh = yes
+		}
+	}
+	#######################################################################################
+	##############################        Francia		 ##################################
+	#######################################################################################
+	reform_francia = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			has_country_flag = can_form_francia
+			NOT = {
+				has_country_flag = formed_francia_flag
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = {
+				tag = HLR
+			}
+			NOT = {
+				tag = PAP
+			}
+			NOT = {
+				tag = GER
+			}
+			NOT = {
+				tag = PRU
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						province_id = 2957
+						province_id = 1876
+						province_id = 183
+						province_id = 1878
+					}
+					OR = {
+						NOT = {
+							owned_by = ROOT
+						}
+						NOT = {
+							is_core = ROOT
+						}
+					}
+				}
+				AND = {
+					region = france_region
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			owns_core_province = 2957			#regensburg
+			owns_core_province = 1876			#frankfurt
+			owns_core_province = 1878			#aachen
+			owns_core_province = 183			#paris
+			france_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			AND = {
+				NOT = {
+					exists = FRA
+				}
+				NOT = {
+					exists = BFR
+				}
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = frx_empire_dismantled.tooltip
+					NOT = {
+						hre_size = 1
+					}
+				}
+				is_emperor = yes
+			}
+			legitimacy_equivalent = 100
+			prestige = 95
+		}
+		effect = {
+			change_tag = FRX
+			swap_non_generic_missions = yes
+			set_country_flag = formed_francia_flag
+			if = {
+				limit = {
+					NOT = {
+						government = monarchy
+					}
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+			if = {
+				limit = {
+					is_part_of_hre = no
+				}
+				set_government_rank = 9
+			}
+			183 = {
+				move_capital_effect = yes
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = {
+					NOT = {
+						accepted_culture = cosmopolitan_french
+					}
+				}
+				add_accepted_culture_or_dip_power = {
+					culture = cosmopolitan_french
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						accepted_culture = burgundian
+					}
+				}
+				add_accepted_culture_or_dip_power = {
+					culture = burgundian
+				}
+			}
+			lower_rhineland_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			wallonia_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			flanders_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			north_brabant_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			north_rhine_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			hesse_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			frankfurt_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			thuringia_area = {
+				limit = {
+					NOT = {
+						is_core = ROOT
+					}
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				add_permanent_claim = FRX
+			}
+			82 = {
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+					add_permanent_claim = FRX
+				}
+			}
+			2972 = {
+				if = {
+					limit = {
+						NOT = {
+							is_core = ROOT
+						}
+						NOT = {
+							owned_by = ROOT
+						}
+					}
+					add_permanent_claim = FRX
+				}
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				is_part_of_hre = yes
+				is_elector = no
+			}
+		}
+	}
+	#######################################################################################
+	#############################      Gran Columbia		 ##############################
+	#######################################################################################
+	form_gran_colombia_nation = {
+		major = yes
+		potential = {
+			OR = {
+				tag = COL
+				tag = VNZ
+				has_country_flag = unlocked_decision_to_form_gran_colombia
+			}
+			NOT = {
+				has_country_flag = formed_gran_colombia
+			}
+			NOT = {
+				exists = GRC
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 825
+				province_id = 831
+				province_id = 820
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			owns_core_province = 825
+			owns_core_province = 831
+			owns_core_province = 820
+		}
+		effect = {
+			change_tag = GRC
+			add_prestige_or_monarch_power = {
+				amount = 10
+			}
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_capital = 825
+			825 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			set_country_flag = formed_gran_colombia
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	################################         Hansa		 ##################################
+	#######################################################################################
+	form_hansa = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = formed_hansa_flag
+			}
+			OR = {
+				tag = HSA
+				tag = BRE
+				tag = HAM
+			}
+			has_country_flag = HNS_decision
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 45
+				province_id = 44
+				province_id = 1874
+			}
+			NOT = {
+				owner = {
+					OR = {
+						tag = ROOT
+						is_in_trade_league_with = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+		}
+		allow = {
+			45 = {
+				owner = {
+					OR = {
+						tag = ROOT
+						is_in_trade_league_with = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+			44 = {
+				owner = {
+					OR = {
+						tag = ROOT
+						is_in_trade_league_with = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+			1874 = {
+				owner = {
+					OR = {
+						tag = ROOT
+						is_in_trade_league_with = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+			45 = {
+				#lubeck node
+				trade_share = {
+					country = ROOT
+					share = 40
+				}
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+		}
+		effect = {
+			#change_tag = HNS
+			override_country_name = HNS
+			set_country_flag = formed_hansa_flag
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	##############################       Kurdistan		 ##################################
+	#######################################################################################
+	form_kurdistan = {
+		major = yes
+		potential = {
+			NOT = {
+				exists = KRD
+			}
+			NOT = {
+				tag = HSN
+			}
+			NOT = {
+				tag = AYY
+			}
+			normal_or_historical_nations = yes
+			primary_culture = kurdish
+			NOT = {
+				has_country_flag = kurdistan_flag
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			culture = kurdish
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			num_of_owned_provinces_with = {
+				culture = kurdish
+				value = 25
+			}
+		}
+		effect = {
+			override_country_name = KRD
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			change_technology_group = muslim
+			change_government = monarchy
+			add_government_reform = iqta
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = kurdistan_flag
+			swap_non_generic_missions = yes
+			country_event = {
+				id = ME_Kurdistan_Events.1
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	##############################        Mazandaran		 ##############################
+	#######################################################################################
+	form_mazandaran_nation = {
+		major = yes
+		potential = {
+			NOT = {
+				tag = TAB
+			}
+			NOT = {
+				tag = PER
+			}
+			NOT = {
+				tag = TIM
+			}
+			NOT = {
+				tag = MUG
+			}
+			OR = {
+				ai = no
+				NOT = {
+					exists = TAB
+				}
+			}
+			primary_culture = mazandarani
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			area = tabarestan_area
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			NOT = {
+				exists = TAB
+			}
+			tabarestan_area = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_country_flag = kry_promised_safavid_support
+				}
+				change_tag = TAB
+				swap_non_generic_missions = yes
+				add_prestige_or_monarch_power = {
+					amount = 25
+				}
+				add_country_modifier = {
+					name = centralization_modifier
+					duration = 9125
+				}
+				if = {
+					limit = {
+						exists = ARL
+					}
+					ARL = {
+						country_event = {
+							id = ME_Mazandaran_Events.4
+						}
+					}
+				}
+			}
+			else = {
+				change_tag = TAB
+				swap_non_generic_missions = yes
+				add_prestige_or_monarch_power = {
+					amount = 25
+				}
+				add_country_modifier = {
+					name = centralization_modifier
+					duration = 9125
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	##########################        Provencial France		 ##############################
+	#######################################################################################
+	PRO_form_capet = {
+		major = yes
+		potential = {
+			has_country_flag = PRO_form_capet
+		}
+		color = {
+			250
+			50
+			50
+		}
+		allow = {
+			AND = {
+				NOT = {
+					exists = FRA
+				}
+				NOT = {
+					exists = BFR
+				}
+			}
+			total_development = 600
+			is_at_war = no
+		}
+		effect = {
+			clr_country_flag = PRO_form_capet
+			change_tag = FRA
+			set_country_flag = PRO_capet_idea
+			override_country_name = CAP
+			#custom_tooltip = PRO_grant_french_mission_tree
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			country_event = {
+				id = ideagroups.1
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	############################         Qir Qoyunlu		 ##############################
+	#######################################################################################
+	form_qir_qoyunlu = {
+		major = yes
+		potential = {
+			NOT = {
+				exists = TRK
+			}
+			normal_or_historical_nations = yes
+			OR = {
+				tag = AKK
+				tag = QAR
+				tag = QIZ
+			}
+			NOT = {
+				has_country_flag = qirqoyunlu_flag
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 418
+				province_id = 416
+				province_id = 410
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			owns_core_province = 418
+			owns_core_province = 416
+			owns_core_province = 410
+			if = {
+				limit = {
+					ai = no
+				}
+				OR = {
+					primary_culture = azerbaijani
+					accepted_culture = azerbaijani
+				}
+				OR = {
+					primary_culture = turkish
+					accepted_culture = turkish
+				}
+			}
+			if = {
+				limit = {
+					tag = AKK
+				}
+				NOT = {
+					exists = QAR
+				}
+			}
+			if = {
+				limit = {
+					tag = QAR
+				}
+				NOT = {
+					exists = AKK
+				}
+			}
+		}
+		effect = {
+			change_tag = TRK
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 8
+					}
+				}
+				set_government_rank = 8
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = qirqoyunlu_flag
+			swap_non_generic_missions = yes
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	#######################################################################################
+	############################      Angevin Empire		 ##############################
+	#######################################################################################
+	UKS_nation_ME = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			#was_never_end_game_tag_trigger = yes
+			NOT = {
+				has_country_flag = formed_uks
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = {
+				exists = UKS
+			}
+			NOT = {
+				exists = GBR
+			}
+			NOT = {
+				exists = UNK
+			}
+			NOT = {
+				tag = PAP
+			}
+			NOT = {
+				tag = HLR
+			}
+			NOT = {
+				tag = ROM
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 15
+					adm_tech = 27
+				}
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					NOT = {
+						government = theocracy
+					}
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+			mission_completed = UKS_union
+		}
+		color = {
+			250
+			50
+			50
+		}
+		allow = {
+			adm_tech = 27
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			is_emperor = no
+			legitimacy_equivalent = 100
+			prestige = 25
+			OR = {
+				FRA = {
+					is_subject_of = ROOT
+					NOT = {
+						num_of_cities = 60
+					}
+				}
+				BFR = {
+					is_subject_of = ROOT
+					NOT = {
+						num_of_cities = 60
+					}
+				}
+			}
+		}
+		effect = {
+			change_tag = UKS
+			set_government_rank = 9
+			add_government_reform = angevin_monarchy
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = {
+					overlord_of = FRA
+				}
+				inherit = FRA
+			}
+			else_if = {
+				limit = {
+					overlord_of = BFR
+				}
+				inherit = BFR
+			}
+			set_country_flag = formed_uks
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			swap_non_generic_missions = yes
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		do_not_integrate = FRA
+		do_not_integrate = BFR
+	}
+	#######################################################################################
+	################################         Braelyc		 ##############################
+	#######################################################################################
+	wls_braelyc = {
+		major = yes
+		potential = {
+			tag = WLS
+			normal_or_historical_nations = yes
+			#was_never_end_game_tag_trigger = yes
+			NOT = {
+				has_country_flag = formed_brl_flag
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		allow = {
+			IRE = {
+				NOT = {
+					num_of_cities = 23
+				}
+				#13 (ireland) + 10
+			}
+			SCO = {
+				NOT = {
+					num_of_cities = 24
+				}
+				#14 (scotland) + 10
+			}
+			KOI = {
+				NOT = {
+					num_of_cities = 6
+				}
+				#mann + 5
+			}
+			CRN = {
+				NOT = {
+					num_of_cities = 6
+				}
+				#cornwall + 5
+			}
+			BRI = {
+				NOT = {
+					num_of_cities = 15
+				}
+				#5 (brittany) + 10
+			}
+			GAL = {
+				NOT = {
+					num_of_cities = 13
+				}
+				#3 (asturias) + 10
+			}
+			OR = {
+				has_institution = nationalism_institution
+				has_idea_group = nationalism_ideas
+			}
+			is_subject = no
+			is_nomad = no
+			stability = 3
+			is_at_war = no
+			AND = {
+				senior_union_with = IRE
+				had_country_flag = {
+					flag = wls_made_ire
+					days = 10950
+				}
+			}
+			AND = {
+				senior_union_with = SCO
+				had_country_flag = {
+					flag = wls_made_lba
+					days = 10950
+				}
+			}
+			AND = {
+				senior_union_with = KOI
+				had_country_flag = {
+					flag = wls_made_koi
+					days = 10950
+				}
+			}
+			AND = {
+				senior_union_with = CRN
+				had_country_flag = {
+					flag = wls_made_crn
+					days = 10950
+				}
+			}
+			AND = {
+				senior_union_with = BRI
+				had_country_flag = {
+					flag = wls_made_bri
+					days = 10950
+				}
+			}
+			AND = {
+				senior_union_with = GAL
+				had_country_flag = {
+					flag = wls_made_gal
+					days = 10950
+				}
+			}
+		}
+		effect = {
+			change_tag = BRL
+			inherit = IRE
+			inherit = SCO
+			inherit = KOI
+			inherit = CRN
+			inherit = BRI
+			inherit = GAL
+			swap_non_generic_missions = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 9
+			}
+			if = {
+				limit = {
+					british_isles_region = {
+						NOT = {
+							owned_by = WLS
+						}
+						NOT = {
+							owned_by = IRE
+						}
+						NOT = {
+							owned_by = SCO
+						}
+						NOT = {
+							owned_by = CRN
+						}
+						NOT = {
+							owned_by = KOI
+						}
+						NOT = {
+							owned_by = GAL
+						}
+						NOT = {
+							owned_by = BRI
+						}
+					}
+				}
+				british_isles_region = {
+					limit = {
+						NOT = {
+							owned_by = BRL
+						}
+						NOT = {
+							is_core = BRL
+						}
+					}
+					add_permanent_claim = BRL
+				}
+			}
+			set_country_flag = formed_brl_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	#######################################################################################
+	############################        Zapadoslavia		 ##############################
+	#######################################################################################
+	form_zapadoslavia = {
+		major = yes
+		potential = {
+			NOT = {
+				exists = ZCV
+			}
+			NOT = {
+				has_country_flag = zapadoslavia_formed_flag
+			}
+			#was_never_end_game_tag_trigger = yes
+			normal_or_historical_nations = yes
+			OR = {
+				culture_group = west_slavic
+				culture = slovak
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		color = {
+			250
+			50
+			50
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 266
+				province_id = 264
+				province_id = 257
+				province_id = 262
+			}
+			OR = {
+				NOT = {
+					owned_by = ROOT
+				}
+				NOT = {
+					is_core = ROOT
+				}
+			}
+		}
+		allow = {
+			is_at_war = no
+			is_emperor = no
+			OR = {
+				has_institution = nationalism_institution
+				has_idea_group = nationalism_ideas
+			}
+			owns_core_province = 266
+			owns_core_province = 264
+			owns_core_province = 257
+			owns_core_province = 262
+			owns_core_province = 1772
+			owns_core_province = 8174
+			is_free_or_tributary_trigger = yes
+		}
+		effect = {
+			change_tag = ZCV
+			if = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				emperor = {
+					add_opinion = {
+						who = ROOT
+						modifier = opinion_left_empire
+					}
+					country_event = {
+						id = hre_event.5
+					}
+				}
+				set_in_empire = no
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							is_part_of_hre = yes
+						}
+						set_in_empire = no
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						government_rank = 9
+					}
+				}
+				set_government_rank = 9
+			}
+			change_technology_group = western
+			change_unit_type = western
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = zapadoslavia_formed_flag
+			set_country_flag = formed_poland_flag
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = {
+					id = ideagroups.1
+				}
+				#Swap Ideas
+			}
+			europe = {
+				limit = {
+					NOT = {
+						owned_by = ROOT
+					}
+					NOT = {
+						is_core = ROOT
+					}
+					OR = {
+						culture_group = west_slavic
+						culture = slovak
+					}
+				}
+				add_permanent_claim = ZCV
+			}
+			vu_colour_refresh = yes
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				ai = yes
+			}
+		}
+	}
 }

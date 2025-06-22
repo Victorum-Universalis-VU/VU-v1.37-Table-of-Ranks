@@ -591,7 +591,7 @@ vu_war_ruler_general_studying = {
 	stability_cost_modifier = 0.25
 	diplomatic_upkeep = -1
 	administrative_efficiency = -0.15
-	all_power_cost = 0.10
+	all_power_cost = 0.1
 }
 
 #4 variants, at peace, at peace as general, at war, at war as general 
@@ -618,7 +618,7 @@ vu_heir_general_studying = {
 		is_at_war = no
 		is_heir_leader = yes
 	}
-	state_maintenance_modifier = 0.10
+	state_maintenance_modifier = 0.1
 	stability_cost_modifier = 0.15
 	administrative_efficiency = -0.15
 }
@@ -633,7 +633,7 @@ vu_war_ruler_studying = {
 			is_heir_leader = yes
 		}
 	}
-	state_maintenance_modifier = 0.10
+	state_maintenance_modifier = 0.1
 	stability_cost_modifier = 0.15
 	administrative_efficiency = -0.1
 }
@@ -654,7 +654,6 @@ vu_war_ruler_general_studying = {
 #########################################
 # Don's Startup Settings				#
 #########################################
-
 vu_startup_small_HRE_modifier = {
 	potential = {
 		has_global_flag = vu_startup_small_HRE
@@ -665,19 +664,288 @@ vu_startup_small_HRE_modifier = {
 	imperial_authority_value = 0.1
 }
 
-vu_dogligator_modifier = { #He died for our persuit of alcoholism with dignity - SF & Don
-    potential = {
-        any_war_enemy_country = {
+vu_dogligator_modifier = {
+	#He died for our persuit of alcoholism with dignity - SF & Don
+	potential = {
+		any_war_enemy_country = {
 			owns = 265
 		}
-    }
-    trigger = {
-        265 = {
-            has_great_project = {
-                type = vu_brnensky_drak #Hanging around Dogligator
+	}
+	trigger = {
+		265 = {
+			has_great_project = {
+				type = vu_brnensky_drak				#Hanging around Dogligator
 				tier = 1
-            }
-        }
-    }
-    land_morale = -0.5
+			}
+		}
+	}
+	land_morale = -0.5
 }
+
+##################################
+# Don's More Strategic Resources #
+##################################
+vu_lacks_horses_for_cavalry = {
+	potential = {
+		NOT = {
+			horses = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	cavalry_cost = 0.5
+}
+
+vu_lacks_bronze_for_cannons = {
+	potential = {
+		NOT = {
+			AND = {
+				tin = 1
+				copper = 1
+			}
+			AND = {
+				zinc = 1
+				copper = 1
+			}
+			iron = 1
+			cannon = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	artillery_cost = 0.5
+}
+
+vu_brass_substitute_for_cannons = {
+	potential = {
+		copper = 1
+		zinc = 1
+		NOT = {
+			tin = 1
+			cannon = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	artillery_fire = -0.5
+}
+
+vu_cast_iron_substitute_for_cannons = {
+	potential = {
+		iron = 1
+		NOT = {
+			AND = {
+				copper = 1
+				tin = 1
+			}
+			AND = {
+				copper = 1
+				zinc = 1
+			}
+			cannon = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	artillery_power = -0.1
+}
+
+vu_lacks_iron_for_infantry = {
+	potential = {
+		NOT = {
+			iron = 1
+			steel = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	infantry_cost = 0.5
+}
+
+vu_lacks_lumber_for_ships = {
+	potential = {
+		NOT = {
+			lumber = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	global_ship_cost = 0.5
+	naval_maintenance_modifier = 0.5
+}
+
+vu_lacks_supplies_for_navies = {
+	potential = {
+		NOT = {
+			naval_supplies = 1
+			tar = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	naval_attrition = 0.25
+}
+
+vu_lacks_food = {
+	potential = {
+		NOT = {
+			grain = 1
+			fish = 1
+			rice = 1
+			millet = 1
+			fruit = 1
+			vegetables = 1
+			dates = 1
+			seafood = 1
+			cheese = 1
+			citrus = 1
+			olive_oil = 1
+			livestock = 1
+			llama = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	land_attrition = 0.25
+}
+
+vu_has_access_to_gunpowder = {
+	potential = {
+		gunpowder = 1
+	}
+	trigger = {
+		always = yes
+	}
+	fire_damage = 0.05
+}
+
+vu_has_access_to_steel = {
+	potential = {
+		steel = 1
+	}
+	trigger = {
+		always = yes
+	}
+	shock_damage = 0.05
+}
+
+vu_has_access_to_munitons = {
+	potential = {
+		munitions = 1
+	}
+	trigger = {
+		always = yes
+	}
+	fire_damage_received = -0.05
+}
+
+vu_has_access_to_alcohol = {
+	potential = {
+		OR = {
+			beer = 1
+			cider = 1
+			sake = 1
+			whiskey = 1
+			vodka = 1
+			wine = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	morale_damage_received = -0.05
+	movement_speed = 0.025
+}
+
+vu_has_access_to_uniforms = {
+	potential = {
+		uniforms = 1
+	}
+	trigger = {
+		always = yes
+	}
+	morale_damage = 0.05
+}
+
+vu_has_access_to_regular_clothes = {
+	potential = {
+		regular_clothes = 1
+	}
+	trigger = {
+		always = yes
+	}
+	global_unrest = -1
+}
+
+vu_has_access_to_luxury_clothes = {
+	potential = {
+		luxury_clothes = 1
+	}
+	trigger = {
+		always = yes
+	}
+	diplomatic_reputation = 0.5
+}
+
+vu_has_access_to_fur_clothes = {
+	potential = {
+		fur_clothing = 1
+	}
+	trigger = {
+		always = yes
+	}
+	land_attrition = -0.1
+}
+
+vu_has_access_to_medicaments_or_herbs = {
+	potential = {
+		OR = {
+			medicaments = 1
+			herbs = 1
+		}
+	}
+	trigger = {
+		always = yes
+	}
+	manpower_recovery_speed = 0.1
+}
+
+vu_has_access_to_salt = {
+	potential = {
+		salt = 1
+	}
+	trigger = {
+		always = yes
+	}
+	land_maintenance_modifier = -0.1
+}
+
+vu_has_access_to_optics = {
+	potential = {
+		optics = 1
+	}
+	trigger = {
+		always = yes
+	}
+	range = 0.15
+}
+
+vu_has_access_to_woodworking = {
+	potential = {
+		woodworking = 1
+	}
+	trigger = {
+		always = yes
+	}
+	ship_durability = 0.05
+	global_ship_repair = 0.15
+}
+

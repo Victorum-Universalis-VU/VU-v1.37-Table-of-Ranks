@@ -822,18 +822,13 @@ cannon_foundry = {
 	cost = 1000
 	time = 12
 	build_trigger = {
-		#development = 10	
 		NOT = {
 			trade_goods = copper
 			trade_goods = tin
 			has_province_flag = has_latent_good
 		}
 		FROM = {
-			mil_tech = 24
-			#OR = {
-			#	innovativeness = 10
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+			has_institution = renaissance
 			check_variable = {
 				which = copper
 				value = 0.4
@@ -842,17 +837,6 @@ cannon_foundry = {
 				which = tin
 				value = 0.3
 			}
-		}
-		ROOT = {
-			development = 10
-			NOT = {
-				trade_goods = copper
-				trade_goods = tin
-				has_province_flag = has_latent_good
-			}
-		}
-		NOT = {
-			has_global_flag = No_Cannon
 		}
 	}
 	on_built = {
@@ -966,14 +950,8 @@ metalworking_workshop = {
 		NOT = {
 			trade_goods = iron
 			has_province_flag = has_latent_good
-			has_global_flag = No_Metalworking
 		}
 		FROM = {
-			mil_tech = 33
-			#OR = {
-			#	innovativeness = 15
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
 			check_variable = {
 				which = iron
 				value = 1
@@ -1075,14 +1053,9 @@ munition_factory = {
 		NOT = {
 			trade_goods = lead
 			has_province_flag = has_latent_good
-			has_global_flag = No_Munitions
 		}
 		FROM = {
-			mil_tech = 32
-			#OR = {
-			#	innovativeness = 15
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+			has_institution = new_world_i
 			check_variable = {
 				which = lead
 				value = 1
@@ -1181,22 +1154,9 @@ wood_workshop = {
 	cost = 400
 	time = 12
 	build_trigger = {
-		ROOT = {
-			trade_goods = lumber
-			#development = 10
-			NOT = {
-				has_province_flag = has_latent_good
-			}
-		}
-		FROM = {
-			adm_tech = 27
-			#OR = {
-			#	innovativeness = 5
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
-		}
+		trade_goods = lumber
 		NOT = {
-			has_global_flag = No_Woodworking
+			has_province_flag = has_latent_good
 		}
 	}
 	on_built = {
@@ -1236,22 +1196,9 @@ leather_workshop = {
 	cost = 400
 	time = 12
 	build_trigger = {
-		ROOT = {
-			trade_goods = livestock
-			#development = 10
-			NOT = {
-				has_province_flag = has_latent_good
-			}
-		}
-		FROM = {
-			adm_tech = 31
-			#OR = {
-			#	innovativeness = 7
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
-		}
+		trade_goods = livestock
 		NOT = {
-			has_global_flag = No_Leather
+			has_province_flag = has_latent_good
 		}
 	}
 	on_built = {
@@ -1291,24 +1238,9 @@ fur_workshop = {
 	cost = 400
 	time = 12
 	build_trigger = {
-		ROOT = {
-			trade_goods = fur
-			#development = 10
-			NOT = {
-				has_province_flag = has_latent_good
-			}
-		}
-		FROM = {
-			dip_tech = 5
-			OR = {
-				innovativeness = 5
-				NOT = {
-					has_dlc = "Rule Britannia"
-				}
-			}
-		}
+		trade_goods = fur
 		NOT = {
-			has_global_flag = No_Leather
+			has_province_flag = has_latent_good
 		}
 	}
 	on_built = {
@@ -1345,22 +1277,11 @@ Instruments_workshop = {
 	cost = 1500
 	time = 12
 	build_trigger = {
-		ROOT = {
-			#development = 25
-			NOT = {
-				has_province_flag = has_latent_good
-			}
+		NOT = {
+			has_province_flag = has_latent_good
 		}
 		FROM = {
-			dip_tech = 12
-			OR = {
-				innovativeness = 15
-				NOT = {
-					has_dlc = "Rule Britannia"
-				}
-			}
-		}
-		FROM = {
+			has_institution = renaissance
 			num_of_owned_provinces_with = {
 				value = 1
 				OR = {
@@ -1369,9 +1290,6 @@ Instruments_workshop = {
 					has_terrain = jungle
 				}
 			}
-		}
-		NOT = {
-			has_global_flag = No_String_Instruments
 		}
 	}
 	on_built = {
@@ -1411,26 +1329,16 @@ sculpture_workshop = {
 	cost = 600
 	time = 12
 	build_trigger = {
-		ROOT = {
-			OR = {
-				trade_goods = marble
-				trade_goods = jade
-			}
-			#development = 15
-			NOT = {
-				has_province_flag = has_latent_good
-			}
+		OR = {
+			trade_goods = marble
+			trade_goods = jade
+		}
+		NOT = {
+			has_province_flag = has_latent_good
 		}
 		has_dlc = "Leviathan"
 		FROM = {
-			adm_tech = 24
-			#OR = {
-			#	innovativeness = 7
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
-		}
-		NOT = {
-			has_global_flag = No_Marble_sculpture
+			has_institution = renaissance
 		}
 	}
 	on_built = {
@@ -1476,29 +1384,19 @@ jewellery_workshop = {
 	cost = 2000
 	time = 12
 	build_trigger = {
-		ROOT = {
-			OR = {
-				trade_goods = amber
-				trade_goods = pearls
-				trade_goods = jade
-				trade_goods = gems
-				trade_goods = silver
-				trade_goods = gold
-			}
-			#development = 20
-			NOT = {
-				has_province_flag = has_latent_good
-			}
-		}
-		FROM = {
-			dip_tech = 28
-			#OR = {
-			#	innovativeness = 20
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+		OR = {
+			trade_goods = amber
+			trade_goods = pearls
+			trade_goods = jade
+			trade_goods = gems
+			trade_goods = silver
+			trade_goods = gold
 		}
 		NOT = {
-			has_global_flag = No_Jewellery
+			has_province_flag = has_latent_good
+		}
+		FROM = {
+			has_institution = feudalism
 		}
 	}
 	on_built = {
@@ -1538,26 +1436,16 @@ uniforms_workshop = {
 	cost = 650
 	time = 12
 	build_trigger = {
-		FROM = {
-			mil_tech = 38
-			#OR = {
-			#	innovativeness = 7
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
-		}
-		ROOT = {
-			OR = {
-				trade_goods = wool
-				trade_goods = cloth
-				trade_goods = cotton
-			}
-			#development = 15
-			NOT = {
-				has_province_flag = has_latent_good
-			}
+		OR = {
+			trade_goods = wool
+			trade_goods = cloth
+			trade_goods = cotton
 		}
 		NOT = {
-			has_global_flag = No_Uniforms
+			has_province_flag = has_latent_good
+		}
+		FROM = {
+			has_institution = new_world_i
 		}
 	}
 	on_built = {
@@ -1611,7 +1499,6 @@ uniforms_workshop = {
 #				NOT = { has_dlc = "Rule Britannia" }
 #			}
 #		}
-#		NOT = { has_global_flag = No_Steam_engine }
 #
 #	}
 #	
@@ -1631,12 +1518,7 @@ steam_engine_manu = {
 	time = 12
 	build_trigger = {
 		FROM = {
-			adm_tech = 41
-			has_institution = enlightenment
-			#OR = {
-			#	innovativeness = 30
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+			has_institution = industrialization
 			check_variable = {
 				which = zinc
 				value = 0.3
@@ -1650,7 +1532,6 @@ steam_engine_manu = {
 			trade_goods = zinc
 			trade_goods = copper
 			has_province_flag = has_latent_good
-			has_global_flag = No_Steam_engine
 		}
 	}
 	on_built = {
@@ -1789,12 +1670,10 @@ mine = {
 				has_terrain = desert_ranges
 				has_terrain = dry_highlands
 			}
-			#NOT = { has_province_modifier = mine_fail }
 		}
 		FROM = {
 			dip_power = 100
 		}
-		#NOT = { has_global_flag = No_Mine }
 	}
 	modifier = {
 	}
@@ -1825,21 +1704,14 @@ spectacle_factory = {
 	time = 12
 	build_trigger = {
 		FROM = {
-			dip_tech = 26
-			#OR = {
-			#	innovativeness = 15
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
 			check_variable = {
 				which = glass
 				value = 0.8
-				#value = 0.6 #VU - This is a TGE value
 			}
 		}
 		NOT = {
 			trade_goods = glass
 			has_province_flag = has_latent_good
-			has_global_flag = No_Optics
 		}
 	}
 	on_built = {
@@ -1932,11 +1804,7 @@ cigars_factory = {
 	time = 12
 	build_trigger = {
 		FROM = {
-			dip_tech = 29
-			#OR = {
-			#	innovativeness = 15
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+			has_institution = new_world_i
 			check_variable = {
 				which = tobacco
 				value = 0.6
@@ -1945,7 +1813,6 @@ cigars_factory = {
 		NOT = {
 			trade_goods = tobacco
 			has_province_flag = has_latent_good
-			has_global_flag = No_Cigars
 		}
 	}
 	on_built = {
@@ -2038,11 +1905,7 @@ chocolate_factory = {
 	time = 12
 	build_trigger = {
 		FROM = {
-			dip_tech = 27
-			#OR = {
-			#	innovativeness = 15
-			#	NOT = { has_dlc = "Rule Britannia" }
-			#}
+			has_institution = printing_press
 			check_variable = {
 				which = cocoa
 				value = 0.6
@@ -2051,7 +1914,6 @@ chocolate_factory = {
 		NOT = {
 			trade_goods = cocoa
 			has_province_flag = has_latent_good
-			has_global_flag = No_Chocolate
 		}
 	}
 	on_built = {
@@ -2149,14 +2011,11 @@ bakery = {
 			}
 		}
 		FROM = {
-			dip_tech = 23
+			has_institution = new_world_i
 			check_variable = {
 				which = grain
 				value = 0.6
 			}
-		}
-		NOT = {
-			has_global_flag = No_Sweet_Confectioneries
 		}
 	}
 	on_built = {
@@ -2261,10 +2120,7 @@ cannery_workshop = {
 			}
 		}
 		FROM = {
-			adm_tech = 47
-		}
-		NOT = {
-			has_global_flag = No_Canned_Goods
+			has_institution = industrialization
 		}
 	}
 	on_built = {
@@ -2312,7 +2168,7 @@ regular_cloth_workshop = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = renaissance
 		}
 	}
 	on_built = {
@@ -2356,7 +2212,7 @@ luxury_cloth_workshop = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = renaissance
 		}
 	}
 	on_built = {
@@ -2403,7 +2259,7 @@ luxury_furniture_workshop = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = new_world_i
 		}
 	}
 	on_built = {
@@ -2464,7 +2320,7 @@ utensil_workshop = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = feudalism
 		}
 	}
 	on_built = {
@@ -2507,33 +2363,30 @@ glassmaker = {
 				has_province_flag = has_latent_good
 			}
 		}
-		FROM = {
-			dip_tech = 9
-		}
 	}
 	on_built = {
 		hidden_effect = {
-            if = {
-                limit = {
-                    trade_goods = glass
-                }
-                ROOT = {
-                    goods_save = yes
-                    change_trade_goods = glass
-                    set_province_flag = has_latent_good
-                }
-            }
-            else_if = {
-                limit = {
-                    trade_goods = coloured_stained_glass
-                }
-                ROOT = {
-                    goods_save = yes
-                    change_trade_goods = coloured_stained_glass
-                    set_province_flag = has_latent_good
-                }
-            }
-        }
+			if = {
+				limit = {
+					trade_goods = glass
+				}
+				ROOT = {
+					goods_save = yes
+					change_trade_goods = glass
+					set_province_flag = has_latent_good
+				}
+			}
+			else_if = {
+				limit = {
+					trade_goods = coloured_stained_glass
+				}
+				ROOT = {
+					goods_save = yes
+					change_trade_goods = coloured_stained_glass
+					set_province_flag = has_latent_good
+				}
+			}
+		}
 	}
 	on_destroyed = {
 		ROOT = {
@@ -2557,68 +2410,61 @@ glassmaker = {
 }
 
 sculpture_workshop = {
-    cost = 600
-    time = 12
-    build_trigger = {
-        ROOT = {
-            OR = {
-                trade_goods = marble
-                trade_goods = jade
-            }
-            #development = 15
-            NOT = {
-                has_province_flag = has_latent_good
-            }
-        }
-        has_dlc = "Leviathan"
-        FROM = {
-            adm_tech = 24
-            #OR = {
-            #	innovativeness = 7
-            #	NOT = { has_dlc = "Rule Britannia" }
-            #}
-        }
-        NOT = {
-            has_global_flag = No_Marble_sculpture
-        }
-    }
-    on_built = {
-        hidden_effect = {
-            if = {
-                limit = {
-                    trade_goods = marble
-                }
-                ROOT = {
-                    goods_save = yes
-                    change_trade_goods = marble_sculpture
-                    set_province_flag = has_latent_good
-                }
-            }
-            else_if = {
-                limit = {
-                    trade_goods = jade
-                }
-                ROOT = {
-                    goods_save = yes
-                    change_trade_goods = jade_sculptures
-                    set_province_flag = has_latent_good
-                }
-            }
-        }
-    }
-    on_destroyed = {
-        ROOT = {
-            clr_province_flag = has_latent_good
-            goods_back = yes
-        }
-    }
-    modifier = {
-        allowed_num_of_buildings = 1
-        local_governing_cost = 0.15
-    }
-    ai_will_do = {
-        factor = 700
-    }
+	cost = 600
+	time = 12
+	build_trigger = {
+		ROOT = {
+			OR = {
+				trade_goods = marble
+				trade_goods = jade
+			}
+			development = 15
+			NOT = {
+				has_province_flag = has_latent_good
+			}
+		}
+		has_dlc = "Leviathan"
+		FROM = {
+			has_institution = renaissance
+		}
+	}
+	on_built = {
+		hidden_effect = {
+			if = {
+				limit = {
+					trade_goods = marble
+				}
+				ROOT = {
+					goods_save = yes
+					change_trade_goods = marble_sculpture
+					set_province_flag = has_latent_good
+				}
+			}
+			else_if = {
+				limit = {
+					trade_goods = jade
+				}
+				ROOT = {
+					goods_save = yes
+					change_trade_goods = jade_sculptures
+					set_province_flag = has_latent_good
+				}
+			}
+		}
+	}
+	on_destroyed = {
+		ROOT = {
+			clr_province_flag = has_latent_good
+			goods_back = yes
+		}
+	}
+	modifier = {
+		allowed_num_of_buildings = 1
+		local_governing_cost = 0.15
+	}
+	ai_will_do = {
+		factor = 700
+	}
 }
 
 #automobile_plant = { #Was glassmaker
@@ -2779,9 +2625,6 @@ potters = {
 				has_province_flag = has_latent_good
 			}
 		}
-		FROM = {
-			dip_tech = 9
-		}
 	}
 	on_built = {
 		hidden_effect = {
@@ -2891,7 +2734,7 @@ steel_foundry = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = feudalism
 		}
 	}
 	on_built = {
@@ -2935,7 +2778,7 @@ papermill = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = feudalism
 		}
 	}
 	on_built = {
@@ -2981,9 +2824,6 @@ brewery = {
 			NOT = {
 				has_province_flag = has_latent_good
 			}
-		}
-		FROM = {
-			dip_tech = 9
 		}
 	}
 	on_built = {
@@ -3038,7 +2878,7 @@ medical_facility = {
 			}
 		}
 		FROM = {
-			dip_tech = 9
+			has_institution = feudalism
 		}
 	}
 	on_built = {
@@ -3114,7 +2954,6 @@ medical_facility = {
 #				}
 #			}
 #		}
-#		NOT = { has_global_flag = No_Fabrics }
 #	}
 #	on_built = { #Basically what happens when the manufactory is built.
 #		hidden_effect = {

@@ -67,6 +67,9 @@ administrative_reform = {
 	nation_designer_cost = 0
 	potential = {
 		is_ToR_subject_type = no
+		NOT = {
+			is_subject_of_type = self_governing_dominion_vu
+		}
 	}
 	modifiers = {
 		governing_capacity = 150
@@ -78,7 +81,7 @@ administrative_reform = {
 		buffed_strong_duchies = yes		#+5% Loyalty
 	}
 	ai = {
-		factor = 0.5		#generic
+		factor = 0.1		#Generic. Reduced this to reduce the likeihood of the AI picking this if it has a unique reform - Prussia
 	}
 }
 
@@ -206,7 +209,7 @@ autocracy_reform = {
 		enables_royal_council = yes
 	}
 	ai = {
-		factor = 0.5		#generic
+		factor = 0.1		#Reduced this to reduce the likelihood of the AI picking this if it has a unique reform - Prussia
 	}
 }
 
@@ -12456,6 +12459,7 @@ unlocked_eue_principality_reform = {
 			is_principality_subject_type = yes
 			has_ToR_unique_government_reform = yes
 			government_rank = 8
+			is_subject_of_type = self_governing_dominion_vu
 		}
 		capital_scope = {
 			superregion = europe_superregion
@@ -16043,5 +16047,33 @@ mesoamerican_lordship_reform = { #Added by Prussia as part of the Great Subjects
 	}
 	custom_attributes = {
 		locked_government_type = yes
+	}
+}
+
+#Governor General for Dominions
+
+self_governing_dominion_vu_government = {
+	icon = "self_governing_dominion_vu_government"
+	valid_for_nation_designer = no
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	fixed_rank = 7
+	potential = {
+		is_subject_of_type = self_governing_dominion_vu
+	}
+	#legacy_equivalent = colonial_government_legacy
+	modifiers = {
+		build_cost = -0.1
+		development_cost = -0.1
+		embracement_cost = -0.1
+		state_maintenance_modifier = -0.25
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+
+	ai = {
+		factor = 1 #Make sure this always gets picked if it gets de-selected by the ai for some reason - Prussia
 	}
 }

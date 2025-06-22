@@ -21,10 +21,15 @@ country_event = {
 		vu_discover_the_world = yes		#Discover the world by Modus
 		spawn_troops_on_startup = yes		#Spawning the historical amounts of troops for countries by Modus
 		crownland_share_on_startup = yes		#Spawn the historical crownland share by VU Team
+		vu_set_POW_policy_globally = yes		#Don's POWs
+		vu_set_add_institutions = yes		#Don
+		vu_set_disable_releasing_of_colonies = yes		#Don's colonial nonsence
+		#vu_set_province_modifiers = yes		#SF's & Don's province modifiers (will unhash it when it's completed)
 	}
 	option = {
 		#Reccommended Mode, doesn't do shit, just leaves the game as is and exits the settings
 		name = VU_SET_Events.01.a
+		highlight = yes
 		add_prestige = 1
 		vu_colour_refresh = yes
 	}
@@ -88,11 +93,11 @@ country_event = {
 		}
 		if = {
 			limit = {
-				has_global_flag = vu_startup_disable_subject_colouring
+				NOT = {
+					has_global_flag = vu_startup_disable_subject_colouring
+				}
 			}
-		}
-		else = {	
-			vu_colour_all_countries = yes		#Nation Colouring by Don
+			vu_colour_all_countries = yes			#Nation Colouring by Don
 		}
 		if = {
 			limit = {
@@ -119,17 +124,16 @@ country_event = {
 			limit = {
 				has_country_flag = vu_startup_shattered_world
 			}
-            vu_shatter_the_world = yes
-            clr_country_flag = vu_startup_shattered_world
+			vu_shatter_the_world = yes
+			clr_country_flag = vu_startup_shattered_world
 		}
-        if = {
+		if = {
 			limit = {
 				has_country_flag = vu_startup_release_all_subjects
 			}
-            vu_release_all_subjects = yes
-            clr_country_flag = vu_startup_release_all_subjects
+			vu_release_all_subjects = yes
+			clr_country_flag = vu_startup_release_all_subjects
 		}
-        
 	}
 }
 
@@ -336,7 +340,7 @@ country_event = {
 			clr_country_flag = vu_startup_shattered_world
 		}
 	}
-    option = {
+	option = {
 		#Release all subjects YES
 		name = VU_SET_Events.05.by
 		trigger = {
@@ -365,6 +369,80 @@ country_event = {
 	after = {
 		country_event = {
 			id = VU_SET_Events.02			#back to the catagories
+		}
+	}
+}
+
+#################################
+# Debugging Events			    #
+#################################
+country_event = {
+	id = VU_SET_Events.06
+	title = VU_SET_Events.06.t
+	desc = VU_SET_Events.06.d
+	picture = DIPLOMACY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = VU_SET_Events.06.a
+		hidden_effect = {
+			every_owned_province = {
+				add_institution_embracement = {
+					which = feudalism
+					value = 100
+				}
+				add_institution_embracement = {
+					which = gunpowder_warfare
+					value = 100
+				}
+				add_institution_embracement = {
+					which = medicine
+					value = 100
+				}
+				add_institution_embracement = {
+					which = civil_service
+					value = 100
+				}
+				add_institution_embracement = {
+					which = market_production
+					value = 100
+				}
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+				add_institution_embracement = {
+					which = new_world_i
+					value = 100
+				}
+				add_institution_embracement = {
+					which = printing_press
+					value = 100
+				}
+				add_institution_embracement = {
+					which = global_trade
+					value = 100
+				}
+				add_institution_embracement = {
+					which = manufactories
+					value = 100
+				}
+				add_institution_embracement = {
+					which = enlightenment
+					value = 100
+				}
+				add_institution_embracement = {
+					which = industrialization
+					value = 100
+				}
+				add_institution_embracement = {
+					which = imperialism
+					value = 100
+				}
+				add_institution_embracement = {
+					which = nationalism_institution
+					value = 100
+				}
+			}
 		}
 	}
 }

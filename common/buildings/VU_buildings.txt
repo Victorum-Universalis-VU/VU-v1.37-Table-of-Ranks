@@ -2,7 +2,7 @@
 #Leisure - Department added to VU by San Felipe
 park = {
 	#Gardens were actually pretty expensive to set up and occupied a lot of land.
-	cost = 400	#VU - Increased from 100 to 500 in v1.36.2.* by San Felipe
+	cost = 150	#VU - Increased from 100 to 500 in v1.36.2.* by San Felipe | Decreased from 400 to 150, as the utility of it is rather insignificant
 	time = 12
 	#one_per_country = yes
 	modifier = {
@@ -14,15 +14,37 @@ park = {
 		local_warscore_cost_modifier = 0.1
 		local_core_creation = 0.025
 		#VU 3.0
-		local_governing_cost_increase = 5
+		allowed_num_of_buildings = 1
 	}
 	ai_will_do = {
-		factor = 1
+		#This building isn't all that useful for AI...
+		factor = 0.25
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
-			factor = 10
-			FROM = {
-				treasury = 27500
+			factor = 0
+			OR = {
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
+		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
+		modifier = {
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
+			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -41,150 +63,55 @@ apothecary = {
 		local_governing_cost_increase = -0.5
 		#VU 3.0
 		local_governing_cost_increase = 5
-		global_tax_income= -0.6
+		global_tax_income = -0.6
+	}
+	on_built = {
+		add_base_manpower = 1
+	}
+	on_destroyed = {
+		add_base_manpower = -1
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#######################
-		# Apothecary Specific #
-		#######################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Apothecaries give the "Prosperity growth" modifier, so the AI should consider them when the state it's in is not prosperus
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			is_prosperous = yes
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
+			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
+		}
+		######################
+		## Manpower Specific #
+		######################
+		modifier = {
+			factor = 2
+			FROM = {
+				vu_don_economy_ai_manpower_when = yes
+			}
 		}
 		modifier = {
 			factor = 2
-			is_prosperous = no
+			vu_don_economy_ai_manpower_in = yes
 		}
 	}
 }
@@ -204,139 +131,55 @@ barber = {
 		local_core_creation = 0.025
 		#VU 3.0
 		local_governing_cost_increase = 10
-		global_tax_income= -0.6
+		global_tax_income = -0.6
+	}
+	on_built = {
+		add_base_manpower = 1
+	}
+	on_destroyed = {
+		add_base_manpower = -1
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		###################
-		# Barber Specific #
-		###################
-		#Removes devastation, the AI should consider theese in devastated lands
-		modifier = {
-			factor = 5
-			devastation = 1
-		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
+		}
+		######################
+		## Manpower Specific #
+		######################
+		modifier = {
+			factor = 2
+			FROM = {
+				vu_don_economy_ai_manpower_when = yes
+			}
+		}
+		modifier = {
+			factor = 2
+			vu_don_economy_ai_manpower_in = yes
 		}
 	}
 }
@@ -358,153 +201,37 @@ cesspit = {
 		#VU 3.0
 		local_governing_cost_increase = 5
 		local_monthly_devastation = -0.1
-		global_tax_income= -0.3
+		global_tax_income = -0.3
 		allowed_num_of_buildings = 1
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#######################
-		# Sanitation Specific #
-		#######################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Removes devastation, the AI should consider theese in devastated lands
-		modifier = {
-			factor = 5
-			devastation = 1
-		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -525,7 +252,7 @@ bath_house = {
 		#VU 3.0
 		local_governing_cost_increase = 10
 		local_monthly_devastation = -0.3
-		global_tax_income= -0.6
+		global_tax_income = -0.6
 		allowed_num_of_buildings = 1
 	}
 	make_obsolete = cesspit
@@ -539,149 +266,33 @@ bath_house = {
 		add_base_tax = -1
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#######################
-		# Sanitation Specific #
-		#######################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Removes devastation, the AI should consider theese in devastated lands
-		modifier = {
-			factor = 5
-			devastation = 1
-		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -702,7 +313,7 @@ sewer_system = {
 		#VU 3.0
 		local_governing_cost_increase = 15
 		local_monthly_devastation = -0.3
-		global_tax_income= -1.2
+		global_tax_income = -1.2
 		allowed_num_of_buildings = 1
 	}
 	make_obsolete = bath_house
@@ -716,149 +327,33 @@ sewer_system = {
 		add_base_tax = -2
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#######################
-		# Sanitation Specific #
-		#######################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Removes devastation, the AI should consider theese in devastated lands
-		modifier = {
-			factor = 5
-			devastation = 1
-		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -880,7 +375,7 @@ latrines = {
 		#VU 3.0
 		local_governing_cost_increase = 20
 		local_monthly_devastation = -0.4
-		global_tax_income= -2.4
+		global_tax_income = -2.4
 		allowed_num_of_buildings = 1
 	}
 	build_trigger = {
@@ -893,149 +388,33 @@ latrines = {
 		add_base_tax = -3
 	}
 	ai_will_do = {
-		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		factor = 0.5
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#######################
-		# Sanitation Specific #
-		#######################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Removes devastation, the AI should consider theese in devastated lands
-		modifier = {
-			factor = 5
-			devastation = 1
-		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
 			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -1056,139 +435,44 @@ well = {
 		local_core_creation = 0.02
 		#VU 3.0
 		local_governing_cost_increase = 5
-		global_tax_income= -0.3
+		global_tax_income = -0.3
 		allowed_num_of_buildings = 1
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				#has_climate = arid #hashed out for water infrastructure
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
+		###########################
+		# Infrastructure Specific #
+		###########################
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##################
-		# Water Specific #
-		##################
-		#Makes sense for people in arid climates to focus on having good water infrastructure
-		modifier = {
-			factor = 2
-			has_climate = arid
-		}
-		#Provinces that don't have sea access generally tend to be more dry
-		modifier = {
-			factor = 2
-			has_port = no
+			factor = 5
+			vu_don_economy_ai_infrastructure_in = yes
 		}
 	}
 }
@@ -1208,7 +492,7 @@ aqueduct = {
 		local_core_creation = 0.03
 		#VU 3.0
 		local_governing_cost_increase = 10
-		global_tax_income= -0.6
+		global_tax_income = -0.6
 		allowed_num_of_buildings = 1
 	}
 	make_obsolete = well
@@ -1216,141 +500,46 @@ aqueduct = {
 		is_state = yes
 	}
 	on_built = {
-		add_base_tax = 1
+		add_base_production = 1
 	}
 	on_destroyed = {
-		add_base_tax = -1
+		add_base_production = -1
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				#has_climate = arid #hashed out for water infrastructure
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
+		###########################
+		# Infrastructure Specific #
+		###########################
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##################
-		# Water Specific #
-		##################
-		#Makes sense for people in arid climates to focus on having good water infrastructure
-		modifier = {
-			factor = 2
-			has_climate = arid
-		}
-		#Provinces that don't have sea access generally tend to be more dry
-		modifier = {
-			factor = 2
-			has_port = no
+			factor = 5
+			vu_don_economy_ai_infrastructure_in = yes
 		}
 	}
 }
@@ -1370,146 +559,51 @@ distillery = {
 		local_core_creation = 0.04
 		#VU 3.0
 		local_governing_cost_increase = 20
-		global_tax_income= -1.2
+		global_tax_income = -1.2
 		allowed_num_of_buildings = 1
 	}
 	make_obsolete = aqueduct
 	on_built = {
-		add_base_tax = 2
+		add_base_production = 2
 	}
 	on_destroyed = {
-		add_base_tax = -2
+		add_base_production = -2
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				#has_climate = arid #hashed out for water infrastructure
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
+		###########################
+		# Infrastructure Specific #
+		###########################
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##################
-		# Water Specific #
-		##################
-		#Makes sense for people in arid climates to focus on having good water infrastructure
-		modifier = {
-			factor = 2
-			has_climate = arid
-		}
-		#Provinces that don't have sea access generally tend to be more dry
-		modifier = {
-			factor = 2
-			has_port = no
+			factor = 5
+			vu_don_economy_ai_infrastructure_in = yes
 		}
 	}
 }
@@ -1528,146 +622,51 @@ pump_house = {
 		local_core_creation = 0.05
 		#VU 3.0
 		local_governing_cost_increase = 30
-		global_tax_income= -2.4
+		global_tax_income = -2.4
 		allowed_num_of_buildings = 1
 	}
 	make_obsolete = distillery
 	on_built = {
-		add_base_tax = 3
+		add_base_production = 3
 	}
 	on_destroyed = {
-		add_base_tax = -3
+		add_base_production = -3
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				#has_climate = arid #hashed out for water infrastructure
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
+		###########################
+		# Infrastructure Specific #
+		###########################
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##################
-		# Water Specific #
-		##################
-		#Makes sense for people in arid climates to focus on having good water infrastructure
-		modifier = {
-			factor = 2
-			has_climate = arid
-		}
-		#Provinces that don't have sea access generally tend to be more dry
-		modifier = {
-			factor = 2
-			has_port = no
+			factor = 5
+			vu_don_economy_ai_infrastructure_in = yes
 		}
 	}
 }
@@ -1697,144 +696,45 @@ wrestling = {
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 		######################
-		# Wrestling Specific #
+		## Manpower Specific #
 		######################
-		# Major thing is that it adds flat manpower, have the AI build theese on low manpower
 		modifier = {
-			factor = 3
-			NOT = {
-				owner = {
-					#The base manpower is 6k, so this is here to help small TAGs win wars against bigger TAGs
-					max_manpower = 10
-				}
+			factor = 2
+			FROM = {
+				vu_don_economy_ai_manpower_when = yes
 			}
 		}
-		# Don't build as much of these with high manpower cap
 		modifier = {
-			factor = 0.15
-			NOT = {
-				owner = {
-					#The base manpower is 6k, so this is here to help small TAGs win wars against bigger TAGs
-					max_manpower = 30
-				}
-			}
+			factor = 2
+			vu_don_economy_ai_manpower_in = yes
 		}
 	}
 }
@@ -1861,181 +761,41 @@ theatrics = {
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##########################
-		# Entertainment Specific #
-		##########################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Lowers governing cost, consider on full gov cap
-		modifier = {
-			factor = 0.5
-			owner = {
-				NOT = {
-					governing_capacity_percentage = 0.65
-				}
-			}
-		}
+		########################
+		## Government Specific #
+		########################
 		modifier = {
 			factor = 5
-			owner = {
-				governing_capacity_percentage = 0.9
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
-		}
-		modifier = {
-			factor = 10
-			owner = {
-				governing_capacity_percentage = 1
-			}
-		}
-		modifier = {
-			factor = 20
-			owner = {
-				governing_capacity_percentage = 1.1
-			}
-		}
-		#Low autonomy = good
-		modifier = {
-			factor = 1.5
-			local_autonomy = 25
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 50
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 65
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 80
 		}
 	}
 }
@@ -2066,181 +826,41 @@ operatics = {
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##########################
-		# Entertainment Specific #
-		##########################
-		#It removes local unrest so the AI shoulb build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Lowers governing cost, consider on full gov cap
-		modifier = {
-			factor = 0.5
-			owner = {
-				NOT = {
-					governing_capacity_percentage = 0.65
-				}
-			}
-		}
+		########################
+		## Government Specific #
+		########################
 		modifier = {
 			factor = 5
-			owner = {
-				governing_capacity_percentage = 0.9
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
-		}
-		modifier = {
-			factor = 10
-			owner = {
-				governing_capacity_percentage = 1
-			}
-		}
-		modifier = {
-			factor = 20
-			owner = {
-				governing_capacity_percentage = 1.1
-			}
-		}
-		#Low autonomy = good
-		modifier = {
-			factor = 1.5
-			local_autonomy = 25
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 50
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 65
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 80
 		}
 	}
 }
@@ -2260,154 +880,52 @@ cinema = {
 		local_governing_cost_increase = 5
 	}
 	on_built = {
-		add_base_manpower = 1
+		add_base_manpower = 2
 	}
 	on_destroyed = {
-		add_base_manpower = -1
+		add_base_manpower = -2
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
+		}
+		#####################
+		## Sailor Specific ##
+		#####################
 		modifier = {
 			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
+			FROM = {
+				vu_don_economy_ai_sailors_when = yes
 			}
 		}
 		modifier = {
 			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		####################
-		# Brothel Specific #
-		####################
-		#It removes local unrest so the AI should build these to help negate it
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		#Salty wenches
-		modifier = {
-			factor = 10
-			trade_goods = salt
-		}
-		#Fishy wenches
-		modifier = {
-			factor = 5
-			trade_goods = fish
+			vu_don_economy_ai_sailors_in = yes
 		}
 	}
 }
@@ -2433,11 +951,40 @@ custom_house = {
 	}
 	ai_will_do = {
 		factor = 1
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
-			factor = 10
-			FROM = {
-				treasury = 27500
+			factor = 0
+			OR = {
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
+		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
+		modifier = {
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
+			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
+		}
+		##############################
+		## Trade buildings specific ##
+		##############################
+		#Build in trade related provinces...
+		modifier = {
+			factor = 5
+			vu_don_economy_ai_trade_in = yes
 		}
 	}
 }
@@ -2491,11 +1038,32 @@ stamp_office = {
 	}
 	ai_will_do = {
 		factor = 1
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
-			factor = 10
-			FROM = {
-				treasury = 27500
+			factor = 0
+			OR = {
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
+		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
+		modifier = {
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
+			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }
@@ -2517,169 +1085,40 @@ pigeon_shed = {
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##########################
-		# Communication Specific #
-		##########################
-		#Adds institution spread... pasted from Education
-		modifier = {
-			factor = 2
-			NOT = {
-				current_institution = 0
-			}
-		}
-		#If the province already has solid institution growth, why not have it go EVEN faster?
-		modifier = {
-			factor = 2
-			current_institution_growth = 12
-		}
-		#For cases of african natives and the like, if the province is not gaining the institution it won't be built
-		modifier = {
-			factor = 0
-			NOT = {
-				current_institution_growth = 0.1
-			}
-		}
-		#Also gov cap... from Courthouses
-		modifier = {
-			factor = 0.5
-			owner = {
-				NOT = {
-					governing_capacity_percentage = 0.65
-				}
-			}
-		}
+		#########################
+		## Government Specific ##
+		#########################
 		modifier = {
 			factor = 5
-			owner = {
-				governing_capacity_percentage = 0.9
-			}
-		}
-		modifier = {
-			factor = 10
-			owner = {
-				governing_capacity_percentage = 1
-			}
-		}
-		modifier = {
-			factor = 20
-			owner = {
-				governing_capacity_percentage = 1.1
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
 		}
 	}
@@ -2702,169 +1141,40 @@ relay_stations = {
 	make_obsolete = pigeon_shed
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##########################
-		# Communication Specific #
-		##########################
-		#Adds institution spread... pasted from Education
-		modifier = {
-			factor = 2
-			NOT = {
-				current_institution = 0
-			}
-		}
-		#If the province already has solid institution growth, why not have it go EVEN faster?
-		modifier = {
-			factor = 2
-			current_institution_growth = 12
-		}
-		#For cases of african natives and the like, if the province is not gaining the institution it won't be built
-		modifier = {
-			factor = 0
-			NOT = {
-				current_institution_growth = 0.1
-			}
-		}
-		#Also gov cap... from Courthouses
-		modifier = {
-			factor = 0.5
-			owner = {
-				NOT = {
-					governing_capacity_percentage = 0.65
-				}
-			}
-		}
+		########################
+		## Government Specific #
+		########################
 		modifier = {
 			factor = 5
-			owner = {
-				governing_capacity_percentage = 0.9
-			}
-		}
-		modifier = {
-			factor = 10
-			owner = {
-				governing_capacity_percentage = 1
-			}
-		}
-		modifier = {
-			factor = 20
-			owner = {
-				governing_capacity_percentage = 1.1
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
 		}
 	}
@@ -2887,169 +1197,40 @@ telephone_exchange = {
 	make_obsolete = relay_stations
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##########################
-		# Communication Specific #
-		##########################
-		#Adds institution spread... pasted from Education
-		modifier = {
-			factor = 2
-			NOT = {
-				current_institution = 0
-			}
-		}
-		#If the province already has solid institution growth, why not have it go EVEN faster?
-		modifier = {
-			factor = 2
-			current_institution_growth = 12
-		}
-		#For cases of african natives and the like, if the province is not gaining the institution it won't be built
-		modifier = {
-			factor = 0
-			NOT = {
-				current_institution_growth = 0.1
-			}
-		}
-		#Also gov cap... from Courthouses
-		modifier = {
-			factor = 0.5
-			owner = {
-				NOT = {
-					governing_capacity_percentage = 0.65
-				}
-			}
-		}
+		########################
+		## Government Specific #
+		########################
 		modifier = {
 			factor = 5
-			owner = {
-				governing_capacity_percentage = 0.9
-			}
-		}
-		modifier = {
-			factor = 10
-			owner = {
-				governing_capacity_percentage = 1
-			}
-		}
-		modifier = {
-			factor = 20
-			owner = {
-				governing_capacity_percentage = 1.1
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
 		}
 	}
@@ -3070,152 +1251,51 @@ fire_office = {
 		#VU 3.0
 		local_governing_cost = -0.1
 	}
+	on_built = {
+		add_base_manpower = 1
+	}
+	on_destroyed = {
+		add_base_manpower = -1
+	}
 	build_trigger = {
 		is_state = yes
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
-			}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		#################
-		# Fire Specific #
-		#################
-		# Reduces unrest... pasted from Theatrics
-		modifier = {
-			factor = 2
-			unrest = 1
-		}
-		modifier = {
-			factor = 3
-			unrest = 5
-		}
-		modifier = {
-			factor = 4
-			unrest = 10
-		}
-		# Also devastation... from Sanitary
+		########################
+		## Government Specific #
+		########################
 		modifier = {
 			factor = 5
-			devastation = 1
-		}
-		modifier = {
-			factor = 0.25
-			NOT = {
-				devastation = 1
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
 		}
 	}
@@ -3232,155 +1312,46 @@ guard_house = {
 		local_warscore_cost_modifier = 0.1
 		local_core_creation = 0.025
 		#VU 3.0
-		local_governing_cost = -0.15
+		local_governing_cost = -0.25		#10% increase on request by Modus
 		allowed_num_of_buildings = 1
 	}
 	ai_will_do = {
 		factor = 1
-		#############################
-		# Don's Improved Economy AI #
-		#############################
-		#AI doesn't build if it's in debt
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
 			factor = 0
-			owner = {
-				num_of_loans = 1
-			}
-		}
-		#AI avoids builfing while in deficit
-		modifier = {
-			factor = 0.25
-			owner = {
-				is_in_deficit = yes
-			}
-		}
-		#AI will try to stockpile some amount of money, now based on Gov rank
-		modifier = {
-			factor = 0.25
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					NOT = {
-						treasury = 500
-					}
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					NOT = {
-						treasury = 250
-					}
-				}
-				else = {
-					NOT = {
-						treasury = 150
-					}
-				}
-			}
-		}
-		#AI focusing on high dev provinces was unnecesary and therefore only causing lag, as it considers it already
-		#in the base hardcoded version, the dev consideration is only useful for non-income based buildings.
-		#AI considering terrian has been removed, we have too many unique city terrains to consider, using only climate now
-		modifier = {
-			factor = 0.25
 			OR = {
-				has_climate = arctic
-				has_climate = arid
-				has_climate = tropical
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
 		}
-		#If the AI has too much money they will build more, incrementaly, based on gov rank (Empires need a larger reserve)
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 750
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 500
-				}
-				else = {
-					treasury = 250
-				}
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
 			}
 		}
+		#Avoid building in...
 		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1000
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 750
-				}
-				else = {
-					treasury = 500
-				}
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
+		}
+		########################
+		## Government Specific #
+		########################
+		modifier = {
+			factor = 5
+			FROM = {
+				vu_don_economy_ai_government_when = yes
 			}
-		}
-		modifier = {
-			factor = 2
-			owner = {
-				if = {
-					limit = {
-						government_rank = 9
-					}
-					treasury = 1500
-				}
-				else_if = {
-					limit = {
-						government_rank = 8
-					}
-					treasury = 1250
-				}
-				else = {
-					treasury = 750
-				}
-			}
-		}
-		##################
-		# Guard Specific #
-		##################
-		# Reduces minimum autonomy and can be built in territories...
-		modifier = {
-			factor = 2
-			is_state = no
-		}
-		modifier = {
-			factor = 0.5
-			is_state = yes
-		}
-		# Features autonomy reduction, pasted from Government
-		modifier = {
-			factor = 1.5
-			local_autonomy = 25
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 50
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 65
-		}
-		modifier = {
-			factor = 2
-			local_autonomy = 80
 		}
 	}
 }
@@ -3403,12 +1374,33 @@ archaeological_dig = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		factor = 0.1
+		################################
+		## Don's New Super-Economy AI ##
+		################################
 		modifier = {
-			factor = 10
-			FROM = {
-				treasury = 27500
+			factor = 0
+			OR = {
+				#Never do when...
+				FROM = {
+					vu_don_economy_ai_never_do_when = yes
+				}
+				#Never build in...
+				vu_don_economy_ai_never_build_in = yes
 			}
+		}
+		#Don note - both Avoids are separate, as they are supposed to stack...
+		#Avoid doing when...
+		modifier = {
+			factor = 0.25
+			FROM = {
+				vu_don_economy_ai_avoid_doing_when = yes
+			}
+		}
+		#Avoid building in...
+		modifier = {
+			factor = 0.25
+			vu_don_economy_ai_avoid_building_in = yes
 		}
 	}
 }

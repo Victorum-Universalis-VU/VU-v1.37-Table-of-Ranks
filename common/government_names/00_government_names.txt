@@ -2459,6 +2459,13 @@ pagan_roman_monarchy = {
         9 = IMPERATOR
     }
 
+    ruler_female = {
+        6 = DOMINA_fem
+        7 = DOMINA_fem
+        8 = REGINA_fem
+        9 = IMPERATRIX_fem
+    }
+
     consort_female = {
         6 = DOMINA_CONSORT_fem
         7 = DOMINA_CONSORT_fem
@@ -2473,8 +2480,16 @@ pagan_roman_monarchy = {
         9 = NOBILES
     }
 
+    heir_female = {
+        6 = DOMINA_fem
+        7 = DOMINA_fem
+        8 = DOMINA_fem
+        9 = DOMINA_fem
+    }
+
     trigger = {
         government = monarchy
+        government_rank = 6
         is_subject = no
         OR = {
             AND = {
@@ -4250,7 +4265,11 @@ swiss_confederation = {
         9 = PRESIDANT
     }
     trigger = {
-        has_reform = united_cantons_reform
+        OR = {
+            has_reform = vu_canton_administration
+            has_reform = vu_subject_canton
+            has_reform = united_cantons_reform
+        }
     }
 }
 italian_signoria = {
@@ -5145,5 +5164,47 @@ iqta = {
 
     trigger = {
         has_reform = iqta
+    }
+}
+
+self_governing_dominion_vu = {
+    rank = {
+        1 = DOMINION_VU
+        2 = DOMINION_VU
+        3 = DOMINION_VU
+        4 = DOMINION_VU
+        5 = DOMINION_VU
+        6 = DOMINION_VU
+        7 = DOMINION_VU
+        8 = DOMINION_VU
+        9 = DOMINION_VU
+    }
+
+    ruler_male = {
+        1 = GOVERNOR_GENERAL_VU
+        2 = GOVERNOR_GENERAL_VU
+        3 = GOVERNOR_GENERAL_VU
+        4 = GOVERNOR_GENERAL_VU
+        5 = GOVERNOR_GENERAL_VU
+        6 = GOVERNOR_GENERAL_VU
+        7 = GOVERNOR_GENERAL_VU
+        8 = GOVERNOR_GENERAL_VU
+        9 = GOVERNOR_GENERAL_VU
+    }
+
+    heir_male = {
+        1 = GOVERNOR_GENERAL_VU_heir
+        2 = GOVERNOR_GENERAL_VU_heir
+        3 = GOVERNOR_GENERAL_VU_heir
+        4 = GOVERNOR_GENERAL_VU_heir
+        5 = GOVERNOR_GENERAL_VU_heir
+        6 = GOVERNOR_GENERAL_VU_heir
+        7 = GOVERNOR_GENERAL_VU_heir
+        8 = GOVERNOR_GENERAL_VU_heir
+        9 = GOVERNOR_GENERAL_VU_heir
+    }
+
+    trigger = {
+        has_reform = self_governing_dominion_vu_government
     }
 }

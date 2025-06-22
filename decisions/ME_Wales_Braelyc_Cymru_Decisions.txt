@@ -1,130 +1,4 @@
 country_decisions = {
-	wls_braelyc = {
-		major = yes
-		potential = {
-			tag = WLS
-			normal_or_historical_nations = yes
-			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_brl_flag }
-			OR = {
-				ai = no
-				is_playing_custom_nation = no
-			}
-		}
-		allow = {
-			IRE = {
-				NOT = { num_of_cities = 23 } #13 (ireland) + 10
-			}
-			SCO = {
-				NOT = { num_of_cities = 24 } #14 (scotland) + 10
-			}
-			KOI = {
-				NOT = { num_of_cities = 6 } #mann + 5
-			}
-			CRN = {
-				NOT = { num_of_cities = 6 } #cornwall + 5
-			}
-			BRI = {
-				NOT = { num_of_cities = 15 } #5 (brittany) + 10
-			}
-			GAL = {
-				NOT = { num_of_cities = 13 } #3 (asturias) + 10
-			}
-			adm_tech = 27
-			is_subject = no
-			is_nomad = no
-			stability = 3
-			is_at_war = no
-			AND = {
-				senior_union_with = IRE
-				had_country_flag = {
-					flag = wls_made_ire
-					days = 10950
-				}
-			}
-			AND = {
-				senior_union_with = SCO
-				had_country_flag = {
-					flag = wls_made_lba
-					days = 10950
-				}
-			}
-			AND = {
-				senior_union_with = KOI
-				had_country_flag = {
-					flag = wls_made_koi
-					days = 10950
-				}
-			}
-			AND = {
-				senior_union_with = CRN
-				had_country_flag = {
-					flag = wls_made_crn
-					days = 10950
-				}
-			}
-			AND = {
-				senior_union_with = BRI
-				had_country_flag = {
-					flag = wls_made_bri
-					days = 10950
-				}
-			}
-			AND = {
-				senior_union_with = GAL
-				had_country_flag = {
-					flag = wls_made_gal
-					days = 10950
-				}
-			}
-		}
-		effect = {
-			change_tag = BRL
-			inherit = IRE
-			inherit = SCO
-			inherit = KOI
-			inherit = CRN
-			inherit = BRI
-			inherit = GAL
-			swap_non_generic_missions = yes
-			remove_non_electors_emperors_from_empire_effect = yes
-			if = {
-				limit = { NOT = { government_rank = 9 } }
-				set_government_rank = 9
-			}
-			if = {
-				limit = {
-					british_isles_region = {
-						NOT = { owned_by = WLS }
-						NOT = { owned_by = IRE }
-						NOT = { owned_by = SCO }
-						NOT = { owned_by = CRN }
-						NOT = { owned_by = KOI }
-						NOT = { owned_by = GAL }
-						NOT = { owned_by = BRI }
-					}
-				}
-				british_isles_region = {
-					limit = {
-						NOT = { owned_by = BRL }
-						NOT = { is_core = BRL }
-					}
-					add_permanent_claim = BRL
-				}
-			}
-			set_country_flag = formed_brl_flag
-			add_prestige_or_monarch_power = { amount = 25 }
-			if = {
-				limit = { has_custom_ideas = no }
-				country_event = { id = ideagroups.1 }
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
-	
 	#exact same effect as the event
 	wls_create_cornwall = {
 		major = yes
@@ -139,7 +13,9 @@ country_decisions = {
 				owned_by = ROOT
 			}
 			OR = {
-				NOT = { exists = CRN }
+				NOT = {
+					exists = CRN
+				}
 				overlord_of = CRN
 			}
 		}
@@ -190,7 +66,6 @@ country_decisions = {
 			}
 		}
 	}
-	
 	wls_create_mann = {
 		major = yes
 		potential = {
@@ -204,7 +79,9 @@ country_decisions = {
 				owned_by = ROOT
 			}
 			OR = {
-				NOT = { exists = KOI }
+				NOT = {
+					exists = KOI
+				}
 				overlord_of = KOI
 			}
 		}
@@ -254,7 +131,6 @@ country_decisions = {
 			}
 		}
 	}
-	
 	wls_create_ireland = {
 		major = yes
 		potential = {
@@ -274,7 +150,9 @@ country_decisions = {
 				}
 			}
 			OR = {
-				NOT = { exists = IRE }
+				NOT = {
+					exists = IRE
+				}
 				overlord_of = IRE
 			}
 		}
@@ -358,7 +236,6 @@ country_decisions = {
 			}
 		}
 	}
-	
 	wls_create_scotland = {
 		major = yes
 		potential = {
@@ -379,7 +256,9 @@ country_decisions = {
 				}
 			}
 			OR = {
-				NOT = { exists = SCO }
+				NOT = {
+					exists = SCO
+				}
 				overlord_of = SCO
 			}
 		}
@@ -489,7 +368,6 @@ country_decisions = {
 			}
 		}
 	}
-	
 	wls_create_brittany = {
 		major = yes
 		potential = {
@@ -504,7 +382,9 @@ country_decisions = {
 				area = brittany_area
 			}
 			OR = {
-				NOT = { exists = BRI }
+				NOT = {
+					exists = BRI
+				}
 				overlord_of = BRI
 			}
 		}
@@ -515,7 +395,9 @@ country_decisions = {
 			brittany_area = {
 				if = {
 					limit = {
-						NOT = { is_core = BRI }
+						NOT = {
+							is_core = BRI
+						}
 					}
 					add_core = BRI
 				}
@@ -569,7 +451,6 @@ country_decisions = {
 			}
 		}
 	}
-	
 	wls_create_galicia = {
 		major = yes
 		potential = {
@@ -584,7 +465,9 @@ country_decisions = {
 				area = asturias_area
 			}
 			OR = {
-				NOT = { exists = GAL }
+				NOT = {
+					exists = GAL
+				}
 				overlord_of = GAL
 			}
 		}
@@ -595,7 +478,9 @@ country_decisions = {
 			asturias_area = {
 				if = {
 					limit = {
-						NOT = { is_core = GAL }
+						NOT = {
+							is_core = GAL
+						}
 					}
 					add_core = GAL
 				}

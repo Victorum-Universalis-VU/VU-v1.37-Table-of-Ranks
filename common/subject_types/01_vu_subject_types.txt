@@ -43,6 +43,7 @@ baltic_marquisate = {}
 baltic_duchy = {}
 baltic_principality = {}
 baltic_kingdom = {}
+#BALTIC CROWN
 baltic_crown_PU = {}
 #BELGIAN SUBJECTS
 belgian_lordship = {}
@@ -3814,6 +3815,65 @@ belgian_kingdom = {
 
     overlord_opinion_modifier = is_kingdom
     subject_opinion_modifier = is_kingdom
+}
+
+benelux_crown_PU = {
+    copy_from = personal_union
+
+    # Graphics:
+    sprite = GFX_court_burgundian_union
+    diplomacy_overlord_sprite = GFX_burgundian_diplomacy_leadunions
+    diplomacy_subject_sprite = GFX_burgundian_diplomacy_inunion
+
+    # Properties:
+    has_overlords_ruler = yes
+    transfer_trade_power = yes
+    can_be_integrated = yes
+    overlord_can_attack = no
+    has_power_projection = no
+    gets_help_with_rebels = yes
+    can_have_subjects_of_other_types = yes
+    can_union_break = no
+    takes_diplo_slot = no
+    transfer_subjects_when_made = yes
+    can_concentrate_development = no
+    extend_trading_range = yes
+    joins_overlords_wars = yes
+    can_use_claims = yes
+
+    liberty_desire_negative_prestige = 1.0
+    military_focus = 0.66
+
+    relative_power_class = 1
+    should_quit_wars_on_activation = yes
+
+    restoration_cb = cb_restore_personal_union
+
+    # Subject Interactions:
+    placate_rulers = no
+    enforce_culture = yes
+    siphon_income = yes
+    support_loyalists = yes
+
+    # Modifiers:
+    modifier_overlord = {
+        modifier = benelux_crown_pu_bonus
+    }
+    modifier_overlord = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = benelux_crown_pu_bonus
+    }
+    modifier_subject = {
+        trigger = {
+            overlord = { has_government_attribute = personal_union_war_contribution }
+        }
+        modifier = benelux_crown_pu_subject
+    }
+
+    overlord_opinion_modifier = in_union
+    subject_opinion_modifier = in_union
 }
 
 #BOHEMIAN SUBJECTS

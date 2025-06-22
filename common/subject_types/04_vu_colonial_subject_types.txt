@@ -1,5 +1,5 @@
 # VU ToR v1.37 subject types by SF
-# Credits go to: Prussia and Modus.
+# Credits go to: Prussia, Modus and to DonBrom for modifying parts of the file
 # All subjects listed here are for VU and were created by the VU team.
 
 #COLONIAL SUBJECTS
@@ -16,12 +16,10 @@ overseas_territory = {}
 #SUBJECT TYPES START HERE
 viceroyalty_vu = {
     copy_from = default
-
     # Graphics:
     sprite = GFX_court_union
     diplomacy_overlord_sprite = GFX_diplomacy_leadunions
     diplomacy_subject_sprite = GFX_diplomacy_inunion
-
     # Properties:
     can_release_and_play = yes
     overlord_can_attack = no
@@ -30,15 +28,11 @@ viceroyalty_vu = {
     gets_help_with_rebels = yes
     press_sailors = yes
     forcelimit_to_overlord = 0.1
-
-    liberty_desire_development_ratio = 0.10
+    liberty_desire_development_ratio = 0.1
     cities_required_for_bonuses = 10
     military_focus = 0.75
-
     relative_power_class = 2
-
     restoration_cb = cb_restore_personal_union
-
     # Subject Interactions:
     placate_rulers = no
     divert_trade = yes
@@ -46,7 +40,6 @@ viceroyalty_vu = {
     enforce_culture = yes
     siphon_income = yes
     support_loyalists = yes
-
     # Modifiers:
     modifier_subject = {
         modifier = vassal_nation
@@ -57,7 +50,6 @@ viceroyalty_vu = {
             num_of_cities = 10
         }
     }
-
     overlord_opinion_modifier = in_union
     subject_opinion_modifier = in_union
 }
@@ -66,12 +58,10 @@ viceroyalty_vu = {
 canadian_province_subject_vu = {
     copy_from = default
     count = vassal
-
     # Graphics:
-    sprite = GFX_icon_canadian_provinces_subject #Was GFX_icon_dutch_province_subject
-    diplomacy_overlord_sprite = GFX_diplomacy_lead_canadian_provinces_subject #Was GFX_diplomacy_leaddutch_province_subject
-    diplomacy_subject_sprite = GFX_diplomacy_am_canadian_provinces_subject #Was GFX_diplomacy_amdutch_province_subject
-
+    sprite = GFX_icon_canadian_provinces_subject
+    diplomacy_overlord_sprite = GFX_diplomacy_lead_canadian_provinces_subject
+    diplomacy_subject_sprite = GFX_diplomacy_am_canadian_provinces_subject
     # Triggers:
     is_potential_overlord = {
         is_subject = yes
@@ -84,20 +74,21 @@ canadian_province_subject_vu = {
         }
         NOT = {
             any_country = {
-                NOT = { tag = PREV }
-                has_subject_of_type = canadian_province_subject_vu #Was dutch_province_subject
+                NOT = { 
+                    tag = PREV 
+                }
+                has_subject_of_type = canadian_province_subject_vu
             }
         }
         NOT = {
             calc_true_if = {
                 all_subject_country = {
-                    is_subject_of_type = canadian_province_subject_vu #Was dutch_province_subject
+                    is_subject_of_type = canadian_province_subject_vu
                 }
                 amount = 5
             }
         }
     }
-
     # Properties:
     transfer_trade_if_merchant_republic = yes
     joins_overlords_wars = yes
@@ -112,22 +103,18 @@ canadian_province_subject_vu = {
     can_concentrate_development = no
     can_have_great_projects_moved_by_overlord = no
     can_be_annexed = no
-
-    base_liberty_desire = -10.0
+    base_liberty_desire = -10
     liberty_desire_negative_prestige = 0.25
     liberty_desire_development_ratio = 0.33
-    pays_overlord = 1.0
+    pays_overlord = 1
     forcelimit_to_overlord = 0
-
     relative_power_class = 1
     diplomacy_view_class = 1
-
     should_quit_wars_on_activation = no
-
     can_fight = {
         independent_nations = yes
         other_overlord = all
-        same_overlord = canadian_province_subject_vu #Was dutch_province_subject
+        same_overlord = canadian_province_subject_vu
     }
     can_rival = {
         independent_nations = yes
@@ -144,7 +131,6 @@ canadian_province_subject_vu = {
         other_overlord = all
         same_overlord = canadian_province_subject_vu
     }
-
     # Subject Interactions:
     # (continuous)
     scutage = yes
@@ -159,39 +145,34 @@ canadian_province_subject_vu = {
     bestow_gifts = yes
     block_settlement_growth = no
     allow_settlement_growth = no
-
     # Modifiers:
     modifier_subject = clear
     modifier_subject = {
-        modifier = canadian_province_subject_modifier #Was dutch_province_subject_modifier
+        modifier = canadian_province_subject_modifier
     }
-
     modifier_overlord = clear
     modifier_overlord = {
-        modifier = canadian_province_subject_overlord_modifier #Was dutch_province_subject_overlord_modifier
+        modifier = canadian_province_subject_overlord_modifier
     }
     modifier_overlord = {
         trigger = {
-            has_global_flag = canadian_province_subject_no_leader_election #Was dutch_province_subject_no_leader_election
+            has_global_flag = canadian_province_subject_no_leader_election
             marriage_with = FROM
         }
         modifier = royal_marriage_no_slot_cost_modifier
     }
-
-    overlord_opinion_modifier = is_canadian_province_subject #Was is_dutch_province_subject
-    subject_opinion_modifier = is_canadian_province_subject #Was is_dutch_province_subject
+    overlord_opinion_modifier = is_canadian_province_subject
+    subject_opinion_modifier = is_canadian_province_subject
 }
 
 #COMMONWEALTH SUBJECT
 commonwealth_subject_vu = {
     copy_from = default
     count = vassal
-
     # Graphics:
-    sprite = GFX_icon_commonwealth_subject #Was GFX_icon_dutch_province_subject
-    diplomacy_overlord_sprite = GFX_diplomacy_lead_commonwealth_subject #Was GFX_diplomacy_leaddutch_province_subject
-    diplomacy_subject_sprite = GFX_diplomacy_am_commonwealth_subject #Was GFX_diplomacy_amdutch_province_subject
-
+    sprite = GFX_icon_commonwealth_subject
+    diplomacy_overlord_sprite = GFX_diplomacy_lead_commonwealth_subject
+    diplomacy_subject_sprite = GFX_diplomacy_am_commonwealth_subject
     # Triggers:
     is_potential_overlord = {
         is_subject = yes
@@ -208,20 +189,21 @@ commonwealth_subject_vu = {
         }
         NOT = {
             any_country = {
-                NOT = { tag = PREV }
-                has_subject_of_type = commonwealth_subject_vu #Was dutch_province_subject
+                NOT = { 
+                    tag = PREV 
+                }
+                has_subject_of_type = commonwealth_subject_vu
             }
         }
         NOT = {
             calc_true_if = {
                 all_subject_country = {
-                    is_subject_of_type = commonwealth_subject_vu #Was dutch_province_subject
+                    is_subject_of_type = commonwealth_subject_vu
                 }
                 amount = 5
             }
         }
     }
-
     # Properties:
     transfer_trade_if_merchant_republic = yes
     joins_overlords_wars = yes
@@ -236,22 +218,18 @@ commonwealth_subject_vu = {
     can_concentrate_development = no
     can_have_great_projects_moved_by_overlord = no
     can_be_annexed = no
-
-    base_liberty_desire = -10.0
+    base_liberty_desire = -10
     liberty_desire_negative_prestige = 0.25
     liberty_desire_development_ratio = 0.33
-    pays_overlord = 1.0
+    pays_overlord = 1
     forcelimit_to_overlord = 0
-
     relative_power_class = 1
     diplomacy_view_class = 1
-
     should_quit_wars_on_activation = no
-
     can_fight = {
         independent_nations = yes
         other_overlord = all
-        same_overlord = commonwealth_subject_vu #Was dutch_province_subject
+        same_overlord = commonwealth_subject_vu
     }
     can_rival = {
         independent_nations = yes
@@ -268,7 +246,6 @@ commonwealth_subject_vu = {
         other_overlord = all
         same_overlord = commonwealth_subject_vu
     }
-
     # Subject Interactions:
     # (continuous)
     scutage = yes
@@ -283,38 +260,33 @@ commonwealth_subject_vu = {
     bestow_gifts = yes
     block_settlement_growth = no
     allow_settlement_growth = no
-
     # Modifiers:
     modifier_subject = clear
     modifier_subject = {
-        modifier = commonwealth_subject_modifier #Was dutch_province_subject_modifier
+        modifier = commonwealth_subject_modifier
     }
-
     modifier_overlord = clear
     modifier_overlord = {
-        modifier = commonwealth_subject_overlord_modifier #Was dutch_province_subject_overlord_modifier
+        modifier = commonwealth_subject_overlord_modifier
     }
     modifier_overlord = {
         trigger = {
-            has_global_flag = commonwealth_subject_no_leader_election #Was dutch_province_subject_no_leader_election
+            has_global_flag = commonwealth_subject_no_leader_election
             marriage_with = FROM
         }
         modifier = royal_marriage_no_slot_cost_modifier
     }
-
-    overlord_opinion_modifier = is_commonwealth_subject #Was is_dutch_province_subject
-    subject_opinion_modifier = is_commonwealth_subject #Was is_dutch_province_subject
+    overlord_opinion_modifier = is_commonwealth_subject
+    subject_opinion_modifier = is_commonwealth_subject
 }
 
 #OVERSEAS SUBJECT
 overseas_territory = {
     copy_from = default
-
     # Graphics:
     sprite = GFX_icon_overseas_territory
     diplomacy_overlord_sprite = GFX_diplomacy_leadoverseas_territory
     diplomacy_subject_sprite = GFX_diplomacy_amoverseas_territory
-
     # Triggers:
     is_potential_overlord = {
         is_subject = no
@@ -337,13 +309,8 @@ overseas_territory = {
             technology_group = polish_tech_group
             technology_group = russian_tech_group
             technology_group = bulgarian_tech_group
-            #VU - Hashed this out as it has nothing to do with our mod. By San Felipe
-            #AND = {
-            #	has_global_flag = extended_timeline_mod
-            #}
         }
     }
-
     # Properties:
     transfer_trade_power = yes
     joins_overlords_wars = no
@@ -365,18 +332,13 @@ overseas_territory = {
     can_have_great_projects_moved_by_overlord = no
     extend_trading_range = yes
     can_be_annexed = no
-
-    cities_required_for_bonuses = 0 #25
+    cities_required_for_bonuses = 0	#25
     trust_on_start = 5
-
     liberty_desire_development_ratio = 0.1
     military_focus = 0.5
-
     relative_power_class = 0
     diplomacy_view_class = 1
-
     should_quit_wars_on_activation = no
-
     can_fight = {
         independent_nations = yes
         other_overlord = all
@@ -393,7 +355,6 @@ overseas_territory = {
         same_overlord = all
         other_overlord = all
     }
-
     # Subject Interactions:
     # (continuous)
     embargo_rivals = no
@@ -402,7 +363,6 @@ overseas_territory = {
     siphon_income = yes
     bestow_gifts = yes
     seize_territory = yes
-
     # Modifiers:
     modifier_subject = clear
     modifier_subject = {
@@ -411,7 +371,10 @@ overseas_territory = {
     modifier_subject = {
         trigger = {
             FROM = {
-                institution_difference = { who = ROOT value = 3 }
+                institution_difference = { 
+                    who = ROOT 
+                    value = 3 
+                }
             }
         }
         modifier = overseas_territory_institution_modifier_3
@@ -419,9 +382,15 @@ overseas_territory = {
     modifier_subject = {
         trigger = {
             FROM = {
-                institution_difference = { who = ROOT value = 2 }
+                institution_difference = { 
+                    who = ROOT 
+                    value = 2 
+                }
                 NOT = {
-                    institution_difference = { who = ROOT value = 3 }
+                    institution_difference = { 
+                        who = ROOT 
+                        value = 3 
+                    }
                 }
             }
         }
@@ -430,9 +399,15 @@ overseas_territory = {
     modifier_subject = {
         trigger = {
             FROM = {
-                institution_difference = { who = ROOT value = 1 }
+                institution_difference = { 
+                    who = ROOT 
+                    value = 1 
+                }
                 NOT = {
-                    institution_difference = { who = ROOT value = 2 }
+                    institution_difference = { 
+                        who = ROOT 
+                        value = 2 
+                    }
                 }
             }
         }
@@ -440,62 +415,85 @@ overseas_territory = {
     }
     modifier_subject = {
         trigger = {
-            NOT = { adm_tech = FROM }
+            NOT = { 
+                adm_tech = FROM 
+            }
         }
         modifier = overseas_territory_adm_tech_modifier
     }
     modifier_subject = {
         trigger = {
-            NOT = { dip_tech = FROM }
+            NOT = { 
+                dip_tech = FROM 
+            }
         }
         modifier = overseas_territory_dip_tech_modifier
     }
     modifier_subject = {
         trigger = {
-            NOT = { mil_tech = FROM }
+            NOT = { 
+                mil_tech = FROM 
+            }
         }
         modifier = overseas_territory_mil_tech_modifier
     }
     modifier_subject = {
         trigger = {
             adm_tech = FROM
-            FROM = { adm_tech = ROOT }
+            FROM = { 
+                adm_tech = ROOT 
+            }
         }
         modifier = overseas_territory_adm_liberty_desire_modifier
     }
     modifier_subject = {
         trigger = {
             dip_tech = FROM
-            FROM = { dip_tech = ROOT }
+            FROM = { 
+                dip_tech = ROOT 
+            }
         }
         modifier = overseas_territory_dip_liberty_desire_modifier
     }
     modifier_subject = {
         trigger = {
             mil_tech = FROM
-            FROM = { mil_tech = ROOT }
+            FROM = { 
+                mil_tech = ROOT 
+            }
         }
         modifier = overseas_territory_mil_liberty_desire_modifier
     }
     modifier_subject = {
         trigger = {
-            FROM = { NOT = { adm_tech = ROOT } }
+            FROM = { 
+                NOT = { 
+                    adm_tech = ROOT 
+                } 
+            }
         }
         modifier = overseas_territory_advanced_adm_liberty_desire_modifier
     }
     modifier_subject = {
         trigger = {
-            FROM = { NOT = { dip_tech = ROOT } }
+            FROM = { 
+                NOT = { 
+                    dip_tech = ROOT 
+                } 
+            }
         }
         modifier = overseas_territory_advanced_dip_liberty_desire_modifier
     }
     modifier_subject = {
         trigger = {
-            FROM = { NOT = { mil_tech = ROOT } }
+            FROM = { 
+                NOT = { 
+                    mil_tech = ROOT 
+                } 
+            }
         }
         modifier = overseas_territory_advanced_mil_liberty_desire_modifier
     }
-
     modifier_overlord = clear
     modifier_overlord = {
         modifier = large_colonial_nation
@@ -503,33 +501,29 @@ overseas_territory = {
             num_of_cities = 25
         }
     }
-
     overlord_opinion_modifier = is_overseas_territory
     subject_opinion_modifier = is_overseas_territory
 }
 
 #SELF-GOVERNING DOMINION
 self_governing_dominion_vu = {
-
-    copy_from = self_governing_colony
-
+    copy_from = vassal
     sprite = GFX_dominion_icon
-
+    diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_british_dominion
+    diplomacy_subject_sprite = GFX_icon_diplomacy_am_british_dominion
     change_colonial_type = no
     upgrade_subject_type = yes
     is_colony_subtype = no
-    count = colony
-
+    counts_for_borders = yes
     # Properties:
-    base_liberty_desire = -10.0
-    liberty_desire_development_ratio = 0.05
+    base_liberty_desire = -25
     pays_overlord = 1.5
-    max_government_rank = 8
-    forcelimit_to_overlord = 0.0 			#Changed from 0.05 to reflect a dominion's much greater autonomy
-    manpower_to_overlord = 0.0 				#Changed from 0.05
-    naval_forcelimit_to_overlord = 0.1		#Changed from 0.05
-    sailors_to_overlord = 0.0 				#Changed from 0.05
-
+    max_government_rank = 7
+    joins_overlords_wars = yes              #Added this because they would still be beholden to their overlord in return for their self-governance - Prussia
+    has_overlords_ruler = no               #Would be ruled by the overlord's monarch, but with a Governor-General appointed to govern it - Prussia | Removed by Don as it was causing issues + it would not be ruled in a personal union, but rather as a governate.
+    can_union_break = no                    #Should only be releasable by overlord's permission - Prussia
+    can_use_claims = yes
+    extend_trading_range = yes
     # Subject Interactions:
     uses_tariffs = no
     increase_tariffs = no
@@ -542,39 +536,37 @@ self_governing_dominion_vu = {
     press_sailors = no
     start_colonial_war = no
     enforce_culture = yes #Although it doesn't make much sense, it functions as a workaround to colonial nations switching to native cultures
+    enforce_religion = yes #Added so that you can convert them to both your culture and religion - Prussia
     transfer_trade_power = no
-
+    grant_province = yes
     is_potential_overlord = {
         is_subject = no
-        OR = {
-            is_year = 1600
-            current_age = age_of_absolutism
-        }
     }
-
-    can_fight = {
-        independent_nations = yes
-        same_overlord = tributary_state
-        other_overlord = all
-    }
-
-    can_rival = {
-        independent_nations = yes
-        same_overlord = tributary_state
-        other_overlord = all
-    }
-    can_ally = {
-        neighboring_primitives = yes
-    }
-
     # Modifiers:
-    modifier_overlord = clear
-    modifier_overlord = {
-        modifier = self_governing_dominion_vu_overlord
-    }
-
-    modifier_subject = clear
+    modifier_subject = clear # Use this to clear after copy_from.
     modifier_subject = {
         modifier = self_governing_dominion_vu_subject
     }
+    modifier_subject = {
+        modifier = subject_tax_modifier
+        trigger = {
+            overlord = {
+                has_government_attribute = subject_tax_modifier_25
+            }
+        }
+    }
+    modifier_subject = {
+        modifier = same_religion_subject_bonus_mod
+        trigger = {
+            overlord = {
+                has_government_attribute = same_religion_subject_bonus
+                religion = PREV
+            }
+        }
+    }
+    modifier_overlord = {
+        modifier = self_governing_dominion_vu_overlord
+    }
+    overlord_opinion_modifier = is_dominion
+    subject_opinion_modifier = is_dominion
 }

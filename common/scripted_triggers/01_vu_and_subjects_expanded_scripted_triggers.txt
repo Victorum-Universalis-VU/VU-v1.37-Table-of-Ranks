@@ -680,7 +680,6 @@ is_possible_subject_of_subject_type_viking_settlement = {
 	NOT = { is_subject_of_type = viking_settlement }
 	is_subject_of = PREV
 	is_colonial_subject_type = yes
-	NOT = { is_subject_of_type = annexable_colony }
 	capital_scope = {
 		continent = north_america
 		NOT = { colonial_region = colonial_mexico }
@@ -734,36 +733,6 @@ is_possible_subject_of_subject_type_defensive_march = {
 		}
 	}
 	primitives = no
-}
-
-is_possible_subject_of_subject_type_annexable_colony = {
-	# PREVs in THIS scope refer to possible overlord
-	NOT = { is_subject_of_type = annexable_colony }
-	is_subject_of = PREV
-	is_colonial_subject_type = yes
-	capital_scope = {
-		OR = {
-			colonial_region = colonial_alaska
-			colonial_region = colonial_canada
-			colonial_region = colonial_eastern_america
-			colonial_region = colonial_louisiana
-			colonial_region = colonial_california
-			colonial_region = colonial_mexico
-			colonial_region = colonial_the_carribean
-			colonial_region = colonial_colombia
-			colonial_region = colonial_peru
-			colonial_region = colonial_la_plata
-			colonial_region = colonial_brazil
-			colonial_region = colonial_australia
-			colonial_region = colonial_papua
-			colonial_region = colonial_solomons
-			colonial_region = colonial_vanuatu
-			colonial_region = colonial_new_caledonia
-			colonial_region = colonial_fiji
-			colonial_region = colonial_polynesia
-			colonial_region = colonial_cape
-		}
-	}
 }
 
 #New VU 1.37.* Generic Merchantlist Republic by SF
@@ -954,7 +923,6 @@ is_colonial_subject_type = {
 		is_subject_of_type = private_enterprise
 		is_subject_of_type = self_governing_colony
 		is_subject_of_type = viking_settlement
-		is_subject_of_type = annexable_colony
 	}
 }
 
@@ -998,7 +966,6 @@ is_subject_type_that_can_be_annexed = {
 		is_subject_of_type = integrated_tribe_subject
 		is_subject_of_type = revolution_subject
 		is_subject_of_type = palatinate_vassal
-		is_subject_of_type = annexable_colony
 		is_subject_of_type = merchantlist_republic
 		is_subject_of_type = venetian_republic
 		is_subject_of_type = genoese_commercial_republic
@@ -1086,7 +1053,7 @@ has_disabled_colonial_nation_spawning = {
 		}
 	]
 	$who$ = {
-		has_country_flag = no_colonial_nations_in_$colonial_region$
+		has_country_flag = no_cn_in_$colonial_region$
 		NOT = {
 			any_subject_country = {
 				is_colonial_nation = yes
